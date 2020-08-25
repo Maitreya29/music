@@ -1,0 +1,239 @@
+<resources>
+    <string name="app_name">Pulse Music</string>
+
+    <string name="channel_name">Notificación de Pulse Music</string>
+
+    <string name="iv_content_desc">Portada de álbum</string>
+    <string name="iv_btn_close_description">Botón de cerrar</string>
+    <string name="iv_btn_action_description">Botón de acción</string>
+    <string name="icon_desc">Ícono de botón</string>
+
+
+    <!-- Bottom Nav bar -->
+    <string name="home">Inicio</string>
+    <string name="library">Biblioteca</string>
+    <string name="albums">Álbumes</string>
+    <string name="artist">Artista</string>
+    <string name="playlist_nav">Lista de reproducción</string>
+
+
+    <!-- Home Fragment -->
+    <string name="favorite_playlist">Favorito</string>
+    <string name="recent">Canción recientes</string>
+    <string name="select_track">Seleccionar canción</string>
+    <string name="random">Para ti</string>
+    <string name="new_in_library">Nuevo en la tienda</string>
+    <string name="top_artist">Top artistas</string>
+    <string name="top_albums">Top álbumes</string>
+    <string name="tracks_plays">Número de escuchadas:</string>
+    <string name="tracks_not_found">Sin canciones encontradas</string>
+
+
+    <!-- Favorites Playlist Activity-->
+    <string name="favorites">Tus favoritos</string>
+    <string name="no_favorites_tracks">Sin canciones encontradas, añade algunas pistas favoritas\n\u2665</string>
+
+
+    <!-- Recent Activity-->
+    <string name="no_recent_tracks">Nada que mostrar \n\u2639</string>
+
+
+    <!-- Home drawer contents -->
+    <string name="drawer_welcome_message">Bienvenido,</string>
+    <string name="def_user_name">Usuario</string>
+    <string name="drawer_settings_option">Ajustes</string>
+    <string name="drawer_equalizer_option">Ecualizador</string>
+    <string name="app_info">Información de la aplicación</string>
+    <string name="note">Hecho con \\u2665 en la India</string>
+    <string name="select_image">Selecciona la imagen</string>
+    <string name="error_select_image_toast">Error al seleccionar la imagen</string>
+
+
+    <!-- Playlist fragment -->
+    <string name="playlist_current_queue">Cola de reproducción</string>
+    <string name="playlist_delete_dialog_title">¿Estás seguro de borrar esta lista de reproducción?</string>
+    <string name="yes">Sí</string>
+    <string name="no">Cancelar</string>
+    <string name="playlist_deleted_toast">Lista eliminada</string>
+    <string name="cannot_delete_default_playlist">No se puede eliminar la lista de reproducción predeterminada</string>
+
+
+    <!-- Toolbar Options menu -->
+    <string name="sort_order">Orden de clasificación</string>
+    <string name="alphabet_asc">A-Z</string>
+    <string name="alphabet_desc">Z-A</string>
+    <string name="add_playlist">Añadir lista de reproducción</string>
+    <string name="settings">Ajustes</string>
+    <string name="equalizer_error">No se encontró el ecualizador por defecto</string>
+    <string name="grid_count">Cantidad de cuadrículas</string>
+    <string name="grid_count_land">Cantidad de cuadrículas (paisaje)</string>
+    <string name="one">Uno</string>
+    <string name="two">Dos</string>
+    <string name="three">Tres</string>
+    <string name="four">Cuatro</string>
+    <string name="five">Cinco</string>
+    <string name="six">Seis</string>
+
+
+    <!-- Options menu for list items -->
+    <string name="play_next">Reproducir siguiente</string>
+    <string name="play_next_toast">Pista añadida y será reproducida a continuación</string>
+    <string name="add_to_queue">Añadir a la cola</string>
+    <string name="add_to_queue_toast">Pista añadida a la cola de juego</string>
+    <string name="add_to_playlist">Añadir a la lista de reproducción</string>
+    <string name="info">Información de la canción</string>
+
+
+    <!-- Bottom sheet dialog -->
+    <string name="enter_name">Introduce tu nombre</string>
+    <string name="enter_name_toast">Por favor, escribe tu nombre</string>
+    <string name="create_playlist">Crear lista de reproducción</string>
+    <string name="edit_playlist">Editar el título de la lista de reproducción</string>
+    <string name="create_playlist_hint">Introduzca el nombre de la lista de reproducción</string>
+    <string name="create">Aceptar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="atp_title">Añadir pista a\\.\\.\\.</string>
+    <string name="atp_no_user_playlist_found">Sin listas encontradas\nClic en el botón de añadir para crear</string>
+    <string name="atp_track_added_toast">Añadió con éxito una pista a la lista de reproducción</string>
+    <string name="atp_track_add_error_toast">Error al añadir una pista a la lista de reproducción</string>
+
+
+    <!-- Playlist Activity -->
+    <string name="no_playlist_tracks_found">No se han encontrado pistas de la lista de reproducción\\n\\u</string>
+    <string name="item_removed">¡¡Canción borrada de la cola!!</string>
+    <string name="snack_bar_action_undo">Deshacer</string>
+    <string name="cannot_remove_active_item">No se puede borrar la canción activa</string>
+
+
+    <!-- Now Playing Activity -->
+    <string name="now_playing">Ahora reproduciendo</string>
+    <string name="added_to_fav">Canción añadida a favoritos</string>
+    <string name="removed_from_fav">Canción eliminada de favoritos</string>
+    <string name="up_next_title">A continuación ●</string>
+    <string name="up_next_title_none">Lista de reproducción completada</string>
+
+
+    <!-- TrackPickerActivity -->
+    <string name="select_tracks">Seleccionar canciones</string>
+
+
+    <!-- Details Activity -->
+    <string name="details_toolbar_title">Detalles</string>
+    <string name="details_activity_rv_title">Pistas</string>
+    <string name="num_tracks">La colección tiene ●</string>
+    <string name="tracks">canciones</string>
+
+
+    <!-- Song info dialog -->
+    <string name="head_title">Canción</string>
+    <string name="head_album">Álbum</string>
+    <string name="head_artist">Artista</string>
+    <string name="head_file_size">Tamaño del archivo</string>
+    <string name="head_file_type">Tipo de archivo</string>
+    <string name="head_bitrate">Tasa de bits</string>
+    <string name="head_sample_rate">Tasa de muestreo</string>
+    <string name="head_channel_count">Número de canales</string>
+    <string name="okay">Aceptar</string>
+
+
+    <!-- Search Activity -->
+    <string name="searchHint">Buscar artista, canciones o álbumes\\.\\.\\.</string>
+    <string name="search_null">No se encontraron resultados</string>
+
+
+    <!-- Settings Activity -->
+    <string name="settings_title">Ajustes</string>
+    <!-- Category -->
+    <string name="look_and_feel">Aspecto y estilo</string>
+    <string name="look_and_feel_desc">Cambiar el tema y relacionado</string>
+
+    <string name="now_playing_title">Ahora reproduciendo</string>
+    <string name="now_playing_desc">Personaliza la pantalla que se está reproduciendo</string>
+
+    <string name="contributors">:Contribuyentes</string>
+    <string name="contributors_desc">Conoce a los desarrolladores</string>
+
+    <string name="about">Acerca de</string>
+    <string name="about_desc">Versión de la aplicación, enlaces sociales</string>
+
+    <!-- Look and feel section -->
+    <string name="laf_category_theme">:Tema</string>
+    <string name="laf_category_select_dark_theme">Seleccione el tema oscuro</string>
+    <string name="laf_category_select_dark_theme_desc">Elija el esquema de color oscuro que se aplicará cuando el modo de oscuridad se encienda</string>
+    <string name="laf_category_enable_dark_mode_title">Activar el modo oscuro</string>
+    <string name="laf_category_enable_dark_mode_text">Al instante activa el tema oscuro preferido</string>
+    <string name="laf_category_enable_auto_mode_title">Automáticamente se establece el tema</string>
+    <string name="laf_category_enable_auto_mode_text">Establece el tema de claro y oscuro basado en la hora del día</string>
+
+    <string name="laf_category_colors">Colores</string>
+    <string name="laf_category_select_color">Escoge el color del acento</string>
+    <string name="laf_category_select_color_desc">Seleccione los colores de acento para la aplicación</string>
+
+    <string name="laf_accents_picker_title">Seleccione el color del acento</string>
+    <string name="laf_accents_picker_accent_title_unknown">Desconocido</string>
+
+    <string name="laf_accents_picker_desaturated_title">Colores desaturados</string>
+    <string name="laf_accents_picker_accent_desaturated_desc">Hace que el color se desate cuando se aplica el tema de la oscuridad</string>
+
+    <string name="dark_theme_name_gray">Sólo gris</string>
+    <string name="dark_theme_name_kinda_dark">Esquema oscuro característico</string>
+    <string name="dark_theme_name_pure_black">Luces apagadas</string>
+
+    <string name="select_dark_theme">Establecer el tema oscuro preferido</string>
+    <string name="set">Aplicar</string>
+
+
+    <!-- Now playing settings -->
+    <string name="now_playing_album_style_section_title">Estilo</string>
+    <string name="now_playing_screen_style_desc">Elija ahora el estilo de pantalla de juego</string>
+    <!--    <string name="now_playing_album_decoration_title">Activar superposición de gradientes</string>-->
+    <!--    <string name="now_playing_album_decoration_desc">Añade una capa desvanecedora arriba de la tarjeta del álbum</string>-->
+    <string name="now_playing_screen_style_title">Seleccione ahora el estilo de juego</string>
+    <string name="now_playing_screen_style_modern">Moderno</string>
+    <string name="now_playing_screen_style_stylish">Estilo</string>
+    <string name="now_playing_screen_style_edge">Borde a borde</string>
+    <string name="now_playing_cover_corner_radius_title">Radio de la esquina</string>
+    <string name="now_playing_cover_corner_radius_changer_title">Ajustar el radio de la esquina</string>
+    <string name="now_playing_cover_corner_radius_desc">Seleccione el radio de la esquina de la portada</string>
+    <string name="now_playing_cover_corner_radius_tl">Arriba a la izquierda</string>
+    <string name="now_playing_cover_corner_radius_tr">Arriba a la derecha</string>
+    <string name="now_playing_cover_corner_radius_bl">Abajo a la izquierda</string>
+    <string name="now_playing_cover_corner_radius_br">Abajo a la derecha</string>
+    <string name="now_playing_cover_corner_radius_unit">dp</string>
+
+    <!-- Contributors -->
+    <string name="lead_developer_title">Desarrolladores líder</string>
+
+    <string name="other_contributions_title">Otros</string>
+
+
+    <!-- About -->
+    <string name="about_app_version">Versión de la aplicación</string>
+    <string name="about_app_release_date">Fecha de compilación</string>
+    <string name="about_app_release_build_type">Tipo de compilación</string>
+    <string name="about_app_build_code">Código de compilación</string>
+    <string name="about_check_source_code">Fuente en github</string>
+
+    <!-- Profile Links -->
+    <string name="social_links">Enlaces sociales</string>
+
+    <!-- Accents -->
+    <string name="exodus_fruit">Fruto del éxodo</string>
+    <string name="electron_blue">Electrón azul</string>
+    <string name="mint_leaf">Hoja de menta</string>
+    <string name="chi_gong">Chi gong</string>
+    <string name="sei_bar">Sei bar</string>
+    <string name="coral">Coral</string>
+    <string name="sunkist">Sunkist</string>
+    <string name="blue_pink">Rosa azul</string>
+
+    <!-- App shortcuts -->
+    <string name="shortcut_shuffle_label">Mezclar</string>
+    <string name="shortcut_shuffle_label_long">Mezclado</string>
+
+    <string name="shortcut_latest_label">Últimas canciones</string>
+    <string name="shortcut_latest_label_long">Últimas canciones</string>
+
+    <string name="shortcut_suggested_label">Para ti</string>
+    <string name="shortcut_suggested_label_long">Para ti</string>
+</resources>

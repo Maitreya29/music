@@ -1,0 +1,1 @@
+Una aplicación de reproducción de músic para complementar su colección de música offline con soporte para playlist, opciones de tema, pantalla múltiple sobre qué está reproduciendo, atajos rápidos, y muchos más.

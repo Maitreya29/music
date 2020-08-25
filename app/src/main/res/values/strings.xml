@@ -203,8 +203,8 @@
 
     <!-- Contributors -->
     <string name="lead_developer_title">Lead developers</string>
-    <string name="lead_developer_1">Ashutosh Patoa</string>
-    <string name="lead_developer_user_name">\@HardcodeCoder</string>
+    <string name="lead_developer_1" translatable="false">Ashutosh Patoa</string>
+    <string name="lead_developer_user_name" translatable="false">\@HardcodeCoder</string>
 
     <string name="other_contributions_title">Others</string>
 
@@ -217,13 +217,13 @@
     <string name="about_check_source_code">Source on github</string>
 
     <!-- Profile Links -->
-    <string name="profile_icon_link">https://pbs.twimg.com/profile_images/1159497870514376704/U5JEGSc6_400x400.jpg</string>
+    <string name="profile_icon_link" translatable="false">https://pbs.twimg.com/profile_images/1159497870514376704/U5JEGSc6_400x400.jpg</string>
     <string name="social_links">Social links</string>
-    <string name="github_link">https://github.com/HardcodeCoder</string>
-    <string name="source_code_link">https://github.com/HardcodeCoder/PulseMusic</string>
-    <string name="facebook_link">https://www.facebook.com/ashutosh.patoa.5</string>
-    <string name="twitter_link">https://www.twitter.com/hardcodecoder</string>
-    <string name="telegram_link">https://t.me/HardcodeCoder</string>
+    <string name="github_link" translatable="false">https://github.com/HardcodeCoder</string>
+    <string name="source_code_link" translatable="false">https://github.com/HardcodeCoder/PulseMusic</string>
+    <string name="facebook_link" translatable="false">https://www.facebook.com/ashutosh.patoa.5</string>
+    <string name="twitter_link" translatable="false">https://www.twitter.com/hardcodecoder</string>
+    <string name="telegram_link" translatable="false">https://t.me/HardcodeCoder</string>
 
     <!-- Accents -->
     <string name="exodus_fruit">Exodus fruit</string>
