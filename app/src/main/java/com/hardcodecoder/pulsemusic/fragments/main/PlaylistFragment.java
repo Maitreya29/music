@@ -69,7 +69,8 @@ public class PlaylistFragment extends Fragment implements PlaylistCardListener, 
             if (null != result) mPlaylistNames.addAll(result);
             loadPlaylistCards(view);
         });
-        mObserver = new FileObserver(AppFileManager.getPlaylistFolderFile(), FileObserver.CREATE) {
+        mObserver = new FileObserver(AppFileManager.getPlaylistFolderFile().getAbsolutePath(),
+                FileObserver.CREATE) {
             @Override
             public void onEvent(int event, @Nullable String path) {
                 if (null != path) view.post(() -> mAdapter.addPlaylist(path));
