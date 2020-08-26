@@ -4,25 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clipChildren="false"
-    android:clipToPadding="false"
-    android:orientation="vertical"
-    android:paddingStart="32dp"
-    android:paddingTop="16dp"
-    android:paddingEnd="32dp"
-    android:paddingBottom="16dp">
+    android:layout_marginStart="32dp"
+    android:layout_marginTop="8dp"
+    android:gravity="center"
+    android:orientation="vertical">
 
     <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/developer_head"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
         android:text="@string/lead_developer_title"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
         android:textColor="?primaryColor" />
 
     <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
+        android:id="@+id/lead_developer_card"
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         app:cardBackgroundColor="?surfaceColor"
         app:cardCornerRadius="@dimen/rounding_radius_8dp"
         app:cardElevation="4dp"
