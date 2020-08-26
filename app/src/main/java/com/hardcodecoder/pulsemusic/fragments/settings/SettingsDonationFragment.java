@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.hardcodecoder.pulsemusic.R;
+import com.hardcodecoder.pulsemusic.fragments.settings.base.SettingsBaseFragment;
 
 public class SettingsDonationFragment extends SettingsBaseFragment {
 

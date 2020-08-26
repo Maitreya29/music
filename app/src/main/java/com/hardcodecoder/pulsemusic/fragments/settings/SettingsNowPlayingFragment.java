@@ -1,4 +1,4 @@
-package com.hardcodecoder.pulsemusic.fragments;
+package com.hardcodecoder.pulsemusic.fragments.settings;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,20 +7,28 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import com.hardcodecoder.pulsemusic.R;
-import com.hardcodecoder.pulsemusic.activities.SettingsActivity;
 import com.hardcodecoder.pulsemusic.dialog.CornerRadiusChangeDialogFragment;
 import com.hardcodecoder.pulsemusic.dialog.NowPlayingStyleChooser;
-import com.hardcodecoder.pulsemusic.interfaces.SettingsFragmentsListener;
+import com.hardcodecoder.pulsemusic.fragments.settings.base.SettingsBaseFragment;
 
-public class SettingsNowPlayingFragment extends Fragment {
+public class SettingsNowPlayingFragment extends SettingsBaseFragment {
 
-    public static final String TAG = "SettingsNowPlayingFragment";
+    public static final String TAG = SettingsNowPlayingFragment.class.getSimpleName();
 
     public static SettingsNowPlayingFragment getInstance() {
         return new SettingsNowPlayingFragment();
+    }
+
+    @Override
+    public String getFragmentTag() {
+        return TAG;
+    }
+
+    @Override
+    public int getToolbarTitleForFragment() {
+        return R.string.now_playing_title;
     }
 
     @Nullable
@@ -31,9 +39,7 @@ public class SettingsNowPlayingFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        SettingsFragmentsListener mListener = (SettingsFragmentsListener) getActivity();
-        if (mListener instanceof SettingsActivity)
-            mListener.setToolbarTitle(R.string.now_playing_title);
+        super.onViewCreated(view, savedInstanceState);
 
         view.findViewById(R.id.now_playing_screen_style).setOnClickListener(v -> {
             if (null != getActivity()) {

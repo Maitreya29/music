@@ -4,14 +4,13 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.hardcodecoder.pulsemusic.R;
-import com.hardcodecoder.pulsemusic.fragments.SettingsMainFragment;
+import com.hardcodecoder.pulsemusic.fragments.settings.SettingsMainFragment;
+import com.hardcodecoder.pulsemusic.fragments.settings.base.SettingsBaseFragment;
 import com.hardcodecoder.pulsemusic.interfaces.SettingsFragmentsListener;
-import com.hardcodecoder.pulsemusic.themes.ThemeManagerUtils;
 
 public class SettingsActivity extends PMBActivity implements SettingsFragmentsListener {
 
@@ -35,15 +34,14 @@ public class SettingsActivity extends PMBActivity implements SettingsFragmentsLi
             mFragmentManager.beginTransaction()
                     .replace(R.id.settings_content_container, SettingsMainFragment.getInstance())
                     .commit();
-            mToolbar.setTitle(R.string.settings_title);
         }
     }
 
     @Override
-    public void changeFragment(Fragment fragment) {
+    public void changeFragment(SettingsBaseFragment fragment) {
         mFragmentManager.beginTransaction()
                 .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_right)
-                .replace(R.id.settings_content_container, fragment, fragment.getTag())
+                .replace(R.id.settings_content_container, fragment, fragment.getFragmentTag())
                 .addToBackStack(null)
                 .commit();
     }
@@ -54,8 +52,7 @@ public class SettingsActivity extends PMBActivity implements SettingsFragmentsLi
     }
 
     @Override
-    public void onThemeChanged() {
-        ThemeManagerUtils.init(this);
+    public void onRequestRestart() {
         recreate();
     }
 

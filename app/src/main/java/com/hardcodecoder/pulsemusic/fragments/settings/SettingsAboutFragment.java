@@ -1,4 +1,4 @@
-package com.hardcodecoder.pulsemusic.fragments;
+package com.hardcodecoder.pulsemusic.fragments.settings;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -9,20 +9,28 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.BuildConfig;
 import com.hardcodecoder.pulsemusic.R;
-import com.hardcodecoder.pulsemusic.activities.SettingsActivity;
-import com.hardcodecoder.pulsemusic.interfaces.SettingsFragmentsListener;
+import com.hardcodecoder.pulsemusic.fragments.settings.base.SettingsBaseFragment;
 
-public class SettingsAboutFragment extends Fragment {
+public class SettingsAboutFragment extends SettingsBaseFragment {
 
-    public static final String TAG = "SettingsAboutFragment";
+    public static final String TAG = SettingsAboutFragment.class.getSimpleName();
 
     public static SettingsAboutFragment getInstance() {
         return new SettingsAboutFragment();
+    }
+
+    @Override
+    public String getFragmentTag() {
+        return TAG;
+    }
+
+    @Override
+    public int getToolbarTitleForFragment() {
+        return R.string.about;
     }
 
     @Nullable
@@ -33,9 +41,7 @@ public class SettingsAboutFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        SettingsFragmentsListener mListener = (SettingsFragmentsListener) getActivity();
-        if (mListener instanceof SettingsActivity)
-            mListener.setToolbarTitle(R.string.about);
+        super.onViewCreated(view, savedInstanceState);
 
         MaterialTextView tempTextView = view.findViewById(R.id.about_app_version);
         tempTextView.setText(BuildConfig.VERSION_NAME);

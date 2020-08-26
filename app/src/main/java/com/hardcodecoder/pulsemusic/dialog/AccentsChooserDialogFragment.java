@@ -11,9 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hardcodecoder.pulsemusic.R;
-import com.hardcodecoder.pulsemusic.activities.SettingsActivity;
 import com.hardcodecoder.pulsemusic.adapters.AccentAdapter;
-import com.hardcodecoder.pulsemusic.interfaces.SettingsFragmentsListener;
 import com.hardcodecoder.pulsemusic.model.AccentsModel;
 import com.hardcodecoder.pulsemusic.themes.ThemeManagerUtils;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
@@ -47,8 +45,6 @@ public class AccentsChooserDialogFragment extends RoundedBottomSheetDialogFragme
         else
             mColors = view.getContext().getResources().getIntArray(R.array.pulse_accent_colors_value);
 
-        final SettingsFragmentsListener mListener = (SettingsFragmentsListener) getActivity();
-
         List<AccentsModel> mList = new ArrayList<>(mColors.length);
         for (int i = 0; i < mColors.length; i++) {
             mList.add(new AccentsModel(
@@ -66,13 +62,12 @@ public class AccentsChooserDialogFragment extends RoundedBottomSheetDialogFragme
                 newAccentId = mList.get(position).getId();
                 dismiss();
                 if (ThemeManagerUtils.setSelectedAccentColor(view.getContext(), newAccentId))
-                    if (mListener instanceof SettingsActivity) {
-                        mListener.onThemeChanged();
+                    if (null != getActivity()) {
+                        getActivity().recreate();
                     }
             });
             recyclerView.setAdapter(adapter);
         }
         view.findViewById(R.id.choose_accents_cancel_btn).setOnClickListener(v -> dismiss());
     }
-
 }

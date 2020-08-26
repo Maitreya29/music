@@ -1,13 +1,14 @@
 package com.hardcodecoder.pulsemusic.interfaces;
 
 import androidx.annotation.StringRes;
-import androidx.fragment.app.Fragment;
+
+import com.hardcodecoder.pulsemusic.fragments.settings.base.SettingsBaseFragment;
 
 public interface SettingsFragmentsListener {
 
-    void changeFragment(Fragment fragment);
+    void changeFragment(SettingsBaseFragment fragment);
 
-    void onThemeChanged();
+    void onRequestRestart();
 
     void setToolbarTitle(@StringRes int titleId);
 }

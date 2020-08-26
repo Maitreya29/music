@@ -1,4 +1,4 @@
-package com.hardcodecoder.pulsemusic.fragments.settings;
+package com.hardcodecoder.pulsemusic.fragments.settings.base;
 
 import android.os.Bundle;
 import android.view.View;
@@ -13,11 +13,18 @@ import com.hardcodecoder.pulsemusic.interfaces.SettingsFragmentsListener;
 
 public abstract class SettingsBaseFragment extends Fragment {
 
+    private SettingsFragmentsListener mListener;
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        SettingsFragmentsListener mListener = (SettingsFragmentsListener) getActivity();
+        mListener = (SettingsFragmentsListener) getActivity();
         if (mListener instanceof SettingsActivity)
             mListener.setToolbarTitle(getToolbarTitleForFragment());
+    }
+
+    protected void requestActivityRestart() {
+        if (mListener instanceof SettingsActivity)
+            mListener.onRequestRestart();
     }
 
     public abstract String getFragmentTag();

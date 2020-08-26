@@ -1,4 +1,4 @@
-package com.hardcodecoder.pulsemusic.fragments;
+package com.hardcodecoder.pulsemusic.fragments.settings;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,28 +8,35 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.hardcodecoder.pulsemusic.R;
-import com.hardcodecoder.pulsemusic.activities.SettingsActivity;
 import com.hardcodecoder.pulsemusic.dialog.AccentsChooserDialogFragment;
 import com.hardcodecoder.pulsemusic.dialog.ThemeChooserBottomSheetDialogFragment;
-import com.hardcodecoder.pulsemusic.interfaces.SettingsFragmentsListener;
+import com.hardcodecoder.pulsemusic.fragments.settings.base.SettingsBaseFragment;
 import com.hardcodecoder.pulsemusic.themes.ThemeManagerUtils;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 import com.hardcodecoder.pulsemusic.views.SettingsToggleableItem;
 
 import java.util.Objects;
 
-public class SettingsThemeFragment extends Fragment {
+public class SettingsThemeFragment extends SettingsBaseFragment {
 
-    public static final String TAG = "SettingsThemeFragment";
-    private SettingsFragmentsListener mListener;
+    public static final String TAG = SettingsThemeFragment.class.getSimpleName();
     private Context mContext;
 
     public static SettingsThemeFragment getInstance() {
         return new SettingsThemeFragment();
+    }
+
+    @Override
+    public String getFragmentTag() {
+        return TAG;
+    }
+
+    @Override
+    public int getToolbarTitleForFragment() {
+        return R.string.look_and_feel;
     }
 
     @Nullable
@@ -40,32 +47,18 @@ public class SettingsThemeFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         mContext = getActivity();
-        mListener = (SettingsFragmentsListener) getActivity();
-        if (mListener instanceof SettingsActivity)
-            mListener.setToolbarTitle(R.string.look_and_feel);
 
         updateThemeSection(view);
-
-        //SettingsToggleableItem albumOverlaySelectorLayout = view.findViewById(R.id.laf_select_album_art_overlay);
-        //SwitchMaterial albumOverlaySwitch = albumOverlaySelectorLayout.findViewById(R.id.setting_toggleable_item_switch);
 
         SettingsToggleableItem desaturatedAccentSwitchLayout = view.findViewById(R.id.laf_enable_desaturated);
         SwitchMaterial desaturatedAccentSwitch = desaturatedAccentSwitchLayout.findViewById(R.id.setting_toggleable_item_switch);
 
-        //boolean albumOverlayEnabled = false;
         boolean desaturatedAccents = false;
         if (null != getContext()) {
-            //albumOverlayEnabled = AppSettings.isAlbumCardOverlayEnabled(getContext());
             desaturatedAccents = AppSettings.getAccentDesaturatedColor(getContext());
         }
-
-        /*albumOverlaySwitch.setChecked(albumOverlayEnabled);
-        albumOverlaySwitch.setOnCheckedChangeListener((buttonView, isChecked) ->
-                AppSettings.setAlbumCardOverlayEnabled(buttonView.getContext(), isChecked));
-
-        albumOverlaySelectorLayout.setOnClickListener(v ->
-                albumOverlaySwitch.setChecked(!albumOverlaySwitch.isChecked()));*/
 
         desaturatedAccentSwitch.setChecked(desaturatedAccents);
         desaturatedAccentSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -138,7 +131,7 @@ public class SettingsThemeFragment extends Fragment {
     }
 
     private void applyTheme() {
-        if (mListener instanceof SettingsActivity)
-            mListener.onThemeChanged();
+        ThemeManagerUtils.init(getActivity());
+        requestActivityRestart();
     }
 }

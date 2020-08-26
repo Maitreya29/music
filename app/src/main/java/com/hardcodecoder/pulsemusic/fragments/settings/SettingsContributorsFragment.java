@@ -1,4 +1,4 @@
-package com.hardcodecoder.pulsemusic.fragments;
+package com.hardcodecoder.pulsemusic.fragments.settings;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -11,21 +11,29 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
-import androidx.fragment.app.Fragment;
 
 import com.hardcodecoder.pulsemusic.GlideApp;
 import com.hardcodecoder.pulsemusic.GlideConstantArtifacts;
 import com.hardcodecoder.pulsemusic.R;
-import com.hardcodecoder.pulsemusic.activities.SettingsActivity;
-import com.hardcodecoder.pulsemusic.interfaces.SettingsFragmentsListener;
+import com.hardcodecoder.pulsemusic.fragments.settings.base.SettingsBaseFragment;
 
-public class SettingsContributorsFragment extends Fragment {
+public class SettingsContributorsFragment extends SettingsBaseFragment {
 
 
-    public static final String TAG = "SettingsContributorsFragment";
+    public static final String TAG = SettingsContributorsFragment.class.getSimpleName();
 
     public static SettingsContributorsFragment getInstance() {
         return new SettingsContributorsFragment();
+    }
+
+    @Override
+    public String getFragmentTag() {
+        return TAG;
+    }
+
+    @Override
+    public int getToolbarTitleForFragment() {
+        return R.string.contributors;
     }
 
     @Nullable
@@ -36,9 +44,7 @@ public class SettingsContributorsFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        SettingsFragmentsListener mListener = (SettingsFragmentsListener) getActivity();
-        if (mListener instanceof SettingsActivity)
-            mListener.setToolbarTitle(R.string.contributors);
+        super.onViewCreated(view, savedInstanceState);
 
         view.findViewById(R.id.github_logo).setOnClickListener(v -> openLink(R.string.github_link));
         view.findViewById(R.id.facebook_logo).setOnClickListener(v -> openLink(R.string.facebook_link));
