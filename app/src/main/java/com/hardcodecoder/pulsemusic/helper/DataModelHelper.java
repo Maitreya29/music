@@ -89,9 +89,16 @@ public class DataModelHelper {
                 String mimeType = context.getContentResolver().getType(uri);
 
                 MediaFormat mediaFormat = mediaExtractor.getTrackFormat(0);
-                int bitRate = mediaFormat.getInteger(MediaFormat.KEY_BIT_RATE);
-                int sampleRate = mediaFormat.getInteger(MediaFormat.KEY_SAMPLE_RATE);
-                int channelCount = mediaFormat.getInteger(MediaFormat.KEY_CHANNEL_COUNT);
+                int bitRate = 0;
+                int sampleRate = 0;
+                int channelCount = 1;
+                try {
+                    bitRate = mediaFormat.getInteger(MediaFormat.KEY_BIT_RATE);
+                    sampleRate = mediaFormat.getInteger(MediaFormat.KEY_SAMPLE_RATE);
+                    channelCount = mediaFormat.getInteger(MediaFormat.KEY_CHANNEL_COUNT);
+                } catch (NullPointerException e) {
+                    e.printStackTrace();
+                }
                 cursor.close();
                 TrackFileModel trackFileModel = new TrackFileModel(displayName, mimeType, fileSize, bitRate, sampleRate, channelCount);
                 callback.onComplete(trackFileModel);
