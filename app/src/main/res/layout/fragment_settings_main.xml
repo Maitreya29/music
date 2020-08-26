@@ -40,6 +40,16 @@
             app:settingItemTitle="@string/contributors" />
 
         <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
+            android:id="@+id/donationSettings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            app:settingItemIcon="@drawable/ic_donation"
+            app:settingItemIconColor="@color/md_yellow_A400"
+            app:settingItemText="@string/donations_desc"
+            app:settingItemTitle="@string/donations" />
+
+        <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
             android:id="@+id/aboutSettings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

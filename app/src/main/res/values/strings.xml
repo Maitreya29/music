@@ -153,6 +153,9 @@
     <string name="contributors">Contributors</string>
     <string name="contributors_desc">Meet the developers</string>
 
+    <string name="donations">Support development</string>
+    <string name="donations_desc">Donate a small amount to support the developers</string>
+
     <string name="about">About</string>
     <string name="about_desc">App version, social links</string>
 
@@ -208,6 +211,14 @@
 
     <string name="other_contributions_title">Others</string>
 
+    <!-- Donations -->
+    <string name="donation_category_head">Contribute</string>
+    <string name="donation_title">Enjoying Pulse Music?</string>
+    <string name="donation_text">Please consider making a small donation to support the development</string>
+    <string name="bmc_title">Buy me a Coffee</string>
+    <string name="pp_title">PayPal</string>
+    <string name="top_donations">Special thanks to</string>
+    <string name="no_supporters">No supporters so far \n\u2639</string>
 
     <!-- About -->
     <string name="about_app_version">App version</string>

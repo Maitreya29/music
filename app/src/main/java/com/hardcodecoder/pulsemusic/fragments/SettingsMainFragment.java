@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.activities.SettingsActivity;
+import com.hardcodecoder.pulsemusic.fragments.settings.SettingsDonationFragment;
 import com.hardcodecoder.pulsemusic.interfaces.SettingsFragmentsListener;
 
 
@@ -35,6 +36,7 @@ public class SettingsMainFragment extends Fragment {
         view.findViewById(R.id.themeSettings).setOnClickListener(v -> openSettingsFragment(SettingsThemeFragment.getInstance()));
         view.findViewById(R.id.nowPlayingSettings).setOnClickListener(v -> openSettingsFragment(SettingsNowPlayingFragment.getInstance()));
         view.findViewById(R.id.contributorsSettings).setOnClickListener(v -> openSettingsFragment(SettingsContributorsFragment.getInstance()));
+        view.findViewById(R.id.donationSettings).setOnClickListener(v -> openSettingsFragment(SettingsDonationFragment.getInstance()));
         view.findViewById(R.id.aboutSettings).setOnClickListener(v -> openSettingsFragment(SettingsAboutFragment.getInstance()));
     }
 

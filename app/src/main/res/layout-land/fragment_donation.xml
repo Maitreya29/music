@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginStart="32dp"
+    android:orientation="horizontal">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/contribute_head"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/donation_category_head"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
+        android:textColor="?primaryColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/donation_card"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:cardBackgroundColor="?surfaceColor"
+        app:cardCornerRadius="@dimen/rounding_radius_8dp"
+        app:cardElevation="4dp"
+        app:cardUseCompatPadding="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/contribute_head">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="100dp"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/donate_head"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/donation_title"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/donate_subhead"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="32dp"
+                android:gravity="center"
+                android:text="@string/donation_text"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/bmc_btn"
+                style="@style/MaterialButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/bmc_title"
+                app:backgroundTint="?attr/primaryColor"
+                app:icon="@drawable/ic_bmc_new_btn_logo"
+                app:iconPadding="12dp"
+                app:iconSize="18dp"
+                app:iconTint="@android:color/transparent"
+                app:iconTintMode="add" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/pp_btn"
+                style="@style/MaterialButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pp_title"
+                app:backgroundTint="?attr/primaryColor"
+                app:icon="@drawable/ic_paypal"
+                app:iconPadding="12dp"
+                app:iconSize="18dp"
+                app:iconTint="@android:color/transparent"
+                app:iconTintMode="add" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

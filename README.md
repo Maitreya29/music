@@ -75,6 +75,22 @@ With 3 different dark themes to and several accents to choose from, customize yo
 - App shortcut support to play tracks without even opening the app
 - All your favorite tracks in one place
 - Option to change now playing screen album cover corner radius
+
+## Support development
+**Enjoying Pulse Music?**
+
+Please consider donating a small amount to support the development.
+
+It requires a lot of effort and time to develop an application, and that too keeping it open source and completely free.
+<p>
+  <a href="https://www.buymeacoffee.com/HardcodeCoder">
+    <img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174">
+  </a>
+    <a href="https://paypal.me/HardcodeCoder">
+      <img src="https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-200px.png" alt="PayPal" height="41" width="174">
+  </a>
+</p>
+
 ## Releases
 [<img alt="Get it on Github" height="70" src="https://raw.githubusercontent.com/flocke/andOTP/master/assets/badges/get-it-on-github.png">](https://github.com/HardcodeCoder/PulseMusic/releases/)
 ### Latest release: [Here](https://github.com/HardcodeCoder/PulseMusic/releases/latest/)
