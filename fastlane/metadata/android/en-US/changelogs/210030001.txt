@@ -1,0 +1,9 @@
+Pulse Music V3.0.1-Release
+
+- Added donation section
+- Added Spanish translations (thanks to @sguinetti) 
+- Added German translations (thanks to @data-niklas)
+- Added sort by duration in library (thanks to @data-niklas)
+- Fixed crash when going to playlist tab (#3)
+- Fixed crash in song info dialog
+- Fixed bottom sheet dialog does not expand in landscape mode

@@ -1,6 +1,7 @@
 # Default ignored files
 /.gradle/
 /.idea/
+/build/
 /app/build/
 /app/release/
 /app/app.iml
