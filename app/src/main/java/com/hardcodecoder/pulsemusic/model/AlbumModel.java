@@ -8,7 +8,7 @@ public class AlbumModel {
     private String mAlbumName;
     private String mAlbumArt;
 
-    public AlbumModel(int mId, int mSongsCount,  long albumId, String mAlbumName, String mAlbumArt) {
+    public AlbumModel(int mId, int mSongsCount, long albumId, String mAlbumName, String mAlbumArt) {
         this.mId = mId;
         this.mSongsCount = mSongsCount;
         this.mAlbumId = albumId;
@@ -20,7 +20,9 @@ public class AlbumModel {
         return mId;
     }
 
-    public long getAlbumId() { return mAlbumId; }
+    public long getAlbumId() {
+        return mAlbumId;
+    }
 
     public int getSongsCount() {
         return mSongsCount;

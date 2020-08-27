@@ -14,6 +14,12 @@
             <item
                 android:id="@+id/menu_action_sort_desc"
                 android:title="@string/alphabet_desc" />
+            <item
+                android:id="@+id/menu_action_sort_duration_asc"
+                android:title="@string/duration_asc" />
+            <item
+                android:id="@+id/menu_action_sort_duration_desc"
+                android:title="@string/duration_desc" />
         </menu>
     </item>
     <item

@@ -185,7 +185,7 @@ public class MainActivity extends MediaSessionActivity {
         if (controlsFrag == null) {
             controlsFrag = new ControlsFragment();
             findViewById(R.id.controls_fragment_container).setVisibility(View.VISIBLE);
-            fm.beginTransaction()
+            getSupportFragmentManager().beginTransaction()
                     .setCustomAnimations(R.anim.slide_up_enter, R.anim.slide_down_exit)
                     .replace(R.id.controls_fragment_container, controlsFrag)
                     .commit();

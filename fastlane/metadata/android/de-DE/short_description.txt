@@ -1,0 +1,1 @@
+Ein Offline-Musikplayer, mit einer modernen UI und mächtigen Funktionen

@@ -6,9 +6,11 @@ public class Preferences {
     public static final String SORT_ORDER_LIBRARY_KEY = "LibrarySortOrder";
     public static final String SORT_ORDER_ALBUMS_KEY = "AlbumsSortOrder";
     public static final String SORT_ORDER_ARTIST_KEY = "ArtistsSortOrder";
-    // In range 3000 - 3001
+    // In range 3000 - 3003
     public static final int SORT_ORDER_ASC = 3000;
     public static final int SORT_ORDER_DESC = 3001;
+    public static final int SORT_ORDER_DURATION_ASC = 3002;
+    public static final int SORT_ORDER_DURATION_DESC = 3003;
 
     public static final String SPAN_COUNT = "GridSpanCount";
 

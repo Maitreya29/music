@@ -118,6 +118,7 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.MyLibrar
         void setItemData(MusicModel md) {
             songName.setText(md.getTrackName());
             artist.setText(md.getArtist());
+
             GlideApp.with(itemView)
                     .load(md.getAlbumArtUrl())
                     .listener(new RequestListener<Drawable>() {

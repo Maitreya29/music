@@ -81,8 +81,16 @@ public class LibraryFragment extends ListGridFragment {
     }
 
     private SortOrder resolveSortOrder(int sortOrder) {
-        if (sortOrder == Preferences.SORT_ORDER_ASC)
-            return SortOrder.TITLE_ASC;
+        switch (sortOrder) {
+            case Preferences.SORT_ORDER_ASC:
+                return SortOrder.TITLE_ASC;
+            case Preferences.SORT_ORDER_DESC:
+                return SortOrder.TITLE_DESC;
+            case Preferences.SORT_ORDER_DURATION_ASC:
+                return SortOrder.DURATION_ASC;
+            case Preferences.SORT_ORDER_DURATION_DESC:
+                return SortOrder.DURATION_DESC;
+        }
         return SortOrder.TITLE_DESC;
     }
 

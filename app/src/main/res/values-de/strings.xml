@@ -1,0 +1,261 @@
+<resources>
+    <string name="app_name">Pulse Music</string>
+
+    <string name="channel_name">Pulse Music Benachrichtigung</string>
+
+    <string name="iv_content_desc">Albumcover</string>
+    <string name="iv_btn_close_description">Schließen Button</string>
+    <string name="iv_btn_action_description">Aktionsbutton</string>
+    <string name="icon_desc">Icon Button</string>
+
+
+    <!-- Bottom Nav bar -->
+    <string name="home">Home</string>
+    <string name="library">Bibliothek</string>
+    <string name="albums">Alben</string>
+    <string name="artist">Künstler</string>
+    <string name="playlist_nav">Playlist</string>
+
+
+    <!-- Home Fragment -->
+    <string name="favorite_playlist">Favoriten</string>
+    <string name="recent">Kürzlich abgespielt</string>
+    <string name="select_track">Titel auswählen</string>
+    <string name="random">Für dich</string>
+    <string name="new_in_library">Neu in der Bibliothek</string>
+    <string name="top_artist">Top Künstler</string>
+    <string name="top_albums">Top Alben</string>
+    <string name="tracks_plays">Wie oft abgespielt:</string>
+    <string name="tracks_not_found">Keine Titel gefunden</string>
+
+
+    <!-- Favorites Playlist Activity-->
+    <string name="favorites">Deine Favoriten</string>
+    <string name="no_favorites_tracks">Keine Titel gefunden. Füge welche zu deinen Favoriten dazu \\u2665</string>
+
+
+    <!-- Recent Activity-->
+    <string name="no_recent_tracks">Nichts zu zeigen\n\\u2639</string>
+
+
+    <!-- Home drawer contents -->
+    <string name="drawer_welcome_message">Willkommen,</string>
+    <string name="def_user_name">Benutzer</string>
+    <string name="drawer_settings_option">Einstellungen</string>
+    <string name="drawer_equalizer_option">Equalizer</string>
+    <string name="app_info">App info</string>
+    <string name="note">Mit \\u2665 in Indien gemacht</string>
+    <string name="select_image">Wähle ein Bild</string>
+    <string name="error_select_image_toast">Fehler bei der Bildauswahl</string>
+
+
+    <!-- Playlist fragment -->
+    <string name="playlist_current_queue">Wiedergabeliste</string>
+    <string name="playlist_delete_dialog_title">Möchtest du diese Playlist wirklich löschen?</string>
+    <string name="yes">Ja</string>
+    <string name="no">Abbrechen</string>
+    <string name="playlist_deleted_toast">Playlist gelöscht</string>
+    <string name="cannot_delete_default_playlist">Standardplaylist kann nicht entfernt werden</string>
+
+
+    <!-- Toolbar Options menu -->
+    <string name="sort_order">Sortierreihenfolge</string>
+    <string name="alphabet_asc">A bis Z</string>
+    <string name="alphabet_desc">Z bis A</string>
+    <string name="duration_asc">Länge ↑</string>
+    <string name="duration_desc">Länge ↓</string>
+    <string name="add_playlist">Zur Playlist hinzufügen</string>
+    <string name="settings">Einstellungen</string>
+    <string name="equalizer_error">Standard Equalizer nicht gefunden</string>
+    <string name="grid_count">Anzahl Spalten</string>
+    <string name="grid_count_land">Anzahl Spalten (Landschaft)</string>
+    <string name="one">Eins</string>
+    <string name="two">Zwei</string>
+    <string name="three">Drei</string>
+    <string name="four">Vier</string>
+    <string name="five">Fünf</string>
+    <string name="six">Sechs</string>
+
+
+    <!-- Options menu for list items -->
+    <string name="play_next">Als Nächstes abspielen</string>
+    <string name="play_next_toast">Titel wurde hinzugefügt und wird als Nächstes abgespielt</string>
+    <string name="add_to_queue">Zur Wiedergabeliste hinzufügen</string>
+    <string name="add_to_queue_toast">Titel zur aktuellen Wiedergabeliste hinzugefügt</string>
+    <string name="add_to_playlist">Zur Wiedergabeliste hinzufügen</string>
+    <string name="info">Titel Informationen</string>
+
+
+    <!-- Bottom sheet dialog -->
+    <string name="enter_name_toast">Bitte gib deinen Namen ein</string>
+    <string name="create_playlist">Wiedergabeliste erschaffen</string>
+    <string name="edit_playlist">Wiedergabelistentitel bearbeiten</string>
+    <string name="create_playlist_hint">Gib den Namen der Wiedergabeliste ein</string>
+    <string name="create">Okay</string>
+    <string name="cancel">Abbrechen</string>
+    <string name="atp_title">Titel hinzufügen zu\\.\\.\\.</string>
+    <string name="atp_no_user_playlist_found">Keine Wiedergabeliste gefunden\nKlicke auf den Hinzufügen-Button um eine zu erschaffen</string>
+    <string name="atp_track_add_error_toast">Fehler beim Hinzufügen des Titels zur Wiedergabeliste</string>
+
+
+    <!-- Playlist Activity -->
+    <string name="no_playlist_tracks_found">Keine Titel in der Wiedergabeliste gefunden\n\\u2639</string>
+    <string name="item_removed">Titel von der Wiedergabeliste entfernt !!!</string>
+    <string name="snack_bar_action_undo">Rückgängig machen</string>
+    <string name="cannot_remove_active_item">Aktive Titel können nicht entfernt werden</string>
+
+
+    <!-- Now Playing Activity -->
+    <string name="now_playing">Jetzt am Spielen</string>
+    <string name="added_to_fav">Titel zu den Favoriten hinzugefügt</string>
+    <string name="removed_from_fav">Titel von den Favoriten entfernt</string>
+    <string name="up_next_title">Als Nächstes ●</string>
+    <string name="up_next_title_none">Playlist abgeschlossen</string>
+
+
+    <!-- TrackPickerActivity -->
+    <string name="select_tracks">Titel auswählen</string>
+
+
+    <!-- Details Activity -->
+    <string name="details_toolbar_title">Details</string>
+    <string name="details_activity_rv_title">Titel</string>
+    <string name="num_tracks">Kollektion hat ●</string>
+    <string name="tracks">Titel</string>
+
+
+    <!-- Song info dialog -->
+    <string name="head_title">Titel</string>
+    <string name="head_album">Album</string>
+    <string name="head_artist">Künstler</string>
+    <string name="head_file_size">Dateigröße</string>
+    <string name="head_file_type">Dateityp</string>
+    <string name="head_bitrate">Bitrate</string>
+    <string name="head_sample_rate">Abtastrate</string>
+    <string name="head_channel_count">Anzahl der Kanäle</string>
+    <string name="okay">OK</string>
+
+
+    <!-- Search Activity -->
+    <string name="searchHint">Suche nach einem Künstler, Liedern oder Alben\\.\\.\\.</string>
+    <string name="search_null">Keine Ergebnisse gefunden</string>
+
+
+    <!-- Settings Activity -->
+    <string name="settings_title">Einstellungen</string>
+    <!-- Category -->
+    <string name="look_and_feel">Erscheinungsbild</string>
+    <string name="look_and_feel_desc">Ändere das Theme und Weiteres</string>
+
+    <string name="now_playing_title">Jetzt am Spielen</string>
+    <string name="now_playing_desc">Passe \"Jetzt am Spielen\" an</string>
+
+    <string name="contributors">Mitgewirkte</string>
+    <string name="contributors_desc">Lerne die Entwickler kennen</string>
+
+    <string name="donations">Unterstütze die Entwicklung</string>
+    <string name="donations_desc">Spende etwas, um die Entwickler zu unterstützen</string>
+
+    <string name="about">Über</string>
+    <string name="about_desc">App Version, Soziale Links</string>
+
+    <!-- Look and feel section -->
+    <string name="laf_category_theme">Theme</string>
+    <string name="laf_category_select_dark_theme">Wähle das Dunkle Theme aus</string>
+    <string name="laf_category_select_dark_theme_desc">Wähle, welches dunkle Farbschema angewandt wird, wenn der dunkle Modus aktiv ist</string>
+    <string name="laf_category_enable_dark_mode_title">Aktivier den dunklen Modus</string>
+    <string name="laf_category_enable_dark_mode_text">Aktivier das bevorzugte dunkle Theme direkt</string>
+    <string name="laf_category_enable_auto_mode_title">Ändere das Theme automatisch</string>
+    <string name="laf_category_enable_auto_mode_text">Ändere das helle und bevorzugte dunkle Theme basierend auf der Tageszeit</string>
+
+    <string name="laf_category_colors">Farben</string>
+    <string name="laf_category_select_color">Wähle eine Akzentfarbe</string>
+    <string name="laf_category_select_color_desc">Wähle eine Akzentfarbe für die App</string>
+
+    <string name="laf_accents_picker_title">Wähle eine Akzentfarbe</string>
+    <string name="laf_accents_picker_accent_title_unknown">Unbekannt</string>
+
+    <string name="laf_accents_picker_desaturated_title">Entsättigte Farben</string>
+    <string name="laf_accents_picker_accent_desaturated_desc">Entsättigt Farben, wenn das dunkle Theme aktiv ist</string>
+
+    <string name="dark_theme_name_gray">Nur Grau</string>
+    <string name="dark_theme_name_kinda_dark">Standard dunkles Farbschema</string>
+    <string name="dark_theme_name_pure_black">Finsterniss</string>
+
+    <string name="select_dark_theme">Ändere das bevorzugte dunkle Theme</string>
+    <string name="set">Setze</string>
+
+
+    <!-- Now playing settings -->
+    <string name="now_playing_album_style_section_title">Stil</string>
+    <string name="now_playing_screen_style_desc">Wähle den \"Jetzt am Spielen\" Stil</string>
+    <!--    <string name="now_playing_album_decoration_title">Enable gradient overlay</string>-->
+    <!--    <string name="now_playing_album_decoration_desc">Adds a fading overlay on top of album card</string>-->
+    <string name="now_playing_screen_style_title">\"Jetzt am Spielen\" Stil</string>
+    <string name="now_playing_screen_style_modern">Modern</string>
+    <string name="now_playing_screen_style_stylish">Stylish</string>
+    <string name="now_playing_screen_style_edge">Rand zu Rand</string>
+    <string name="now_playing_cover_corner_radius_title">Randradius</string>
+    <string name="now_playing_cover_corner_radius_changer_title">Stell den Randradius ein</string>
+    <string name="now_playing_cover_corner_radius_desc">Wähle den Albumbild Randradius</string>
+    <string name="now_playing_cover_corner_radius_tl">Oben links</string>
+    <string name="now_playing_cover_corner_radius_tr">Oben rechts</string>
+    <string name="now_playing_cover_corner_radius_bl">Unten links</string>
+    <string name="now_playing_cover_corner_radius_br">Unten rechts</string>
+    <string name="now_playing_cover_corner_radius_unit">dp</string>
+
+    <!-- Contributors -->
+    <string name="lead_developer_title">Führender Entwickler</string>
+    <string name="lead_developer_1" translatable="false">Ashutosh Patoa</string>
+    <string name="lead_developer_user_name" translatable="false">\@HardcodeCoder</string>
+
+    <string name="other_contributions_title">Andere</string>
+
+    <!-- Donations -->
+    <string name="donation_category_head">Unterstütze</string>
+    <string name="donation_title">Gefällt dir Pulse Music?</string>
+    <string name="donation_text">Bitte erwägen Sie eine kleine Spende zur Unterstützung der Entwicklung</string>
+    <string name="bmc_title">Kauf mir einen Kaffee</string>
+    <string name="pp_title">PayPal</string>
+    <string name="top_donations">Speziellen Dank an</string>
+    <string name="no_supporters">Keine Unterstützer bis jetzt \n\u2639</string>
+
+
+    <!-- About -->
+    <string name="about_app_version">App Version</string>
+    <string name="about_app_release_date">Build Datum</string>
+    <string name="about_app_release_build_type">Build Typ</string>
+    <string name="about_app_build_code">Build Code</string>
+    <string name="about_check_source_code">Quelle auf Github</string>
+
+    <!-- Profile Links -->
+    <string name="profile_icon_link" translatable="false">https://pbs.twimg.com/profile_images/1159497870514376704/U5JEGSc6_400x400.jpg</string>
+    <string name="social_links">Soziale Links</string>
+    <string name="github_link" translatable="false">https://github.com/HardcodeCoder</string>
+    <string name="source_code_link" translatable="false">https://github.com/HardcodeCoder/PulseMusic</string>
+    <string name="facebook_link" translatable="false">https://www.facebook.com/ashutosh.patoa.5</string>
+    <string name="twitter_link" translatable="false">https://www.twitter.com/hardcodecoder</string>
+    <string name="telegram_link" translatable="false">https://t.me/HardcodeCoder</string>
+
+    <!-- Accents -->
+    <string name="exodus_fruit">Exodus Frucht</string>
+    <string name="electron_blue">Elektron Blau</string>
+    <string name="mint_leaf">Minzblatt</string>
+    <string name="chi_gong">Chi gong</string>
+    <string name="sei_bar">Sei bar</string>
+    <string name="coral">Koralle</string>
+    <string name="sunkist">Sunkist</string>
+    <string name="blue_pink">Blaues Pink</string>
+
+    <!-- App shortcuts -->
+    <string name="shortcut_shuffle_label">Mischen</string>
+    <string name="shortcut_shuffle_label_long">Gemischt</string>
+
+    <string name="shortcut_latest_label">Letzten Titel</string>
+    <string name="shortcut_latest_label_long">Letzten Titel</string>
+
+    <string name="shortcut_suggested_label">Für dich</string>
+    <string name="shortcut_suggested_label_long">Für dich</string>
+    <string name="enter_name">Gib deinen Namen ein</string>
+    <string name="atp_track_added_toast">Titel erfolgreich zur Wiedergabeliste hinzugefügt</string>
+</resources>
