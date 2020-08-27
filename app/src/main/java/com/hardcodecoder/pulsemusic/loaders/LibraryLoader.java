@@ -1,5 +1,6 @@
 package com.hardcodecoder.pulsemusic.loaders;
 
+import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.database.Cursor;
@@ -17,6 +18,9 @@ public class LibraryLoader implements Callable<List<MusicModel>> {
     private ContentResolver contentResolver;
     private String mSortOrder;
 
+    // MediaStore.Audio.Media.DURATION existed well before APi 29
+    // Suppress lint
+    @SuppressLint("InlinedApi")
     LibraryLoader(ContentResolver contentResolver, SortOrder sortOrder) {
         this.contentResolver = contentResolver;
         switch (sortOrder) {
@@ -26,17 +30,18 @@ public class LibraryLoader implements Callable<List<MusicModel>> {
             case TITLE_DESC:
                 mSortOrder = MediaStore.Audio.Media.TITLE + " COLLATE NOCASE DESC";
                 break;
-            case DATE_MODIFIED_ASC:
-                mSortOrder = MediaStore.Audio.Media.DATE_MODIFIED + " ASC";
+            case DURATION_ASC:
+                mSortOrder = MediaStore.Audio.Media.DURATION + " ASC";
                 break;
-            case DATE_MODIFIED_DESC:
-                mSortOrder = MediaStore.Audio.Media.DATE_MODIFIED + " DESC";
+            case DURATION_DESC:
+                mSortOrder = MediaStore.Audio.Media.DURATION + " DESC";
                 break;
             default:
                 mSortOrder = null;
         }
     }
 
+    @SuppressLint("InlinedApi")
     @Override
     public List<MusicModel> call() {
         List<MusicModel> libraryList = new ArrayList<>();
@@ -47,7 +52,7 @@ public class LibraryLoader implements Callable<List<MusicModel>> {
                 MediaStore.Audio.Media.ARTIST,
                 MediaStore.Audio.Media.ALBUM,
                 MediaStore.Audio.Media.ALBUM_ID,
-                MediaStore.Audio.Media.DURATION
+                MediaStore.Audio.AudioColumns.DURATION
         };
 
         final Cursor cursor = contentResolver.query(

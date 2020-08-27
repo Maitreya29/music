@@ -23,9 +23,9 @@ import com.hardcodecoder.pulsemusic.loaders.SortOrder;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.singleton.TrackManager;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
+import com.hardcodecoder.pulsemusic.utils.SortUtil;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class LibraryFragment extends ListGridFragment {
@@ -47,10 +47,8 @@ public class LibraryFragment extends ListGridFragment {
         mList = new ArrayList<>(LoaderCache.getAllTracksList());
         final int sortOrder = getCurrentSortOrder();
 
-        if (sortOrder == Preferences.SORT_ORDER_DESC)
-            Collections.reverse(mList);
-
         if (mList.size() > 0) {
+            SortUtil.sortLibraryList(mList, resolveSortOrder(sortOrder));
             RecyclerView recyclerView = (RecyclerView) ((ViewStub) view.findViewById(R.id.stub_library_fragment_rv)).inflate();
             mLayoutManager = new GridLayoutManager(recyclerView.getContext(), getCurrentSpanCount());
             recyclerView.setLayoutManager(mLayoutManager);
