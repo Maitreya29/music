@@ -36,6 +36,12 @@ public class LibraryLoader implements Callable<List<MusicModel>> {
             case DURATION_DESC:
                 mSortOrder = MediaStore.Audio.Media.DURATION + " DESC";
                 break;
+            case DATE_MODIFIED_ASC:
+                mSortOrder = MediaStore.Audio.Media.DATE_MODIFIED + " ASC";
+                break;
+            case DATE_MODIFIED_DESC:
+                mSortOrder = MediaStore.Audio.Media.DATE_MODIFIED + " DESC";
+                break;
             default:
                 mSortOrder = null;
         }
