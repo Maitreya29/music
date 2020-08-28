@@ -122,7 +122,7 @@ public class PlaylistTracksActivity extends MediaSessionActivity implements Play
             if (null != data && null != (object = data.getSerializableExtra(TrackPickerActivity.ID_PICKED_TRACKS))) {
                 ArrayList<MusicModel> selectedTracks = (ArrayList<MusicModel>) object;
                 if (selectedTracks.size() > 0) {
-                    AppFileManager.addItemsToPlaylist(playListTitle, selectedTracks, result -> mHandler.post(() -> {
+                    AppFileManager.addItemsToPlaylist(playListTitle, selectedTracks, true, result -> mHandler.post(() -> {
                         if (result) {
                             if (null == mAdapter) loadPlaylist(selectedTracks);
                             else {

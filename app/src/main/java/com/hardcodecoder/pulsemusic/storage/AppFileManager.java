@@ -161,12 +161,13 @@ public class AppFileManager {
 
     public static void addItemsToPlaylist(@NonNull String playlistName,
                                           @NonNull List<MusicModel> playlistTracks,
+                                          boolean append,
                                           @Nullable Callback<Boolean> callback) {
         TaskRunner.executeAsync(() -> {
             List<String> tracksTitleRaw = DataModelHelper.getTitlesListFromModelsObject(playlistTracks);
             StorageUtils.writeTracksToPlaylist(
                     StorageStructure.getAbsolutePlaylistsFolderPath(mFilesDir) +
-                            playlistName, tracksTitleRaw);
+                            playlistName, tracksTitleRaw, append);
             if (null != callback) callback.onComplete(true);
         });
     }
@@ -181,10 +182,7 @@ public class AppFileManager {
     }
 
     public static void updatePlaylistItems(@NonNull String playlistName, @NonNull List<MusicModel> newTracksList) {
-        TaskRunner.executeAsync(() -> {
-            deletePlaylist(playlistName);
-            addItemsToPlaylist(playlistName, newTracksList, null);
-        });
+        addItemsToPlaylist(playlistName, newTracksList, false, null);
     }
 
     public static void deletePlaylist(@NonNull String playlistName) {

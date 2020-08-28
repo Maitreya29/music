@@ -150,7 +150,7 @@ class StorageUtils {
         }
     }
 
-    static void writeTracksToPlaylist(String filePath, List<String> playlistTracks) {
+    static void writeTracksToPlaylist(String filePath, List<String> playlistTracks, boolean append) {
         if (null != playlistTracks && playlistTracks.size() > 0) {
             StringBuilder builder = new StringBuilder();
             for (String line : playlistTracks) {
@@ -160,7 +160,7 @@ class StorageUtils {
             FileOutputStream fos = null;
             try {
                 File file = new File(filePath);
-                fos = new FileOutputStream(file, true);
+                fos = new FileOutputStream(file, append);
                 fos.write(builder.toString().getBytes());
             } catch (IOException e) {
                 e.printStackTrace();
