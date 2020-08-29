@@ -6,5 +6,6 @@
         android:icon="@drawable/ic_playlist_add"
         android:orderInCategory="1"
         android:title="@string/add_playlist"
+        app:iconTint="?attr/unFocusedColor"
         app:showAsAction="always" />
 </menu>
