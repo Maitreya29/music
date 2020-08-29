@@ -28,7 +28,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.activities.CurrentPlaylistActivity;
-import com.hardcodecoder.pulsemusic.activities.PlaylistTracksActivity;
+import com.hardcodecoder.pulsemusic.activities.UserPlaylistTracksActivity;
 import com.hardcodecoder.pulsemusic.adapters.PlaylistAdapter;
 import com.hardcodecoder.pulsemusic.dialog.RoundedBottomSheetDialog;
 import com.hardcodecoder.pulsemusic.helper.RecyclerViewGestureHelper;
@@ -152,8 +152,8 @@ public class PlaylistFragment extends Fragment implements PlaylistCardListener, 
         if (pos == 0)
             startActivity(new Intent(mContext, CurrentPlaylistActivity.class));
         else {
-            Intent i = new Intent(mContext, PlaylistTracksActivity.class);
-            i.putExtra(PlaylistTracksActivity.KEY_TITLE, mPlaylistNames.get(pos));
+            Intent i = new Intent(mContext, UserPlaylistTracksActivity.class);
+            i.putExtra(UserPlaylistTracksActivity.KEY_TITLE, mPlaylistNames.get(pos));
             Objects.requireNonNull(getActivity()).startActivityFromFragment(this, i, 100);
         }
     }

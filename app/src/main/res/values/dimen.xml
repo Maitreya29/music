@@ -19,4 +19,5 @@
     <dimen name="colored_icon_height">46dp</dimen>
     <dimen name="colored_icon_padding">12dp</dimen>
 
+    <dimen name="spannable_text_absolute_size_span">48dp</dimen>
 </resources>
