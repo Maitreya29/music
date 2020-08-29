@@ -72,7 +72,7 @@ public class LoaderHelper {
                 for (HistoryModel hm : result)
                     recentTracks.add(map.get(hm.getTitle()));
                 callback.onComplete(recentTracks);
-            }
+            } else callback.onComplete(null);
         });
     }
 
