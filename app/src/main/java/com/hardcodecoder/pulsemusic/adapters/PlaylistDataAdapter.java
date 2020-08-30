@@ -1,6 +1,7 @@
 package com.hardcodecoder.pulsemusic.adapters;
 
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -10,6 +11,8 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.load.DataSource;
@@ -21,7 +24,9 @@ import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.GlideApp;
 import com.hardcodecoder.pulsemusic.GlideConstantArtifacts;
 import com.hardcodecoder.pulsemusic.R;
+import com.hardcodecoder.pulsemusic.TaskRunner;
 import com.hardcodecoder.pulsemusic.helper.MediaArtHelper;
+import com.hardcodecoder.pulsemusic.helper.PMBGridAdapterDiffCallback;
 import com.hardcodecoder.pulsemusic.interfaces.ItemTouchHelperAdapter;
 import com.hardcodecoder.pulsemusic.interfaces.ItemTouchHelperViewHolder;
 import com.hardcodecoder.pulsemusic.interfaces.PlaylistItemListener;
@@ -43,12 +48,24 @@ public class PlaylistDataAdapter extends RecyclerView.Adapter<PlaylistDataAdapte
     private MusicModel deletedItem;
     private int deletedIndex;
 
-
     public PlaylistDataAdapter(List<MusicModel> playlistTracks, LayoutInflater inflater, PlaylistItemListener mListener, @Nullable SimpleGestureCallback callback) {
         this.mPlaylistTracks = playlistTracks;
         this.mInflater = inflater;
         this.mListener = mListener;
         this.mCallback = callback;
+    }
+
+    public void onListShuffled(List<MusicModel> oldList) {
+        final Handler handler = new Handler();
+        TaskRunner.executeAsync(() -> {
+            final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new PMBGridAdapterDiffCallback(oldList, mPlaylistTracks) {
+                @Override
+                public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
+                    return oldList.get(oldItemPosition).getTrackName().equals(mPlaylistTracks.get(newItemPosition).getTrackName());
+                }
+            });
+            handler.post(() -> diffResult.dispatchUpdatesTo(PlaylistDataAdapter.this));
+        });
     }
 
     public void addItems(final List<MusicModel> list) {
@@ -148,12 +165,12 @@ public class PlaylistDataAdapter extends RecyclerView.Adapter<PlaylistDataAdapte
 
         @Override
         public void onItemSelected() {
-            itemView.setBackground(itemView.getContext().getDrawable(R.drawable.active_item_background));
+            itemView.setBackground(ContextCompat.getDrawable(itemView.getContext(), R.drawable.active_item_background));
         }
 
         @Override
         public void onItemClear() {
-            itemView.setBackground(itemView.getContext().getDrawable(android.R.color.transparent));
+            itemView.setBackground(ContextCompat.getDrawable(itemView.getContext(), android.R.color.transparent));
         }
     }
 }

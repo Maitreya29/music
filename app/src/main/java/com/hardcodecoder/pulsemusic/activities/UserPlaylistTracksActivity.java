@@ -32,7 +32,7 @@ public class UserPlaylistTracksActivity extends AdvancePlaylist {
     }
 
     @Override
-    protected void onReceivedData(ArrayList<MusicModel> receivedData) {
+    protected void onReceiveData(ArrayList<MusicModel> receivedData) {
         AppFileManager.addItemsToPlaylist(playListTitle, receivedData, true, result -> {
             if (result) {
                 if (null == mAdapter) setUpData(receivedData, 0);

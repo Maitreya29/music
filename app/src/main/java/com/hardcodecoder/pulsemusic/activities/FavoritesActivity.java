@@ -19,6 +19,10 @@ public class FavoritesActivity extends SimplePlaylist {
         super.onCreate(savedInstanceState);
         setUpToolbar(getString(R.string.favorites));
         AppFileManager.getFavorites(this::setUpData);
+        setUpDynamicButton(R.string.playlist_clear_all, R.drawable.ic_clear_all, v -> {
+            AppFileManager.deleteAllFavorites();
+            clearAllTracks();
+        });
     }
 
     @Override

@@ -28,7 +28,7 @@ public class AppFileManager {
 
     public static void initDataDir(@NonNull Context context) {
         mFilesDir = context.getFilesDir().getAbsolutePath();
-        deleteOldHistoryFiles();
+        deleteOldHistoryFiles(100);
         TaskRunner.executeAsync(() -> {
             StorageUtils.createDir(new File(StorageStructure.getAbsoluteHistoryPath(mFilesDir)));
             StorageUtils.createDir(new File(StorageStructure.getAbsolutePlaylistsFolderPath(mFilesDir)));
@@ -111,6 +111,14 @@ public class AppFileManager {
                         false);
             });
         }
+    }
+
+    public static void deleteAllFavorites() {
+        TaskRunner.executeAsync(() -> {
+            mFavoritesSet = null;
+            StorageUtils.deleteFile(new File(
+                    StorageStructure.getAbsoluteFavoritesPath(mFilesDir)));
+        });
     }
 
     public static void isItemAFavorite(@NonNull MusicModel item, @NonNull Callback<Boolean> callback) {
@@ -216,17 +224,26 @@ public class AppFileManager {
         });
     }*/
 
-    private static void deleteOldHistoryFiles() {
+    /**
+     * Helper method to delete recent/history tracks
+     *
+     * @param maxPermittedHistoryCount gives the maximum record to store
+     */
+    public static void deleteOldHistoryFiles(int maxPermittedHistoryCount) {
         TaskRunner.executeAsync(() -> {
             String hisToryDir = StorageStructure.getAbsoluteHistoryPath(mFilesDir);
             File[] files = new File(hisToryDir).listFiles();
-            int size;
-            if (null != files && (size = files.length) > 20) {
-                // Sorts in descending order by modified date
-                StorageUtils.sortFilesByLastModified(files);
-                File[] deleteFiles = new File[size - 20];
-                System.arraycopy(files, 20, deleteFiles, 0, size - 20);
-                for (File deleteFile : deleteFiles) StorageUtils.deleteFile(deleteFile);
+            if (null != files) {
+                int size = files.length;
+                if (maxPermittedHistoryCount == 0) {
+                    for (File deleteFile : files) StorageUtils.deleteFile(deleteFile);
+                } else if (size > maxPermittedHistoryCount) {
+                    // Sorts in descending order by modified date
+                    StorageUtils.sortFilesByLastModified(files);
+                    File[] deleteFiles = new File[size - maxPermittedHistoryCount];
+                    System.arraycopy(files, maxPermittedHistoryCount, deleteFiles, 0, size - maxPermittedHistoryCount);
+                    for (File deleteFile : deleteFiles) StorageUtils.deleteFile(deleteFile);
+                }
             }
         });
     }

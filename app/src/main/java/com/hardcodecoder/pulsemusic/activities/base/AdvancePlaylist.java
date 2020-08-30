@@ -33,7 +33,8 @@ public abstract class AdvancePlaylist extends BasePlaylistActivity implements Pl
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        findViewById(R.id.open_track_picker_btn).setOnClickListener(v ->
+        setShuffleButtonAction(v -> shuffleTrackAndPlay(mPlaylistTracks));
+        setUpDynamicButton(R.string.playlist_add_more, R.drawable.ic_playlist_add, v ->
                 startActivityForResult(new Intent(this, TrackPickerActivity.class), TrackPickerActivity.REQUEST_CODE));
     }
 
@@ -60,7 +61,7 @@ public abstract class AdvancePlaylist extends BasePlaylistActivity implements Pl
         });
     }
 
-    protected void onReceivedData(ArrayList<MusicModel> receivedData) {
+    protected void onReceiveData(ArrayList<MusicModel> receivedData) {
     }
 
     @Override
@@ -82,7 +83,7 @@ public abstract class AdvancePlaylist extends BasePlaylistActivity implements Pl
             if (null != data && null != (object = data.getSerializableExtra(TrackPickerActivity.ID_PICKED_TRACKS))) {
                 ArrayList<MusicModel> selectedTracks = (ArrayList<MusicModel>) object;
                 if (selectedTracks.size() > 0)
-                    onReceivedData(selectedTracks);
+                    onReceiveData(selectedTracks);
             }
         }
     }

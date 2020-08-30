@@ -11,6 +11,7 @@ import com.hardcodecoder.pulsemusic.activities.base.AdvancePlaylist;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CurrentPlaylistActivity extends AdvancePlaylist {
 
@@ -18,11 +19,17 @@ public class CurrentPlaylistActivity extends AdvancePlaylist {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setUpToolbar(getString(R.string.playlist_current_queue));
+        setShuffleButtonAction(v -> {
+            if (null == mPlaylistTracks) return;
+            List<MusicModel> oldList = new ArrayList<>(mPlaylistTracks);
+            shuffleTrackAndPlay(mPlaylistTracks);
+            mAdapter.onListShuffled(oldList);
+        });
         setUpData(mTrackManager.getActiveQueue(), mTrackManager.getActiveIndex());
     }
 
     @Override
-    protected void onReceivedData(ArrayList<MusicModel> receivedData) {
+    protected void onReceiveData(ArrayList<MusicModel> receivedData) {
         if (null == mAdapter) {
             setUpData(receivedData, mTrackManager.getActiveIndex());
             mTrackManager.buildDataList(receivedData, 0);
