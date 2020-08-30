@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="32dp">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="32dp"
+        android:gravity="start"
+        android:text="@string/custom_accent_title"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+        android:textColor="?attr/primaryColor"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/red_components"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:gravity="center_vertical"
+        android:layout_below="@id/title">
+
+        <TextView
+            android:id="@+id/red_label"
+            android:layout_width="16dp"
+            android:layout_height="wrap_content"
+            android:text="R"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+        <include
+            android:id="@+id/red_slider"
+            layout="@layout/color_channel_slider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/green_components"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:gravity="center_vertical"
+        android:layout_below="@id/red_components">
+
+        <TextView
+            android:id="@+id/green_label"
+            android:layout_width="16dp"
+            android:layout_height="wrap_content"
+            android:text="G"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+        <include
+            android:id="@+id/green_slider"
+            layout="@layout/color_channel_slider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:value="128"
+            tools:valueFrom="0"
+            tools:valueTo="255" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/blue_components"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:gravity="center_vertical"
+        android:layout_below="@id/green_components">
+
+        <TextView
+            android:id="@+id/blue_label"
+            android:layout_width="16dp"
+            android:layout_height="wrap_content"
+            android:text="B"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+        <include
+            android:id="@+id/blue_slider"
+            layout="@layout/color_channel_slider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/hex_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/blue_components"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:text="#808080"
+        android:inputType="text" />
+
+    <ImageView
+        android:id="@+id/color_preview"
+        android:layout_below="@id/hex_code"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="16dp"
+        android:layout_centerInParent="true"
+        app:srcCompat="@drawable/ic_app_shortcut_background" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/custom_accents_apply_btn"
+        style="@style/MaterialTextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/color_preview"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="32dp"
+        android:text="@string/apply" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/custom_accents_presets_btn"
+        style="@style/MaterialTextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/color_preview"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="32dp"
+        android:text="@string/presets" />
+
+
+</RelativeLayout>

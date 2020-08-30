@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.slider.Slider xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/color_channel_slider"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:value="128"
+    android:valueFrom="0"
+    android:valueTo="255"
+    app:thumbColor="?attr/primaryColor"
+    app:thumbRadius="10dp"
+    app:trackColorActive="?attr/primaryColor"
+    app:trackColorInactive="?attr/overlayColor" />

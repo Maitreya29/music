@@ -192,6 +192,9 @@
     <string name="select_dark_theme">Set preferred dark theme</string>
     <string name="set">Set</string>
 
+    <string name="custom">Custom</string>
+    <string name="custom_accent_title">Adjust custom color</string>
+
 
     <!-- Now playing settings -->
     <string name="now_playing_album_style_section_title">Style</string>
@@ -261,4 +264,6 @@
 
     <string name="shortcut_suggested_label">For you</string>
     <string name="shortcut_suggested_label_long">For you</string>
+    <string name="apply">Apply</string>
+    <string name="presets">Presets</string>
 </resources>
