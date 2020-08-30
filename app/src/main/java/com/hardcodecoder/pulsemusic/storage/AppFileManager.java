@@ -9,13 +9,11 @@ import androidx.annotation.Nullable;
 import com.hardcodecoder.pulsemusic.TaskRunner;
 import com.hardcodecoder.pulsemusic.TaskRunner.Callback;
 import com.hardcodecoder.pulsemusic.helper.DataModelHelper;
-import com.hardcodecoder.pulsemusic.loaders.LoaderCache;
 import com.hardcodecoder.pulsemusic.model.HistoryModel;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -24,7 +22,7 @@ import java.util.Set;
 
 public class AppFileManager {
 
-    private static final Map<String, Integer> mHistoryMap = new HashMap<>();
+    private static Map<String, Integer> mHistoryMap = null;
     private static Set<String> mFavoritesSet = null;
     private static String mFilesDir;
 
@@ -33,12 +31,13 @@ public class AppFileManager {
         deleteOldHistoryFiles();
         TaskRunner.executeAsync(() -> {
             StorageUtils.createDir(new File(StorageStructure.getAbsoluteHistoryPath(mFilesDir)));
-            StorageUtils.createDir(new File(StorageStructure.getAbsoluteFavoritesPath(mFilesDir)));
             StorageUtils.createDir(new File(StorageStructure.getAbsolutePlaylistsFolderPath(mFilesDir)));
         });
     }
 
     public static void addItemToHistory(@NonNull MusicModel md) {
+        if (null == mHistoryMap)
+            mHistoryMap = new HashMap<>();
         TaskRunner.executeAsync(() -> {
             Integer count = mHistoryMap.get(md.getTrackName());
             if (null == count) count = 1;
@@ -53,18 +52,20 @@ public class AppFileManager {
     }
 
     public static void getHistory(boolean defSort, @NonNull Callback<List<HistoryModel>> callback) {
+        if (null == mHistoryMap)
+            mHistoryMap = new HashMap<>();
         TaskRunner.executeAsync(() -> {
             String dirPth = StorageStructure.getAbsoluteHistoryPath(mFilesDir);
             File[] files = new File(dirPth).listFiles();
             List<HistoryModel> historyList = new ArrayList<>();
             if (null != files) {
                 if (defSort)
-                    StorageUtils.sortFiles(files);
+                    StorageUtils.sortFilesByLastModified(files);
                 for (File file : files) {
                     HistoryModel hm = StorageUtils.readRawHistory(file);
                     if (null != hm) {
                         historyList.add(hm);
-                        mHistoryMap.put(file.getName(), hm.getPlayCount());
+                        mHistoryMap.put(hm.getTitle(), hm.getPlayCount());
                     }
                 }
             }
@@ -76,18 +77,17 @@ public class AppFileManager {
         if (null == mFavoritesSet)
             mFavoritesSet = new HashSet<>();
         if (mFavoritesSet.add(item.getTrackName()))
-            TaskRunner.executeAsync(() -> StorageUtils.writeRawFavorite(
-                    StorageStructure.getAbsoluteFavoritesPath(mFilesDir)
-                            .concat(item.getTrackName())));
+            TaskRunner.executeAsync(() ->
+                    StorageUtils.writeRawFavorite(
+                            StorageStructure.getAbsoluteFavoritesPath(mFilesDir),
+                            item.getTrackName()));
     }
 
     private static void loadFavorites() {
-        String favoritesDir = StorageStructure.getAbsoluteFavoritesPath(mFilesDir);
-        String[] files = new File(favoritesDir).list();
+        String favoritesPath = StorageStructure.getAbsoluteFavoritesPath(mFilesDir);
+        List<String> rawFavoritesList = StorageUtils.readRawFavorites(favoritesPath);
         mFavoritesSet = new HashSet<>();
-        if (null != files) {
-            Collections.addAll(mFavoritesSet, files);
-        }
+        mFavoritesSet.addAll(rawFavoritesList);
     }
 
     public static void getFavorites(@NonNull Callback<List<MusicModel>> callback) {
@@ -101,12 +101,15 @@ public class AppFileManager {
 
     public static void deleteFavorite(@NonNull MusicModel md) {
         if (null == mFavoritesSet)
-            mFavoritesSet = new HashSet<>();
+            return;
         if (mFavoritesSet.remove(md.getTrackName())) {
-            StorageUtils.deleteFile(
-                    new File(StorageStructure.getAbsoluteFavoritesPath(
-                            mFilesDir)
-                            + md.getTrackName()));
+            TaskRunner.executeAsync(() -> {
+                List<String> newFavorites = new ArrayList<>(mFavoritesSet);
+                StorageUtils.writeRawFavorites(
+                        StorageStructure.getAbsoluteFavoritesPath(mFilesDir),
+                        newFavorites,
+                        false);
+            });
         }
     }
 
@@ -117,7 +120,6 @@ public class AppFileManager {
                 loadFavorites();
                 handler.post(() -> callback.onComplete(mFavoritesSet.contains(item.getTrackName())));
             });
-            loadFavorites();
         } else callback.onComplete(mFavoritesSet.contains(item.getTrackName()));
     }
 
@@ -135,7 +137,7 @@ public class AppFileManager {
                     .listFiles();
             List<String> playlistTitles = null;
             if (null != files && files.length > 0) {
-                StorageUtils.sortFiles(files);
+                StorageUtils.sortFilesByLastModified(files);
                 playlistTitles = new ArrayList<>();
                 for (File file : files)
                     playlistTitles.add(file.getName());
@@ -196,7 +198,7 @@ public class AppFileManager {
         return new File(StorageStructure.getAbsolutePlaylistsFolderPath(mFilesDir));
     }
 
-    public static void deleteObsoleteHistoryFiles() {
+    /*public static void deleteObsoleteHistoryFiles() {
         TaskRunner.executeAsync(() -> {
             String hisToryDir = StorageStructure.getAbsoluteHistoryPath(mFilesDir);
             File[] files = new File(hisToryDir).listFiles();
@@ -212,7 +214,7 @@ public class AppFileManager {
                 }
             }
         });
-    }
+    }*/
 
     private static void deleteOldHistoryFiles() {
         TaskRunner.executeAsync(() -> {
@@ -221,7 +223,7 @@ public class AppFileManager {
             int size;
             if (null != files && (size = files.length) > 20) {
                 // Sorts in descending order by modified date
-                StorageUtils.sortFiles(files);
+                StorageUtils.sortFilesByLastModified(files);
                 File[] deleteFiles = new File[size - 20];
                 System.arraycopy(files, 20, deleteFiles, 0, size - 20);
                 for (File deleteFile : deleteFiles) StorageUtils.deleteFile(deleteFile);

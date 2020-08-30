@@ -9,7 +9,7 @@ class StorageStructure {
     private static final String PLAYLISTS_FOLDER = "playlists";
 
     static String getAbsoluteFavoritesPath(String filesDir) {
-        return filesDir + File.separator + FAVORITES_FOLDER + File.separator;
+        return filesDir + File.separator + FAVORITES_FOLDER;
     }
 
     static String getAbsoluteHistoryPath(String filesDir) {
