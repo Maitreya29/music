@@ -68,8 +68,10 @@ public class ThemeChooserBottomSheetDialogFragment extends RoundedBottomSheetDia
 
                 if (ThemeManagerUtils.needToApplyNewDarkTheme()) {
                     //Theme need to be updated
-                    if (null != getActivity())
+                    if (null != getActivity()) {
+                        ThemeManagerUtils.init(getActivity());
                         getActivity().recreate();
+                    }
                 }
             }
             dismiss();
