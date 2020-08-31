@@ -1,7 +1,5 @@
 package com.hardcodecoder.pulsemusic.utils;
 
-import android.util.Log;
-
 import com.hardcodecoder.pulsemusic.loaders.SortOrder;
 import com.hardcodecoder.pulsemusic.loaders.SortOrder.ALBUMS;
 import com.hardcodecoder.pulsemusic.loaders.SortOrder.ARTIST;
@@ -15,7 +13,6 @@ import java.util.List;
 public class SortUtil {
 
     public static List<MusicModel> sortLibraryList(List<MusicModel> list, SortOrder sortOrder) {
-        Log.e("NEW SORT ORDER", sortOrder.toString());
         if (sortOrder == SortOrder.TITLE_ASC)
             Collections.sort(list, (o1, o2) -> o1.getTrackName().compareToIgnoreCase(o2.getTrackName()));
         else if (sortOrder == SortOrder.TITLE_DESC)

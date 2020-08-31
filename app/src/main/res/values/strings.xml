@@ -195,8 +195,6 @@
     <!-- Now playing settings -->
     <string name="now_playing_album_style_section_title">Style</string>
     <string name="now_playing_screen_style_desc">Choose now playing screen style</string>
-    <!--    <string name="now_playing_album_decoration_title">Enable gradient overlay</string>-->
-    <!--    <string name="now_playing_album_decoration_desc">Adds a fading overlay on top of album card</string>-->
     <string name="now_playing_screen_style_title">Select now playing style</string>
     <string name="now_playing_screen_style_modern">Modern</string>
     <string name="now_playing_screen_style_stylish">Stylish</string>
