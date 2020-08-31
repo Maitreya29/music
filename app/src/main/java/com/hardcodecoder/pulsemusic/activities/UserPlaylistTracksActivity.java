@@ -1,6 +1,9 @@
 package com.hardcodecoder.pulsemusic.activities;
 
 import android.os.Bundle;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.AbsoluteSizeSpan;
 
 import androidx.annotation.Nullable;
 
@@ -29,6 +32,19 @@ public class UserPlaylistTracksActivity extends AdvancePlaylist {
 
         if (playListTitle != null)
             AppFileManager.getPlaylistTracks(playListTitle, result -> setUpData(result, 0));
+    }
+
+    @Override
+    protected SpannableStringBuilder getEmptyListStyledText() {
+        String text = getString(R.string.no_playlist_tracks_found);
+        int len = text.length();
+        SpannableStringBuilder stringBuilder = new SpannableStringBuilder(text);
+        stringBuilder.setSpan(new AbsoluteSizeSpan(getResources().getDimensionPixelSize(R.dimen.spannable_text_absolute_size_span)),
+                len - 1,
+                len,
+                Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        return stringBuilder;
+
     }
 
     @Override
