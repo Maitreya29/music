@@ -73,7 +73,8 @@ public class AppFileManager {
         });
     }
 
-    public static void addItemToFavorites(@NonNull MusicModel item) {
+    public static boolean addItemToFavorites(@NonNull MusicModel item) {
+        if (item.getId() < 0) return false;
         if (null == mFavoritesSet)
             mFavoritesSet = new HashSet<>();
         if (mFavoritesSet.add(item.getTrackName()))
@@ -81,6 +82,7 @@ public class AppFileManager {
                     StorageUtils.writeRawFavorite(
                             StorageStructure.getAbsoluteFavoritesPath(mFilesDir),
                             item.getTrackName()));
+        return true;
     }
 
     private static void loadFavorites() {

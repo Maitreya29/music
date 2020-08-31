@@ -22,6 +22,7 @@ import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatSeekBar;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.imageview.ShapeableImageView;
@@ -151,8 +152,10 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
             AppFileManager.deleteFavorite(mTrackManager.getActiveQueueItem());
             Toast.makeText(getContext(), getString(R.string.removed_from_fav), Toast.LENGTH_SHORT).show();
         } else {
-            AppFileManager.addItemToFavorites(mTrackManager.getActiveQueueItem());
-            Toast.makeText(getContext(), getString(R.string.added_to_fav), Toast.LENGTH_SHORT).show();
+            if (AppFileManager.addItemToFavorites(mTrackManager.getActiveQueueItem()))
+                Toast.makeText(getContext(), getString(R.string.added_to_fav), Toast.LENGTH_SHORT).show();
+            else
+                Toast.makeText(getContext(), getString(R.string.cannot_add_to_fav), Toast.LENGTH_SHORT).show();
         }
         updateFavoriteItem();
     }
@@ -170,11 +173,11 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
         if (null == state || null == getContext() || null == playPauseBtn) return;
 
         if (state.getState() == PlaybackState.STATE_PLAYING) {
-            Drawable d = getContext().getDrawable(R.drawable.play_to_pause_linear_out_slow_in);
+            Drawable d = ContextCompat.getDrawable(getContext(), R.drawable.play_to_pause_linear_out_slow_in);
             playPauseBtn.setImageDrawable(d);
             if (d instanceof AnimatedVectorDrawable) ((AnimatedVectorDrawable) d).start();
         } else {
-            Drawable d = getContext().getDrawable(R.drawable.pause_to_play);
+            Drawable d = ContextCompat.getDrawable(getContext(), R.drawable.pause_to_play);
             playPauseBtn.setImageDrawable(d);
             if (d instanceof AnimatedVectorDrawable) ((AnimatedVectorDrawable) d).start();
         }

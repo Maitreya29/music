@@ -115,6 +115,7 @@
     <string name="now_playing">Now Playing</string>
     <string name="added_to_fav">Track added to favorites</string>
     <string name="removed_from_fav">Track removed from favorites</string>
+    <string name="cannot_add_to_fav">Track cannot be added to favorites</string>
     <string name="up_next_title">Up next ●</string>
     <string name="up_next_title_none">Playlist completed</string>
 
