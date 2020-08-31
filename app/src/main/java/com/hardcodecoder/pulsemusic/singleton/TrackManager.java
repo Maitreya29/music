@@ -85,10 +85,6 @@ public class TrackManager {
         mActiveList.add(md);
     }
 
-    public boolean canRemoveItem(int position) {
-        return position != mIndex;
-    }
-
     public void updateActiveQueue(int from, int to) {
         if (mActiveList.size() > 0) {
             Collections.swap(mActiveList, from, to);

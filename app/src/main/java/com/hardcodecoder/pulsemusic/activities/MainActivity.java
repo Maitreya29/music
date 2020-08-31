@@ -3,6 +3,7 @@ package com.hardcodecoder.pulsemusic.activities;
 import android.content.Intent;
 import android.media.MediaMetadata;
 import android.media.session.MediaController;
+import android.media.session.PlaybackState;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -192,6 +193,16 @@ public class MainActivity extends MediaSessionActivity {
         }
     }
 
+    private void hideControlsFragment() {
+        if (null == controlsFrag) return;
+        findViewById(R.id.controls_fragment_container).setVisibility(View.GONE);
+        getSupportFragmentManager().beginTransaction()
+                .setCustomAnimations(R.anim.slide_up_enter, R.anim.slide_down_exit)
+                .remove(controlsFrag)
+                .commitAllowingStateLoss();
+        controlsFrag = null;
+    }
+
     @Override
     public void onMediaServiceConnected(MediaController controller) {
         mController = controller;
@@ -210,8 +221,12 @@ public class MainActivity extends MediaSessionActivity {
         super.onStart();
         if (null != mController) {
             mController.registerCallback(mCallback);
-            if (null != mController.getMetadata())
-                showControlsFragment();
+            if (null != mController.getPlaybackState()) {
+                if (mController.getPlaybackState().getState() == PlaybackState.STATE_STOPPED) {
+                    hideControlsFragment();
+                } else if (null != mController.getMetadata())
+                    showControlsFragment();
+            }
         }
     }
 
