@@ -1,29 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingTop="4dp"
-    android:paddingBottom="4dp">
+    android:paddingBottom="32dp">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/track_album_art"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/backgrounds/scenic" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/track_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="32dp"
+        android:ellipsize="marquee"
+        android:focusable="true"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:requiresFadingEdge="horizontal"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/track_album_art"
+        app:layout_constraintTop_toTopOf="@id/track_album_art"
+        tools:text="@tools:sample/full_names" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/track_sub_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+        app:layout_constraintStart_toEndOf="@id/track_album_art"
+        app:layout_constraintTop_toBottomOf="@id/track_title"
+        tools:text="@tools:sample/full_names" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/track_play_next"
         style="@style/BottomDialogOptionsMenuTextStyle"
-        android:text="@string/play_next" />
+        android:layout_marginTop="32dp"
+        android:text="@string/play_next"
+        app:drawableStartCompat="@drawable/ic_queue_play_next"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/track_sub_title" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/add_to_queue"
         style="@style/BottomDialogOptionsMenuTextStyle"
-        android:text="@string/add_to_queue" />
+        android:text="@string/add_to_queue"
+        app:drawableStartCompat="@drawable/ic_queue_music"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/track_play_next" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/add_to_playlist"
         style="@style/BottomDialogOptionsMenuTextStyle"
-        android:text="@string/add_to_playlist" />
+        android:text="@string/add_to_playlist"
+        app:drawableStartCompat="@drawable/ic_playlist_add"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/add_to_queue" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/song_info"
         style="@style/BottomDialogOptionsMenuTextStyle"
-        android:text="@string/info" />
-</LinearLayout>
+        android:text="@string/info"
+        app:drawableStartCompat="@drawable/ic_info"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/add_to_playlist" />
+</androidx.constraintlayout.widget.ConstraintLayout>
