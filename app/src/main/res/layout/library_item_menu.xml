@@ -30,6 +30,7 @@
         android:scrollHorizontally="true"
         android:singleLine="true"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/track_album_art"
         app:layout_constraintTop_toTopOf="@id/track_album_art"
