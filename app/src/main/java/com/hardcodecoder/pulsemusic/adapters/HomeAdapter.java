@@ -1,29 +1,18 @@
 package com.hardcodecoder.pulsemusic.adapters;
 
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.GenericTransitionOptions;
-import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
 import com.google.android.material.textview.MaterialTextView;
-import com.hardcodecoder.pulsemusic.GlideApp;
-import com.hardcodecoder.pulsemusic.GlideConstantArtifacts;
 import com.hardcodecoder.pulsemusic.R;
-import com.hardcodecoder.pulsemusic.helper.MediaArtHelper;
 import com.hardcodecoder.pulsemusic.interfaces.SimpleItemClickListener;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
-import com.hardcodecoder.pulsemusic.utils.DimensionsUtil;
+import com.hardcodecoder.pulsemusic.views.MediaArtImageView;
 
 import java.util.List;
 
@@ -74,7 +63,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
     static class MyViewHolder extends RecyclerView.ViewHolder {
 
         private MaterialTextView title, text;
-        private ImageView albumArt;
+        private MediaArtImageView albumArt;
 
         MyViewHolder(View itemView, SimpleItemClickListener listener) {
             super(itemView);
@@ -93,26 +82,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
         void setItemData(MusicModel md, LayoutStyle style) {
             title.setText(md.getTrackName());
             text.setText(md.getArtist());
-
-            GlideApp.with(albumArt)
-                    .load(md.getAlbumArtUrl())
-                    .listener(new RequestListener<Drawable>() {
-                        @Override
-                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                            MediaArtHelper.setDynamicAlbumArtOnLoadFailed(albumArt, md.getAlbumId(), DimensionsUtil.RoundingRadius.RADIUS_8dp);
-                            return true;
-                        }
-
-                        @Override
-                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                            return false;
-                        }
-                    })
-                    .transform(style == LayoutStyle.ROUNDED_RECTANGLE ?
-                            GlideConstantArtifacts.getRadius8dp() :
-                            GlideConstantArtifacts.getCircleCrop())
-                    .transition(GenericTransitionOptions.with(R.anim.fade_in_image))
-                    .into(albumArt);
+            albumArt.loadAlbumArt(md.getAlbumArtUrl(), md.getAlbumId());
         }
     }
 }

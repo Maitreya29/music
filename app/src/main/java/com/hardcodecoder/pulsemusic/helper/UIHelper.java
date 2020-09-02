@@ -2,7 +2,6 @@ package com.hardcodecoder.pulsemusic.helper;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.SpannableString;
@@ -13,19 +12,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
-import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textview.MaterialTextView;
-import com.hardcodecoder.pulsemusic.GlideApp;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.dialog.AddToPlaylistDialog;
 import com.hardcodecoder.pulsemusic.dialog.RoundedBottomSheetDialog;
@@ -34,7 +26,7 @@ import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.singleton.TrackManager;
 import com.hardcodecoder.pulsemusic.storage.AppFileManager;
 import com.hardcodecoder.pulsemusic.utils.DataUtils;
-import com.hardcodecoder.pulsemusic.utils.DimensionsUtil;
+import com.hardcodecoder.pulsemusic.views.MediaArtImageView;
 
 public class UIHelper {
 
@@ -43,29 +35,14 @@ public class UIHelper {
         View view = View.inflate(context, R.layout.library_item_menu, null);
         BottomSheetDialog bottomSheetDialog = new RoundedBottomSheetDialog(view.getContext());
 
-        ShapeableImageView trackAlbumArt = view.findViewById(R.id.track_album_art);
+        MediaArtImageView trackAlbumArt = view.findViewById(R.id.track_album_art);
         MaterialTextView trackTitle = view.findViewById(R.id.track_title);
         MaterialTextView trackSubTitle = view.findViewById(R.id.track_sub_title);
 
+        trackAlbumArt.loadAlbumArt(md.getAlbumArtUrl(), md.getAlbumId());
         trackTitle.setText(md.getTrackName());
         trackTitle.setSelected(true);
         trackSubTitle.setText(md.getArtist());
-
-        GlideApp.with(context)
-                .load(md.getAlbumArtUrl())
-                .listener(new RequestListener<Drawable>() {
-                    @Override
-                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                        MediaArtHelper.setDynamicAlbumArtOnLoadFailed(trackAlbumArt, md.getAlbumId(), DimensionsUtil.RoundingRadius.RADIUS_NONE);
-                        return true;
-                    }
-
-                    @Override
-                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                        return false;
-                    }
-                })
-                .into(trackAlbumArt);
 
         view.findViewById(R.id.track_play_next).setOnClickListener(v -> {
             tm.playNext(md);

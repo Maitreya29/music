@@ -36,4 +36,16 @@
         <attr name="stepSize" format="integer" />
         <attr name="unit" format="string" />
     </declare-styleable>
+
+    <declare-styleable name="ModernImageView">
+        <attr name="radiusTopLeft" format="dimension" />
+        <attr name="radiusTopRight" format="dimension" />
+        <attr name="radiusBottomLeft" format="dimension" />
+        <attr name="radiusBottomRight" format="dimension" />
+        <attr name="radius" format="dimension" />
+        <attr name="cornerType" format="enum">
+            <enum name="rounded" value="0" />
+            <enum name="cut" value="1" />
+        </attr>
+    </declare-styleable>
 </resources>

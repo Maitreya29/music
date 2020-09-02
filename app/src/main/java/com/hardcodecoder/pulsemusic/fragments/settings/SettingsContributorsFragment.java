@@ -13,7 +13,6 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import com.hardcodecoder.pulsemusic.GlideApp;
-import com.hardcodecoder.pulsemusic.GlideConstantArtifacts;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.fragments.settings.base.SettingsBaseFragment;
 
@@ -54,7 +53,7 @@ public class SettingsContributorsFragment extends SettingsBaseFragment {
         GlideApp.with(view)
                 .load(getString(R.string.profile_icon_link))
                 .error(R.drawable.def_avatar)
-                .transform(GlideConstantArtifacts.getCircleCrop())
+                .centerCrop()
                 .into((ImageView) view.findViewById(R.id.lead_developer_profile_icon));
     }
 

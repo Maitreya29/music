@@ -127,13 +127,13 @@ public class PlaybackManager implements Playback.Callback {
     private Bitmap loadAlbumArt(String path, long albumId) {
         // We know that manually selected tracks have negative album id
         if (albumId < 0)
-            return MediaArtHelper.loadDynamicAlbumArtBitmap(mContext, albumId);
+            return MediaArtHelper.getDefaultAlbumArtBitmap(mContext, albumId);
         try {
             Uri uri = Uri.parse(path);
             InputStream is = mContext.getContentResolver().openInputStream(uri);
             return BitmapFactory.decodeStream(is);
         } catch (Exception e) {
-            return MediaArtHelper.loadDynamicAlbumArtBitmap(mContext, albumId);
+            return MediaArtHelper.getDefaultAlbumArtBitmap(mContext, albumId);
         }
     }
 

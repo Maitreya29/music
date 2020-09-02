@@ -7,28 +7,17 @@
     android:layout_marginEnd="16dp"
     android:paddingBottom="32dp">
 
-    <ImageView
+    <com.hardcodecoder.pulsemusic.views.MediaArtImageView
         android:id="@+id/grid_item_iv"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:contentDescription="@string/iv_content_desc"
-        android:scaleType="fitXY"
+        android:scaleType="centerCrop"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintTop_toTopOf="parent"
+        app:radius="@dimen/rounding_radius_8dp"
         tools:src="@tools:sample/backgrounds/scenic" />
 
-    <!--
-        <ViewStub
-            android:id="@+id/stub_album_art_overlay"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout="@layout/album_art_overlay"
-            app:layout_constraintBottom_toBottomOf="@id/grid_item_iv"
-            app:layout_constraintEnd_toEndOf="@id/grid_item_iv"
-            app:layout_constraintStart_toStartOf="@id/grid_item_iv"
-            app:layout_constraintTop_toTopOf="@id/grid_item_iv" />
-
-       -->
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/grid_item_tv"
         android:layout_width="match_parent"

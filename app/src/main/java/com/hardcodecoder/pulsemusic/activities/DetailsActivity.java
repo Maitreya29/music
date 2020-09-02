@@ -1,34 +1,24 @@
 package com.hardcodecoder.pulsemusic.activities;
 
-import android.graphics.drawable.Drawable;
 import android.media.session.MediaController;
 import android.os.Bundle;
 import android.transition.Fade;
 import android.view.ViewStub;
-import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.MultiTransformation;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
 import com.google.android.material.textview.MaterialTextView;
-import com.hardcodecoder.pulsemusic.GlideApp;
-import com.hardcodecoder.pulsemusic.GlideConstantArtifacts;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.TaskRunner;
 import com.hardcodecoder.pulsemusic.adapters.DetailsAdapter;
-import com.hardcodecoder.pulsemusic.helper.MediaArtHelper;
 import com.hardcodecoder.pulsemusic.helper.UIHelper;
 import com.hardcodecoder.pulsemusic.interfaces.SimpleItemClickListener;
 import com.hardcodecoder.pulsemusic.loaders.ItemsLoader;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.singleton.TrackManager;
-import com.hardcodecoder.pulsemusic.utils.DimensionsUtil;
+import com.hardcodecoder.pulsemusic.views.MediaArtImageView;
 
 import java.util.List;
 import java.util.Locale;
@@ -72,34 +62,12 @@ public class DetailsActivity extends MediaSessionActivity implements SimpleItemC
     private void loadImage() {
         String transitionName = getIntent().getStringExtra(KEY_TRANSITION_NAME);
         String artUrl = getIntent().getStringExtra(KEY_ART_URL);
-        ImageView sharedImageView = findViewById(R.id.details_activity_art);
+        MediaArtImageView sharedImageView = findViewById(R.id.details_activity_art);
         sharedImageView.setTransitionName(transitionName);
-        if (mCategory == CATEGORY_ALBUM) {
-            GlideApp.with(this)
-                    .load(artUrl)
-                    .listener(new RequestListener<Drawable>() {
-                        @Override
-                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                            MediaArtHelper.loadDynamicAlbumArt(sharedImageView, mAlbumId, DimensionsUtil.RoundingRadius.RADIUS_8dp, result ->
-                                    sharedImageView.post(() -> {
-                                        sharedImageView.setImageDrawable(result);
-                                        supportStartPostponedEnterTransition();
-                                    }));
-                            return true;
-                        }
 
-                        @Override
-                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                            supportStartPostponedEnterTransition();
-                            return false;
-                        }
-                    })
-                    .transform(new MultiTransformation<>(GlideConstantArtifacts.getCenterCrop(), GlideConstantArtifacts.getRadius8dp()))
-                    .into(sharedImageView);
-        } else {
-            sharedImageView.setImageResource(R.drawable.ic_artist_art);
-            supportStartPostponedEnterTransition();
-        }
+        if (mCategory == CATEGORY_ALBUM) sharedImageView.loadAlbumArt(artUrl, mAlbumId);
+        else sharedImageView.setImageResource(R.drawable.ic_artist_art);
+        supportStartPostponedEnterTransition();
     }
 
     private void loadItems() {
@@ -137,7 +105,7 @@ public class DetailsActivity extends MediaSessionActivity implements SimpleItemC
         enterFade.excludeTarget(android.R.id.statusBarBackground, true);
         enterFade.excludeTarget(android.R.id.navigationBarBackground, true);
         enterFade.excludeTarget(R.id.stub_details_activity_rv, true);
-        enterFade.setDuration(275);
+        enterFade.setDuration(getResources().getInteger(android.R.integer.config_mediumAnimTime));
         getWindow().setEnterTransition(enterFade);
     }
 

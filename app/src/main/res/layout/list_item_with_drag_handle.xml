@@ -10,7 +10,7 @@
     android:paddingEnd="0dp"
     android:paddingBottom="10dp">
 
-    <ImageView
+    <com.hardcodecoder.pulsemusic.views.MediaArtImageView
         android:id="@+id/list_item_drag_album_art"
         android:layout_width="42dp"
         android:layout_height="42dp"

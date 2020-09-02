@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hardcodecoder.pulsemusic.R;
@@ -96,7 +97,7 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.CardsS
 
         @Override
         public void onItemClear() {
-            itemView.setBackground(itemView.getContext().getDrawable(R.drawable.overlay_color_bck_drawable));
+            itemView.setBackground(ContextCompat.getDrawable(itemView.getContext(), R.drawable.overlay_color_bck_drawable));
         }
     }
 }

@@ -27,7 +27,7 @@
         app:layout_constraintStart_toEndOf="@id/details_activity_btn_close"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
+    <com.hardcodecoder.pulsemusic.views.MediaArtImageView
         android:id="@+id/details_activity_art"
         android:layout_width="148dp"
         android:layout_height="148dp"
@@ -37,8 +37,8 @@
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/details_activity_toolbar_title"
+        app:radius="@dimen/rounding_radius_8dp"
         tools:src="@tools:sample/avatars" />
-
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/details_activity_title"

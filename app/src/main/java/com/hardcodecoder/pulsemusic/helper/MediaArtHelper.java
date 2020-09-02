@@ -1,52 +1,42 @@
 package com.hardcodecoder.pulsemusic.helper;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
-import android.widget.ImageView;
 
-import androidx.annotation.NonNull;
+import androidx.annotation.ColorInt;
 
-import com.hardcodecoder.pulsemusic.TaskRunner;
-import com.hardcodecoder.pulsemusic.TaskRunner.Callback;
-import com.hardcodecoder.pulsemusic.utils.DimensionsUtil;
-import com.hardcodecoder.pulsemusic.utils.DimensionsUtil.RoundingRadius;
+import com.hardcodecoder.pulsemusic.MediaArtCache;
+import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.utils.ImageUtil;
 
 public class MediaArtHelper {
 
-    public static Bitmap loadDynamicAlbumArtBitmap(Context context, long albumId) {
-        final int[] dimensions = {512, 512};
-        Drawable drawable = ImageUtil.generateDynamicAlbumArt(
-                context,
-                dimensions,
-                getValue(albumId),
-                DimensionsUtil.getRoundingRadius(RoundingRadius.RADIUS_NONE));
-        return ImageUtil.createBitmapFrom(drawable, dimensions);
+    private static TypedArray mMediaArtColors;
+
+    public static Drawable getDefaultAlbumArt(Context context, long albumId) {
+        if (null != MediaArtCache.getMediaArtDrawable(albumId))
+            return MediaArtCache.getMediaArtDrawable(albumId);
+        Drawable drawable = ImageUtil.generateTintedDefaultAlbumArt(context, getTintColor(context, albumId));
+        MediaArtCache.addDrawableIfNotPresent(drawable, albumId);
+        return drawable;
     }
 
-    public static void setDynamicAlbumArtOnLoadFailed(@NonNull ImageView imageView, long albumId, RoundingRadius roundingRadius) {
-        TaskRunner.executeAsync(() -> {
-            Drawable drawable = ImageUtil.generateDynamicAlbumArt(
-                    imageView.getContext(),
-                    new int[]{imageView.getWidth(), imageView.getHeight()},
-                    getValue(albumId),
-                    DimensionsUtil.getRoundingRadius(roundingRadius));
-            imageView.post(() -> imageView.setImageDrawable(drawable));
-        });
+    public static Bitmap getDefaultAlbumArtBitmap(Context context, long albumId) {
+        Drawable drawable = getDefaultAlbumArt(context, albumId);
+        Bitmap bitmap = Bitmap.createBitmap(400, 400, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+        return bitmap;
     }
 
-    public static void loadDynamicAlbumArt(@NonNull ImageView imageView, long albumId, RoundingRadius roundingRadius, Callback<Drawable> callback) {
-        TaskRunner.executeAsync(() -> {
-            Drawable drawable = ImageUtil.generateDynamicAlbumArt(imageView.getContext(),
-                    new int[]{imageView.getWidth(), imageView.getHeight()},
-                    getValue(albumId),
-                    DimensionsUtil.getRoundingRadius(roundingRadius));
-            callback.onComplete(drawable);
-        });
-    }
-
-    private static Integer getValue(long albumId) {
-        return Math.abs((int) albumId % 10);
+    @ColorInt
+    private static int getTintColor(Context context, long albumId) {
+        if (null == mMediaArtColors)
+            mMediaArtColors = context.getResources().obtainTypedArray(R.array.album_art_colors);
+        return mMediaArtColors.getColor((int) albumId % mMediaArtColors.length(), 0xFF0000);
     }
 }

@@ -1,36 +1,25 @@
 package com.hardcodecoder.pulsemusic.adapters;
 
-import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.MultiTransformation;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
 import com.google.android.material.textview.MaterialTextView;
-import com.hardcodecoder.pulsemusic.GlideApp;
-import com.hardcodecoder.pulsemusic.GlideConstantArtifacts;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.TaskRunner;
-import com.hardcodecoder.pulsemusic.helper.MediaArtHelper;
 import com.hardcodecoder.pulsemusic.helper.PMBGridAdapterDiffCallback;
 import com.hardcodecoder.pulsemusic.interfaces.GridAdapterCallback;
 import com.hardcodecoder.pulsemusic.interfaces.SimpleItemClickListener;
 import com.hardcodecoder.pulsemusic.loaders.SortOrder;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
-import com.hardcodecoder.pulsemusic.utils.DimensionsUtil;
 import com.hardcodecoder.pulsemusic.utils.SortUtil;
+import com.hardcodecoder.pulsemusic.views.MediaArtImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -102,7 +91,7 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.MyLibrar
     static class MyLibraryViewHolder extends RecyclerView.ViewHolder {
 
         private MaterialTextView songName, artist;
-        private ImageView albumArt;
+        private MediaArtImageView albumArt;
 
         MyLibraryViewHolder(View itemView, SimpleItemClickListener listener) {
             super(itemView);
@@ -118,23 +107,7 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.MyLibrar
         void setItemData(MusicModel md) {
             songName.setText(md.getTrackName());
             artist.setText(md.getArtist());
-
-            GlideApp.with(itemView)
-                    .load(md.getAlbumArtUrl())
-                    .listener(new RequestListener<Drawable>() {
-                        @Override
-                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                            MediaArtHelper.setDynamicAlbumArtOnLoadFailed(albumArt, md.getAlbumId(), DimensionsUtil.RoundingRadius.RADIUS_4dp);
-                            return true;
-                        }
-
-                        @Override
-                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                            return false;
-                        }
-                    })
-                    .transform(new MultiTransformation<>(GlideConstantArtifacts.getCenterCrop(), GlideConstantArtifacts.getRadius4dp()))
-                    .into(albumArt);
+            albumArt.loadAlbumArt(md.getAlbumArtUrl(), md.getAlbumId());
         }
     }
 }

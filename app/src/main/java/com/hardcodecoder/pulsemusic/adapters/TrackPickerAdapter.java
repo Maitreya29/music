@@ -1,32 +1,22 @@
 package com.hardcodecoder.pulsemusic.adapters;
 
-import android.graphics.drawable.Drawable;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.MultiTransformation;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
 import com.google.android.material.textview.MaterialTextView;
-import com.hardcodecoder.pulsemusic.GlideApp;
-import com.hardcodecoder.pulsemusic.GlideConstantArtifacts;
 import com.hardcodecoder.pulsemusic.R;
-import com.hardcodecoder.pulsemusic.helper.MediaArtHelper;
 import com.hardcodecoder.pulsemusic.interfaces.ItemTouchHelperViewHolder;
 import com.hardcodecoder.pulsemusic.interfaces.TrackPickerCallbackAdapter;
 import com.hardcodecoder.pulsemusic.interfaces.TrackPickerListener;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
-import com.hardcodecoder.pulsemusic.utils.DimensionsUtil;
 import com.hardcodecoder.pulsemusic.utils.ImageUtil;
+import com.hardcodecoder.pulsemusic.views.MediaArtImageView;
 
 import java.util.List;
 
@@ -68,7 +58,7 @@ public class TrackPickerAdapter extends RecyclerView.Adapter<TrackPickerAdapter.
         if (isSelected)
             holder.itemView.setBackground(ImageUtil.getTintedGradientOverlay(holder.itemView.getContext()));
         else
-            holder.itemView.setBackground(holder.itemView.getContext().getDrawable(android.R.color.transparent));
+            holder.itemView.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(), android.R.color.transparent));
 
         holder.updateViewData(mList.get(position));
     }
@@ -87,7 +77,7 @@ public class TrackPickerAdapter extends RecyclerView.Adapter<TrackPickerAdapter.
 
     static class TrackPickerSVH extends RecyclerView.ViewHolder implements ItemTouchHelperViewHolder {
 
-        private ImageView albumArt;
+        private MediaArtImageView albumArt;
         private MaterialTextView title, artist;
 
         TrackPickerSVH(@NonNull View itemView) {
@@ -100,23 +90,7 @@ public class TrackPickerAdapter extends RecyclerView.Adapter<TrackPickerAdapter.
         void updateViewData(MusicModel md) {
             title.setText(md.getTrackName());
             artist.setText(md.getArtist());
-
-            GlideApp.with(itemView)
-                    .load(md.getAlbumArtUrl())
-                    .listener(new RequestListener<Drawable>() {
-                        @Override
-                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                            MediaArtHelper.setDynamicAlbumArtOnLoadFailed(albumArt, md.getAlbumId(), DimensionsUtil.RoundingRadius.RADIUS_8dp);
-                            return true;
-                        }
-
-                        @Override
-                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                            return false;
-                        }
-                    })
-                    .transform(new MultiTransformation<>(GlideConstantArtifacts.getCenterCrop(), GlideConstantArtifacts.getRadius8dp()))
-                    .into(albumArt);
+            albumArt.loadAlbumArt(md.getAlbumArtUrl(), md.getAlbumId());
         }
 
         @Override
@@ -126,7 +100,7 @@ public class TrackPickerAdapter extends RecyclerView.Adapter<TrackPickerAdapter.
 
         @Override
         public void onItemClear() {
-            itemView.setBackground(itemView.getContext().getDrawable(android.R.color.transparent));
+            itemView.setBackground(ContextCompat.getDrawable(itemView.getContext(), android.R.color.transparent));
         }
     }
 }
