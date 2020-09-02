@@ -22,8 +22,8 @@ import java.util.Set;
 
 public class AppFileManager {
 
-    private static Map<String, Integer> mHistoryMap = null;
-    private static Set<String> mFavoritesSet = null;
+    private static Map<Integer, Short> mHistoryMap = null;
+    private static Set<Integer> mFavoritesSet = null;
     private static String mFilesDir;
 
     public static void initDataDir(@NonNull Context context) {
@@ -39,7 +39,7 @@ public class AppFileManager {
         if (null == mHistoryMap)
             mHistoryMap = new HashMap<>();
         TaskRunner.executeAsync(() -> {
-            Integer count = mHistoryMap.get(md.getTrackName());
+            Short count = mHistoryMap.get(md.getTrackName().hashCode());
             if (null == count) count = 1;
             else count++;
             StorageUtils.writeRawHistory(
@@ -47,7 +47,7 @@ public class AppFileManager {
                     md,
                     count);
 
-            mHistoryMap.put(md.getTrackName(), count);
+            mHistoryMap.put(md.getTrackName().hashCode(), count);
         });
     }
 
@@ -65,7 +65,7 @@ public class AppFileManager {
                     HistoryModel hm = StorageUtils.readRawHistory(file);
                     if (null != hm) {
                         historyList.add(hm);
-                        mHistoryMap.put(hm.getTitle(), hm.getPlayCount());
+                        mHistoryMap.put(hm.getTitle().hashCode(), hm.getPlayCount());
                     }
                 }
             }
@@ -77,7 +77,7 @@ public class AppFileManager {
         if (item.getId() < 0) return false;
         if (null == mFavoritesSet)
             mFavoritesSet = new HashSet<>();
-        if (mFavoritesSet.add(item.getTrackName()))
+        if (mFavoritesSet.add(item.getTrackName().hashCode()))
             TaskRunner.executeAsync(() ->
                     StorageUtils.writeRawFavorite(
                             StorageStructure.getAbsoluteFavoritesPath(mFilesDir),
@@ -85,17 +85,21 @@ public class AppFileManager {
         return true;
     }
 
-    private static void loadFavorites() {
+    private static List<String> loadFavorites() {
         String favoritesPath = StorageStructure.getAbsoluteFavoritesPath(mFilesDir);
         List<String> rawFavoritesList = StorageUtils.readRawFavorites(favoritesPath);
-        mFavoritesSet = new HashSet<>();
-        mFavoritesSet.addAll(rawFavoritesList);
+        if (null == mFavoritesSet) {
+            mFavoritesSet = new HashSet<>();
+            for (String str : rawFavoritesList) {
+                mFavoritesSet.add(str.hashCode());
+            }
+        }
+        return rawFavoritesList;
     }
 
     public static void getFavorites(@NonNull Callback<List<MusicModel>> callback) {
         TaskRunner.executeAsync(() -> {
-            if (null == mFavoritesSet) loadFavorites();
-            List<String> favoritesRaw = new ArrayList<>(mFavoritesSet);
+            List<String> favoritesRaw = new ArrayList<>(loadFavorites());
             List<MusicModel> favorites = DataModelHelper.getModelsObjectFromTitlesList(favoritesRaw);
             callback.onComplete(favorites);
         });
@@ -104,9 +108,10 @@ public class AppFileManager {
     public static void deleteFavorite(@NonNull MusicModel md) {
         if (null == mFavoritesSet)
             return;
-        if (mFavoritesSet.remove(md.getTrackName())) {
+        if (mFavoritesSet.remove(md.getTrackName().hashCode())) {
             TaskRunner.executeAsync(() -> {
-                List<String> newFavorites = new ArrayList<>(mFavoritesSet);
+                List<String> newFavorites = new ArrayList<>(loadFavorites());
+                newFavorites.remove(md.getTrackName());
                 StorageUtils.writeRawFavorites(
                         StorageStructure.getAbsoluteFavoritesPath(mFilesDir),
                         newFavorites,
@@ -128,9 +133,9 @@ public class AppFileManager {
             Handler handler = new Handler();
             TaskRunner.executeAsync(() -> {
                 loadFavorites();
-                handler.post(() -> callback.onComplete(mFavoritesSet.contains(item.getTrackName())));
+                handler.post(() -> callback.onComplete(mFavoritesSet.contains(item.getTrackName().hashCode())));
             });
-        } else callback.onComplete(mFavoritesSet.contains(item.getTrackName()));
+        } else callback.onComplete(mFavoritesSet.contains(item.getTrackName().hashCode()));
     }
 
     public static void savePlaylist(@NonNull String playlistName) {

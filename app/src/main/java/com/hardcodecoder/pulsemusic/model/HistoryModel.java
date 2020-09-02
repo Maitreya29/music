@@ -7,9 +7,9 @@ public class HistoryModel {
     private String artist;
     private long albumId;
     private long lastModified;
-    private int playCount;
+    private short playCount;
 
-    public HistoryModel(String title, String album, String artist, long albumId, long lastModified, int playCount) {
+    public HistoryModel(String title, String album, String artist, long albumId, long lastModified, short playCount) {
         this.title = title;
         this.album = album;
         this.albumId = albumId;
@@ -38,7 +38,7 @@ public class HistoryModel {
         return lastModified;
     }
 
-    public int getPlayCount() {
+    public short getPlayCount() {
         return playCount;
     }
 }

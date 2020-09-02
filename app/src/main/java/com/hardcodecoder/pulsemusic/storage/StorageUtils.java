@@ -1,7 +1,6 @@
 package com.hardcodecoder.pulsemusic.storage;
 
 import android.annotation.SuppressLint;
-import android.os.SystemClock;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -38,14 +37,14 @@ class StorageUtils {
                 playCount);
     }
 
-    private static HistoryModel getHistoryModelFrom(String fileName, String[] lines) {
+    private static HistoryModel getHistoryModelFrom(String[] lines, long lastModified) {
         return new HistoryModel(
                 lines[LINE_ID_TITLE],
                 lines[LINE_ID_ALBUM],
                 lines[LINE_ID_ARTIST],
                 Long.parseLong(lines[LINE_ID_ALBUM_ID]),
-                Long.parseLong(fileName),
-                Integer.parseInt(lines[LINE_ID_PLAY_COUNT])
+                lastModified,
+                Short.parseShort(lines[LINE_ID_PLAY_COUNT])
         );
     }
 
@@ -61,7 +60,7 @@ class StorageUtils {
     static void writeRawHistory(String historyDir, MusicModel data, int playCount) {
         FileOutputStream fos = null;
         try {
-            File file = new File(historyDir + SystemClock.elapsedRealtime());
+            File file = new File(historyDir + data.getTrackName().hashCode());
             fos = new FileOutputStream(file);
             fos.write(StorageUtils.getWriteableHistoryDataFrom(data, playCount).getBytes());
         } catch (IOException e) {
@@ -87,7 +86,7 @@ class StorageUtils {
             while ((line = reader.readLine()) != null)
                 lines[index++] = line;
             reader.close();
-            return getHistoryModelFrom(file.getName(), lines);
+            return getHistoryModelFrom(lines, file.lastModified());
         } catch (IOException e) {
             e.printStackTrace();
         }
