@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="album_art_colors">
-        <item>#74b9ff</item>
-        <item>#41AD71</item>
-        <item>#a29bfe</item>
-        <item>#fdcb6e</item>
-        <item>#ff9ff3</item>
-        <item>#fd79a8</item>
-        <item>#B686FF</item>
-        <item>#FF9A93</item>
-        <item>#cd84f1</item>
-        <item>#00d2d3</item>
+        <item>#71B8FF</item>
+        <item>#46BA7A</item>
+        <item>#FFCB6B</item>
+        <item>#FA76A5</item>
+        <item>#B281FD</item>
+        <item>#FF958E</item>
+        <item>#00E0E1</item>
     </array>
 
     <!-- Ordering matters do not change it -->
