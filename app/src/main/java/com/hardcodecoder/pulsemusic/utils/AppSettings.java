@@ -3,9 +3,11 @@ package com.hardcodecoder.pulsemusic.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 
 import com.hardcodecoder.pulsemusic.Preferences;
+import com.hardcodecoder.pulsemusic.themes.PresetColors;
 
 public class AppSettings {
 
@@ -83,6 +85,18 @@ public class AppSettings {
     public static int getSelectedAccentId(@NonNull Context context) {
         return context.getSharedPreferences(Preferences.ACCENTS_COLOR_KEY, Context.MODE_PRIVATE)
                 .getInt(Preferences.ACCENTS_COLOR_PRESET_KEY, Preferences.ACCENT_EXODUS_FRUIT);
+    }
+
+    public static void saveCustomAccentColor(@NonNull Context context, @ColorInt int color) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.ACCENTS_COLOR_KEY, Context.MODE_PRIVATE).edit();
+        editor.putInt(Preferences.ACCENTS_COLOR_CUSTOM_KEY, color);
+        editor.putBoolean(Preferences.ACCENTS_COLOR_MODE_KEY, false);
+        editor.apply();
+    }
+
+    public static int getCustomAccentColor(@NonNull Context context) {
+        return context.getSharedPreferences(Preferences.ACCENTS_COLOR_KEY, Context.MODE_PRIVATE)
+                .getInt(Preferences.ACCENTS_COLOR_CUSTOM_KEY, PresetColors.EXODUS_FRUIT);
     }
 
     public static boolean getPresetAccentModeEnabled(@NonNull Context context) {

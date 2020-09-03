@@ -15,12 +15,17 @@ public class ThemeManagerUtils {
     private static int mThemeId = Preferences.LIGHT_THEME;
     private static int mPresetsAccentsId = Preferences.ACCENT_EXODUS_FRUIT;
     private static int mAccentColor = PresetColors.EXODUS_FRUIT;
+    private static boolean mUsingPresetColors = true;
     private static boolean mDesaturatedAccents = false;
 
     public static void init(Context context) {
         mAutoMode = AppSettings.isAutoThemeEnabled(context);
-        mPresetsAccentsId = AppSettings.getSelectedAccentId(context);
-        mAccentColor = PresetColors.getPresetAccentColorById(mPresetsAccentsId);
+        if ((mUsingPresetColors = AppSettings.getPresetAccentModeEnabled(context))) {
+            mPresetsAccentsId = AppSettings.getSelectedAccentId(context);
+            mAccentColor = PresetColors.getPresetAccentColorById(mPresetsAccentsId);
+        } else
+            mAccentColor = AppSettings.getCustomAccentColor(context);
+
         if (mAutoMode) mDarkMode = (DayTimeUtils.getTimeOfDay() == DayTimeUtils.DayTime.NIGHT);
         else mDarkMode = AppSettings.isDarkModeEnabled(context);
 
@@ -54,6 +59,11 @@ public class ThemeManagerUtils {
         return mPresetsAccentsId != accentId;
     }
 
+    public static boolean setSelectedCustomAccentColor(Context context, @ColorInt int color) {
+        AppSettings.saveCustomAccentColor(context, color);
+        return mAccentColor != color;
+    }
+
     public static boolean needToApplyNewDarkTheme() {
         //Returns true to restart activity in order to apply new dark theme
         return (mAutoMode && isNight()) || mDarkMode;
@@ -77,6 +87,14 @@ public class ThemeManagerUtils {
 
     public static int getSelectedAccentColor() {
         return mAccentColor;
+    }
+
+    public static boolean isUsingPresetColors() {
+        return mUsingPresetColors;
+    }
+
+    public static boolean isAccentsDesaturated() {
+        return mDesaturatedAccents;
     }
 
     private static boolean needToChangeTheme() {

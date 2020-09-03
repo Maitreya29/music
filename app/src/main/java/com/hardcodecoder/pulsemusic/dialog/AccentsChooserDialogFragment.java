@@ -36,7 +36,7 @@ public class AccentsChooserDialogFragment extends RoundedBottomSheetDialogFragme
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         AccentsModel[] mAccentsModels = PresetColors.getPresetColorsModel(view.getContext());
         int currentId = -1;
-        if (AppSettings.getPresetAccentModeEnabled(view.getContext()))
+        if (ThemeManagerUtils.isUsingPresetColors())
             currentId = AppSettings.getSelectedAccentId(view.getContext());
 
         if (mAccentsModels.length > 0) {
