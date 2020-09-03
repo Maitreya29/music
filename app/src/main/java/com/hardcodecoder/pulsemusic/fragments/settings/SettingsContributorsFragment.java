@@ -53,7 +53,7 @@ public class SettingsContributorsFragment extends SettingsBaseFragment {
         GlideApp.with(view)
                 .load(getString(R.string.profile_icon_link))
                 .error(R.drawable.def_avatar)
-                .centerCrop()
+                .circleCrop()
                 .into((ImageView) view.findViewById(R.id.lead_developer_profile_icon));
     }
 
