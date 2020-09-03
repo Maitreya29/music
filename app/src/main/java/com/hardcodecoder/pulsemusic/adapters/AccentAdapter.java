@@ -70,7 +70,7 @@ public class AccentAdapter extends RecyclerView.Adapter<AccentAdapter.AccentAdap
 
         private void markCurrentItemSelected() {
             GradientDrawable drawable = new GradientDrawable();
-            drawable.setCornerRadius(DimensionsUtil.convertToPixels(itemView.getContext(), 8));
+            drawable.setCornerRadius(DimensionsUtil.getDimension(itemView.getContext(), 8));
             drawable.setStroke(
                     DimensionsUtil.getDimensionPixelSize(itemView.getContext(), 2),
                     ThemeManagerUtils.getAccentColorForCurrentTheme());

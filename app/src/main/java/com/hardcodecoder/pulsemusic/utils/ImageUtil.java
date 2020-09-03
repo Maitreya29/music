@@ -22,11 +22,11 @@ public class ImageUtil {
     }
 
     public static Drawable getTintedGradientOverlay(Context context) {
-        GradientDrawable drawable = new GradientDrawable();
-        //GradientDrawable.Orientation.RIGHT_LEFT,
-        //new int[]{ColorUtil.generatePrimaryTintedColorOverlay(context), android.R.color.transparent});
-        drawable.setCornerRadius(DimensionsUtil.convertToPixels(context, 16));
-        drawable.setStroke((int) DimensionsUtil.convertToPixels(context, 1), ColorUtil.generatePrimaryTintedColorOverlay(context));
+        GradientDrawable drawable = new GradientDrawable(
+                GradientDrawable.Orientation.RIGHT_LEFT,
+                new int[]{ColorUtil.generatePrimaryTintedColorOverlay(context), android.R.color.transparent});
+        drawable.setCornerRadius(DimensionsUtil.getDimension(context, 16));
+        drawable.setStroke((int) DimensionsUtil.getDimension(context, 2), ColorUtil.generatePrimaryTintedColorOverlay(context));
         return drawable;
     }
 }
