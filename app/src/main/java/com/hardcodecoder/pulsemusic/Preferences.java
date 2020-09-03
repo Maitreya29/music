@@ -69,7 +69,9 @@ public class Preferences {
     public static final String NOW_PLAYING_ALBUM_COVER_RADIUS_BR = "RadiusBottomRight";
     public static final int NOW_PLAYING_ALBUM_COVER_RADIUS_DEF = 16;
 
-    // True of false
+
     public static final String ACCENTS_COLOR_KEY = "AccentsColor";
+    public static final String ACCENTS_COLOR_MODE_KEY = "AccentsColorMode";
+    public static final String ACCENTS_COLOR_PRESET_KEY = "AccentsColorPreset";
     public static final String ACCENTS_COLOR_DESATURATED_KEY = "AccentsColorDesaturated";
 }

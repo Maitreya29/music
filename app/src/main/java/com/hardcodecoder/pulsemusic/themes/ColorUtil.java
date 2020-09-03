@@ -39,4 +39,9 @@ public class ColorUtil {
          */
         return (color & 0x00FFFFFF) | 0x40000000;
     }
+
+    @ColorInt
+    public static int makeColorDesaturated(@ColorInt int color) {
+        return mixColors(color, Color.WHITE, 0.4f);
+    }
 }

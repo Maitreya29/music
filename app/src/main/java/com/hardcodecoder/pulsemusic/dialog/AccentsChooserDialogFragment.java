@@ -13,11 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.adapters.AccentAdapter;
 import com.hardcodecoder.pulsemusic.model.AccentsModel;
+import com.hardcodecoder.pulsemusic.themes.PresetColors;
 import com.hardcodecoder.pulsemusic.themes.ThemeManagerUtils;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class AccentsChooserDialogFragment extends RoundedBottomSheetDialogFragment {
 
@@ -36,32 +34,19 @@ public class AccentsChooserDialogFragment extends RoundedBottomSheetDialogFragme
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        int[] mIds = view.getContext().getResources().getIntArray(R.array.pulse_accent_colors_id);
-        String[] mTitles = view.getContext().getResources().getStringArray(R.array.pulse_accent_colors_title);
-        int[] mColors;
+        AccentsModel[] mAccentsModels = PresetColors.getPresetColorsModel(view.getContext());
+        int currentId = -1;
+        if (AppSettings.getPresetAccentModeEnabled(view.getContext()))
+            currentId = AppSettings.getSelectedAccentId(view.getContext());
 
-        if (ThemeManagerUtils.isDarkModeEnabled() && ThemeManagerUtils.isAccentsDesaturated())
-            mColors = view.getContext().getResources().getIntArray(R.array.pulse_accent_colors_value_desaturated);
-        else
-            mColors = view.getContext().getResources().getIntArray(R.array.pulse_accent_colors_value);
-
-        List<AccentsModel> mList = new ArrayList<>(mColors.length);
-        for (int i = 0; i < mColors.length; i++) {
-            mList.add(new AccentsModel(
-                    mIds[i],
-                    mTitles[i] == null ? getString(R.string.laf_accents_picker_accent_title_unknown) : mTitles[i],
-                    mColors[i]));
-        }
-        int currentId = AppSettings.getSelectedAccentId(view.getContext());
-
-        if (mList.size() > 0) {
+        if (mAccentsModels.length > 0) {
             RecyclerView recyclerView = view.findViewById(R.id.accents_display_rv);
             recyclerView.setHasFixedSize(true);
             recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), RecyclerView.HORIZONTAL, false));
-            AccentAdapter adapter = new AccentAdapter(mList, getLayoutInflater(), currentId, position -> {
-                newAccentId = mList.get(position).getId();
+            AccentAdapter adapter = new AccentAdapter(mAccentsModels, getLayoutInflater(), currentId, position -> {
+                newAccentId = mAccentsModels[position].getId();
                 dismiss();
-                if (ThemeManagerUtils.setSelectedAccentColor(view.getContext(), newAccentId))
+                if (ThemeManagerUtils.setSelectedPresetAccentColor(view.getContext(), newAccentId))
                     if (null != getActivity()) {
                         ThemeManagerUtils.init(getActivity());
                         getActivity().recreate();

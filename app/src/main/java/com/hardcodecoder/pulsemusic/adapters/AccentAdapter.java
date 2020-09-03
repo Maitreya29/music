@@ -1,5 +1,6 @@
 package com.hardcodecoder.pulsemusic.adapters;
 
+import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,19 +12,19 @@ import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.interfaces.SingleClickListener;
 import com.hardcodecoder.pulsemusic.model.AccentsModel;
+import com.hardcodecoder.pulsemusic.themes.ThemeManagerUtils;
+import com.hardcodecoder.pulsemusic.utils.DimensionsUtil;
 import com.hardcodecoder.pulsemusic.views.ColorView;
-
-import java.util.List;
 
 public class AccentAdapter extends RecyclerView.Adapter<AccentAdapter.AccentAdapterSVH> {
 
     private LayoutInflater mInflater;
     private SingleClickListener mListener;
-    private List<AccentsModel> mAccentsList;
+    private AccentsModel[] mAccentsList;
     private int mSelectedAccentId;
 
-    public AccentAdapter(List<AccentsModel> list, LayoutInflater inflater, int selectedAccentId, SingleClickListener listener) {
-        this.mAccentsList = list;
+    public AccentAdapter(AccentsModel[] accentsArray, LayoutInflater inflater, int selectedAccentId, SingleClickListener listener) {
+        this.mAccentsList = accentsArray;
         this.mInflater = inflater;
         this.mSelectedAccentId = selectedAccentId;
         this.mListener = listener;
@@ -37,12 +38,12 @@ public class AccentAdapter extends RecyclerView.Adapter<AccentAdapter.AccentAdap
 
     @Override
     public void onBindViewHolder(@NonNull AccentAdapterSVH holder, int position) {
-        holder.setData(mAccentsList.get(position), mSelectedAccentId);
+        holder.setData(mAccentsList[position], mSelectedAccentId);
     }
 
     @Override
     public int getItemCount() {
-        return null == mAccentsList ? 0 : mAccentsList.size();
+        return null == mAccentsList ? 0 : mAccentsList.length;
     }
 
     static class AccentAdapterSVH extends RecyclerView.ViewHolder {
@@ -56,15 +57,24 @@ public class AccentAdapter extends RecyclerView.Adapter<AccentAdapter.AccentAdap
             mTitle = itemView.findViewById(R.id.accent_title);
             itemView.setOnClickListener(v -> {
                 listener.onItemCLick(getAdapterPosition());
-                itemView.findViewById(R.id.accent_item_root).setBackground(itemView.getContext().getDrawable(R.drawable.selected_accent_item_background));
+                markCurrentItemSelected();
             });
         }
 
         void setData(AccentsModel accentsModel, int selectedAccentId) {
             if (accentsModel.getId() == selectedAccentId)
-                itemView.findViewById(R.id.accent_item_root).setBackground(itemView.getContext().getDrawable(R.drawable.selected_accent_item_background));
+                markCurrentItemSelected();
             mColorView.setBackgroundColor(accentsModel.getColor());
             mTitle.setText(accentsModel.getTitle());
+        }
+
+        private void markCurrentItemSelected() {
+            GradientDrawable drawable = new GradientDrawable();
+            drawable.setCornerRadius(DimensionsUtil.convertToPixels(itemView.getContext(), 8));
+            drawable.setStroke(
+                    DimensionsUtil.getDimensionPixelSize(itemView.getContext(), 2),
+                    ThemeManagerUtils.getAccentColorForCurrentTheme());
+            itemView.setBackground(drawable);
         }
     }
 }

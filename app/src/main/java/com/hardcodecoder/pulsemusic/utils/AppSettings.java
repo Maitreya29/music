@@ -75,13 +75,19 @@ public class AppSettings {
 
     public static void saveSelectedAccentId(@NonNull Context context, int accentId) {
         SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.ACCENTS_COLOR_KEY, Context.MODE_PRIVATE).edit();
-        editor.putInt(Preferences.ACCENTS_COLOR_KEY, accentId);
+        editor.putInt(Preferences.ACCENTS_COLOR_PRESET_KEY, accentId);
+        editor.putBoolean(Preferences.ACCENTS_COLOR_MODE_KEY, true);
         editor.apply();
     }
 
     public static int getSelectedAccentId(@NonNull Context context) {
         return context.getSharedPreferences(Preferences.ACCENTS_COLOR_KEY, Context.MODE_PRIVATE)
-                .getInt(Preferences.ACCENTS_COLOR_KEY, Preferences.ACCENT_EXODUS_FRUIT);
+                .getInt(Preferences.ACCENTS_COLOR_PRESET_KEY, Preferences.ACCENT_EXODUS_FRUIT);
+    }
+
+    public static boolean getPresetAccentModeEnabled(@NonNull Context context) {
+        return context.getSharedPreferences(Preferences.ACCENTS_COLOR_KEY, Context.MODE_PRIVATE)
+                .getBoolean(Preferences.ACCENTS_COLOR_MODE_KEY, true /*Use preset colors by default*/);
     }
 
     public static void saveAccentDesaturatedColor(@NonNull Context context, boolean enabled) {

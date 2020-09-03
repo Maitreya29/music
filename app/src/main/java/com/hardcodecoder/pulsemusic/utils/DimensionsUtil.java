@@ -9,4 +9,9 @@ public class DimensionsUtil {
         float factor = (float) context.getResources().getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT;
         return factor * dimenDp;
     }
+
+    public static int getDimensionPixelSize(Context context, float dimenDp) {
+        float factor = (float) context.getResources().getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT;
+        return Math.round(factor * dimenDp);
+    }
 }

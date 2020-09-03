@@ -6,7 +6,7 @@
         <item name="colorPrimary">?attr/primaryColor</item>
         <item name="colorAccent">?attr/primaryColor</item>
     </style>
-
+<!--
     <style name="ElectronBlue">
         <item name="primaryColor">@color/electron_blue</item>
         <item name="colorPrimary">?attr/primaryColor</item>
@@ -96,4 +96,5 @@
         <item name="colorPrimary">?attr/primaryColor</item>
         <item name="colorAccent">?attr/primaryColor</item>
     </style>
+    -->
 </resources>
