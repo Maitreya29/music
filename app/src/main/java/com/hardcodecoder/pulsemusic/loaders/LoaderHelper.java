@@ -26,7 +26,6 @@ public class LoaderHelper {
     public static void loadAllTracks(@NonNull ContentResolver contentResolver, @NonNull Callback<List<MusicModel>> callback) {
         TaskRunner.executeAsync(new LibraryLoader(contentResolver, SortOrder.TITLE_ASC), result -> {
             LoaderCache.setAllTracksList(result);
-            result.clear();
             callback.onComplete(LoaderCache.getAllTracksList());
         });
     }

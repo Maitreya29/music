@@ -25,6 +25,9 @@ public class TaskRunner {
                 handler.post(() -> callback.onComplete(result));
             } catch (Exception e) {
                 e.printStackTrace();
+                // Callback is necessary to trigger
+                // any fallback event that happen if load fails
+                callback.onComplete(null);
             }
         });
     }
