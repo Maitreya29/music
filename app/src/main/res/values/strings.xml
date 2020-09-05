@@ -28,6 +28,10 @@
     <string name="tracks_plays">No of plays:</string>
     <string name="tracks_not_found">No tracks found</string>
 
+    <!-- Select tracks default's-->
+    <string name="def_track_title">Unknown</string>
+    <string name="selected_track_load_failed_toast">Cannot play selected track, load failed</string>
+
 
     <!-- Favorites Playlist Activity-->
     <string name="favorites">Your favorites</string>

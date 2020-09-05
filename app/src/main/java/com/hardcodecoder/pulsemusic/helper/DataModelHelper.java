@@ -9,6 +9,7 @@ import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.provider.OpenableColumns;
 
+import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.TaskRunner;
 import com.hardcodecoder.pulsemusic.loaders.LoaderCache;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
@@ -22,7 +23,7 @@ import java.util.Map;
 
 public class DataModelHelper {
 
-    private static int mPickedTrackId = 0;
+    private static int mPickedTrackId = -1;
 
     public static List<MusicModel> getModelsObjectFromTitlesList(List<String> titles) {
         Map<String, MusicModel> modelMap = new HashMap<>();
@@ -37,29 +38,33 @@ public class DataModelHelper {
         return modelList;
     }
 
-    public static List<String> getTitlesListFromModelsObject(List<MusicModel> modelList) {
-        List<String> titlesList = new ArrayList<>();
-        for (MusicModel musicModel : modelList) {
-            titlesList.add(musicModel.getTrackName());
-        }
-        return titlesList;
-    }
-
     public static MusicModel buildMusicModelFrom(Context context, Intent data) {
+        String path = data.getDataString();
+        if (null == path) return null;
         MediaMetadataRetriever mmr = new MediaMetadataRetriever();
         mmr.setDataSource(context, data.getData());
+        String defText = context.getString(R.string.def_track_title);
         try {
-            String path = data.getDataString();
-            if (path != null) {
-                String name = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE);
-                String artist = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST);
-                String album = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM);
-                int duration = Integer.parseInt(mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION));
-                mmr.release();
-                mPickedTrackId--;
-                return new MusicModel(mPickedTrackId, name, path, album, artist, null, mPickedTrackId, duration);
-            }
-            return null;
+            String title = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE);
+            String artist = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST);
+            String album = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM);
+            String dateAdded = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DATE);
+            String trackNumber = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_CD_TRACK_NUMBER);
+            int duration = Integer.parseInt(mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION));
+            mmr.release();
+            final long dateModified = null == dateAdded ? 0 : Long.parseLong(dateAdded);
+            return new MusicModel(
+                    mPickedTrackId,
+                    null == title ? defText : title,
+                    data.getDataString(),
+                    null == album ? defText : album,
+                    null == artist ? defText : artist,
+                    null,
+                    mPickedTrackId--,
+                    dateModified,
+                    dateModified,
+                    null == trackNumber ? 0 : Integer.parseInt(trackNumber),
+                    duration);
         } catch (Exception e) {
             e.printStackTrace();
             return null;

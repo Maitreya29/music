@@ -8,25 +8,31 @@ import java.io.Serializable;
 public class MusicModel implements Serializable {
 
     private String mTrackName, mTrackPath, mAlbum, mArtist, mAlbumArtUrl;
-    private long mAlbumId;
-    private int mId, mTrackDuration;
+    private long mAlbumId, mDateAdded, mDateModified;
+    private int mId, mTrackNumber, mTrackDuration;
 
     public MusicModel(int mId,
-                      @NonNull String mTrackName,
-                      @NonNull String mTrackPath,
-                      @NonNull String mAlbum,
-                      @NonNull String mArtist,
-                      @Nullable String mAlbumArtUrl,
-                      long mAlbumId,
-                      int mTrackDuration) {
+                      @NonNull String trackName,
+                      @NonNull String trackPath,
+                      @NonNull String album,
+                      @NonNull String artist,
+                      @Nullable String albumArtUrl,
+                      long albumId,
+                      long dateAdded,
+                      long dateModified,
+                      int trackNumber,
+                      int trackDuration) {
         this.mId = mId;
-        this.mTrackName = mTrackName;
-        this.mTrackPath = mTrackPath;
-        this.mAlbum = mAlbum;
-        this.mArtist = mArtist;
-        this.mAlbumArtUrl = mAlbumArtUrl;
-        this.mAlbumId = mAlbumId;
-        this.mTrackDuration = mTrackDuration;
+        this.mTrackName = trackName;
+        this.mTrackPath = trackPath;
+        this.mAlbum = album;
+        this.mArtist = artist;
+        this.mAlbumArtUrl = albumArtUrl;
+        this.mAlbumId = albumId;
+        this.mDateAdded = dateAdded;
+        this.mDateModified = dateModified;
+        this.mTrackNumber = trackNumber;
+        this.mTrackDuration = trackDuration;
     }
 
     public int getId() {
@@ -55,6 +61,18 @@ public class MusicModel implements Serializable {
 
     public long getAlbumId() {
         return mAlbumId;
+    }
+
+    public int getTrackNumber() {
+        return mTrackNumber;
+    }
+
+    public long getDateAdded() {
+        return mDateAdded;
+    }
+
+    public long getDateModified() {
+        return mDateModified;
     }
 
     public int getTrackDuration() {

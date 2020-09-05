@@ -58,6 +58,9 @@ public class LibraryLoader implements Callable<List<MusicModel>> {
                 MediaStore.Audio.Media.ARTIST,
                 MediaStore.Audio.Media.ALBUM,
                 MediaStore.Audio.Media.ALBUM_ID,
+                MediaStore.Audio.Media.TRACK,
+                MediaStore.Audio.Media.DATE_ADDED,
+                MediaStore.Audio.Media.DATE_MODIFIED,
                 MediaStore.Audio.AudioColumns.DURATION
         };
 
@@ -74,6 +77,9 @@ public class LibraryLoader implements Callable<List<MusicModel>> {
             int artistColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ARTIST);
             int albumColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM);
             int albumIdColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM_ID);
+            int dateAddedColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATE_ADDED);
+            int dateModifiedColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATE_MODIFIED);
+            int trackNumIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.TRACK);
             int durationColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION);
 
             final Uri sArtworkUri = Uri.parse("content://media/external/audio/albumart");
@@ -85,6 +91,9 @@ public class LibraryLoader implements Callable<List<MusicModel>> {
                 String album = cursor.getString(albumColumnIndex);
                 String songPath = ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, _id).toString();
                 long albumId = cursor.getLong(albumIdColumnIndex);
+                long dateAdded = cursor.getLong(dateAddedColumnIndex);
+                long dateModified = cursor.getLong(dateModifiedColumnIndex);
+                int trackNum = cursor.getInt(trackNumIndex);
                 int duration = cursor.getInt(durationColumnIndex);
                 String albumArt = ContentUris.withAppendedId(sArtworkUri, albumId).toString();
 
@@ -96,6 +105,9 @@ public class LibraryLoader implements Callable<List<MusicModel>> {
                         artist == null ? "" : artist,
                         albumArt,
                         albumId,
+                        dateAdded,
+                        dateModified,
+                        trackNum,
                         duration));
             } while (cursor.moveToNext());
             cursor.close();

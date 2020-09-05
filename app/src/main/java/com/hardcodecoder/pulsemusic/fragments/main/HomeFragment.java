@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -185,7 +186,8 @@ public class HomeFragment extends Fragment {
                 singlePickedItemList.add(md);
                 tm.buildDataList(singlePickedItemList, 0);
                 play();
-            }
+            } else
+                Toast.makeText(getContext(), getString(R.string.selected_track_load_failed_toast), Toast.LENGTH_SHORT).show();
         }
     }
 

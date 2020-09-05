@@ -182,7 +182,9 @@ public class AppFileManager {
                                           boolean append,
                                           @Nullable Callback<Boolean> callback) {
         TaskRunner.executeAsync(() -> {
-            List<String> tracksTitleRaw = DataModelHelper.getTitlesListFromModelsObject(playlistTracks);
+            List<String> tracksTitleRaw = new ArrayList<>();
+            for (MusicModel musicModel : playlistTracks)
+                tracksTitleRaw.add(musicModel.getTrackName());
             StorageUtils.writeTracksToPlaylist(
                     StorageStructure.getAbsolutePlaylistsFolderPath(mFilesDir) +
                             playlistName, tracksTitleRaw, append);
