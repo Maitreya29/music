@@ -25,7 +25,7 @@ public class MediaArtHelper {
     }
 
     public static Bitmap getDefaultAlbumArtBitmap(Context context, long albumId) {
-        Drawable drawable = ImageUtil.generateTintedDefaultAlbumArt(context, getTintColor(context, albumId));
+        Drawable drawable = ImageUtil.generateTintedDefaultAlbumArt(context, getTintColor(context, Math.abs(albumId)));
         Bitmap bitmap = Bitmap.createBitmap(400, 400, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
         drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
