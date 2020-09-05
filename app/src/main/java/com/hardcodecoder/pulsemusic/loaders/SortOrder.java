@@ -6,6 +6,8 @@ public enum SortOrder {
     TITLE_DESC,
     DURATION_ASC,
     DURATION_DESC,
+    DATE_ADDED_ASC,
+    DATE_ADDED_DESC,
     DATE_MODIFIED_ASC,
     DATE_MODIFIED_DESC;
 

@@ -88,6 +88,14 @@ public class LibraryFragment extends ListGridFragment {
                 return SortOrder.DURATION_ASC;
             case Preferences.SORT_ORDER_DURATION_DESC:
                 return SortOrder.DURATION_DESC;
+            case Preferences.SORT_ORDER_DATE_ADDED_ASC:
+                return SortOrder.DATE_ADDED_ASC;
+            case Preferences.SORT_ORDER_DATE_ADDED_DESC:
+                return SortOrder.DATE_ADDED_DESC;
+            case Preferences.SORT_ORDER_DATE_MODIFIED_ASC:
+                return SortOrder.DATE_MODIFIED_ASC;
+            case Preferences.SORT_ORDER_DATE_MODIFIED_DESC:
+                return SortOrder.DATE_MODIFIED_DESC;
         }
         return SortOrder.TITLE_DESC;
     }

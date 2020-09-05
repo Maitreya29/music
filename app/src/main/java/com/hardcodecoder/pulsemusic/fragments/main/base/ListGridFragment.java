@@ -55,6 +55,18 @@ public class ListGridFragment extends PMBGridFragment {
             case R.id.menu_action_sort_duration_desc:
                 changeSortOrder(Preferences.SORT_ORDER_DURATION_DESC);
                 break;
+            case R.id.menu_action_sort_date_added_asc:
+                changeSortOrder(Preferences.SORT_ORDER_DATE_ADDED_ASC);
+                break;
+            case R.id.menu_action_sort_date_added_desc:
+                changeSortOrder(Preferences.SORT_ORDER_DATE_ADDED_DESC);
+                break;
+            case R.id.menu_action_sort_date_modified_asc:
+                changeSortOrder(Preferences.SORT_ORDER_DATE_MODIFIED_ASC);
+                break;
+            case R.id.menu_action_sort_date_modified_desc:
+                changeSortOrder(Preferences.SORT_ORDER_DATE_MODIFIED_DESC);
+                break;
             case R.id.one:
                 updateGridSpanCount(Configuration.ORIENTATION_PORTRAIT, 1);
                 break;

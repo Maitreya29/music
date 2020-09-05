@@ -13,14 +13,32 @@ import java.util.List;
 public class SortUtil {
 
     public static List<MusicModel> sortLibraryList(List<MusicModel> list, SortOrder sortOrder) {
-        if (sortOrder == SortOrder.TITLE_ASC)
-            Collections.sort(list, (o1, o2) -> o1.getTrackName().compareToIgnoreCase(o2.getTrackName()));
-        else if (sortOrder == SortOrder.TITLE_DESC)
-            Collections.sort(list, (o1, o2) -> o2.getTrackName().compareToIgnoreCase(o1.getTrackName()));
-        else if (sortOrder == SortOrder.DURATION_ASC)
-            Collections.sort(list, (o1, o2) -> Integer.compare(o1.getTrackDuration(), o2.getTrackDuration()));
-        else if (sortOrder == SortOrder.DURATION_DESC)
-            Collections.sort(list, (o1, o2) -> Integer.compare(o2.getTrackDuration(), o1.getTrackDuration()));
+        switch (sortOrder) {
+            case TITLE_ASC:
+                Collections.sort(list, (o1, o2) -> o1.getTrackName().compareToIgnoreCase(o2.getTrackName()));
+                break;
+            case TITLE_DESC:
+                Collections.sort(list, (o1, o2) -> o2.getTrackName().compareToIgnoreCase(o1.getTrackName()));
+                break;
+            case DURATION_ASC:
+                Collections.sort(list, (o1, o2) -> Integer.compare(o1.getTrackDuration(), o2.getTrackDuration()));
+                break;
+            case DURATION_DESC:
+                Collections.sort(list, (o1, o2) -> Integer.compare(o2.getTrackDuration(), o1.getTrackDuration()));
+                break;
+            case DATE_ADDED_ASC:
+                Collections.sort(list, (o1, o2) -> Long.compare(o1.getDateAdded(), o2.getDateAdded()));
+                break;
+            case DATE_ADDED_DESC:
+                Collections.sort(list, (o1, o2) -> Long.compare(o2.getDateAdded(), o1.getDateAdded()));
+                break;
+            case DATE_MODIFIED_ASC:
+                Collections.sort(list, (o1, o2) -> Long.compare(o1.getDateModified(), o2.getDateModified()));
+                break;
+            case DATE_MODIFIED_DESC:
+                Collections.sort(list, (o1, o2) -> Long.compare(o2.getDateModified(), o1.getDateModified()));
+                break;
+        }
         return list;
     }
 
