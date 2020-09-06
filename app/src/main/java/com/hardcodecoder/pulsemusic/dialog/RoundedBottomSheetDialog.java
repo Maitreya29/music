@@ -27,6 +27,20 @@ public class RoundedBottomSheetDialog extends BottomSheetDialog {
                 behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
                 behavior.setPeekHeight(0);
             }
+            if (bottomSheet != null) {
+                BottomSheetBehavior<FrameLayout> behavior = BottomSheetBehavior.from(bottomSheet);
+                behavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+                    @Override
+                    public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                        if (newState == BottomSheetBehavior.STATE_COLLAPSED) dismiss();
+                    }
+
+                    @Override
+                    public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+                        bottomSheet.setAlpha(slideOffset);
+                    }
+                });
+            }
         });
     }
 }
