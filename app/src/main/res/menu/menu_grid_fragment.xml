@@ -3,8 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:icon="@drawable/ic_sort"
         android:orderInCategory="1"
         android:title="@string/sort_order"
+        app:iconTint="?attr/colorControlNormal"
         app:showAsAction="never">
         <menu>
             <item
@@ -18,8 +20,10 @@
     </item>
 
     <item
+        android:icon="@drawable/ic_columns"
         android:orderInCategory="2"
         android:title="@string/grid_count"
+        app:iconTint="?attr/colorControlNormal"
         app:showAsAction="never">
         <menu>
             <item
