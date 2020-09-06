@@ -7,14 +7,12 @@
     android:paddingStart="16dp"
     android:paddingEnd="0dp">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/details_activity_title"
+    <com.hardcodecoder.pulsemusic.views.MarqueeTitleToolbar
+        android:id="@+id/details_activity_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+        android:layout_height="48dp"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="@tools:sample/full_names" />
+        tools:title="@tools:sample/full_names" />
 
     <com.hardcodecoder.pulsemusic.views.MediaArtImageView
         android:id="@+id/details_activity_art"
@@ -25,11 +23,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.7"
         app:layout_constraintHorizontal_bias="0.08"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/details_activity_title"
-        app:layout_constraintVertical_bias="0.28"
-        app:layout_constraintWidth_percent="0.36"
+        app:layout_constraintTop_toBottomOf="@id/details_activity_toolbar"
+        app:layout_constraintVertical_bias="0.25"
         app:radius="@dimen/rounding_radius_8dp"
         tools:src="@tools:sample/avatars" />
 
@@ -40,22 +38,10 @@
         android:layout_marginTop="8dp"
         android:gravity="center"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
-        android:textColor="?secondaryTextColor"
         app:layout_constraintEnd_toEndOf="@id/details_activity_art"
         app:layout_constraintStart_toStartOf="@id/details_activity_art"
         app:layout_constraintTop_toBottomOf="@id/details_activity_art"
         tools:text="@tools:sample/cities" />
-
-    <ImageView
-        android:id="@+id/details_activity_btn_close"
-        style="@style/ButtonStyle24"
-        android:layout_margin="8dp"
-        android:layout_marginEnd="16dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:contentDescription="@string/iv_btn_close_description"
-        android:src="@drawable/ic_close"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
     <ViewStub
         android:id="@+id/stub_details_activity_rv"
@@ -64,11 +50,11 @@
         android:layout_marginStart="36dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="36dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="16dp"
         android:layout="@layout/recycler_view_vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/details_activity_art"
-        app:layout_constraintTop_toBottomOf="@id/details_activity_title"
+        app:layout_constraintTop_toBottomOf="@id/details_activity_toolbar"
         tools:visibility="visible" />
 </androidx.constraintlayout.widget.ConstraintLayout>
