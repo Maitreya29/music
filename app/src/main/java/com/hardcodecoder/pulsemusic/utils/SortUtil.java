@@ -38,6 +38,12 @@ public class SortUtil {
             case DATE_MODIFIED_DESC:
                 Collections.sort(list, (o1, o2) -> Long.compare(o2.getDateModified(), o1.getDateModified()));
                 break;
+            case TRACK_NUMBER_ASC:
+                Collections.sort(list, (o1, o2) -> Long.compare(o1.getTrackNumber(), o2.getTrackNumber()));
+                break;
+            case TRACK_NUMBER_DESC:
+                Collections.sort(list, (o1, o2) -> Long.compare(o2.getTrackNumber(), o1.getTrackNumber()));
+                break;
         }
         return list;
     }

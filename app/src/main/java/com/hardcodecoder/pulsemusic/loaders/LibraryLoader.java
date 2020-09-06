@@ -7,6 +7,8 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
 
+import androidx.annotation.Nullable;
+
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 
 import java.util.ArrayList;
@@ -17,11 +19,17 @@ public class LibraryLoader implements Callable<List<MusicModel>> {
 
     private ContentResolver contentResolver;
     private String mSortOrder;
+    private String mSelectionString;
 
     // MediaStore.Audio.Media.DURATION existed well before APi 29
     // Suppress lint
     @SuppressLint("InlinedApi")
     LibraryLoader(ContentResolver contentResolver, SortOrder sortOrder) {
+        this(contentResolver, sortOrder, null);
+    }
+
+    @SuppressLint("InlinedApi")
+    LibraryLoader(ContentResolver contentResolver, SortOrder sortOrder, @Nullable String selectionString) {
         this.contentResolver = contentResolver;
         switch (sortOrder) {
             case TITLE_ASC:
@@ -42,9 +50,16 @@ public class LibraryLoader implements Callable<List<MusicModel>> {
             case DATE_MODIFIED_DESC:
                 mSortOrder = MediaStore.Audio.Media.DATE_MODIFIED + " DESC";
                 break;
+            case TRACK_NUMBER_ASC:
+                mSortOrder = MediaStore.Audio.Media.TRACK + " ASC";
+                break;
+            case TRACK_NUMBER_DESC:
+                mSortOrder = MediaStore.Audio.Media.TRACK + " DESC";
+                break;
             default:
                 mSortOrder = null;
         }
+        this.mSelectionString = selectionString;
     }
 
     @SuppressLint("InlinedApi")
@@ -67,7 +82,7 @@ public class LibraryLoader implements Callable<List<MusicModel>> {
         final Cursor cursor = contentResolver.query(
                 uri,
                 cursor_cols,
-                null,
+                mSelectionString,
                 null,
                 mSortOrder);
 

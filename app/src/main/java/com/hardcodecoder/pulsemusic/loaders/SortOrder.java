@@ -9,7 +9,9 @@ public enum SortOrder {
     DATE_ADDED_ASC,
     DATE_ADDED_DESC,
     DATE_MODIFIED_ASC,
-    DATE_MODIFIED_DESC;
+    DATE_MODIFIED_DESC,
+    TRACK_NUMBER_ASC,
+    TRACK_NUMBER_DESC;
 
     public enum ALBUMS {
         TITLE_ASC,

@@ -47,7 +47,8 @@
             android:configChanges="orientation|screenSize" />
 
         <activity android:name=".activities.SettingsActivity" />
-        <activity android:name=".activities.DetailsActivity" />
+        <activity android:name=".activities.AlbumDetailsActivity" />
+        <activity android:name=".activities.ArtistDetailsActivity" />
         <activity android:name=".activities.RecentActivity" />
         <activity android:name=".activities.FavoritesActivity" />
         <activity android:name=".activities.CurrentPlaylistActivity" />

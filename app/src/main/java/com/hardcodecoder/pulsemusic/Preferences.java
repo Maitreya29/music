@@ -5,6 +5,8 @@ public class Preferences {
     public static final String SORT_ORDER_PREFS_KEY = "SortOrder";
     public static final String SORT_ORDER_LIBRARY_KEY = "LibrarySortOrder";
     public static final String SORT_ORDER_ALBUMS_KEY = "AlbumsSortOrder";
+    public static final String SORT_ORDER_ALBUM_DETAILS_KEY = "AlbumDetailsSortOrder";
+    public static final String SORT_ORDER_ARTIST_DETAILS_KEY = "ArtistDetailsSortOrder";
     public static final String SORT_ORDER_ARTIST_KEY = "ArtistsSortOrder";
     // In range 3000 - 3100
     public static final int SORT_ORDER_ASC = 3000;
@@ -15,6 +17,8 @@ public class Preferences {
     public static final int SORT_ORDER_DATE_ADDED_DESC = 3005;
     public static final int SORT_ORDER_DATE_MODIFIED_ASC = 3006;
     public static final int SORT_ORDER_DATE_MODIFIED_DESC = 3007;
+    public static final int SORT_ORDER_ALBUM_TRACK_NUMBER_ASC = 3008;
+    public static final int SORT_ORDER_ALBUM_TRACK_NUMBER_DESC = 3009;
 
     public static final String SPAN_COUNT = "GridSpanCount";
 
