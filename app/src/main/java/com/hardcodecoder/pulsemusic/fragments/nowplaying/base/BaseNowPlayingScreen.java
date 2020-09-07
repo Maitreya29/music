@@ -1,5 +1,6 @@
 package com.hardcodecoder.pulsemusic.fragments.nowplaying.base;
 
+import android.annotation.SuppressLint;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -25,12 +26,16 @@ import androidx.appcompat.widget.AppCompatSeekBar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.GenericTransitionOptions;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.shape.CornerFamily;
 import com.google.android.material.slider.Slider;
+import com.hardcodecoder.pulsemusic.GlideApp;
 import com.hardcodecoder.pulsemusic.PMS;
 import com.hardcodecoder.pulsemusic.R;
+import com.hardcodecoder.pulsemusic.activities.CurrentPlaylistActivity;
 import com.hardcodecoder.pulsemusic.helper.MediaProgressUpdateHelper;
+import com.hardcodecoder.pulsemusic.helper.SwipeGestureListener;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.singleton.TrackManager;
 import com.hardcodecoder.pulsemusic.storage.AppFileManager;
@@ -39,6 +44,7 @@ import com.hardcodecoder.pulsemusic.utils.AppSettings;
 public abstract class BaseNowPlayingScreen extends Fragment implements MediaProgressUpdateHelper.Callback {
 
     private final TrackManager mTrackManager = TrackManager.getInstance();
+    private ImageView mMediaAlbumCover;
     private MediaController mController;
     private MediaController.TransportControls mTransportControls;
     private MediaProgressUpdateHelper mUpdateHelper;
@@ -56,6 +62,8 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
 
         }
     };
+    // Denotes most recently performed swipe gesture direction, 0 = right, 1 = left
+    private int mSwipeDirection = 1;
     private boolean mCurrentItemFavorite = false;
 
     @CallSuper
@@ -67,6 +75,10 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
     @CallSuper
     @Override
     public void onMetadataDataChanged(MediaMetadata metadata) {
+        GlideApp.with(this)
+                .load(metadata.getBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART))
+                .transition(GenericTransitionOptions.with(mSwipeDirection == 1 ? R.anim.album_cover_enter_left : R.anim.album_cover_enter_right))
+                .into(mMediaAlbumCover);
         updateFavoriteItem();
         updateRepeat();
     }
@@ -136,9 +148,26 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
         slider.setValueTo(valueTo);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
+    protected void setUpAlbumArtImageView(@NonNull ImageView mediaArtImageView) {
+        mMediaAlbumCover = mediaArtImageView;
+        mMediaAlbumCover.setOnTouchListener(new SwipeGestureListener(mediaArtImageView.getContext()) {
+            @Override
+            public void onSwipeRight() {
+                onSkipToPrevious();
+            }
+
+            @Override
+            public void onSwipeLeft() {
+                onSkipToNext();
+            }
+        });
+
+    }
+
     protected void setUpSkipControls(ImageView skipPrev, ImageView skipNext) {
-        skipPrev.setOnClickListener(v -> mTransportControls.skipToPrevious());
-        skipNext.setOnClickListener(v -> mTransportControls.skipToNext());
+        skipPrev.setOnClickListener(v -> onSkipToPrevious());
+        skipNext.setOnClickListener(v -> onSkipToNext());
     }
 
     protected void toggleRepeatMode() {
@@ -168,7 +197,6 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
         else mTransportControls.play();
     }
 
-
     protected void togglePlayPauseAnimation(ImageView playPauseBtn, PlaybackState state) {
         if (null == state || null == getContext() || null == playPauseBtn) return;
 
@@ -196,6 +224,10 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
         return DateUtils.formatElapsedTime(elapsedTime);
     }
 
+    protected void setGotToCurrentQueueCLickListener(View view) {
+        view.setOnClickListener(v -> startActivity(new Intent(getContext(), CurrentPlaylistActivity.class)));
+    }
+
     private void updateRepeat() {
         onRepeatStateChanged(mTrackManager.isCurrentTrackInRepeatMode());
     }
@@ -203,6 +235,16 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
     private void updateFavoriteItem() {
         AppFileManager.isItemAFavorite(mTrackManager.getActiveQueueItem(), result ->
                 onFavoriteStateChanged((mCurrentItemFavorite = result)));
+    }
+
+    private void onSkipToNext() {
+        mSwipeDirection = 1;
+        mTransportControls.skipToNext();
+    }
+
+    private void onSkipToPrevious() {
+        mSwipeDirection = 0;
+        mTransportControls.skipToPrevious();
     }
 
     private void connectToService() {

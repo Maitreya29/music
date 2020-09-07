@@ -11,11 +11,9 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.bumptech.glide.GenericTransitionOptions;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.slider.Slider;
 import com.google.android.material.textview.MaterialTextView;
-import com.hardcodecoder.pulsemusic.GlideApp;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.fragments.nowplaying.base.BaseNowPlayingScreen;
 
@@ -23,7 +21,6 @@ public class ModernNowPlayingScreen extends BaseNowPlayingScreen {
 
     public static final String TAG = ModernNowPlayingScreen.class.getSimpleName();
     private Slider mProgressSlider;
-    private ShapeableImageView mAlbumCover;
     private ImageView mFavoriteBtn;
     private ImageView mRepeatBtn;
     private ImageView mPlayPauseBtn;
@@ -46,7 +43,8 @@ public class ModernNowPlayingScreen extends BaseNowPlayingScreen {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mAlbumCover = view.findViewById(R.id.modern_nps_album_cover);
+        ShapeableImageView albumCover = view.findViewById(R.id.modern_nps_album_cover);
+        applyCornerRadius(albumCover);
         mTitle = view.findViewById(R.id.modern_nps_title);
         mSubTitle = view.findViewById(R.id.modern_nps_sub_title);
         mProgressSlider = view.findViewById(R.id.modern_nps_slider);
@@ -56,6 +54,8 @@ public class ModernNowPlayingScreen extends BaseNowPlayingScreen {
         mPlayPauseBtn = view.findViewById(R.id.modern_nps_play_pause_btn);
         mFavoriteBtn = view.findViewById(R.id.modern_nps_fav_btn);
         mUpNext = view.findViewById(R.id.modern_nps_up_next);
+        setGotToCurrentQueueCLickListener(mUpNext);
+        setUpAlbumArtImageView(albumCover);
         view.findViewById(R.id.modern_nps_close_btn).setOnClickListener(v -> {
             if (null != getActivity())
                 getActivity().finish();
@@ -67,7 +67,6 @@ public class ModernNowPlayingScreen extends BaseNowPlayingScreen {
         mRepeatBtn.setOnClickListener(v -> toggleRepeatMode());
         mPlayPauseBtn.setOnClickListener(v -> togglePlayPause());
         mFavoriteBtn.setOnClickListener(v -> toggleFavorite());
-        applyCornerRadius(mAlbumCover);
     }
 
     @Override
@@ -83,18 +82,12 @@ public class ModernNowPlayingScreen extends BaseNowPlayingScreen {
     @Override
     public void onMetadataDataChanged(MediaMetadata metadata) {
         super.onMetadataDataChanged(metadata);
-        if (null == metadata) return;
         long seconds = metadata.getLong(MediaMetadata.METADATA_KEY_DURATION) / 1000;
         resetSliderValues(mProgressSlider, seconds);
         mStartTime.setText(getFormattedElapsedTime(0));
         mEndTime.setText(getFormattedElapsedTime(seconds));
         mSubTitle.setText(metadata.getString(MediaMetadata.METADATA_KEY_ARTIST));
         mTitle.setText(metadata.getText(MediaMetadata.METADATA_KEY_TITLE));
-
-        GlideApp.with(this)
-                .load(metadata.getBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART))
-                .transition(GenericTransitionOptions.with(R.anim.now_playing_album_card))
-                .into(mAlbumCover);
         mUpNext.setText(getUpNextText());
     }
 

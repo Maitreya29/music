@@ -12,9 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatSeekBar;
 
-import com.bumptech.glide.GenericTransitionOptions;
 import com.google.android.material.textview.MaterialTextView;
-import com.hardcodecoder.pulsemusic.GlideApp;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.fragments.nowplaying.base.BaseNowPlayingScreen;
 
@@ -22,7 +20,6 @@ public class EdgeNowPlayingScreen extends BaseNowPlayingScreen {
 
     public static final String TAG = EdgeNowPlayingScreen.class.getSimpleName();
     private AppCompatSeekBar mProgressSeekBar;
-    private ImageView mAlbumCover;
     private ImageView mFavoriteBtn;
     private ImageView mRepeatBtn;
     private ImageView mPlayPauseBtn;
@@ -45,7 +42,6 @@ public class EdgeNowPlayingScreen extends BaseNowPlayingScreen {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mAlbumCover = view.findViewById(R.id.edge_nps_album_cover);
         mTitle = view.findViewById(R.id.edge_nps_title);
         mSubTitle = view.findViewById(R.id.edge_nps_sub_title);
         mProgressSeekBar = view.findViewById(R.id.edge_nps_seek_bar);
@@ -55,6 +51,8 @@ public class EdgeNowPlayingScreen extends BaseNowPlayingScreen {
         mPlayPauseBtn = view.findViewById(R.id.edge_nps_play_pause_btn);
         mFavoriteBtn = view.findViewById(R.id.edge_nps_favourite_btn);
         mUpNext = view.findViewById(R.id.edge_nps_up_next);
+        setGotToCurrentQueueCLickListener(mUpNext);
+        setUpAlbumArtImageView(view.findViewById(R.id.edge_nps_album_cover));
         view.findViewById(R.id.edge_nps_close_btn).setOnClickListener(v -> {
             if (null != getActivity())
                 getActivity().finish();
@@ -71,7 +69,6 @@ public class EdgeNowPlayingScreen extends BaseNowPlayingScreen {
     @Override
     public void onMetadataDataChanged(MediaMetadata metadata) {
         super.onMetadataDataChanged(metadata);
-        if (null == metadata) return;
         long seconds = metadata.getLong(MediaMetadata.METADATA_KEY_DURATION) / 1000;
         mProgressSeekBar.setProgress(0);
         mProgressSeekBar.setMax((int) seconds);
@@ -79,11 +76,6 @@ public class EdgeNowPlayingScreen extends BaseNowPlayingScreen {
         mEndTime.setText(getFormattedElapsedTime(seconds));
         mSubTitle.setText(metadata.getString(MediaMetadata.METADATA_KEY_ARTIST));
         mTitle.setText(metadata.getText(MediaMetadata.METADATA_KEY_TITLE));
-
-        GlideApp.with(this)
-                .load(metadata.getBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART))
-                .transition(GenericTransitionOptions.with(R.anim.now_playing_album_card))
-                .into(mAlbumCover);
         mUpNext.setText(getUpNextText());
     }
 
