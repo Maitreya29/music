@@ -144,7 +144,7 @@ public class PlaybackManager implements Playback.Callback {
         } else {
             actions = PlaybackState.ACTION_PLAY;
         }
-        return PlaybackState.ACTION_SKIP_TO_PREVIOUS | PlaybackState.ACTION_SKIP_TO_NEXT | actions;
+        return PlaybackState.ACTION_SKIP_TO_PREVIOUS | PlaybackState.ACTION_SKIP_TO_NEXT | actions | PlaybackState.ACTION_SEEK_TO;
     }
 
     @Override
