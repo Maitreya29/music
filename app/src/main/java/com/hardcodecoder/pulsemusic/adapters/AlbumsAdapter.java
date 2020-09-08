@@ -61,7 +61,7 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.AlbumsSVH>
     @NonNull
     @Override
     public AlbumsSVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new AlbumsSVH(mInflater.inflate(R.layout.rv_grid_item_album, parent, false), /*mAddOverlay,*/ mListener);
+        return new AlbumsSVH(mInflater.inflate(R.layout.rv_big_album_item, parent, false), /*mAddOverlay,*/ mListener);
     }
 
     @Override
@@ -83,8 +83,8 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.AlbumsSVH>
 
         AlbumsSVH(@NonNull View itemView, SimpleTransitionClickListener mListener) {
             super(itemView);
-            albumArt = itemView.findViewById(R.id.grid_item_iv);
-            title = itemView.findViewById(R.id.grid_item_tv);
+            albumArt = itemView.findViewById(R.id.big_album_item_art);
+            title = itemView.findViewById(R.id.big_album_item_title);
             itemView.setOnClickListener(v -> mListener.onItemClick(albumArt, getAdapterPosition()));
         }
 

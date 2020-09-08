@@ -8,7 +8,7 @@
     android:paddingBottom="32dp">
 
     <com.hardcodecoder.pulsemusic.views.MediaArtImageView
-        android:id="@+id/grid_item_iv"
+        android:id="@+id/big_album_item_art"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:contentDescription="@string/iv_content_desc"
@@ -19,7 +19,7 @@
         tools:src="@tools:sample/backgrounds/scenic" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/grid_item_tv"
+        android:id="@+id/big_album_item_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -28,6 +28,6 @@
         android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/grid_item_iv"
+        app:layout_constraintTop_toBottomOf="@id/big_album_item_art"
         tools:text="@tools:sample/lorem/random" />
 </androidx.constraintlayout.widget.ConstraintLayout>
