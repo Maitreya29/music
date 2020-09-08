@@ -138,8 +138,10 @@
     <string name="details_toolbar_title">Details</string>
     <string name="details_activity_rv_title">Tracks</string>
     <string name="num_tracks">Collection has ●</string>
+    <string name="num_artist_tracks">Artist has ●</string>
     <string name="num_album_tracks">Album contains ●</string>
     <string name="tracks">tracks</string>
+    <string name="album">albums</string>
 
 
     <!-- Song info dialog -->

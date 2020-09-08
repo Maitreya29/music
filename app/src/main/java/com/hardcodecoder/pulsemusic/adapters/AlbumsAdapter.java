@@ -53,7 +53,8 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.AlbumsSVH>
             });
             handler.post(() -> {
                 diffResult.dispatchUpdatesTo(AlbumsAdapter.this);
-                mCallback.onSortUpdateComplete();
+                if (null != mCallback)
+                    mCallback.onSortUpdateComplete();
             });
         });
     }

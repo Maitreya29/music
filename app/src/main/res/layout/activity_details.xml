@@ -39,18 +39,6 @@
         app:layout_constraintTop_toBottomOf="@id/details_activity_art"
         tools:text="@tools:sample/cities" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/details_activity_rv_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:text="@string/details_activity_rv_title"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-        app:layout_constraintEnd_toEndOf="@id/details_activity_art"
-        app:layout_constraintStart_toStartOf="@id/details_activity_art"
-        app:layout_constraintTop_toBottomOf="@id/details_activity_title_sub" />
-
     <ViewStub
         android:id="@+id/stub_details_activity_rv"
         android:layout_width="match_parent"
@@ -59,5 +47,5 @@
         android:layout="@layout/recycler_view_vertical"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/details_activity_rv_title" />
+        app:layout_constraintTop_toBottomOf="@id/details_activity_title_sub" />
 </androidx.constraintlayout.widget.ConstraintLayout>

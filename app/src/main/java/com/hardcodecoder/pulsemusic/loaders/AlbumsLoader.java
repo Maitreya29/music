@@ -7,6 +7,8 @@ import android.net.Uri;
 import android.provider.BaseColumns;
 import android.provider.MediaStore;
 
+import androidx.annotation.Nullable;
+
 import com.hardcodecoder.pulsemusic.model.AlbumModel;
 
 import java.util.ArrayList;
@@ -17,8 +19,13 @@ public class AlbumsLoader implements Callable<List<AlbumModel>> {
 
     private ContentResolver mContentResolver;
     private String mSortOrder;
+    private String mSelection;
 
-    AlbumsLoader(ContentResolver mContentResolver, SortOrder.ALBUMS sortOrder) {
+    AlbumsLoader(ContentResolver contentResolver, SortOrder.ALBUMS sortOrder) {
+        this(contentResolver, sortOrder, null);
+    }
+
+    AlbumsLoader(ContentResolver mContentResolver, SortOrder.ALBUMS sortOrder, @Nullable String selection) {
         this.mContentResolver = mContentResolver;
         switch (sortOrder) {
             case TITLE_ASC:
@@ -42,6 +49,7 @@ public class AlbumsLoader implements Callable<List<AlbumModel>> {
             default:
                 mSortOrder = null;
         }
+        this.mSelection = selection;
     }
 
     @Override
@@ -54,7 +62,7 @@ public class AlbumsLoader implements Callable<List<AlbumModel>> {
         final Cursor cursor = mContentResolver.query(
                 MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI,
                 col,
-                null,
+                mSelection,
                 null,
                 mSortOrder);
 

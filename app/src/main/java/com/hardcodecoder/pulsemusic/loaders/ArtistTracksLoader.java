@@ -1,33 +1,27 @@
 package com.hardcodecoder.pulsemusic.loaders;
 
-import com.hardcodecoder.pulsemusic.model.MusicModel;
-import com.hardcodecoder.pulsemusic.utils.SortUtil;
+import android.content.ContentResolver;
+import android.provider.MediaStore;
 
-import java.util.ArrayList;
+import com.hardcodecoder.pulsemusic.model.AlbumModel;
+
 import java.util.List;
 import java.util.concurrent.Callable;
 
-public class ArtistTracksLoader implements Callable<List<MusicModel>> {
+public class ArtistTracksLoader implements Callable<List<AlbumModel>> {
 
+    private ContentResolver mContentResolver;
     private String mArtistName;
-    private SortOrder mSortOrder;
+    private SortOrder.ALBUMS mSortOrder;
 
-    public ArtistTracksLoader(String artistName, SortOrder sortOrder) {
+    public ArtistTracksLoader(ContentResolver contentResolver, String artistName, SortOrder.ALBUMS sortOrder) {
+        this.mContentResolver = contentResolver;
         this.mArtistName = artistName;
         this.mSortOrder = sortOrder;
     }
 
     @Override
-    public List<MusicModel> call() {
-        List<MusicModel> masterList = LoaderCache.getAllTracksList();
-        List<MusicModel> listToReturn = null;
-        if (null != masterList && masterList.size() > 0) {
-            listToReturn = new ArrayList<>();
-            for (MusicModel md : masterList)
-                if (md.getArtist().equals(mArtistName))
-                    listToReturn.add(md);
-        }
-        if (null != listToReturn) SortUtil.sortLibraryList(listToReturn, mSortOrder);
-        return listToReturn;
+    public List<AlbumModel> call() {
+        return new AlbumsLoader(mContentResolver, mSortOrder, MediaStore.Audio.Albums.ARTIST + " = \"" + mArtistName + "\"").call();
     }
 }
