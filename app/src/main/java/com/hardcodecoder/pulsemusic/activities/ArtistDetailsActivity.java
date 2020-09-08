@@ -3,6 +3,8 @@ package com.hardcodecoder.pulsemusic.activities;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.ViewStub;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -114,6 +116,8 @@ public class ArtistDetailsActivity extends BaseDetailsActivity {
                     AlbumModel am = mList.get(position);
                     NavigationUtil.goToAlbum(ArtistDetailsActivity.this, sharedView, am.getAlbumName(), am.getAlbumId(), am.getAlbumArt());
                 }, null);
+                LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(this, R.anim.item_enter_slide_up);
+                rv.setLayoutAnimation(controller);
                 rv.setAdapter(mAdapter);
             }
         });

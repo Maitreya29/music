@@ -7,13 +7,11 @@ import android.util.AttributeSet;
 
 import androidx.annotation.Nullable;
 
-import com.bumptech.glide.GenericTransitionOptions;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.hardcodecoder.pulsemusic.GlideApp;
-import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.helper.MediaArtHelper;
 
 public class MediaArtImageView extends ModernImageView {
@@ -48,7 +46,6 @@ public class MediaArtImageView extends ModernImageView {
                         return false;
                     }
                 })
-                .transition(GenericTransitionOptions.with(R.anim.fade_in_image))
                 .into(this);
     }
 }

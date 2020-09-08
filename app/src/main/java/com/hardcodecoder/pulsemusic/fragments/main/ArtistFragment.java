@@ -4,6 +4,8 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewStub;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -59,6 +61,8 @@ public class ArtistFragment extends CardGridFragment {
                     () -> mLayoutManager.scrollToPosition(mFirstVisibleItemPosition),
                     getCurrentOrientation(),
                     getCurrentSpanCount());
+            LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(mRecyclerView.getContext(), R.anim.item_enter_slide_up);
+            mRecyclerView.setLayoutAnimation(controller);
             mRecyclerView.setAdapter(mAdapter);
         } else {
             MaterialTextView noTracksText = (MaterialTextView) ((ViewStub) view.findViewById(R.id.stub_no_tracks_found)).inflate();

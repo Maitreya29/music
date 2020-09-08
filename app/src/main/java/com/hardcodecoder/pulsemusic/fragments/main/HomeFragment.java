@@ -23,7 +23,6 @@ import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.activities.FavoritesActivity;
 import com.hardcodecoder.pulsemusic.activities.RecentActivity;
 import com.hardcodecoder.pulsemusic.adapters.HomeAdapter;
-import com.hardcodecoder.pulsemusic.adapters.HomeAdapter.LayoutStyle;
 import com.hardcodecoder.pulsemusic.adapters.HomeAdapterAlbum;
 import com.hardcodecoder.pulsemusic.adapters.HomeAdapterArtist;
 import com.hardcodecoder.pulsemusic.helper.DataModelHelper;
@@ -121,7 +120,7 @@ public class HomeFragment extends Fragment {
                         if (null != getActivity())
                             UIHelper.buildAndShowOptionsMenu(getActivity(), getActivity().getSupportFragmentManager(), list.get(position));
                     }
-                }, LayoutStyle.ROUNDED_RECTANGLE);
+                });
                 rv.setAdapter(adapter);
             }, BASE_DELAY_MILLS);
         }
@@ -147,7 +146,7 @@ public class HomeFragment extends Fragment {
                         if (null != getActivity())
                             UIHelper.buildAndShowOptionsMenu(getActivity(), getActivity().getSupportFragmentManager(), list.get(position));
                     }
-                }, LayoutStyle.ROUNDED_RECTANGLE);
+                });
                 rv.setAdapter(adapter);
             }, BASE_DELAY_MILLS * 2);
         }

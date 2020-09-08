@@ -4,6 +4,8 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewStub;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,7 +30,6 @@ public class AlbumsFragment extends CardGridFragment {
     private GridLayoutManager mLayoutManager;
     private AlbumsAdapter mAdapter;
     private int mFirstVisibleItemPosition;
-    //private boolean mAddOverlay = false;
 
     public static AlbumsFragment getInstance() {
         return new AlbumsFragment();
@@ -46,21 +47,18 @@ public class AlbumsFragment extends CardGridFragment {
 
     private void loadAlbumsList(View view, List<AlbumModel> list) {
         if (null != list && list.size() > 0) {
-            /*if (null != getContext())
-                mAddOverlay = AppSettings.isAlbumCardOverlayEnabled(getContext());*/
             RecyclerView rv = (RecyclerView) ((ViewStub) view.findViewById(R.id.stub_grid_rv)).inflate();
             mLayoutManager = new GridLayoutManager(rv.getContext(), getCurrentSpanCount());
             rv.setLayoutManager(mLayoutManager);
             rv.setHasFixedSize(true);
-            mAdapter = new AlbumsAdapter(list,
-                    getLayoutInflater(),
-                    (sharedView, position) -> {
-                        if (null != getActivity()) {
-                            AlbumModel albumModel = list.get(position);
-                            NavigationUtil.goToAlbum(getActivity(), sharedView, albumModel.getAlbumName(), albumModel.getAlbumId(), albumModel.getAlbumArt());
-                        }
-                    },
-                    () -> mLayoutManager.scrollToPosition(mFirstVisibleItemPosition)/*, mAddOverlay*/);
+            mAdapter = new AlbumsAdapter(list, getLayoutInflater(), (sharedView, position) -> {
+                if (null != getActivity()) {
+                    AlbumModel albumModel = list.get(position);
+                    NavigationUtil.goToAlbum(getActivity(), sharedView, albumModel.getAlbumName(), albumModel.getAlbumId(), albumModel.getAlbumArt());
+                }
+            }, () -> mLayoutManager.scrollToPosition(mFirstVisibleItemPosition));
+            LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(rv.getContext(), R.anim.item_enter_slide_up);
+            rv.setLayoutAnimation(controller);
             rv.setAdapter(mAdapter);
         } else {
             MaterialTextView noTracksText = (MaterialTextView) ((ViewStub) view.findViewById(R.id.stub_no_tracks_found)).inflate();
