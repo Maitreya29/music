@@ -1,5 +1,6 @@
 package com.hardcodecoder.pulsemusic.helper;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -26,16 +27,18 @@ import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.singleton.TrackManager;
 import com.hardcodecoder.pulsemusic.storage.AppFileManager;
 import com.hardcodecoder.pulsemusic.utils.DataUtils;
+import com.hardcodecoder.pulsemusic.utils.NavigationUtil;
 import com.hardcodecoder.pulsemusic.views.MediaArtImageView;
 
 public class UIHelper {
 
-    public static void buildAndShowOptionsMenu(@NonNull Context context, @NonNull FragmentManager fragmentManager, @NonNull final MusicModel md) {
+    public static void buildAndShowOptionsMenu(@NonNull Activity activity, @NonNull FragmentManager fragmentManager, @NonNull final MusicModel md) {
         final TrackManager tm = TrackManager.getInstance();
-        View view = View.inflate(context, R.layout.library_item_menu, null);
+        View view = View.inflate(activity, R.layout.library_item_menu, null);
         BottomSheetDialog bottomSheetDialog = new RoundedBottomSheetDialog(view.getContext());
 
         MediaArtImageView trackAlbumArt = view.findViewById(R.id.track_album_art);
+        trackAlbumArt.setTransitionName("song_info_transition_" + md.getId());
         MaterialTextView trackTitle = view.findViewById(R.id.track_title);
         MaterialTextView trackSubTitle = view.findViewById(R.id.track_sub_title);
 
@@ -46,20 +49,26 @@ public class UIHelper {
 
         view.findViewById(R.id.track_play_next).setOnClickListener(v -> {
             tm.playNext(md);
-            Toast.makeText(v.getContext(), context.getString(R.string.play_next_toast), Toast.LENGTH_SHORT).show();
+            Toast.makeText(v.getContext(), activity.getString(R.string.play_next_toast), Toast.LENGTH_SHORT).show();
             dismiss(bottomSheetDialog);
         });
 
         view.findViewById(R.id.add_to_queue).setOnClickListener(v -> {
             tm.addToActiveQueue(md);
-            Toast.makeText(v.getContext(), context.getString(R.string.add_to_queue_toast), Toast.LENGTH_SHORT).show();
+            Toast.makeText(v.getContext(), activity.getString(R.string.add_to_queue_toast), Toast.LENGTH_SHORT).show();
             dismiss(bottomSheetDialog);
         });
 
         view.findViewById(R.id.song_info).setOnClickListener(v -> {
-            buildSongInfoDialog(context, md);
+            buildSongInfoDialog(activity, md);
             dismiss(bottomSheetDialog);
         });
+
+        view.findViewById(R.id.go_to_album).setOnClickListener(v ->
+                NavigationUtil.goToAlbum(activity, trackAlbumArt, md.getAlbum(), md.getAlbumId(), md.getAlbumArtUrl()));
+
+        view.findViewById(R.id.go_to_artist).setOnClickListener(v ->
+                NavigationUtil.goToArtist(activity, md.getArtist()));
 
         view.findViewById(R.id.add_to_playlist).setOnClickListener(v -> {
             openAddToPlaylistDialog(fragmentManager, md);
@@ -92,25 +101,18 @@ public class UIHelper {
                 Toast.makeText(context, context.getString(R.string.create_playlist_hint), Toast.LENGTH_SHORT).show();
                 return;
             }
-            if (sheetDialog.isShowing())
-                sheetDialog.dismiss();
+            dismiss(sheetDialog);
         });
 
-        layout.findViewById(R.id.cancel_btn).setOnClickListener(v -> {
-            if (sheetDialog.isShowing())
-                sheetDialog.dismiss();
-        });
+        layout.findViewById(R.id.cancel_btn).setOnClickListener(v -> dismiss(sheetDialog));
         sheetDialog.show();
     }
 
-    private static void buildSongInfoDialog(Context context, final MusicModel musicModel) {
+    public static void buildSongInfoDialog(Context context, final MusicModel musicModel) {
         BottomSheetDialog bottomSheetDialog = new RoundedBottomSheetDialog(context);
         View view = View.inflate(context, R.layout.bottom_sheet_track_info, null);
         bottomSheetDialog.setContentView(view);
-        view.findViewById(R.id.dialog_ok).setOnClickListener(v -> {
-            if (bottomSheetDialog.isShowing())
-                bottomSheetDialog.dismiss();
-        });
+        view.findViewById(R.id.dialog_ok).setOnClickListener(v -> dismiss(bottomSheetDialog));
         // Reference view fields which needs to be filled with data
         MaterialTextView displayTextView = view.findViewById(R.id.dialog_display_name);
         MaterialTextView trackTitle = view.findViewById(R.id.dialog_track_title);
@@ -148,7 +150,7 @@ public class UIHelper {
         textView.setText(artist);
     }
 
-    private static void openAddToPlaylistDialog(FragmentManager fragmentManager, final MusicModel itemToAdd) {
+    public static void openAddToPlaylistDialog(FragmentManager fragmentManager, final MusicModel itemToAdd) {
         AddToPlaylistDialog dialog = AddToPlaylistDialog.getInstance();
         Bundle b = new Bundle();
         b.putSerializable(AddToPlaylistDialog.MUSIC_MODEL_KEY, itemToAdd);
