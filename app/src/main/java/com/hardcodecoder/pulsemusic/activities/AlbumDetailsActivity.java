@@ -1,5 +1,7 @@
 package com.hardcodecoder.pulsemusic.activities;
 
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.ViewStub;
@@ -11,12 +13,18 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.google.android.material.textview.MaterialTextView;
+import com.hardcodecoder.pulsemusic.GlideApp;
 import com.hardcodecoder.pulsemusic.Preferences;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.TaskRunner;
 import com.hardcodecoder.pulsemusic.activities.base.BaseDetailsActivity;
 import com.hardcodecoder.pulsemusic.adapters.LibraryAdapter;
+import com.hardcodecoder.pulsemusic.helper.MediaArtHelper;
 import com.hardcodecoder.pulsemusic.helper.UIHelper;
 import com.hardcodecoder.pulsemusic.interfaces.SimpleItemClickListener;
 import com.hardcodecoder.pulsemusic.loaders.AlbumTracksLoader;
@@ -47,12 +55,12 @@ public class AlbumDetailsActivity extends BaseDetailsActivity {
 
         String mAlbumTitle = getIntent().getStringExtra(KEY_ALBUM_TITLE);
         mAlbumId = getIntent().getLongExtra(KEY_ALBUM_ID, 0);
-        loadImage();
 
         tm = TrackManager.getInstance();
 
         setUpToolbar(findViewById(R.id.details_activity_toolbar), mAlbumTitle == null ? "" : mAlbumTitle);
 
+        loadImage();
         loadItems();
     }
 
@@ -111,9 +119,24 @@ public class AlbumDetailsActivity extends BaseDetailsActivity {
 
         MediaArtImageView sharedImageView = findViewById(R.id.details_activity_art);
         sharedImageView.setTransitionName(transitionName);
-        sharedImageView.loadAlbumArt(artUrl, mAlbumId);
+        GlideApp.with(sharedImageView)
+                .load(artUrl)
+                .listener(new RequestListener<Drawable>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                        sharedImageView.setBackgroundColor(Color.parseColor("1E1E1E"));
+                        sharedImageView.setImageDrawable(MediaArtHelper.getDefaultAlbumArt(sharedImageView.getContext(), mAlbumId));
+                        return true;
+                    }
 
-        supportStartPostponedEnterTransition();
+                    @Override
+                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                        sharedImageView.setImageDrawable(resource);
+                        supportStartPostponedEnterTransition();
+                        return true;
+                    }
+                })
+                .into(sharedImageView);
     }
 
     private void loadItems() {
@@ -141,7 +164,7 @@ public class AlbumDetailsActivity extends BaseDetailsActivity {
                         UIHelper.buildAndShowOptionsMenu(AlbumDetailsActivity.this, getSupportFragmentManager(), mList.get(position));
                     }
                 }, null);
-                LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(this, R.anim.item_enter_slide_up);
+                LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(this, R.anim.item_falls_down_animation);
                 rv.setLayoutAnimation(controller);
                 rv.setAdapter(mAdapter);
             }
