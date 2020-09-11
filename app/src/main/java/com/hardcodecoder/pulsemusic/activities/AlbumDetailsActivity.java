@@ -124,8 +124,9 @@ public class AlbumDetailsActivity extends BaseDetailsActivity {
                 .listener(new RequestListener<Drawable>() {
                     @Override
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                        sharedImageView.setBackgroundColor(Color.parseColor("1E1E1E"));
+                        sharedImageView.setBackgroundColor(Color.parseColor("#1E1E1E"));
                         sharedImageView.setImageDrawable(MediaArtHelper.getDefaultAlbumArt(sharedImageView.getContext(), mAlbumId));
+                        supportStartPostponedEnterTransition();
                         return true;
                     }
 
@@ -161,7 +162,7 @@ public class AlbumDetailsActivity extends BaseDetailsActivity {
 
                     @Override
                     public void onOptionsClick(int position) {
-                        UIHelper.buildAndShowOptionsMenu(AlbumDetailsActivity.this, getSupportFragmentManager(), mList.get(position));
+                        UIHelper.showMenuForAlbumDetails(AlbumDetailsActivity.this, getSupportFragmentManager(), mList.get(position));
                     }
                 }, null);
                 LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(this, R.anim.item_falls_down_animation);

@@ -118,7 +118,7 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onOptionsClick(int position) {
                         if (null != getActivity())
-                            UIHelper.buildAndShowOptionsMenu(getActivity(), getActivity().getSupportFragmentManager(), list.get(position));
+                            UIHelper.showMenuForLibraryTracks(getActivity(), getActivity().getSupportFragmentManager(), list.get(position));
                     }
                 });
                 rv.setAdapter(adapter);
@@ -144,7 +144,7 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onOptionsClick(int position) {
                         if (null != getActivity())
-                            UIHelper.buildAndShowOptionsMenu(getActivity(), getActivity().getSupportFragmentManager(), list.get(position));
+                            UIHelper.showMenuForLibraryTracks(getActivity(), getActivity().getSupportFragmentManager(), list.get(position));
                     }
                 });
                 rv.setAdapter(adapter);
