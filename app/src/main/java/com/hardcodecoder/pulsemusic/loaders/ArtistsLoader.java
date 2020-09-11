@@ -17,22 +17,7 @@ public class ArtistsLoader implements Callable<List<ArtistModel>> {
 
     ArtistsLoader(ContentResolver mContentResolver, SortOrder.ARTIST sortOrder) {
         this.mContentResolver = mContentResolver;
-        switch (sortOrder) {
-            case TITLE_ASC:
-                mSortOrder = MediaStore.Audio.Artists.ARTIST + " COLLATE NOCASE ASC";
-                break;
-            case TITLE_DESC:
-                mSortOrder = MediaStore.Audio.Artists.ARTIST + " COLLATE NOCASE DESC";
-                break;
-            case NUM_OF_TRACKS_ASC:
-                mSortOrder = MediaStore.Audio.Artists.NUMBER_OF_TRACKS + " ASC";
-                break;
-            case NUM_OF_TRACKS_DESC:
-                mSortOrder = MediaStore.Audio.Artists.NUMBER_OF_TRACKS + " DESC";
-                break;
-            default:
-                mSortOrder = null;
-        }
+        mSortOrder = MediaStoreHelper.getSortOrderFor(sortOrder);
     }
 
     @Override
@@ -61,7 +46,6 @@ public class ArtistsLoader implements Callable<List<ArtistModel>> {
                 String artist = cursor.getString(artistColumnIndex);
                 int num_albums = cursor.getInt(albumCountColumnIndex);
                 int num_tracks = cursor.getInt(trackCountColumnIndex);
-
                 artistList.add(new ArtistModel(id, num_albums, num_tracks, artist));
             } while (cursor.moveToNext());
             cursor.close();

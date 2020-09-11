@@ -22,6 +22,8 @@ public class AlbumTracksLoader implements Callable<List<MusicModel>> {
 
     @Override
     public List<MusicModel> call() {
-        return new LibraryLoader(mContentResolver, mSortOrder, MediaStore.Audio.Media.ALBUM_ID + " = " + mAlbumId).call();
+        String selection = MediaStore.Audio.Media.ALBUM_ID + "=?";
+        String[] selectionArgs = new String[]{String.valueOf(mAlbumId)};
+        return new LibraryLoader(mContentResolver, mSortOrder, selection, selectionArgs).call();
     }
 }

@@ -4,7 +4,6 @@ import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.database.Cursor;
 import android.net.Uri;
-import android.provider.BaseColumns;
 import android.provider.MediaStore;
 
 import androidx.annotation.Nullable;
@@ -27,35 +26,14 @@ public class AlbumsLoader implements Callable<List<AlbumModel>> {
 
     AlbumsLoader(ContentResolver mContentResolver, SortOrder.ALBUMS sortOrder, @Nullable String selection) {
         this.mContentResolver = mContentResolver;
-        switch (sortOrder) {
-            case TITLE_ASC:
-                mSortOrder = MediaStore.Audio.Albums.ALBUM + " COLLATE NOCASE ASC";
-                break;
-            case TITLE_DESC:
-                mSortOrder = MediaStore.Audio.Albums.ALBUM + " COLLATE NOCASE DESC";
-                break;
-            case ALBUM_DATE_FIRST_YEAR_ASC:
-                mSortOrder = MediaStore.Audio.Albums.FIRST_YEAR + " ASC";
-                break;
-            case ALBUM_DATE_FIRST_YEAR_DESC:
-                mSortOrder = MediaStore.Audio.Albums.FIRST_YEAR + " DESC";
-                break;
-            case ALBUM_DATE_LAST_YEAR_ASC:
-                mSortOrder = MediaStore.Audio.Albums.LAST_YEAR + " ASC";
-                break;
-            case ALBUM_DATE_LAST_YEAR_DESC:
-                mSortOrder = MediaStore.Audio.Albums.LAST_YEAR + " DESC";
-                break;
-            default:
-                mSortOrder = null;
-        }
+        mSortOrder = MediaStoreHelper.getSortOrderFor(sortOrder);
         this.mSelection = selection;
     }
 
     @Override
     public List<AlbumModel> call() {
         List<AlbumModel> albumsList = new ArrayList<>();
-        String[] col = {BaseColumns._ID,
+        String[] col = {MediaStore.Audio.Albums._ID,
                 MediaStore.Audio.Albums.ALBUM,
                 MediaStore.Audio.Albums.ALBUM_ID,
                 MediaStore.Audio.Albums.NUMBER_OF_SONGS};
@@ -67,7 +45,7 @@ public class AlbumsLoader implements Callable<List<AlbumModel>> {
                 mSortOrder);
 
         if (cursor != null && cursor.moveToFirst()) {
-            int idColumnIndex = cursor.getColumnIndexOrThrow(BaseColumns._ID);
+            int idColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Albums._ID);
             int albumColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Albums.ALBUM);
             int albumIdColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Albums.ALBUM_ID);
             int songCountColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Albums.NUMBER_OF_SONGS);

@@ -20,46 +20,17 @@ public class LibraryLoader implements Callable<List<MusicModel>> {
     private ContentResolver contentResolver;
     private String mSortOrder;
     private String mSelectionString;
+    private String[] mSelectionArgs;
 
-    // MediaStore.Audio.Media.DURATION existed well before APi 29
-    // Suppress lint
-    @SuppressLint("InlinedApi")
     LibraryLoader(ContentResolver contentResolver, SortOrder sortOrder) {
-        this(contentResolver, sortOrder, null);
+        this(contentResolver, sortOrder, null, null);
     }
 
-    @SuppressLint("InlinedApi")
-    LibraryLoader(ContentResolver contentResolver, SortOrder sortOrder, @Nullable String selectionString) {
+    LibraryLoader(ContentResolver contentResolver, SortOrder sortOrder, @Nullable String selectionString, @Nullable String[] selectionArgs) {
         this.contentResolver = contentResolver;
-        switch (sortOrder) {
-            case TITLE_ASC:
-                mSortOrder = MediaStore.Audio.Media.TITLE + " COLLATE NOCASE ASC";
-                break;
-            case TITLE_DESC:
-                mSortOrder = MediaStore.Audio.Media.TITLE + " COLLATE NOCASE DESC";
-                break;
-            case DURATION_ASC:
-                mSortOrder = MediaStore.Audio.Media.DURATION + " ASC";
-                break;
-            case DURATION_DESC:
-                mSortOrder = MediaStore.Audio.Media.DURATION + " DESC";
-                break;
-            case DATE_MODIFIED_ASC:
-                mSortOrder = MediaStore.Audio.Media.DATE_MODIFIED + " ASC";
-                break;
-            case DATE_MODIFIED_DESC:
-                mSortOrder = MediaStore.Audio.Media.DATE_MODIFIED + " DESC";
-                break;
-            case TRACK_NUMBER_ASC:
-                mSortOrder = MediaStore.Audio.Media.TRACK + " ASC";
-                break;
-            case TRACK_NUMBER_DESC:
-                mSortOrder = MediaStore.Audio.Media.TRACK + " DESC";
-                break;
-            default:
-                mSortOrder = null;
-        }
+        mSortOrder = MediaStoreHelper.getSortOrderFor(sortOrder);
         this.mSelectionString = selectionString;
+        this.mSelectionArgs = selectionArgs;
     }
 
     @SuppressLint("InlinedApi")
@@ -83,7 +54,7 @@ public class LibraryLoader implements Callable<List<MusicModel>> {
                 uri,
                 cursor_cols,
                 mSelectionString,
-                null,
+                mSelectionArgs,
                 mSortOrder);
 
         if (cursor != null && cursor.moveToFirst()) {
