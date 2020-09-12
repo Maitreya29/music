@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="ThemeLight" parent="BaseThemeLight">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="navigationBarColor">@color/lightColorBackground</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:navigationBarColor">?attr/navigationBarColor</item>
+    </style>
+
+    <style name="ThemeDark" parent="BaseThemeDark">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
+    </style>
+</resources>
