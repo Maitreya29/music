@@ -17,6 +17,8 @@ import com.hardcodecoder.pulsemusic.themes.PresetColors;
 import com.hardcodecoder.pulsemusic.themes.ThemeManagerUtils;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 
+import java.util.Objects;
+
 public class AccentsChooserDialogFragment extends RoundedBottomSheetDialogFragment {
 
     public static final String TAG = "AccentsChooser";
@@ -56,12 +58,10 @@ public class AccentsChooserDialogFragment extends RoundedBottomSheetDialogFragme
         }
         view.findViewById(R.id.choose_accents_cancel_btn).setOnClickListener(v -> dismiss());
 
-        /*
         view.findViewById(R.id.choose_accents_custom_btn).setOnClickListener(v -> {
             CustomAccentChooserDialogFragment dialogFragment = CustomAccentChooserDialogFragment.getInstance();
             dialogFragment.show(Objects.requireNonNull(getActivity()).getSupportFragmentManager(), CustomAccentChooserDialogFragment.TAG);
             dismiss();
         });
-        */
     }
 }

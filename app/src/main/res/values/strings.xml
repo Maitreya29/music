@@ -270,6 +270,15 @@
     <string name="sunkist">Sunkist</string>
     <string name="blue_pink">Blue pink</string>
 
+    <!-- Custom accents dialog -->
+    <string name="hex_color_hint">Hex color</string>
+    <string name="hex_color_error">Invalid color</string>
+    <string name="r_channel_label">R</string>
+    <string name="g_channel_label">G</string>
+    <string name="b_channel_label">B</string>
+    <string name="apply">Apply</string>
+    <string name="presets">Presets</string>
+
     <!-- App shortcuts -->
     <string name="shortcut_shuffle_label">Shuffle</string>
     <string name="shortcut_shuffle_label_long">Shuffled</string>
@@ -279,6 +288,4 @@
 
     <string name="shortcut_suggested_label">For you</string>
     <string name="shortcut_suggested_label_long">For you</string>
-    <string name="apply">Apply</string>
-    <string name="presets">Presets</string>
 </resources>
