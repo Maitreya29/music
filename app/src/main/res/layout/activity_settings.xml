@@ -8,12 +8,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:background="?windowBackgroundColor"
+        android:background="?attr/windowBackgroundColor"
         app:liftOnScroll="true">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/material_toolbar"
-            style="@style/Toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:theme="@style/Toolbar"
             app:layout_scrollFlags="noScroll"
             app:navigationIcon="@drawable/ic_keyboard_backspace"
             app:title="@string/settings"

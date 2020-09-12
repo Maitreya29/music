@@ -84,7 +84,7 @@
         android:gravity="center"
         android:maxLines="2"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
-        android:textColor="?secondaryTextColor"
+        android:textColor="?android:attr/textColorSecondary"
         app:layout_constraintTop_toBottomOf="@+id/edge_nps_title"
         tools:text="Artist name" />
 
@@ -118,12 +118,12 @@
         android:background="@drawable/bck_play_pause_btn"
         android:padding="12dp"
         android:stateListAnimator="@animator/focused_elevation_up"
-        android:tint="?attr/colorOnPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/edge_nps_next_btn"
         app:layout_constraintStart_toEndOf="@+id/edge_nps_prev_btn"
         app:layout_constraintTop_toBottomOf="@id/edge_nps_seek_bar"
         app:layout_constraintVertical_bias="0.4"
+        app:tint="?attr/colorOnPrimary"
         tools:ignore="contentDescription"
         tools:src="@drawable/pause_to_play" />
 

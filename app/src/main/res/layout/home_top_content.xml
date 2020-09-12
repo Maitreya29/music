@@ -22,7 +22,7 @@
         android:layout_marginTop="8dp"
         android:text="@string/recent"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
-        android:textColor="?secondaryTextColor"
+        android:textColor="?android:attr/textColorSecondary"
         app:layout_constraintEnd_toEndOf="@id/ic_recent"
         app:layout_constraintStart_toStartOf="@id/ic_recent"
         app:layout_constraintTop_toBottomOf="@id/ic_recent" />
@@ -43,7 +43,7 @@
         android:layout_marginTop="8dp"
         android:text="@string/favorite_playlist"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
-        android:textColor="?secondaryTextColor"
+        android:textColor="?android:attr/textColorSecondary"
         app:layout_constraintEnd_toEndOf="@id/ic_favorite"
         app:layout_constraintStart_toStartOf="@id/ic_favorite"
         app:layout_constraintTop_toBottomOf="@id/ic_favorite" />
@@ -64,7 +64,7 @@
         android:layout_marginTop="8dp"
         android:text="@string/select_track"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
-        android:textColor="?secondaryTextColor"
+        android:textColor="?android:attr/textColorSecondary"
         app:layout_constraintEnd_toEndOf="@id/ic_folder"
         app:layout_constraintStart_toStartOf="@id/ic_folder"
         app:layout_constraintTop_toBottomOf="@id/ic_folder" />

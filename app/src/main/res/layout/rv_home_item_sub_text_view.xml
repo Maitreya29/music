@@ -11,5 +11,5 @@
     android:gravity="center_horizontal"
     android:singleLine="true"
     android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
-    android:textColor="?attr/secondaryTextColor"
+    android:textColor="?android:attr/textColorSecondary"
     tools:text="@tools:sample/full_names" />

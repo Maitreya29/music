@@ -35,13 +35,11 @@
         style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?windowBackgroundColor"
+        android:background="?attr/windowBackgroundColor"
         android:elevation="0dp"
         app:elevation="0dp"
         app:itemHorizontalTranslationEnabled="true"
         app:itemIconSize="20dp"
-        app:itemIconTint="@drawable/bottom_navigation_selector"
-        app:itemTextColor="@drawable/bottom_navigation_selector"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/bottom_navigation_items" />
 

@@ -9,5 +9,5 @@
     android:gravity="bottom"
     android:maxLines="1"
     android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-    android:textColor="?secondaryTextColor"
+    android:textColor="?android:attr/textColorSecondary"
     tools:text="@tools:sample/lorem/random" />

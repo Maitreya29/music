@@ -27,8 +27,7 @@
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="android:statusBarColor">@color/md_grey_500</item>
-        <item name="navigationBarColor">@color/md_grey_500</item>
-        <item name="android:navigationBarColor">?attr/navigationBarColor</item>
+        <item name="android:navigationBarColor">@color/md_grey_500</item>
         <item name="android:windowAnimationStyle">@style/WindowTransitions</item>
         <item name="android:windowContentTransitions">true</item>
         <item name="android:textViewStyle">@style/PulseTextViewStyle</item>
@@ -39,8 +38,7 @@
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="navigationBarColor">?attr/windowBackgroundColor</item>
-        <item name="android:navigationBarColor">?attr/navigationBarColor</item>
+        <item name="android:navigationBarColor">?android:attr/windowBackground</item>
         <item name="android:windowAnimationStyle">@style/WindowTransitions</item>
         <item name="android:windowContentTransitions">true</item>
         <item name="android:textViewStyle">@style/PulseTextViewStyle</item>
@@ -52,14 +50,7 @@
         <item name="primaryColor">@color/exodus_fruit</item>
         <item name="colorOnPrimary">@color/lightColorOnPrimary</item>
         <item name="windowBackgroundColor">@color/lightColorBackground</item>
-        <item name="surfaceColor">@color/lightColorSurface</item>
-        <item name="colorOnSurface">@color/lightColorOnSurface</item>
-        <item name="primaryTextColor">@color/lightColorPrimaryText</item>
-        <item name="secondaryTextColor">@color/lightColorSecondaryText</item>
-        <item name="disabledTextColor">@color/lightColorDisabledText</item>
-        <item name="unFocusedColor">@color/lightColorUnFocused</item>
         <item name="overlayColor">@color/lightColorOverlay</item>
-        <item name="isLightMode">true</item>
         <item name="toolbarBackground">@drawable/toolbar_background_light</item>
     </style>
 
@@ -68,30 +59,19 @@
         <item name="primaryColor">@color/exodus_fruit_desaturated</item>
         <item name="colorOnPrimary">@color/darkColorOnPrimary</item>
         <item name="windowBackgroundColor">@color/darkColorBackground</item>
-        <item name="surfaceColor">@color/darkColorSurface</item>
-        <item name="colorOnSurface">@color/darkColorOnSurface</item>
-        <item name="primaryTextColor">@color/darkColorPrimaryText</item>
-        <item name="secondaryTextColor">@color/darkColorSecondaryText</item>
-        <item name="disabledTextColor">@color/darkColorDisabledText</item>
-        <item name="unFocusedColor">@color/darkColorUnFocused</item>
         <item name="overlayColor">@color/darkColorOverlay</item>
-        <item name="isLightMode">false</item>
         <item name="toolbarBackground">@drawable/toolbar_background_dark</item>
     </style>
 
     <style name="PulseSignatureTheme" parent="PulseDarkTheme">
         <item name="android:windowBackground">@color/signatureColorBackground</item>
         <item name="windowBackgroundColor">@color/signatureColorBackground</item>
-        <item name="surfaceColor">@color/signatureColorSurface</item>
-        <item name="android:navigationBarColor">@color/signatureColorBackground</item>
     </style>
 
     <style name="PulseDarkTheme.Black">
         <item name="android:windowBackground">@color/blackColorBackground</item>
         <item name="colorOnPrimary">@color/blackColorOnPrimary</item>
         <item name="windowBackgroundColor">@color/blackColorBackground</item>
-        <item name="surfaceColor">@color/blackColorSurface</item>
-        <item name="android:navigationBarColor">@color/blackColorBackground</item>
         <item name="overlayColor">@color/blackColorOverlay</item>
     </style>
 </resources>

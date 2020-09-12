@@ -12,7 +12,7 @@
         style="@style/ButtonStyle24"
         android:contentDescription="@string/iv_content_desc"
         android:src="@drawable/ic_playlist"
-        app:tint="?unFocusedColor" />
+        app:tint="?attr/colorControlNormal" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/playlist_title"
@@ -28,6 +28,6 @@
         style="@style/ButtonStyle24"
         android:layout_marginEnd="16dp"
         android:contentDescription="@string/iv_btn_action_description"
-        android:src="@drawable/ic_round_edit"
+        android:src="@drawable/ic_edit"
         android:visibility="visible" />
 </LinearLayout>

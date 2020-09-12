@@ -22,8 +22,8 @@
         android:textStyle="normal"
         app:settingItemDesaturatedColorsInDarkMode="false"
         app:settingItemIcon="@drawable/ic_now_playing_style"
-        app:settingItemIconBackgroundColor="?windowBackgroundColor"
-        app:settingItemIconColor="?unFocusedColor"
+        app:settingItemIconBackgroundColor="?attr/windowBackgroundColor"
+        app:settingItemIconColor="?attr/colorControlNormal"
         app:settingItemText="@string/now_playing_screen_style_desc"
         app:settingItemTitle="@string/now_playing_screen_style_title" />
 
@@ -36,8 +36,8 @@
         android:textStyle="normal"
         app:settingItemDesaturatedColorsInDarkMode="false"
         app:settingItemIcon="@drawable/ic_rounded_corner"
-        app:settingItemIconBackgroundColor="?windowBackgroundColor"
-        app:settingItemIconColor="?unFocusedColor"
+        app:settingItemIconBackgroundColor="?attr/windowBackgroundColor"
+        app:settingItemIconColor="?attr/colorControlNormal"
         app:settingItemText="@string/now_playing_cover_corner_radius_desc"
         app:settingItemTitle="@string/now_playing_cover_corner_radius_title" />
 </LinearLayout>

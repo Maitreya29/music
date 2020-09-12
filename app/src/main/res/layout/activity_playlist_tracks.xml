@@ -10,7 +10,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?windowBackgroundColor"
+        android:background="?attr/windowBackgroundColor"
         app:liftOnScroll="true">
 
         <include layout="@layout/material_toolbar" />
@@ -63,6 +63,6 @@
         android:gravity="center"
         android:paddingBottom="32dp"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-        android:textColor="?secondaryTextColor"
+        android:textColor="?android:attr/textColorSecondary"
         tools:text="@string/tracks_not_found" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -10,8 +10,8 @@
     <style name="ActivityThemeBlack" parent="PulseDarkTheme.Black" />
 
     <style name="ToolbarPopupTheme">
-        <item name="android:popupBackground">?surfaceColor</item>
-        <item name="android:tint">?unFocusedColor</item>
+        <item name="android:popupBackground">?attr/colorSurface</item>
+        <item name="android:tint">?attr/colorControlNormal</item>
     </style>
 
     <style name="ButtonStyleBase">
@@ -22,6 +22,7 @@
         <item name="android:focusable">true</item>
         <item name="android:clickable">true</item>
         <item name="android:contentDescription">@string/icon_desc</item>
+        <item name="tint">?attr/colorControlNormal</item>
     </style>
 
     <style name="ButtonStyle48" parent="ButtonStyleBase" />
@@ -46,7 +47,7 @@
         <item name="android:maxLines">1</item>
         <item name="android:background">?selectableItemBackground</item>
         <item name="android:gravity">center_vertical</item>
-        <item name="drawableTint">?attr/unFocusedColor</item>
+        <item name="drawableTint">?attr/colorControlNormal</item>
         <item name="android:focusable">true</item>
         <item name="android:clickable">true</item>
     </style>
@@ -55,12 +56,25 @@
         <item name="android:background">@drawable/bottom_sheet_rounded_corners</item>
     </style>
 
-    <style name="BaseBottomSheetDialog" parent="@style/Theme.MaterialComponents.BottomSheetDialog">
+    <style name="BaseBottomSheet" parent="@style/Theme.MaterialComponents.BottomSheetDialog">
         <item name="android:windowIsFloating">false</item>
         <item name="bottomSheetStyle">@style/BottomSheet</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:navigationBarColor">?navigationBarColor</item>
+        <item name="android:navigationBarColor">?attr/navigationBarColor</item>
+        <item name="android:fontFamily">@font/manrope</item>
     </style>
+
+    <style name="BaseBottomSheetLight" parent="@style/Theme.MaterialComponents.Light.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="bottomSheetStyle">@style/BottomSheet</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">?attr/navigationBarColor</item>
+        <item name="android:fontFamily">@font/manrope</item>
+    </style>
+
+    <style name="RoundedBottomSheetLight" parent="@style/BaseBottomSheetLight" />
+
+    <style name="RoundedBottomSheet" parent="@style/BaseBottomSheet" />
 
     <style name="MaterialOutlineButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
         <item name="android:textSize">14sp</item>
@@ -68,7 +82,7 @@
         <item name="android:textAllCaps">true</item>
         <item name="android:paddingTop">@dimen/button_padding_vertical</item>
         <item name="android:paddingBottom">@dimen/button_padding_vertical</item>
-        <item name="backgroundTint">?attr/windowBackgroundColor</item>
+        <item name="backgroundTint">?android:attr/windowBackground</item>
         <item name="strokeColor">?attr/primaryColor</item>
         <item name="iconSize">20dp</item>
         <item name="iconPadding">12dp</item>
@@ -89,16 +103,13 @@
         <item name="android:textAllCaps">true</item>
         <item name="android:paddingTop">@dimen/button_padding_vertical</item>
         <item name="android:paddingBottom">@dimen/button_padding_vertical</item>
-        <item name="backgroundTint">?attr/primaryColor</item>
         <item name="iconSize">20dp</item>
         <item name="iconPadding">12dp</item>
         <item name="iconTint">?attr/colorOnPrimary</item>
     </style>
 
-    <style name="Toolbar" parent="Widget.MaterialComponents.Toolbar">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">48dp</item>
-        <item name="layout_collapseMode">pin</item>
+    <style name="Toolbar" parent="ThemeOverlay.MaterialComponents.Toolbar.Surface">
+        <item name="tint">?attr/colorControlNormal</item>
     </style>
 
     <style name="ToolbarTextAppearanceNormal">
@@ -112,4 +123,3 @@
         <item name="android:textSize">16sp</item>
     </style>
 </resources>
-
