@@ -10,17 +10,12 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.hardcodecoder.pulsemusic.BDS;
-import com.hardcodecoder.pulsemusic.PMS;
 import com.hardcodecoder.pulsemusic.R;
-import com.hardcodecoder.pulsemusic.dialog.AccentsChooserDialogFragment;
 import com.hardcodecoder.pulsemusic.dialog.BluetoothActionChooserBottomSheetDialogFragment;
-import com.hardcodecoder.pulsemusic.dialog.ThemeChooserBottomSheetDialogFragment;
 import com.hardcodecoder.pulsemusic.fragments.settings.base.SettingsBaseFragment;
-import com.hardcodecoder.pulsemusic.themes.ThemeManagerUtils;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 import com.hardcodecoder.pulsemusic.views.SettingsToggleableItem;
 
@@ -69,7 +64,7 @@ public class SettingsAudioFragment extends SettingsBaseFragment {
             AppSettings.saveBluetoothDeviceDetection(buttonView.getContext(), isChecked);
             if (isChecked){
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    mContext.startForegroundService(new Intent(mContext.getApplicationContext(), BDS.class));
+                    mContext.startForegroundService(new Intent(mContext, BDS.class));
                 }
             }
             else{

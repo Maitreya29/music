@@ -39,7 +39,7 @@ public class BDS extends IntentService {
     @RequiresApi(Build.VERSION_CODES.O)
     private void createNotificationChannel() {
         NotificationManager mNotificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
-        ;
+
         if (mNotificationManager.getNotificationChannel(CHANNEL_ID) == null) {
             NotificationChannel notificationChannel = new NotificationChannel(
                     CHANNEL_ID,
