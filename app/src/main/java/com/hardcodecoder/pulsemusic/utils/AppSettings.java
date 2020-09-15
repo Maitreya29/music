@@ -45,73 +45,75 @@ public class AppSettings {
     }
 
     public static void enableDarkMode(@NonNull Context context, boolean state) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.UI_THEME_DARK_KEY, Context.MODE_PRIVATE).edit();
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.PULSE_THEMES_PREFS, Context.MODE_PRIVATE).edit();
         editor.putBoolean(Preferences.UI_THEME_DARK_KEY, state);
         editor.apply();
     }
 
     public static void enableAutoTheme(@NonNull Context context, boolean state) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.UI_MODE_AUTO_KEY, Context.MODE_PRIVATE).edit();
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.PULSE_THEMES_PREFS, Context.MODE_PRIVATE).edit();
         editor.putBoolean(Preferences.UI_MODE_AUTO_KEY, state);
         editor.apply();
     }
 
     public static boolean isDarkModeEnabled(@NonNull Context context) {
-        return context.getSharedPreferences(Preferences.UI_THEME_DARK_KEY, Context.MODE_PRIVATE).getBoolean(Preferences.UI_THEME_DARK_KEY, false);
+        return context.getSharedPreferences(Preferences.PULSE_THEMES_PREFS, Context.MODE_PRIVATE)
+                .getBoolean(Preferences.UI_THEME_DARK_KEY, false);
     }
 
     public static boolean isAutoThemeEnabled(@NonNull Context context) {
-        return context.getSharedPreferences(Preferences.UI_MODE_AUTO_KEY, Context.MODE_PRIVATE).getBoolean(Preferences.UI_MODE_AUTO_KEY, false);
+        return context.getSharedPreferences(Preferences.PULSE_THEMES_PREFS, Context.MODE_PRIVATE)
+                .getBoolean(Preferences.UI_MODE_AUTO_KEY, false);
     }
 
     public static void saveSelectedDarkTheme(@NonNull Context context, int id) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.DARK_THEME_CATEGORY_KEY, Context.MODE_PRIVATE).edit();
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.PULSE_THEMES_PREFS, Context.MODE_PRIVATE).edit();
         editor.putInt(Preferences.DARK_THEME_CATEGORY_KEY, id);
         editor.apply();
     }
 
     public static int getSelectedDarkTheme(@NonNull Context context) {
-        return context.getSharedPreferences(Preferences.DARK_THEME_CATEGORY_KEY, Context.MODE_PRIVATE)
+        return context.getSharedPreferences(Preferences.PULSE_THEMES_PREFS, Context.MODE_PRIVATE)
                 .getInt(Preferences.DARK_THEME_CATEGORY_KEY, Preferences.DARK_THEME_GRAY);
     }
 
     public static void saveSelectedAccentId(@NonNull Context context, int accentId) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.ACCENTS_COLOR_KEY, Context.MODE_PRIVATE).edit();
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.PULSE_THEMES_PREFS, Context.MODE_PRIVATE).edit();
         editor.putInt(Preferences.ACCENTS_COLOR_PRESET_KEY, accentId);
-        editor.putBoolean(Preferences.ACCENTS_COLOR_MODE_KEY, true);
+        editor.putBoolean(Preferences.ACCENTS_MODE_USING_PRESET_KEY, true);
         editor.apply();
     }
 
     public static int getSelectedAccentId(@NonNull Context context) {
-        return context.getSharedPreferences(Preferences.ACCENTS_COLOR_KEY, Context.MODE_PRIVATE)
+        return context.getSharedPreferences(Preferences.PULSE_THEMES_PREFS, Context.MODE_PRIVATE)
                 .getInt(Preferences.ACCENTS_COLOR_PRESET_KEY, Preferences.ACCENT_EXODUS_FRUIT);
     }
 
     public static void saveCustomAccentColor(@NonNull Context context, @ColorInt int color) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.ACCENTS_COLOR_KEY, Context.MODE_PRIVATE).edit();
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.PULSE_THEMES_PREFS, Context.MODE_PRIVATE).edit();
         editor.putInt(Preferences.ACCENTS_COLOR_CUSTOM_KEY, color);
-        editor.putBoolean(Preferences.ACCENTS_COLOR_MODE_KEY, false);
+        editor.putBoolean(Preferences.ACCENTS_MODE_USING_PRESET_KEY, false);
         editor.apply();
     }
 
     public static int getCustomAccentColor(@NonNull Context context) {
-        return context.getSharedPreferences(Preferences.ACCENTS_COLOR_KEY, Context.MODE_PRIVATE)
+        return context.getSharedPreferences(Preferences.PULSE_THEMES_PREFS, Context.MODE_PRIVATE)
                 .getInt(Preferences.ACCENTS_COLOR_CUSTOM_KEY, PresetColors.EXODUS_FRUIT);
     }
 
     public static boolean getPresetAccentModeEnabled(@NonNull Context context) {
-        return context.getSharedPreferences(Preferences.ACCENTS_COLOR_KEY, Context.MODE_PRIVATE)
-                .getBoolean(Preferences.ACCENTS_COLOR_MODE_KEY, true /*Use preset colors by default*/);
+        return context.getSharedPreferences(Preferences.PULSE_THEMES_PREFS, Context.MODE_PRIVATE)
+                .getBoolean(Preferences.ACCENTS_MODE_USING_PRESET_KEY, true /*Use preset colors by default*/);
     }
 
     public static void saveAccentDesaturatedColor(@NonNull Context context, boolean enabled) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.ACCENTS_COLOR_DESATURATED_KEY, Context.MODE_PRIVATE).edit();
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.PULSE_THEMES_PREFS, Context.MODE_PRIVATE).edit();
         editor.putBoolean(Preferences.ACCENTS_COLOR_DESATURATED_KEY, enabled);
         editor.apply();
     }
 
     public static boolean getAccentDesaturatedColor(@NonNull Context context) {
-        return context.getSharedPreferences(Preferences.ACCENTS_COLOR_DESATURATED_KEY, Context.MODE_PRIVATE)
+        return context.getSharedPreferences(Preferences.PULSE_THEMES_PREFS, Context.MODE_PRIVATE)
                 .getBoolean(Preferences.ACCENTS_COLOR_DESATURATED_KEY, false);
     }
 

@@ -37,15 +37,22 @@ public class Preferences {
     public static final int SPAN_COUNT_PORTRAIT_DEF_VALUE = 2;
     public static final int SPAN_COUNT_LANDSCAPE_DEF_VALUE = 4;
 
-    public static final String UI_MODE_AUTO_KEY = "AutoTheme";
-    public static final String UI_THEME_DARK_KEY = "DarkMode";
+    public static final String PULSE_THEMES_PREFS = "PulseThemes";
+
+    public static final String UI_MODE_AUTO_KEY = "AutoThemeEnabled";
+    public static final String UI_THEME_DARK_KEY = "DarkModeEnabled";
 
     public static final short LIGHT_THEME = 515;
 
-    public static final String DARK_THEME_CATEGORY_KEY = "Dark_themes_key";
+    public static final String DARK_THEME_CATEGORY_KEY = "DarkThemeId";
     public static final short DARK_THEME_GRAY = 616;
     public static final short DARK_THEME_KINDA = 626;
     public static final short DARK_THEME_PURE_BLACK = 636;
+
+    public static final String ACCENTS_MODE_USING_PRESET_KEY = "UsingPresetColors";
+    public static final String ACCENTS_COLOR_PRESET_KEY = "AccentsColorPresetId";
+    public static final String ACCENTS_COLOR_CUSTOM_KEY = "AccentsColorCustom";
+    public static final String ACCENTS_COLOR_DESATURATED_KEY = "AccentsColorDesaturated";
 
     public static final short ACCENT_EXODUS_FRUIT = 700;
     public static final short ACCENT_ELECTRON_BLUE = 701;
@@ -69,10 +76,4 @@ public class Preferences {
     public static final String NOW_PLAYING_ALBUM_COVER_RADIUS_BR = "RadiusBottomRight";
     public static final int NOW_PLAYING_ALBUM_COVER_RADIUS_DEF = 16;
 
-
-    public static final String ACCENTS_COLOR_KEY = "AccentsColor";
-    public static final String ACCENTS_COLOR_MODE_KEY = "AccentsColorMode";
-    public static final String ACCENTS_COLOR_PRESET_KEY = "AccentsColorPreset";
-    public static final String ACCENTS_COLOR_CUSTOM_KEY = "AccentsColorCustom";
-    public static final String ACCENTS_COLOR_DESATURATED_KEY = "AccentsColorDesaturated";
 }
