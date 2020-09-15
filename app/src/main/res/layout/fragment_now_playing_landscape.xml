@@ -134,7 +134,7 @@
         android:layout_marginStart="18dp"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="18dp"
-        android:background="@drawable/bck_play_pause_btn"
+        android:background="@drawable/ic_app_shortcut_background"
         android:padding="12dp"
         android:stateListAnimator="@animator/focused_elevation_up"
         android:tint="?attr/colorOnPrimary"
@@ -159,12 +159,12 @@
     <ImageButton
         android:id="@+id/fragment_nps_land_favourite_btn"
         style="@style/ButtonStyle24"
-        android:src="@drawable/selector_favorites_button"
         app:layout_constraintBottom_toBottomOf="@id/fragment_nps_land_play_pause_btn"
         app:layout_constraintEnd_toEndOf="@id/fragment_nps_land_slider"
         app:layout_constraintStart_toEndOf="@+id/fragment_nps_land_next_btn"
         app:layout_constraintTop_toTopOf="@id/fragment_nps_land_play_pause_btn"
-        tools:ignore="contentDescription" />
+        tools:ignore="contentDescription"
+        tools:src="@drawable/ic_favorite_border" />
 
     <ImageView
         android:id="@+id/fragment_nps_land_close_btn"

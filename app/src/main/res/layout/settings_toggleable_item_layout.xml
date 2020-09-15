@@ -36,7 +36,7 @@
         android:textColor="?android:attr/textColorSecondary"
         tools:text="@tools:sample/lorem/random" />
 
-    <com.google.android.material.switchmaterial.SwitchMaterial
+    <com.hardcodecoder.pulsemusic.views.AccentColorSwitch
         android:id="@+id/setting_toggleable_item_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

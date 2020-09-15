@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="ic_launcher_background">@color/exodus_fruit</color>
+    <color name="ic_launcher_background">#6c5ce7</color>
 
     <!-- ********************************************* -->
     <!-- *********** COLORS FOR LIGHT MODE *********** -->
@@ -40,12 +40,11 @@
     <color name="signatureColorSurface">#121F1B24</color>
 
 
-
     <!-- ******************************************************** -->
     <!-- *************** COLORS FOR BLACK ******************** -->
 
     <color name="blackColorBackground">#000000</color>
-    <color name="blackColorOnPrimary">#202020</color>
+    <color name="blackColorOnPrimary">@color/md_grey_900</color>
     <color name="blackColorSurface">@color/md_grey_1000</color>
     <color name="blackColorOverlay">#1AFFFFFF</color>
 </resources>

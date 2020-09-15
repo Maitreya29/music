@@ -11,13 +11,12 @@
     android:paddingEnd="32dp"
     android:paddingBottom="16dp">
 
-    <com.google.android.material.textview.MaterialTextView
+    <com.hardcodecoder.pulsemusic.views.AccentColorTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:text="@string/donation_category_head"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
-        android:textColor="?primaryColor" />
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Overline" />
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"

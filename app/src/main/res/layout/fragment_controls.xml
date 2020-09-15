@@ -36,7 +36,6 @@
         android:id="@+id/cf_skip_prev_btn"
         style="@style/ButtonStyle24"
         android:src="@drawable/ic_round_skip_previous"
-        android:tint="?attr/colorControlNormal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/cf_play_pause_btn"
         app:layout_constraintTop_toTopOf="parent"
@@ -45,7 +44,6 @@
     <ImageView
         android:id="@+id/cf_play_pause_btn"
         style="@style/ButtonStyle24"
-        android:tint="?attr/colorControlNormal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/cf_skip_next_btn"
         app:layout_constraintTop_toTopOf="parent"
@@ -56,10 +54,8 @@
         android:id="@+id/cf_skip_next_btn"
         style="@style/ButtonStyle24"
         android:src="@drawable/ic_round_skip_next"
-        android:tint="?attr/colorControlNormal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="ContentDescription" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

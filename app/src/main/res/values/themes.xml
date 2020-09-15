@@ -53,7 +53,6 @@
 
     <style name="PulseLightTheme" parent="ThemeLight">
         <item name="android:windowBackground">@color/lightColorBackground</item>
-        <item name="primaryColor">@color/exodus_fruit</item>
         <item name="colorOnPrimary">@color/lightColorOnPrimary</item>
         <item name="windowBackgroundColor">@color/lightColorBackground</item>
         <item name="overlayColor">@color/lightColorOverlay</item>
@@ -62,7 +61,6 @@
 
     <style name="PulseDarkTheme" parent="ThemeDark">
         <item name="android:windowBackground">@color/darkColorBackground</item>
-        <item name="primaryColor">@color/exodus_fruit_desaturated</item>
         <item name="colorOnPrimary">@color/darkColorOnPrimary</item>
         <item name="windowBackgroundColor">@color/darkColorBackground</item>
         <item name="overlayColor">@color/darkColorOverlay</item>

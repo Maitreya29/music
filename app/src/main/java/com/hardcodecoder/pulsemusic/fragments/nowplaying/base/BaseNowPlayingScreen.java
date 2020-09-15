@@ -5,6 +5,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.res.ColorStateList;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.MediaMetadata;
@@ -27,6 +28,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.GenericTransitionOptions;
+import com.google.android.material.color.MaterialColors;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.shape.CornerFamily;
 import com.google.android.material.slider.Slider;
@@ -39,6 +41,7 @@ import com.hardcodecoder.pulsemusic.helper.SwipeGestureListener;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.singleton.TrackManager;
 import com.hardcodecoder.pulsemusic.storage.AppFileManager;
+import com.hardcodecoder.pulsemusic.themes.ThemeColors;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 
 public abstract class BaseNowPlayingScreen extends Fragment implements MediaProgressUpdateHelper.Callback {
@@ -189,6 +192,11 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
         updateFavoriteItem();
     }
 
+    protected void setDefaultTintToPlayBtn(ImageView playPauseBtn) {
+        playPauseBtn.setBackgroundTintList(ColorStateList.valueOf(ThemeColors.getAccentColorForCurrentTheme()));
+        playPauseBtn.setImageTintList(ColorStateList.valueOf(MaterialColors.getColor(playPauseBtn, R.attr.colorOnPrimary)));
+    }
+
     protected void togglePlayPause() {
         if (null == mController.getPlaybackState()) return;
         PlaybackState state = mController.getPlaybackState();
@@ -232,9 +240,29 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
         onRepeatStateChanged(mTrackManager.isCurrentTrackInRepeatMode());
     }
 
+    protected void handleRepeatStateChanged(ImageView imageView, boolean repeating) {
+        if (repeating) {
+            imageView.setImageTintList(ThemeColors.getAccentColorStateList());
+            imageView.setImageResource(R.drawable.ic_repeat_one);
+        } else {
+            imageView.setImageTintList(ThemeColors.getColorControlNormalTintList());
+            imageView.setImageResource(R.drawable.ic_repeat);
+        }
+    }
+
     private void updateFavoriteItem() {
         AppFileManager.isItemAFavorite(mTrackManager.getActiveQueueItem(), result ->
                 onFavoriteStateChanged((mCurrentItemFavorite = result)));
+    }
+
+    protected void handleFavoriteStateChanged(ImageView imageView, boolean favorite) {
+        if (favorite) {
+            imageView.setImageTintList(ThemeColors.getAccentColorStateList());
+            imageView.setImageResource(R.drawable.ic_favorite);
+        } else {
+            imageView.setImageTintList(ThemeColors.getColorControlNormalTintList());
+            imageView.setImageResource(R.drawable.ic_favorite_border);
+        }
     }
 
     private void onSkipToNext() {

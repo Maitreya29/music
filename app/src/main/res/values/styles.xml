@@ -78,20 +78,16 @@
 
     <style name="MaterialOutlineButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">?attr/primaryColor</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:paddingTop">@dimen/button_padding_vertical</item>
         <item name="android:paddingBottom">@dimen/button_padding_vertical</item>
         <item name="backgroundTint">?android:attr/windowBackground</item>
-        <item name="strokeColor">?attr/primaryColor</item>
         <item name="iconSize">20dp</item>
         <item name="iconPadding">12dp</item>
-        <item name="iconTint">?attr/primaryColor</item>
     </style>
 
     <style name="MaterialTextButton" parent="Widget.MaterialComponents.Button.TextButton">
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">?attr/primaryColor</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:paddingTop">@dimen/button_padding_vertical</item>
         <item name="android:paddingBottom">@dimen/button_padding_vertical</item>

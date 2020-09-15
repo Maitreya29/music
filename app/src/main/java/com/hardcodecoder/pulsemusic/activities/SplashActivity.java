@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,7 @@ import androidx.core.content.ContextCompat;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.loaders.LoaderHelper;
 import com.hardcodecoder.pulsemusic.storage.AppFileManager;
+import com.hardcodecoder.pulsemusic.themes.TintHelper;
 
 public class SplashActivity extends PMBActivity {
 
@@ -23,6 +25,7 @@ public class SplashActivity extends PMBActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        TintHelper.setAccentTintTo((ImageView) findViewById(R.id.splash_logo));
         getPermission();
     }
 

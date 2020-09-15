@@ -7,13 +7,12 @@
     android:paddingTop="16dp"
     android:paddingBottom="0dp">
 
-    <com.google.android.material.textview.MaterialTextView
+    <com.hardcodecoder.pulsemusic.views.AccentColorTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="72dp"
         android:text="@string/now_playing_album_style_section_title"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
-        android:textColor="?primaryColor" />
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Overline" />
 
     <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
         android:id="@+id/now_playing_screen_style"

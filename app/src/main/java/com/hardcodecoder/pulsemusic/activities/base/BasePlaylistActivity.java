@@ -19,6 +19,7 @@ import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.activities.MediaSessionActivity;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.singleton.TrackManager;
+import com.hardcodecoder.pulsemusic.themes.TintHelper;
 
 import java.util.Collections;
 import java.util.List;
@@ -37,7 +38,6 @@ public abstract class BasePlaylistActivity extends MediaSessionActivity {
     protected void setUpToolbar(String title) {
         MaterialToolbar toolbar = findViewById(R.id.material_toolbar);
         toolbar.setTitle(title);
-        //setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(v -> finish());
     }
 
@@ -53,11 +53,14 @@ public abstract class BasePlaylistActivity extends MediaSessionActivity {
     }
 
     protected void setShuffleButtonAction(View.OnClickListener listener) {
-        findViewById(R.id.playlist_shuffle_btn).setOnClickListener(listener);
+        MaterialButton shuffleBtn = findViewById(R.id.playlist_shuffle_btn);
+        TintHelper.setAccentTintToMaterialButton(shuffleBtn);
+        shuffleBtn.setOnClickListener(listener);
     }
 
     protected void setUpDynamicButton(@StringRes int stringId, @DrawableRes int drawableId, View.OnClickListener listener) {
         MaterialButton dynamicBtn = findViewById(R.id.playlist_dynamic_btn);
+        TintHelper.setAccentTintToMaterialOutlineButton(dynamicBtn);
         dynamicBtn.setText(stringId);
         dynamicBtn.setIcon(ContextCompat.getDrawable(this, drawableId));
         dynamicBtn.setOnClickListener(listener);

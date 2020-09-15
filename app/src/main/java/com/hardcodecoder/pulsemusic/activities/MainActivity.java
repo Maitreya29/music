@@ -1,6 +1,7 @@
 package com.hardcodecoder.pulsemusic.activities;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.media.MediaMetadata;
 import android.media.session.MediaController;
 import android.media.session.PlaybackState;
@@ -10,7 +11,6 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.StyleRes;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -27,7 +27,7 @@ import com.hardcodecoder.pulsemusic.fragments.main.LibraryFragment;
 import com.hardcodecoder.pulsemusic.fragments.main.PlaylistFragment;
 import com.hardcodecoder.pulsemusic.loaders.LoaderCache;
 import com.hardcodecoder.pulsemusic.loaders.LoaderHelper;
-import com.hardcodecoder.pulsemusic.themes.ThemeManagerUtils;
+import com.hardcodecoder.pulsemusic.themes.ThemeColors;
 
 public class MainActivity extends MediaSessionActivity {
 
@@ -54,16 +54,9 @@ public class MainActivity extends MediaSessionActivity {
     };
     private AppBarLayout mAppBar;
     private MediaController mController;
-    @StyleRes
-    private int mCurrentTheme;
-    @StyleRes
-    private int mCurrentAccent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        mCurrentTheme = ThemeManagerUtils.getThemeToApply();
-        mCurrentAccent = R.style.ExodusFruit;//ThemeManagerUtils.getAccentStyleToApply();
-
         super.onCreate(null); // Pass null to prevent restoration of fragments on activity recreate
         setContentView(R.layout.activity_main);
         setUpToolbar();
@@ -92,6 +85,9 @@ public class MainActivity extends MediaSessionActivity {
 
     private void setUpBottomNavigationView() {
         BottomNavigationView bottomNavigation = findViewById(R.id.bottom_nav_bar);
+        ColorStateList colorStateList = ThemeColors.getEnabledSelectedColorStateList();
+        bottomNavigation.setItemIconTintList(colorStateList);
+        bottomNavigation.setItemTextColor(colorStateList);
         bottomNavigation.setOnNavigationItemSelectedListener(menuItem -> {
             int id = menuItem.getItemId();
             switch (id) {
@@ -214,10 +210,6 @@ public class MainActivity extends MediaSessionActivity {
 
     @Override
     protected void onStart() {
-        if ((mCurrentTheme != ThemeManagerUtils.getThemeToApply()) || (mCurrentAccent != R.style.ExodusFruit/*ThemeManagerUtils.getAccentStyleToApply()*/)) {
-            supportInvalidateOptionsMenu();
-            recreate();
-        }
         super.onStart();
         if (null != mController) {
             mController.registerCallback(mCallback);

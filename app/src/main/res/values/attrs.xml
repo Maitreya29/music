@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="Base">
-        <attr name="primaryColor" format="color|reference" />
-        <attr name="colorOnPrimary" format="color|reference" />
-
         <attr name="windowBackgroundColor" format="color|reference" />
         <attr name="overlayColor" format="color|reference" />
 

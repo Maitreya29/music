@@ -22,6 +22,7 @@ import com.hardcodecoder.pulsemusic.interfaces.ItemTouchHelperViewHolder;
 import com.hardcodecoder.pulsemusic.interfaces.PlaylistItemListener;
 import com.hardcodecoder.pulsemusic.interfaces.SimpleGestureCallback;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
+import com.hardcodecoder.pulsemusic.utils.ImageUtil;
 import com.hardcodecoder.pulsemusic.views.MediaArtImageView;
 
 import java.util.Collections;
@@ -139,7 +140,7 @@ public class PlaylistDataAdapter extends RecyclerView.Adapter<PlaylistDataAdapte
 
         @Override
         public void onItemSelected() {
-            itemView.setBackground(ContextCompat.getDrawable(itemView.getContext(), R.drawable.active_item_background));
+            itemView.setBackground(ImageUtil.getAccentTintedSelectedItemBackground(itemView.getContext()));
         }
 
         @Override

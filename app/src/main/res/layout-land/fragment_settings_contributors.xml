@@ -5,17 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginStart="32dp"
-    android:layout_marginTop="8dp"
     android:gravity="center"
     android:orientation="vertical">
 
-    <com.google.android.material.textview.MaterialTextView
+    <com.hardcodecoder.pulsemusic.views.AccentColorTextView
         android:id="@+id/developer_head"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/lead_developer_title"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
-        android:textColor="?primaryColor" />
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Overline" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/lead_developer_card"

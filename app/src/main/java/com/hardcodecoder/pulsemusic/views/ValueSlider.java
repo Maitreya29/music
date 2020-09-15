@@ -9,7 +9,6 @@ import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.google.android.material.slider.Slider;
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
 
@@ -17,7 +16,7 @@ import java.util.Locale;
 
 public class ValueSlider extends FrameLayout {
 
-    private Slider mSlider;
+    private AccentColorSlider mSlider;
     private MaterialTextView mStartValueText;
     private String suffix;
 

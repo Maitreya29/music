@@ -8,6 +8,7 @@ import android.util.AttributeSet;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
+import androidx.core.content.ContextCompat;
 
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.themes.ColorUtil;
@@ -33,7 +34,7 @@ public class ColoredIconView extends AppCompatImageView {
 
     private void initialize(Context context, @Nullable AttributeSet attributeSet) {
         TypedArray typedArray = context.obtainStyledAttributes(attributeSet, R.styleable.ColoredIconView);
-        setBackground(context.getDrawable(R.drawable.plain_circle));
+        setBackground(ContextCompat.getDrawable(context, R.drawable.plain_circle));
         int paddingPixels = context.getResources().getDimensionPixelSize(R.dimen.icon_padding);
         setPadding(paddingPixels, paddingPixels, paddingPixels, paddingPixels);
         setImageResource(typedArray.getResourceId(R.styleable.ColoredIconView_icon, R.drawable.def_colored_icon_view_icon));

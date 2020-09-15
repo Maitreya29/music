@@ -12,6 +12,7 @@ import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.interfaces.SimpleTransitionClickListener;
 import com.hardcodecoder.pulsemusic.model.TopArtistModel;
+import com.hardcodecoder.pulsemusic.themes.TintHelper;
 
 import java.util.List;
 import java.util.Locale;
@@ -54,6 +55,7 @@ public class HomeAdapterArtist extends RecyclerView.Adapter<HomeAdapterArtist.Ad
         AdapterSVH(@NonNull View itemView, SimpleTransitionClickListener listener) {
             super(itemView);
             artistArt = itemView.findViewById(R.id.home_rv_artist_list_item_art);
+            TintHelper.setAccentTintTo(artistArt);
             artistName = itemView.findViewById(R.id.home_rv_list_item_title);
             trackCount = itemView.findViewById(R.id.home_rv_list_item_text);
             itemView.setOnClickListener(v -> listener.onItemClick(artistArt, getAdapterPosition()));

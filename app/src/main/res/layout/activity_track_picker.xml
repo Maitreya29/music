@@ -36,7 +36,6 @@
         android:clickable="true"
         android:focusable="true"
         android:src="@drawable/ic_done_all_white"
-        app:backgroundTint="?attr/primaryColor"
         app:layout_anchorGravity="bottom"
         app:tint="?attr/colorOnPrimary" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

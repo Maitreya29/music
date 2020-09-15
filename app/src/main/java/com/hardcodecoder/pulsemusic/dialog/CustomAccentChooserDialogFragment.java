@@ -16,6 +16,7 @@ import com.google.android.material.slider.Slider;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.hardcodecoder.pulsemusic.R;
+import com.hardcodecoder.pulsemusic.themes.ThemeColors;
 import com.hardcodecoder.pulsemusic.themes.ThemeManagerUtils;
 
 import java.util.Objects;
@@ -59,7 +60,7 @@ public class CustomAccentChooserDialogFragment extends RoundedBottomSheetDialogF
 
         // Initialize current accent color
         // Make sure to initialize before setting up listeners
-        mSelectedColor = ThemeManagerUtils.getSelectedAccentColor();
+        mSelectedColor = ThemeColors.getCurrentAccentColor();
         updateSliders();
         updateColorCodeAndPreview();
 

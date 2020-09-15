@@ -12,7 +12,7 @@ import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.interfaces.SingleClickListener;
 import com.hardcodecoder.pulsemusic.model.AccentsModel;
-import com.hardcodecoder.pulsemusic.themes.ThemeManagerUtils;
+import com.hardcodecoder.pulsemusic.themes.ThemeColors;
 import com.hardcodecoder.pulsemusic.utils.DimensionsUtil;
 import com.hardcodecoder.pulsemusic.views.ColorView;
 
@@ -73,7 +73,7 @@ public class AccentAdapter extends RecyclerView.Adapter<AccentAdapter.AccentAdap
             drawable.setCornerRadius(DimensionsUtil.getDimension(itemView.getContext(), 8));
             drawable.setStroke(
                     DimensionsUtil.getDimensionPixelSize(itemView.getContext(), 2),
-                    ThemeManagerUtils.getAccentColorForCurrentTheme());
+                    ThemeColors.getAccentColorForCurrentTheme());
             itemView.setBackground(drawable);
         }
     }

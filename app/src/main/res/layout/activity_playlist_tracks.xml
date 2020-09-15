@@ -43,7 +43,6 @@
                 android:layout_marginStart="32dp"
                 android:layout_weight="1"
                 app:iconPadding="0dp"
-                app:strokeColor="?attr/primaryColor"
                 tools:icon="@drawable/ic_playlist_add"
                 tools:text="Any action" />
         </LinearLayout>

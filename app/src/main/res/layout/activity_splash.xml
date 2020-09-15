@@ -7,11 +7,11 @@
     android:paddingBottom="100dp">
 
     <ImageView
+        android:id="@+id/splash_logo"
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_gravity="center"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_foreground"
-        android:tint="?attr/primaryColor"
         tools:ignore="contentDescription" />
 </FrameLayout>

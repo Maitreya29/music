@@ -22,7 +22,7 @@ public class ShortcutIconGenerator {
         Drawable background = ContextCompat.getDrawable(context, R.drawable.ic_app_shortcut_background);
         Drawable foreground = ContextCompat.getDrawable(context, drawableRes);
         if (null != foreground)
-            foreground.setTint(ThemeManagerUtils.getSelectedAccentColor());
+            foreground.setTint(ThemeManagerUtils.getStoredAccentColor());
 
         LayerDrawable layerDrawable = new LayerDrawable(new Drawable[]{background, foreground});
         return Icon.createWithBitmap(createBitmap(layerDrawable));

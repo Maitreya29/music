@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.adapters.TrackPickerAdapter;
@@ -16,6 +17,7 @@ import com.hardcodecoder.pulsemusic.helper.RecyclerViewSelectorHelper;
 import com.hardcodecoder.pulsemusic.interfaces.TrackPickerListener;
 import com.hardcodecoder.pulsemusic.loaders.LoaderCache;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
+import com.hardcodecoder.pulsemusic.themes.TintHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +36,9 @@ public class TrackPickerActivity extends PMBActivity implements TrackPickerListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_track_picker);
 
-        findViewById(R.id.btn_done).setOnClickListener(v -> {
+        FloatingActionButton fab = findViewById(R.id.btn_done);
+        TintHelper.setAccentTintTo(fab);
+        fab.setOnClickListener(v -> {
             Intent i = new Intent();
             i.putExtra(ID_PICKED_TRACKS, mSelectedTracks);
             setResult(RESULT_OK, i);
