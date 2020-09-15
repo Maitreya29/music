@@ -106,6 +106,29 @@ public class AppSettings {
                 .getInt(Preferences.NOW_PLAYING_SCREEN_STYLE_KEY, Preferences.NOW_PLAYING_SCREEN_MODERN);
     }
 
+    public static void saveBluetoothDeviceDetection(@NonNull Context context, boolean enabled) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.BLUETOOTH_DEVICE_DETECTION_KEY, Context.MODE_PRIVATE).edit();
+        editor.putBoolean(Preferences.BLUETOOTH_DEVICE_DETECTION_KEY, enabled);
+        editor.apply();
+    }
+
+    public static boolean isBluetoothDeviceDetection(@NonNull Context context) {
+        return context.getSharedPreferences(Preferences.BLUETOOTH_DEVICE_DETECTION_KEY, Context.MODE_PRIVATE)
+                .getBoolean(Preferences.BLUETOOTH_DEVICE_DETECTION_KEY, false);
+    }
+
+    public static void saveBluetoothDeviceDetectionAction(@NonNull Context context, int action) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.BLUETOOTH_DEVICE_DETECTION_ACTION_KEY, Context.MODE_PRIVATE).edit();
+        editor.putInt(Preferences.BLUETOOTH_DEVICE_DETECTION_ACTION_KEY, action);
+        editor.apply();
+    }
+
+    public static int getBluetoothDeviceDetectionAction(@NonNull Context context) {
+        return context.getSharedPreferences(Preferences.BLUETOOTH_DEVICE_DETECTION_ACTION_KEY, Context.MODE_PRIVATE)
+                .getInt(Preferences.BLUETOOTH_DEVICE_DETECTION_ACTION_KEY, Preferences.BLUETOOTH_ACTION_PLAY_SHUFFLE);
+    }
+
+
     public static void saveNowPlayingAlbumCoverCornerRadius(@NonNull Context context, int tl, int tr, int bl, int br) {
         SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.NOW_PLAYING_ALBUM_COVER_CORNER_RADIUS, Context.MODE_PRIVATE).edit();
         editor.putInt(Preferences.NOW_PLAYING_ALBUM_COVER_RADIUS_TL, tl);

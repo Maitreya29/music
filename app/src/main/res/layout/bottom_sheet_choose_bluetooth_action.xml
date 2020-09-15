@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="32dp">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:text="@string/select_bluetooth_action"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+        android:textColor="?attr/primaryColor"
+        android:textStyle="bold" />
+
+    <RadioGroup
+        android:id="@+id/radio_button_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical">
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/radio_btn_shuffle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="?primaryColor"
+            android:paddingStart="32dp"
+            android:paddingEnd="0dp"
+            android:text="@string/radio_btn_shuffle"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+            android:textColor="?primaryTextColor" />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/radio_btn_suggested"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="?primaryColor"
+            android:paddingStart="32dp"
+            android:paddingEnd="0dp"
+            android:text="@string/radio_btn_suggested"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+            android:textColor="?primaryTextColor" />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/radio_btn_recent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="?primaryColor"
+            android:paddingStart="32dp"
+            android:paddingEnd="0dp"
+            android:text="@string/radio_btn_recent"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+            android:textColor="?primaryTextColor" />
+    </RadioGroup>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/choose_bluetooth_action_cancel_btn"
+        style="@style/MaterialTextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/radio_button_group"
+        android:layout_toStartOf="@id/choose_bluetooth_action_set_btn"
+        android:text="@string/cancel" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/choose_bluetooth_action_set_btn"
+        style="@style/MaterialTextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/radio_button_group"
+        android:layout_alignParentEnd="true"
+        android:text="@string/set" />
+</RelativeLayout>

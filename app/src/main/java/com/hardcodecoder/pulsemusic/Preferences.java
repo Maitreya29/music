@@ -72,4 +72,10 @@ public class Preferences {
     // True of false
     public static final String ACCENTS_COLOR_KEY = "AccentsColor";
     public static final String ACCENTS_COLOR_DESATURATED_KEY = "AccentsColorDesaturated";
+    public static final String BLUETOOTH_DEVICE_DETECTION_KEY = "BluetoothDeviceDetection";
+    public static final String BLUETOOTH_DEVICE_DETECTION_ACTION_KEY = "BluetoothDeviceDetectionAction";
+
+    public static final short BLUETOOTH_ACTION_PLAY_SHUFFLE = 6000;
+    public static final short BLUETOOTH_ACTION_PLAY_SUGGESTED = 6001;
+    public static final short BLUETOOTH_ACTION_PLAY_LATEST = 6002;
 }

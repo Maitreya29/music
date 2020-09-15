@@ -279,4 +279,16 @@
     <string name="shortcut_suggested_label_long">For you</string>
     <string name="apply">Apply</string>
     <string name="presets">Presets</string>
+    <string name="audio">Audio</string>
+    <string name="audio_desc">Change audio settings</string>
+    <string name="audio_category_bluetooth">Bluetooth</string>
+    <string name="audio_category_enable_connected_start">Bluetooth device detection</string>
+    <string name="audio_category_enable_connected_start_text">Starts playing music when a bluetooth device connects</string>
+    <string name="bluetooth_channel_name">Bluetooth Device Detection</string>
+    <string name="audio_category_select_bluetooth_action_title">Select bluetooth play action</string>
+    <string name="audio_category_select_bluetooth_action_text">Choose which music will be played when a device is connected</string>
+    <string name="select_bluetooth_action">Set preferred bluetooth action</string>
+    <string name="radio_btn_shuffle">Play shuffled tracks</string>
+    <string name="radio_btn_recent">Play recent tracks</string>
+    <string name="radio_btn_suggested">Play suggested tracks</string>
 </resources>

@@ -258,4 +258,18 @@
     <string name="shortcut_suggested_label_long">Für dich</string>
     <string name="enter_name">Gib deinen Namen ein</string>
     <string name="atp_track_added_toast">Titel erfolgreich zur Wiedergabeliste hinzugefügt</string>
+    <string name="apply">Anwenden</string>
+    <string name="presets">Voreinstellungen</string>
+    <string name="audio">Audio</string>
+    <string name="audio_desc">Ändere Audio Einstellungen</string>
+    <string name="audio_category_bluetooth">Bluetooth</string>
+    <string name="audio_category_enable_connected_start">Bluetooth-Geräteerkennung</string>
+    <string name="audio_category_enable_connected_start_text">Spielt Musik, wenn sich ein Bluetooth-Gerät verbindet</string>
+    <string name="bluetooth_channel_name">Bluetooth Geräte Erkennung</string>
+    <string name="audio_category_select_bluetooth_action_title">Wähle eine Bluetooth Abspielaktion</string>
+    <string name="audio_category_select_bluetooth_action_text">Wähl aus, was für Musik bei Verbindung eines Bluetooth-Gerätes abgespielt wird</string>
+    <string name="select_bluetooth_action">Wähle die bevorzugte Bluetooth-Aktion</string>
+    <string name="radio_btn_shuffle">Spiel vermischte Musik</string>
+    <string name="radio_btn_recent">Spiel aktuelle Musik</string>
+    <string name="radio_btn_suggested">Spiel vorgeschlagene Musik</string>
 </resources>
