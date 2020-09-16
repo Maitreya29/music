@@ -11,13 +11,12 @@
         android:paddingTop="16dp"
         android:paddingBottom="0dp">
 
-        <com.google.android.material.textview.MaterialTextView
+        <com.hardcodecoder.pulsemusic.views.AccentColorTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="72dp"
             android:text="@string/audio_category_bluetooth"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
-            android:textColor="?primaryColor" />
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Overline" />
 
         <com.hardcodecoder.pulsemusic.views.SettingsToggleableItem
             android:id="@+id/audio_enable_bluetooth_start"
@@ -34,10 +33,10 @@
             app:settingItemDesaturatedColorsInDarkMode="false"
             app:settingItemIcon="@drawable/ic_play_circle"
             app:settingItemIconBackgroundColor="?windowBackgroundColor"
-            app:settingItemIconColor="?unFocusedColor"
+            app:settingItemIconColor="?attr/colorControlNormal"
             app:settingItemText="@string/audio_category_select_bluetooth_action_text"
             app:settingItemTitle="@string/audio_category_select_bluetooth_action_title"
             app:settingToggleableItemEnabled="true" />
-          -->
+
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

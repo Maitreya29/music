@@ -134,7 +134,7 @@ public class AppSettings {
         editor.apply();
     }
 
-    public static boolean isBluetoothDeviceDetection(@NonNull Context context) {
+    public static boolean isBluetoothDeviceDetectionEnabled(@NonNull Context context) {
         return context.getSharedPreferences(Preferences.BLUETOOTH_DEVICE_DETECTION_KEY, Context.MODE_PRIVATE)
                 .getBoolean(Preferences.BLUETOOTH_DEVICE_DETECTION_KEY, false);
     }

@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SwitchCompat;
 
-import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.hardcodecoder.pulsemusic.BDS;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.dialog.BluetoothActionChooserBottomSheetDialogFragment;
@@ -52,22 +52,21 @@ public class SettingsAudioFragment extends SettingsBaseFragment {
         mContext = getActivity();
 
         SettingsToggleableItem bluetoothDeviceDetectionLayout = view.findViewById(R.id.audio_enable_bluetooth_start);
-        SwitchMaterial bluetoothDeviceDetectionSwitch = bluetoothDeviceDetectionLayout.findViewById(R.id.setting_toggleable_item_switch);
+        SwitchCompat bluetoothDeviceDetectionSwitch = bluetoothDeviceDetectionLayout.findViewById(R.id.setting_toggleable_item_switch);
 
         boolean bluetoothDeviceDetection = false;
         if (null != getContext()) {
-            bluetoothDeviceDetection = AppSettings.isBluetoothDeviceDetection(getContext());
+            bluetoothDeviceDetection = AppSettings.isBluetoothDeviceDetectionEnabled(getContext());
         }
 
         bluetoothDeviceDetectionSwitch.setChecked(bluetoothDeviceDetection);
         bluetoothDeviceDetectionSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             AppSettings.saveBluetoothDeviceDetection(buttonView.getContext(), isChecked);
-            if (isChecked){
+            if (isChecked) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     mContext.startForegroundService(new Intent(mContext, BDS.class));
                 }
-            }
-            else{
+            } else {
                 mContext.stopService(new Intent(mContext.getApplicationContext(), BDS.class));
             }
 
@@ -78,7 +77,5 @@ public class SettingsAudioFragment extends SettingsBaseFragment {
             BluetoothActionChooserBottomSheetDialogFragment dialog = BluetoothActionChooserBottomSheetDialogFragment.getInstance();
             dialog.show(Objects.requireNonNull(getActivity()).getSupportFragmentManager(), BluetoothActionChooserBottomSheetDialogFragment.TAG);
         });
-
     }
-
 }

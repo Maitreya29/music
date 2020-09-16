@@ -289,8 +289,6 @@
     <string name="shortcut_suggested_label">For you</string>
     <string name="shortcut_suggested_label_long">For you</string>
 
-    <string name="apply">Apply</string>
-    <string name="presets">Presets</string>
     <string name="audio">Audio</string>
     <string name="audio_desc">Change audio settings</string>
     <string name="audio_category_bluetooth">Bluetooth</string>

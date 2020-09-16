@@ -1,17 +1,11 @@
 package com.hardcodecoder.pulsemusic;
 
 import android.app.Application;
-import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Build;
 
-import androidx.annotation.RequiresApi;
-import androidx.core.content.ContextCompat;
-
 import com.hardcodecoder.pulsemusic.shortcuts.AppShortcutsManager;
-import com.hardcodecoder.pulsemusic.receivers.BluetoothBroadcastReceiver;
 import com.hardcodecoder.pulsemusic.storage.AppFileManager;
 import com.hardcodecoder.pulsemusic.themes.ThemeManagerUtils;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
@@ -38,11 +32,10 @@ public class PulseApp extends Application {
             };
             getSharedPreferences(Preferences.PULSE_THEMES_PREFS, MODE_PRIVATE).registerOnSharedPreferenceChangeListener(mListener);
         }
-        if (AppSettings.isBluetoothDeviceDetection(this)){
+        if (AppSettings.isBluetoothDeviceDetectionEnabled(this)) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 startForegroundService(new Intent(getApplicationContext(), BDS.class));
-            }
-            else{
+            } else {
                 startService(new Intent(getApplicationContext(), BDS.class));
             }
         }
