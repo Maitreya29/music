@@ -45,6 +45,7 @@ public class SettingsMainFragment extends SettingsBaseFragment {
         mListener = (SettingsFragmentsListener) getActivity();
         view.findViewById(R.id.themeSettings).setOnClickListener(v -> openSettingsFragment(SettingsThemeFragment.getInstance()));
         view.findViewById(R.id.nowPlayingSettings).setOnClickListener(v -> openSettingsFragment(SettingsNowPlayingFragment.getInstance()));
+        view.findViewById(R.id.audioSettings).setOnClickListener(v -> openSettingsFragment(SettingsAudioFragment.getInstance()));
         view.findViewById(R.id.contributorsSettings).setOnClickListener(v -> openSettingsFragment(SettingsContributorsFragment.getInstance()));
         view.findViewById(R.id.donationSettings).setOnClickListener(v -> openSettingsFragment(SettingsDonationFragment.getInstance()));
         view.findViewById(R.id.aboutSettings).setOnClickListener(v -> openSettingsFragment(SettingsAboutFragment.getInstance()));

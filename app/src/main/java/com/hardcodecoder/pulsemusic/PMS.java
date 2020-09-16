@@ -27,6 +27,7 @@ import com.hardcodecoder.pulsemusic.playback.LocalPlayback;
 import com.hardcodecoder.pulsemusic.playback.MediaNotificationManager;
 import com.hardcodecoder.pulsemusic.playback.PlaybackManager;
 import com.hardcodecoder.pulsemusic.singleton.TrackManager;
+import com.hardcodecoder.pulsemusic.utils.AppSettings;
 
 import java.util.Collections;
 import java.util.List;
@@ -37,6 +38,7 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
     public static final int PLAY_SHUFFLE = 100;
     public static final int PLAY_LATEST = 101;
     public static final int PLAY_SUGGESTED = 102;
+    public static final int PLAY_CONTINUE = 103;
 
     private static final String TAG = "PMS";
     private final IBinder mBinder = new ServiceBinder();
@@ -104,21 +106,56 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
             if (null != intent && (startCode = intent.getIntExtra(PLAY_KEY, -1)) != -1) {
                 switch (startCode) {
                     case PLAY_SHUFFLE:
-                        LoaderHelper.loadAllTracks(getContentResolver(), result -> {
-                            Collections.shuffle(result);
-                            playPlaylist(result);
-                        });
+                        playShuffle();
                         break;
                     case PLAY_LATEST:
-                        LoaderHelper.loadLatestTracks(getContentResolver(), this::playPlaylist);
+                        playLatest();
                         break;
                     case PLAY_SUGGESTED:
-                        LoaderHelper.loadSuggestionsList(getContentResolver(), this::playPlaylist);
+                        playSuggested();
+                        break;
+                    case PLAY_CONTINUE:
+                        PlaybackState state = mMediaSession.getController().getPlaybackState();
+                        if (state != null) {
+                            if (state.getState() == PlaybackState.STATE_PAUSED || state.getState() == PlaybackState.STATE_STOPPED)
+                                mMediaSession.getController().getTransportControls().play();
+                        } else {
+                            int currentAction = AppSettings.getBluetoothDeviceDetectionAction(getApplicationContext());
+                            switch (currentAction) {
+                                case Preferences.BLUETOOTH_ACTION_PLAY_SHUFFLE:
+                                    playShuffle();
+                                    break;
+                                case Preferences.BLUETOOTH_ACTION_PLAY_LATEST:
+                                    playLatest();
+                                    break;
+                                case Preferences.BLUETOOTH_ACTION_PLAY_SUGGESTED:
+                                    playSuggested();
+                                    break;
+                                default:
+                                    playShuffle();
+                                    break;
+                            }
+                        }
                         break;
                     default:
                         Log.e(TAG, "Unknown start command");
                 }
             }
+        });
+    }
+
+    private void playLatest() {
+        LoaderHelper.loadLatestTracks(getContentResolver(), this::playPlaylist);
+    }
+
+    private void playSuggested() {
+        LoaderHelper.loadSuggestionsList(getContentResolver(), this::playPlaylist);
+    }
+
+    private void playShuffle() {
+        LoaderHelper.loadAllTracks(getContentResolver(), result -> {
+            Collections.shuffle(result);
+            playPlaylist(result);
         });
     }
 
