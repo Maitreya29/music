@@ -1,6 +1,7 @@
 package com.hardcodecoder.pulsemusic.utils;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -31,9 +32,7 @@ public class NavigationUtil {
         }
     }
 
-    public static void goToArtist(@NonNull Activity activity,
-                                  @Nullable View sharedView,
-                                  @NonNull String artistName) {
+    public static void goToArtist(@NonNull Activity activity, @Nullable View sharedView, @NonNull String artistName) {
         Intent i = new Intent(activity, ArtistDetailsActivity.class);
         i.putExtra(ArtistDetailsActivity.KEY_ARTIST_TITLE, artistName);
         if (null != sharedView) {
@@ -42,5 +41,12 @@ public class NavigationUtil {
             Bundle b = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, sharedView, transitionName).toBundle();
             activity.startActivity(i, b);
         }
+    }
+
+    public static void goToArtist(@NonNull Context context, @NonNull String artistName) {
+        Intent i = new Intent(context, ArtistDetailsActivity.class);
+        i.putExtra(ArtistDetailsActivity.KEY_ARTIST_TITLE, artistName);
+        context.startActivity(i);
+
     }
 }

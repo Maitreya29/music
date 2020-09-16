@@ -8,8 +8,8 @@ import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SwitchCompat;
 
-import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
 
@@ -17,7 +17,7 @@ public class SettingsToggleableItem extends FrameLayout {
 
     private MaterialTextView title;
     private MaterialTextView text;
-    private SwitchMaterial switchButton;
+    private SwitchCompat switchButton;
 
     public SettingsToggleableItem(@NonNull Context context) {
         super(context);

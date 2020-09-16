@@ -65,16 +65,17 @@ public class StylishNowPlayingScreen extends BaseNowPlayingScreen {
         mRepeatBtn.setOnClickListener(v -> toggleRepeatMode());
         mPlayPauseBtn.setOnClickListener(v -> togglePlayPause());
         mFavoriteBtn.setOnClickListener(v -> toggleFavorite());
+        setDefaultTintToPlayBtn(mPlayPauseBtn);
     }
 
     @Override
     public void onRepeatStateChanged(boolean repeat) {
-        mRepeatBtn.setImageResource(repeat ? R.drawable.ic_repeat_one : R.drawable.ic_repeat);
+        handleRepeatStateChanged(mRepeatBtn, repeat);
     }
 
     @Override
     public void onFavoriteStateChanged(boolean isFavorite) {
-        mFavoriteBtn.setSelected(isFavorite);
+        handleFavoriteStateChanged(mFavoriteBtn, isFavorite);
     }
 
     @Override

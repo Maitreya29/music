@@ -3,36 +3,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingTop="32dp">
+    android:padding="32dp">
 
-    <com.google.android.material.textview.MaterialTextView
+    <com.hardcodecoder.pulsemusic.views.AccentColorTextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
         android:layout_marginBottom="32dp"
         android:gravity="start"
         android:text="@string/custom_accent_title"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-        android:textColor="?attr/primaryColor"
         android:textStyle="bold" />
 
     <LinearLayout
         android:id="@+id/red_components"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:gravity="center_vertical"
-        android:layout_below="@id/title">
+        android:layout_below="@id/title"
+        android:gravity="center_vertical">
 
         <TextView
             android:id="@+id/red_label"
             android:layout_width="16dp"
             android:layout_height="wrap_content"
-            android:text="R"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+            android:text="@string/r_channel_label"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            android:textColor="@android:color/holo_red_light" />
 
         <include
             android:id="@+id/red_slider"
@@ -45,16 +43,16 @@
         android:id="@+id/green_components"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:gravity="center_vertical"
-        android:layout_below="@id/red_components">
+        android:layout_below="@id/red_components"
+        android:gravity="center_vertical">
 
         <TextView
             android:id="@+id/green_label"
             android:layout_width="16dp"
             android:layout_height="wrap_content"
-            android:text="G"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+            android:text="@string/g_channel_label"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            android:textColor="@color/md_green_A700" />
 
         <include
             android:id="@+id/green_slider"
@@ -66,21 +64,20 @@
             tools:valueTo="255" />
     </LinearLayout>
 
-
     <LinearLayout
         android:id="@+id/blue_components"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:gravity="center_vertical"
-        android:layout_below="@id/green_components">
+        android:layout_below="@id/green_components"
+        android:gravity="center_vertical">
 
         <TextView
             android:id="@+id/blue_label"
             android:layout_width="16dp"
             android:layout_height="wrap_content"
-            android:text="B"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+            android:text="@string/b_channel_label"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            android:textColor="@color/md_blue_A400" />
 
         <include
             android:id="@+id/blue_slider"
@@ -89,37 +86,53 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
 
-    <EditText
-        android:id="@+id/hex_code"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/hex_code_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/blue_components"
+        android:layout_alignBottom="@id/color_preview"
+        android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
-        android:ems="10"
-        android:text="#808080"
-        android:inputType="text" />
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="16dp"
+        android:hint="@string/hex_color_hint"
+        android:theme="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+        app:prefixText="#">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/hex_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textCapCharacters"
+            android:maxLength="6"
+            android:minEms="6"
+            tools:text="808080" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <ImageView
         android:id="@+id/color_preview"
-        android:layout_below="@id/hex_code"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:layout_below="@id/blue_components"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
-        android:layout_centerInParent="true"
-        app:srcCompat="@drawable/ic_app_shortcut_background" />
+        app:srcCompat="@drawable/ic_app_shortcut_background"
+        tools:ignore="contentDescription"
+        tools:tint="@color/md_red_A400" />
 
-    <com.google.android.material.button.MaterialButton
+    <com.hardcodecoder.pulsemusic.views.MaterialTextButton
         android:id="@+id/custom_accents_apply_btn"
         style="@style/MaterialTextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/color_preview"
         android:layout_alignParentEnd="true"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="32dp"
         android:text="@string/apply" />
 
-    <com.google.android.material.button.MaterialButton
+    <com.hardcodecoder.pulsemusic.views.MaterialTextButton
         android:id="@+id/custom_accents_presets_btn"
         style="@style/MaterialTextButton"
         android:layout_width="wrap_content"
@@ -127,8 +140,6 @@
         android:layout_below="@id/color_preview"
         android:layout_alignParentStart="true"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginTop="16dp"
         android:text="@string/presets" />
-
-
 </RelativeLayout>

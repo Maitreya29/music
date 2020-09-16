@@ -56,7 +56,7 @@ public class TrackPickerAdapter extends RecyclerView.Adapter<TrackPickerAdapter.
                 mListener.onItemClick(holder, holder.getAdapterPosition(), mSelectedItemState.get(holder.getAdapterPosition(), false)));
 
         if (isSelected)
-            holder.itemView.setBackground(ImageUtil.getTintedGradientOverlay(holder.itemView.getContext()));
+            holder.itemView.setBackground(ImageUtil.getAccentTintedSelectedItemBackground(holder.itemView.getContext()));
         else
             holder.itemView.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(), android.R.color.transparent));
 
@@ -95,7 +95,7 @@ public class TrackPickerAdapter extends RecyclerView.Adapter<TrackPickerAdapter.
 
         @Override
         public void onItemSelected() {
-            itemView.setBackground(ImageUtil.getTintedGradientOverlay(itemView.getContext()));
+            itemView.setBackground(ImageUtil.getAccentTintedSelectedItemBackground(itemView.getContext()));
         }
 
         @Override

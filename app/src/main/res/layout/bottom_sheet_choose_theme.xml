@@ -4,14 +4,13 @@
     android:layout_height="match_parent"
     android:padding="32dp">
 
-    <com.google.android.material.textview.MaterialTextView
+    <com.hardcodecoder.pulsemusic.views.AccentColorTextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="start"
         android:text="@string/select_dark_theme"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-        android:textColor="?attr/primaryColor"
         android:textStyle="bold" />
 
     <RadioGroup
@@ -22,41 +21,38 @@
         android:layout_marginTop="16dp"
         android:orientation="vertical">
 
-        <com.google.android.material.radiobutton.MaterialRadioButton
+        <com.hardcodecoder.pulsemusic.views.AccentColorRadioButton
             android:id="@+id/radio_btn_dark_theme_gray"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:buttonTint="?primaryColor"
             android:paddingStart="32dp"
             android:paddingEnd="0dp"
             android:text="@string/dark_theme_name_gray"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
-            android:textColor="?primaryTextColor" />
+            android:textColor="?android:attr/textColorPrimary" />
 
-        <com.google.android.material.radiobutton.MaterialRadioButton
+        <com.hardcodecoder.pulsemusic.views.AccentColorRadioButton
             android:id="@+id/radio_btn_dark_theme_kinda"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:buttonTint="?primaryColor"
             android:paddingStart="32dp"
             android:paddingEnd="0dp"
             android:text="@string/dark_theme_name_kinda_dark"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
-            android:textColor="?primaryTextColor" />
+            android:textColor="?android:attr/textColorPrimary" />
 
-        <com.google.android.material.radiobutton.MaterialRadioButton
+        <com.hardcodecoder.pulsemusic.views.AccentColorRadioButton
             android:id="@+id/radio_btn_dark_theme_pure_black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:buttonTint="?primaryColor"
             android:paddingStart="32dp"
             android:paddingEnd="0dp"
             android:text="@string/dark_theme_name_pure_black"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
-            android:textColor="?primaryTextColor" />
+            android:textColor="?android:attr/textColorPrimary" />
     </RadioGroup>
 
-    <com.google.android.material.button.MaterialButton
+    <com.hardcodecoder.pulsemusic.views.MaterialTextButton
         android:id="@+id/choose_theme_cancel_btn"
         style="@style/MaterialTextButton"
         android:layout_width="wrap_content"
@@ -65,7 +61,7 @@
         android:layout_toStartOf="@id/choose_theme_set_btn"
         android:text="@string/cancel" />
 
-    <com.google.android.material.button.MaterialButton
+    <com.hardcodecoder.pulsemusic.views.MaterialTextButton
         android:id="@+id/choose_theme_set_btn"
         style="@style/MaterialTextButton"
         android:layout_width="wrap_content"

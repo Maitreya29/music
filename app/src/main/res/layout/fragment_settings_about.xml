@@ -10,12 +10,11 @@
     android:paddingEnd="32dp"
     android:paddingBottom="0dp">
 
-    <com.google.android.material.textview.MaterialTextView
+    <com.hardcodecoder.pulsemusic.views.AccentColorTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/app_info"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
-        android:textColor="?primaryColor" />
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Overline" />
 
     <com.google.android.material.textview.MaterialTextView
         android:layout_width="wrap_content"
@@ -30,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
-        android:textColor="?secondaryTextColor"
+        android:textColor="?android:attr/textColorSecondary"
         tools:text="@tools:sample/us_zipcodes" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -47,7 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
-        android:textColor="?secondaryTextColor"
+        android:textColor="?android:attr/textColorSecondary"
         tools:text="@tools:sample/date/hhmmss" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -64,7 +63,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
-        android:textColor="?secondaryTextColor"
+        android:textColor="?android:attr/textColorSecondary"
         tools:text="@tools:sample/us_zipcodes" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -80,23 +79,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
-        android:textColor="?secondaryTextColor"
+        android:textColor="?android:attr/textColorSecondary"
         tools:text="@tools:sample/full_names" />
 
-    <com.google.android.material.textview.MaterialTextView
+    <com.hardcodecoder.pulsemusic.views.AccentColorTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="@string/social_links"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
-        android:textColor="?primaryColor" />
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Overline" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/about_card_github_link"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        app:cardBackgroundColor="?surfaceColor"
+        app:cardBackgroundColor="?attr/colorSurface"
         app:cardUseCompatPadding="true">
 
         <LinearLayout
@@ -111,7 +109,7 @@
                 android:layout_height="48dp"
                 android:contentDescription="@string/iv_content_desc"
                 android:src="@drawable/ic_github"
-                android:tint="?colorOnSurface" />
+                app:tint="?attr/colorOnSurface" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"

@@ -20,8 +20,7 @@
             android:id="@+id/search_activity_close_btn"
             style="@style/ButtonStyle24"
             android:contentDescription="@string/iv_btn_close_description"
-            android:src="@drawable/ic_keyboard_backspace"
-            android:tint="?attr/unFocusedColor" />
+            android:src="@drawable/ic_keyboard_backspace" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/search_activity_edit_text"
@@ -32,7 +31,7 @@
             android:hint="@string/searchHint"
             android:inputType="textPersonName"
             android:textAppearance="@style/ToolbarTextAppearanceSearch"
-            android:textColorHint="?secondaryTextColor" />
+            android:textColorHint="?android:attr/textColorSecondary" />
     </LinearLayout>
 
     <ViewStub

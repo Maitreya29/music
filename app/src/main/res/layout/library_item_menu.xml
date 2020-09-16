@@ -12,9 +12,9 @@
         android:layout_height="56dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
+        android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:scaleType="centerCrop"
         tools:src="@tools:sample/backgrounds/scenic" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -42,7 +42,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:maxLines="1"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/track_album_art"
         app:layout_constraintTop_toBottomOf="@id/track_title"
         tools:text="@tools:sample/full_names" />
@@ -73,10 +76,28 @@
         app:layout_constraintTop_toBottomOf="@id/add_to_queue" />
 
     <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/go_to_album"
+        style="@style/BottomDialogOptionsMenuTextStyle"
+        android:text="@string/go_to_album"
+        android:visibility="gone"
+        app:drawableStartCompat="@drawable/ic_album"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/add_to_playlist"
+        tools:visibility="visible" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/go_to_artist"
+        style="@style/BottomDialogOptionsMenuTextStyle"
+        android:text="@string/go_to_artist"
+        app:drawableStartCompat="@drawable/ic_artist"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/go_to_album" />
+
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/song_info"
         style="@style/BottomDialogOptionsMenuTextStyle"
         android:text="@string/info"
         app:drawableStartCompat="@drawable/ic_info"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/add_to_playlist" />
+        app:layout_constraintTop_toBottomOf="@id/go_to_artist" />
 </androidx.constraintlayout.widget.ConstraintLayout>

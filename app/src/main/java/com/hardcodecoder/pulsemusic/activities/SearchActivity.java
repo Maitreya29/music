@@ -109,7 +109,7 @@ public class SearchActivity extends MediaSessionActivity implements SimpleItemCl
 
     @Override
     public void onOptionsClick(int position) {
-        UIHelper.buildAndShowOptionsMenu(this, getSupportFragmentManager(), mSearchResult.get(position));
+        UIHelper.showMenuForLibraryTracks(this, getSupportFragmentManager(), mSearchResult.get(position));
     }
 
     @Override

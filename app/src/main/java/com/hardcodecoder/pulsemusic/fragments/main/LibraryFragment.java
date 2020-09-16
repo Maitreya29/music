@@ -66,7 +66,7 @@ public class LibraryFragment extends ListGridFragment {
                         @Override
                         public void onOptionsClick(int position) {
                             if (null != getActivity()) {
-                                UIHelper.buildAndShowOptionsMenu(getActivity(), getActivity().getSupportFragmentManager(), mList.get(position));
+                                UIHelper.showMenuForLibraryTracks(getActivity(), getActivity().getSupportFragmentManager(), mList.get(position));
                             }
                         }
                     },

@@ -93,6 +93,8 @@
     <string name="add_to_queue">Add to queue</string>
     <string name="add_to_queue_toast">Track added to playing queue</string>
     <string name="add_to_playlist">Add to playlist</string>
+    <string name="go_to_album">Go to album</string>
+    <string name="go_to_artist">Go to artist</string>
     <string name="info">Song info</string>
 
 
@@ -268,6 +270,15 @@
     <string name="sunkist">Sunkist</string>
     <string name="blue_pink">Blue pink</string>
 
+    <!-- Custom accents dialog -->
+    <string name="hex_color_hint">Hex color</string>
+    <string name="hex_color_error">Invalid color</string>
+    <string name="r_channel_label">R</string>
+    <string name="g_channel_label">G</string>
+    <string name="b_channel_label">B</string>
+    <string name="apply">Apply</string>
+    <string name="presets">Presets</string>
+
     <!-- App shortcuts -->
     <string name="shortcut_shuffle_label">Shuffle</string>
     <string name="shortcut_shuffle_label_long">Shuffled</string>
@@ -277,6 +288,7 @@
 
     <string name="shortcut_suggested_label">For you</string>
     <string name="shortcut_suggested_label_long">For you</string>
+
     <string name="apply">Apply</string>
     <string name="presets">Presets</string>
     <string name="audio">Audio</string>
@@ -291,4 +303,5 @@
     <string name="radio_btn_shuffle">Play shuffled tracks</string>
     <string name="radio_btn_recent">Play recent tracks</string>
     <string name="radio_btn_suggested">Play suggested tracks</string>
+
 </resources>

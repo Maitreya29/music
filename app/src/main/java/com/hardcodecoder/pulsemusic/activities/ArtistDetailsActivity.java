@@ -20,6 +20,7 @@ import com.hardcodecoder.pulsemusic.adapters.AlbumsAdapter;
 import com.hardcodecoder.pulsemusic.loaders.ArtistTracksLoader;
 import com.hardcodecoder.pulsemusic.loaders.SortOrder;
 import com.hardcodecoder.pulsemusic.model.AlbumModel;
+import com.hardcodecoder.pulsemusic.themes.TintHelper;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 import com.hardcodecoder.pulsemusic.utils.DimensionsUtil;
 import com.hardcodecoder.pulsemusic.utils.NavigationUtil;
@@ -92,6 +93,7 @@ public class ArtistDetailsActivity extends BaseDetailsActivity {
         String transitionName = getIntent().getStringExtra(KEY_TRANSITION_NAME);
 
         MediaArtImageView sharedImageView = findViewById(R.id.details_activity_art);
+        TintHelper.setAccentTintTo(sharedImageView);
         sharedImageView.setTransitionName(transitionName);
         sharedImageView.setImageResource(R.drawable.ic_artist_art);
 
@@ -106,7 +108,7 @@ public class ArtistDetailsActivity extends BaseDetailsActivity {
                 sub.setText(String.format(Locale.ENGLISH, "%s %d %s", getString(R.string.num_artist_tracks), mList.size(), getString(R.string.album)));
 
                 RecyclerView rv = (RecyclerView) ((ViewStub) findViewById(R.id.stub_details_activity_rv)).inflate();
-                int padding = (int) DimensionsUtil.convertToPixels(this, 16f);
+                int padding = DimensionsUtil.getDimensionPixelSize(this, 16f);
                 rv.setPadding(padding, padding, 0, 0);
                 rv.setHasFixedSize(true);
                 rv.setVerticalFadingEdgeEnabled(true);

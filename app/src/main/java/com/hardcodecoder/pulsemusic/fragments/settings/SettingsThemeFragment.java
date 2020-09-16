@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SwitchCompat;
 
-import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.dialog.AccentsChooserDialogFragment;
 import com.hardcodecoder.pulsemusic.dialog.ThemeChooserBottomSheetDialogFragment;
@@ -53,7 +53,7 @@ public class SettingsThemeFragment extends SettingsBaseFragment {
         updateThemeSection(view);
 
         SettingsToggleableItem desaturatedAccentSwitchLayout = view.findViewById(R.id.laf_enable_desaturated);
-        SwitchMaterial desaturatedAccentSwitch = desaturatedAccentSwitchLayout.findViewById(R.id.setting_toggleable_item_switch);
+        SwitchCompat desaturatedAccentSwitch = desaturatedAccentSwitchLayout.findViewById(R.id.setting_toggleable_item_switch);
 
         boolean desaturatedAccents = false;
         if (null != getContext()) {
@@ -82,10 +82,10 @@ public class SettingsThemeFragment extends SettingsBaseFragment {
 
         // Get custom views
         SettingsToggleableItem enableDarkThemeLayout = view.findViewById(R.id.laf_enable_dark_mode);
-        SwitchMaterial enableDarkThemeSwitch = enableDarkThemeLayout.findViewById(R.id.setting_toggleable_item_switch);
+        SwitchCompat enableDarkThemeSwitch = enableDarkThemeLayout.findViewById(R.id.setting_toggleable_item_switch);
 
         SettingsToggleableItem enableAutoThemeLayout = view.findViewById(R.id.laf_enable_auto_mode);
-        SwitchMaterial enableAutoThemeSwitch = enableAutoThemeLayout.findViewById(R.id.setting_toggleable_item_switch);
+        SwitchCompat enableAutoThemeSwitch = enableAutoThemeLayout.findViewById(R.id.setting_toggleable_item_switch);
 
         // Configure state of views based on saved settings
         boolean darkModeEnable = AppSettings.isDarkModeEnabled(mContext);

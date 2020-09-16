@@ -5,24 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginStart="32dp"
-    android:layout_marginTop="8dp"
     android:gravity="center"
     android:orientation="vertical">
 
-    <com.google.android.material.textview.MaterialTextView
+    <com.hardcodecoder.pulsemusic.views.AccentColorTextView
         android:id="@+id/developer_head"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/lead_developer_title"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
-        android:textColor="?primaryColor" />
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Overline" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/lead_developer_card"
         android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        app:cardBackgroundColor="?surfaceColor"
+        app:cardBackgroundColor="?attr/colorSurface"
         app:cardCornerRadius="@dimen/rounding_radius_8dp"
         app:cardElevation="4dp"
         app:cardUseCompatPadding="false">
@@ -65,7 +63,7 @@
                 android:paddingBottom="32dp"
                 android:text="@string/lead_developer_user_name"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
-                android:textColor="?secondaryTextColor"
+                android:textColor="?android:attr/textColorSecondary"
                 app:layout_constraintTop_toBottomOf="@id/lead_developer_name" />
 
             <com.hardcodecoder.pulsemusic.views.ColoredIconView

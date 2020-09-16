@@ -6,13 +6,12 @@
     android:layout_marginStart="32dp"
     android:orientation="horizontal">
 
-    <com.google.android.material.textview.MaterialTextView
+    <com.hardcodecoder.pulsemusic.views.AccentColorTextView
         android:id="@+id/contribute_head"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/donation_category_head"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
-        android:textColor="?primaryColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,7 +21,7 @@
         android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        app:cardBackgroundColor="?surfaceColor"
+        app:cardBackgroundColor="?attr/colorSurface"
         app:cardCornerRadius="@dimen/rounding_radius_8dp"
         app:cardElevation="4dp"
         app:cardUseCompatPadding="false"

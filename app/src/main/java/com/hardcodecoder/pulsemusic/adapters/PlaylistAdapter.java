@@ -92,7 +92,7 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.CardsS
 
         @Override
         public void onItemSelected() {
-            itemView.setBackground(ImageUtil.getTintedGradientOverlay(itemView.getContext()));
+            itemView.setBackground(ImageUtil.getAccentTintedSelectedItemBackground(itemView.getContext()));
         }
 
         @Override

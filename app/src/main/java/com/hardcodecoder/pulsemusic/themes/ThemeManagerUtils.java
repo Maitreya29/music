@@ -2,6 +2,8 @@ package com.hardcodecoder.pulsemusic.themes;
 
 import android.content.Context;
 
+import androidx.annotation.ColorInt;
+
 import com.hardcodecoder.pulsemusic.Preferences;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 import com.hardcodecoder.pulsemusic.utils.DayTimeUtils;
@@ -11,12 +13,19 @@ public class ThemeManagerUtils {
     private static boolean mAutoMode = false;
     private static boolean mDarkMode = false;
     private static int mThemeId = Preferences.LIGHT_THEME;
-    private static int mAccentsId = Preferences.ACCENT_EXODUS_FRUIT;
+    private static int mPresetsAccentsId;
+    private static int mStoredAccentColor = PresetColors.EXODUS_FRUIT;
+    private static boolean mUsingPresetColors = true;
     private static boolean mDesaturatedAccents = false;
 
     public static void init(Context context) {
         mAutoMode = AppSettings.isAutoThemeEnabled(context);
-        mAccentsId = AppSettings.getSelectedAccentId(context);
+        if ((mUsingPresetColors = AppSettings.getPresetAccentModeEnabled(context))) {
+            mPresetsAccentsId = AppSettings.getSelectedAccentId(context);
+            mStoredAccentColor = PresetColors.getPresetAccentColorById(mPresetsAccentsId);
+        } else
+            mStoredAccentColor = AppSettings.getCustomAccentColor(context);
+
         if (mAutoMode) mDarkMode = (DayTimeUtils.getTimeOfDay() == DayTimeUtils.DayTime.NIGHT);
         else mDarkMode = AppSettings.isDarkModeEnabled(context);
 
@@ -24,6 +33,9 @@ public class ThemeManagerUtils {
         else mThemeId = Preferences.LIGHT_THEME;
 
         mDesaturatedAccents = AppSettings.getAccentDesaturatedColor(context) && mDarkMode;
+
+        // Reset theme colors, will be re initialized on activity create
+        ThemeColors.reset();
     }
 
     public static boolean toggleDarkTheme(Context context, boolean enabled) {
@@ -45,9 +57,14 @@ public class ThemeManagerUtils {
         AppSettings.saveSelectedDarkTheme(context, id);
     }
 
-    public static boolean setSelectedAccentColor(Context context, int accentId) {
+    public static boolean setSelectedPresetAccentColor(Context context, int accentId) {
         AppSettings.saveSelectedAccentId(context, accentId);
-        return accentId != mAccentsId;
+        return !mUsingPresetColors || mPresetsAccentsId != accentId;
+    }
+
+    public static boolean setSelectedCustomAccentColor(Context context, @ColorInt int color) {
+        AppSettings.saveCustomAccentColor(context, color);
+        return mStoredAccentColor != color;
     }
 
     public static boolean needToApplyNewDarkTheme() {
@@ -59,20 +76,21 @@ public class ThemeManagerUtils {
         return mDarkMode;
     }
 
-    public static boolean isAccentsDesaturated() {
-        return mDesaturatedAccents;
-    }
-
     public static int getThemeToApply() {
         return ThemeStore.getThemeById(mDarkMode, mThemeId);
     }
 
-    public static int getAccentStyleToApply() {
-        return ThemeStore.getAccentById(mAccentsId, mDesaturatedAccents);
+    @ColorInt
+    public static int getStoredAccentColor() {
+        return mStoredAccentColor;
     }
 
-    public static int getAccentById(int id) {
-        return ThemeStore.getAccentById(id, false);
+    public static boolean isUsingPresetColors() {
+        return mUsingPresetColors;
+    }
+
+    public static boolean isAccentsDesaturated() {
+        return mDesaturatedAccents;
     }
 
     private static boolean needToChangeTheme() {

@@ -1,22 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="Base">
-        <attr name="primaryColor" format="color|reference" />
-        <attr name="colorOnPrimary" format="color|reference" />
-
-        <attr name="primaryTextColor" format="color|reference" />
-        <attr name="secondaryTextColor" format="color|reference" />
-        <attr name="disabledTextColor" format="color|reference" />
-
         <attr name="windowBackgroundColor" format="color|reference" />
-        <attr name="surfaceColor" format="color|reference" />
-        <attr name="colorOnSurface" format="color|reference"/>
-
-        <attr name="unFocusedColor" format="color|reference" />
         <attr name="overlayColor" format="color|reference" />
 
         <attr name="navigationBarColor" format="color|reference" />
-        <attr name="isLightMode" format="boolean" />
         <attr name="toolbarBackground" format="integer" />
     </declare-styleable>
 </resources>

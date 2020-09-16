@@ -1,5 +1,7 @@
 package com.hardcodecoder.pulsemusic.fragments.nowplaying.screens;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.media.MediaMetadata;
 import android.media.session.PlaybackState;
 import android.os.Bundle;
@@ -15,6 +17,7 @@ import androidx.appcompat.widget.AppCompatSeekBar;
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.fragments.nowplaying.base.BaseNowPlayingScreen;
+import com.hardcodecoder.pulsemusic.themes.ThemeColors;
 
 public class EdgeNowPlayingScreen extends BaseNowPlayingScreen {
 
@@ -64,6 +67,13 @@ public class EdgeNowPlayingScreen extends BaseNowPlayingScreen {
         mRepeatBtn.setOnClickListener(v -> toggleRepeatMode());
         mPlayPauseBtn.setOnClickListener(v -> togglePlayPause());
         mFavoriteBtn.setOnClickListener(v -> toggleFavorite());
+        applySeekBarTint();
+        setDefaultTintToPlayBtn(mPlayPauseBtn);
+    }
+
+    private void applySeekBarTint() {
+        mProgressSeekBar.setProgressBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#1F000000")));
+        mProgressSeekBar.setProgressTintList(ColorStateList.valueOf(ThemeColors.getAccentColorForCurrentTheme()));
     }
 
     @Override
@@ -89,12 +99,12 @@ public class EdgeNowPlayingScreen extends BaseNowPlayingScreen {
 
     @Override
     public void onRepeatStateChanged(boolean repeat) {
-        mRepeatBtn.setImageResource(repeat ? R.drawable.ic_repeat_one : R.drawable.ic_repeat);
+        handleRepeatStateChanged(mRepeatBtn, repeat);
     }
 
     @Override
     public void onFavoriteStateChanged(boolean isFavorite) {
-        mFavoriteBtn.setSelected(isFavorite);
+        handleFavoriteStateChanged(mFavoriteBtn, isFavorite);
     }
 
 

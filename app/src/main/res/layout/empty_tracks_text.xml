@@ -8,5 +8,5 @@
     android:minHeight="200dp"
     android:paddingBottom="32dp"
     android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-    android:textColor="?secondaryTextColor"
+    android:textColor="?android:attr/textColorSecondary"
     tools:text="@string/tracks_not_found" />

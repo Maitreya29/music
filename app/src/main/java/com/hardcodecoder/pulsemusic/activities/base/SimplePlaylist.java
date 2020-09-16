@@ -65,6 +65,6 @@ public class SimplePlaylist extends BasePlaylistActivity implements SimpleItemCl
 
     @Override
     public void onOptionsClick(int position) {
-        UIHelper.buildAndShowOptionsMenu(this, getSupportFragmentManager(), mPlaylistTracks.get(position));
+        UIHelper.showMenuForLibraryTracks(this, getSupportFragmentManager(), mPlaylistTracks.get(position));
     }
 }

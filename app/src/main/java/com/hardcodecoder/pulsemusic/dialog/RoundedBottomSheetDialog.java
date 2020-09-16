@@ -9,11 +9,12 @@ import androidx.annotation.NonNull;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.hardcodecoder.pulsemusic.R;
+import com.hardcodecoder.pulsemusic.themes.ThemeManagerUtils;
 
 public class RoundedBottomSheetDialog extends BottomSheetDialog {
 
     public RoundedBottomSheetDialog(@NonNull Context context) {
-        super(context, R.style.BaseBottomSheetDialog);
+        super(context, ThemeManagerUtils.isDarkModeEnabled() ? R.style.RoundedBottomSheet : R.style.RoundedBottomSheetLight);
     }
 
     @Override

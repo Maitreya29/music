@@ -11,13 +11,12 @@
         android:paddingTop="16dp"
         android:paddingBottom="0dp">
 
-        <com.google.android.material.textview.MaterialTextView
+        <com.hardcodecoder.pulsemusic.views.AccentColorTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="72dp"
             android:text="@string/laf_category_theme"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
-            android:textColor="?primaryColor" />
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Overline" />
 
         <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
             android:id="@+id/laf_select_dark_theme"
@@ -26,8 +25,8 @@
             android:textStyle="normal"
             app:settingItemDesaturatedColorsInDarkMode="false"
             app:settingItemIcon="@drawable/ic_theme_palette"
-            app:settingItemIconBackgroundColor="?windowBackgroundColor"
-            app:settingItemIconColor="?unFocusedColor"
+            app:settingItemIconBackgroundColor="?attr/windowBackgroundColor"
+            app:settingItemIconColor="?attr/colorControlNormal"
             app:settingItemText="@string/laf_category_select_dark_theme_desc"
             app:settingItemTitle="@string/laf_category_select_dark_theme"
             app:settingToggleableItemEnabled="true" />
@@ -46,14 +45,13 @@
             app:settingToggleableItemText="@string/laf_category_enable_auto_mode_text"
             app:settingToggleableItemTitle="@string/laf_category_enable_auto_mode_title" />
 
-        <com.google.android.material.textview.MaterialTextView
+        <com.hardcodecoder.pulsemusic.views.AccentColorTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="72dp"
             android:layout_marginTop="32dp"
             android:text="@string/laf_category_colors"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
-            android:textColor="?primaryColor" />
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Overline" />
 
         <com.hardcodecoder.pulsemusic.views.SettingsToggleableItem
             android:id="@+id/laf_enable_desaturated"
@@ -69,28 +67,10 @@
             android:textStyle="normal"
             app:settingItemDesaturatedColorsInDarkMode="false"
             app:settingItemIcon="@drawable/ic_dropper"
-            app:settingItemIconBackgroundColor="?windowBackgroundColor"
-            app:settingItemIconColor="?unFocusedColor"
+            app:settingItemIconBackgroundColor="?attr/windowBackgroundColor"
+            app:settingItemIconColor="?attr/colorControlNormal"
             app:settingItemText="@string/laf_category_select_color_desc"
             app:settingItemTitle="@string/laf_category_select_color"
             app:settingToggleableItemEnabled="true" />
-
-        <!--
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="72dp"
-                    android:layout_marginTop="32dp"
-                    android:text="@string/laf_category_album_art_decoration"
-                    android:textAppearance="@style/TextViewOverline"
-                    android:textColor="?primaryColor" />
-
-                <com.hardcodecoder.pulsemusic.views.SettingsToggleableItem
-                    android:id="@+id/laf_select_album_art_overlay"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:settingToggleableItemText="@string/laf_category_album_art_decoration_desc"
-                    app:settingToggleableItemTitle="@string/laf_category_album_art_decoration_title" />
-          -->
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

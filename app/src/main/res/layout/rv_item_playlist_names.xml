@@ -11,7 +11,7 @@
         style="@style/ButtonStyle24"
         android:contentDescription="@string/iv_content_desc"
         android:src="@drawable/ic_playlist"
-        app:tint="?attr/unFocusedColor" />
+        app:tint="?attr/colorControlNormal" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/rv_item_playlist_name"

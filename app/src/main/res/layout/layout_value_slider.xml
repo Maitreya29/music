@@ -13,15 +13,12 @@
         android:layout_height="wrap_content"
         tools:text="0" />
 
-    <com.google.android.material.slider.Slider
+    <com.hardcodecoder.pulsemusic.views.AccentColorSlider
         android:id="@+id/value_slider"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        app:thumbColor="?attr/primaryColor"
         app:thumbRadius="6dp"
-        app:trackColorActive="?attr/primaryColor"
-        app:trackColorInactive="?attr/overlayColor"
         tools:value="50"
         tools:valueFrom="0"
         tools:valueTo="100" />

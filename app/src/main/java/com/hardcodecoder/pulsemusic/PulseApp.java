@@ -29,9 +29,14 @@ public class PulseApp extends Application {
             final AppShortcutsManager manager = new AppShortcutsManager(getApplicationContext());
             manager.initDynamicShortcuts(false);
             mListener = (sharedPreferences, key) -> {
-                if (key.equals(Preferences.ACCENTS_COLOR_KEY)) manager.initDynamicShortcuts(true);
+                if (key.equals(Preferences.ACCENTS_COLOR_PRESET_KEY) ||
+                        key.equals(Preferences.ACCENTS_COLOR_CUSTOM_KEY) ||
+                        key.equals(Preferences.ACCENTS_COLOR_DESATURATED_KEY) ||
+                        key.equals(Preferences.ACCENTS_MODE_USING_PRESET_KEY)) {
+                    manager.initDynamicShortcuts(true);
+                }
             };
-            getSharedPreferences(Preferences.ACCENTS_COLOR_KEY, MODE_PRIVATE).registerOnSharedPreferenceChangeListener(mListener);
+            getSharedPreferences(Preferences.PULSE_THEMES_PREFS, MODE_PRIVATE).registerOnSharedPreferenceChangeListener(mListener);
         }
         if (AppSettings.isBluetoothDeviceDetection(this)){
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -45,7 +50,7 @@ public class PulseApp extends Application {
 
     @Override
     public void onLowMemory() {
-        getSharedPreferences(Preferences.ACCENTS_COLOR_KEY, MODE_PRIVATE).unregisterOnSharedPreferenceChangeListener(mListener);
+        getSharedPreferences(Preferences.PULSE_THEMES_PREFS, MODE_PRIVATE).unregisterOnSharedPreferenceChangeListener(mListener);
         MediaArtCache.flushCache();
         super.onLowMemory();
     }
