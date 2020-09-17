@@ -25,8 +25,6 @@ import com.hardcodecoder.pulsemusic.fragments.main.ControlsFragment;
 import com.hardcodecoder.pulsemusic.fragments.main.HomeFragment;
 import com.hardcodecoder.pulsemusic.fragments.main.LibraryFragment;
 import com.hardcodecoder.pulsemusic.fragments.main.PlaylistFragment;
-import com.hardcodecoder.pulsemusic.loaders.LoaderCache;
-import com.hardcodecoder.pulsemusic.loaders.LoaderHelper;
 import com.hardcodecoder.pulsemusic.themes.ThemeColors;
 
 public class MainActivity extends MediaSessionActivity {
@@ -60,9 +58,7 @@ public class MainActivity extends MediaSessionActivity {
         super.onCreate(null); // Pass null to prevent restoration of fragments on activity recreate
         setContentView(R.layout.activity_main);
         setUpToolbar();
-        if (LoaderCache.getAllTracksList() == null) {
-            LoaderHelper.loadAllTracks(getContentResolver(), result -> setUpMainContents(savedInstanceState));
-        } else setUpMainContents(savedInstanceState);
+        setUpMainContents(savedInstanceState);
     }
 
 

@@ -17,6 +17,7 @@ import android.os.HandlerThread;
 import android.os.IBinder;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.media.session.MediaButtonReceiver;
@@ -29,6 +30,7 @@ import com.hardcodecoder.pulsemusic.playback.PlaybackManager;
 import com.hardcodecoder.pulsemusic.singleton.TrackManager;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -89,7 +91,7 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
      * --> pause the playback
      * --> remove the app from recent
      * --> Notification was started again and the service runs in the background, tapping on notification causes the app to crash
-     *Reason --> The system was recreating the service {verified by logs in on create and onStartCommand)
+     * Reason --> The system was recreating the service {verified by logs in on create and onStartCommand)
      * and thus notification was getting posted with the old metadata
      */
     @Override
@@ -122,18 +124,15 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
                         } else {
                             int currentAction = AppSettings.getBluetoothDeviceDetectionAction(getApplicationContext());
                             switch (currentAction) {
-                                case Preferences.BLUETOOTH_ACTION_PLAY_SHUFFLE:
-                                    playShuffle();
-                                    break;
                                 case Preferences.BLUETOOTH_ACTION_PLAY_LATEST:
                                     playLatest();
                                     break;
                                 case Preferences.BLUETOOTH_ACTION_PLAY_SUGGESTED:
                                     playSuggested();
                                     break;
+                                case Preferences.BLUETOOTH_ACTION_PLAY_SHUFFLE:
                                 default:
                                     playShuffle();
-                                    break;
                             }
                         }
                         break;
@@ -145,17 +144,21 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
     }
 
     private void playLatest() {
-        LoaderHelper.loadLatestTracks(getContentResolver(), this::playPlaylist);
+        LoaderHelper.loadAllTracks(getContentResolver(), result -> LoaderHelper.loadLatestTracks(this::playPlaylist));
     }
 
     private void playSuggested() {
-        LoaderHelper.loadSuggestionsList(getContentResolver(), this::playPlaylist);
+        LoaderHelper.loadAllTracks(getContentResolver(), result -> LoaderHelper.loadSuggestionsList(this::playPlaylist));
     }
 
     private void playShuffle() {
         LoaderHelper.loadAllTracks(getContentResolver(), result -> {
-            Collections.shuffle(result);
-            playPlaylist(result);
+            List<MusicModel> masterShuffledList = null;
+            if (null != result) {
+                masterShuffledList = new ArrayList<>(result);
+                Collections.shuffle(masterShuffledList);
+            }
+            playPlaylist(masterShuffledList);
         });
     }
 
@@ -163,7 +166,8 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
         if (null != playlist && playlist.size() > 0) {
             TrackManager.getInstance().buildDataList(playlist, 0);
             mMediaSession.getController().getTransportControls().play();
-        }
+        } else
+            Toast.makeText(this, getString(R.string.no_playlist_tracks_found), Toast.LENGTH_SHORT).show();
     }
 
     @Nullable

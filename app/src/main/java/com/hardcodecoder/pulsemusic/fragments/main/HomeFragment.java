@@ -63,10 +63,10 @@ public class HomeFragment extends Fragment {
         if (LoaderCache.getAllTracksList().size() > 0 && null != getContext()) {
             LoaderHelper.loadTopAlbums(result -> loadTopAlbums(view, result));
             if (null == LoaderCache.getSuggestions())
-                LoaderHelper.loadSuggestionsList(getContext().getContentResolver(), result -> loadSuggestions(view, result));
+                LoaderHelper.loadSuggestionsList(result -> loadSuggestions(view, result));
             else loadSuggestions(view, LoaderCache.getSuggestions());
             if (null == LoaderCache.getLatestTracks())
-                LoaderHelper.loadLatestTracks(getContext().getContentResolver(), result -> loadLatestTracks(view, result));
+                LoaderHelper.loadLatestTracks(result -> loadLatestTracks(view, result));
             else loadLatestTracks(view, LoaderCache.getLatestTracks());
             LoaderHelper.loadTopArtist(result -> loadTopArtists(view, result));
         } else {
