@@ -237,6 +237,7 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
     @Override
     public void onNotificationStopped(boolean removeNotification) {
         stopForeground(removeNotification);
+        if (removeNotification) stopSelf();
     }
 
     @Override

@@ -33,11 +33,8 @@ public class PulseApp extends Application {
             getSharedPreferences(Preferences.PULSE_THEMES_PREFS, MODE_PRIVATE).registerOnSharedPreferenceChangeListener(mListener);
         }
         if (AppSettings.isBluetoothDeviceDetectionEnabled(this)) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                startForegroundService(new Intent(getApplicationContext(), BDS.class));
-            } else {
-                startService(new Intent(getApplicationContext(), BDS.class));
-            }
+            Intent intent = new Intent(this, BDS.class);
+            startService(intent);
         }
     }
 

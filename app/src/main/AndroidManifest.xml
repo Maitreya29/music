@@ -7,20 +7,18 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
 
     <application
         android:name=".PulseApp"
         android:allowBackup="false"
         android:appCategory="audio"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="false"
         android:theme="@style/ActivityThemeDark"
-        android:hardwareAccelerated="true"
         tools:targetApi="Q">
 
         <activity android:name=".activities.SplashActivity">
@@ -48,6 +46,10 @@
             android:name=".activities.TrackPickerActivity"
             android:configChanges="orientation|screenSize" />
 
+        <activity
+            android:name=".shortcuts.ShortcutsLauncher"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
         <activity android:name=".activities.SettingsActivity" />
         <activity android:name=".activities.AlbumDetailsActivity" />
         <activity android:name=".activities.ArtistDetailsActivity" />
@@ -55,22 +57,18 @@
         <activity android:name=".activities.FavoritesActivity" />
         <activity android:name=".activities.CurrentPlaylistActivity" />
         <activity android:name=".activities.UserPlaylistTracksActivity" />
-        <activity
-            android:name=".shortcuts.ShortcutsLauncher"
-            android:launchMode="singleInstance"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity android:name=".activities.nowplaying.NowPlayingScreenActivity" />
 
-        <service
-            android:name=".BDS"
-            android:enabled="true"
-            android:exported="true" />
         <receiver android:name=".receivers.BluetoothBroadcastReceiver">
             <intent-filter>
                 <action android:name="android.bluetooth.device.action.ACL_CONNECTED" />
                 <action android:name="android.bluetooth.device.action.ACL_DISCONNECTED" />
             </intent-filter>
         </receiver>
+
+        <service
+            android:name=".BDS"
+            android:foregroundServiceType="connectedDevice" />
 
         <service
             android:name=".PMS"

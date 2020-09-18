@@ -1,8 +1,6 @@
 package com.hardcodecoder.pulsemusic.fragments.settings;
 
-import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +22,6 @@ import java.util.Objects;
 public class SettingsAudioFragment extends SettingsBaseFragment {
 
     public static final String TAG = SettingsAudioFragment.class.getSimpleName();
-    private Context mContext;
 
     public static SettingsAudioFragment getInstance() {
         return new SettingsAudioFragment();
@@ -49,33 +46,27 @@ public class SettingsAudioFragment extends SettingsBaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mContext = getActivity();
 
         SettingsToggleableItem bluetoothDeviceDetectionLayout = view.findViewById(R.id.audio_enable_bluetooth_start);
         SwitchCompat bluetoothDeviceDetectionSwitch = bluetoothDeviceDetectionLayout.findViewById(R.id.setting_toggleable_item_switch);
 
-        boolean bluetoothDeviceDetection = false;
         if (null != getContext()) {
-            bluetoothDeviceDetection = AppSettings.isBluetoothDeviceDetectionEnabled(getContext());
+            boolean bluetoothDeviceDetection = AppSettings.isBluetoothDeviceDetectionEnabled(getContext());
+
+            bluetoothDeviceDetectionSwitch.setChecked(bluetoothDeviceDetection);
+            bluetoothDeviceDetectionSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                AppSettings.saveBluetoothDeviceDetection(buttonView.getContext(), isChecked);
+                Intent bluetoothServiceIntent = new Intent(getContext().getApplicationContext(), BDS.class);
+                if (isChecked) getContext().startService(bluetoothServiceIntent);
+                else getContext().stopService(bluetoothServiceIntent);
+            });
+            bluetoothDeviceDetectionLayout.setOnClickListener(v ->
+                    bluetoothDeviceDetectionSwitch.setChecked(!bluetoothDeviceDetectionSwitch.isChecked()));
+
+            view.findViewById(R.id.audio_select_bluetooth_action).setOnClickListener(v -> {
+                BluetoothActionChooserBottomSheetDialogFragment dialog = BluetoothActionChooserBottomSheetDialogFragment.getInstance();
+                dialog.show(Objects.requireNonNull(getActivity()).getSupportFragmentManager(), BluetoothActionChooserBottomSheetDialogFragment.TAG);
+            });
         }
-
-        bluetoothDeviceDetectionSwitch.setChecked(bluetoothDeviceDetection);
-        bluetoothDeviceDetectionSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            AppSettings.saveBluetoothDeviceDetection(buttonView.getContext(), isChecked);
-            if (isChecked) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    mContext.startForegroundService(new Intent(mContext, BDS.class));
-                }
-            } else {
-                mContext.stopService(new Intent(mContext.getApplicationContext(), BDS.class));
-            }
-
-        });
-        bluetoothDeviceDetectionLayout.setOnClickListener(v -> bluetoothDeviceDetectionSwitch.setChecked(!bluetoothDeviceDetectionSwitch.isChecked()));
-
-        view.findViewById(R.id.audio_select_bluetooth_action).setOnClickListener(v -> {
-            BluetoothActionChooserBottomSheetDialogFragment dialog = BluetoothActionChooserBottomSheetDialogFragment.getInstance();
-            dialog.show(Objects.requireNonNull(getActivity()).getSupportFragmentManager(), BluetoothActionChooserBottomSheetDialogFragment.TAG);
-        });
     }
 }
