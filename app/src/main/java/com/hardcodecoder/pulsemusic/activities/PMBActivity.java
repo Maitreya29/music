@@ -19,7 +19,9 @@ public abstract class PMBActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        ThemeManagerUtils.init(getApplicationContext(), false);
         setTheme(ThemeManagerUtils.getThemeToApply());
+        // Initialize ThemeColors only after applying theme to the calling activity
         ThemeColors.initColors(this);
         mCurrentTheme = ThemeManagerUtils.getThemeToApply();
         mCurrentAccent = ThemeColors.getAccentColorForCurrentTheme();

@@ -17,8 +17,11 @@ public class ThemeManagerUtils {
     private static int mStoredAccentColor = PresetColors.EXODUS_FRUIT;
     private static boolean mUsingPresetColors = true;
     private static boolean mDesaturatedAccents = false;
+    private static boolean mInitialized = false;
 
-    public static void init(Context context) {
+    public static void init(Context context, boolean forceInitialize) {
+        if (!forceInitialize && mInitialized) return;
+
         mAutoMode = AppSettings.isAutoThemeEnabled(context);
         if ((mUsingPresetColors = AppSettings.getPresetAccentModeEnabled(context))) {
             mPresetsAccentsId = AppSettings.getSelectedAccentId(context);
@@ -34,8 +37,10 @@ public class ThemeManagerUtils {
 
         mDesaturatedAccents = AppSettings.getAccentDesaturatedColor(context) && mDarkMode;
 
-        // Reset theme colors, will be re initialized on activity create
+        // we have initialized theme, older colors may no longer represent the current theme
+        // Reset theme colors, will be re initialized on PMB#onCreate
         ThemeColors.reset();
+        mInitialized = true;
     }
 
     public static boolean toggleDarkTheme(Context context, boolean enabled) {
@@ -77,7 +82,7 @@ public class ThemeManagerUtils {
     }
 
     public static int getThemeToApply() {
-        return ThemeStore.getThemeById(mDarkMode, mThemeId);
+        return ThemeStore.getThemeById(mThemeId);
     }
 
     @ColorInt

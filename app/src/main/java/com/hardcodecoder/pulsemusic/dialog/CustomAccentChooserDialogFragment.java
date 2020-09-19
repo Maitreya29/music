@@ -121,7 +121,7 @@ public class CustomAccentChooserDialogFragment extends RoundedBottomSheetDialogF
         view.findViewById(R.id.custom_accents_apply_btn).setOnClickListener(v -> {
             boolean needsRestart = ThemeManagerUtils.setSelectedCustomAccentColor(v.getContext(), mSelectedColor);
             if (needsRestart && null != getActivity()) {
-                ThemeManagerUtils.init(getActivity());
+                ThemeManagerUtils.init(getActivity(), true);
                 getActivity().recreate();
             }
             dismiss();

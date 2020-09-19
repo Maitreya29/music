@@ -1,5 +1,7 @@
 package com.hardcodecoder.pulsemusic.activities;
 
+import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -7,15 +9,18 @@ import androidx.annotation.StringRes;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.appbar.MaterialToolbar;
+import com.hardcodecoder.pulsemusic.Preferences;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.fragments.settings.SettingsMainFragment;
 import com.hardcodecoder.pulsemusic.fragments.settings.base.SettingsBaseFragment;
 import com.hardcodecoder.pulsemusic.interfaces.SettingsFragmentsListener;
+import com.hardcodecoder.pulsemusic.shortcuts.AppShortcutsManager;
 
 public class SettingsActivity extends PMBActivity implements SettingsFragmentsListener {
 
     private MaterialToolbar mToolbar;
     private FragmentManager mFragmentManager;
+    private SharedPreferences.OnSharedPreferenceChangeListener mAccentsChangedListener;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,6 +39,19 @@ public class SettingsActivity extends PMBActivity implements SettingsFragmentsLi
             mFragmentManager.beginTransaction()
                     .replace(R.id.settings_content_container, SettingsMainFragment.getInstance())
                     .commit();
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
+            mAccentsChangedListener = (sharedPreferences, key) -> {
+                if (key.equals(Preferences.ACCENTS_COLOR_PRESET_KEY) ||
+                        key.equals(Preferences.ACCENTS_COLOR_CUSTOM_KEY) ||
+                        key.equals(Preferences.ACCENTS_COLOR_DESATURATED_KEY) ||
+                        key.equals(Preferences.ACCENTS_MODE_USING_PRESET_KEY)) {
+                    AppShortcutsManager manager = new AppShortcutsManager(getApplicationContext());
+                    manager.initDynamicShortcuts(true);
+                }
+            };
+            getSharedPreferences(Preferences.PULSE_THEMES_PREFS, MODE_PRIVATE)
+                    .registerOnSharedPreferenceChangeListener(mAccentsChangedListener);
         }
     }
 
@@ -64,5 +82,13 @@ public class SettingsActivity extends PMBActivity implements SettingsFragmentsLi
             mToolbar.setTitle(R.string.settings_title);
             mFragmentManager.popBackStack();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (null != mAccentsChangedListener)
+            getSharedPreferences(Preferences.PULSE_THEMES_PREFS, MODE_PRIVATE)
+                    .unregisterOnSharedPreferenceChangeListener(mAccentsChangedListener);
+        super.onDestroy();
     }
 }

@@ -50,7 +50,7 @@ public class AccentsChooserDialogFragment extends RoundedBottomSheetDialogFragme
                 dismiss();
                 if (ThemeManagerUtils.setSelectedPresetAccentColor(view.getContext(), newAccentId))
                     if (null != getActivity()) {
-                        ThemeManagerUtils.init(getActivity());
+                        ThemeManagerUtils.init(getActivity(), true);
                         getActivity().recreate();
                     }
             });

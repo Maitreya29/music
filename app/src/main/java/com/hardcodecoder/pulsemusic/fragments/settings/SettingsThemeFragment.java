@@ -131,7 +131,7 @@ public class SettingsThemeFragment extends SettingsBaseFragment {
     }
 
     private void applyTheme() {
-        ThemeManagerUtils.init(getActivity());
+        ThemeManagerUtils.init(getActivity(), true);
         requestActivityRestart();
     }
 }

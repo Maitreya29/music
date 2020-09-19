@@ -8,7 +8,7 @@ import com.hardcodecoder.pulsemusic.R;
 class ThemeStore {
 
     @StyleRes
-    static int getThemeById(boolean darkModeOn, int id) {
+    static int getThemeById(int id) {
         switch (id) {
             case Preferences.DARK_THEME_GRAY:
                 return R.style.ActivityThemeDark;
@@ -16,7 +16,9 @@ class ThemeStore {
                 return R.style.ActivityThemeKindaDark;
             case Preferences.DARK_THEME_PURE_BLACK:
                 return R.style.ActivityThemeBlack;
+            case Preferences.LIGHT_THEME:
+            default:
+                return R.style.ActivityThemeLight;
         }
-        return darkModeOn ? R.style.ActivityThemeDark : R.style.ActivityThemeLight;
     }
 }
