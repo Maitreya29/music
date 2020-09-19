@@ -49,4 +49,10 @@ public class LoaderCache {
         }
         mLatestTracks = new ArrayList<>(latestTracks);
     }
+
+    static void releaseCache() {
+        mAllTracksList = null;
+        mSuggestions = null;
+        mLatestTracks = null;
+    }
 }

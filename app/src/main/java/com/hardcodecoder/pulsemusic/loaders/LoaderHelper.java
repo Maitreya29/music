@@ -25,14 +25,13 @@ import java.util.Random;
 public class LoaderHelper {
 
     public static void loadAllTracks(@NonNull ContentResolver contentResolver, @NonNull Callback<List<MusicModel>> callback) {
-        if (null != LoaderCache.getAllTracksList())
+        // Since we are loading the master list
+        // Any previous cached tracks must be made invalid
+        LoaderCache.releaseCache();
+        TaskRunner.executeAsync(new LibraryLoader(contentResolver, SortOrder.TITLE_ASC), result -> {
+            LoaderCache.setAllTracksList(result);
             callback.onComplete(LoaderCache.getAllTracksList());
-        else {
-            TaskRunner.executeAsync(new LibraryLoader(contentResolver, SortOrder.TITLE_ASC), result -> {
-                LoaderCache.setAllTracksList(result);
-                callback.onComplete(LoaderCache.getAllTracksList());
-            });
-        }
+        });
     }
 
     public static void loadAlbumsList(ContentResolver contentResolver, SortOrder.ALBUMS sortOrder, @NonNull Callback<List<AlbumModel>> callback) {
