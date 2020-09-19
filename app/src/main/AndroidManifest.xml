@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:name=".PulseApp"
@@ -61,6 +62,7 @@
 
         <receiver android:name=".receivers.BluetoothBroadcastReceiver">
             <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.bluetooth.device.action.ACL_CONNECTED" />
                 <action android:name="android.bluetooth.device.action.ACL_DISCONNECTED" />
             </intent-filter>
@@ -68,6 +70,7 @@
 
         <service
             android:name=".BDS"
+            android:process=":bluetooth"
             android:foregroundServiceType="connectedDevice" />
 
         <service

@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 
+import androidx.core.content.ContextCompat;
+
 import com.hardcodecoder.pulsemusic.shortcuts.AppShortcutsManager;
 import com.hardcodecoder.pulsemusic.storage.AppFileManager;
 import com.hardcodecoder.pulsemusic.themes.ThemeManagerUtils;
@@ -34,7 +36,7 @@ public class PulseApp extends Application {
         }
         if (AppSettings.isBluetoothDeviceDetectionEnabled(this)) {
             Intent intent = new Intent(this, BDS.class);
-            startService(intent);
+            ContextCompat.startForegroundService(this, intent);
         }
     }
 
