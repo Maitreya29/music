@@ -82,4 +82,7 @@ public class Preferences {
     public static final short BLUETOOTH_ACTION_PLAY_SHUFFLE = 6000;
     public static final short BLUETOOTH_ACTION_PLAY_SUGGESTED = 6001;
     public static final short BLUETOOTH_ACTION_PLAY_LATEST = 6002;
+
+    public static final String APP_SHORTCUT_THEME = "AppShortCutThemeMode";
+    public static final String APP_SHORTCUT_THEME_MODE = "DarkThemeInUse";
 }

@@ -150,7 +150,6 @@ public class AppSettings {
                 .getInt(Preferences.BLUETOOTH_DEVICE_DETECTION_ACTION_KEY, Preferences.BLUETOOTH_ACTION_PLAY_SHUFFLE);
     }
 
-
     public static void saveNowPlayingAlbumCoverCornerRadius(@NonNull Context context, int tl, int tr, int bl, int br) {
         SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.NOW_PLAYING_ALBUM_COVER_CORNER_RADIUS, Context.MODE_PRIVATE).edit();
         editor.putInt(Preferences.NOW_PLAYING_ALBUM_COVER_RADIUS_TL, tl);
@@ -167,5 +166,16 @@ public class AppSettings {
         int bl = sharedPreferences.getInt(Preferences.NOW_PLAYING_ALBUM_COVER_RADIUS_BL, Preferences.NOW_PLAYING_ALBUM_COVER_RADIUS_DEF);
         int br = sharedPreferences.getInt(Preferences.NOW_PLAYING_ALBUM_COVER_RADIUS_BR, Preferences.NOW_PLAYING_ALBUM_COVER_RADIUS_DEF);
         return new int[]{tl, tr, bl, br};
+    }
+
+    public static void setAppShortcutThemeMode(@NonNull Context context, boolean darkModeOn) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.APP_SHORTCUT_THEME, Context.MODE_PRIVATE).edit();
+        editor.putBoolean(Preferences.APP_SHORTCUT_THEME_MODE, darkModeOn);
+        editor.apply();
+    }
+
+    public static boolean getAppShortcutThemeMode(@NonNull Context context) {
+        return context.getSharedPreferences(Preferences.APP_SHORTCUT_THEME, Context.MODE_PRIVATE)
+                .getBoolean(Preferences.APP_SHORTCUT_THEME_MODE, false);
     }
 }
