@@ -129,24 +129,24 @@ public class AppSettings {
     }
 
     public static void saveBluetoothDeviceDetection(@NonNull Context context, boolean enabled) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.BLUETOOTH_DEVICE_DETECTION_KEY, Context.MODE_PRIVATE).edit();
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.BLUETOOTH_DEVICE_DETECTION, Context.MODE_PRIVATE).edit();
         editor.putBoolean(Preferences.BLUETOOTH_DEVICE_DETECTION_KEY, enabled);
         editor.apply();
     }
 
     public static boolean isBluetoothDeviceDetectionEnabled(@NonNull Context context) {
-        return context.getSharedPreferences(Preferences.BLUETOOTH_DEVICE_DETECTION_KEY, Context.MODE_PRIVATE)
+        return context.getSharedPreferences(Preferences.BLUETOOTH_DEVICE_DETECTION, Context.MODE_PRIVATE)
                 .getBoolean(Preferences.BLUETOOTH_DEVICE_DETECTION_KEY, false);
     }
 
     public static void saveBluetoothDeviceDetectionAction(@NonNull Context context, int action) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.BLUETOOTH_DEVICE_DETECTION_ACTION_KEY, Context.MODE_PRIVATE).edit();
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.BLUETOOTH_DEVICE_DETECTION, Context.MODE_PRIVATE).edit();
         editor.putInt(Preferences.BLUETOOTH_DEVICE_DETECTION_ACTION_KEY, action);
         editor.apply();
     }
 
     public static int getBluetoothDeviceDetectionAction(@NonNull Context context) {
-        return context.getSharedPreferences(Preferences.BLUETOOTH_DEVICE_DETECTION_ACTION_KEY, Context.MODE_PRIVATE)
+        return context.getSharedPreferences(Preferences.BLUETOOTH_DEVICE_DETECTION, Context.MODE_PRIVATE)
                 .getInt(Preferences.BLUETOOTH_DEVICE_DETECTION_ACTION_KEY, Preferences.BLUETOOTH_ACTION_PLAY_SHUFFLE);
     }
 

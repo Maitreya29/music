@@ -78,7 +78,8 @@ public class Preferences {
     public static final String NOW_PLAYING_ALBUM_COVER_RADIUS_BR = "RadiusBottomRight";
     public static final int NOW_PLAYING_ALBUM_COVER_RADIUS_DEF = 16;
 
-    public static final String BLUETOOTH_DEVICE_DETECTION_KEY = "BluetoothDeviceDetection";
+    public static final String BLUETOOTH_DEVICE_DETECTION = "BluetoothDeviceDetection";
+    public static final String BLUETOOTH_DEVICE_DETECTION_KEY = "BluetoothDetectionEnabled";
     public static final String BLUETOOTH_DEVICE_DETECTION_ACTION_KEY = "BluetoothDeviceDetectionAction";
 
     public static final short BLUETOOTH_ACTION_PLAY_SHUFFLE = 6000;
