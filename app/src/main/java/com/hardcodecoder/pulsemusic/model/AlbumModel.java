@@ -6,14 +6,16 @@ public class AlbumModel {
     private int mSongsCount;
     private long mAlbumId;
     private String mAlbumName;
+    private String mAlbumArtist;
     private String mAlbumArt;
 
-    public AlbumModel(int mId, int mSongsCount, long albumId, String mAlbumName, String mAlbumArt) {
-        this.mId = mId;
-        this.mSongsCount = mSongsCount;
+    public AlbumModel(int id, int songsCount, long albumId, String albumName, String albumArtist, String albumArt) {
+        this.mId = id;
+        this.mSongsCount = songsCount;
         this.mAlbumId = albumId;
-        this.mAlbumName = mAlbumName;
-        this.mAlbumArt = mAlbumArt;
+        this.mAlbumName = albumName;
+        this.mAlbumArtist = albumArtist;
+        this.mAlbumArt = albumArt;
     }
 
     public int getId() {
@@ -30,6 +32,10 @@ public class AlbumModel {
 
     public String getAlbumName() {
         return mAlbumName;
+    }
+
+    public String getAlbumArtist() {
+        return mAlbumArtist;
     }
 
     public String getAlbumArt() {

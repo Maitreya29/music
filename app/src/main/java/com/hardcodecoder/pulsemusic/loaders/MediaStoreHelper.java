@@ -37,6 +37,10 @@ public class MediaStoreHelper {
                 return MediaStore.Audio.Albums.ALBUM + " COLLATE NOCASE ASC";
             case TITLE_DESC:
                 return MediaStore.Audio.Albums.ALBUM + " COLLATE NOCASE DESC";
+            case ARTIST_ASC:
+                return MediaStore.Audio.Albums.ARTIST + " COLLATE NOCASE ASC";
+            case ARTIST_DESC:
+                return MediaStore.Audio.Albums.ARTIST + " COLLATE NOCASE DESC";
             case ALBUM_DATE_FIRST_YEAR_ASC:
                 return MediaStore.Audio.Albums.FIRST_YEAR + " ASC";
             case ALBUM_DATE_FIRST_YEAR_DESC:

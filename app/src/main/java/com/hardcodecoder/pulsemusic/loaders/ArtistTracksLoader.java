@@ -33,6 +33,7 @@ public class ArtistTracksLoader implements Callable<List<AlbumModel>> {
         String[] col = {
                 MediaStore.Audio.Artists.Albums.ALBUM,
                 MediaStore.Audio.Artists.Albums.ALBUM_ID,
+                MediaStore.Audio.Artists.Albums.ARTIST,
                 MediaStore.Audio.Artists.Albums.NUMBER_OF_SONGS_FOR_ARTIST};
 
         final Cursor cursor = mContentResolver.query(
@@ -46,14 +47,16 @@ public class ArtistTracksLoader implements Callable<List<AlbumModel>> {
         if (cursor != null && cursor.moveToFirst()) {
             int albumColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Artists.Albums.ALBUM);
             int albumIdColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Artists.Albums.ALBUM_ID);
+            int albumArtistColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Artists.Albums.ALBUM_ID);
             int albumCountColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Artists.Albums.NUMBER_OF_SONGS_FOR_ARTIST);
             final Uri sArtworkUri = Uri.parse("content://media/external/audio/albumart");
             do {
                 String album = cursor.getString(albumColumnIndex);
                 long albumId = cursor.getLong(albumIdColumnIndex);
                 int num = cursor.getInt(albumCountColumnIndex);
+                String albumArtist = cursor.getString(albumArtistColumnIndex);
                 String albumArt = ContentUris.withAppendedId(sArtworkUri, albumId).toString();
-                albumsList.add(new AlbumModel(id++, num, albumId, album, albumArt));
+                albumsList.add(new AlbumModel(id++, num, albumId, album, albumArtist, albumArt));
 
             } while (cursor.moveToNext());
             cursor.close();

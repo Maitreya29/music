@@ -62,10 +62,20 @@ public class SortUtil {
     }
 
     public static List<AlbumModel> sortAlbumList(List<AlbumModel> list, ALBUMS sortOrder) {
-        if (sortOrder == ALBUMS.TITLE_ASC)
-            Collections.sort(list, (o1, o2) -> o1.getAlbumName().compareToIgnoreCase(o2.getAlbumName()));
-        else if (sortOrder == ALBUMS.TITLE_DESC) {
-            Collections.sort(list, (o1, o2) -> o2.getAlbumName().compareToIgnoreCase(o1.getAlbumName()));
+        switch (sortOrder) {
+            case TITLE_DESC:
+                Collections.sort(list, (o1, o2) -> o2.getAlbumName().compareToIgnoreCase(o1.getAlbumName()));
+                break;
+            case ARTIST_ASC:
+                Collections.sort(list, (o1, o2) -> o1.getAlbumArtist().compareToIgnoreCase(o2.getAlbumArtist()));
+                break;
+            case ARTIST_DESC:
+                Collections.sort(list, (o1, o2) -> o2.getAlbumArtist().compareToIgnoreCase(o1.getAlbumArtist()));
+                break;
+            case TITLE_ASC:
+            default:
+                Collections.sort(list, (o1, o2) -> o1.getAlbumName().compareToIgnoreCase(o2.getAlbumName()));
+                break;
         }
         return list;
     }

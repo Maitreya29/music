@@ -16,6 +16,8 @@ public enum SortOrder {
     public enum ALBUMS {
         TITLE_ASC,
         TITLE_DESC,
+        ARTIST_ASC,
+        ARTIST_DESC,
         ALBUM_DATE_FIRST_YEAR_ASC,
         ALBUM_DATE_FIRST_YEAR_DESC,
         ALBUM_DATE_LAST_YEAR_ASC,

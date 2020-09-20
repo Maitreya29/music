@@ -68,6 +68,10 @@ public class AlbumsFragment extends CardGridFragment {
         switch (sortOrder) {
             case Preferences.SORT_ORDER_DESC:
                 return ALBUMS.TITLE_DESC;
+            case Preferences.SORT_ORDER_ALBUM_ARTIST_ASC:
+                return ALBUMS.ARTIST_ASC;
+            case Preferences.SORT_ORDER_ALBUM_ARTIST_DESC:
+                return ALBUMS.ARTIST_DESC;
             case Preferences.SORT_ORDER_ASC:
             default:
                 return ALBUMS.TITLE_ASC;

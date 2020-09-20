@@ -39,6 +39,12 @@ public class CardGridFragment extends PMBGridFragment {
             case R.id.menu_action_sort_desc:
                 changeSortOrder(Preferences.SORT_ORDER_DESC);
                 break;
+            case R.id.menu_action_sort_artist_asc:
+                changeSortOrder(Preferences.SORT_ORDER_ALBUM_ARTIST_ASC);
+                break;
+            case R.id.menu_action_sort_artist_desc:
+                changeSortOrder(Preferences.SORT_ORDER_ALBUM_ARTIST_DESC);
+                break;
             case R.id.two:
                 updateGridSpanCount(Configuration.ORIENTATION_PORTRAIT, 2);
                 break;
