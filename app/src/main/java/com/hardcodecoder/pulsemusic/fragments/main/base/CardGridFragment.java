@@ -27,10 +27,7 @@ public class CardGridFragment extends PMBGridFragment {
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        if (getCurrentOrientation() == Configuration.ORIENTATION_PORTRAIT)
-            inflater.inflate(R.menu.menu_grid_fragment, menu);
-        else if (getCurrentOrientation() == Configuration.ORIENTATION_LANDSCAPE)
-            inflater.inflate(R.menu.menu_grid_fragment_land, menu);
+        inflater.inflate(getMenuRes(getCurrentOrientation()), menu);
     }
 
     @Override
@@ -67,6 +64,11 @@ public class CardGridFragment extends PMBGridFragment {
     @Override
     public int getSortOrder() {
         return Preferences.SORT_ORDER_ASC;
+    }
+
+    @Override
+    public int getMenuRes(int screenOrientation) {
+        return 0;
     }
 
     @Override

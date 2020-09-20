@@ -2,6 +2,7 @@ package com.hardcodecoder.pulsemusic.fragments.main.base;
 
 import android.content.res.Configuration;
 
+import androidx.annotation.MenuRes;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
@@ -58,6 +59,9 @@ public abstract class PMBGridFragment extends Fragment {
         saveNewSpanCount(id, spanCount);
         onLayoutSpanCountChanged(id, spanCount);
     }
+
+    @MenuRes
+    public abstract int getMenuRes(int screenOrientation);
 
     public abstract int getSortOrder();
 

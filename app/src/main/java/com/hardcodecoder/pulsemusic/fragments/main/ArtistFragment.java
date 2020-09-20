@@ -77,6 +77,13 @@ public class ArtistFragment extends CardGridFragment {
     }
 
     @Override
+    public int getMenuRes(int screenOrientation) {
+        if (screenOrientation == Configuration.ORIENTATION_LANDSCAPE)
+            return R.menu.menu_artist_land;
+        return R.menu.menu_artist;
+    }
+
+    @Override
     public int getSortOrder() {
         if (null == getContext())
             return super.getSortOrder();

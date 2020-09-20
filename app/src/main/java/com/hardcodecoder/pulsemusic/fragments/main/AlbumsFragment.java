@@ -38,10 +38,8 @@ public class AlbumsFragment extends CardGridFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         final int sortOrder = getCurrentSortOrder();
-        ALBUMS albumsSortOrder = sortOrder == Preferences.SORT_ORDER_ASC ?
-                ALBUMS.TITLE_ASC : ALBUMS.TITLE_DESC;
         LoaderHelper.loadAlbumsList(view.getContext().getContentResolver(),
-                albumsSortOrder,
+                resolveSortOrder(sortOrder),
                 result -> loadAlbumsList(view, result));
     }
 
@@ -67,9 +65,13 @@ public class AlbumsFragment extends CardGridFragment {
     }
 
     private ALBUMS resolveSortOrder(int sortOrder) {
-        if (sortOrder == Preferences.SORT_ORDER_ASC)
-            return ALBUMS.TITLE_ASC;
-        return ALBUMS.TITLE_DESC;
+        switch (sortOrder) {
+            case Preferences.SORT_ORDER_DESC:
+                return ALBUMS.TITLE_DESC;
+            case Preferences.SORT_ORDER_ASC:
+            default:
+                return ALBUMS.TITLE_ASC;
+        }
     }
 
     @Override
@@ -77,6 +79,13 @@ public class AlbumsFragment extends CardGridFragment {
         if (null == getContext())
             return super.getSortOrder();
         return AppSettings.getSortOrder(getContext(), Preferences.SORT_ORDER_ALBUMS_KEY);
+    }
+
+    @Override
+    public int getMenuRes(int screenOrientation) {
+        if (screenOrientation == Configuration.ORIENTATION_LANDSCAPE)
+            return R.menu.menu_album_land;
+        return R.menu.menu_album;
     }
 
     @Override

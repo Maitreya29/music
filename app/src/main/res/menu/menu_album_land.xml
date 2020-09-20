@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:icon="@drawable/ic_sort"
+        android:orderInCategory="1"
+        android:title="@string/sort_order"
+        app:iconTint="?attr/colorControlNormal"
+        app:showAsAction="ifRoom">
+        <menu>
+            <item
+                android:id="@+id/menu_action_sort_asc"
+                android:title="@string/alphabet_asc" />
+
+            <item
+                android:id="@+id/menu_action_sort_desc"
+                android:title="@string/alphabet_desc" />
+
+            <item
+                android:id="@+id/menu_action_sort_artist_asc"
+                android:title="@string/album_artist_asc" />
+
+            <item
+                android:id="@+id/menu_action_sort_artist_desc"
+                android:title="@string/album_artist_desc" />
+        </menu>
+    </item>
+    <item
+        android:icon="@drawable/ic_columns"
+        android:orderInCategory="2"
+        android:title="@string/grid_count_land"
+        app:iconTint="?attr/colorControlNormal"
+        app:showAsAction="ifRoom">
+        <menu>
+            <item
+                android:id="@+id/l_four"
+                android:title="@string/four" />
+
+            <item
+                android:id="@+id/l_five"
+                android:title="@string/five" />
+
+            <item
+                android:id="@+id/l_six"
+                android:title="@string/six" />
+        </menu>
+    </item>
+</menu>

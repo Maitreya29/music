@@ -78,6 +78,13 @@ public class LibraryFragment extends ListGridFragment {
         }
     }
 
+    @Override
+    public int getMenuRes(int screenOrientation) {
+        if (screenOrientation == Configuration.ORIENTATION_LANDSCAPE)
+            return R.menu.menu_library_land;
+        return R.menu.menu_library;
+    }
+
     private SortOrder resolveSortOrder(int sortOrder) {
         switch (sortOrder) {
             case Preferences.SORT_ORDER_ASC:

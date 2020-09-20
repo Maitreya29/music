@@ -27,17 +27,7 @@ public class ListGridFragment extends PMBGridFragment {
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        if (getShowOptionsMenuItemSort()) {
-            if (getCurrentOrientation() == Configuration.ORIENTATION_PORTRAIT)
-                inflater.inflate(R.menu.menu_library, menu);
-            else if (getCurrentOrientation() == Configuration.ORIENTATION_LANDSCAPE)
-                inflater.inflate(R.menu.menu_library_land, menu);
-        } else {
-            if (getCurrentOrientation() == Configuration.ORIENTATION_PORTRAIT)
-                inflater.inflate(R.menu.menu_library_no_sort, menu);
-            else if (getCurrentOrientation() == Configuration.ORIENTATION_LANDSCAPE)
-                inflater.inflate(R.menu.menu_library_no_sort_land, menu);
-        }
+        inflater.inflate(getMenuRes(getCurrentOrientation()), menu);
     }
 
     @Override
@@ -86,8 +76,9 @@ public class ListGridFragment extends PMBGridFragment {
         return true;
     }
 
-    protected boolean getShowOptionsMenuItemSort() {
-        return true;
+    @Override
+    public int getMenuRes(int screenOrientation) {
+        return 0;
     }
 
     @Override
