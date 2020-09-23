@@ -2,19 +2,23 @@ package com.hardcodecoder.pulsemusic.model;
 
 public class AlbumModel {
 
-    private int mId;
-    private int mSongsCount;
-    private long mAlbumId;
     private String mAlbumName;
     private String mAlbumArtist;
     private String mAlbumArt;
+    private long mAlbumId;
+    private int mSongsCount;
+    private int mId;
+    private int mFirstYear;
+    private int mLastYear;
 
-    public AlbumModel(int id, int songsCount, long albumId, String albumName, String albumArtist, String albumArt) {
+    public AlbumModel(int id, String albumName, long albumId, String albumArtist, int songsCount, int firstYear, int lastYear, String albumArt) {
         this.mId = id;
-        this.mSongsCount = songsCount;
-        this.mAlbumId = albumId;
         this.mAlbumName = albumName;
+        this.mAlbumId = albumId;
         this.mAlbumArtist = albumArtist;
+        this.mSongsCount = songsCount;
+        this.mFirstYear = firstYear;
+        this.mLastYear = lastYear;
         this.mAlbumArt = albumArt;
     }
 
@@ -22,20 +26,28 @@ public class AlbumModel {
         return mId;
     }
 
+    public String getAlbumName() {
+        return mAlbumName;
+    }
+
     public long getAlbumId() {
         return mAlbumId;
+    }
+
+    public String getAlbumArtist() {
+        return mAlbumArtist;
     }
 
     public int getSongsCount() {
         return mSongsCount;
     }
 
-    public String getAlbumName() {
-        return mAlbumName;
+    public int getFirstYear() {
+        return mFirstYear;
     }
 
-    public String getAlbumArtist() {
-        return mAlbumArtist;
+    public int getLastYear() {
+        return mLastYear;
     }
 
     public String getAlbumArt() {

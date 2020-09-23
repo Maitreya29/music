@@ -34,7 +34,9 @@ public class ArtistTracksLoader implements Callable<List<AlbumModel>> {
                 MediaStore.Audio.Artists.Albums.ALBUM,
                 MediaStore.Audio.Artists.Albums.ALBUM_ID,
                 MediaStore.Audio.Artists.Albums.ARTIST,
-                MediaStore.Audio.Artists.Albums.NUMBER_OF_SONGS_FOR_ARTIST};
+                MediaStore.Audio.Artists.Albums.NUMBER_OF_SONGS_FOR_ARTIST,
+                MediaStore.Audio.Artists.Albums.FIRST_YEAR,
+                MediaStore.Audio.Artists.Albums.LAST_YEAR};
 
         final Cursor cursor = mContentResolver.query(
                 MediaStore.Audio.Artists.Albums.getContentUri("external", artistId),
@@ -49,14 +51,18 @@ public class ArtistTracksLoader implements Callable<List<AlbumModel>> {
             int albumIdColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Artists.Albums.ALBUM_ID);
             int albumArtistColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Artists.Albums.ALBUM_ID);
             int albumCountColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Artists.Albums.NUMBER_OF_SONGS_FOR_ARTIST);
+            int albumFirstYearColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Artists.Albums.FIRST_YEAR);
+            int albumLastYearColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Artists.Albums.LAST_YEAR);
             final Uri sArtworkUri = Uri.parse("content://media/external/audio/albumart");
             do {
                 String album = cursor.getString(albumColumnIndex);
                 long albumId = cursor.getLong(albumIdColumnIndex);
                 int num = cursor.getInt(albumCountColumnIndex);
+                int firstYear = cursor.getInt(albumFirstYearColumnIndex);
+                int lastYear = cursor.getInt(albumLastYearColumnIndex);
                 String albumArtist = cursor.getString(albumArtistColumnIndex);
                 String albumArt = ContentUris.withAppendedId(sArtworkUri, albumId).toString();
-                albumsList.add(new AlbumModel(id++, num, albumId, album, albumArtist, albumArt));
+                albumsList.add(new AlbumModel(id++, album, albumId, albumArtist, num, firstYear, lastYear, albumArt));
 
             } while (cursor.moveToNext());
             cursor.close();
