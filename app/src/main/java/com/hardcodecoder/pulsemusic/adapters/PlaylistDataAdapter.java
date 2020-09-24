@@ -30,7 +30,6 @@ import java.util.List;
 
 public class PlaylistDataAdapter extends RecyclerView.Adapter<PlaylistDataAdapter.PlaylistDataSVH> implements ItemTouchHelperAdapter {
 
-
     private LayoutInflater mInflater;
     private List<MusicModel> mPlaylistTracks;
     private SimpleGestureCallback mCallback;
@@ -46,16 +45,20 @@ public class PlaylistDataAdapter extends RecyclerView.Adapter<PlaylistDataAdapte
         this.mCallback = callback;
     }
 
-    public void onListShuffled(List<MusicModel> oldList) {
+    public void updatePlaylist(List<MusicModel> newList) {
         final Handler handler = new Handler();
         TaskRunner.executeAsync(() -> {
-            final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new PMBGridAdapterDiffCallback(oldList, mPlaylistTracks) {
+            final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new PMBGridAdapterDiffCallback(mPlaylistTracks, newList) {
                 @Override
                 public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-                    return oldList.get(oldItemPosition).getTrackName().equals(mPlaylistTracks.get(newItemPosition).getTrackName());
+                    return mPlaylistTracks.get(oldItemPosition).getTrackName().equals(newList.get(newItemPosition).getTrackName());
                 }
             });
-            handler.post(() -> diffResult.dispatchUpdatesTo(PlaylistDataAdapter.this));
+            handler.post(() -> {
+                diffResult.dispatchUpdatesTo(PlaylistDataAdapter.this);
+                mPlaylistTracks.clear();
+                mPlaylistTracks.addAll(newList);
+            });
         });
     }
 

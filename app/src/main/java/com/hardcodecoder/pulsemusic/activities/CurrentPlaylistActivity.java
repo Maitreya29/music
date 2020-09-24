@@ -9,9 +9,9 @@ import com.google.android.material.snackbar.Snackbar;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.activities.base.AdvancePlaylist;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
+import com.hardcodecoder.pulsemusic.singleton.TrackManager;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class CurrentPlaylistActivity extends AdvancePlaylist {
 
@@ -23,9 +23,8 @@ public class CurrentPlaylistActivity extends AdvancePlaylist {
         setUpToolbar(getString(R.string.playlist_current_queue));
         setShuffleButtonAction(v -> {
             if (null == mPlaylistTracks) return;
-            List<MusicModel> oldList = new ArrayList<>(mPlaylistTracks);
             shuffleTrackAndPlay(mPlaylistTracks);
-            mAdapter.onListShuffled(oldList);
+            mAdapter.updatePlaylist(TrackManager.getInstance().getActiveQueue());
         });
         setUpData(mTrackManager.getActiveQueue(), mTrackManager.getActiveIndex());
     }

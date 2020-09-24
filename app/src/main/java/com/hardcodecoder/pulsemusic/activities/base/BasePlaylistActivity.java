@@ -21,6 +21,7 @@ import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.singleton.TrackManager;
 import com.hardcodecoder.pulsemusic.themes.TintHelper;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -74,8 +75,9 @@ public abstract class BasePlaylistActivity extends MediaSessionActivity {
     protected void shuffleTrackAndPlay(List<MusicModel> playlist) {
         if (null == playlist || playlist.size() <= 0)
             return;
-        Collections.shuffle(playlist);
-        mTrackManager.buildDataList(playlist, 0);
+        List<MusicModel> playListToPlay = new ArrayList<>(playlist);
+        Collections.shuffle(playListToPlay);
+        mTrackManager.buildDataList(playListToPlay, 0);
         playMedia();
         Toast.makeText(this, getString(R.string.playlist_shuffled_success_toast), Toast.LENGTH_SHORT).show();
     }
