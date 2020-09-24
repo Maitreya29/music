@@ -47,6 +47,9 @@ public class SettingsToggleableItem extends FrameLayout {
         text.setText(typedArray.getText(R.styleable.SettingsToggleableItem_settingToggleableItemText));
 
         typedArray.recycle();
+
+        // Added onClick listener to toggle switch state
+        setOnClickListener(v -> switchButton.setChecked(!switchButton.isChecked()));
     }
 
     @Override
@@ -55,5 +58,17 @@ public class SettingsToggleableItem extends FrameLayout {
         text.setEnabled(enabled);
         switchButton.setEnabled(enabled);
         super.setEnabled(enabled);
+    }
+
+    public boolean isSwitchChecked() {
+        return switchButton.isChecked();
+    }
+
+    public void setSwitchChecked(boolean checked) {
+        switchButton.setChecked(checked);
+    }
+
+    public void setOnSwitchCheckedChangedListener(SwitchCompat.OnCheckedChangeListener checkedListener) {
+        switchButton.setOnCheckedChangeListener(checkedListener);
     }
 }
