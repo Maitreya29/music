@@ -48,14 +48,14 @@ public abstract class PMBGridFragment extends Fragment {
         return mSpanCount;
     }
 
-    void changeSortOrder(int newSortOrder) {
+    protected void changeSortOrder(int newSortOrder) {
         if (mCurrentSortOrder != newSortOrder) {
             mCurrentSortOrder = newSortOrder;
             onSortOrderChanged(newSortOrder);
         }
     }
 
-    void updateGridSpanCount(int id, int spanCount) {
+    protected void updateGridSpanCount(int id, int spanCount) {
         saveNewSpanCount(id, spanCount);
         onLayoutSpanCountChanged(id, spanCount);
     }

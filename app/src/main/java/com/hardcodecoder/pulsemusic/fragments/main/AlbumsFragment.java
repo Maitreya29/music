@@ -2,6 +2,7 @@ package com.hardcodecoder.pulsemusic.fragments.main;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewStub;
 import android.view.animation.AnimationUtils;
@@ -41,6 +42,27 @@ public class AlbumsFragment extends CardGridFragment {
         LoaderHelper.loadAlbumsList(view.getContext().getContentResolver(),
                 resolveSortOrder(sortOrder),
                 result -> loadAlbumsList(view, result));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_action_sort_artist_asc:
+                changeSortOrder(Preferences.SORT_ORDER_ALBUM_ARTIST_ASC);
+                break;
+            case R.id.menu_action_sort_artist_desc:
+                changeSortOrder(Preferences.SORT_ORDER_ALBUM_ARTIST_DESC);
+                break;
+            case R.id.menu_action_sort_first_year_asc:
+                changeSortOrder(Preferences.SORT_ORDER_ALBUM_FIRST_YEAR_ASC);
+                break;
+            case R.id.menu_action_sort_first_year_desc:
+                changeSortOrder(Preferences.SORT_ORDER_ALBUM_FIRST_YEAR_DESC);
+                break;
+            default:
+                super.onOptionsItemSelected(item);
+        }
+        return true;
     }
 
     private void loadAlbumsList(View view, List<AlbumModel> list) {
