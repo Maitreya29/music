@@ -21,6 +21,8 @@ public class Preferences {
     public static final int SORT_ORDER_ALBUM_TRACK_NUMBER_DESC = 3009;
     public static final int SORT_ORDER_ALBUM_ARTIST_ASC = 3010;
     public static final int SORT_ORDER_ALBUM_ARTIST_DESC = 3011;
+    public static final int SORT_ORDER_ALBUM_FIRST_YEAR_ASC = 3012;
+    public static final int SORT_ORDER_ALBUM_FIRST_YEAR_DESC = 3013;
 
     public static final String SPAN_COUNT = "GridSpanCount";
 

@@ -72,6 +72,24 @@ public class SortUtil {
             case ARTIST_DESC:
                 Collections.sort(list, (o1, o2) -> o2.getAlbumArtist().compareToIgnoreCase(o1.getAlbumArtist()));
                 break;
+            case ALBUM_DATE_FIRST_YEAR_ASC:
+                Collections.sort(list, (o1, o2) -> {
+                    int diff = Integer.compare(o1.getFirstYear(), o2.getFirstYear());
+                    // If album year is the same, sort alphabetically
+                    if (diff == 0)
+                        return o1.getAlbumName().compareToIgnoreCase(o2.getAlbumName());
+                    return diff;
+                });
+                break;
+            case ALBUM_DATE_FIRST_YEAR_DESC:
+                Collections.sort(list, (o1, o2) -> {
+                    int diff = Integer.compare(o2.getFirstYear(), o1.getFirstYear());
+                    // If album year is the same, sort alphabetically
+                    if (diff == 0)
+                        return o1.getAlbumName().compareToIgnoreCase(o2.getAlbumName());
+                    return diff;
+                });
+                break;
             case TITLE_ASC:
             default:
                 Collections.sort(list, (o1, o2) -> o1.getAlbumName().compareToIgnoreCase(o2.getAlbumName()));

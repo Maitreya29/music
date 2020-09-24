@@ -72,6 +72,10 @@ public class AlbumsFragment extends CardGridFragment {
                 return ALBUMS.ARTIST_ASC;
             case Preferences.SORT_ORDER_ALBUM_ARTIST_DESC:
                 return ALBUMS.ARTIST_DESC;
+            case Preferences.SORT_ORDER_ALBUM_FIRST_YEAR_ASC:
+                return ALBUMS.ALBUM_DATE_FIRST_YEAR_ASC;
+            case Preferences.SORT_ORDER_ALBUM_FIRST_YEAR_DESC:
+                return ALBUMS.ALBUM_DATE_FIRST_YEAR_DESC;
             case Preferences.SORT_ORDER_ASC:
             default:
                 return ALBUMS.TITLE_ASC;
