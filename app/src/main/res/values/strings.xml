@@ -89,6 +89,7 @@
     <string name="four">Four</string>
     <string name="five">Five</string>
     <string name="six">Six</string>
+    <string name="clear_dulicates">Clear duplicates</string>
 
 
     <!-- Options menu for list items -->

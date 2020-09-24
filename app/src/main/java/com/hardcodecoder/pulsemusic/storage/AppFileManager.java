@@ -181,6 +181,7 @@ public class AppFileManager {
                                           @NonNull List<MusicModel> playlistTracks,
                                           boolean append,
                                           @Nullable Callback<Boolean> callback) {
+        final Handler handler = new Handler();
         TaskRunner.executeAsync(() -> {
             List<String> tracksTitleRaw = new ArrayList<>();
             for (MusicModel musicModel : playlistTracks)
@@ -188,7 +189,7 @@ public class AppFileManager {
             StorageUtils.writeTracksToPlaylist(
                     StorageStructure.getAbsolutePlaylistsFolderPath(mFilesDir) +
                             playlistName, tracksTitleRaw, append);
-            if (null != callback) callback.onComplete(true);
+            if (null != callback) handler.post(() -> callback.onComplete(true));
         });
     }
 
@@ -256,5 +257,17 @@ public class AppFileManager {
                 }
             }
         });
+    }
+
+    public static List<MusicModel> deleteAllDuplicatesInPlaylist(@NonNull String playlistName, @NonNull List<MusicModel> playlist) {
+        Set<Integer> set = new HashSet<>();
+        List<MusicModel> sanitizedList = new ArrayList<>();
+        for (MusicModel md : playlist) {
+            if (set.add(md.getId()))
+                sanitizedList.add(md);
+        }
+        if (playlist.size() != sanitizedList.size())
+            updatePlaylistItems(playlistName, sanitizedList);
+        return sanitizedList;
     }
 }

@@ -39,6 +39,7 @@ public abstract class BasePlaylistActivity extends MediaSessionActivity {
     protected void setUpToolbar(String title) {
         MaterialToolbar toolbar = findViewById(R.id.material_toolbar);
         toolbar.setTitle(title);
+        setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(v -> finish());
     }
 

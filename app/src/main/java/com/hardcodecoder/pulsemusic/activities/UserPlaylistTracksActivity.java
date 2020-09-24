@@ -4,7 +4,10 @@ import android.os.Bundle;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.AbsoluteSizeSpan;
+import android.view.Menu;
+import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -35,6 +38,21 @@ public class UserPlaylistTracksActivity extends AdvancePlaylist {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_advance_playllist, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.menu_action_clear_duplicates) {
+            mAdapter.updatePlaylist(AppFileManager.deleteAllDuplicatesInPlaylist(playListTitle, mPlaylistTracks));
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     protected SpannableStringBuilder getEmptyListStyledText() {
         String text = getString(R.string.no_playlist_tracks_found);
         int len = text.length();
@@ -44,7 +62,6 @@ public class UserPlaylistTracksActivity extends AdvancePlaylist {
                 len,
                 Spanned.SPAN_INCLUSIVE_INCLUSIVE);
         return stringBuilder;
-
     }
 
     @Override
