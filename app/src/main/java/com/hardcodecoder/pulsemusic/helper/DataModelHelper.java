@@ -26,6 +26,7 @@ public class DataModelHelper {
     private static int mPickedTrackId = -1;
 
     public static List<MusicModel> getModelsObjectFromTitlesList(List<String> titles) {
+        if (null == titles || titles.size() == 0) return null;
         Map<String, MusicModel> modelMap = new HashMap<>();
         for (MusicModel musicModel : LoaderCache.getAllTracksList())
             modelMap.put(musicModel.getTrackName(), musicModel);
