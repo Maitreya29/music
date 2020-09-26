@@ -11,9 +11,9 @@ import android.widget.Toast;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
-import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.activities.MediaSessionActivity;
@@ -37,7 +37,7 @@ public abstract class BasePlaylistActivity extends MediaSessionActivity {
     }
 
     protected void setUpToolbar(String title) {
-        MaterialToolbar toolbar = findViewById(R.id.material_toolbar);
+        Toolbar toolbar = findViewById(R.id.material_toolbar);
         toolbar.setTitle(title);
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(v -> finish());

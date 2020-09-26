@@ -4,14 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/windowBackgroundColor"
-        app:liftOnScroll="true">
-
-        <include layout="@layout/material_toolbar" />
-    </com.google.android.material.appbar.AppBarLayout>
+    <include layout="@layout/material_app_bar" />
 
     <ViewStub
         android:id="@+id/stub_track_picker_rv"

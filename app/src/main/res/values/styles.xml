@@ -9,11 +9,6 @@
 
     <style name="ActivityThemeBlack" parent="PulseDarkTheme.Black" />
 
-    <style name="ToolbarPopupTheme">
-        <item name="android:popupBackground">?attr/colorSurface</item>
-        <item name="android:tint">?attr/colorControlNormal</item>
-    </style>
-
     <style name="ButtonStyleBase">
         <item name="android:layout_width">48dp</item>
         <item name="android:layout_height">48dp</item>
@@ -102,17 +97,6 @@
         <item name="iconSize">20dp</item>
         <item name="iconPadding">12dp</item>
         <item name="iconTint">?attr/colorOnPrimary</item>
-    </style>
-
-    <style name="Toolbar" parent="ThemeOverlay.MaterialComponents.Toolbar.Surface">
-        <item name="tint">?attr/colorControlNormal</item>
-    </style>
-
-    <style name="ToolbarTextAppearanceNormal">
-        <item name="android:textStyle">bold</item>
-        <item name="android:textAllCaps">false</item>
-        <item name="android:textSize">20sp</item>
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
     </style>
 
     <style name="TextAppearanceSearch" parent="TextAppearance.MaterialComponents.Headline6">

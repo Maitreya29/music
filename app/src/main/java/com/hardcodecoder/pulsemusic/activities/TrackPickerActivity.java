@@ -5,10 +5,10 @@ import android.os.Bundle;
 import android.view.ViewStub;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
@@ -47,7 +47,7 @@ public class TrackPickerActivity extends PMBActivity implements TrackPickerListe
             overrideActivityTransition();
         });
 
-        MaterialToolbar toolbar = findViewById(R.id.material_toolbar);
+        Toolbar toolbar = findViewById(R.id.material_toolbar);
         toolbar.setTitle(getString(R.string.select_tracks));
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(v -> {

@@ -8,23 +8,20 @@ import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
 
 public class MarqueeTitleToolbar extends FrameLayout {
 
-    private MaterialToolbar mToolbar;
+    private CustomToolbar mToolbar;
     private MaterialTextView mTitleTextView;
 
     public MarqueeTitleToolbar(@NonNull Context context) {
-        super(context);
-        initialize(context);
+        this(context, null);
     }
 
     public MarqueeTitleToolbar(@NonNull Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
-        initialize(context);
+        this(context, attrs, 0);
     }
 
     public MarqueeTitleToolbar(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
@@ -41,7 +38,7 @@ public class MarqueeTitleToolbar extends FrameLayout {
         mToolbar.setNavigationOnClickListener(listener);
     }
 
-    public MaterialToolbar getToolbar() {
+    public CustomToolbar getToolbar() {
         return mToolbar;
     }
 

@@ -4,24 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:background="?attr/windowBackgroundColor"
-        app:liftOnScroll="true">
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/material_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:theme="@style/Toolbar"
-            app:layout_scrollFlags="noScroll"
-            app:navigationIcon="@drawable/ic_keyboard_backspace"
-            app:title="@string/settings"
-            app:titleTextAppearance="@style/ToolbarTextAppearanceNormal" />
-
-    </com.google.android.material.appbar.AppBarLayout>
+    <include layout="@layout/material_app_bar" />
 
     <FrameLayout
         android:id="@+id/settings_content_container"

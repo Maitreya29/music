@@ -6,9 +6,9 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 
-import com.google.android.material.appbar.MaterialToolbar;
 import com.hardcodecoder.pulsemusic.Preferences;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.fragments.settings.SettingsMainFragment;
@@ -18,7 +18,7 @@ import com.hardcodecoder.pulsemusic.shortcuts.AppShortcutsManager;
 
 public class SettingsActivity extends PMBActivity implements SettingsFragmentsListener {
 
-    private MaterialToolbar mToolbar;
+    private Toolbar mToolbar;
     private FragmentManager mFragmentManager;
     private SharedPreferences.OnSharedPreferenceChangeListener mAccentsChangedListener;
 
@@ -31,6 +31,7 @@ public class SettingsActivity extends PMBActivity implements SettingsFragmentsLi
 
         //Setting up toolbar
         mToolbar = findViewById(R.id.material_toolbar);
+        setToolbarTitle(R.string.settings_title);
         setSupportActionBar(mToolbar);
         mToolbar.setNavigationOnClickListener(v -> onBackPressed());
 
