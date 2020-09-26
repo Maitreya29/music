@@ -11,11 +11,11 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.dialog.HomeBottomSheetFragment;
@@ -64,7 +64,7 @@ public class MainActivity extends MediaSessionActivity {
 
     private void setUpToolbar() {
         mAppBar = findViewById(R.id.main_app_bar);
-        MaterialToolbar toolbar = findViewById(R.id.main_toolbar);
+        Toolbar toolbar = findViewById(R.id.main_toolbar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(v -> {
             HomeBottomSheetFragment homeBottomSheetFragment = HomeBottomSheetFragment.newInstance();

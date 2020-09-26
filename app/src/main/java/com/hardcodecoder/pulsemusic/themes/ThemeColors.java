@@ -72,6 +72,12 @@ public class ThemeColors {
         return mCurrentAccentColor;
     }
 
+    /**
+     * @return the colorControlNormal for current theme
+     */
+    public static int getCurrentColorControlNormal() {
+        return mCurrentColorControlNormal;
+    }
 
     /**
      * @return the ripple color for ui component that has focused/pressed states

@@ -56,7 +56,6 @@
         <item name="colorOnPrimary">@color/lightColorOnPrimary</item>
         <item name="windowBackgroundColor">@color/lightColorBackground</item>
         <item name="overlayColor">@color/lightColorOverlay</item>
-        <item name="toolbarBackground">@drawable/toolbar_background_light</item>
     </style>
 
     <style name="PulseDarkTheme" parent="ThemeDark">
@@ -64,7 +63,6 @@
         <item name="colorOnPrimary">@color/darkColorOnPrimary</item>
         <item name="windowBackgroundColor">@color/darkColorBackground</item>
         <item name="overlayColor">@color/darkColorOverlay</item>
-        <item name="toolbarBackground">@drawable/toolbar_background_dark</item>
     </style>
 
     <style name="PulseSignatureTheme" parent="PulseDarkTheme">

@@ -5,6 +5,5 @@
         <attr name="overlayColor" format="color|reference" />
 
         <attr name="navigationBarColor" format="color|reference" />
-        <attr name="toolbarBackground" format="integer" />
     </declare-styleable>
 </resources>

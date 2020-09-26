@@ -115,7 +115,8 @@
         <item name="android:textColor">?android:attr/textColorPrimary</item>
     </style>
 
-    <style name="ToolbarTextAppearanceSearch" parent="ThemeOverlay.MaterialComponents.Toolbar.Surface">
+    <style name="TextAppearanceSearch" parent="TextAppearance.MaterialComponents.Headline6">
         <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 </resources>
