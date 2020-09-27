@@ -1,5 +1,6 @@
 package com.hardcodecoder.pulsemusic.adapters;
 
+import android.os.Handler;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,10 +8,13 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
+import com.hardcodecoder.pulsemusic.TaskRunner;
+import com.hardcodecoder.pulsemusic.helper.DiffCb;
 import com.hardcodecoder.pulsemusic.interfaces.ItemTouchHelperViewHolder;
 import com.hardcodecoder.pulsemusic.interfaces.TrackPickerCallbackAdapter;
 import com.hardcodecoder.pulsemusic.interfaces.TrackPickerListener;
@@ -18,6 +22,10 @@ import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.utils.ImageUtil;
 import com.hardcodecoder.pulsemusic.views.MediaArtImageView;
 
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.HashSet;
 import java.util.List;
 
 public class TrackPickerAdapter extends RecyclerView.Adapter<TrackPickerAdapter.TrackPickerSVH> implements TrackPickerCallbackAdapter {
@@ -26,6 +34,10 @@ public class TrackPickerAdapter extends RecyclerView.Adapter<TrackPickerAdapter.
     private List<MusicModel> mList;
     private LayoutInflater mInflater;
     private TrackPickerListener mListener;
+    private Deque<List<MusicModel>> pendingUpdates = new ArrayDeque<>();
+    private Handler mMainHandler = new Handler();
+    private HashSet<MusicModel> mSelectedTracks = new HashSet<>();
+
 
     public TrackPickerAdapter(List<MusicModel> mList, LayoutInflater mInflater, TrackPickerListener listener) {
         this.mList = mList;
@@ -74,6 +86,70 @@ public class TrackPickerAdapter extends RecyclerView.Adapter<TrackPickerAdapter.
         if (mList != null) return mList.size();
         else return 0;
     }
+
+    public void updateItems(final List<MusicModel> newItems) {
+        pendingUpdates.push(newItems);
+        if (pendingUpdates.size() > 1) {
+            return;
+        }
+        updateItemsInternal(newItems);
+    }
+
+    public void updateSelection() {
+        mSelectedItemState.clear();
+        for (int i = 0; i < mList.size(); i++) {
+            MusicModel model = mList.get(i);
+            if (mSelectedTracks.contains(model)) {
+                mSelectedItemState.put(i, true);
+            }
+        }
+    }
+
+
+    private void updateItemsInternal(final List<MusicModel> newItems) {
+        TaskRunner.executeAsync(() -> {
+            final List<MusicModel> oldItems = new ArrayList<>(this.mList);
+            final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new DiffCb(oldItems, newItems));
+            mMainHandler.post(() -> applyDiffResult(newItems, diffResult));
+        });
+    }
+
+    private void applyDiffResult(List<MusicModel> newItems, DiffUtil.DiffResult diffResult) {
+        pendingUpdates.remove(newItems);
+        dispatchUpdates(newItems, diffResult);
+        if (pendingUpdates.size() > 0) {
+            List<MusicModel> latest = pendingUpdates.pop();
+            pendingUpdates.clear();
+            updateItemsInternal(latest);
+        }
+    }
+
+    private void dispatchUpdates(List<MusicModel> newItems, DiffUtil.DiffResult diffResult) {
+        updateSelection();
+        diffResult.dispatchUpdatesTo(this);
+        mList.clear();
+        mList.addAll(newItems);
+    }
+
+    @Override
+    public void onDetachedFromRecyclerView(@NonNull RecyclerView recyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView);
+        pendingUpdates.clear();
+        mList.clear();
+    }
+
+    public HashSet<MusicModel> getSelectedTracks() {
+        return mSelectedTracks;
+    }
+
+    public void removeSelection(MusicModel musicModel) {
+        mSelectedTracks.remove(musicModel);
+    }
+
+    public void addSelection(MusicModel musicModel) {
+        mSelectedTracks.add(musicModel);
+    }
+
 
     static class TrackPickerSVH extends RecyclerView.ViewHolder implements ItemTouchHelperViewHolder {
 

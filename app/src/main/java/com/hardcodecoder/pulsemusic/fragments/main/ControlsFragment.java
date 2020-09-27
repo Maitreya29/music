@@ -70,7 +70,6 @@ public class ControlsFragment extends Fragment {
         });
 
         skipNext.setOnClickListener(v1 -> mTransportControl.skipToNext());
-
         skipPrev.setOnClickListener(v1 -> mTransportControl.skipToPrevious());
 
         v.setOnClickListener(v1 -> {

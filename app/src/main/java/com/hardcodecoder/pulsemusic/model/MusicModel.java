@@ -11,6 +11,11 @@ public class MusicModel implements Serializable {
     private long mAlbumId, mDateAdded, mDateModified;
     private int mId, mTrackNumber, mTrackDuration;
 
+    @Override
+    public int hashCode() {
+        return mTrackPath.hashCode();
+    }
+
     public MusicModel(int mId,
                       @NonNull String trackName,
                       @NonNull String trackPath,
