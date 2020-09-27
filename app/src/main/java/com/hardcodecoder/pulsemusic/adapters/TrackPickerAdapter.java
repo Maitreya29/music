@@ -1,7 +1,6 @@
 package com.hardcodecoder.pulsemusic.adapters;
 
 import android.os.Handler;
-import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,34 +24,33 @@ import com.hardcodecoder.pulsemusic.views.MediaArtImageView;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 public class TrackPickerAdapter extends RecyclerView.Adapter<TrackPickerAdapter.TrackPickerSVH> implements TrackPickerCallbackAdapter {
 
-    private final SparseBooleanArray mSelectedItemState = new SparseBooleanArray();
+    private final Handler mMainHandler = new Handler();
+    private final Set<MusicModel> mSelectedTracks = new LinkedHashSet<>();
+    private Deque<List<MusicModel>> pendingUpdates = new ArrayDeque<>();
     private List<MusicModel> mList;
     private LayoutInflater mInflater;
     private TrackPickerListener mListener;
-    private Deque<List<MusicModel>> pendingUpdates = new ArrayDeque<>();
-    private Handler mMainHandler = new Handler();
-    private HashSet<MusicModel> mSelectedTracks = new HashSet<>();
 
-
-    public TrackPickerAdapter(List<MusicModel> mList, LayoutInflater mInflater, TrackPickerListener listener) {
-        this.mList = mList;
+    public TrackPickerAdapter(List<MusicModel> list, LayoutInflater mInflater, TrackPickerListener listener) {
+        this.mList = new ArrayList<>(list);
         this.mInflater = mInflater;
         this.mListener = listener;
     }
 
     @Override
     public void onItemSelected(int position) {
-        mSelectedItemState.put(position, true);
+        mSelectedTracks.add(mList.get(position));
     }
 
     @Override
     public void onItemUnselected(int position) {
-        mSelectedItemState.put(position, false);
+        mSelectedTracks.remove(mList.get(position));
     }
 
     @NonNull
@@ -63,9 +61,10 @@ public class TrackPickerAdapter extends RecyclerView.Adapter<TrackPickerAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull TrackPickerSVH holder, int position) {
-        boolean isSelected = mSelectedItemState.get(position, false);
+        boolean isSelected = mSelectedTracks.contains(mList.get(position));
         holder.itemView.setOnClickListener(v ->
-                mListener.onItemClick(holder, holder.getAdapterPosition(), mSelectedItemState.get(holder.getAdapterPosition(), false)));
+                mListener.onItemClick(holder, holder.getAdapterPosition(),
+                        mSelectedTracks.contains(mList.get(holder.getAdapterPosition()))));
 
         if (isSelected)
             holder.itemView.setBackground(ImageUtil.getAccentTintedSelectedItemBackground(holder.itemView.getContext()));
@@ -84,7 +83,7 @@ public class TrackPickerAdapter extends RecyclerView.Adapter<TrackPickerAdapter.
     @Override
     public int getItemCount() {
         if (mList != null) return mList.size();
-        else return 0;
+        return 0;
     }
 
     public void updateItems(final List<MusicModel> newItems) {
@@ -94,17 +93,6 @@ public class TrackPickerAdapter extends RecyclerView.Adapter<TrackPickerAdapter.
         }
         updateItemsInternal(newItems);
     }
-
-    public void updateSelection() {
-        mSelectedItemState.clear();
-        for (int i = 0; i < mList.size(); i++) {
-            MusicModel model = mList.get(i);
-            if (mSelectedTracks.contains(model)) {
-                mSelectedItemState.put(i, true);
-            }
-        }
-    }
-
 
     private void updateItemsInternal(final List<MusicModel> newItems) {
         TaskRunner.executeAsync(() -> {
@@ -125,7 +113,6 @@ public class TrackPickerAdapter extends RecyclerView.Adapter<TrackPickerAdapter.
     }
 
     private void dispatchUpdates(List<MusicModel> newItems, DiffUtil.DiffResult diffResult) {
-        updateSelection();
         diffResult.dispatchUpdatesTo(this);
         mList.clear();
         mList.addAll(newItems);
@@ -133,23 +120,14 @@ public class TrackPickerAdapter extends RecyclerView.Adapter<TrackPickerAdapter.
 
     @Override
     public void onDetachedFromRecyclerView(@NonNull RecyclerView recyclerView) {
-        super.onDetachedFromRecyclerView(recyclerView);
         pendingUpdates.clear();
         mList.clear();
+        super.onDetachedFromRecyclerView(recyclerView);
     }
 
-    public HashSet<MusicModel> getSelectedTracks() {
+    public Set<MusicModel> getSelectedTracks() {
         return mSelectedTracks;
     }
-
-    public void removeSelection(MusicModel musicModel) {
-        mSelectedTracks.remove(musicModel);
-    }
-
-    public void addSelection(MusicModel musicModel) {
-        mSelectedTracks.add(musicModel);
-    }
-
 
     static class TrackPickerSVH extends RecyclerView.ViewHolder implements ItemTouchHelperViewHolder {
 

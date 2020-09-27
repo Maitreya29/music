@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/trackpicker_bar"
+        android:id="@+id/track_picker_bar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_marginStart="4dp"
@@ -15,13 +15,13 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/trackpicker_activity_close_btn"
+            android:id="@+id/track_picker_activity_close_btn"
             style="@style/ButtonStyle24"
             android:contentDescription="@string/iv_btn_close_description"
             android:src="@drawable/ic_keyboard_backspace" />
 
         <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/trackpicker_activity_edit_text"
+            android:id="@+id/track_picker_activity_edit_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="8dp"
@@ -42,7 +42,7 @@
         android:layout="@layout/recycler_view_vertical"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/trackpicker_bar" />
+        app:layout_constraintTop_toBottomOf="@id/track_picker_bar" />
 
     <ViewStub
         android:id="@+id/stub_no_tracks_found"
@@ -50,7 +50,7 @@
         android:layout_height="0dp"
         android:layout="@layout/empty_tracks_text"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/trackpicker_bar" />
+        app:layout_constraintTop_toBottomOf="@id/track_picker_bar" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_done"
