@@ -21,24 +21,40 @@ import java.lang.reflect.Field;
 public class AccentColorTextInputLayout extends TextInputLayout {
 
     public AccentColorTextInputLayout(@NonNull Context context) {
-        super(context);
-        applyTint();
+        this(context, null);
     }
 
     public AccentColorTextInputLayout(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        applyTint();
     }
 
     public AccentColorTextInputLayout(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        applyTint();
     }
 
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
         if (getEditText() == null) return;
+
+        int colorOnSurface = ThemeColors.getCurrentColorOnSurface();
+
+        int[][] states = new int[][]{
+                new int[]{android.R.attr.state_focused}, // [0]
+                new int[]{android.R.attr.state_hovered}, // [1]
+                new int[]{-android.R.attr.state_enabled}, // [2]
+                new int[]{}, // [3]
+        };
+        int[] colors = new int[states.length];
+
+        colors[0] = ThemeColors.getAccentColorForCurrentTheme();
+        colors[1] = ColorUtil.changeAlphaComponentTo(colorOnSurface, 0.42f);
+        colors[2] = ColorUtil.changeAlphaComponentTo(colorOnSurface, 0.38f);
+        colors[3] = ColorUtil.changeAlphaComponentTo(colorOnSurface, 0.42f);
+
+        setDefaultHintTextColor(ColorStateList.valueOf(colorOnSurface));
+        setHintTextColor(ThemeColors.getAccentColorStateList());
+        setBoxStrokeColorStateList(new ColorStateList(states, colors));
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             // Use setTextCursorDrawable to set custom tinted drawable
@@ -60,23 +76,5 @@ public class AccentColorTextInputLayout extends TextInputLayout {
                 e.printStackTrace();
             }
         }
-    }
-
-    private void applyTint() {
-        int colorOnSurface = ThemeColors.getCurrentColorOnSurface();
-        int[][] states = new int[][]{
-                new int[]{android.R.attr.state_focused}, // [0]
-                new int[]{android.R.attr.state_hovered}, // [1]
-                new int[]{-android.R.attr.state_enabled}, // [2]
-                new int[]{}, // [3]
-        };
-        int[] colors = new int[states.length];
-        colors[0] = ThemeColors.getAccentColorForCurrentTheme();
-        colors[1] = ColorUtil.changeAlphaComponentTo(colorOnSurface, 0.42f);
-        colors[2] = ColorUtil.changeAlphaComponentTo(colorOnSurface, 0.38f);
-        colors[3] = ColorUtil.changeAlphaComponentTo(colorOnSurface, 0.42f);
-        setDefaultHintTextColor(ColorStateList.valueOf(colorOnSurface));
-        setHintTextColor(ThemeColors.getAccentColorStateList());
-        setBoxStrokeColorStateList(new ColorStateList(states, colors));
     }
 }

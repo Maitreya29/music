@@ -30,7 +30,7 @@ public class AccentColorSwitch extends SwitchCompat {
     private ColorStateList materialThemeColorsTrackTintList;
 
     public AccentColorSwitch(@NonNull Context context) {
-        super(context);
+        this(context, null);
     }
 
     public AccentColorSwitch(@NonNull Context context, @Nullable AttributeSet attrs) {
@@ -41,11 +41,9 @@ public class AccentColorSwitch extends SwitchCompat {
         super(context, attrs, defStyleAttr);
     }
 
-
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-
         if (getThumbTintList() == null) {
             setThumbTintList(getMaterialThemeColorsThumbTintList());
         }

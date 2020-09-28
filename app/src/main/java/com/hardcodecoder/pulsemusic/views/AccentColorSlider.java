@@ -13,21 +13,21 @@ import com.hardcodecoder.pulsemusic.themes.ThemeColors;
 public class AccentColorSlider extends Slider {
 
     public AccentColorSlider(@NonNull Context context) {
-        super(context);
-        applyColors();
+        this(context, null);
     }
 
     public AccentColorSlider(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        applyColors();
     }
 
     public AccentColorSlider(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        applyColors();
     }
 
-    private void applyColors() {
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+
         ColorStateList inactiveTrackColor = ColorStateList.valueOf(ThemeColors.getCurrentColorOverlay());
         ColorStateList activeTrackColor = ThemeColors.getAccentColorStateList();
 

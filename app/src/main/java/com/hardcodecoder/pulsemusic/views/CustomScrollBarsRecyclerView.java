@@ -19,22 +19,17 @@ public class CustomScrollBarsRecyclerView extends RecyclerView {
     private int scrollBarColor;
 
     public CustomScrollBarsRecyclerView(@NonNull Context context) {
-        super(context);
-        setScrollBarColor();
+        this(context, null);
     }
 
     public CustomScrollBarsRecyclerView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        setScrollBarColor();
+        scrollBarColor = ThemeColors.getAccentColorForCurrentTheme();
     }
 
     public CustomScrollBarsRecyclerView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        setScrollBarColor();
-    }
-
-    public void setScrollBarColor() {
-        this.scrollBarColor = ThemeColors.getAccentColorForCurrentTheme();
+        scrollBarColor = ThemeColors.getAccentColorForCurrentTheme();
     }
 
     /**

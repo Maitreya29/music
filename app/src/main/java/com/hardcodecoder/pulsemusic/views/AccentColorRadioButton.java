@@ -13,21 +13,20 @@ import com.hardcodecoder.pulsemusic.themes.ThemeColors;
 public class AccentColorRadioButton extends MaterialRadioButton {
 
     public AccentColorRadioButton(@NonNull Context context) {
-        super(context);
-        applyStyles();
+        this(context, null);
     }
 
     public AccentColorRadioButton(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        applyStyles();
     }
 
     public AccentColorRadioButton(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        applyStyles();
     }
 
-    private void applyStyles() {
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
         ColorStateList stateList = ColorStateList.valueOf(ThemeColors.getAccentColorForCurrentTheme());
         setButtonTintList(stateList);
     }

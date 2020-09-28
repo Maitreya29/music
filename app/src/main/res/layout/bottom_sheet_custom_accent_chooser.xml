@@ -86,7 +86,7 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
+    <com.hardcodecoder.pulsemusic.views.AccentColorTextInputLayout
         android:id="@+id/hex_code_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -108,7 +108,7 @@
             android:maxLength="6"
             android:minEms="6"
             tools:text="808080" />
-    </com.google.android.material.textfield.TextInputLayout>
+    </com.hardcodecoder.pulsemusic.views.AccentColorTextInputLayout>
 
     <ImageView
         android:id="@+id/color_preview"

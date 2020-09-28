@@ -22,22 +22,15 @@ import com.hardcodecoder.pulsemusic.utils.AppSettings;
 public class SettingsCategoryItemView extends FrameLayout {
 
     public SettingsCategoryItemView(@NonNull Context context) {
-        super(context);
-        initialize(context, null);
+        this(context, null, 0);
     }
 
     public SettingsCategoryItemView(@NonNull Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
-        initialize(context, attrs);
+        this(context, attrs, 0);
     }
 
     public SettingsCategoryItemView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        initialize(context, attrs);
-    }
-
-
-    private void initialize(@NonNull Context context, @Nullable AttributeSet attrs) {
         View view = View.inflate(context, R.layout.settings_category_list_item, this);
         MaterialTextView title = view.findViewById(R.id.settings_list_item_title);
         MaterialTextView text = view.findViewById(R.id.settings_list_item_text);
@@ -73,5 +66,4 @@ public class SettingsCategoryItemView extends FrameLayout {
 
         typedArray.recycle();
     }
-
 }

@@ -19,11 +19,11 @@ public class MediaArtImageView extends ModernImageView {
     private static final String BACKGROUND_COLOR = "#1E1E1E";
 
     public MediaArtImageView(Context context) {
-        super(context);
+        this(context, null, 0);
     }
 
     public MediaArtImageView(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
+        this(context, attrs, 0);
     }
 
     public MediaArtImageView(Context context, @Nullable AttributeSet attrs, int defStyle) {

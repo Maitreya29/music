@@ -12,21 +12,20 @@ import com.hardcodecoder.pulsemusic.themes.ThemeColors;
 public class AccentColorTextView extends MaterialTextView {
 
     public AccentColorTextView(@NonNull Context context) {
-        super(context);
-        applyColor();
+        this(context, null);
     }
 
     public AccentColorTextView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        applyColor();
     }
 
     public AccentColorTextView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        applyColor();
     }
 
-    private void applyColor() {
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
         setTextColor(ThemeColors.getAccentColorForCurrentTheme());
     }
 }

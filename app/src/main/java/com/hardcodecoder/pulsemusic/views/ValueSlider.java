@@ -21,13 +21,11 @@ public class ValueSlider extends FrameLayout {
     private String suffix;
 
     public ValueSlider(@NonNull Context context) {
-        super(context);
-        initialize(context, null);
+        this(context, null, 0);
     }
 
     public ValueSlider(@NonNull Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
-        initialize(context, attrs);
+        this(context, attrs, 0);
     }
 
     public ValueSlider(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {

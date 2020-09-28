@@ -20,21 +20,15 @@ public class SettingsToggleableItem extends FrameLayout {
     private SwitchCompat switchButton;
 
     public SettingsToggleableItem(@NonNull Context context) {
-        super(context);
-        initialize(context, null);
+        this(context, null, 0);
     }
 
     public SettingsToggleableItem(@NonNull Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
-        initialize(context, attrs);
+        this(context, attrs, 0);
     }
 
     public SettingsToggleableItem(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        initialize(context, attrs);
-    }
-
-    private void initialize(Context context, @Nullable AttributeSet attributeSet) {
         View view = View.inflate(context, R.layout.settings_toggleable_item_layout, this);
         title = view.findViewById(R.id.setting_toggleable_item_title);
         text = view.findViewById(R.id.setting_toggleable_item_text);
@@ -42,7 +36,7 @@ public class SettingsToggleableItem extends FrameLayout {
         //Do not save state
         switchButton.setSaveEnabled(false);
 
-        TypedArray typedArray = context.obtainStyledAttributes(attributeSet, R.styleable.SettingsToggleableItem);
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.SettingsToggleableItem);
         title.setText(typedArray.getText(R.styleable.SettingsToggleableItem_settingToggleableItemTitle));
         text.setText(typedArray.getText(R.styleable.SettingsToggleableItem_settingToggleableItemText));
 

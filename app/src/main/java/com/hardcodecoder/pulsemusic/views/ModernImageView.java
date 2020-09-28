@@ -13,22 +13,15 @@ import com.hardcodecoder.pulsemusic.R;
 public class ModernImageView extends ShapeableImageView {
 
     public ModernImageView(Context context) {
-        super(context);
+        this(context, null, 0);
     }
 
     public ModernImageView(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
-        initialize(context, attrs);
+        this(context, attrs, 0);
     }
 
     public ModernImageView(Context context, @Nullable AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        initialize(context, attrs);
-    }
-
-    private void initialize(Context context, @Nullable AttributeSet attrs) {
-        if (null == context) return;
-
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ModernImageView);
 
         int cornerFamily = CornerFamily.ROUNDED;

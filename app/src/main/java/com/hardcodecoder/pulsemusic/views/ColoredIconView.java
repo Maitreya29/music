@@ -18,8 +18,7 @@ import com.hardcodecoder.pulsemusic.utils.AppSettings;
 public class ColoredIconView extends AppCompatImageView {
 
     public ColoredIconView(Context context) {
-        super(context);
-        initialize(context, null);
+        this(context, null);
     }
 
     public ColoredIconView(Context context, AttributeSet attrs) {
