@@ -59,6 +59,7 @@ public class TrackPickerActivity extends PMBActivity implements TrackPickerListe
 
     private void setUpSearchUi() {
         AppCompatEditText editText = findViewById(R.id.track_picker_activity_edit_text);
+        TintHelper.setAccentTintToCursor(editText);
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

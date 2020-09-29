@@ -21,6 +21,7 @@ import com.hardcodecoder.pulsemusic.interfaces.SimpleItemClickListener;
 import com.hardcodecoder.pulsemusic.loaders.SearchQueryLoader;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.singleton.TrackManager;
+import com.hardcodecoder.pulsemusic.themes.TintHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +57,7 @@ public class SearchActivity extends MediaSessionActivity implements SimpleItemCl
 
     private void setUpSearchUi() {
         AppCompatEditText editText = findViewById(R.id.search_activity_edit_text);
+        TintHelper.setAccentTintToCursor(editText);
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
