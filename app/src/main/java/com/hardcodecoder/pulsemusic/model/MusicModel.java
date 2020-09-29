@@ -7,22 +7,25 @@ import java.io.Serializable;
 
 public class MusicModel implements Serializable {
 
-    private String mTrackName, mTrackPath, mAlbum, mArtist, mAlbumArtUrl;
-    private long mAlbumId, mDateAdded, mDateModified;
-    private int mId, mTrackNumber, mTrackDuration;
-
-    @Override
-    public int hashCode() {
-        return mTrackPath.hashCode();
-    }
+    private String mTrackName;
+    private String mTrackPath;
+    private String mAlbum;
+    private String mArtist;
+    private String mAlbumArtUrl;
+    private long mDateAdded;
+    private long mDateModified;
+    private int mId;
+    private int mAlbumId;
+    private int mTrackNumber;
+    private int mTrackDuration;
 
     public MusicModel(int mId,
                       @NonNull String trackName,
-                      @NonNull String trackPath,
                       @NonNull String album,
+                      int albumId,
                       @NonNull String artist,
+                      @NonNull String trackPath,
                       @Nullable String albumArtUrl,
-                      long albumId,
                       long dateAdded,
                       long dateModified,
                       int trackNumber,
@@ -64,7 +67,7 @@ public class MusicModel implements Serializable {
         return mAlbumArtUrl;
     }
 
-    public long getAlbumId() {
+    public int getAlbumId() {
         return mAlbumId;
     }
 
@@ -82,5 +85,10 @@ public class MusicModel implements Serializable {
 
     public int getTrackDuration() {
         return mTrackDuration;
+    }
+
+    @Override
+    public int hashCode() {
+        return mTrackPath.hashCode();
     }
 }

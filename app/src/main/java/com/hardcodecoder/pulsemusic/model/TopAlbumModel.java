@@ -4,10 +4,10 @@ public class TopAlbumModel {
 
     private String albumName;
     private String albumArt;
-    private long albumId;
+    private int albumId;
     private int playCount;
 
-    public TopAlbumModel(String albumName, String albumArt, long albumId, int playCount) {
+    public TopAlbumModel(String albumName, String albumArt, int albumId, int playCount) {
         this.albumName = albumName;
         this.albumArt = albumArt;
         this.albumId = albumId;
@@ -22,7 +22,7 @@ public class TopAlbumModel {
         return albumArt;
     }
 
-    public long getAlbumId() {
+    public int getAlbumId() {
         return albumId;
     }
 

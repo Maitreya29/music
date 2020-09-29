@@ -30,7 +30,7 @@ public class MediaArtImageView extends ModernImageView {
         super(context, attrs, defStyle);
     }
 
-    public void loadAlbumArt(final String albumArtUrl, final long albumId) {
+    public void loadAlbumArt(final String albumArtUrl, final int albumId) {
         GlideApp.with(this)
                 .load(albumArtUrl)
                 .listener(new RequestListener<Drawable>() {

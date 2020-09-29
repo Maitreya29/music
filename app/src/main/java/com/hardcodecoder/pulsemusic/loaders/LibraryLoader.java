@@ -76,7 +76,7 @@ public class LibraryLoader implements Callable<List<MusicModel>> {
                 String artist = cursor.getString(artistColumnIndex);
                 String album = cursor.getString(albumColumnIndex);
                 String songPath = ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, _id).toString();
-                long albumId = cursor.getLong(albumIdColumnIndex);
+                int albumId = cursor.getInt(albumIdColumnIndex);
                 long dateAdded = cursor.getLong(dateAddedColumnIndex);
                 long dateModified = cursor.getLong(dateModifiedColumnIndex);
                 int trackNum = cursor.getInt(trackNumIndex);
@@ -86,11 +86,11 @@ public class LibraryLoader implements Callable<List<MusicModel>> {
                 libraryList.add(new MusicModel(
                         _id,
                         songName,
-                        songPath,
                         album == null ? "" : album,
-                        artist == null ? "" : artist,
-                        albumArt,
                         albumId,
+                        artist == null ? "" : artist,
+                        songPath,
+                        albumArt,
                         dateAdded,
                         dateModified,
                         trackNum,

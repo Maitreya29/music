@@ -5,11 +5,11 @@ public class HistoryModel {
     private String title;
     private String album;
     private String artist;
-    private long albumId;
+    private int albumId;
     private long lastModified;
     private short playCount;
 
-    public HistoryModel(String title, String album, String artist, long albumId, long lastModified, short playCount) {
+    public HistoryModel(String title, String album, String artist, int albumId, long lastModified, short playCount) {
         this.title = title;
         this.album = album;
         this.albumId = albumId;
@@ -30,7 +30,7 @@ public class HistoryModel {
         return artist;
     }
 
-    public long getAlbumId() {
+    public int getAlbumId() {
         return albumId;
     }
 

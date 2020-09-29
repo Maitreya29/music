@@ -42,7 +42,7 @@ class StorageUtils {
                 lines[LINE_ID_TITLE],
                 lines[LINE_ID_ALBUM],
                 lines[LINE_ID_ARTIST],
-                Long.parseLong(lines[LINE_ID_ALBUM_ID]),
+                Integer.parseInt(lines[LINE_ID_ALBUM_ID]),
                 lastModified,
                 Short.parseShort(lines[LINE_ID_PLAY_COUNT])
         );
