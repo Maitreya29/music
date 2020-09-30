@@ -2,20 +2,20 @@ package com.hardcodecoder.pulsemusic.model;
 
 public class ArtistModel {
 
-    private int mId;
+    private int mArtistId;
     private int mNumOfAlbums;
     private int mNumOfTracks;
     private String mArtistName;
 
-    public ArtistModel(int mId, int mNumOfAlbums, int mNumOfTracks, String mArtistName) {
-        this.mId = mId;
-        this.mNumOfAlbums = mNumOfAlbums;
-        this.mNumOfTracks = mNumOfTracks;
-        this.mArtistName = mArtistName;
+    public ArtistModel(int artistId, String artistName, int numOfAlbums, int numOfTracks) {
+        this.mArtistId = artistId;
+        this.mNumOfAlbums = numOfAlbums;
+        this.mNumOfTracks = numOfTracks;
+        this.mArtistName = artistName;
     }
 
-    public int getId() {
-        return mId;
+    public int getArtistId() {
+        return mArtistId;
     }
 
     public int getNumOfAlbums() {

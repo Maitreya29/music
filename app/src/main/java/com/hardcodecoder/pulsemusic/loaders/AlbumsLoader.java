@@ -35,7 +35,6 @@ public class AlbumsLoader implements Callable<List<AlbumModel>> {
         List<AlbumModel> albumsList = new ArrayList<>();
         String[] col = {MediaStore.Audio.Albums._ID,
                 MediaStore.Audio.Albums.ALBUM,
-                MediaStore.Audio.Albums.ALBUM_ID,
                 MediaStore.Audio.Albums.ARTIST,
                 MediaStore.Audio.Albums.NUMBER_OF_SONGS,
                 MediaStore.Audio.Albums.FIRST_YEAR,
@@ -49,25 +48,25 @@ public class AlbumsLoader implements Callable<List<AlbumModel>> {
                 mSortOrder);
 
         if (cursor != null && cursor.moveToFirst()) {
-            int idColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Albums._ID);
+            int albumIdColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Albums._ID);
             int albumColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Albums.ALBUM);
-            int albumIdColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Albums.ALBUM_ID);
             int albumArtistColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Albums.ARTIST);
             int songCountColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Albums.NUMBER_OF_SONGS);
             int albumFirstYearColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Albums.FIRST_YEAR);
             int albumLastYearColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Albums.LAST_YEAR);
+
             final Uri sArtworkUri = Uri.parse("content://media/external/audio/albumart");
+
             do {
                 String album = cursor.getString(albumColumnIndex);
                 if (null != album) {
-                    int id = cursor.getInt(idColumnIndex);
+                    int albumId = cursor.getInt(albumIdColumnIndex);
                     int num = cursor.getInt(songCountColumnIndex);
                     int firstYear = cursor.getInt(albumFirstYearColumnIndex);
                     int lastYear = cursor.getInt(albumLastYearColumnIndex);
-                    long albumId = cursor.getLong(albumIdColumnIndex);
                     String albumArtist = cursor.getString(albumArtistColumnIndex);
                     String albumArt = ContentUris.withAppendedId(sArtworkUri, albumId).toString();
-                    albumsList.add(new AlbumModel(id, album, albumId, albumArtist, num, firstYear, lastYear, albumArt));
+                    albumsList.add(new AlbumModel(album, albumId, albumArtist, num, firstYear, lastYear, albumArt));
                 }
             } while (cursor.moveToNext());
             cursor.close();

@@ -36,17 +36,17 @@ public class ArtistsLoader implements Callable<List<ArtistModel>> {
                 mSortOrder);
 
         if (cursor != null && cursor.moveToFirst()) {
-            int idColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Artists._ID);
+            int artistIdColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Artists._ID);
             int artistColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Artists.ARTIST);
             int albumCountColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Artists.NUMBER_OF_ALBUMS);
             int trackCountColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Artists.NUMBER_OF_TRACKS);
 
             do {
-                int id = cursor.getInt(idColumnIndex);
+                int artistId = cursor.getInt(artistIdColumnIndex);
                 String artist = cursor.getString(artistColumnIndex);
                 int num_albums = cursor.getInt(albumCountColumnIndex);
                 int num_tracks = cursor.getInt(trackCountColumnIndex);
-                artistList.add(new ArtistModel(id, num_albums, num_tracks, artist));
+                artistList.add(new ArtistModel(artistId, artist, num_albums, num_tracks));
             } while (cursor.moveToNext());
             cursor.close();
         }

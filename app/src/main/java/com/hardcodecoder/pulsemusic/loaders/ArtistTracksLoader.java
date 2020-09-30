@@ -4,6 +4,8 @@ import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
+import android.provider.BaseColumns;
 import android.provider.MediaStore;
 
 import com.hardcodecoder.pulsemusic.model.AlbumModel;
@@ -15,54 +17,55 @@ import java.util.concurrent.Callable;
 public class ArtistTracksLoader implements Callable<List<AlbumModel>> {
 
     private ContentResolver mContentResolver;
-    private String mArtistName;
     private String mSortOrder;
+    private long mArtistId;
 
     public ArtistTracksLoader(ContentResolver contentResolver, String artistName, SortOrder.ALBUMS sortOrder) {
         this.mContentResolver = contentResolver;
-        this.mArtistName = artistName;
+        this.mArtistId = getArtistIdFromName(artistName);
         mSortOrder = MediaStoreHelper.getSortOrderFor(sortOrder);
     }
 
     @Override
     public List<AlbumModel> call() {
-        long artistId = getArtistIdFromName();
-        if (artistId == -1)
+        if (mArtistId == -1)
             return null;
         List<AlbumModel> albumsList = new ArrayList<>();
+        String albumIdColName;
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P)
+            albumIdColName = BaseColumns._ID;
+        else albumIdColName = MediaStore.Audio.Artists.Albums.ALBUM_ID;
         String[] col = {
                 MediaStore.Audio.Artists.Albums.ALBUM,
-                MediaStore.Audio.Artists.Albums.ALBUM_ID,
+                albumIdColName,
                 MediaStore.Audio.Artists.Albums.ARTIST,
                 MediaStore.Audio.Artists.Albums.NUMBER_OF_SONGS_FOR_ARTIST,
                 MediaStore.Audio.Artists.Albums.FIRST_YEAR,
                 MediaStore.Audio.Artists.Albums.LAST_YEAR};
 
         final Cursor cursor = mContentResolver.query(
-                MediaStore.Audio.Artists.Albums.getContentUri("external", artistId),
+                MediaStore.Audio.Artists.Albums.getContentUri("external", mArtistId),
                 col,
                 null,
                 null,
                 mSortOrder);
 
-        int id = 0;
         if (cursor != null && cursor.moveToFirst()) {
+            int albumIdColumnIndex = cursor.getColumnIndexOrThrow(albumIdColName);
             int albumColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Artists.Albums.ALBUM);
-            int albumIdColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Artists.Albums.ALBUM_ID);
-            int albumArtistColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Artists.Albums.ALBUM_ID);
             int albumCountColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Artists.Albums.NUMBER_OF_SONGS_FOR_ARTIST);
             int albumFirstYearColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Artists.Albums.FIRST_YEAR);
             int albumLastYearColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Artists.Albums.LAST_YEAR);
             final Uri sArtworkUri = Uri.parse("content://media/external/audio/albumart");
             do {
+                int albumId = cursor.getInt(albumIdColumnIndex);
                 String album = cursor.getString(albumColumnIndex);
-                long albumId = cursor.getLong(albumIdColumnIndex);
                 int num = cursor.getInt(albumCountColumnIndex);
                 int firstYear = cursor.getInt(albumFirstYearColumnIndex);
                 int lastYear = cursor.getInt(albumLastYearColumnIndex);
-                String albumArtist = cursor.getString(albumArtistColumnIndex);
+                String albumArtist = cursor.getString(albumIdColumnIndex);
                 String albumArt = ContentUris.withAppendedId(sArtworkUri, albumId).toString();
-                albumsList.add(new AlbumModel(id++, album, albumId, albumArtist, num, firstYear, lastYear, albumArt));
+                albumsList.add(new AlbumModel(album, albumId, albumArtist, num, firstYear, lastYear, albumArt));
 
             } while (cursor.moveToNext());
             cursor.close();
@@ -70,13 +73,13 @@ public class ArtistTracksLoader implements Callable<List<AlbumModel>> {
         return albumsList;
     }
 
-    private long getArtistIdFromName() {
+    private long getArtistIdFromName(String artist) {
         String[] cols = {MediaStore.Audio.Artists._ID};
         final Cursor artistIdCursor = mContentResolver.query(
                 MediaStore.Audio.Artists.EXTERNAL_CONTENT_URI,
                 cols,
                 MediaStore.Audio.Artists.ARTIST + "=?",
-                new String[]{mArtistName},
+                new String[]{artist},
                 null);
 
         long artistId = -1;
