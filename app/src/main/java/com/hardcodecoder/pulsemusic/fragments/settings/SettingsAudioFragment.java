@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.hardcodecoder.pulsemusic.BDS;
+import com.hardcodecoder.pulsemusic.AudioDeviceService;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.dialog.BluetoothActionChooserBottomSheetDialogFragment;
 import com.hardcodecoder.pulsemusic.fragments.settings.base.SettingsBaseFragment;
@@ -54,7 +54,7 @@ public class SettingsAudioFragment extends SettingsBaseFragment {
             bluetoothDeviceDetectionItem.setSwitchChecked(bluetoothDeviceDetection);
             bluetoothDeviceDetectionItem.setOnSwitchCheckedChangedListener((buttonView, isChecked) -> {
                 AppSettings.saveBluetoothDeviceDetection(buttonView.getContext(), isChecked);
-                Intent bluetoothServiceIntent = new Intent(getContext().getApplicationContext(), BDS.class);
+                Intent bluetoothServiceIntent = new Intent(getContext().getApplicationContext(), AudioDeviceService.class);
                 if (isChecked) getContext().startService(bluetoothServiceIntent);
                 else getContext().stopService(bluetoothServiceIntent);
             });

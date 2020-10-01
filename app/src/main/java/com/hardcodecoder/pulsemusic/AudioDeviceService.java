@@ -4,8 +4,11 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.Service;
+import android.bluetooth.BluetoothDevice;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Build;
 import android.os.IBinder;
 
@@ -13,13 +16,28 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
-public class BDS extends Service {
+import com.hardcodecoder.pulsemusic.receivers.BluetoothBroadcastReceiver;
+import com.hardcodecoder.pulsemusic.utils.AppSettings;
+
+public class AudioDeviceService extends Service {
 
     private static final String CHANNEL_ID = "com.hardcodecoder.pulsemusic.BLUETOOTH_CHANNEL_ID";
     private boolean mNotificationPosted = false;
+    private BroadcastReceiver mBluetoothReceiver;
 
     @Override
     public void onCreate() {
+        if (AppSettings.isBluetoothDeviceDetectionEnabled(this)) {
+            IntentFilter filter = new IntentFilter();
+            filter.addAction(BluetoothDevice.ACTION_ACL_CONNECTED);
+            filter.addAction(BluetoothDevice.ACTION_ACL_DISCONNECTED);
+            mBluetoothReceiver = new BluetoothBroadcastReceiver();
+            registerReceiver(mBluetoothReceiver, filter);
+        } else {
+            // no valid reason to keep service alive
+            stopForeground(true);
+            stopSelf();
+        }
         super.onCreate();
     }
 
@@ -38,6 +56,8 @@ public class BDS extends Service {
     @Override
     public void onDestroy() {
         mNotificationPosted = false;
+        if (null != mBluetoothReceiver)
+            unregisterReceiver(mBluetoothReceiver);
         super.onDestroy();
     }
 

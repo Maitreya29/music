@@ -21,7 +21,7 @@ public class PulseApp extends Application {
             manager.initDynamicShortcuts(false);
         }
         if (AppSettings.isBluetoothDeviceDetectionEnabled(this)) {
-            Intent intent = new Intent(this, BDS.class);
+            Intent intent = new Intent(this, AudioDeviceService.class);
             ContextCompat.startForegroundService(this, intent);
         }
     }

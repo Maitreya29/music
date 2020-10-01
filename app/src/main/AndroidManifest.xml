@@ -60,18 +60,16 @@
         <activity android:name=".activities.UserPlaylistTracksActivity" />
         <activity android:name=".activities.nowplaying.NowPlayingScreenActivity" />
 
-        <receiver android:name=".receivers.BluetoothBroadcastReceiver">
+        <receiver android:name=".receivers.BootCompletedReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="android.bluetooth.device.action.ACL_CONNECTED" />
-                <action android:name="android.bluetooth.device.action.ACL_DISCONNECTED" />
             </intent-filter>
         </receiver>
 
         <service
-            android:name=".BDS"
-            android:process=":bluetooth"
-            android:foregroundServiceType="connectedDevice" />
+            android:name=".AudioDeviceService"
+            android:foregroundServiceType="connectedDevice"
+            android:process=":bluetooth" />
 
         <service
             android:name=".PMS"
