@@ -15,18 +15,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="72dp"
-            android:text="@string/audio_category_bluetooth"
+            android:text="@string/audio_category_auto_play"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Overline" />
 
         <com.hardcodecoder.pulsemusic.views.SettingsToggleableItem
-            android:id="@+id/audio_enable_bluetooth_start"
+            android:id="@+id/audio_device_bluetooth_toggle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:settingToggleableItemText="@string/audio_category_enable_connected_start_text"
-            app:settingToggleableItemTitle="@string/audio_category_enable_connected_start" />
+            app:settingToggleableItemText="@string/audio_category_toggle_bluetooth_text"
+            app:settingToggleableItemTitle="@string/audio_category_toggle_bluetooth_title" />
 
         <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
-            android:id="@+id/audio_select_bluetooth_action"
+            android:id="@+id/audio_device_bluetooth_action_picker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textStyle="normal"
@@ -37,6 +37,5 @@
             app:settingItemText="@string/audio_category_select_bluetooth_action_text"
             app:settingItemTitle="@string/audio_category_select_bluetooth_action_title"
             app:settingToggleableItemEnabled="true" />
-
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

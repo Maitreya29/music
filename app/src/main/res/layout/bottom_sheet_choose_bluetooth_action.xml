@@ -40,12 +40,12 @@
             android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2" />
 
         <com.hardcodecoder.pulsemusic.views.AccentColorRadioButton
-            android:id="@+id/radio_btn_recent"
+            android:id="@+id/radio_btn_latest"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="32dp"
             android:paddingEnd="0dp"
-            android:text="@string/radio_btn_recent"
+            android:text="@string/radio_btn_latest"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2" />
     </RadioGroup>
 

@@ -13,17 +13,16 @@ import androidx.annotation.Nullable;
 
 import com.hardcodecoder.pulsemusic.Preferences;
 import com.hardcodecoder.pulsemusic.R;
-import com.hardcodecoder.pulsemusic.themes.ThemeManagerUtils;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 
-public class BluetoothActionChooserBottomSheetDialogFragment extends RoundedBottomSheetDialogFragment {
+public class AutoPlayActionChooserDialogFragment extends RoundedBottomSheetDialogFragment {
 
-    public static final String TAG = "BluetoothActionChooserBottomSheetDialogFragment";
-    private boolean mOptionChanged = false;
+    public static final String TAG = "AutoPlayActionChooserDialogFragment";
     private Context mContext;
+    private boolean mOptionChanged = false;
 
-    public static BluetoothActionChooserBottomSheetDialogFragment getInstance() {
-        return new BluetoothActionChooserBottomSheetDialogFragment();
+    public static AutoPlayActionChooserDialogFragment getInstance() {
+        return new AutoPlayActionChooserDialogFragment();
     }
 
     @Nullable
@@ -39,14 +38,14 @@ public class BluetoothActionChooserBottomSheetDialogFragment extends RoundedBott
         int currentAction = AppSettings.getBluetoothDeviceDetectionAction(mContext);
 
         switch (currentAction) {
-            case Preferences.BLUETOOTH_ACTION_PLAY_SHUFFLE:
+            case Preferences.DEVICE_ACTION_PLAY_SHUFFLE:
                 ((RadioButton) radioGroup.findViewById(R.id.radio_btn_shuffle)).setChecked(true);
                 break;
-            case Preferences.BLUETOOTH_ACTION_PLAY_SUGGESTED:
+            case Preferences.DEVICE_ACTION_PLAY_SUGGESTED:
                 ((RadioButton) radioGroup.findViewById(R.id.radio_btn_suggested)).setChecked(true);
                 break;
-            case Preferences.BLUETOOTH_ACTION_PLAY_LATEST:
-                ((RadioButton) radioGroup.findViewById(R.id.radio_btn_recent)).setChecked(true);
+            case Preferences.DEVICE_ACTION_PLAY_LATEST:
+                ((RadioButton) radioGroup.findViewById(R.id.radio_btn_latest)).setChecked(true);
                 break;
         }
 
@@ -56,16 +55,15 @@ public class BluetoothActionChooserBottomSheetDialogFragment extends RoundedBott
             if (mOptionChanged) {
                 switch (radioGroup.getCheckedRadioButtonId()) {
                     case R.id.radio_btn_shuffle:
-                        AppSettings.saveBluetoothDeviceDetectionAction(mContext, Preferences.BLUETOOTH_ACTION_PLAY_SHUFFLE);
+                        AppSettings.saveBluetoothDeviceDetectionAction(mContext, Preferences.DEVICE_ACTION_PLAY_SHUFFLE);
                         break;
                     case R.id.radio_btn_suggested:
-                        AppSettings.saveBluetoothDeviceDetectionAction(mContext, Preferences.BLUETOOTH_ACTION_PLAY_SUGGESTED);
+                        AppSettings.saveBluetoothDeviceDetectionAction(mContext, Preferences.DEVICE_ACTION_PLAY_SUGGESTED);
                         break;
-                    case R.id.radio_btn_recent:
-                        AppSettings.saveBluetoothDeviceDetectionAction(mContext, Preferences.BLUETOOTH_ACTION_PLAY_LATEST);
+                    case R.id.radio_btn_latest:
+                        AppSettings.saveBluetoothDeviceDetectionAction(mContext, Preferences.DEVICE_ACTION_PLAY_LATEST);
                         break;
                 }
-
             }
             dismiss();
         });

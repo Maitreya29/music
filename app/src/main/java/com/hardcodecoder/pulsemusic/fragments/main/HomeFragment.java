@@ -60,7 +60,7 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         tm = TrackManager.getInstance();
 
-        if (LoaderCache.getAllTracksList().size() > 0 && null != getContext()) {
+        if (null != LoaderCache.getAllTracksList() && null != getContext()) {
             LoaderHelper.loadTopAlbums(result -> loadTopAlbums(view, result));
             if (null == LoaderCache.getSuggestions())
                 LoaderHelper.loadSuggestionsList(result -> loadSuggestions(view, result));

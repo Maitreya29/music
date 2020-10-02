@@ -124,13 +124,13 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
                         } else {
                             int currentAction = AppSettings.getBluetoothDeviceDetectionAction(getApplicationContext());
                             switch (currentAction) {
-                                case Preferences.BLUETOOTH_ACTION_PLAY_LATEST:
+                                case Preferences.DEVICE_ACTION_PLAY_LATEST:
                                     playLatest();
                                     break;
-                                case Preferences.BLUETOOTH_ACTION_PLAY_SUGGESTED:
+                                case Preferences.DEVICE_ACTION_PLAY_SUGGESTED:
                                     playSuggested();
                                     break;
-                                case Preferences.BLUETOOTH_ACTION_PLAY_SHUFFLE:
+                                case Preferences.DEVICE_ACTION_PLAY_SHUFFLE:
                                 default:
                                     playShuffle();
                             }

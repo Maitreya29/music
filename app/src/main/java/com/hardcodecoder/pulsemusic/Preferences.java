@@ -80,13 +80,13 @@ public class Preferences {
     public static final String NOW_PLAYING_ALBUM_COVER_RADIUS_BR = "RadiusBottomRight";
     public static final int NOW_PLAYING_ALBUM_COVER_RADIUS_DEF = 16;
 
-    public static final String BLUETOOTH_DEVICE_DETECTION = "BluetoothDeviceDetection";
+    public static final String AUDIO_DEVICE_AUTO_PLAY = "AudioDeviceAutoPlay";
     public static final String BLUETOOTH_DEVICE_DETECTION_KEY = "BluetoothDetectionEnabled";
-    public static final String BLUETOOTH_DEVICE_DETECTION_ACTION_KEY = "BluetoothDeviceDetectionAction";
+    public static final String BLUETOOTH_DEVICE_ACTION_KEY = "BluetoothDeviceAction";
 
-    public static final short BLUETOOTH_ACTION_PLAY_SHUFFLE = 6000;
-    public static final short BLUETOOTH_ACTION_PLAY_SUGGESTED = 6001;
-    public static final short BLUETOOTH_ACTION_PLAY_LATEST = 6002;
+    public static final short DEVICE_ACTION_PLAY_SHUFFLE = 6000;
+    public static final short DEVICE_ACTION_PLAY_SUGGESTED = 6001;
+    public static final short DEVICE_ACTION_PLAY_LATEST = 6002;
 
     public static final String APP_SHORTCUT_THEME = "AppShortCutThemeMode";
     public static final String APP_SHORTCUT_THEME_MODE = "DarkThemeInUse";
