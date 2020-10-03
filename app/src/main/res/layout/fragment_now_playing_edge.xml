@@ -3,26 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false">
 
-    <ImageView
-        android:id="@+id/edge_nps_album_cover"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/edge_nps_album_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:contentDescription="@string/iv_content_desc"
-        android:scaleType="fitXY"
+        android:clipChildren="false"
+        android:clipToPadding="false"
         app:layout_constraintDimensionRatio="1:1.18"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@tools:sample/backgrounds/scenic" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <View
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/status_bar_gradient"
-        app:layout_constraintBottom_toBottomOf="@id/edge_nps_album_cover"
-        app:layout_constraintEnd_toEndOf="@id/edge_nps_album_cover"
-        app:layout_constraintStart_toStartOf="@id/edge_nps_album_cover"
-        app:layout_constraintTop_toTopOf="@id/edge_nps_album_cover" />
+        app:layout_constraintBottom_toBottomOf="@id/edge_nps_album_container"
+        app:layout_constraintEnd_toEndOf="@id/edge_nps_album_container"
+        app:layout_constraintStart_toStartOf="@id/edge_nps_album_container"
+        app:layout_constraintTop_toTopOf="@id/edge_nps_album_container" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/edge_nps_start_time"
@@ -32,7 +33,7 @@
         android:layout_marginTop="8dp"
         android:gravity="end"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edge_nps_album_cover"
+        app:layout_constraintTop_toBottomOf="@id/edge_nps_album_container"
         tools:text="@tools:sample/date/hhmm" />
 
     <androidx.appcompat.widget.AppCompatSeekBar
@@ -43,7 +44,7 @@
         android:progressDrawable="@drawable/seek_bar_track"
         android:thumb="@drawable/seek_bar_thumb"
         android:thumbOffset="0dp"
-        app:layout_constraintBottom_toBottomOf="@id/edge_nps_album_cover"
+        app:layout_constraintBottom_toBottomOf="@id/edge_nps_album_container"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:progress="60" />
@@ -55,12 +56,12 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edge_nps_album_cover"
+        app:layout_constraintTop_toBottomOf="@id/edge_nps_album_container"
         tools:text="@tools:sample/date/hhmm" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/edge_nps_title"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
@@ -68,10 +69,8 @@
         android:maxLines="1"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
         app:layout_constraintBottom_toTopOf="@id/edge_nps_play_pause_btn"
-        app:layout_constraintEnd_toEndOf="@id/edge_nps_album_cover"
-        app:layout_constraintStart_toStartOf="@id/edge_nps_album_cover"
         app:layout_constraintTop_toBottomOf="@+id/edge_nps_seek_bar"
-        app:layout_constraintVertical_bias="0.36"
+        app:layout_constraintVertical_bias="0.4"
         tools:text="@tools:sample/lorem" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -94,7 +93,7 @@
         android:layout_marginStart="16dp"
         android:src="@drawable/ic_repeat"
         app:layout_constraintBottom_toBottomOf="@id/edge_nps_play_pause_btn"
-        app:layout_constraintStart_toStartOf="@id/edge_nps_album_cover"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/edge_nps_play_pause_btn"
         tools:ignore="contentDescription" />
 
@@ -142,7 +141,7 @@
         style="@style/ButtonStyle24"
         android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="@id/edge_nps_play_pause_btn"
-        app:layout_constraintEnd_toEndOf="@id/edge_nps_album_cover"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/edge_nps_play_pause_btn"
         tools:ignore="contentDescription"
         tools:src="@drawable/ic_favorite_border" />

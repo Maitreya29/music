@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.slider.Slider;
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
@@ -43,8 +42,11 @@ public class LandscapeModeNowPlayingScreen extends BaseNowPlayingScreen {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ShapeableImageView albumCover = view.findViewById(R.id.fragment_nps_land_album_cover);
-        applyCornerRadius(albumCover);
+
+        setUpPagerAlbumArt(view.findViewById(R.id.fragment_nps_land_album_container),
+                R.layout.land_nps_media_art,
+                getMediaImageViewShapeAppearanceModel());
+
         mTitle = view.findViewById(R.id.fragment_nps_land_title);
         mSubTitle = view.findViewById(R.id.fragment_nps_land_sub_title);
         mProgressSlider = view.findViewById(R.id.fragment_nps_land_slider);
@@ -55,7 +57,6 @@ public class LandscapeModeNowPlayingScreen extends BaseNowPlayingScreen {
         mFavoriteBtn = view.findViewById(R.id.fragment_nps_land_favourite_btn);
         mUpNext = view.findViewById(R.id.fragment_nps_land_up_next);
         setGotToCurrentQueueCLickListener(mUpNext);
-        setUpAlbumArtImageView(albumCover);
         view.findViewById(R.id.fragment_nps_land_close_btn).setOnClickListener(v -> {
             if (null != getActivity())
                 getActivity().finish();
@@ -77,7 +78,7 @@ public class LandscapeModeNowPlayingScreen extends BaseNowPlayingScreen {
         resetSliderValues(mProgressSlider, seconds);
         mStartTime.setText(getFormattedElapsedTime(0));
         mEndTime.setText(getFormattedElapsedTime(seconds));
-        mSubTitle.setText(metadata.getString(MediaMetadata.METADATA_KEY_ARTIST));
+        mSubTitle.setText(String.format("%s● %s", getString(R.string.artist), metadata.getString(MediaMetadata.METADATA_KEY_ARTIST)));
         mTitle.setText(metadata.getText(MediaMetadata.METADATA_KEY_TITLE));
         mUpNext.setText(getUpNextText());
     }
@@ -85,7 +86,6 @@ public class LandscapeModeNowPlayingScreen extends BaseNowPlayingScreen {
     @Override
     public void onPlaybackStateChanged(PlaybackState state) {
         super.onPlaybackStateChanged(state);
-        if (state == null) return;
         togglePlayPauseAnimation(mPlayPauseBtn, state);
     }
 

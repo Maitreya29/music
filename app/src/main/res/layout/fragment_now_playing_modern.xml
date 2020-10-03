@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false">
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/modern_nps_head"
@@ -18,55 +20,54 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/modern_nps_album_cover"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/modern_nps_album_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:elevation="4dp"
-        android:scaleType="fitXY"
-        app:layout_constraintDimensionRatio="100:106"
-        app:layout_constraintTop_toBottomOf="@id/modern_nps_head"
-        tools:ignore="contentDescription"
-        tools:src="@tools:sample/backgrounds/scenic" />
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintTop_toBottomOf="@id/modern_nps_head" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/modern_nps_title"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
         android:gravity="center"
-        android:singleLine="true"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/modern_nps_album_cover"
-        app:layout_constraintStart_toStartOf="@id/modern_nps_album_cover"
-        app:layout_constraintTop_toBottomOf="@+id/modern_nps_album_cover"
-        app:layout_constraintVertical_bias="0.05"
-        tools:text="@tools:sample/lorem" />
+        android:requiresFadingEdge="horizontal"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/modern_nps_album_container"
+        tools:text="@string/now_playing" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/modern_nps_sub_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="56dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:gravity="center"
         android:maxLines="2"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
-        android:textColor="?android:attr/textColorSecondary"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/modern_nps_title"
-        tools:text="Artist name" />
+        app:layout_constraintVertical_bias="0.05"
+        tools:text="@string/artist" />
 
     <include
         android:id="@+id/modern_nps_slider"
         layout="@layout/nps_slider"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/modern_nps_album_cover"
-        app:layout_constraintStart_toStartOf="@id/modern_nps_album_cover"
         app:layout_constraintTop_toBottomOf="@id/modern_nps_sub_title"
         app:layout_constraintVertical_bias="0.06" />
 
@@ -93,9 +94,10 @@
     <ImageView
         android:id="@+id/modern_nps_repeat_btn"
         style="@style/ButtonStyle24"
+        android:layout_marginStart="12dp"
         android:src="@drawable/ic_repeat"
         app:layout_constraintBottom_toBottomOf="@id/modern_nps_play_pause_btn"
-        app:layout_constraintStart_toStartOf="@id/modern_nps_album_cover"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/modern_nps_play_pause_btn"
         tools:ignore="contentDescription" />
 
@@ -115,7 +117,7 @@
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_marginStart="18dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="18dp"
         android:background="@drawable/ic_app_shortcut_background"
         android:padding="12dp"
@@ -142,8 +144,9 @@
     <ImageView
         android:id="@+id/modern_nps_fav_btn"
         style="@style/ButtonStyle24"
+        android:layout_marginEnd="12dp"
         app:layout_constraintBottom_toBottomOf="@id/modern_nps_play_pause_btn"
-        app:layout_constraintEnd_toEndOf="@id/modern_nps_album_cover"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/modern_nps_play_pause_btn"
         tools:ignore="contentDescription"
         tools:src="@drawable/ic_favorite_border" />
@@ -157,6 +160,7 @@
         android:paddingStart="72dp"
         android:paddingEnd="72dp"
         android:requiresFadingEdge="horizontal"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

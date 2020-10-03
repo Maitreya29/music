@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.slider.Slider;
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
@@ -25,6 +24,7 @@ public class StylishNowPlayingScreen extends BaseNowPlayingScreen {
     private ImageView mRepeatBtn;
     private ImageView mPlayPauseBtn;
     private MaterialTextView mTitle;
+    private MaterialTextView mSubTitle;
     private MaterialTextView mStartTime;
     private MaterialTextView mEndTime;
     private MaterialTextView mUpNext;
@@ -42,9 +42,13 @@ public class StylishNowPlayingScreen extends BaseNowPlayingScreen {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ShapeableImageView albumCover = view.findViewById(R.id.stylish_nps_album_cover);
-        applyCornerRadius(albumCover);
+
+        setUpPagerAlbumArt(view.findViewById(R.id.stylish_nps_album_container),
+                R.layout.stylish_nps_media_art,
+                getMediaImageViewShapeAppearanceModel());
+
         mTitle = view.findViewById(R.id.stylish_nps_title);
+        mSubTitle = view.findViewById(R.id.stylish_nps_sub_title);
         mProgressSlider = view.findViewById(R.id.stylish_nps_slider);
         mStartTime = view.findViewById(R.id.stylish_nps_start_time);
         mEndTime = view.findViewById(R.id.stylish_nps_end_time);
@@ -53,7 +57,6 @@ public class StylishNowPlayingScreen extends BaseNowPlayingScreen {
         mFavoriteBtn = view.findViewById(R.id.stylish_nps_favourite_btn);
         mUpNext = view.findViewById(R.id.stylish_nps_up_next);
         setGotToCurrentQueueCLickListener(mUpNext);
-        setUpAlbumArtImageView(albumCover);
         view.findViewById(R.id.stylish_nps_close_btn).setOnClickListener(v -> {
             if (null != getActivity())
                 getActivity().finish();
@@ -86,13 +89,13 @@ public class StylishNowPlayingScreen extends BaseNowPlayingScreen {
         mStartTime.setText(getFormattedElapsedTime(0));
         mEndTime.setText(getFormattedElapsedTime(seconds));
         mTitle.setText(metadata.getText(MediaMetadata.METADATA_KEY_TITLE));
+        mSubTitle.setText(String.format("%s● %s", getString(R.string.artist), metadata.getString(MediaMetadata.METADATA_KEY_ARTIST)));
         mUpNext.setText(getUpNextText());
     }
 
     @Override
     public void onPlaybackStateChanged(PlaybackState state) {
         super.onPlaybackStateChanged(state);
-        if (state == null) return;
         togglePlayPauseAnimation(mPlayPauseBtn, state);
     }
 

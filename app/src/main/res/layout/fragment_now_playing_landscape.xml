@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false"
     android:fitsSystemWindows="true">
 
     <com.google.android.material.textview.MaterialTextView
@@ -21,24 +23,22 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="@tools:sample/lorem/random" />
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/fragment_nps_land_album_cover"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/fragment_nps_land_album_container"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="56dp"
-        android:contentDescription="@string/iv_content_desc"
-        android:elevation="4dp"
-        android:scaleType="fitXY"
+        android:clipChildren="false"
+        android:clipToPadding="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/fragment_nps_land_title"
-        app:layout_constraintWidth_max="360dp"
-        tools:src="@tools:sample/backgrounds/scenic" />
+        app:layout_constraintWidth_max="360dp" />
 
     <include
         android:id="@+id/fragment_nps_land_slider"
@@ -77,8 +77,8 @@
         android:id="@+id/fragment_nps_land_sub_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="72dp"
-        android:layout_marginEnd="72dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginEnd="56dp"
         android:gravity="center"
         android:maxLines="1"
         android:requiresFadingEdge="horizontal"
@@ -86,7 +86,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/fragment_nps_land_play_pause_btn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/fragment_nps_land_album_cover"
+        app:layout_constraintStart_toEndOf="@id/fragment_nps_land_album_container"
         app:layout_constraintTop_toBottomOf="@id/fragment_nps_land_slider"
         app:layout_constraintVertical_bias="0.5"
         tools:text="@tools:sample/full_names" />
@@ -111,8 +111,7 @@
         style="@style/ButtonStyle24"
         android:src="@drawable/ic_repeat"
         app:layout_constraintBottom_toBottomOf="@id/fragment_nps_land_play_pause_btn"
-        app:layout_constraintEnd_toStartOf="@+id/fragment_nps_land_prev_btn"
-        app:layout_constraintStart_toStartOf="@id/fragment_nps_land_slider"
+        app:layout_constraintStart_toStartOf="@id/fragment_nps_land_sub_title"
         app:layout_constraintTop_toTopOf="@id/fragment_nps_land_play_pause_btn"
         tools:ignore="contentDescription" />
 
@@ -160,8 +159,7 @@
         android:id="@+id/fragment_nps_land_favourite_btn"
         style="@style/ButtonStyle24"
         app:layout_constraintBottom_toBottomOf="@id/fragment_nps_land_play_pause_btn"
-        app:layout_constraintEnd_toEndOf="@id/fragment_nps_land_slider"
-        app:layout_constraintStart_toEndOf="@+id/fragment_nps_land_next_btn"
+        app:layout_constraintEnd_toEndOf="@id/fragment_nps_land_sub_title"
         app:layout_constraintTop_toTopOf="@id/fragment_nps_land_play_pause_btn"
         tools:ignore="contentDescription"
         tools:src="@drawable/ic_favorite_border" />

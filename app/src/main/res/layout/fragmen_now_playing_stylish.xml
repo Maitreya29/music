@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false">
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/stylish_nps_title"
@@ -32,25 +34,36 @@
         app:layout_constraintTop_toBottomOf="@id/stylish_nps_title"
         tools:text="@tools:sample/lorem/random" />
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/stylish_nps_album_cover"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/stylish_nps_album_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="4dp"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        app:layout_constraintDimensionRatio="16:20"
+        app:layout_constraintTop_toBottomOf="@id/stylish_nps_up_next" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/stylish_nps_sub_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
-        android:elevation="4dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintDimensionRatio="6:7.5"
-        app:layout_constraintTop_toBottomOf="@id/stylish_nps_up_next"
-        tools:src="@tools:sample/backgrounds/scenic" />
+        android:gravity="center"
+        android:maxLines="2"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+        app:layout_constraintTop_toBottomOf="@+id/stylish_nps_album_container"
+        tools:text="Artist name" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/stylish_nps_start_time"
         android:layout_width="40dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         app:layout_constraintBottom_toBottomOf="@id/stylish_nps_slider"
-        app:layout_constraintStart_toStartOf="@id/stylish_nps_album_cover"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/stylish_nps_slider"
         tools:text="@tools:sample/date/hhmm" />
 
@@ -59,27 +72,28 @@
         layout="@layout/nps_slider"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toStartOf="@id/stylish_nps_end_time"
         app:layout_constraintStart_toEndOf="@id/stylish_nps_start_time"
-        app:layout_constraintTop_toBottomOf="@id/stylish_nps_album_cover"
-        app:layout_constraintVertical_bias="0.1" />
+        app:layout_constraintTop_toBottomOf="@id/stylish_nps_sub_title" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/stylish_nps_end_time"
         android:layout_width="40dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
         app:layout_constraintBottom_toBottomOf="@id/stylish_nps_slider"
-        app:layout_constraintEnd_toEndOf="@id/stylish_nps_album_cover"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/stylish_nps_slider"
         tools:text="@tools:sample/date/hhmm" />
 
     <ImageView
         android:id="@+id/stylish_nps_repeat_btn"
         style="@style/ButtonStyle24"
+        android:layout_marginStart="8dp"
         android:src="@drawable/ic_repeat"
         app:layout_constraintBottom_toBottomOf="@id/stylish_nps_play_pause_btn"
-        app:layout_constraintStart_toStartOf="@id/stylish_nps_album_cover"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/stylish_nps_play_pause_btn"
         tools:ignore="contentDescription" />
 
@@ -125,8 +139,9 @@
     <ImageView
         android:id="@+id/stylish_nps_favourite_btn"
         style="@style/ButtonStyle24"
+        android:layout_marginEnd="8dp"
         app:layout_constraintBottom_toBottomOf="@id/stylish_nps_play_pause_btn"
-        app:layout_constraintEnd_toEndOf="@id/stylish_nps_album_cover"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/stylish_nps_play_pause_btn"
         tools:ignore="contentDescription"
         tools:src="@drawable/ic_favorite_border" />

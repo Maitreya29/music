@@ -32,7 +32,7 @@ public class TrackManager {
         return mIndex;
     }
 
-    private void setActiveIndex(int index) {
+    public void setActiveIndex(int index) {
         mIndex = index;
     }
 

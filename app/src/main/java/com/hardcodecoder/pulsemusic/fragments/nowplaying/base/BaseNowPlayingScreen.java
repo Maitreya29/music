@@ -1,6 +1,5 @@
 package com.hardcodecoder.pulsemusic.fragments.nowplaying.base;
 
-import android.annotation.SuppressLint;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -21,33 +20,35 @@ import android.widget.SeekBar;
 import android.widget.Toast;
 
 import androidx.annotation.CallSuper;
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatSeekBar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.viewpager2.widget.ViewPager2;
 
-import com.bumptech.glide.GenericTransitionOptions;
 import com.google.android.material.color.MaterialColors;
-import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.shape.CornerFamily;
+import com.google.android.material.shape.ShapeAppearanceModel;
 import com.google.android.material.slider.Slider;
-import com.hardcodecoder.pulsemusic.GlideApp;
 import com.hardcodecoder.pulsemusic.PMS;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.activities.CurrentPlaylistActivity;
 import com.hardcodecoder.pulsemusic.helper.MediaProgressUpdateHelper;
-import com.hardcodecoder.pulsemusic.helper.SwipeGestureListener;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.singleton.TrackManager;
 import com.hardcodecoder.pulsemusic.storage.AppFileManager;
 import com.hardcodecoder.pulsemusic.themes.ThemeColors;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 
+import java.util.Objects;
+
+import static android.app.Activity.RESULT_OK;
+
 public abstract class BaseNowPlayingScreen extends Fragment implements MediaProgressUpdateHelper.Callback {
 
     private final TrackManager mTrackManager = TrackManager.getInstance();
-    private ImageView mMediaAlbumCover;
     private MediaController mController;
     private MediaController.TransportControls mTransportControls;
     private MediaProgressUpdateHelper mUpdateHelper;
@@ -65,9 +66,10 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
 
         }
     };
-    // Denotes most recently performed swipe gesture direction, 0 = right, 1 = left
-    private int mSwipeDirection = 1;
+    private ViewPager2 mMediaArtPager;
+    private MediaArtPagerAdapter mMediaArtAdapter;
     private boolean mCurrentItemFavorite = false;
+    private boolean mShouldAnimateMediaArt = false;
 
     @CallSuper
     @Override
@@ -75,15 +77,25 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
         connectToService();
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (null != mMediaArtAdapter && requestCode == CurrentPlaylistActivity.REQUEST_CODE && resultCode == RESULT_OK) {
+            if (null != data && data.getBooleanExtra(CurrentPlaylistActivity.TRACK_CHANGED, false)) {
+                mMediaArtAdapter.notifyTracksChanged(mTrackManager.getActiveQueue());
+                mMediaArtPager.setCurrentItem(mTrackManager.getActiveIndex());
+            }
+        }
+    }
+
     @CallSuper
     @Override
     public void onMetadataDataChanged(MediaMetadata metadata) {
-        GlideApp.with(this)
-                .load(metadata.getBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART))
-                .transition(GenericTransitionOptions.with(mSwipeDirection == 1 ? R.anim.album_cover_enter_left : R.anim.album_cover_enter_right))
-                .into(mMediaAlbumCover);
+        if (null != mMediaArtPager)
+            mMediaArtPager.setCurrentItem(mTrackManager.getActiveIndex(), mShouldAnimateMediaArt);
         updateFavoriteItem();
         updateRepeat();
+        mShouldAnimateMediaArt = true;
     }
 
     @CallSuper
@@ -92,21 +104,36 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
         updateRepeat();
     }
 
-    protected void applyCornerRadius(@NonNull ShapeableImageView imageView) {
+    protected void setUpPagerAlbumArt(ViewPager2 pager, @LayoutRes int redId, ShapeAppearanceModel model) {
+        mMediaArtPager = pager;
+        mMediaArtAdapter = new MediaArtPagerAdapter(getContext(), TrackManager.getInstance().getActiveQueue(), redId, model);
+        mMediaArtPager.setAdapter(mMediaArtAdapter);
+        mMediaArtPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                if (position == mTrackManager.getActiveIndex()) return;
+                mTrackManager.setActiveIndex(position);
+                mTransportControls.play();
+            }
+        });
+        mMediaArtPager.setCurrentItem(mTrackManager.getActiveIndex(), true);
+    }
+
+    protected ShapeAppearanceModel getMediaImageViewShapeAppearanceModel() {
         float factor = (float) getResources().getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT;
-        int[] radiusDP = AppSettings.getNowPlayingAlbumCoverCornerRadius(imageView.getContext());
+        int[] radiusDP = AppSettings.getNowPlayingAlbumCoverCornerRadius(Objects.requireNonNull(getContext()));
         float tl = radiusDP[0] * factor;
         float tr = radiusDP[1] * factor;
         float bl = radiusDP[2] * factor;
         float br = radiusDP[3] * factor;
         int cornerFamily = CornerFamily.ROUNDED;
-        imageView.setShapeAppearanceModel(imageView.getShapeAppearanceModel().toBuilder()
+        return new ShapeAppearanceModel.Builder()
                 .setTopLeftCorner(cornerFamily, tl)
                 .setTopRightCorner(cornerFamily, tr)
                 .setBottomLeftCorner(cornerFamily, bl)
                 .setBottomRightCorner(cornerFamily, br)
-                .build()
-        );
+                .build();
     }
 
     protected void setUpSliderControls(Slider progressSlider) {
@@ -151,26 +178,9 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
         slider.setValueTo(valueTo);
     }
 
-    @SuppressLint("ClickableViewAccessibility")
-    protected void setUpAlbumArtImageView(@NonNull ImageView mediaArtImageView) {
-        mMediaAlbumCover = mediaArtImageView;
-        mMediaAlbumCover.setOnTouchListener(new SwipeGestureListener(mediaArtImageView.getContext()) {
-            @Override
-            public void onSwipeRight() {
-                onSkipToPrevious();
-            }
-
-            @Override
-            public void onSwipeLeft() {
-                onSkipToNext();
-            }
-        });
-
-    }
-
     protected void setUpSkipControls(ImageView skipPrev, ImageView skipNext) {
-        skipPrev.setOnClickListener(v -> onSkipToPrevious());
-        skipNext.setOnClickListener(v -> onSkipToNext());
+        skipPrev.setOnClickListener(v -> mTransportControls.skipToPrevious());
+        skipNext.setOnClickListener(v -> mTransportControls.skipToNext());
     }
 
     protected void toggleRepeatMode() {
@@ -233,7 +243,7 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
     }
 
     protected void setGotToCurrentQueueCLickListener(View view) {
-        view.setOnClickListener(v -> startActivity(new Intent(getContext(), CurrentPlaylistActivity.class)));
+        view.setOnClickListener(v -> startActivityForResult(new Intent(getContext(), CurrentPlaylistActivity.class), CurrentPlaylistActivity.REQUEST_CODE));
     }
 
     private void updateRepeat() {
@@ -265,26 +275,12 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
         }
     }
 
-    private void onSkipToNext() {
-        mSwipeDirection = 1;
-        mTransportControls.skipToNext();
-    }
-
-    private void onSkipToPrevious() {
-        mSwipeDirection = 0;
-        mTransportControls.skipToPrevious();
-    }
-
     private void connectToService() {
         if (null != getActivity()) {
             Intent intent = new Intent(getActivity(), PMS.class);
             getActivity().bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE);
         }
     }
-
-    public abstract void onRepeatStateChanged(boolean repeat);
-
-    public abstract void onFavoriteStateChanged(boolean isFavorite);
 
     @Override
     public void onDestroy() {
@@ -294,4 +290,8 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
             getActivity().unbindService(mServiceConnection);
         super.onDestroy();
     }
+
+    public abstract void onRepeatStateChanged(boolean repeat);
+
+    public abstract void onFavoriteStateChanged(boolean isFavorite);
 }

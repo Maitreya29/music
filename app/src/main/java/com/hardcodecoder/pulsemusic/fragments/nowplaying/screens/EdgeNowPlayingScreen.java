@@ -55,7 +55,9 @@ public class EdgeNowPlayingScreen extends BaseNowPlayingScreen {
         mFavoriteBtn = view.findViewById(R.id.edge_nps_favourite_btn);
         mUpNext = view.findViewById(R.id.edge_nps_up_next);
         setGotToCurrentQueueCLickListener(mUpNext);
-        setUpAlbumArtImageView(view.findViewById(R.id.edge_nps_album_cover));
+
+        setUpPagerAlbumArt(view.findViewById(R.id.edge_nps_album_container), R.layout.edge_nps_media_art, null);
+
         view.findViewById(R.id.edge_nps_close_btn).setOnClickListener(v -> {
             if (null != getActivity())
                 getActivity().finish();
@@ -84,7 +86,7 @@ public class EdgeNowPlayingScreen extends BaseNowPlayingScreen {
         mProgressSeekBar.setMax((int) seconds);
         mStartTime.setText(getFormattedElapsedTime(0));
         mEndTime.setText(getFormattedElapsedTime(seconds));
-        mSubTitle.setText(metadata.getString(MediaMetadata.METADATA_KEY_ARTIST));
+        mSubTitle.setText(String.format("%s● %s", getString(R.string.artist), metadata.getString(MediaMetadata.METADATA_KEY_ARTIST)));
         mTitle.setText(metadata.getText(MediaMetadata.METADATA_KEY_TITLE));
         mUpNext.setText(getUpNextText());
     }
@@ -92,10 +94,8 @@ public class EdgeNowPlayingScreen extends BaseNowPlayingScreen {
     @Override
     public void onPlaybackStateChanged(PlaybackState state) {
         super.onPlaybackStateChanged(state);
-        if (state == null) return;
         togglePlayPauseAnimation(mPlayPauseBtn, state);
     }
-
 
     @Override
     public void onRepeatStateChanged(boolean repeat) {
@@ -106,7 +106,6 @@ public class EdgeNowPlayingScreen extends BaseNowPlayingScreen {
     public void onFavoriteStateChanged(boolean isFavorite) {
         handleFavoriteStateChanged(mFavoriteBtn, isFavorite);
     }
-
 
     @Override
     public void onProgressValueChanged(int progressInSec) {

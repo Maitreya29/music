@@ -1,5 +1,6 @@
 package com.hardcodecoder.pulsemusic.activities;
 
+import android.content.Intent;
 import android.media.session.MediaController;
 import android.os.Bundle;
 
@@ -15,12 +16,21 @@ import java.util.ArrayList;
 
 public class CurrentPlaylistActivity extends AdvancePlaylist {
 
+    public static final String TRACK_CHANGED = "HasTracksChanged";
+    public static final int REQUEST_CODE = 40;
     private MediaController mController;
+    private boolean mHasTracksChanged = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setUpToolbar(getString(R.string.playlist_current_queue));
+        setUpToolbar(getString(R.string.playlist_current_queue), v -> {
+            Intent i = new Intent();
+            i.putExtra(TRACK_CHANGED, mHasTracksChanged);
+            setResult(RESULT_OK, i);
+            finishActivity(REQUEST_CODE);
+            finish();
+        });
         setShuffleButtonAction(v -> {
             if (null == mPlaylistTracks) return;
             shuffleTrackAndPlay(mPlaylistTracks);
@@ -31,6 +41,7 @@ public class CurrentPlaylistActivity extends AdvancePlaylist {
 
     @Override
     protected void onReceiveData(ArrayList<MusicModel> receivedData) {
+        mHasTracksChanged = true;
         if (null == mAdapter) {
             setUpData(receivedData, mTrackManager.getActiveIndex());
             mTrackManager.buildDataList(receivedData, 0);
@@ -60,11 +71,13 @@ public class CurrentPlaylistActivity extends AdvancePlaylist {
                 mController.getTransportControls().stop();
             }
         }
+        mHasTracksChanged = true;
     }
 
     @Override
     public void onItemMoved(int fromPosition, int toPosition) {
         mTrackManager.updateActiveQueue(fromPosition, toPosition);
+        mHasTracksChanged = true;
     }
 
     @Override
