@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<set xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <translate
-        android:duration="@integer/now_playing_screen_enter"
-        android:fromYDelta="100%p"
-        android:interpolator="@android:interpolator/linear_out_slow_in"
-        android:toYDelta="0" />
-</set>
+<translate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="@android:integer/config_longAnimTime"
+    android:fromYDelta="90%p"
+    android:interpolator="@android:interpolator/decelerate_quad"
+    android:toYDelta="0" />

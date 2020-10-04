@@ -37,7 +37,9 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
         android:gravity="center"
+        android:maxLines="1"
         android:requiresFadingEdge="horizontal"
+        android:scrollHorizontally="true"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -51,13 +53,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
         android:gravity="center"
         android:maxLines="2"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/modern_nps_title"
-        app:layout_constraintVertical_bias="0.05"
         tools:text="@string/artist" />
 
     <include
