@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.hardcodecoder.pulsemusic.views.CustomScrollBarsRecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.hardcodecoder.pulsemusic.views.CustomFastScrollRecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fast_scroll_recycler_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layoutAnimation="@anim/item_falls_down_animation"
-    android:paddingStart="0dp"
-    android:paddingEnd="1dp"
-    android:scrollbarStyle="insideOverlay"
-    android:scrollbarThumbVertical="@drawable/recycler_view_scroll_thumb"
-    android:scrollbars="vertical"
+    app:bubbleTextColor="?attr/colorOnPrimary"
     app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
     tools:listitem="@layout/list_item_with_options" />

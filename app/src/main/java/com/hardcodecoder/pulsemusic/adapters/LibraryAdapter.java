@@ -20,11 +20,12 @@ import com.hardcodecoder.pulsemusic.loaders.SortOrder;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.utils.SortUtil;
 import com.hardcodecoder.pulsemusic.views.MediaArtImageView;
+import com.l4digital.fastscroll.FastScroller;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.MyLibraryViewHolder> {
+public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.MyLibraryViewHolder> implements FastScroller.SectionIndexer {
 
     private List<MusicModel> mList;
     private SimpleItemClickListener mListener;
@@ -56,6 +57,11 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.MyLibrar
                     mCallback.onSortUpdateComplete();
             });
         });
+    }
+
+    @Override
+    public CharSequence getSectionText(int position) {
+        return mList.get(position).getTrackName().substring(0, 1);
     }
 
     @NonNull

@@ -21,11 +21,13 @@ import com.hardcodecoder.pulsemusic.loaders.SortOrder;
 import com.hardcodecoder.pulsemusic.model.ArtistModel;
 import com.hardcodecoder.pulsemusic.themes.TintHelper;
 import com.hardcodecoder.pulsemusic.utils.SortUtil;
+import com.l4digital.fastscroll.FastScroller;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistSVH> {
+public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistSVH>
+        implements FastScroller.SectionIndexer {
 
     private List<ArtistModel> mList;
     private LayoutInflater mInflater;
@@ -79,6 +81,11 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistSVH>
             return R.layout.rv_grid_item_artist_small;
         }
         return R.layout.rv_grid_item_artist;
+    }
+
+    @Override
+    public CharSequence getSectionText(int position) {
+        return mList.get(position).getArtistName().substring(0, 1);
     }
 
     @NonNull

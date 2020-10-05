@@ -20,6 +20,7 @@ import com.hardcodecoder.pulsemusic.interfaces.TrackPickerListener;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.utils.ImageUtil;
 import com.hardcodecoder.pulsemusic.views.MediaArtImageView;
+import com.l4digital.fastscroll.FastScroller;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -28,7 +29,8 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-public class TrackPickerAdapter extends RecyclerView.Adapter<TrackPickerAdapter.TrackPickerSVH> implements TrackPickerCallbackAdapter {
+public class TrackPickerAdapter extends RecyclerView.Adapter<TrackPickerAdapter.TrackPickerSVH>
+        implements TrackPickerCallbackAdapter, FastScroller.SectionIndexer {
 
     private final Handler mMainHandler = new Handler();
     private final Set<MusicModel> mSelectedTracks = new LinkedHashSet<>();
@@ -75,9 +77,8 @@ public class TrackPickerAdapter extends RecyclerView.Adapter<TrackPickerAdapter.
     }
 
     @Override
-    public void onViewDetachedFromWindow(@NonNull TrackPickerSVH holder) {
-        super.onViewDetachedFromWindow(holder);
-        holder.itemView.clearAnimation();
+    public CharSequence getSectionText(int position) {
+        return mList.get(position).getTrackName().substring(0, 1);
     }
 
     @Override
@@ -120,8 +121,10 @@ public class TrackPickerAdapter extends RecyclerView.Adapter<TrackPickerAdapter.
 
     @Override
     public void onDetachedFromRecyclerView(@NonNull RecyclerView recyclerView) {
+        mSelectedTracks.clear();
         pendingUpdates.clear();
         mList.clear();
+        mListener = null;
         super.onDetachedFromRecyclerView(recyclerView);
     }
 

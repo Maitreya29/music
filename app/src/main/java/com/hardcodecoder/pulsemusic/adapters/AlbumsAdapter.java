@@ -19,11 +19,13 @@ import com.hardcodecoder.pulsemusic.loaders.SortOrder;
 import com.hardcodecoder.pulsemusic.model.AlbumModel;
 import com.hardcodecoder.pulsemusic.utils.SortUtil;
 import com.hardcodecoder.pulsemusic.views.MediaArtImageView;
+import com.l4digital.fastscroll.FastScroller;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.AlbumsSVH> {
+public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.AlbumsSVH>
+        implements FastScroller.SectionIndexer {
 
     private List<AlbumModel> mList;
     private LayoutInflater mInflater;
@@ -57,6 +59,11 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.AlbumsSVH>
                     mCallback.onSortUpdateComplete();
             });
         });
+    }
+
+    @Override
+    public CharSequence getSectionText(int position) {
+        return mList.get(position).getAlbumName().substring(0, 1);
     }
 
     @NonNull

@@ -55,6 +55,8 @@ dependencies {
     implementation 'androidx.media:media:1.1.0'
     implementation 'com.google.android.material:material:1.2.1'
 
+    implementation 'com.l4digital.fastscroll:fastscroll:2.0.1'
+
     annotationProcessor 'androidx.annotation:annotation:1.1.0'
 
     testImplementation 'junit:junit:4.12'
