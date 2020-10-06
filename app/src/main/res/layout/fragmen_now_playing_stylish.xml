@@ -9,16 +9,19 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/stylish_nps_title"
-        android:layout_width="match_parent"
-        android:layout_height="32dp"
-        android:layout_marginStart="32dp"
+        android:layout_width="0dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="72dp"
         android:ellipsize="marquee"
         android:gravity="start|bottom"
         android:requiresFadingEdge="horizontal"
         android:singleLine="true"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="@tools:sample/full_names" />
 
@@ -27,8 +30,9 @@
         android:layout_width="0dp"
         android:layout_height="32dp"
         android:gravity="start|top"
-        android:maxLines="1"
         android:requiresFadingEdge="horizontal"
+        android:singleLine="true"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
         app:layout_constraintEnd_toEndOf="@id/stylish_nps_title"
         app:layout_constraintStart_toStartOf="@id/stylish_nps_title"
         app:layout_constraintTop_toBottomOf="@id/stylish_nps_title"
@@ -38,10 +42,9 @@
         android:id="@+id/stylish_nps_album_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="4dp"
         android:clipChildren="false"
         android:clipToPadding="false"
-        app:layout_constraintDimensionRatio="16:20"
+        app:layout_constraintBottom_toTopOf="@id/stylish_nps_sub_title"
         app:layout_constraintTop_toBottomOf="@id/stylish_nps_up_next" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -49,19 +52,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
-        android:gravity="center"
-        android:maxLines="2"
+        android:gravity="bottom|center_horizontal"
+        android:paddingTop="8dp"
+        android:singleLine="true"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-        app:layout_constraintTop_toBottomOf="@+id/stylish_nps_album_container"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.7"
         tools:text="Artist name" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/stylish_nps_start_time"
         android:layout_width="40dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="24dp"
         app:layout_constraintBottom_toBottomOf="@id/stylish_nps_slider"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/stylish_nps_slider"
@@ -72,16 +77,17 @@
         layout="@layout/nps_slider"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/stylish_nps_end_time"
         app:layout_constraintStart_toEndOf="@id/stylish_nps_start_time"
-        app:layout_constraintTop_toBottomOf="@id/stylish_nps_sub_title" />
+        app:layout_constraintTop_toBottomOf="@id/stylish_nps_sub_title"
+        app:layout_constraintVertical_bias="0.06" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/stylish_nps_end_time"
         android:layout_width="40dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="24dp"
         app:layout_constraintBottom_toBottomOf="@id/stylish_nps_slider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/stylish_nps_slider"
@@ -121,7 +127,7 @@
         app:layout_constraintEnd_toStartOf="@+id/stylish_nps_next_btn"
         app:layout_constraintStart_toEndOf="@+id/stylish_nps_prev_btn"
         app:layout_constraintTop_toBottomOf="@id/stylish_nps_slider"
-        app:layout_constraintVertical_bias="0.3"
+        app:layout_constraintVertical_bias="0.25"
         app:tint="?attr/colorOnPrimary"
         tools:ignore="contentDescription"
         tools:src="@drawable/pause_to_play" />
@@ -154,5 +160,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/stylish_nps_favourite_btn"
         app:layout_constraintTop_toBottomOf="@id/stylish_nps_favourite_btn"
-        app:layout_constraintVertical_bias="0.8" />
+        app:layout_constraintVertical_bias="0.5" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,7 +13,7 @@
         android:layout_height="0dp"
         android:clipChildren="false"
         android:clipToPadding="false"
-        app:layout_constraintDimensionRatio="1:1.18"
+        app:layout_constraintBottom_toBottomOf="@id/edge_nps_seek_bar"
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
@@ -44,9 +44,11 @@
         android:progressDrawable="@drawable/seek_bar_track"
         android:thumb="@drawable/seek_bar_thumb"
         android:thumbOffset="0dp"
-        app:layout_constraintBottom_toBottomOf="@id/edge_nps_album_container"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.6"
         tools:progress="60" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -61,29 +63,32 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/edge_nps_title"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:gravity="center"
-        android:maxLines="1"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-        app:layout_constraintBottom_toTopOf="@id/edge_nps_play_pause_btn"
-        app:layout_constraintTop_toBottomOf="@+id/edge_nps_seek_bar"
-        app:layout_constraintVertical_bias="0.4"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:gravity="center_horizontal|bottom"
+        android:singleLine="true"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edge_nps_seek_bar"
+        app:layout_constraintVertical_bias="0.14"
         tools:text="@tools:sample/lorem" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/edge_nps_sub_title"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="56dp"
         android:gravity="center"
-        android:maxLines="2"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+        android:singleLine="true"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
         android:textColor="?android:attr/textColorSecondary"
+        app:layout_constraintEnd_toEndOf="@id/edge_nps_title"
+        app:layout_constraintStart_toStartOf="@id/edge_nps_title"
         app:layout_constraintTop_toBottomOf="@+id/edge_nps_title"
         tools:text="Artist name" />
 
@@ -120,8 +125,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/edge_nps_next_btn"
         app:layout_constraintStart_toEndOf="@+id/edge_nps_prev_btn"
-        app:layout_constraintTop_toBottomOf="@id/edge_nps_seek_bar"
-        app:layout_constraintVertical_bias="0.4"
+        app:layout_constraintTop_toBottomOf="@id/edge_nps_sub_title"
+        app:layout_constraintVertical_bias="0.2"
         app:tint="?attr/colorOnPrimary"
         tools:ignore="contentDescription"
         tools:src="@drawable/pause_to_play" />
@@ -153,8 +158,9 @@
         android:layout_marginStart="72dp"
         android:layout_marginEnd="72dp"
         android:gravity="center"
-        android:maxLines="1"
         android:requiresFadingEdge="horizontal"
+        android:singleLine="true"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -165,10 +171,10 @@
     <ImageView
         android:id="@+id/edge_nps_close_btn"
         style="@style/ButtonStyle36"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="18dp"
         android:contentDescription="@string/iv_content_desc"
         android:src="@drawable/ic_down_arrow"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="@id/edge_nps_favourite_btn"
+        app:layout_constraintTop_toBottomOf="@id/edge_nps_favourite_btn"
+        app:layout_constraintVertical_bias="0.8" />
 </androidx.constraintlayout.widget.ConstraintLayout>
