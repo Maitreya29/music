@@ -179,7 +179,7 @@ public class MainActivity extends MediaSessionActivity {
             controlsFrag = new ControlsFragment();
             findViewById(R.id.controls_fragment_container).setVisibility(View.VISIBLE);
             getSupportFragmentManager().beginTransaction()
-                    .setCustomAnimations(R.anim.slide_up_enter, R.anim.slide_down_exit)
+                    .setCustomAnimations(R.anim.slide_in_bottom, R.anim.slide_out_bottom)
                     .replace(R.id.controls_fragment_container, controlsFrag)
                     .commit();
         }
@@ -189,7 +189,7 @@ public class MainActivity extends MediaSessionActivity {
         if (null == controlsFrag) return;
         findViewById(R.id.controls_fragment_container).setVisibility(View.GONE);
         getSupportFragmentManager().beginTransaction()
-                .setCustomAnimations(R.anim.slide_up_enter, R.anim.slide_down_exit)
+                .setCustomAnimations(R.anim.slide_in_bottom, R.anim.slide_out_bottom)
                 .remove(controlsFrag)
                 .commitAllowingStateLoss();
         controlsFrag = null;

@@ -80,7 +80,7 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (null != mMediaArtAdapter && requestCode == CurrentPlaylistActivity.REQUEST_CODE && resultCode == RESULT_OK) {
+        if (null != mMediaArtAdapter && requestCode == CurrentPlaylistActivity.REQUEST_UPDATE_TRACK && resultCode == RESULT_OK) {
             if (null != data && data.getBooleanExtra(CurrentPlaylistActivity.TRACK_CHANGED, false)) {
                 mMediaArtAdapter.notifyTracksChanged(mTrackManager.getActiveQueue());
                 mMediaArtPager.setCurrentItem(mTrackManager.getActiveIndex());
@@ -243,7 +243,11 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
     }
 
     protected void setGotToCurrentQueueCLickListener(View view) {
-        view.setOnClickListener(v -> startActivityForResult(new Intent(getContext(), CurrentPlaylistActivity.class), CurrentPlaylistActivity.REQUEST_CODE));
+        view.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), CurrentPlaylistActivity.class);
+            intent.putExtra(CurrentPlaylistActivity.TRANSITION_STYLE_KEY, CurrentPlaylistActivity.TRANSITION_STYLE_SLIDE);
+            startActivityForResult(intent, CurrentPlaylistActivity.REQUEST_UPDATE_TRACK);
+        });
     }
 
     private void updateRepeat() {

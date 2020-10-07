@@ -17,18 +17,26 @@ import java.util.ArrayList;
 public class CurrentPlaylistActivity extends AdvancePlaylist {
 
     public static final String TRACK_CHANGED = "HasTracksChanged";
-    public static final int REQUEST_CODE = 40;
+    public static final String TRANSITION_STYLE_KEY = "TransitionStyle";
+    public static final short TRANSITION_STYLE_DEFAULT = 0;
+    public static final short TRANSITION_STYLE_SLIDE = 1;
+    public static final int REQUEST_UPDATE_TRACK = 40; // Calling activity get's notified if the tracks changes
     private MediaController mController;
+    private short mTransitionStyle;
     private boolean mHasTracksChanged = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        mTransitionStyle = getIntent().getShortExtra(TRANSITION_STYLE_KEY, TRANSITION_STYLE_DEFAULT);
+        if (mTransitionStyle == TRANSITION_STYLE_SLIDE)
+            overridePendingTransition(R.anim.slide_in_bottom, R.anim.activity_open_exit);
+
         super.onCreate(savedInstanceState);
         setUpToolbar(getString(R.string.playlist_current_queue), v -> {
             Intent i = new Intent();
             i.putExtra(TRACK_CHANGED, mHasTracksChanged);
             setResult(RESULT_OK, i);
-            finishActivity(REQUEST_CODE);
+            finishActivity(REQUEST_UPDATE_TRACK);
             finish();
         });
         setShuffleButtonAction(v -> {
@@ -84,5 +92,22 @@ public class CurrentPlaylistActivity extends AdvancePlaylist {
     public void onMediaServiceConnected(MediaController controller) {
         super.onMediaServiceConnected(controller);
         mController = controller;
+    }
+
+    private void applyExitTransition() {
+        if (mTransitionStyle == TRANSITION_STYLE_SLIDE)
+            overridePendingTransition(R.anim.activity_close_enter, R.anim.slide_out_bottom);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        applyExitTransition();
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        applyExitTransition();
     }
 }

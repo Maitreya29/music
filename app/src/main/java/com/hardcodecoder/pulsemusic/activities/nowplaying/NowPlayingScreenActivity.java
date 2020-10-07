@@ -23,7 +23,7 @@ public class NowPlayingScreenActivity extends PMBActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        overridePendingTransition(R.anim.activity_slide_in, R.anim.activity_open_exit);
+        overridePendingTransition(R.anim.slide_in_bottom, R.anim.activity_open_exit);
         Fragment screenFragment;
         String tag;
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -65,7 +65,7 @@ public class NowPlayingScreenActivity extends PMBActivity {
     }
 
     private void overrideExitTransition() {
-        overridePendingTransition(R.anim.activity_close_enter, R.anim.activity_slide_out);
+        overridePendingTransition(R.anim.activity_close_enter, R.anim.slide_out_bottom);
     }
 
     @Override
