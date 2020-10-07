@@ -6,10 +6,16 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.DecelerateInterpolator;
+import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.slider.Slider;
 import com.google.android.material.textview.MaterialTextView;
@@ -43,7 +49,8 @@ public class ModernNowPlayingScreen extends BaseNowPlayingScreen {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        setUpPagerAlbumArt(view.findViewById(R.id.modern_nps_album_container),
+        ViewPager2 pager = view.findViewById(R.id.modern_nps_album_container);
+        setUpPagerAlbumArt(pager,
                 R.layout.modern_nps_media_art,
                 getMediaImageViewShapeAppearanceModel());
 
@@ -53,22 +60,54 @@ public class ModernNowPlayingScreen extends BaseNowPlayingScreen {
         mStartTime = view.findViewById(R.id.modern_nps_start_time);
         mEndTime = view.findViewById(R.id.modern_nps_end_time);
         mRepeatBtn = view.findViewById(R.id.modern_nps_repeat_btn);
+        ImageView skipPrev = view.findViewById(R.id.modern_nps_prev_btn);
         mPlayPauseBtn = view.findViewById(R.id.modern_nps_play_pause_btn);
+        ImageView skipNext = view.findViewById(R.id.modern_nps_next_btn);
         mFavoriteBtn = view.findViewById(R.id.modern_nps_fav_btn);
         mUpNext = view.findViewById(R.id.modern_nps_up_next);
-        setGotToCurrentQueueCLickListener(mUpNext);
+
         view.findViewById(R.id.modern_nps_close_btn).setOnClickListener(v -> {
             if (null != getActivity())
-                getActivity().finish();
+                getActivity().finishAfterTransition();
         });
-        setUpSliderControls(mProgressSlider);
-        setUpSkipControls(
-                view.findViewById(R.id.modern_nps_prev_btn),
-                view.findViewById(R.id.modern_nps_next_btn));
         mRepeatBtn.setOnClickListener(v -> toggleRepeatMode());
         mPlayPauseBtn.setOnClickListener(v -> togglePlayPause());
         mFavoriteBtn.setOnClickListener(v -> toggleFavorite());
+
+        setGotToCurrentQueueCLickListener(mUpNext);
+        setUpSliderControls(mProgressSlider);
+        setUpSkipControls(skipPrev, skipNext);
         setDefaultTintToPlayBtn(mPlayPauseBtn);
+
+        TranslateAnimation translateAnimation = new TranslateAnimation(
+                Animation.ABSOLUTE, 0,
+                Animation.ABSOLUTE, 0,
+                Animation.RELATIVE_TO_PARENT, 0.3f,
+                Animation.RELATIVE_TO_PARENT, 0);
+
+        translateAnimation.setDuration(500);
+        translateAnimation.setInterpolator(new DecelerateInterpolator(1.1f));
+
+        AlphaAnimation alphaAnimation = new AlphaAnimation(0, 1);
+        alphaAnimation.setInterpolator(new DecelerateInterpolator(1.1f));
+        alphaAnimation.setDuration(800);
+
+        AnimationSet set = new AnimationSet(false);
+        set.addAnimation(alphaAnimation);
+        set.addAnimation(translateAnimation);
+
+        pager.startAnimation(set);
+        mTitle.startAnimation(set);
+        mSubTitle.startAnimation(set);
+        mProgressSlider.startAnimation(set);
+        mStartTime.startAnimation(set);
+        mEndTime.startAnimation(set);
+        mRepeatBtn.startAnimation(set);
+        skipPrev.startAnimation(set);
+        mPlayPauseBtn.startAnimation(set);
+        skipNext.startAnimation(set);
+        mFavoriteBtn.startAnimation(set);
+        mUpNext.startAnimation(set);
     }
 
     @Override
