@@ -13,12 +13,10 @@ import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.interfaces.SimpleItemClickListener;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.views.MediaArtImageView;
-import com.l4digital.fastscroll.FastScroller;
 
 import java.util.List;
 
-public class SimplePlaylistAdapter extends RecyclerView.Adapter<SimplePlaylistAdapter.SimpleViewHolder>
-        implements FastScroller.SectionIndexer {
+public class SimplePlaylistAdapter extends RecyclerView.Adapter<SimplePlaylistAdapter.SimpleViewHolder> {
 
     private List<MusicModel> mList;
     private SimpleItemClickListener mListener;
@@ -55,11 +53,6 @@ public class SimplePlaylistAdapter extends RecyclerView.Adapter<SimplePlaylistAd
     public void onViewDetachedFromWindow(@NonNull SimpleViewHolder holder) {
         super.onViewDetachedFromWindow(holder);
         holder.itemView.clearAnimation();
-    }
-
-    @Override
-    public CharSequence getSectionText(int position) {
-        return mList.get(position).getTrackName().substring(0, 1);
     }
 
     @Override

@@ -39,7 +39,7 @@
         android:id="@+id/stub_track_picker_rv"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout="@layout/recycler_view_vertical"
+        android:layout="@layout/recycler_view_vertical_fast_scroll"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/track_picker_bar" />

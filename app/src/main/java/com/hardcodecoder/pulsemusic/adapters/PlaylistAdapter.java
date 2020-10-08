@@ -16,12 +16,11 @@ import com.hardcodecoder.pulsemusic.interfaces.ItemTouchHelperViewHolder;
 import com.hardcodecoder.pulsemusic.interfaces.PlaylistCardListener;
 import com.hardcodecoder.pulsemusic.interfaces.SimpleGestureCallback;
 import com.hardcodecoder.pulsemusic.utils.ImageUtil;
-import com.l4digital.fastscroll.FastScroller;
 
 import java.util.List;
 
 public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.CardsSVH>
-        implements ItemTouchHelperAdapter, FastScroller.SectionIndexer {
+        implements ItemTouchHelperAdapter {
 
     private List<String> mPlaylistNames;
     private PlaylistCardListener mListener;
@@ -53,11 +52,6 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.CardsS
     public void onItemDismiss(int position) {
         if (null != mCallback)
             mCallback.onItemDismissed(position);
-    }
-
-    @Override
-    public CharSequence getSectionText(int position) {
-        return mPlaylistNames.get(position).substring(0, 1);
     }
 
     @NonNull

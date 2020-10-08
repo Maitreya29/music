@@ -24,13 +24,12 @@ import com.hardcodecoder.pulsemusic.interfaces.SimpleGestureCallback;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.utils.ImageUtil;
 import com.hardcodecoder.pulsemusic.views.MediaArtImageView;
-import com.l4digital.fastscroll.FastScroller;
 
 import java.util.Collections;
 import java.util.List;
 
 public class PlaylistDataAdapter extends RecyclerView.Adapter<PlaylistDataAdapter.PlaylistDataSVH>
-        implements ItemTouchHelperAdapter, FastScroller.SectionIndexer {
+        implements ItemTouchHelperAdapter {
 
     private LayoutInflater mInflater;
     private List<MusicModel> mPlaylistTracks;
@@ -96,11 +95,6 @@ public class PlaylistDataAdapter extends RecyclerView.Adapter<PlaylistDataAdapte
         notifyItemRemoved(position);
         if (null != mCallback)
             mCallback.onItemDismissed(position);
-    }
-
-    @Override
-    public CharSequence getSectionText(int position) {
-        return mPlaylistTracks.get(position).getTrackName().substring(0, 1);
     }
 
     @NonNull

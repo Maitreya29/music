@@ -7,7 +7,7 @@
         android:id="@+id/stub_library_fragment_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout="@layout/recycler_view_vertical" />
+        android:layout="@layout/recycler_view_vertical_fast_scroll" />
 
     <ViewStub
         android:id="@+id/stub_no_tracks_found"
