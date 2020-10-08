@@ -16,7 +16,7 @@ import com.hardcodecoder.pulsemusic.views.MarqueeTitleToolbar;
 public abstract class BaseDetailsActivity extends MediaSessionActivity {
 
     public static final String KEY_TRANSITION_NAME = "Transition";
-    protected int mCurrentSortOrder;
+    private int mCurrentSortOrder;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,6 +44,10 @@ public abstract class BaseDetailsActivity extends MediaSessionActivity {
         enterFade.excludeTarget(R.id.stub_details_activity_rv, true);
         enterFade.setDuration(getResources().getInteger(android.R.integer.config_mediumAnimTime));
         getWindow().setEnterTransition(enterFade);
+    }
+
+    protected int getCurrentSortOrder() {
+        return mCurrentSortOrder;
     }
 
     protected void onChangeSortOrder(int newSortOrder) {

@@ -21,28 +21,36 @@ import com.hardcodecoder.pulsemusic.utils.SortUtil;
 import com.hardcodecoder.pulsemusic.views.MediaArtImageView;
 import com.l4digital.fastscroll.FastScroller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.AlbumsSVH>
         implements FastScroller.SectionIndexer {
 
+    private SimpleDateFormat mDateFormatter = null;
     private List<AlbumModel> mList;
     private LayoutInflater mInflater;
     private SimpleTransitionClickListener mListener;
     private GridAdapterCallback mCallback;
+    private SortOrder.ALBUMS mSortOrder;
 
     public AlbumsAdapter(List<AlbumModel> list,
                          LayoutInflater inflater,
+                         SortOrder.ALBUMS sortOrder,
                          SimpleTransitionClickListener listener,
                          GridAdapterCallback callback) {
         mList = list;
         mInflater = inflater;
+        mSortOrder = sortOrder;
         mListener = listener;
         mCallback = callback;
     }
 
     public void updateSortOrder(SortOrder.ALBUMS sortOrder) {
+        mSortOrder = sortOrder;
         final Handler handler = new Handler();
         TaskRunner.executeAsync(() -> {
             List<AlbumModel> oldSortedTracks = new ArrayList<>(mList);
@@ -63,7 +71,28 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.AlbumsSVH>
 
     @Override
     public CharSequence getSectionText(int position) {
-        return mList.get(position).getAlbumName().substring(0, 1);
+        AlbumModel am = mList.get(position);
+        switch (mSortOrder) {
+            case ARTIST_ASC:
+            case ARTIST_DESC:
+                return am.getAlbumArtist().substring(0, 1);
+            case ALBUM_DATE_FIRST_YEAR_ASC:
+            case ALBUM_DATE_FIRST_YEAR_DESC:
+                return getDate(am.getFirstYear());
+            case ALBUM_DATE_LAST_YEAR_ASC:
+            case ALBUM_DATE_LAST_YEAR_DESC:
+                return getDate(am.getLastYear());
+            case TITLE_ASC:
+            case TITLE_DESC:
+            default:
+                return am.getAlbumName().substring(0, 1);
+        }
+    }
+
+    private CharSequence getDate(long seconds) {
+        if (null == mDateFormatter)
+            mDateFormatter = new SimpleDateFormat("yyyy", Locale.getDefault());
+        return mDateFormatter.format(new Date(seconds * 1000));
     }
 
     @NonNull

@@ -141,7 +141,8 @@ public class AlbumDetailsActivity extends BaseDetailsActivity {
     }
 
     private void loadItems() {
-        TaskRunner.executeAsync(new AlbumTracksLoader(getContentResolver(), resolveSortOrder(mCurrentSortOrder), mAlbumId), data -> {
+        final SortOrder sortOrder = resolveSortOrder(getCurrentSortOrder());
+        TaskRunner.executeAsync(new AlbumTracksLoader(getContentResolver(), sortOrder, mAlbumId), data -> {
             if (null != data && data.size() > 0) {
                 mList = data;
                 MaterialTextView sub = findViewById(R.id.details_activity_title_sub);
@@ -151,20 +152,26 @@ public class AlbumDetailsActivity extends BaseDetailsActivity {
                 rv.setHasFixedSize(true);
                 rv.setHorizontalFadingEdgeEnabled(true);
                 rv.setLayoutManager(new LinearLayoutManager(rv.getContext(), RecyclerView.VERTICAL, false));
-                mAdapter = new LibraryAdapter(mList, getLayoutInflater(), new SimpleItemClickListener() {
-                    @Override
-                    public void onItemClick(int position) {
-                        if (null != mList) {
-                            tm.buildDataList(mList, position);
-                            playMedia();
-                        }
-                    }
 
-                    @Override
-                    public void onOptionsClick(int position) {
-                        UIHelper.showMenuForAlbumDetails(AlbumDetailsActivity.this, getSupportFragmentManager(), mList.get(position));
-                    }
-                }, null);
+                mAdapter = new LibraryAdapter(
+                        mList,
+                        getLayoutInflater(),
+                        sortOrder,
+                        new SimpleItemClickListener() {
+                            @Override
+                            public void onItemClick(int position) {
+                                if (null != mList) {
+                                    tm.buildDataList(mList, position);
+                                    playMedia();
+                                }
+                            }
+
+                            @Override
+                            public void onOptionsClick(int position) {
+                                UIHelper.showMenuForAlbumDetails(AlbumDetailsActivity.this, getSupportFragmentManager(), mList.get(position));
+                            }
+                        }, null);
+
                 LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(this, R.anim.item_falls_down_animation);
                 rv.setLayoutAnimation(controller);
                 rv.setAdapter(mAdapter);

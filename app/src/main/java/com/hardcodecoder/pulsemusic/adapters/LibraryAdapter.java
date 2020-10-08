@@ -1,12 +1,14 @@
 package com.hardcodecoder.pulsemusic.adapters;
 
 import android.os.Handler;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,25 +24,36 @@ import com.hardcodecoder.pulsemusic.utils.SortUtil;
 import com.hardcodecoder.pulsemusic.views.MediaArtImageView;
 import com.l4digital.fastscroll.FastScroller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.MyLibraryViewHolder> implements FastScroller.SectionIndexer {
 
+    private SimpleDateFormat mDateFormatter = null;
     private List<MusicModel> mList;
     private SimpleItemClickListener mListener;
     private GridAdapterCallback mCallback;
     private LayoutInflater mInflater;
+    private SortOrder mSortOrder;
     private int lastPosition = -1;
 
-    public LibraryAdapter(List<MusicModel> list, LayoutInflater inflater, SimpleItemClickListener listener, GridAdapterCallback callback) {
-        this.mList = list;
-        this.mListener = listener;
-        this.mInflater = inflater;
-        this.mCallback = callback;
+    public LibraryAdapter(@NonNull List<MusicModel> list,
+                          @NonNull LayoutInflater inflater,
+                          @NonNull SortOrder sortOrder,
+                          @NonNull SimpleItemClickListener listener,
+                          @Nullable GridAdapterCallback callback) {
+        mList = list;
+        mListener = listener;
+        mSortOrder = sortOrder;
+        mInflater = inflater;
+        mCallback = callback;
     }
 
     public void updateSortOrder(SortOrder sortOrder) {
+        mSortOrder = sortOrder;
         final Handler handler = new Handler();
         TaskRunner.executeAsync(() -> {
             List<MusicModel> oldSortedTracks = new ArrayList<>(mList);
@@ -61,7 +74,31 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.MyLibrar
 
     @Override
     public CharSequence getSectionText(int position) {
-        return mList.get(position).getTrackName().substring(0, 1);
+        final MusicModel md = mList.get(position);
+        switch (mSortOrder) {
+            case DURATION_ASC:
+            case DURATION_DESC:
+                return DateUtils.formatElapsedTime(md.getTrackDuration() / 1000);
+            case DATE_ADDED_ASC:
+            case DATE_ADDED_DESC:
+                return getDate(md.getDateAdded());
+            case DATE_MODIFIED_ASC:
+            case DATE_MODIFIED_DESC:
+                return getDate(md.getDateModified());
+            case TRACK_NUMBER_ASC:
+            case TRACK_NUMBER_DESC:
+                return String.valueOf(md.getTrackNumber());
+            case TITLE_ASC:
+            case TITLE_DESC:
+            default:
+                return md.getTrackName().substring(0, 1);
+        }
+    }
+
+    private CharSequence getDate(long seconds) {
+        if (null == mDateFormatter)
+            mDateFormatter = new SimpleDateFormat("MMM dd, yy", Locale.getDefault());
+        return mDateFormatter.format(new Date(seconds * 1000));
     }
 
     @NonNull

@@ -45,17 +45,19 @@ public class LibraryFragment extends ListGridFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         tm = TrackManager.getInstance();
         mList = new ArrayList<>(LoaderCache.getAllTracksList());
-        final int sortOrder = getCurrentSortOrder();
+        final SortOrder sortOrder = resolveSortOrder(getCurrentSortOrder());
 
         if (mList.size() > 0) {
-            SortUtil.sortLibraryList(mList, resolveSortOrder(sortOrder));
+            SortUtil.sortLibraryList(mList, sortOrder);
             RecyclerView recyclerView = (RecyclerView) ((ViewStub) view.findViewById(R.id.stub_library_fragment_rv)).inflate();
             mLayoutManager = new GridLayoutManager(recyclerView.getContext(), getCurrentSpanCount());
             recyclerView.setLayoutManager(mLayoutManager);
             recyclerView.setHasFixedSize(true);
+
             mAdapter = new LibraryAdapter(
                     mList,
                     getLayoutInflater(),
+                    sortOrder,
                     new SimpleItemClickListener() {
                         @Override
                         public void onItemClick(int position) {
@@ -69,8 +71,8 @@ public class LibraryFragment extends ListGridFragment {
                                 UIHelper.showMenuForLibraryTracks(getActivity(), getActivity().getSupportFragmentManager(), mList.get(position));
                             }
                         }
-                    },
-                    () -> mLayoutManager.scrollToPosition(mFirstVisibleItemPosition));
+                    }, () -> mLayoutManager.scrollToPosition(mFirstVisibleItemPosition));
+
             recyclerView.setAdapter(mAdapter);
         } else {
             MaterialTextView noTracksText = (MaterialTextView) ((ViewStub) view.findViewById(R.id.stub_no_tracks_found)).inflate();

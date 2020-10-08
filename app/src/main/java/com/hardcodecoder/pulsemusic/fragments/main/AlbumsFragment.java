@@ -71,12 +71,19 @@ public class AlbumsFragment extends CardGridFragment {
             mLayoutManager = new GridLayoutManager(rv.getContext(), getCurrentSpanCount());
             rv.setLayoutManager(mLayoutManager);
             rv.setHasFixedSize(true);
-            mAdapter = new AlbumsAdapter(list, getLayoutInflater(), (sharedView, position) -> {
-                if (null != getActivity()) {
-                    AlbumModel albumModel = list.get(position);
-                    NavigationUtil.goToAlbum(getActivity(), sharedView, albumModel.getAlbumName(), albumModel.getAlbumId(), albumModel.getAlbumArt());
-                }
-            }, () -> mLayoutManager.scrollToPosition(mFirstVisibleItemPosition));
+
+            mAdapter = new AlbumsAdapter(
+                    list,
+                    getLayoutInflater(),
+                    resolveSortOrder(getCurrentSortOrder()),
+                    (sharedView, position) -> {
+                        if (null != getActivity()) {
+                            AlbumModel albumModel = list.get(position);
+                            NavigationUtil.goToAlbum(getActivity(), sharedView, albumModel.getAlbumName(), albumModel.getAlbumId(), albumModel.getAlbumArt());
+                        }
+                    },
+                    () -> mLayoutManager.scrollToPosition(mFirstVisibleItemPosition));
+
             LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(rv.getContext(), R.anim.item_enter_slide_up);
             rv.setLayoutAnimation(controller);
             rv.setAdapter(mAdapter);

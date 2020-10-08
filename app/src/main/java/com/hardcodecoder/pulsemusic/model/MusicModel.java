@@ -12,11 +12,14 @@ public class MusicModel implements Serializable {
     private String mAlbum;
     private String mArtist;
     private String mAlbumArtUrl;
+    // Unix Time: Elapsed seconds since 1 January 1970
     private long mDateAdded;
+    // Unix Time: Elapsed seconds since 1 January 1970
     private long mDateModified;
     private int mId;
     private int mAlbumId;
     private int mTrackNumber;
+    // Duration in milli seconds
     private int mTrackDuration;
 
     public MusicModel(int mId,

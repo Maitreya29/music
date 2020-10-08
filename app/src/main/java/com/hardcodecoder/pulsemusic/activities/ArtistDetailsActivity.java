@@ -101,7 +101,8 @@ public class ArtistDetailsActivity extends BaseDetailsActivity {
     }
 
     private void loadItems() {
-        TaskRunner.executeAsync(new ArtistTracksLoader(getContentResolver(), mArtistTitle, resolveSortOrder(mCurrentSortOrder)), (data) -> {
+        final SortOrder.ALBUMS sortOrder = resolveSortOrder(getCurrentSortOrder());
+        TaskRunner.executeAsync(new ArtistTracksLoader(getContentResolver(), mArtistTitle, sortOrder), (data) -> {
             if (null != data && data.size() > 0) {
                 mList = data;
                 MaterialTextView sub = findViewById(R.id.details_activity_title_sub);
@@ -114,10 +115,15 @@ public class ArtistDetailsActivity extends BaseDetailsActivity {
                 rv.setVerticalFadingEdgeEnabled(true);
                 GridLayoutManager layoutManager = new GridLayoutManager(rv.getContext(), 2);
                 rv.setLayoutManager(layoutManager);
-                mAdapter = new AlbumsAdapter(mList, getLayoutInflater(), (sharedView, position) -> {
-                    AlbumModel am = mList.get(position);
-                    NavigationUtil.goToAlbum(ArtistDetailsActivity.this, sharedView, am.getAlbumName(), am.getAlbumId(), am.getAlbumArt());
-                }, null);
+                mAdapter = new AlbumsAdapter(
+                        mList,
+                        getLayoutInflater(),
+                        sortOrder,
+                        (sharedView, position) -> {
+                            AlbumModel am = mList.get(position);
+                            NavigationUtil.goToAlbum(ArtistDetailsActivity.this, sharedView, am.getAlbumName(), am.getAlbumId(), am.getAlbumArt());
+                        },
+                        null);
                 LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(this, R.anim.item_enter_slide_up);
                 rv.setLayoutAnimation(controller);
                 rv.setAdapter(mAdapter);
