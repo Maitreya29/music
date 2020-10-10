@@ -21,7 +21,8 @@ public class LoaderCache {
             mAllTracksList.clear();
             mAllTracksList = null;
         }
-        mAllTracksList = new ArrayList<>(allTracksList);
+        if (null != allTracksList)
+            mAllTracksList = new ArrayList<>(allTracksList);
     }
 
     public static List<MusicModel> getSuggestions() {
@@ -34,7 +35,8 @@ public class LoaderCache {
             mSuggestions.clear();
             mSuggestions = null;
         }
-        mSuggestions = new ArrayList<>(suggestions);
+        if (null != suggestions)
+            mSuggestions = new ArrayList<>(suggestions);
     }
 
     public static List<MusicModel> getLatestTracks() {
@@ -47,7 +49,8 @@ public class LoaderCache {
             mLatestTracks.clear();
             mLatestTracks = null;
         }
-        mLatestTracks = new ArrayList<>(latestTracks);
+        if (null != latestTracks)
+            mLatestTracks = new ArrayList<>(latestTracks);
     }
 
     static void releaseCache() {

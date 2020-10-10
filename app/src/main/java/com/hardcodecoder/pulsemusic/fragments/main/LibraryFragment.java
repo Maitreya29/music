@@ -44,11 +44,12 @@ public class LibraryFragment extends ListGridFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         tm = TrackManager.getInstance();
-        mList = new ArrayList<>(LoaderCache.getAllTracksList());
-        final SortOrder sortOrder = resolveSortOrder(getCurrentSortOrder());
 
-        if (mList.size() > 0) {
+        if (null != LoaderCache.getAllTracksList() && !LoaderCache.getAllTracksList().isEmpty()) {
+            final SortOrder sortOrder = resolveSortOrder(getCurrentSortOrder());
+            mList = new ArrayList<>(LoaderCache.getAllTracksList());
             SortUtil.sortLibraryList(mList, sortOrder);
+
             RecyclerView recyclerView = (RecyclerView) ((ViewStub) view.findViewById(R.id.stub_library_fragment_rv)).inflate();
             mLayoutManager = new GridLayoutManager(recyclerView.getContext(), getCurrentSpanCount());
             recyclerView.setLayoutManager(mLayoutManager);

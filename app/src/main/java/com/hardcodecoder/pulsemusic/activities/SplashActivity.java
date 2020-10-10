@@ -20,6 +20,7 @@ import com.hardcodecoder.pulsemusic.themes.TintHelper;
 public class SplashActivity extends PMBActivity {
 
     private static final int REQUEST_CODE = 69;
+    private final Handler mHandler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +54,7 @@ public class SplashActivity extends PMBActivity {
     }
 
     private void startHomeActivity() {
-        new Handler().postDelayed(() -> {
+        mHandler.postDelayed(() -> {
             Intent i = new Intent(SplashActivity.this, MainActivity.class);
             startActivity(i);
             finish();
@@ -67,4 +68,3 @@ public class SplashActivity extends PMBActivity {
         });
     }
 }
-

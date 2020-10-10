@@ -30,6 +30,7 @@ public class TrackPickerActivity extends PMBActivity implements TrackPickerListe
     public static final String ID_PICKED_TRACKS = "picked_tracks";
     public static final int REQUEST_CODE = 100;
     private RecyclerViewSelectorHelper mSelectorHelper;
+    @Nullable
     private TrackPickerAdapter mAdapter;
     private Stack<String> pendingUpdates = new Stack<>();
     private String mQuery = "";
@@ -46,7 +47,8 @@ public class TrackPickerActivity extends PMBActivity implements TrackPickerListe
         TintHelper.setAccentTintTo(fab);
         fab.setOnClickListener(v -> {
             Intent i = new Intent();
-            i.putExtra(ID_PICKED_TRACKS, new ArrayList<>(mAdapter.getSelectedTracks()));
+            if (null != mAdapter)
+                i.putExtra(ID_PICKED_TRACKS, new ArrayList<>(mAdapter.getSelectedTracks()));
             setResult(RESULT_OK, i);
             finishActivity(REQUEST_CODE);
             finish();
@@ -67,6 +69,7 @@ public class TrackPickerActivity extends PMBActivity implements TrackPickerListe
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (null == mAdapter) return;
                 if (!mQuery.equalsIgnoreCase(s.toString())) {
                     if (s.toString().isEmpty()) {
                         mAdapter.updateItems(LoaderCache.getAllTracksList());
@@ -87,7 +90,8 @@ public class TrackPickerActivity extends PMBActivity implements TrackPickerListe
         if (pendingUpdates.size() == 1)
             TaskRunner.executeAsync(new SearchQueryLoader(query), result -> {
                 pendingUpdates.remove(0);
-                mAdapter.updateItems(result);
+                if (mAdapter != null)
+                    mAdapter.updateItems(result);
 
                 if (pendingUpdates.size() > 0) {
                     searchResult(pendingUpdates.pop());
