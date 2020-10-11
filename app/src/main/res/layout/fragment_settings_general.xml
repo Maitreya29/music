@@ -1,0 +1,28 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="16dp"
+    android:paddingBottom="0dp">
+
+    <com.hardcodecoder.pulsemusic.views.AccentColorTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:text="@string/general_category_loader_section_title"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Overline" />
+
+    <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
+        android:id="@+id/ignore_folder_picker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="normal"
+        app:settingItemDesaturatedColorsInDarkMode="false"
+        app:settingItemIcon="@drawable/ic_folder_add"
+        app:settingItemIconBackgroundColor="?windowBackgroundColor"
+        app:settingItemIconColor="?attr/colorControlNormal"
+        app:settingItemText="Add or remove folders to exclude tracks from showing in library"
+        app:settingItemTitle="Select ignored folders"
+        app:settingToggleableItemEnabled="true" />
+</LinearLayout>

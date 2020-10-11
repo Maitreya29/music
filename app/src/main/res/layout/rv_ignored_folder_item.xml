@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <ImageView
+        style="@style/ButtonStyle24"
+        android:contentDescription="@string/iv_content_desc"
+        android:src="@drawable/ic_folder" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/ignored_folder_item_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <ImageView
+        android:id="@+id/ignored_folder_item_delete_btn"
+        style="@style/ButtonStyle24"
+        android:contentDescription="@string/iv_btn_close_description"
+        android:src="@drawable/ic_close" />
+</LinearLayout>
