@@ -190,6 +190,10 @@
 
     <!-- General Section -->
     <string name="general_category_loader_section_title">Loader</string>
+    <string name="restart_dialog_title">Restart app</string>
+    <string name="restart_dialog_desc">App needs to restart for changes to take effect</string>
+    <string name="restart_dialog_positive_btn_title">Restart</string>
+    <string name="restart_dialog_negative_btn_title">Do it later</string>
     <string name="ignored_folder_title">Ignored folders</string>
     <string name="ignored_folder_text">Add folders to ignored list. Media from these folders will not appear in library</string>
     <string name="ignored_folder_picker_title">Select folders</string>
