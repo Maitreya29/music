@@ -10,6 +10,7 @@ import android.provider.MediaStore;
 import androidx.annotation.Nullable;
 
 import com.hardcodecoder.pulsemusic.model.MusicModel;
+import com.hardcodecoder.pulsemusic.storage.AppFileManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,7 @@ import java.util.concurrent.Callable;
 
 public class LibraryLoader implements Callable<List<MusicModel>> {
 
-    private ContentResolver contentResolver;
+    private ContentResolver mContentResolver;
     private String mSortOrder;
     private String mSelectionString;
     private String[] mSelectionArgs;
@@ -27,10 +28,16 @@ public class LibraryLoader implements Callable<List<MusicModel>> {
     }
 
     LibraryLoader(ContentResolver contentResolver, SortOrder sortOrder, @Nullable String selectionString, @Nullable String[] selectionArgs) {
-        this.contentResolver = contentResolver;
+        mContentResolver = contentResolver;
         mSortOrder = MediaStoreHelper.getSortOrderFor(sortOrder);
-        this.mSelectionString = selectionString;
-        this.mSelectionArgs = selectionArgs;
+        List<String> ignoredFoldersList = AppFileManager.getIgnoredList();
+        if (null != ignoredFoldersList && !ignoredFoldersList.isEmpty()) {
+            mSelectionString = getSelection(selectionString, ignoredFoldersList.size());
+            mSelectionArgs = getSelectionArgs(selectionArgs, ignoredFoldersList);
+        } else {
+            mSelectionString = selectionString;
+            mSelectionArgs = selectionArgs;
+        }
     }
 
     @SuppressLint("InlinedApi")
@@ -39,18 +46,18 @@ public class LibraryLoader implements Callable<List<MusicModel>> {
         List<MusicModel> libraryList = new ArrayList<>();
         final Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
         final String[] cursor_cols = {
-                MediaStore.Audio.Media._ID,
-                MediaStore.Audio.Media.TITLE,
-                MediaStore.Audio.Media.ARTIST,
-                MediaStore.Audio.Media.ALBUM,
-                MediaStore.Audio.Media.ALBUM_ID,
-                MediaStore.Audio.Media.TRACK,
-                MediaStore.Audio.Media.DATE_ADDED,
-                MediaStore.Audio.Media.DATE_MODIFIED,
-                MediaStore.Audio.AudioColumns.DURATION
+                MediaStore.Audio.Media._ID,             // 0
+                MediaStore.Audio.Media.TITLE,           // 1
+                MediaStore.Audio.Media.ALBUM,           // 2
+                MediaStore.Audio.Media.ALBUM_ID,        // 3
+                MediaStore.Audio.Media.ARTIST,          // 4
+                MediaStore.Audio.Media.TRACK,           // 5
+                MediaStore.Audio.Media.DATE_ADDED,      // 6
+                MediaStore.Audio.Media.DATE_MODIFIED,   // 7
+                MediaStore.Audio.AudioColumns.DURATION, // 8
         };
 
-        final Cursor cursor = contentResolver.query(
+        final Cursor cursor = mContentResolver.query(
                 uri,
                 cursor_cols,
                 mSelectionString,
@@ -58,29 +65,20 @@ public class LibraryLoader implements Callable<List<MusicModel>> {
                 mSortOrder);
 
         if (cursor != null && cursor.moveToFirst()) {
-            int idColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID);
-            int titleColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.TITLE);
-            int artistColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ARTIST);
-            int albumColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM);
-            int albumIdColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM_ID);
-            int dateAddedColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATE_ADDED);
-            int dateModifiedColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATE_MODIFIED);
-            int trackNumIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.TRACK);
-            int durationColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION);
-
             final Uri sArtworkUri = Uri.parse("content://media/external/audio/albumart");
 
             do {
-                int _id = cursor.getInt(idColumnIndex);
-                String songName = cursor.getString(titleColumnIndex);
-                String artist = cursor.getString(artistColumnIndex);
-                String album = cursor.getString(albumColumnIndex);
+                int _id = cursor.getInt(0);
+                String songName = cursor.getString(1);
+                String album = cursor.getString(2);
+                int albumId = cursor.getInt(3);
+                String artist = cursor.getString(4);
+                int trackNum = cursor.getInt(5);
+                long dateAdded = cursor.getLong(6);
+                long dateModified = cursor.getLong(7);
+                int duration = cursor.getInt(8);
+
                 String songPath = ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, _id).toString();
-                int albumId = cursor.getInt(albumIdColumnIndex);
-                long dateAdded = cursor.getLong(dateAddedColumnIndex);
-                long dateModified = cursor.getLong(dateModifiedColumnIndex);
-                int trackNum = cursor.getInt(trackNumIndex);
-                int duration = cursor.getInt(durationColumnIndex);
                 String albumArt = ContentUris.withAppendedId(sArtworkUri, albumId).toString();
 
                 libraryList.add(new MusicModel(
@@ -101,17 +99,24 @@ public class LibraryLoader implements Callable<List<MusicModel>> {
         return libraryList;
     }
 
-    private String getSelection() {
-        return "("
-                + "(" + MediaStore.Audio.Media.IS_MUSIC + "==?)"
-                + "AND (" + MediaStore.Audio.Media.IS_ALARM + "==?)"
-                + "AND (" + MediaStore.Audio.Media.IS_NOTIFICATION + "==?)"
-                + "AND (" + MediaStore.Audio.Media.IS_PODCAST + "==?)"
-                + "AND (" + MediaStore.Audio.Media.IS_RINGTONE + "==?)"
-                + ")";
+    private String getSelection(String selection, int numIgnoredFolders) {
+        StringBuilder newSelection = new StringBuilder(
+                selection == null || !selection.trim().equals("") ?
+                        "" : selection + " AND ");
+        newSelection.append(MediaStore.Audio.AudioColumns.DATA + " NOT LIKE ?");
+        for (int i = 0; i < numIgnoredFolders - 1; i++)
+            newSelection.append(" AND " + MediaStore.Audio.AudioColumns.DATA + " NOT LIKE ?");
+
+        return newSelection.toString();
     }
 
-    private String[] getSelectionArgs() {
-        return new String[]{"1", "0", "0", "0", "0"};
+    private String[] getSelectionArgs(String[] selectionArgs, List<String> ignoredFolders) {
+        if (selectionArgs == null) selectionArgs = new String[0];
+        String[] newSelectionValues = new String[selectionArgs.length + ignoredFolders.size()];
+        System.arraycopy(selectionArgs, 0, newSelectionValues, 0, selectionArgs.length);
+        for (int i = selectionArgs.length; i < newSelectionValues.length; i++)
+            newSelectionValues[i] = ignoredFolders.get(i - selectionArgs.length) + "%";
+
+        return newSelectionValues;
     }
 }

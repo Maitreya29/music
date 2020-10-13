@@ -23,8 +23,10 @@ import java.util.Set;
 
 public class AppFileManager {
 
+    private static final Handler sHandler = new Handler();
     private static Map<Integer, Short> mHistoryMap = null;
     private static Set<Integer> mFavoritesSet = null;
+    private static IgnoreListProvider sIgnoreListProvider = null;
     private static String mFilesDir;
 
     public static void initDataDir(@NonNull Context context) {
@@ -34,6 +36,7 @@ public class AppFileManager {
             StorageUtils.createDir(new File(StorageStructure.getAbsoluteHistoryPath(mFilesDir)));
             StorageUtils.createDir(new File(StorageStructure.getAbsolutePlaylistsFolderPath(mFilesDir)));
         });
+        sIgnoreListProvider = new IgnoreListProvider(mFilesDir);
     }
 
     public static void addItemToHistory(@NonNull MusicModel md) {
@@ -131,10 +134,9 @@ public class AppFileManager {
 
     public static void isItemAFavorite(@NonNull MusicModel item, @NonNull Callback<Boolean> callback) {
         if (null == mFavoritesSet) {
-            Handler handler = new Handler();
             TaskRunner.executeAsync(() -> {
                 loadFavorites();
-                handler.post(() -> callback.onComplete(mFavoritesSet.contains(item.getTrackName().hashCode())));
+                sHandler.post(() -> callback.onComplete(mFavoritesSet.contains(item.getTrackName().hashCode())));
             });
         } else callback.onComplete(mFavoritesSet.contains(item.getTrackName().hashCode()));
     }
@@ -181,7 +183,6 @@ public class AppFileManager {
                                           @NonNull List<MusicModel> playlistTracks,
                                           boolean append,
                                           @Nullable Callback<Boolean> callback) {
-        final Handler handler = new Handler();
         TaskRunner.executeAsync(() -> {
             List<String> tracksTitleRaw = new ArrayList<>();
             for (MusicModel musicModel : playlistTracks)
@@ -189,7 +190,7 @@ public class AppFileManager {
             StorageUtils.writeTracksToPlaylist(
                     StorageStructure.getAbsolutePlaylistsFolderPath(mFilesDir) +
                             playlistName, tracksTitleRaw, append);
-            if (null != callback) handler.post(() -> callback.onComplete(true));
+            if (null != callback) sHandler.post(() -> callback.onComplete(true));
         });
     }
 
@@ -234,6 +235,27 @@ public class AppFileManager {
                 }
             }
         });
+    }
+
+    public static void addToIgnoredList(String folderPath) {
+        TaskRunner.executeAsync(() ->
+                sIgnoreListProvider.addToIgnoreList(folderPath));
+    }
+
+    public static void removeFromIgnoredList(String folderPath) {
+        TaskRunner.executeAsync(() ->
+                sIgnoreListProvider.deleteFromIgnoreList(folderPath));
+    }
+
+    public static void getIgnoredList(Callback<List<String>> callback) {
+        TaskRunner.executeAsync(() -> {
+            List<String> ignoredList = sIgnoreListProvider.getIgnoredList();
+            sHandler.post(() -> callback.onComplete(ignoredList));
+        });
+    }
+
+    public static List<String> getIgnoredList() {
+        return sIgnoreListProvider.getIgnoredList();
     }
 
     /**

@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.adapters.IgnoredFoldersAdapter;
+import com.hardcodecoder.pulsemusic.storage.AppFileManager;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -60,8 +61,7 @@ public class IgnoreFolderChooser extends RoundedBottomSheetDialogFragment {
             }
         });
 
-        List<String> list = new ArrayList<>(); //AppDataManager.getIgnoredList();
-        setUpRecyclerView(list);
+        AppFileManager.getIgnoredList(this::setUpRecyclerView);
     }
 
     @Override
@@ -82,7 +82,7 @@ public class IgnoreFolderChooser extends RoundedBottomSheetDialogFragment {
                 setUpRecyclerView(list);
             } else mAdapter.addItem(completePath);
             Toast.makeText(getContext(), getString(R.string.ignored_folder_picker_add_success), Toast.LENGTH_SHORT).show();
-            //AppDataManager.addToIgnoredList(completePath);
+            AppFileManager.addToIgnoredList(completePath);
         }
     }
 
@@ -94,20 +94,20 @@ public class IgnoreFolderChooser extends RoundedBottomSheetDialogFragment {
             mEmptyListText.setText(R.string.ignored_folder_picker_empty_text);
             return;
         }
-        rootView.post(() -> {
-            if (null != mEmptyListText) mEmptyListText.setVisibility(View.GONE);
-            RecyclerView recyclerView = (RecyclerView) ((ViewStub) rootView.findViewById(R.id.bottom_dialog_picker_stub_rv)).inflate();
-            recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), RecyclerView.VERTICAL, false));
-            mAdapter = new IgnoredFoldersAdapter(
-                    foldersList,
-                    getLayoutInflater(),
-                    position -> {
-                        // Remove folder when clicked on remove btn
-                        //AppDataManager.deleteFromIgnoreList(foldersList.get(position));
-                        mAdapter.deleteItem(position);
-                        Toast.makeText(recyclerView.getContext(), getString(R.string.ignored_folder_picker_remove_success), Toast.LENGTH_SHORT).show();
-                    });
-            recyclerView.setAdapter(mAdapter);
-        });
+
+        if (null != mEmptyListText) mEmptyListText.setVisibility(View.GONE);
+
+        RecyclerView recyclerView = (RecyclerView) ((ViewStub) rootView.findViewById(R.id.bottom_dialog_picker_stub_rv)).inflate();
+        recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), RecyclerView.VERTICAL, false));
+        mAdapter = new IgnoredFoldersAdapter(
+                foldersList,
+                getLayoutInflater(),
+                position -> {
+                    // Remove folder when clicked on remove btn
+                    AppFileManager.removeFromIgnoredList(foldersList.get(position));
+                    mAdapter.deleteItem(position);
+                    Toast.makeText(recyclerView.getContext(), getString(R.string.ignored_folder_picker_remove_success), Toast.LENGTH_SHORT).show();
+                });
+        recyclerView.setAdapter(mAdapter);
     }
 }
