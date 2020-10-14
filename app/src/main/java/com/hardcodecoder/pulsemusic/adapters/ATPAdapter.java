@@ -15,9 +15,9 @@ import java.util.List;
 
 public class ATPAdapter extends RecyclerView.Adapter<ATPAdapter.ATPViewHolder> {
 
-    private LayoutInflater mInflater;
-    private List<String> mDataList;
-    private SingleClickListener mListener;
+    private final LayoutInflater mInflater;
+    private final List<String> mDataList;
+    private final SingleClickListener mListener;
 
     public ATPAdapter(LayoutInflater inflater, List<String> dataList, SingleClickListener listener) {
         mInflater = inflater;
@@ -50,7 +50,7 @@ public class ATPAdapter extends RecyclerView.Adapter<ATPAdapter.ATPViewHolder> {
 
     static class ATPViewHolder extends RecyclerView.ViewHolder {
 
-        private MaterialTextView mPlaylistName;
+        private final MaterialTextView mPlaylistName;
 
         ATPViewHolder(@NonNull View itemView, SingleClickListener listener) {
             super(itemView);

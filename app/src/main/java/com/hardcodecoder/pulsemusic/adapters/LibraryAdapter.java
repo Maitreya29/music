@@ -32,11 +32,11 @@ import java.util.Locale;
 
 public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.MyLibraryViewHolder> implements FastScroller.SectionIndexer {
 
+    private final List<MusicModel> mList;
+    private final SimpleItemClickListener mListener;
+    private final GridAdapterCallback mCallback;
+    private final LayoutInflater mInflater;
     private SimpleDateFormat mDateFormatter = null;
-    private List<MusicModel> mList;
-    private SimpleItemClickListener mListener;
-    private GridAdapterCallback mCallback;
-    private LayoutInflater mInflater;
     private SortOrder mSortOrder;
     private int lastPosition = -1;
 
@@ -123,9 +123,7 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.MyLibrar
 
     @Override
     public int getItemCount() {
-        if (mList != null)
-            return mList.size();
-        return 0;
+        return mList.size();
     }
 
     /*
@@ -133,8 +131,9 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.MyLibrar
      */
     static class MyLibraryViewHolder extends RecyclerView.ViewHolder {
 
-        private MaterialTextView songName, artist;
-        private MediaArtImageView albumArt;
+        private final MaterialTextView songName;
+        private final MaterialTextView artist;
+        private final MediaArtImageView albumArt;
 
         MyLibraryViewHolder(View itemView, SimpleItemClickListener listener) {
             super(itemView);

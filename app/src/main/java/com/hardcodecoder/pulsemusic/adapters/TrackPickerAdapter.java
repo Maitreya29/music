@@ -34,9 +34,9 @@ public class TrackPickerAdapter extends RecyclerView.Adapter<TrackPickerAdapter.
 
     private final Handler mMainHandler = new Handler();
     private final Set<MusicModel> mSelectedTracks = new LinkedHashSet<>();
-    private Deque<List<MusicModel>> pendingUpdates = new ArrayDeque<>();
-    private List<MusicModel> mList;
-    private LayoutInflater mInflater;
+    private final Deque<List<MusicModel>> pendingUpdates = new ArrayDeque<>();
+    private final List<MusicModel> mList;
+    private final LayoutInflater mInflater;
     private TrackPickerListener mListener;
 
     public TrackPickerAdapter(List<MusicModel> list, LayoutInflater mInflater, TrackPickerListener listener) {
@@ -83,8 +83,7 @@ public class TrackPickerAdapter extends RecyclerView.Adapter<TrackPickerAdapter.
 
     @Override
     public int getItemCount() {
-        if (mList != null) return mList.size();
-        return 0;
+        return mList.size();
     }
 
     public void updateItems(final List<MusicModel> newItems) {
@@ -134,8 +133,9 @@ public class TrackPickerAdapter extends RecyclerView.Adapter<TrackPickerAdapter.
 
     static class TrackPickerSVH extends RecyclerView.ViewHolder implements ItemTouchHelperViewHolder {
 
-        private MediaArtImageView albumArt;
-        private MaterialTextView title, artist;
+        private final MediaArtImageView albumArt;
+        private final MaterialTextView title;
+        private final MaterialTextView artist;
 
         TrackPickerSVH(@NonNull View itemView) {
             super(itemView);

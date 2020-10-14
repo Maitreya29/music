@@ -16,7 +16,7 @@ import com.hardcodecoder.pulsemusic.PMS.ServiceBinder;
 public abstract class MediaSessionActivity extends PMBActivity {
 
     private MediaController mController = null;
-    private ServiceConnection serviceConnection = new ServiceConnection() {
+    private final ServiceConnection serviceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder binder) {
             ServiceBinder serviceBinder = (ServiceBinder) binder;

@@ -16,9 +16,9 @@ import java.util.List;
 
 public class IgnoredFoldersAdapter extends RecyclerView.Adapter<IgnoredFoldersAdapter.IgnoreFolderSVH> {
 
+    private final LayoutInflater mInflater;
+    private final SingleClickListener mListener;
     private List<String> mIgnoredFoldersList;
-    private LayoutInflater mInflater;
-    private SingleClickListener mListener;
 
     public IgnoredFoldersAdapter(List<String> ignoredFoldersList, LayoutInflater inflater, SingleClickListener listener) {
         mIgnoredFoldersList = ignoredFoldersList;
@@ -56,7 +56,7 @@ public class IgnoredFoldersAdapter extends RecyclerView.Adapter<IgnoredFoldersAd
 
     public static class IgnoreFolderSVH extends RecyclerView.ViewHolder {
 
-        private MaterialTextView mTitle;
+        private final MaterialTextView mTitle;
 
         public IgnoreFolderSVH(@NonNull View itemView, SingleClickListener listener) {
             super(itemView);

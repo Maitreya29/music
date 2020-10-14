@@ -16,9 +16,9 @@ import java.util.concurrent.Callable;
 
 public class AlbumsLoader implements Callable<List<AlbumModel>> {
 
-    private ContentResolver mContentResolver;
-    private String mSortOrder;
-    private String mSelection;
+    private final ContentResolver mContentResolver;
+    private final String mSortOrder;
+    private final String mSelection;
 
     AlbumsLoader(ContentResolver contentResolver, SortOrder.ALBUMS sortOrder) {
         this(contentResolver, sortOrder, null);

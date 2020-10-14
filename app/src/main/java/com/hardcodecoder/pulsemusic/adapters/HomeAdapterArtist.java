@@ -19,9 +19,9 @@ import java.util.Locale;
 
 public class HomeAdapterArtist extends RecyclerView.Adapter<HomeAdapterArtist.AdapterSVH> {
 
-    private List<TopArtistModel> mList;
-    private LayoutInflater mInflater;
-    private SimpleTransitionClickListener mListener;
+    private final List<TopArtistModel> mList;
+    private final LayoutInflater mInflater;
+    private final SimpleTransitionClickListener mListener;
 
     public HomeAdapterArtist(List<TopArtistModel> list, LayoutInflater inflater, SimpleTransitionClickListener listener) {
         this.mList = list;
@@ -49,8 +49,9 @@ public class HomeAdapterArtist extends RecyclerView.Adapter<HomeAdapterArtist.Ad
 
     static class AdapterSVH extends RecyclerView.ViewHolder {
 
-        private ImageView artistArt;
-        private MaterialTextView artistName, trackCount;
+        private final ImageView artistArt;
+        private final MaterialTextView artistName;
+        private final MaterialTextView trackCount;
 
         AdapterSVH(@NonNull View itemView, SimpleTransitionClickListener listener) {
             super(itemView);

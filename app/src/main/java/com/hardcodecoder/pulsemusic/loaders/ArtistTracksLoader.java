@@ -16,9 +16,9 @@ import java.util.concurrent.Callable;
 
 public class ArtistTracksLoader implements Callable<List<AlbumModel>> {
 
-    private ContentResolver mContentResolver;
-    private String mSortOrder;
-    private long mArtistId;
+    private final ContentResolver mContentResolver;
+    private final String mSortOrder;
+    private final long mArtistId;
 
     public ArtistTracksLoader(ContentResolver contentResolver, String artistName, SortOrder.ALBUMS sortOrder) {
         this.mContentResolver = contentResolver;

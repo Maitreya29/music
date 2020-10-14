@@ -18,10 +18,10 @@ import com.hardcodecoder.pulsemusic.views.ColorView;
 
 public class AccentAdapter extends RecyclerView.Adapter<AccentAdapter.AccentAdapterSVH> {
 
-    private LayoutInflater mInflater;
-    private SingleClickListener mListener;
-    private AccentsModel[] mAccentsList;
-    private int mSelectedAccentId;
+    private final LayoutInflater mInflater;
+    private final SingleClickListener mListener;
+    private final AccentsModel[] mAccentsList;
+    private final int mSelectedAccentId;
 
     public AccentAdapter(AccentsModel[] accentsArray, LayoutInflater inflater, int selectedAccentId, SingleClickListener listener) {
         this.mAccentsList = accentsArray;
@@ -48,8 +48,8 @@ public class AccentAdapter extends RecyclerView.Adapter<AccentAdapter.AccentAdap
 
     static class AccentAdapterSVH extends RecyclerView.ViewHolder {
 
-        private ColorView mColorView;
-        private MaterialTextView mTitle;
+        private final ColorView mColorView;
+        private final MaterialTextView mTitle;
 
         AccentAdapterSVH(@NonNull View itemView, SingleClickListener listener) {
             super(itemView);

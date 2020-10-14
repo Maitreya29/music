@@ -31,10 +31,10 @@ import java.util.List;
 public class PlaylistDataAdapter extends RecyclerView.Adapter<PlaylistDataAdapter.PlaylistDataSVH>
         implements ItemTouchHelperAdapter {
 
-    private LayoutInflater mInflater;
-    private List<MusicModel> mPlaylistTracks;
-    private SimpleGestureCallback mCallback;
-    private PlaylistItemListener mListener;
+    private final LayoutInflater mInflater;
+    private final List<MusicModel> mPlaylistTracks;
+    private final SimpleGestureCallback mCallback;
+    private final PlaylistItemListener mListener;
     private int lastPosition = -1;
     private MusicModel deletedItem;
     private int deletedIndex;
@@ -118,8 +118,9 @@ public class PlaylistDataAdapter extends RecyclerView.Adapter<PlaylistDataAdapte
 
     static class PlaylistDataSVH extends RecyclerView.ViewHolder implements ItemTouchHelperViewHolder {
 
-        private MaterialTextView title, subTitle;
-        private MediaArtImageView albumArt;
+        private final MaterialTextView title;
+        private final MaterialTextView subTitle;
+        private final MediaArtImageView albumArt;
 
         PlaylistDataSVH(@NonNull View itemView, PlaylistItemListener listener) {
             super(itemView);

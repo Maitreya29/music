@@ -29,10 +29,10 @@ public class TrackPickerActivity extends PMBActivity implements TrackPickerListe
 
     public static final String ID_PICKED_TRACKS = "picked_tracks";
     public static final int REQUEST_CODE = 100;
+    private final Stack<String> pendingUpdates = new Stack<>();
     private RecyclerViewSelectorHelper mSelectorHelper;
     @Nullable
     private TrackPickerAdapter mAdapter;
-    private Stack<String> pendingUpdates = new Stack<>();
     private String mQuery = "";
 
     @Override

@@ -24,11 +24,11 @@ import java.util.List;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHolderLibrary> {
 
+    private final Deque<List<MusicModel>> pendingUpdates = new ArrayDeque<>();
+    private final SimpleItemClickListener mListener;
+    private final LayoutInflater mInflater;
+    private final Handler mMainHandler = new Handler();
     protected List<MusicModel> list = new ArrayList<>();
-    private Deque<List<MusicModel>> pendingUpdates = new ArrayDeque<>();
-    private SimpleItemClickListener mListener;
-    private LayoutInflater mInflater;
-    private Handler mMainHandler = new Handler();
 
     public SearchAdapter(LayoutInflater inflater, SimpleItemClickListener clickListener) {
         this.mListener = clickListener;
@@ -99,8 +99,9 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
      */
     static class MyViewHolderLibrary extends RecyclerView.ViewHolder {
 
-        private MaterialTextView title, subTitle;
-        private MediaArtImageView albumArt;
+        private final MaterialTextView title;
+        private final MaterialTextView subTitle;
+        private final MediaArtImageView albumArt;
 
         MyViewHolderLibrary(View itemView, SimpleItemClickListener listener) {
             super(itemView);
@@ -119,4 +120,3 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
         }
     }
 }
-

@@ -18,9 +18,9 @@ import java.util.List;
 
 public class SimplePlaylistAdapter extends RecyclerView.Adapter<SimplePlaylistAdapter.SimpleViewHolder> {
 
+    private final LayoutInflater mInflater;
     private List<MusicModel> mList;
     private SimpleItemClickListener mListener;
-    private LayoutInflater mInflater;
     private int lastPosition = -1;
 
     public SimplePlaylistAdapter(List<MusicModel> list, LayoutInflater inflater, SimpleItemClickListener listener) {
@@ -74,8 +74,9 @@ public class SimplePlaylistAdapter extends RecyclerView.Adapter<SimplePlaylistAd
      */
     static class SimpleViewHolder extends RecyclerView.ViewHolder {
 
-        private MaterialTextView songName, artist;
-        private MediaArtImageView albumArt;
+        private final MaterialTextView songName;
+        private final MaterialTextView artist;
+        private final MediaArtImageView albumArt;
 
         SimpleViewHolder(View itemView, SimpleItemClickListener listener) {
             super(itemView);

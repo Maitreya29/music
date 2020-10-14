@@ -28,7 +28,7 @@ import java.util.List;
 
 public class SearchActivity extends MediaSessionActivity implements SimpleItemClickListener {
 
-    private List<String> pendingUpdates = new ArrayList<>();
+    private final List<String> pendingUpdates = new ArrayList<>();
     private List<MusicModel> mSearchResult;
     private MaterialTextView noResultsText;
     private SearchAdapter mAdapter;

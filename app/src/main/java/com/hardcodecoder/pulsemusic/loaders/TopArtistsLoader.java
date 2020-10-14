@@ -12,7 +12,7 @@ import java.util.concurrent.Callable;
 
 public class TopArtistsLoader implements Callable<List<TopArtistModel>> {
 
-    private List<HistoryModel> mHistoryList;
+    private final List<HistoryModel> mHistoryList;
 
     TopArtistsLoader(List<HistoryModel> recentTracks) {
         mHistoryList = new ArrayList<>(recentTracks);

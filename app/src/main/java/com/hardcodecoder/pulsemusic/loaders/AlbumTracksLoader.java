@@ -10,9 +10,9 @@ import java.util.concurrent.Callable;
 
 public class AlbumTracksLoader implements Callable<List<MusicModel>> {
 
-    private ContentResolver mContentResolver;
-    private SortOrder mSortOrder;
-    private long mAlbumId;
+    private final ContentResolver mContentResolver;
+    private final SortOrder mSortOrder;
+    private final long mAlbumId;
 
     public AlbumTracksLoader(ContentResolver contentResolver, SortOrder sortOrder, long albumId) {
         this.mContentResolver = contentResolver;

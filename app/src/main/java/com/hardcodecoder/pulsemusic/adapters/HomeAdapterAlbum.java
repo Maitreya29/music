@@ -17,9 +17,9 @@ import java.util.List;
 
 public class HomeAdapterAlbum extends RecyclerView.Adapter<HomeAdapterAlbum.AdapterSVH> {
 
-    private List<TopAlbumModel> mList;
-    private LayoutInflater mInflater;
-    private SimpleTransitionClickListener mListener;
+    private final List<TopAlbumModel> mList;
+    private final LayoutInflater mInflater;
+    private final SimpleTransitionClickListener mListener;
 
     public HomeAdapterAlbum(List<TopAlbumModel> list, LayoutInflater inflater, SimpleTransitionClickListener listener) {
         this.mList = list;
@@ -47,8 +47,8 @@ public class HomeAdapterAlbum extends RecyclerView.Adapter<HomeAdapterAlbum.Adap
 
     static class AdapterSVH extends RecyclerView.ViewHolder {
 
-        private MediaArtImageView albumArt;
-        private MaterialTextView title;
+        private final MediaArtImageView albumArt;
+        private final MaterialTextView title;
 
         AdapterSVH(@NonNull View itemView, SimpleTransitionClickListener listener) {
             super(itemView);

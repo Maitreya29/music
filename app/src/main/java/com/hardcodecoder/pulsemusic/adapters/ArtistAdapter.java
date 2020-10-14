@@ -29,10 +29,10 @@ import java.util.List;
 public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistSVH>
         implements FastScroller.SectionIndexer {
 
-    private List<ArtistModel> mList;
-    private LayoutInflater mInflater;
-    private SimpleTransitionClickListener mListener;
-    private GridAdapterCallback mCallback;
+    private final List<ArtistModel> mList;
+    private final LayoutInflater mInflater;
+    private final SimpleTransitionClickListener mListener;
+    private final GridAdapterCallback mCallback;
     private int mOrientation;
     private int mCurrentSpanCount;
     private int mLayoutId;
@@ -108,8 +108,8 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistSVH>
 
     static class ArtistSVH extends RecyclerView.ViewHolder {
 
-        private ImageView artistArt;
-        private TextView title;
+        private final ImageView artistArt;
+        private final TextView title;
 
         ArtistSVH(@NonNull View itemView, SimpleTransitionClickListener mListener) {
             super(itemView);

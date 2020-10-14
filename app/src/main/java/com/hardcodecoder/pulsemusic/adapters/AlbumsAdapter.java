@@ -30,11 +30,11 @@ import java.util.Locale;
 public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.AlbumsSVH>
         implements FastScroller.SectionIndexer {
 
+    private final List<AlbumModel> mList;
+    private final LayoutInflater mInflater;
+    private final SimpleTransitionClickListener mListener;
+    private final GridAdapterCallback mCallback;
     private SimpleDateFormat mDateFormatter = null;
-    private List<AlbumModel> mList;
-    private LayoutInflater mInflater;
-    private SimpleTransitionClickListener mListener;
-    private GridAdapterCallback mCallback;
     private SortOrder.ALBUMS mSortOrder;
 
     public AlbumsAdapter(List<AlbumModel> list,
@@ -115,8 +115,8 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.AlbumsSVH>
 
     static class AlbumsSVH extends RecyclerView.ViewHolder {
 
-        private MediaArtImageView albumArt;
-        private TextView title;
+        private final MediaArtImageView albumArt;
+        private final TextView title;
 
         AlbumsSVH(@NonNull View itemView, SimpleTransitionClickListener mListener) {
             super(itemView);

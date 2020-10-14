@@ -22,10 +22,10 @@ import java.util.List;
 public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.CardsSVH>
         implements ItemTouchHelperAdapter {
 
-    private List<String> mPlaylistNames;
-    private PlaylistCardListener mListener;
-    private LayoutInflater mInflater;
-    private SimpleGestureCallback mCallback;
+    private final List<String> mPlaylistNames;
+    private final PlaylistCardListener mListener;
+    private final LayoutInflater mInflater;
+    private final SimpleGestureCallback mCallback;
 
     public PlaylistAdapter(List<String> playlistNames, LayoutInflater inflater, PlaylistCardListener mListener, @Nullable SimpleGestureCallback callback) {
         this.mPlaylistNames = playlistNames;
@@ -74,7 +74,7 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.CardsS
 
     static class CardsSVH extends RecyclerView.ViewHolder implements ItemTouchHelperViewHolder {
 
-        private TextView title;
+        private final TextView title;
 
         CardsSVH(@NonNull View itemView, PlaylistCardListener listener) {
             super(itemView);

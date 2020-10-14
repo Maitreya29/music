@@ -15,7 +15,7 @@ import java.util.concurrent.Callable;
 
 public class TopAlbumsLoader implements Callable<List<TopAlbumModel>> {
 
-    private List<HistoryModel> mHistoryList;
+    private final List<HistoryModel> mHistoryList;
 
     TopAlbumsLoader(List<HistoryModel> recentTracks) {
         mHistoryList = new ArrayList<>(recentTracks);
