@@ -18,10 +18,10 @@ import java.util.concurrent.Callable;
 
 public class LibraryLoader implements Callable<List<MusicModel>> {
 
-    private ContentResolver mContentResolver;
-    private String mSortOrder;
-    private String mSelectionString;
-    private String[] mSelectionArgs;
+    private final ContentResolver mContentResolver;
+    private final String mSortOrder;
+    private final String mSelectionString;
+    private final String[] mSelectionArgs;
 
     LibraryLoader(ContentResolver contentResolver, SortOrder sortOrder) {
         this(contentResolver, sortOrder, null, null);
@@ -101,8 +101,7 @@ public class LibraryLoader implements Callable<List<MusicModel>> {
 
     private String getSelection(String selection, int numIgnoredFolders) {
         StringBuilder newSelection = new StringBuilder(
-                selection == null || !selection.trim().equals("") ?
-                        "" : selection + " AND ");
+                selection == null || selection.trim().equals("") ? "" : selection + " AND ");
         newSelection.append(MediaStore.Audio.AudioColumns.DATA + " NOT LIKE ?");
         for (int i = 0; i < numIgnoredFolders - 1; i++)
             newSelection.append(" AND " + MediaStore.Audio.AudioColumns.DATA + " NOT LIKE ?");
