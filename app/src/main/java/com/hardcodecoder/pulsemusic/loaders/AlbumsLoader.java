@@ -9,9 +9,12 @@ import android.provider.MediaStore;
 import androidx.annotation.Nullable;
 
 import com.hardcodecoder.pulsemusic.model.AlbumModel;
+import com.hardcodecoder.pulsemusic.model.MusicModel;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.Callable;
 
 public class AlbumsLoader implements Callable<List<AlbumModel>> {
@@ -32,7 +35,7 @@ public class AlbumsLoader implements Callable<List<AlbumModel>> {
 
     @Override
     public List<AlbumModel> call() {
-        List<AlbumModel> albumsList = new ArrayList<>();
+
         String[] col = {MediaStore.Audio.Albums._ID,
                 MediaStore.Audio.Albums.ALBUM,
                 MediaStore.Audio.Albums.ARTIST,
@@ -47,6 +50,8 @@ public class AlbumsLoader implements Callable<List<AlbumModel>> {
                 null,
                 mSortOrder);
 
+        List<AlbumModel> sanitizedAlbumsList = null;
+
         if (cursor != null && cursor.moveToFirst()) {
             int albumIdColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Albums._ID);
             int albumColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Albums.ALBUM);
@@ -57,6 +62,7 @@ public class AlbumsLoader implements Callable<List<AlbumModel>> {
 
             final Uri sArtworkUri = Uri.parse("content://media/external/audio/albumart");
 
+            List<AlbumModel> albumsList = new ArrayList<>();
             do {
                 String album = cursor.getString(albumColumnIndex);
                 if (null != album) {
@@ -70,7 +76,21 @@ public class AlbumsLoader implements Callable<List<AlbumModel>> {
                 }
             } while (cursor.moveToNext());
             cursor.close();
+
+            // Make sure no album is returned that is present in the ignored folders list
+            if (null != LoaderCache.getAllTracksList()) {
+                Set<Integer> albumsSet = new HashSet<>();
+                for (MusicModel md : LoaderCache.getAllTracksList()) {
+                    albumsSet.add(md.getAlbumId());
+                }
+
+                sanitizedAlbumsList = new ArrayList<>();
+                for (AlbumModel am : albumsList) {
+                    if (albumsSet.contains(am.getAlbumId()))
+                        sanitizedAlbumsList.add(am);
+                }
+            }
         }
-        return albumsList;
+        return sanitizedAlbumsList;
     }
 }
