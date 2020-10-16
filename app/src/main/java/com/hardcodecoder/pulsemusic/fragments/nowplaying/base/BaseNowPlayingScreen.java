@@ -68,6 +68,7 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
     };
     private ViewPager2 mMediaArtPager;
     private MediaArtPagerAdapter mMediaArtAdapter;
+    private long mDuration = 1;
     private boolean mCurrentItemFavorite = false;
     private boolean mShouldAnimateMediaArt = false;
 
@@ -95,6 +96,8 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
             mMediaArtPager.setCurrentItem(mTrackManager.getActiveIndex(), mShouldAnimateMediaArt);
         updateFavoriteItem();
         updateRepeat();
+        long seconds = metadata.getLong(MediaMetadata.METADATA_KEY_DURATION) / 1000;
+        mDuration = seconds == 0 ? 1 : seconds;
         mShouldAnimateMediaArt = true;
     }
 
@@ -173,9 +176,9 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
         });
     }
 
-    protected void resetSliderValues(Slider slider, long valueTo) {
+    protected void resetSliderValues(Slider slider) {
         slider.setValue(0);
-        slider.setValueTo(valueTo);
+        slider.setValueTo(mDuration);
     }
 
     protected void setUpSkipControls(ImageView skipPrev, ImageView skipNext) {
@@ -240,6 +243,10 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
 
     protected String getFormattedElapsedTime(long elapsedTime) {
         return DateUtils.formatElapsedTime(elapsedTime);
+    }
+
+    protected long getDurationSeconds() {
+        return mDuration;
     }
 
     protected void setGotToCurrentQueueCLickListener(View view) {

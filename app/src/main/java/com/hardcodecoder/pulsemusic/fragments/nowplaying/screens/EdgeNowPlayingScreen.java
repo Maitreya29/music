@@ -122,7 +122,7 @@ public class EdgeNowPlayingScreen extends BaseNowPlayingScreen {
     @Override
     public void onMetadataDataChanged(MediaMetadata metadata) {
         super.onMetadataDataChanged(metadata);
-        long seconds = metadata.getLong(MediaMetadata.METADATA_KEY_DURATION) / 1000;
+        long seconds = getDurationSeconds();
         mProgressSeekBar.setProgress(0);
         mProgressSeekBar.setMax((int) seconds);
         mStartTime.setText(getFormattedElapsedTime(0));
