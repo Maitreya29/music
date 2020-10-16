@@ -10,8 +10,10 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.android.material.button.MaterialButton;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.fragments.settings.base.SettingsBaseFragment;
+import com.hardcodecoder.pulsemusic.themes.TintHelper;
 
 public class SettingsDonationFragment extends SettingsBaseFragment {
 
@@ -30,8 +32,14 @@ public class SettingsDonationFragment extends SettingsBaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        view.findViewById(R.id.bmc_btn).setOnClickListener(v -> openLink("https://www.buymeacoffee.com/HardcodeCoder"));
-        view.findViewById(R.id.pp_btn).setOnClickListener(v -> openLink("https://paypal.me/HardcodeCoder"));
+        MaterialButton coffeeBtn = view.findViewById(R.id.bmc_btn);
+        MaterialButton payPalBtn = view.findViewById(R.id.pp_btn);
+
+        TintHelper.setAccentTintToMaterialButton(coffeeBtn);
+        TintHelper.setAccentTintToMaterialButton(payPalBtn);
+
+        coffeeBtn.setOnClickListener(v -> openLink("https://www.buymeacoffee.com/HardcodeCoder"));
+        payPalBtn.setOnClickListener(v -> openLink("https://paypal.me/HardcodeCoder"));
     }
 
     @Override
