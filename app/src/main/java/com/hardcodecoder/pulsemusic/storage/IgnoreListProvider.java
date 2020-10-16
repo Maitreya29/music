@@ -13,7 +13,7 @@ import java.util.List;
 public class IgnoreListProvider {
 
     private static final String TAG = "IgnoreListProvider";
-    private static final String IGNORED_LIST_FILE = "Ignore.txt";
+    private static final String IGNORED_LIST_FILE = "ignoredList.txt";
     private final String mFilesDir;
 
     public IgnoreListProvider(String baseFilesDir) {
