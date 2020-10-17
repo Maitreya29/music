@@ -60,7 +60,7 @@ class StorageUtils {
     static void writeRawHistory(String historyDir, MusicModel data, int playCount) {
         FileOutputStream fos = null;
         try {
-            File file = new File(historyDir + data.getTrackName().hashCode());
+            File file = new File(historyDir + data.hashCode());
             fos = new FileOutputStream(file);
             fos.write(StorageUtils.getWriteableHistoryDataFrom(data, playCount).getBytes());
         } catch (IOException e) {

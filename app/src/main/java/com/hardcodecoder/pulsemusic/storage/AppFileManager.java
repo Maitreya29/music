@@ -43,7 +43,7 @@ public class AppFileManager {
         if (null == mHistoryMap)
             mHistoryMap = new HashMap<>();
         TaskRunner.executeAsync(() -> {
-            Short count = mHistoryMap.get(md.getTrackName().hashCode());
+            Short count = mHistoryMap.get(md.hashCode());
             if (null == count) count = 1;
             else count++;
             StorageUtils.writeRawHistory(
@@ -51,7 +51,7 @@ public class AppFileManager {
                     md,
                     count);
 
-            mHistoryMap.put(md.getTrackName().hashCode(), count);
+            mHistoryMap.put(md.hashCode(), count);
         });
     }
 
@@ -69,7 +69,7 @@ public class AppFileManager {
                     HistoryModel hm = StorageUtils.readRawHistory(file);
                     if (null != hm) {
                         historyList.add(hm);
-                        mHistoryMap.put(hm.getTitle().hashCode(), hm.getPlayCount());
+                        mHistoryMap.put(Integer.parseInt(file.getName()), hm.getPlayCount());
                     }
                 }
             }
@@ -81,11 +81,11 @@ public class AppFileManager {
         if (item.getId() < 0) return false;
         if (null == mFavoritesSet)
             mFavoritesSet = new HashSet<>();
-        if (mFavoritesSet.add(item.getTrackName().hashCode()))
+        if (mFavoritesSet.add(item.hashCode()))
             TaskRunner.executeAsync(() ->
                     StorageUtils.writeRawFavorite(
                             StorageStructure.getAbsoluteFavoritesPath(mFilesDir),
-                            item.getTrackName()));
+                            item.getTrackPath()));
         return true;
     }
 
@@ -104,7 +104,7 @@ public class AppFileManager {
     public static void getFavorites(@NonNull Callback<List<MusicModel>> callback) {
         TaskRunner.executeAsync(() -> {
             List<String> favoritesRaw = new ArrayList<>(loadFavorites());
-            List<MusicModel> favorites = DataModelHelper.getModelsObjectFromTitlesList(favoritesRaw);
+            List<MusicModel> favorites = DataModelHelper.getModelsObjectFromTrackPath(favoritesRaw);
             callback.onComplete(favorites);
         });
     }
@@ -112,10 +112,10 @@ public class AppFileManager {
     public static void deleteFavorite(@NonNull MusicModel md) {
         if (null == mFavoritesSet)
             return;
-        if (mFavoritesSet.remove(md.getTrackName().hashCode())) {
+        if (mFavoritesSet.remove(md.hashCode())) {
             TaskRunner.executeAsync(() -> {
                 List<String> newFavorites = new ArrayList<>(loadFavorites());
-                newFavorites.remove(md.getTrackName());
+                newFavorites.remove(md.getTrackPath());
                 StorageUtils.writeRawFavorites(
                         StorageStructure.getAbsoluteFavoritesPath(mFilesDir),
                         newFavorites,
@@ -136,9 +136,9 @@ public class AppFileManager {
         if (null == mFavoritesSet) {
             TaskRunner.executeAsync(() -> {
                 loadFavorites();
-                sHandler.post(() -> callback.onComplete(mFavoritesSet.contains(item.getTrackName().hashCode())));
+                sHandler.post(() -> callback.onComplete(mFavoritesSet.contains(item.hashCode())));
             });
-        } else callback.onComplete(mFavoritesSet.contains(item.getTrackName().hashCode()));
+        } else callback.onComplete(mFavoritesSet.contains(item.hashCode()));
     }
 
     public static void savePlaylist(@NonNull String playlistName) {
@@ -176,7 +176,7 @@ public class AppFileManager {
     public static void addItemToPlaylist(@NonNull String playlistName, @NonNull MusicModel itemToAdd) {
         TaskRunner.executeAsync(() -> StorageUtils.writeTrackToPlaylist(
                 StorageStructure.getAbsolutePlaylistsFolderPath(mFilesDir) +
-                        playlistName, itemToAdd.getTrackName()));
+                        playlistName, itemToAdd.getTrackPath()));
     }
 
     public static void addItemsToPlaylist(@NonNull String playlistName,
@@ -186,10 +186,11 @@ public class AppFileManager {
         TaskRunner.executeAsync(() -> {
             List<String> tracksTitleRaw = new ArrayList<>();
             for (MusicModel musicModel : playlistTracks)
-                tracksTitleRaw.add(musicModel.getTrackName());
+                tracksTitleRaw.add(musicModel.getTrackPath());
             StorageUtils.writeTracksToPlaylist(
-                    StorageStructure.getAbsolutePlaylistsFolderPath(mFilesDir) +
-                            playlistName, tracksTitleRaw, append);
+                    StorageStructure.getAbsolutePlaylistsFolderPath(mFilesDir) + playlistName,
+                    tracksTitleRaw,
+                    append);
             if (null != callback) sHandler.post(() -> callback.onComplete(true));
         });
     }
@@ -198,7 +199,7 @@ public class AppFileManager {
         TaskRunner.executeAsync(() -> {
             String playlistPath = StorageStructure.getAbsolutePlaylistsFolderPath(mFilesDir);
             List<String> playlistTracksRaw = StorageUtils.readRawPlaylistTracks(playlistPath + playlistName);
-            List<MusicModel> playlistTracks = DataModelHelper.getModelsObjectFromTitlesList(playlistTracksRaw);
+            List<MusicModel> playlistTracks = DataModelHelper.getModelsObjectFromTrackPath(playlistTracksRaw);
             callback.onComplete(playlistTracks);
         });
     }
@@ -226,7 +227,7 @@ public class AppFileManager {
                 List<MusicModel> masterList = LoaderCache.getAllTracksList();
                 if (null != masterList && masterList.size() > 0) {
                     Set<Integer> currentList = new HashSet<>();
-                    for (MusicModel md : masterList) currentList.add(md.getTrackName().hashCode());
+                    for (MusicModel md : masterList) currentList.add(md.hashCode());
                     for (File f : files)
                         if (!currentList.contains(Integer.parseInt(f.getName())))
                             StorageUtils.deleteFile(f);

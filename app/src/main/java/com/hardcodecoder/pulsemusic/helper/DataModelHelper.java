@@ -25,14 +25,14 @@ public class DataModelHelper {
 
     private static int mPickedTrackId = -1;
 
-    public static List<MusicModel> getModelsObjectFromTitlesList(List<String> titles) {
-        if (null == titles || titles.size() == 0) return null;
+    public static List<MusicModel> getModelsObjectFromTrackPath(List<String> trackPaths) {
+        if (null == trackPaths || trackPaths.size() == 0) return null;
         Map<String, MusicModel> modelMap = new HashMap<>();
         for (MusicModel musicModel : LoaderCache.getAllTracksList())
-            modelMap.put(musicModel.getTrackName(), musicModel);
+            modelMap.put(musicModel.getTrackPath(), musicModel);
 
         List<MusicModel> modelList = new ArrayList<>();
-        for (String name : titles) {
+        for (String name : trackPaths) {
             if (null != modelMap.get(name))
                 modelList.add(modelMap.get(name));
         }
