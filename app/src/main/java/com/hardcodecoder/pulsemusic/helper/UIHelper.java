@@ -24,8 +24,8 @@ import com.hardcodecoder.pulsemusic.dialog.AddToPlaylistDialog;
 import com.hardcodecoder.pulsemusic.dialog.RoundedBottomSheetDialog;
 import com.hardcodecoder.pulsemusic.interfaces.CreatePlaylist;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
+import com.hardcodecoder.pulsemusic.providers.ProviderManager;
 import com.hardcodecoder.pulsemusic.singleton.TrackManager;
-import com.hardcodecoder.pulsemusic.storage.AppFileManager;
 import com.hardcodecoder.pulsemusic.utils.DataUtils;
 import com.hardcodecoder.pulsemusic.utils.NavigationUtil;
 import com.hardcodecoder.pulsemusic.views.MediaArtImageView;
@@ -56,7 +56,7 @@ public class UIHelper {
         layout.findViewById(R.id.confirm_btn).setOnClickListener(v -> {
             if (et.getText() != null && et.getText().toString().length() > 0) {
                 String playlistName = et.getText().toString();
-                AppFileManager.savePlaylist(playlistName);
+                ProviderManager.getPlaylistProvider().addPlaylistItem(playlistName);
                 callback.onPlaylistCreated(playlistName);
             } else {
                 Toast.makeText(context, context.getString(R.string.create_playlist_hint), Toast.LENGTH_SHORT).show();

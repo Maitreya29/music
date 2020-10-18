@@ -1,7 +1,8 @@
 package com.hardcodecoder.pulsemusic.loaders;
 
-import com.hardcodecoder.pulsemusic.model.HistoryModel;
+import com.hardcodecoder.pulsemusic.model.HistoryRecord;
 import com.hardcodecoder.pulsemusic.model.TopArtistModel;
+import com.hardcodecoder.pulsemusic.providers.ProviderManager;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,21 +13,19 @@ import java.util.concurrent.Callable;
 
 public class TopArtistsLoader implements Callable<List<TopArtistModel>> {
 
-    private final List<HistoryModel> mHistoryList;
-
-    TopArtistsLoader(List<HistoryModel> recentTracks) {
-        mHistoryList = new ArrayList<>(recentTracks);
-    }
 
     @Override
     public List<TopArtistModel> call() {
-        Map<String, Integer> frequency = new HashMap<>();
-        Map<String, HistoryModel> modelMap = new HashMap<>();
+        List<HistoryRecord> records = ProviderManager.getHistoryProvider().getHistoryRecords();
+        if (null == records || records.isEmpty()) return null;
 
-        for (HistoryModel hm : mHistoryList) {
-            Integer count = frequency.get(hm.getAlbum());
-            frequency.put(hm.getArtist(), (null == count) ? hm.getPlayCount() : count + hm.getPlayCount());
-            modelMap.put(hm.getArtist(), hm);
+        Map<String, Integer> frequency = new HashMap<>();
+        Map<String, HistoryRecord> modelMap = new HashMap<>();
+
+        for (HistoryRecord hr : records) {
+            Integer count = frequency.get(hr.getAlbum());
+            frequency.put(hr.getArtist(), (null == count) ? hr.getPlayCount() : count + hr.getPlayCount());
+            modelMap.put(hr.getArtist(), hr);
         }
 
         List<TopArtistModel> topArtistList = new ArrayList<>();
@@ -36,13 +35,9 @@ public class TopArtistsLoader implements Callable<List<TopArtistModel>> {
         Collections.sort(topArtistList, (o1, o2) -> {
             int count = o2.getNumOfPlays() - o1.getNumOfPlays();
             if (count == 0) {
-                HistoryModel h1 = modelMap.get(o1.getArtistName());
-                HistoryModel h2 = modelMap.get(o2.getArtistName());
-                if (h1 != null && h2 != null) {
-                    long d = h2.getLastModified() - h1.getLastModified();
-                    return d > 0 ? 1 : (d == 0 ? 0 : -1);
-                }
-                return 0;
+                HistoryRecord h1 = modelMap.get(o1.getArtistName());
+                HistoryRecord h2 = modelMap.get(o2.getArtistName());
+                return Long.compare(h2.getLastModified(), h1.getLastModified());
             }
             return count;
         });

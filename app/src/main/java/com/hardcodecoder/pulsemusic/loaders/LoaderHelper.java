@@ -8,18 +8,15 @@ import com.hardcodecoder.pulsemusic.TaskRunner;
 import com.hardcodecoder.pulsemusic.TaskRunner.Callback;
 import com.hardcodecoder.pulsemusic.model.AlbumModel;
 import com.hardcodecoder.pulsemusic.model.ArtistModel;
-import com.hardcodecoder.pulsemusic.model.HistoryModel;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.model.TopAlbumModel;
 import com.hardcodecoder.pulsemusic.model.TopArtistModel;
-import com.hardcodecoder.pulsemusic.storage.AppFileManager;
+import com.hardcodecoder.pulsemusic.providers.ProviderManager;
 import com.hardcodecoder.pulsemusic.utils.SortUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Hashtable;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 public class LoaderHelper {
@@ -74,17 +71,7 @@ public class LoaderHelper {
     }
 
     public static void loadRecentTracks(@NonNull Callback<List<MusicModel>> callback) {
-        AppFileManager.getHistory(true, result -> {
-            if (null != result && result.size() > 0) {
-                Map<String, MusicModel> map = new Hashtable<>();
-                for (MusicModel md : LoaderCache.getAllTracksList())
-                    map.put(md.getTrackName(), md);
-                List<MusicModel> recentTracks = new ArrayList<>(result.size());
-                for (HistoryModel hm : result)
-                    recentTracks.add(map.get(hm.getTitle()));
-                callback.onComplete(recentTracks);
-            } else callback.onComplete(null);
-        });
+        ProviderManager.getHistoryProvider().getHistoryTracks(callback);
     }
 
     public static void loadLatestTracks(@NonNull Callback<List<MusicModel>> callback) {
@@ -108,16 +95,10 @@ public class LoaderHelper {
     }
 
     public static void loadTopAlbums(@NonNull Callback<List<TopAlbumModel>> callback) {
-        AppFileManager.getHistory(false, history -> {
-            if (null != history && history.size() > 0)
-                TaskRunner.executeAsync(new TopAlbumsLoader(history), callback);
-        });
+        TaskRunner.executeAsync(new TopAlbumsLoader(), callback);
     }
 
     public static void loadTopArtist(@NonNull Callback<List<TopArtistModel>> callback) {
-        AppFileManager.getHistory(false, history -> {
-            if (null != history && history.size() > 0)
-                TaskRunner.executeAsync(new TopArtistsLoader(history), callback);
-        });
+        TaskRunner.executeAsync(new TopArtistsLoader(), callback);
     }
 }

@@ -14,7 +14,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.activities.base.AdvancePlaylist;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
-import com.hardcodecoder.pulsemusic.storage.AppFileManager;
+import com.hardcodecoder.pulsemusic.providers.ProviderManager;
 
 import java.util.ArrayList;
 
@@ -34,7 +34,7 @@ public class UserPlaylistTracksActivity extends AdvancePlaylist {
         setUpToolbar(playListTitle);
 
         if (playListTitle != null)
-            AppFileManager.getPlaylistTracks(playListTitle, result -> setUpData(result, 0));
+            ProviderManager.getPlaylistProvider().getTrackForPlaylist(playListTitle, tracks -> setUpData(tracks, 0));
     }
 
     @Override
@@ -46,7 +46,8 @@ public class UserPlaylistTracksActivity extends AdvancePlaylist {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.menu_action_clear_duplicates) {
-            mAdapter.updatePlaylist(AppFileManager.deleteAllDuplicatesInPlaylist(playListTitle, mPlaylistTracks));
+            ProviderManager.getPlaylistProvider().deleteAllDuplicatesInPlaylist(playListTitle, mPlaylistTracks, result ->
+                    mAdapter.updatePlaylist(result));
             return true;
         }
         return false;
@@ -66,12 +67,9 @@ public class UserPlaylistTracksActivity extends AdvancePlaylist {
 
     @Override
     protected void onReceiveData(ArrayList<MusicModel> receivedData) {
-        AppFileManager.addItemsToPlaylist(playListTitle, receivedData, true, result -> {
-            if (result) {
-                if (null == mAdapter) setUpData(receivedData, 0);
-                else mAdapter.addItems(receivedData);
-            }
-        });
+        ProviderManager.getPlaylistProvider().addTracksToPlaylist(receivedData, playListTitle, true);
+        if (null == mAdapter) setUpData(receivedData, 0);
+        else mAdapter.addItems(receivedData);
     }
 
     @Override
@@ -90,7 +88,7 @@ public class UserPlaylistTracksActivity extends AdvancePlaylist {
     @Override
     protected void onDestroy() {
         if (isPlaylistModified)
-            AppFileManager.updatePlaylistItems(playListTitle, mPlaylistTracks);
+            ProviderManager.getPlaylistProvider().updatePlaylistTracks(playListTitle, mPlaylistTracks);
         super.onDestroy();
     }
 }

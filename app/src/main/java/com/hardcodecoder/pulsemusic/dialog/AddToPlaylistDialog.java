@@ -18,7 +18,7 @@ import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.adapters.ATPAdapter;
 import com.hardcodecoder.pulsemusic.helper.UIHelper;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
-import com.hardcodecoder.pulsemusic.storage.AppFileManager;
+import com.hardcodecoder.pulsemusic.providers.ProviderManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +61,7 @@ public class AddToPlaylistDialog extends RoundedBottomSheetDialogFragment {
     }
 
     private void setUpRecyclerView(View view) {
-        AppFileManager.getPlaylists(result -> {
+        ProviderManager.getPlaylistProvider().getAllPlaylistItem(result -> {
             if (null == result || result.size() <= 0) {
                 mEmptyListText = (MaterialTextView) ((ViewStub) view.findViewById(R.id.stub_empty_list_text)).inflate();
                 mEmptyListText.setText(getString(R.string.atp_no_user_playlist_found));
@@ -80,7 +80,9 @@ public class AddToPlaylistDialog extends RoundedBottomSheetDialogFragment {
                                 Toast.makeText(view.getContext(), getString(R.string.atp_track_add_error_toast), Toast.LENGTH_SHORT).show();
                                 return;
                             }
-                            AppFileManager.addItemToPlaylist(mPlaylistNames.get(position), mItemToAdd);
+                            List<MusicModel> tracks = new ArrayList<>();
+                            tracks.add(mItemToAdd);
+                            ProviderManager.getPlaylistProvider().addTracksToPlaylist(tracks, mPlaylistNames.get(position), true);
                             Toast.makeText(view.getContext(), getString(R.string.atp_track_added_toast), Toast.LENGTH_SHORT).show();
                             if (isVisible())
                                 dismiss();

@@ -35,7 +35,7 @@ import com.hardcodecoder.pulsemusic.helper.RecyclerViewGestureHelper;
 import com.hardcodecoder.pulsemusic.helper.UIHelper;
 import com.hardcodecoder.pulsemusic.interfaces.PlaylistCardListener;
 import com.hardcodecoder.pulsemusic.interfaces.SimpleGestureCallback;
-import com.hardcodecoder.pulsemusic.storage.AppFileManager;
+import com.hardcodecoder.pulsemusic.providers.ProviderManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,11 +65,11 @@ public class PlaylistFragment extends Fragment implements PlaylistCardListener, 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mPlaylistNames = new ArrayList<>();
         mPlaylistNames.add(getString(R.string.playlist_current_queue));
-        AppFileManager.getPlaylists(result -> {
+        ProviderManager.getPlaylistProvider().getAllPlaylistItem(result -> {
             if (null != result) mPlaylistNames.addAll(result);
             loadPlaylistCards(view);
         });
-        mObserver = new FileObserver(AppFileManager.getPlaylistFolderFile().getAbsolutePath(),
+        mObserver = new FileObserver(ProviderManager.getPlaylistProvider().getPlaylistParentFolder().getAbsolutePath(),
                 FileObserver.CREATE) {
             @Override
             public void onEvent(int event, @Nullable String path) {
@@ -128,9 +128,10 @@ public class PlaylistFragment extends Fragment implements PlaylistCardListener, 
                 if (et.getText() != null && et.getText().toString().length() > 0) {
                     String oldName = mPlaylistNames.remove(pos);
                     String newName = et.getText().toString();
-                    mPlaylistNames.add(pos, newName);
-                    mAdapter.notifyItemChanged(pos);
-                    AppFileManager.renamePlaylist(oldName, newName);
+                    if (ProviderManager.getPlaylistProvider().renamePlaylistItem(oldName, newName)) {
+                        mPlaylistNames.add(pos, newName);
+                        mAdapter.notifyItemChanged(pos);
+                    }
                 } else {
                     Toast.makeText(mContext, getString(R.string.create_playlist_hint), Toast.LENGTH_SHORT).show();
                     return;
@@ -172,7 +173,7 @@ public class PlaylistFragment extends Fragment implements PlaylistCardListener, 
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext)
                     .setMessage(getString(R.string.playlist_delete_dialog_title))
                     .setPositiveButton(getString(R.string.yes), (dialog, which) -> {
-                        AppFileManager.deletePlaylist(mPlaylistNames.remove(position));
+                        ProviderManager.getPlaylistProvider().deletePlaylistItem(mPlaylistNames.get(position));
                         Toast.makeText(getContext(), getString(R.string.playlist_deleted_toast), Toast.LENGTH_SHORT).show();
                         mAdapter.notifyItemRemoved(position);
                     }).setNegativeButton(getString(R.string.no), (dialog, which) -> mAdapter.notifyItemChanged(position));

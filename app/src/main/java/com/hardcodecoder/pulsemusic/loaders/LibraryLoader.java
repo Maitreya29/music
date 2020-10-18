@@ -10,7 +10,7 @@ import android.provider.MediaStore;
 import androidx.annotation.Nullable;
 
 import com.hardcodecoder.pulsemusic.model.MusicModel;
-import com.hardcodecoder.pulsemusic.storage.AppFileManager;
+import com.hardcodecoder.pulsemusic.providers.ProviderManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +30,7 @@ public class LibraryLoader implements Callable<List<MusicModel>> {
     LibraryLoader(ContentResolver contentResolver, SortOrder sortOrder, @Nullable String selectionString, @Nullable String[] selectionArgs) {
         mContentResolver = contentResolver;
         mSortOrder = MediaStoreHelper.getSortOrderFor(sortOrder);
-        List<String> ignoredFoldersList = AppFileManager.getIgnoredList();
+        List<String> ignoredFoldersList = ProviderManager.getIgnoredListProvider().getIgnoredList();
         if (null != ignoredFoldersList && !ignoredFoldersList.isEmpty()) {
             mSelectionString = getSelection(selectionString, ignoredFoldersList.size());
             mSelectionArgs = getSelectionArgs(selectionArgs, ignoredFoldersList);

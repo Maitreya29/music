@@ -2,7 +2,7 @@ package com.hardcodecoder.pulsemusic.singleton;
 
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.playback.PlaybackManager;
-import com.hardcodecoder.pulsemusic.storage.AppFileManager;
+import com.hardcodecoder.pulsemusic.providers.ProviderManager;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,7 +11,7 @@ import java.util.List;
 public class TrackManager {
 
     private static final TrackManager ourInstance = new TrackManager();
-    private List<MusicModel> mActiveList = new ArrayList<>();
+    private final List<MusicModel> mActiveList = new ArrayList<>();
     private int mIndex = -1;
     private boolean mRepeatCurrentTrack = false;
 
@@ -112,6 +112,6 @@ public class TrackManager {
         // All data might not available to work with such tracks on relaunch
         if (getActiveQueueItem().getAlbumId() < 0)
             return;
-        AppFileManager.addItemToHistory(getActiveQueueItem());
+        ProviderManager.getHistoryProvider().addToHistory(getActiveQueueItem());
     }
 }

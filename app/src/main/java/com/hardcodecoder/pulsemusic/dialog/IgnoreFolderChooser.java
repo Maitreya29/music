@@ -20,7 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.adapters.IgnoredFoldersAdapter;
-import com.hardcodecoder.pulsemusic.storage.AppFileManager;
+import com.hardcodecoder.pulsemusic.providers.ProviderManager;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -61,7 +61,7 @@ public class IgnoreFolderChooser extends RoundedBottomSheetDialogFragment {
             }
         });
 
-        AppFileManager.getIgnoredList(this::setUpRecyclerView);
+        ProviderManager.getIgnoredListProvider().getIgnoredList(this::setUpRecyclerView);
     }
 
     @Override
@@ -82,7 +82,7 @@ public class IgnoreFolderChooser extends RoundedBottomSheetDialogFragment {
                 setUpRecyclerView(list);
             } else mAdapter.addItem(completePath);
             Toast.makeText(getContext(), getString(R.string.ignored_folder_picker_add_success), Toast.LENGTH_SHORT).show();
-            AppFileManager.addToIgnoredList(completePath);
+            ProviderManager.getIgnoredListProvider().addToIgnoreList(completePath);
         }
     }
 
@@ -104,7 +104,7 @@ public class IgnoreFolderChooser extends RoundedBottomSheetDialogFragment {
                 getLayoutInflater(),
                 position -> {
                     // Remove folder when clicked on remove btn
-                    AppFileManager.removeFromIgnoredList(foldersList.get(position));
+                    ProviderManager.getIgnoredListProvider().removeFromIgnoreList(foldersList.get(position));
                     mAdapter.deleteItem(position);
                     Toast.makeText(recyclerView.getContext(), getString(R.string.ignored_folder_picker_remove_success), Toast.LENGTH_SHORT).show();
                 });

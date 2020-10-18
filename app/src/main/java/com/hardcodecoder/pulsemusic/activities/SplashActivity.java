@@ -14,7 +14,7 @@ import androidx.core.content.ContextCompat;
 
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.loaders.LoaderHelper;
-import com.hardcodecoder.pulsemusic.storage.AppFileManager;
+import com.hardcodecoder.pulsemusic.providers.ProviderManager;
 import com.hardcodecoder.pulsemusic.themes.TintHelper;
 
 public class SplashActivity extends PMBActivity {
@@ -26,6 +26,7 @@ public class SplashActivity extends PMBActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        ProviderManager.init(this);
         TintHelper.setAccentTintTo((ImageView) findViewById(R.id.splash_logo));
         getPermission();
     }
@@ -63,7 +64,7 @@ public class SplashActivity extends PMBActivity {
 
     private void startMusicLoader() {
         LoaderHelper.loadAllTracks(getContentResolver(), result -> {
-            AppFileManager.deleteObsoleteHistoryFiles();
+            ProviderManager.getHistoryProvider().deleteObsoleteHistoryFiles();
             startHomeActivity();
         });
     }

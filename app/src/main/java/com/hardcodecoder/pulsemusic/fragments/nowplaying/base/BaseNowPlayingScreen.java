@@ -37,8 +37,8 @@ import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.activities.CurrentPlaylistActivity;
 import com.hardcodecoder.pulsemusic.helper.MediaProgressUpdateHelper;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
+import com.hardcodecoder.pulsemusic.providers.ProviderManager;
 import com.hardcodecoder.pulsemusic.singleton.TrackManager;
-import com.hardcodecoder.pulsemusic.storage.AppFileManager;
 import com.hardcodecoder.pulsemusic.themes.ThemeColors;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 
@@ -194,13 +194,16 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
 
     protected void toggleFavorite() {
         if (mCurrentItemFavorite) {
-            AppFileManager.deleteFavorite(mTrackManager.getActiveQueueItem());
+            ProviderManager.getFavoritesProvider().removeFromFavorite(mTrackManager.getActiveQueueItem());
             Toast.makeText(getContext(), getString(R.string.removed_from_fav), Toast.LENGTH_SHORT).show();
         } else {
-            if (AppFileManager.addItemToFavorites(mTrackManager.getActiveQueueItem()))
-                Toast.makeText(getContext(), getString(R.string.added_to_fav), Toast.LENGTH_SHORT).show();
-            else
+            MusicModel md = mTrackManager.getActiveQueueItem();
+            if (md.getId() < 0)
                 Toast.makeText(getContext(), getString(R.string.cannot_add_to_fav), Toast.LENGTH_SHORT).show();
+            else {
+                ProviderManager.getFavoritesProvider().addToFavorites(md);
+                Toast.makeText(getContext(), getString(R.string.added_to_fav), Toast.LENGTH_SHORT).show();
+            }
         }
         updateFavoriteItem();
     }
@@ -272,8 +275,8 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
     }
 
     private void updateFavoriteItem() {
-        AppFileManager.isItemAFavorite(mTrackManager.getActiveQueueItem(), result ->
-                onFavoriteStateChanged((mCurrentItemFavorite = result)));
+        ProviderManager.getFavoritesProvider().isTemFavorite(mTrackManager.getActiveQueueItem(), isFavorite ->
+                onFavoriteStateChanged((mCurrentItemFavorite = isFavorite)));
     }
 
     protected void handleFavoriteStateChanged(ImageView imageView, boolean favorite) {
