@@ -9,9 +9,10 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.FragmentManager;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.dialog.IgnoreFolderChooser;
 import com.hardcodecoder.pulsemusic.fragments.settings.base.SettingsBaseFragment;
@@ -49,30 +50,40 @@ public class SettingsGeneralFragment extends SettingsBaseFragment {
         view.findViewById(R.id.ignore_folder_picker).setOnClickListener(v -> {
             if (null == getActivity()) return;
 
-            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-            IgnoreFolderChooser ignoreFolderChooser = IgnoreFolderChooser.getInstance();
-            ignoreFolderChooser.show(fragmentManager, IgnoreFolderChooser.TAG);
-            fragmentManager.executePendingTransactions();
-
-            if (null == ignoreFolderChooser.getDialog()) return;
-
-            ignoreFolderChooser.getDialog().setOnDismissListener(dialog -> {
-                AlertDialog dialog2 = new MaterialAlertDialogBuilder(Objects.requireNonNull(getContext()))
-                        .setTitle(R.string.restart_dialog_title)
-                        .setMessage(R.string.restart_dialog_desc)
-                        .setPositiveButton(R.string.restart_dialog_positive_btn_title, (dialog1, which) -> {
-                            Intent restartIntent = getActivity().getPackageManager()
-                                    .getLaunchIntentForPackage(getActivity().getPackageName());
-                            if (null != restartIntent) {
-                                restartIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                startActivity(restartIntent);
-                                getActivity().finish();
-                            }
-                        })
-                        .setNegativeButton(R.string.restart_dialog_negative_btn_title, (dialog12, which) ->
-                                dialog12.dismiss()).create();
-                dialog2.show();
+            IgnoreFolderChooser ignoreFolderChooser = IgnoreFolderChooser.getInstance(hasChanged -> {
+                if (hasChanged) showRestartDialog(view);
             });
+            ignoreFolderChooser.show(getFragmentManager(), IgnoreFolderChooser.TAG);
         });
+    }
+
+    private void showRestartDialog(View view) {
+        View layout = View.inflate(view.getContext(), R.layout.alert_dialog_view, null);
+        MaterialTextView title = layout.findViewById(R.id.alert_dialog_title);
+        MaterialTextView msg = layout.findViewById(R.id.alert_dialog_message);
+
+        MaterialButton negativeBtn = layout.findViewById(R.id.alert_dialog_negative_btn);
+        MaterialButton positiveBtn = layout.findViewById(R.id.alert_dialog_positive_btn);
+
+        title.setText(R.string.restart_dialog_title);
+        msg.setText(R.string.restart_dialog_desc);
+
+        AlertDialog dialog2 = new MaterialAlertDialogBuilder(Objects.requireNonNull(getContext()))
+                .setView(layout).create();
+
+        positiveBtn.setText(R.string.restart_dialog_positive_btn_title);
+        positiveBtn.setOnClickListener(positive -> {
+            Intent restartIntent = getActivity().getPackageManager()
+                    .getLaunchIntentForPackage(getActivity().getPackageName());
+            if (null != restartIntent) {
+                restartIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(restartIntent);
+                getActivity().finish();
+            }
+        });
+
+        negativeBtn.setText(R.string.restart_dialog_negative_btn_title);
+        negativeBtn.setOnClickListener(negative -> dialog2.dismiss());
+        dialog2.show();
     }
 }

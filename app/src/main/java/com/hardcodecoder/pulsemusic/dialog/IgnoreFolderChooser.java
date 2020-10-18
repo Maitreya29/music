@@ -1,6 +1,7 @@
 package com.hardcodecoder.pulsemusic.dialog;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -33,9 +34,13 @@ public class IgnoreFolderChooser extends RoundedBottomSheetDialogFragment {
     private static final int REQUEST_CODE_FOLDER_SELECT = 44;
     private IgnoredFoldersAdapter mAdapter;
     private MaterialTextView mEmptyListText;
+    private DialogDismissCallback mCallback;
+    private boolean mHasChanged = false;
 
-    public static IgnoreFolderChooser getInstance() {
-        return new IgnoreFolderChooser();
+    public static IgnoreFolderChooser getInstance(DialogDismissCallback callback) {
+        IgnoreFolderChooser folderChooser = new IgnoreFolderChooser();
+        folderChooser.mCallback = callback;
+        return folderChooser;
     }
 
     @Nullable
@@ -80,7 +85,10 @@ public class IgnoreFolderChooser extends RoundedBottomSheetDialogFragment {
                 List<String> list = new ArrayList<>();
                 list.add(completePath);
                 setUpRecyclerView(list);
-            } else mAdapter.addItem(completePath);
+            } else {
+                mAdapter.addItem(completePath);
+            }
+            mHasChanged = true;
             Toast.makeText(getContext(), getString(R.string.ignored_folder_picker_add_success), Toast.LENGTH_SHORT).show();
             ProviderManager.getIgnoredListProvider().addToIgnoreList(completePath);
         }
@@ -106,8 +114,19 @@ public class IgnoreFolderChooser extends RoundedBottomSheetDialogFragment {
                     // Remove folder when clicked on remove btn
                     ProviderManager.getIgnoredListProvider().removeFromIgnoreList(foldersList.get(position));
                     mAdapter.deleteItem(position);
+                    mHasChanged = true;
                     Toast.makeText(recyclerView.getContext(), getString(R.string.ignored_folder_picker_remove_success), Toast.LENGTH_SHORT).show();
                 });
         recyclerView.setAdapter(mAdapter);
+    }
+
+    @Override
+    public void onDismiss(@NonNull DialogInterface dialog) {
+        super.onDismiss(dialog);
+        mCallback.onDismissed(mHasChanged);
+    }
+
+    public interface DialogDismissCallback {
+        void onDismissed(boolean hasChanged);
     }
 }
