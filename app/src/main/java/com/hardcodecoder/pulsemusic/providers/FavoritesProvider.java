@@ -51,9 +51,12 @@ public class FavoritesProvider {
 
     public void getFavoriteTracks(Callback<List<MusicModel>> callback) {
         TaskRunner.executeAsync(() -> {
-            List<String> trackPaths = StorageUtil.readLinesFromFile(new File(mFavoritesFilePath));
-            List<MusicModel> favoriteTracks = DataModelHelper.getModelsObjectFromTrackPath(trackPaths);
-            mHandler.post(() -> callback.onComplete(favoriteTracks));
+            File file = new File(mFavoritesFilePath);
+            if (file.exists()) {
+                List<String> trackPaths = StorageUtil.readLinesFromFile(file);
+                List<MusicModel> favoriteTracks = DataModelHelper.getModelsObjectFromTrackPath(trackPaths);
+                mHandler.post(() -> callback.onComplete(favoriteTracks));
+            } else mHandler.post(() -> callback.onComplete(null));
         });
     }
 

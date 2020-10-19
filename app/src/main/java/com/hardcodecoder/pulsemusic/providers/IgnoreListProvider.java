@@ -4,6 +4,7 @@ import android.os.Environment;
 import android.os.Handler;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.hardcodecoder.pulsemusic.TaskRunner;
 import com.hardcodecoder.pulsemusic.TaskRunner.Callback;
@@ -34,13 +35,20 @@ public class IgnoreListProvider {
 
     public void getIgnoredList(@NonNull Callback<List<String>> callback) {
         TaskRunner.executeAsync(() -> {
-            List<String> ignoredList = StorageUtil.readLinesFromFile(new File(mIgnoredFilePath));
-            mHandler.post(() -> callback.onComplete(ignoredList));
+            File file = new File(mIgnoredFilePath);
+            if (file.exists()) {
+                List<String> ignoredList = StorageUtil.readLinesFromFile(file);
+                mHandler.post(() -> callback.onComplete(ignoredList));
+            } else mHandler.post(() -> callback.onComplete(null));
         });
     }
 
+    @Nullable
     public List<String> getIgnoredList() {
-        return StorageUtil.readLinesFromFile(new File(mIgnoredFilePath));
+        File file = new File(mIgnoredFilePath);
+        if (file.exists())
+            return StorageUtil.readLinesFromFile(file);
+        return null;
     }
 
     public void removeFromIgnoreList(@NonNull String folderToRemove) {

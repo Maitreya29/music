@@ -25,6 +25,9 @@ public class StorageUtil {
         try {
             fos = new FileOutputStream(fileToWrite, append);
             fos.write(data.getBytes());
+
+            fos.flush();
+            fos.close();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -45,6 +48,7 @@ public class StorageUtil {
             bufferedWriter = new BufferedWriter(writer);
             for (String s : lines)
                 bufferedWriter.write(s + "\n");
+
             bufferedWriter.flush();
             bufferedWriter.close();
         } catch (IOException e) {
@@ -92,6 +96,7 @@ public class StorageUtil {
             String line;
             while ((line = reader.readLine()) != null)
                 linesList.add(line);
+
             reader.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -117,6 +122,7 @@ public class StorageUtil {
     }
 
     public static void createDir(@NonNull File file) {
+        if (file.exists()) return;
         if (!file.mkdir())
             Log.e(TAG, "Unable to create folder: " + file.getAbsolutePath());
     }
