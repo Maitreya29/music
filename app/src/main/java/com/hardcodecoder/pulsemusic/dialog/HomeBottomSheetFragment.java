@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -22,7 +23,6 @@ import com.hardcodecoder.pulsemusic.GlideApp;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.activities.SettingsActivity;
 import com.hardcodecoder.pulsemusic.utils.UserInfo;
-
 
 public class HomeBottomSheetFragment extends RoundedBottomSheetDialogFragment {
 
@@ -73,6 +73,8 @@ public class HomeBottomSheetFragment extends RoundedBottomSheetDialogFragment {
         GlideApp.with(this)
                 .load(UserInfo.getUserProfilePic(mUserPic.getContext()))
                 .error(R.drawable.def_avatar)
+                .skipMemoryCache(true)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .circleCrop()
                 .into(mUserPic);
     }
@@ -123,14 +125,12 @@ public class HomeBottomSheetFragment extends RoundedBottomSheetDialogFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK && requestCode == PICK_AVATAR) {
-            if (null == data) {
+            if (null == data || data.getData() == null) {
                 Toast.makeText(getContext(), getString(R.string.error_select_image_toast), Toast.LENGTH_SHORT).show();
                 return;
             }
-            if (null != getContext()) {
-                UserInfo.saveUserProfilePic(getContext(), data.getDataString());
-                loadProfilePic();
-            }
+            if (null != getContext())
+                UserInfo.saveUserProfilePic(getContext(), data.getData(), result -> loadProfilePic());
         }
     }
 }
