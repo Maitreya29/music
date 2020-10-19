@@ -175,7 +175,7 @@ public class PlaylistFragment extends Fragment implements PlaylistCardListener, 
                     .setPositiveButton(getString(R.string.yes), (dialog, which) -> {
                         ProviderManager.getPlaylistProvider().deletePlaylistItem(mPlaylistNames.get(position));
                         Toast.makeText(getContext(), getString(R.string.playlist_deleted_toast), Toast.LENGTH_SHORT).show();
-                        mAdapter.notifyItemRemoved(position);
+                        mAdapter.removePlaylist(position);
                     }).setNegativeButton(getString(R.string.no), (dialog, which) -> mAdapter.notifyItemChanged(position));
             alertDialog.create().show();
         }

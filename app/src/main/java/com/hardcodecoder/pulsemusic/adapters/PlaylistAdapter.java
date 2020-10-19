@@ -39,6 +39,11 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.CardsS
         notifyItemInserted(1);
     }
 
+    public void removePlaylist(int position) {
+        mPlaylistNames.remove(position);
+        notifyItemRemoved(position);
+    }
+
     @Override
     public boolean onItemMove(int fromPosition, int toPosition) {
         return false;
