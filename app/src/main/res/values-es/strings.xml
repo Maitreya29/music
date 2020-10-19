@@ -63,7 +63,6 @@
     <string name="alphabet_asc">A-Z</string>
     <string name="alphabet_desc">Z-A</string>
     <string name="add_playlist">Añadir lista de reproducción</string>
-    <string name="settings">Ajustes</string>
     <string name="equalizer_error">No se encontró el ecualizador por defecto</string>
     <string name="grid_count">Cantidad de cuadrículas</string>
     <string name="grid_count_land">Cantidad de cuadrículas (paisaje)</string>
@@ -102,7 +101,6 @@
     <string name="no_playlist_tracks_found">No se han encontrado pistas de la lista de reproducción\\n\\u</string>
     <string name="item_removed">¡¡Canción borrada de la cola!!</string>
     <string name="snack_bar_action_undo">Deshacer</string>
-    <string name="cannot_remove_active_item">No se puede borrar la canción activa</string>
 
 
     <!-- Now Playing Activity -->
@@ -114,13 +112,9 @@
 
 
     <!-- TrackPickerActivity -->
-    <string name="select_tracks">Seleccionar canciones</string>
 
 
     <!-- Details Activity -->
-    <string name="details_toolbar_title">Detalles</string>
-    <string name="details_activity_rv_title">Pistas</string>
-    <string name="num_tracks">La colección tiene ●</string>
     <string name="tracks">canciones</string>
 
 
@@ -170,7 +164,6 @@
     <string name="laf_category_select_color_desc">Seleccione los colores de acento para la aplicación</string>
 
     <string name="laf_accents_picker_title">Seleccione el color del acento</string>
-    <string name="laf_accents_picker_accent_title_unknown">Desconocido</string>
 
     <string name="laf_accents_picker_desaturated_title">Colores desaturados</string>
     <string name="laf_accents_picker_accent_desaturated_desc">Hace que el color se desate cuando se aplica el tema de la oscuridad</string>
@@ -203,8 +196,6 @@
 
     <!-- Contributors -->
     <string name="lead_developer_title">Desarrolladores líder</string>
-
-    <string name="other_contributions_title">Otros</string>
 
 
     <!-- About -->

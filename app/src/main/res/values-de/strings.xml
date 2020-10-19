@@ -65,7 +65,6 @@
     <string name="duration_asc">Länge ↑</string>
     <string name="duration_desc">Länge ↓</string>
     <string name="add_playlist">Zur Playlist hinzufügen</string>
-    <string name="settings">Einstellungen</string>
     <string name="equalizer_error">Standard Equalizer nicht gefunden</string>
     <string name="grid_count">Anzahl Spalten</string>
     <string name="grid_count_land">Anzahl Spalten (Landschaft)</string>
@@ -102,7 +101,6 @@
     <string name="no_playlist_tracks_found">Keine Titel in der Wiedergabeliste gefunden\n\\u2639</string>
     <string name="item_removed">Titel von der Wiedergabeliste entfernt !!!</string>
     <string name="snack_bar_action_undo">Rückgängig machen</string>
-    <string name="cannot_remove_active_item">Aktive Titel können nicht entfernt werden</string>
 
 
     <!-- Now Playing Activity -->
@@ -114,13 +112,9 @@
 
 
     <!-- TrackPickerActivity -->
-    <string name="select_tracks">Titel auswählen</string>
 
 
     <!-- Details Activity -->
-    <string name="details_toolbar_title">Details</string>
-    <string name="details_activity_rv_title">Titel</string>
-    <string name="num_tracks">Kollektion hat ●</string>
     <string name="tracks">Titel</string>
 
 
@@ -173,7 +167,6 @@
     <string name="laf_category_select_color_desc">Wähle eine Akzentfarbe für die App</string>
 
     <string name="laf_accents_picker_title">Wähle eine Akzentfarbe</string>
-    <string name="laf_accents_picker_accent_title_unknown">Unbekannt</string>
 
     <string name="laf_accents_picker_desaturated_title">Entsättigte Farben</string>
     <string name="laf_accents_picker_accent_desaturated_desc">Entsättigt Farben, wenn das dunkle Theme aktiv ist</string>
@@ -209,16 +202,12 @@
     <string name="lead_developer_1" translatable="false">Ashutosh Patoa</string>
     <string name="lead_developer_user_name" translatable="false">\@HardcodeCoder</string>
 
-    <string name="other_contributions_title">Andere</string>
-
     <!-- Donations -->
     <string name="donation_category_head">Unterstütze</string>
     <string name="donation_title">Gefällt dir Pulse Music?</string>
     <string name="donation_text">Bitte erwägen Sie eine kleine Spende zur Unterstützung der Entwicklung</string>
     <string name="bmc_title">Kauf mir einen Kaffee</string>
     <string name="pp_title">PayPal</string>
-    <string name="top_donations">Speziellen Dank an</string>
-    <string name="no_supporters">Keine Unterstützer bis jetzt \n\u2639</string>
 
 
     <!-- About -->
@@ -262,14 +251,9 @@
     <string name="presets">Voreinstellungen</string>
     <string name="audio">Audio</string>
     <string name="audio_desc">Ändere Audio Einstellungen</string>
-    <string name="audio_category_bluetooth">Bluetooth</string>
-    <string name="audio_category_enable_connected_start">Bluetooth-Geräteerkennung</string>
-    <string name="audio_category_enable_connected_start_text">Spielt Musik, wenn sich ein Bluetooth-Gerät verbindet</string>
-    <string name="bluetooth_channel_name">Bluetooth Geräte Erkennung</string>
     <string name="audio_category_select_bluetooth_action_title">Wähle eine Bluetooth Abspielaktion</string>
     <string name="audio_category_select_bluetooth_action_text">Wähl aus, was für Musik bei Verbindung eines Bluetooth-Gerätes abgespielt wird</string>
     <string name="select_bluetooth_action">Wähle die bevorzugte Bluetooth-Aktion</string>
     <string name="radio_btn_shuffle">Spiel vermischte Musik</string>
-    <string name="radio_btn_recent">Spiel aktuelle Musik</string>
     <string name="radio_btn_suggested">Spiel vorgeschlagene Musik</string>
 </resources>

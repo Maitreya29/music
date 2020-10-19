@@ -120,7 +120,6 @@
     <string name="no_playlist_tracks_found">No playlist tracks found\n\u2639</string>
     <string name="item_removed">Song removed from queue !!!</string>
     <string name="snack_bar_action_undo">Undo</string>
-    <string name="cannot_remove_active_item">Cannot remove active track</string>
     <string name="playlist_shuffle">Shuffle</string>
     <string name="playlist_add_more">Add</string>
     <string name="playlist_clear_all">Clear all</string>
@@ -137,13 +136,9 @@
 
 
     <!-- TrackPickerActivity -->
-    <string name="select_tracks">Select tracks</string>
 
 
     <!-- Details Activity -->
-    <string name="details_toolbar_title">Details</string>
-    <string name="details_activity_rv_title">Tracks</string>
-    <string name="num_tracks">Collection has ●</string>
     <string name="num_artist_tracks">Artist has ●</string>
     <string name="num_album_tracks">Album contains ●</string>
     <string name="tracks">tracks</string>
@@ -194,8 +189,6 @@
     <string name="restart_dialog_desc">App needs to restart for changes to take effect</string>
     <string name="restart_dialog_positive_btn_title">Restart</string>
     <string name="restart_dialog_negative_btn_title">Do it later</string>
-    <string name="ignored_folder_title">Ignored folders</string>
-    <string name="ignored_folder_text">Add folders to ignored list. Media from these folders will not appear in library</string>
     <string name="ignored_folder_picker_title">Select folders</string>
     <string name="ignored_folder_picker_empty_text">Ignored list is empty</string>
     <string name="ignored_folder_picker_add_success">Folder added to ignored list</string>
@@ -216,7 +209,6 @@
     <string name="laf_category_select_color_desc">Select accent colors for the app</string>
 
     <string name="laf_accents_picker_title">Select accent color</string>
-    <string name="laf_accents_picker_accent_title_unknown">Unknown</string>
 
     <string name="laf_accents_picker_desaturated_title">Desaturated colors</string>
     <string name="laf_accents_picker_accent_desaturated_desc">Makes color desaturated when dark theme is applied</string>
@@ -253,16 +245,12 @@
     <string name="lead_developer_1" translatable="false">Ashutosh Patoa</string>
     <string name="lead_developer_user_name" translatable="false">\@HardcodeCoder</string>
 
-    <string name="other_contributions_title">Others</string>
-
     <!-- Donations -->
     <string name="donation_category_head">Contribute</string>
     <string name="donation_title">Enjoying Pulse Music?</string>
     <string name="donation_text">Please consider making a small donation to support the development</string>
     <string name="bmc_title">Buy me a Coffee</string>
     <string name="pp_title">PayPal</string>
-    <string name="top_donations">Special thanks to</string>
-    <string name="no_supporters">No supporters so far \n\u2639</string>
 
 
     <!-- About -->
@@ -326,5 +314,4 @@
     <string name="radio_btn_shuffle">Play shuffled tracks</string>
     <string name="radio_btn_latest">Play latest tracks</string>
     <string name="radio_btn_suggested">Play suggested tracks</string>
-
 </resources>
