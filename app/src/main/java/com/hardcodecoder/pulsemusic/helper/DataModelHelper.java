@@ -9,6 +9,8 @@ import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.provider.OpenableColumns;
 
+import androidx.annotation.Nullable;
+
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.TaskRunner;
 import com.hardcodecoder.pulsemusic.loaders.LoaderCache;
@@ -25,16 +27,19 @@ public class DataModelHelper {
 
     private static int mPickedTrackId = -1;
 
-    public static List<MusicModel> getModelsObjectFromTrackPath(List<String> trackPaths) {
-        if (null == trackPaths || trackPaths.size() == 0) return null;
-        Map<String, MusicModel> modelMap = new HashMap<>();
+    @Nullable
+    public static List<MusicModel> getModelObjectFromId(List<Integer> idList) {
+        if (null == idList || idList.isEmpty()) return null;
+
+        Map<Integer, MusicModel> modelMap = new HashMap<>();
+
         for (MusicModel musicModel : LoaderCache.getAllTracksList())
-            modelMap.put(musicModel.getTrackPath(), musicModel);
+            modelMap.put(musicModel.getId(), musicModel);
 
         List<MusicModel> modelList = new ArrayList<>();
-        for (String name : trackPaths) {
-            if (null != modelMap.get(name))
-                modelList.add(modelMap.get(name));
+        for (Integer id : idList) {
+            MusicModel md = modelMap.get(id);
+            if (null != md) modelList.add(md);
         }
         return modelList;
     }

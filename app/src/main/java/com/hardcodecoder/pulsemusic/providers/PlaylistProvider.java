@@ -64,12 +64,12 @@ public class PlaylistProvider {
 
     public void addTracksToPlaylist(@NonNull List<MusicModel> tracks, @NonNull String playlistTitle, boolean append) {
         TaskRunner.executeAsync(() -> {
-            List<String> tracksPath = new ArrayList<>();
-            for (MusicModel md : tracks)
-                tracksPath.add(md.getTrackPath());
-            StorageUtil.writerLinesToFile(
+            List<Integer> trackIds = new ArrayList<>(tracks.size());
+            for (MusicModel md : tracks) trackIds.add(md.getId());
+
+            StorageUtil.writePlaylistIdsToFile(
                     new File(mPlaylistDirPath + playlistTitle),
-                    tracksPath,
+                    trackIds,
                     append);
         });
     }
@@ -80,8 +80,8 @@ public class PlaylistProvider {
 
     public void getTrackForPlaylist(@NonNull String playlistTitle, @NonNull Callback<List<MusicModel>> callback) {
         TaskRunner.executeAsync(() -> {
-            List<String> tracksPaths = StorageUtil.readLinesFromFile(new File(mPlaylistDirPath + playlistTitle));
-            List<MusicModel> tracks = DataModelHelper.getModelsObjectFromTrackPath(tracksPaths);
+            List<Integer> trackIds = StorageUtil.readPlaylistIdsFromFile(new File(mPlaylistDirPath + playlistTitle));
+            List<MusicModel> tracks = DataModelHelper.getModelObjectFromId(trackIds);
             mHandler.post(() -> callback.onComplete(tracks));
         });
     }

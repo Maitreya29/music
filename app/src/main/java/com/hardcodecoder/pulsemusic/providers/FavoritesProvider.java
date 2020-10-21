@@ -31,19 +31,18 @@ public class FavoritesProvider {
         if (musicModel.getId() < 0) return;
         TaskRunner.executeAsync(() -> {
             loadFavorites();
-            if (mFavoritesSet.add(musicModel.hashCode())) {
+            if (mFavoritesSet.add(musicModel.getId()))
                 StorageUtil.writeStringToFile(
                         new File(mFavoritesFilePath),
-                        musicModel.getTrackPath() + System.lineSeparator(),
+                        musicModel.getId() + System.lineSeparator(),
                         true);
-            }
         });
     }
 
     public void isTemFavorite(MusicModel musicModel, Callback<Boolean> callback) {
         TaskRunner.executeAsync(() -> {
             loadFavorites();
-            if (mFavoritesSet.contains(musicModel.hashCode()))
+            if (mFavoritesSet.contains(musicModel.getId()))
                 mHandler.post(() -> callback.onComplete(true));
             else mHandler.post(() -> callback.onComplete(false));
         });
@@ -53,8 +52,8 @@ public class FavoritesProvider {
         TaskRunner.executeAsync(() -> {
             File file = new File(mFavoritesFilePath);
             if (file.exists()) {
-                List<String> trackPaths = StorageUtil.readLinesFromFile(file);
-                List<MusicModel> favoriteTracks = DataModelHelper.getModelsObjectFromTrackPath(trackPaths);
+                List<Integer> trackIds = StorageUtil.readPlaylistIdsFromFile(file);
+                List<MusicModel> favoriteTracks = DataModelHelper.getModelObjectFromId(trackIds);
                 mHandler.post(() -> callback.onComplete(favoriteTracks));
             } else mHandler.post(() -> callback.onComplete(null));
         });
@@ -63,23 +62,31 @@ public class FavoritesProvider {
     public void removeFromFavorite(@NonNull MusicModel musicModel) {
         TaskRunner.executeAsync(() -> {
             File file = new File(mFavoritesFilePath);
-            List<String> trackPaths = StorageUtil.readLinesFromFile(file);
-            trackPaths.remove(musicModel.getTrackPath());
-            StorageUtil.writerLinesToFile(file, trackPaths, false);
+            Integer id = musicModel.getId();
+            loadFavorites();
+            if (mFavoritesSet.remove(id)) {
+                List<Integer> trackIds = StorageUtil.readPlaylistIdsFromFile(file);
+                trackIds.remove(id);
+                StorageUtil.writePlaylistIdsToFile(file, trackIds, false);
+            }
         });
     }
 
     public void clearAllFavorites() {
-        TaskRunner.executeAsync(() ->
-                StorageUtil.deleteFile(new File(mFavoritesFilePath)));
+        TaskRunner.executeAsync(() -> {
+            StorageUtil.deleteFile(new File(mFavoritesFilePath));
+            mFavoritesSet.clear();
+        });
     }
 
     private synchronized void loadFavorites() {
         if (null != mFavoritesSet) return;
         File file = new File(mFavoritesFilePath);
-        List<String> favoriteRecords = StorageUtil.readLinesFromFile(file);
-        mFavoritesSet = new HashSet<>(favoriteRecords.size());
-        for (String s : favoriteRecords)
-            mFavoritesSet.add(s.hashCode());
+        List<Integer> favoriteRecords = null;
+        if (file.exists())
+            favoriteRecords = StorageUtil.readPlaylistIdsFromFile(file);
+        mFavoritesSet = new HashSet<>();
+        if (null != favoriteRecords)
+            mFavoritesSet.addAll(favoriteRecords);
     }
 }

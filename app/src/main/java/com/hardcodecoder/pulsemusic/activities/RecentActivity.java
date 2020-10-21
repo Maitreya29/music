@@ -17,7 +17,7 @@ public class RecentActivity extends SimplePlaylist {
         setUpToolbar(getString(R.string.recent));
         LoaderHelper.loadRecentTracks(this::setUpData);
         setUpDynamicButton(R.string.playlist_clear_all, R.drawable.ic_clear_all, v -> {
-            ProviderManager.getHistoryProvider().deleteHistoryFiles(0);
+            ProviderManager.getHistoryProvider().deleteHistoryFiles(0, null);
             clearAllTracks();
         });
     }
