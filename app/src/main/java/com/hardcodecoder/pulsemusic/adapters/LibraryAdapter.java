@@ -57,11 +57,11 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.MyLibrar
         final Handler handler = new Handler();
         TaskRunner.executeAsync(() -> {
             List<MusicModel> oldSortedTracks = new ArrayList<>(mList);
-            List<MusicModel> updatedTracks = SortUtil.sortLibraryList(mList, sortOrder);
-            final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new PMBGridAdapterDiffCallback(oldSortedTracks, updatedTracks) {
+            SortUtil.sortLibraryList(mList, sortOrder);
+            final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new PMBGridAdapterDiffCallback(oldSortedTracks, mList) {
                 @Override
                 public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-                    return oldSortedTracks.get(oldItemPosition).getTrackName().equals(updatedTracks.get(newItemPosition).getTrackName());
+                    return oldSortedTracks.get(oldItemPosition).getId() == mList.get(newItemPosition).getId();
                 }
             });
             handler.post(() -> {

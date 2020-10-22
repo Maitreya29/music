@@ -42,6 +42,7 @@ import com.hardcodecoder.pulsemusic.singleton.TrackManager;
 import com.hardcodecoder.pulsemusic.themes.ThemeColors;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 
+import java.util.List;
 import java.util.Objects;
 
 import static android.app.Activity.RESULT_OK;
@@ -83,8 +84,16 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
         super.onActivityResult(requestCode, resultCode, data);
         if (null != mMediaArtAdapter && requestCode == CurrentPlaylistActivity.REQUEST_UPDATE_TRACK && resultCode == RESULT_OK) {
             if (null != data && data.getBooleanExtra(CurrentPlaylistActivity.TRACK_CHANGED, false)) {
-                mMediaArtAdapter.notifyTracksChanged(mTrackManager.getActiveQueue());
-                mMediaArtPager.setCurrentItem(mTrackManager.getActiveIndex());
+                List<MusicModel> modifiedTracks = mTrackManager.getActiveQueue();
+                if (null != modifiedTracks && !modifiedTracks.isEmpty()) {
+                    mMediaArtAdapter.notifyTracksChanged(mTrackManager.getActiveQueue());
+                    mMediaArtPager.setCurrentItem(mTrackManager.getActiveIndex());
+                } else {
+                    // Since playlist is empty (or the user cleared the playlist)
+                    // There is no point in showing a blank NowPlayingScreen
+                    // We finish the activity itself.
+                    getActivity().finish();
+                }
             }
         }
     }
