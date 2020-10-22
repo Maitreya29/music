@@ -68,7 +68,7 @@ public class SettingsGeneralFragment extends SettingsBaseFragment {
         title.setText(R.string.restart_dialog_title);
         msg.setText(R.string.restart_dialog_desc);
 
-        AlertDialog dialog2 = new MaterialAlertDialogBuilder(Objects.requireNonNull(getContext()))
+        AlertDialog restartDialog = new MaterialAlertDialogBuilder(Objects.requireNonNull(getContext()))
                 .setView(layout).create();
 
         positiveBtn.setText(R.string.restart_dialog_positive_btn_title);
@@ -78,12 +78,13 @@ public class SettingsGeneralFragment extends SettingsBaseFragment {
             if (null != restartIntent) {
                 restartIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(restartIntent);
+                restartDialog.dismiss();
                 getActivity().finish();
             }
         });
 
         negativeBtn.setText(R.string.restart_dialog_negative_btn_title);
-        negativeBtn.setOnClickListener(negative -> dialog2.dismiss());
-        dialog2.show();
+        negativeBtn.setOnClickListener(negative -> restartDialog.dismiss());
+        restartDialog.show();
     }
 }
