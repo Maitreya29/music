@@ -8,8 +8,8 @@ import java.util.List;
 
 public class DiffCb extends DiffUtil.Callback {
 
-    private List<MusicModel> oldItems;
-    private List<MusicModel> newItems;
+    private final List<MusicModel> oldItems;
+    private final List<MusicModel> newItems;
 
     public DiffCb(List<MusicModel> oldItems, List<MusicModel> newItems) {
         this.oldItems = oldItems;

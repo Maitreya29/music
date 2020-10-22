@@ -178,7 +178,7 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
 
     @Override
     public void onTaskRemoved(Intent rootIntent) {
-        if (mMediaSession!=null && !mMediaSession.isActive()) stopSelf();
+        if (mMediaSession != null && !mMediaSession.isActive()) stopSelf();
         super.onTaskRemoved(rootIntent);
     }
 
@@ -186,7 +186,8 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
     public void onDestroy() {
         if (isReceiverRegistered)
             mNotificationManager.unregisterControlsReceiver();
-        mMediaSession.release();
+        if (mMediaSession != null)
+            mMediaSession.release();
         mServiceThread.quit();
         super.onDestroy();
     }

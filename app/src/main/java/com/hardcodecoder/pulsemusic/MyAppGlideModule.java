@@ -1,6 +1,7 @@
 package com.hardcodecoder.pulsemusic;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -15,7 +16,9 @@ public final class MyAppGlideModule extends AppGlideModule {
     @Override
     public void applyOptions(@NonNull Context context, @NonNull GlideBuilder builder) {
         super.applyOptions(context, builder);
-        int diskCacheSizeBytes = 1024 * 1024 * 30; // 30 MB
+        int diskCacheSizeBytes = 1024 * 1024 * 50; // 50 MB
         builder.setDiskCache(new InternalCacheDiskCacheFactory(context, diskCacheSizeBytes));
+        if (BuildConfig.DEBUG) builder.setLogLevel(Log.DEBUG);
+        else builder.setLogLevel(Log.ERROR);
     }
 }

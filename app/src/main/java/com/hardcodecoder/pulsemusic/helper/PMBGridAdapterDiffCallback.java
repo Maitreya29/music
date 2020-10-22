@@ -6,8 +6,8 @@ import java.util.List;
 
 public abstract class PMBGridAdapterDiffCallback extends DiffUtil.Callback {
 
-    private List<?> mOldList;
-    private List<?> mUpdatedList;
+    private final List<?> mOldList;
+    private final List<?> mUpdatedList;
 
     protected PMBGridAdapterDiffCallback(List<?> oldList, List<?> updatedList) {
         this.mOldList = oldList;
