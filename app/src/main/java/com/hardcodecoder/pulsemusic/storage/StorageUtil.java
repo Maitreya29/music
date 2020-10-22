@@ -31,15 +31,16 @@ public class StorageUtil {
     }
 
     public static List<String> readLinesFromFile(@NonNull File file) {
-        List<String> lines = null;
+        List<String> linesList = null;
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            lines = new ArrayList<>();
-            for (int i = 0; i < lines.size(); i++)
-                lines.add(reader.readLine());
+            linesList = new ArrayList<>();
+            String line;
+            while ((line = reader.readLine()) != null)
+                linesList.add(line);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return lines;
+        return linesList;
     }
 
     public static void writeStringToFile(@NonNull File file, @NonNull String data, boolean append) {
