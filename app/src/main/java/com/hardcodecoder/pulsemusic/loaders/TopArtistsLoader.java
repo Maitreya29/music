@@ -41,6 +41,10 @@ public class TopArtistsLoader implements Callable<List<TopArtistModel>> {
             }
             return count;
         });
+
+        // Limit to 20 TopAlbums
+        if (topArtistList != null)
+            topArtistList = topArtistList.subList(0, Math.min(topArtistList.size(), 20));
         return topArtistList;
     }
 }
