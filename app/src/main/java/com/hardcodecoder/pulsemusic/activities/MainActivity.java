@@ -200,7 +200,9 @@ public class MainActivity extends MediaSessionActivity {
         mController = controller;
         mController.registerCallback(mCallback);
 
-        if (mController.getMetadata() != null)
+        if (mController.getMetadata() != null &&
+                mController.getPlaybackState() != null &&
+                mController.getPlaybackState().getState() != PlaybackState.STATE_STOPPED)
             showControlsFragment();
     }
 

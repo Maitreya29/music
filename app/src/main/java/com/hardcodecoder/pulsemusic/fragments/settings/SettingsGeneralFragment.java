@@ -1,6 +1,7 @@
 package com.hardcodecoder.pulsemusic.fragments.settings;
 
 import android.content.Intent;
+import android.media.session.MediaController;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.dialog.IgnoreFolderChooser;
 import com.hardcodecoder.pulsemusic.fragments.settings.base.SettingsBaseFragment;
+import com.hardcodecoder.pulsemusic.singleton.TrackManager;
 
 import java.util.Objects;
 
@@ -78,6 +80,9 @@ public class SettingsGeneralFragment extends SettingsBaseFragment {
             if (null != restartIntent) {
                 restartIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(restartIntent);
+                MediaController controller = getActivity().getMediaController();
+                if (controller != null) controller.getTransportControls().stop();
+                TrackManager.getInstance().resetTrackManager();
                 restartDialog.dismiss();
                 getActivity().finish();
             }

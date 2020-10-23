@@ -114,4 +114,10 @@ public class TrackManager {
             return;
         ProviderManager.getHistoryProvider().addToHistory(getActiveQueueItem());
     }
+
+    public void resetTrackManager() {
+        mActiveList.clear();
+        mIndex = -1;
+        mRepeatCurrentTrack = false;
+    }
 }

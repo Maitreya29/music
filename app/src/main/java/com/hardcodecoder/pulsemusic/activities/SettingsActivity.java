@@ -1,6 +1,7 @@
 package com.hardcodecoder.pulsemusic.activities;
 
 import android.content.SharedPreferences;
+import android.media.session.MediaController;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -16,7 +17,7 @@ import com.hardcodecoder.pulsemusic.fragments.settings.base.SettingsBaseFragment
 import com.hardcodecoder.pulsemusic.interfaces.SettingsFragmentsListener;
 import com.hardcodecoder.pulsemusic.shortcuts.AppShortcutsManager;
 
-public class SettingsActivity extends PMBActivity implements SettingsFragmentsListener {
+public class SettingsActivity extends MediaSessionActivity implements SettingsFragmentsListener {
 
     private Toolbar mToolbar;
     private FragmentManager mFragmentManager;
@@ -91,5 +92,9 @@ public class SettingsActivity extends PMBActivity implements SettingsFragmentsLi
             getSharedPreferences(Preferences.PULSE_THEMES_PREFS, MODE_PRIVATE)
                     .unregisterOnSharedPreferenceChangeListener(mAccentsChangedListener);
         super.onDestroy();
+    }
+
+    @Override
+    public void onMediaServiceConnected(MediaController controller) {
     }
 }
