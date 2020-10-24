@@ -11,11 +11,11 @@
         android:id="@+id/stylish_nps_title"
         android:layout_width="0dp"
         android:layout_height="24dp"
-        android:layout_marginStart="26dp"
         android:layout_marginTop="4dp"
-        android:layout_marginEnd="72dp"
         android:ellipsize="marquee"
         android:gravity="start|bottom"
+        android:paddingStart="26dp"
+        android:paddingEnd="72dp"
         android:requiresFadingEdge="horizontal"
         android:singleLine="true"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
@@ -28,14 +28,18 @@
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/stylish_nps_up_next"
         android:layout_width="0dp"
-        android:layout_height="32dp"
-        android:gravity="start|top"
+        android:layout_height="56dp"
+        android:background="?attr/selectableItemBackground"
+        android:gravity="center_vertical"
+        android:paddingStart="26dp"
+        android:paddingTop="20dp"
+        android:paddingEnd="72dp"
         android:requiresFadingEdge="horizontal"
         android:singleLine="true"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
         app:layout_constraintEnd_toEndOf="@id/stylish_nps_title"
         app:layout_constraintStart_toStartOf="@id/stylish_nps_title"
-        app:layout_constraintTop_toBottomOf="@id/stylish_nps_title"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="@tools:sample/lorem/random" />
 
     <androidx.viewpager2.widget.ViewPager2
@@ -59,7 +63,7 @@
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.7"
+        app:layout_constraintVertical_bias="0.71"
         tools:text="Artist name" />
 
     <com.google.android.material.textview.MaterialTextView
