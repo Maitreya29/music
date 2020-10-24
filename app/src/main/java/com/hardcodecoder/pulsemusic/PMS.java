@@ -27,6 +27,7 @@ import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.playback.LocalPlayback;
 import com.hardcodecoder.pulsemusic.playback.MediaNotificationManager;
 import com.hardcodecoder.pulsemusic.playback.PlaybackManager;
+import com.hardcodecoder.pulsemusic.providers.ProviderManager;
 import com.hardcodecoder.pulsemusic.singleton.TrackManager;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 
@@ -54,6 +55,7 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
     @Override
     public void onCreate() {
         super.onCreate();
+        ProviderManager.init(this);
         mServiceThread = new HandlerThread("PMS Thread", Thread.NORM_PRIORITY);
         mServiceThread.start();
         mWorkerHandler = new Handler(mServiceThread.getLooper());

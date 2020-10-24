@@ -2,7 +2,6 @@ package com.hardcodecoder.pulsemusic.singleton;
 
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.playback.PlaybackManager;
-import com.hardcodecoder.pulsemusic.providers.ProviderManager;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -96,23 +95,20 @@ public class TrackManager {
     }
 
     public void removeItemFromActiveQueue(int position) {
-        if (mActiveList.size() > 0) {
+        if (mActiveList.size() > position) {
+            if (mIndex == position) mRepeatCurrentTrack = false;
             mActiveList.remove(position);
-            if (position < getActiveIndex())
+            if (position < mIndex) {
+                // Track above active item is removed, so now the active item index is mIndex-1
                 mIndex--;
+            }
         }
     }
 
     public void restoreItem(int deletedQueueIndex, MusicModel musicModel) {
         mActiveList.add(deletedQueueIndex, musicModel);
-    }
-
-    public void addToHistory() {
-        // Do not save any media that as picked by user
-        // All data might not available to work with such tracks on relaunch
-        if (getActiveQueueItem().getAlbumId() < 0)
-            return;
-        ProviderManager.getHistoryProvider().addToHistory(getActiveQueueItem());
+        if (deletedQueueIndex < mIndex) // Track above active item is restored, so now the active item index is +1
+            mIndex++;
     }
 
     public void resetTrackManager() {

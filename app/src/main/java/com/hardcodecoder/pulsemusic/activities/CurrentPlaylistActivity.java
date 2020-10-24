@@ -49,7 +49,6 @@ public class CurrentPlaylistActivity extends AdvancePlaylist {
 
     @Override
     protected void onReceiveData(ArrayList<MusicModel> receivedData) {
-        mHasTracksChanged = true;
         if (null == mAdapter) {
             setUpData(receivedData, mTrackManager.getActiveIndex());
             mTrackManager.buildDataList(receivedData, 0);
@@ -57,10 +56,17 @@ public class CurrentPlaylistActivity extends AdvancePlaylist {
             mAdapter.addItems(receivedData);
             mTrackManager.buildDataList(mPlaylistTracks, mTrackManager.getActiveIndex());
         }
+        mHasTracksChanged = true;
     }
 
     @Override
-    public void onItemDismissed(int position) {
+    public void onItemClick(int position) {
+        super.onItemClick(position);
+        mHasTracksChanged = true;
+    }
+
+    @Override
+    public void onItemDismissed(final int position) {
         mTrackManager.removeItemFromActiveQueue(position);
         Snackbar sb = Snackbar.make(findViewById(R.id.playlist_data_root_view), R.string.item_removed, Snackbar.LENGTH_SHORT);
         sb.setAction(getString(R.string.snack_bar_action_undo), v -> {
@@ -74,7 +80,7 @@ public class CurrentPlaylistActivity extends AdvancePlaylist {
             if (mTrackManager.getActiveQueue().size() > position) {
                 playMedia();
             } else {
-                // Active item was removed
+                // Active and last item in the playlist was removed
                 // Stop playback immediately
                 mController.getTransportControls().stop();
             }

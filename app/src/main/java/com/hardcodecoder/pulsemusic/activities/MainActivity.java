@@ -49,6 +49,12 @@ public class MainActivity extends MediaSessionActivity {
         public void onMetadataChanged(@Nullable MediaMetadata metadata) {
             showControlsFragment();
         }
+
+        @Override
+        public void onPlaybackStateChanged(@Nullable PlaybackState state) {
+            if (null == state || state.getState() == PlaybackState.STATE_STOPPED)
+                hideControlsFragment();
+        }
     };
     private AppBarLayout mAppBar;
     private MediaController mController;

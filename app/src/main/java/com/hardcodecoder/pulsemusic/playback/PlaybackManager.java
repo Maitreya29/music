@@ -19,11 +19,10 @@ public class PlaybackManager implements Playback.Callback {
     public static final short ACTION_PLAY_NEXT = 1;
     public static final short ACTION_PLAY_PREV = -1;
     private final PlaybackState.Builder mStateBuilder = new PlaybackState.Builder();
-    private final MediaMetadata.Builder mMetadataBuilder = new MediaMetadata.Builder();
-    private Playback mPlayback;
-    private PlaybackServiceCallback mServiceCallback;
-    private TrackManager mTrackManager;
-    private Context mContext;
+    private final Playback mPlayback;
+    private final PlaybackServiceCallback mServiceCallback;
+    private final TrackManager mTrackManager;
+    private final Context mContext;
     private boolean mManualPause;
     private final MediaSession.Callback mMediaSessionCallback = new MediaSession.Callback() {
 
@@ -90,6 +89,7 @@ public class PlaybackManager implements Playback.Callback {
     }
 
     private void handleStopRequest() {
+        mTrackManager.resetTrackManager();
         mServiceCallback.onPlaybackStopped();
         mPlayback.onStop(true);
     }
@@ -113,14 +113,15 @@ public class PlaybackManager implements Playback.Callback {
         }
     }
 
-    private void updateMetaData(MusicModel md, boolean b) {
-        if (b) {
-            mMetadataBuilder.putLong(MediaMetadata.METADATA_KEY_DURATION, md.getTrackDuration());
-            mMetadataBuilder.putString(MediaMetadata.METADATA_KEY_TITLE, md.getTrackName());
-            mMetadataBuilder.putString(MediaMetadata.METADATA_KEY_ARTIST, md.getArtist());
-            mMetadataBuilder.putString(MediaMetadata.METADATA_KEY_ALBUM, md.getAlbum());
-            mMetadataBuilder.putBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART, loadAlbumArt(md.getAlbumArtUrl(), md.getAlbumId()));
-            mServiceCallback.onMetaDataChanged(mMetadataBuilder.build());
+    private void updateMetaData(MusicModel md, boolean hasMediaChanged) {
+        if (hasMediaChanged) {
+            MediaMetadata.Builder metadataBuilder = new MediaMetadata.Builder();
+            metadataBuilder.putLong(MediaMetadata.METADATA_KEY_DURATION, md.getTrackDuration());
+            metadataBuilder.putString(MediaMetadata.METADATA_KEY_TITLE, md.getTrackName());
+            metadataBuilder.putString(MediaMetadata.METADATA_KEY_ARTIST, md.getArtist());
+            metadataBuilder.putString(MediaMetadata.METADATA_KEY_ALBUM, md.getAlbum());
+            metadataBuilder.putBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART, loadAlbumArt(md.getAlbumArtUrl(), md.getAlbumId()));
+            mServiceCallback.onMetaDataChanged(metadataBuilder.build());
         }
     }
 

@@ -16,6 +16,8 @@ import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.widget.Toast;
 
+import com.hardcodecoder.pulsemusic.model.MusicModel;
+import com.hardcodecoder.pulsemusic.providers.ProviderManager;
 import com.hardcodecoder.pulsemusic.singleton.TrackManager;
 
 import java.io.IOException;
@@ -27,8 +29,8 @@ public class LocalPlayback implements
         AudioManager.OnAudioFocusChangeListener {
 
     private final IntentFilter filter = new IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY);
-    private Context mContext;
-    private AudioManager mAudioManager;
+    private final Context mContext;
+    private final AudioManager mAudioManager;
     private Playback.Callback mPlaybackCallback;
     private final BroadcastReceiver becomingNoisyReceiver = new BroadcastReceiver() {
         @Override
@@ -45,7 +47,7 @@ public class LocalPlayback implements
     private TelephonyManager mTelephonyManager;
     private AudioFocusRequest mAudioFocusRequest = null;
     private PhoneStateListener mPhoneStateListener;
-    private TrackManager mTrackManager;
+    private final TrackManager mTrackManager;
     private int mMediaId = -99;
     private Handler mHandler;
     private boolean mDelayedPlayback = false;
@@ -72,8 +74,9 @@ public class LocalPlayback implements
         mp.setOnPreparedListener(this);
         mp.setOnCompletionListener(this);
         mp.reset();
+        MusicModel md = mTrackManager.getActiveQueueItem();
         try {
-            mp.setDataSource(mContext, Uri.parse(mTrackManager.getActiveQueueItem().getTrackPath()));
+            mp.setDataSource(mContext, Uri.parse(md.getTrackPath()));
             mp.prepare();
         } catch (IOException e) {
             e.printStackTrace();
@@ -81,7 +84,11 @@ public class LocalPlayback implements
             Toast.makeText(mContext, "Music file not found, playing next song in queue", Toast.LENGTH_LONG).show();
             mPlaybackCallback.onPlaybackCompletion();
         }
-        mTrackManager.addToHistory();
+        // Do not save any media that was picked by user
+        // All data might not available to work with such tracks when building
+        // HistoryRecords and or TopAlbums/TopArtist
+        if (md.getAlbumId() < 0) return;
+        ProviderManager.getHistoryProvider().addToHistory(md);
     }
 
     @Override
@@ -149,6 +156,7 @@ public class LocalPlayback implements
         if (abandonAudioFocus) abandonAudioFocus();
 
         releaseMediaPlayer();
+        mMediaId = -999;
 
         if (isBecomingNoisyReceiverRegistered) {
             mContext.unregisterReceiver(becomingNoisyReceiver);
@@ -277,8 +285,8 @@ public class LocalPlayback implements
                 switch (state) {
                     //if at least one call exists or the phone is ringing
                     //pause the MediaPlayer
-                    //case TelephonyManager.CALL_STATE_OFFHOOK:
-                    //break;
+                    case TelephonyManager.CALL_STATE_OFFHOOK:
+                        break;
                     case TelephonyManager.CALL_STATE_RINGING:
                         wasRinging = true;
                         mPlaybackCallback.onFocusChanged(false);

@@ -119,6 +119,7 @@ public class HistoryProvider {
         if (mHistoryMap != null) return;
         mHistoryMap = new HashMap<>();
         File[] files = new File(mHistoryDir).listFiles();
+        if (null == files || files.length == 0) return;
         for (File file : files) {
             HistoryRecord hr = getHistoryRecord(file);
             mHistoryMap.put(Integer.parseInt(file.getName()), hr.getPlayCount());
