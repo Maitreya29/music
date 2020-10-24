@@ -64,12 +64,13 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
-
         }
     };
     private ViewPager2 mMediaArtPager;
     private MediaArtPagerAdapter mMediaArtAdapter;
     private long mDuration = 1;
+    private int previousState;
+    private boolean userScrollChange = false;
     private boolean mCurrentItemFavorite = false;
     private boolean mShouldAnimateMediaArt = false;
 
@@ -77,25 +78,6 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         connectToService();
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (null != mMediaArtAdapter && requestCode == CurrentPlaylistActivity.REQUEST_UPDATE_TRACK && resultCode == RESULT_OK) {
-            if (null != data && data.getBooleanExtra(CurrentPlaylistActivity.TRACK_CHANGED, false)) {
-                List<MusicModel> modifiedTracks = mTrackManager.getActiveQueue();
-                if (null != modifiedTracks && !modifiedTracks.isEmpty()) {
-                    mMediaArtAdapter.notifyTracksChanged(mTrackManager.getActiveQueue());
-                    mMediaArtPager.setCurrentItem(mTrackManager.getActiveIndex());
-                } else {
-                    // Since playlist is empty (or the user cleared the playlist)
-                    // There is no point in showing a blank NowPlayingScreen
-                    // We finish the activity itself.
-                    getActivity().finish();
-                }
-            }
-        }
     }
 
     @CallSuper
@@ -108,11 +90,14 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
         long seconds = metadata.getLong(MediaMetadata.METADATA_KEY_DURATION) / 1000;
         mDuration = seconds == 0 ? 1 : seconds;
         mShouldAnimateMediaArt = true;
+        onUpNextItemChanged(getUpNextText());
     }
 
     @CallSuper
     @Override
     public void onPlaybackStateChanged(PlaybackState state) {
+        if (null != state && state.getState() == PlaybackState.STATE_STOPPED)
+            finishActivity();
         updateRepeat();
     }
 
@@ -120,16 +105,37 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
         mMediaArtPager = pager;
         mMediaArtAdapter = new MediaArtPagerAdapter(getContext(), TrackManager.getInstance().getActiveQueue(), redId, model);
         mMediaArtPager.setAdapter(mMediaArtAdapter);
+        mMediaArtPager.setCurrentItem(mTrackManager.getActiveIndex(), false);
+        mMediaArtPager.setSaveEnabled(false);
+        mMediaArtPager.setSaveFromParentEnabled(false);
         mMediaArtPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                super.onPageScrollStateChanged(state);
+                if (previousState == ViewPager2.SCROLL_STATE_DRAGGING && state == ViewPager2.SCROLL_STATE_SETTLING)
+                    userScrollChange = true;
+                else if (previousState == ViewPager2.SCROLL_STATE_SETTLING && state == ViewPager2.SCROLL_STATE_IDLE)
+                    userScrollChange = false;
+                previousState = state;
+            }
+
             @Override
             public void onPageSelected(int position) {
-                super.onPageSelected(position);
                 if (position == mTrackManager.getActiveIndex()) return;
-                mTrackManager.setActiveIndex(position);
-                mTransportControls.play();
+
+                if (userScrollChange) {
+                    // User changed page, manually change active track index and start playing
+                    mTrackManager.setActiveIndex(position);
+                    if (null != mTransportControls) mTransportControls.play();
+                } else {
+                    // For some reason onPageSelected is triggered
+                    // after a call to notifyDataSetChanged with arbitrary position
+                    // We set it back to whatever is the current active track index
+                    mMediaArtPager.setCurrentItem(mTrackManager.getActiveIndex(), false);
+                }
             }
         });
-        mMediaArtPager.setCurrentItem(mTrackManager.getActiveIndex(), true);
     }
 
     protected ShapeAppearanceModel getMediaImageViewShapeAppearanceModel() {
@@ -148,7 +154,7 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
                 .build();
     }
 
-    protected void setUpSliderControls(Slider progressSlider) {
+    protected void setUpSliderControls(@NonNull Slider progressSlider) {
         progressSlider.addOnSliderTouchListener(new Slider.OnSliderTouchListener() {
             @Override
             public void onStartTrackingTouch(@NonNull Slider slider) {
@@ -165,7 +171,7 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
         progressSlider.setLabelFormatter(value -> DateUtils.formatElapsedTime((long) value));
     }
 
-    protected void setUpSeekBarControls(AppCompatSeekBar seekBar) {
+    protected void setUpSeekBarControls(@NonNull AppCompatSeekBar seekBar) {
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -185,12 +191,12 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
         });
     }
 
-    protected void resetSliderValues(Slider slider) {
+    protected void resetSliderValues(@NonNull Slider slider) {
         slider.setValue(0);
         slider.setValueTo(mDuration);
     }
 
-    protected void setUpSkipControls(ImageView skipPrev, ImageView skipNext) {
+    protected void setUpSkipControls(@NonNull ImageView skipPrev, @NonNull ImageView skipNext) {
         skipPrev.setOnClickListener(v -> mTransportControls.skipToPrevious());
         skipNext.setOnClickListener(v -> mTransportControls.skipToNext());
     }
@@ -217,7 +223,7 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
         updateFavoriteItem();
     }
 
-    protected void setDefaultTintToPlayBtn(ImageView playPauseBtn) {
+    protected void setDefaultTintToPlayBtn(@NonNull ImageView playPauseBtn) {
         playPauseBtn.setBackgroundTintList(ColorStateList.valueOf(ThemeColors.getAccentColorForCurrentTheme()));
         playPauseBtn.setImageTintList(ColorStateList.valueOf(MaterialColors.getColor(playPauseBtn, R.attr.colorOnPrimary)));
     }
@@ -244,15 +250,6 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
         }
     }
 
-    protected String getUpNextText() {
-        MusicModel nextItem = TrackManager.getInstance().getNextQueueItem();
-        String upNextText;
-        if (null != nextItem)
-            upNextText = getString(R.string.up_next_title).concat(" ").concat(nextItem.getTrackName());
-        else upNextText = getString(R.string.up_next_title_none);
-        return upNextText;
-    }
-
     protected String getFormattedElapsedTime(long elapsedTime) {
         return DateUtils.formatElapsedTime(elapsedTime);
     }
@@ -261,12 +258,24 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
         return mDuration;
     }
 
-    protected void setGotToCurrentQueueCLickListener(View view) {
+    protected void setGotToCurrentQueueCLickListener(@NonNull View view) {
         view.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), CurrentPlaylistActivity.class);
             intent.putExtra(CurrentPlaylistActivity.TRANSITION_STYLE_KEY, CurrentPlaylistActivity.TRANSITION_STYLE_SLIDE);
             startActivityForResult(intent, CurrentPlaylistActivity.REQUEST_UPDATE_TRACK);
         });
+    }
+
+    protected void onUpNextItemChanged(String upNextTitle) {
+    }
+
+    private String getUpNextText() {
+        MusicModel nextItem = mTrackManager.getNextQueueItem();
+        String upNextText;
+        if (null != nextItem)
+            upNextText = getString(R.string.up_next_title).concat(" ").concat(nextItem.getTrackName());
+        else upNextText = getString(R.string.up_next_title_none);
+        return upNextText;
     }
 
     private void updateRepeat() {
@@ -305,8 +314,41 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
         }
     }
 
+    private void finishActivity() {
+        if (getActivity() != null) getActivity().finish();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (null != mMediaArtAdapter && requestCode == CurrentPlaylistActivity.REQUEST_UPDATE_TRACK && resultCode == RESULT_OK) {
+            if (null != data && data.getBooleanExtra(CurrentPlaylistActivity.TRACK_CHANGED, false)) {
+
+                List<MusicModel> modifiedTracks = mTrackManager.getActiveQueue();
+                int trackIndex = mTrackManager.getActiveIndex();
+                int currentItemIndex = mMediaArtPager.getCurrentItem();
+
+                if (null != modifiedTracks && !modifiedTracks.isEmpty()) {
+                    onUpNextItemChanged(getUpNextText());
+                    mMediaArtAdapter.notifyTracksChanged(mTrackManager.getActiveQueue(), completed -> {
+                        if (currentItemIndex != trackIndex)
+                            mMediaArtPager.setCurrentItem(mTrackManager.getActiveIndex(), false);
+                    });
+                } else {
+                    // Since playlist is null or empty maybe because the
+                    // user cleared the last active playlist item (which triggers playback stop)
+                    // There is no point in showing a blank NowPlayingScreen
+                    // We finish the activity itself.
+                    finishActivity();
+                }
+            }
+        }
+    }
+
     @Override
     public void onDestroy() {
+        if (null != mMediaArtPager)
+            mMediaArtPager.requestDisallowInterceptTouchEvent(false);
         if (null != mUpdateHelper)
             mUpdateHelper.destroy();
         if (null != getActivity())

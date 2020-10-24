@@ -8,13 +8,15 @@ import android.view.ViewGroup;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.shape.ShapeAppearanceModel;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.TaskRunner;
-import com.hardcodecoder.pulsemusic.helper.PMBGridAdapterDiffCallback;
+import com.hardcodecoder.pulsemusic.TaskRunner.Callback;
+import com.hardcodecoder.pulsemusic.helper.DiffCb;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.views.MediaArtImageView;
 
@@ -25,21 +27,21 @@ public class MediaArtPagerAdapter extends RecyclerView.Adapter<MediaArtPagerAdap
 
     private final ShapeAppearanceModel mShapeModel;
     private final Context mContext;
-    private final List<MusicModel> mTracksList;
+    private final List<MusicModel> mTracksList = new ArrayList<>();
     @LayoutRes
     private final int mLLayoutRes;
 
     public MediaArtPagerAdapter(Context context, List<MusicModel> tracks, @LayoutRes int layoutRes, ShapeAppearanceModel appearanceModel) {
         mContext = context;
-        mTracksList = new ArrayList<>(tracks);
+        mTracksList.addAll(tracks);
         mLLayoutRes = layoutRes;
         mShapeModel = appearanceModel;
     }
 
-    public void notifyTracksChanged(List<MusicModel> updatedTracks) {
+    public void notifyTracksChanged(@NonNull List<MusicModel> updatedTracks, @Nullable Callback<Void> callback) {
         final Handler handler = new Handler();
         TaskRunner.executeAsync(() -> {
-            final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new PMBGridAdapterDiffCallback(mTracksList, updatedTracks) {
+            DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new DiffCb(mTracksList, updatedTracks) {
                 @Override
                 public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
                     return mTracksList.get(oldItemPosition).getId() == updatedTracks.get(newItemPosition).getId();
@@ -49,14 +51,14 @@ public class MediaArtPagerAdapter extends RecyclerView.Adapter<MediaArtPagerAdap
                 diffResult.dispatchUpdatesTo(MediaArtPagerAdapter.this);
                 mTracksList.clear();
                 mTracksList.addAll(updatedTracks);
+                if (callback != null) callback.onComplete(null);
             });
         });
     }
 
     @Override
     public int getItemCount() {
-        if (null != mTracksList) return mTracksList.size();
-        return 0;
+        return mTracksList.size();
     }
 
     @NonNull
@@ -73,7 +75,7 @@ public class MediaArtPagerAdapter extends RecyclerView.Adapter<MediaArtPagerAdap
 
     public static class AlbumArtSVH extends RecyclerView.ViewHolder {
 
-        public MediaArtImageView mMediaArtImageView;
+        public final MediaArtImageView mMediaArtImageView;
 
         public AlbumArtSVH(@NonNull View itemView, ShapeAppearanceModel shapeModel) {
             super(itemView);

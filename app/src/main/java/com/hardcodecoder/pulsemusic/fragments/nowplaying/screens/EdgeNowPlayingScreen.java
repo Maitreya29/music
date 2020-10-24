@@ -129,7 +129,6 @@ public class EdgeNowPlayingScreen extends BaseNowPlayingScreen {
         mEndTime.setText(getFormattedElapsedTime(seconds));
         mSubTitle.setText(String.format("%s● %s", getString(R.string.artist), metadata.getString(MediaMetadata.METADATA_KEY_ARTIST)));
         mTitle.setText(metadata.getText(MediaMetadata.METADATA_KEY_TITLE));
-        mUpNext.setText(getUpNextText());
     }
 
     @Override
@@ -152,5 +151,10 @@ public class EdgeNowPlayingScreen extends BaseNowPlayingScreen {
     public void onProgressValueChanged(int progressInSec) {
         mProgressSeekBar.setProgress(progressInSec);
         mStartTime.setText(getFormattedElapsedTime(progressInSec));
+    }
+
+    @Override
+    protected void onUpNextItemChanged(String upNextTitle) {
+        mUpNext.setText(upNextTitle);
     }
 }

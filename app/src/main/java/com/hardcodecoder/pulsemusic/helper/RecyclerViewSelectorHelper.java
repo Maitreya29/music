@@ -7,7 +7,7 @@ import com.hardcodecoder.pulsemusic.interfaces.TrackPickerCallbackAdapter;
 
 public class RecyclerViewSelectorHelper {
 
-    private TrackPickerCallbackAdapter mAdapter;
+    private final TrackPickerCallbackAdapter mAdapter;
 
     public RecyclerViewSelectorHelper(TrackPickerCallbackAdapter mAdapter) {
         this.mAdapter = mAdapter;
