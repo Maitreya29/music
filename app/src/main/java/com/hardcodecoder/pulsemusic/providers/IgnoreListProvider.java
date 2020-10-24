@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 
 import com.hardcodecoder.pulsemusic.TaskRunner;
 import com.hardcodecoder.pulsemusic.TaskRunner.Callback;
-import com.hardcodecoder.pulsemusic.storage.StorageUtil;
+import com.hardcodecoder.pulsemusic.utils.StorageUtil;
 
 import java.io.File;
 import java.util.List;

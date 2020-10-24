@@ -12,7 +12,6 @@
 
     <application
         android:name=".PulseApp"
-        android:allowBackup="false"
         android:appCategory="audio"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
@@ -58,7 +57,7 @@
         <activity android:name=".activities.FavoritesActivity" />
         <activity android:name=".activities.CurrentPlaylistActivity" />
         <activity android:name=".activities.UserPlaylistTracksActivity" />
-        <activity android:name=".activities.nowplaying.NowPlayingScreenActivity" />
+        <activity android:name=".activities.NowPlayingScreenActivity" />
 
         <receiver android:name=".receivers.BootCompletedReceiver">
             <intent-filter>

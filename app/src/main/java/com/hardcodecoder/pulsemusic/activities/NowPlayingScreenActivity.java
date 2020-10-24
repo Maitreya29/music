@@ -1,4 +1,4 @@
-package com.hardcodecoder.pulsemusic.activities.nowplaying;
+package com.hardcodecoder.pulsemusic.activities;
 
 import android.content.res.Configuration;
 import android.os.Build;
@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment;
 
 import com.hardcodecoder.pulsemusic.Preferences;
 import com.hardcodecoder.pulsemusic.R;
-import com.hardcodecoder.pulsemusic.activities.PMBActivity;
 import com.hardcodecoder.pulsemusic.fragments.nowplaying.screens.EdgeNowPlayingScreen;
 import com.hardcodecoder.pulsemusic.fragments.nowplaying.screens.LandscapeModeNowPlayingScreen;
 import com.hardcodecoder.pulsemusic.fragments.nowplaying.screens.ModernNowPlayingScreen;

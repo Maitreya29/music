@@ -1,4 +1,4 @@
-package com.hardcodecoder.pulsemusic.storage;
+package com.hardcodecoder.pulsemusic.utils;
 
 import android.util.Log;
 

@@ -12,7 +12,7 @@ import com.hardcodecoder.pulsemusic.helper.DataModelHelper;
 import com.hardcodecoder.pulsemusic.loaders.LoaderCache;
 import com.hardcodecoder.pulsemusic.model.HistoryRecord;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
-import com.hardcodecoder.pulsemusic.storage.StorageUtil;
+import com.hardcodecoder.pulsemusic.utils.StorageUtil;
 
 import java.io.File;
 import java.util.ArrayList;

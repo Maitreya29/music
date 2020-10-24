@@ -16,7 +16,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
-import com.hardcodecoder.pulsemusic.activities.nowplaying.NowPlayingScreenActivity;
+import com.hardcodecoder.pulsemusic.activities.NowPlayingScreenActivity;
 
 public class ControlsFragment extends Fragment {
 
