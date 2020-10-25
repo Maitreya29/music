@@ -1,0 +1,17 @@
+Pulse Music V4.0.0-Release
+
+Note: Please uninstall any previous version (and clear app data) before installing this release. 
+
+- Added complete custom accent support
+- Added Bluetooth auto play feature
+- Added few more sorting options
+- Added fast scroll with section indexer
+- Added album swipe gesture to change track
+- Added option to blacklist folders
+- Reworked on Album/Artist Details page
+- Optimised Now Playing screen for multiple screen sizes
+- Option to open Active playlist from Now playing screen
+- Fixed lots of crashes due to NPE
+- Fixed loading of albums in Android < 10
+- Lots of under the hood changes (Breaking changes) and improvements
+- Bug fixes

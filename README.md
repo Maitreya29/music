@@ -4,7 +4,7 @@
 
 <h1 align="center">Pulse Music</h1>
 
-<p align="center"> An offline music player android app, with modern UI and powerful features</p>
+<p align="center"> An offline music player with modern UI and useful features</p>
 
 <p align="center">
   <a href="https://github.com/HardcodeCoder/pulsemusic/blob/master/LICENSE">
@@ -58,7 +58,7 @@ But wait there's even more check it out yourself.
 
 ## Features
 ### Theme your music
-With 3 different dark themes to and several accents to choose from, customize your music player your way.
+With 3 different dark themes and several curated accents to choose from, customize your music player your way.
 <br></br>
 **Manual dark theme toggle** : Enable dark theme whenever you want
 <br></br>
@@ -68,13 +68,16 @@ With 3 different dark themes to and several accents to choose from, customize yo
 <br></br>
 **Desaturated colors** : Make accent colors desaturated to better suit the dark theme (works only in dark theme)
 ## Other features
-- Choose tracks from file explorer and play
-- Change column count in landscape mode
-- Add, remove re-oder current playling queue
-- Smart search
-- App shortcut support to play tracks without even opening the app
-- All your favorite tracks in one place
-- Option to change now playing screen album cover corner radius
+- Custom accent support.
+- Bluetooth AutoPlay.
+- Option to blacklist folders.
+- Choose tracks from file explorer and play.
+- Change column count in landscape mode (independent from portrait mode).
+- Add, remove re-oder tracks in current queue as well as user created playlists.
+- Smart search.
+- App shortcut support to play tracks without even opening the app.
+- All your favorite tracks in one place.
+- Option to change now playing screen album cover corner radius.
 
 ## Support development
 **Enjoying Pulse Music?**
