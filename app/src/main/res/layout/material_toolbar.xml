@@ -8,4 +8,5 @@
     android:paddingBottom="4dp"
     app:layout_scrollFlags="scroll|enterAlways|snapMargins"
     app:navigationIcon="@drawable/ic_keyboard_backspace"
+    app:titleTextAppearance="@style/TextAppearanceToolbar"
     tools:title="@tools:sample/full_names" />
