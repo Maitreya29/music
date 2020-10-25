@@ -64,12 +64,7 @@ public class PlaylistDataAdapter extends RecyclerView.Adapter<PlaylistDataAdapte
     public void updatePlaylist(@NonNull List<MusicModel> newList) {
         final Handler handler = new Handler();
         TaskRunner.executeAsync(() -> {
-            final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new DiffCb(mPlaylistTracks, newList) {
-                @Override
-                public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-                    return mPlaylistTracks.get(oldItemPosition).getId() == newList.get(newItemPosition).getId();
-                }
-            });
+            final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new DiffCb(mPlaylistTracks, newList));
             handler.post(() -> {
                 diffResult.dispatchUpdatesTo(PlaylistDataAdapter.this);
                 mPlaylistTracks.clear();

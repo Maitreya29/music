@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.TaskRunner;
-import com.hardcodecoder.pulsemusic.helper.PMBGridAdapterDiffCallback;
+import com.hardcodecoder.pulsemusic.helper.DiffCb;
 import com.hardcodecoder.pulsemusic.interfaces.GridAdapterCallback;
 import com.hardcodecoder.pulsemusic.interfaces.SimpleItemClickListener;
 import com.hardcodecoder.pulsemusic.loaders.SortOrder;
@@ -58,12 +58,7 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.MyLibrar
         TaskRunner.executeAsync(() -> {
             List<MusicModel> oldSortedTracks = new ArrayList<>(mList);
             SortUtil.sortLibraryList(mList, sortOrder);
-            final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new PMBGridAdapterDiffCallback(oldSortedTracks, mList) {
-                @Override
-                public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-                    return oldSortedTracks.get(oldItemPosition).getId() == mList.get(newItemPosition).getId();
-                }
-            });
+            final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new DiffCb(oldSortedTracks, mList));
             handler.post(() -> {
                 diffResult.dispatchUpdatesTo(LibraryAdapter.this);
                 if (null != mCallback)

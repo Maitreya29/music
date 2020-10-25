@@ -41,12 +41,7 @@ public class MediaArtPagerAdapter extends RecyclerView.Adapter<MediaArtPagerAdap
     public void notifyTracksChanged(@NonNull List<MusicModel> updatedTracks, @Nullable Callback<Void> callback) {
         final Handler handler = new Handler();
         TaskRunner.executeAsync(() -> {
-            DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new DiffCb(mTracksList, updatedTracks) {
-                @Override
-                public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-                    return mTracksList.get(oldItemPosition).getId() == updatedTracks.get(newItemPosition).getId();
-                }
-            });
+            DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new DiffCb(mTracksList, updatedTracks));
             handler.post(() -> {
                 diffResult.dispatchUpdatesTo(MediaArtPagerAdapter.this);
                 mTracksList.clear();
