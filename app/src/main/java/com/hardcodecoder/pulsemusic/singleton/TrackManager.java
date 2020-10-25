@@ -85,13 +85,12 @@ public class TrackManager {
     }
 
     public void updateActiveQueue(int from, int to) {
-        if (mActiveList.size() > 0) {
-            Collections.swap(mActiveList, from, to);
-            if (mIndex == from)
-                mIndex = to;
-            else if (mIndex == to)
-                mIndex = from;
-        }
+        if (mActiveList.isEmpty()) return;
+        Collections.swap(mActiveList, from, to);
+        if (mIndex == from) // Active active is moved
+            mIndex = to;
+        else if (mIndex == to) // Item is moved in place of active item
+            mIndex = from;
     }
 
     public void removeItemFromActiveQueue(int position) {

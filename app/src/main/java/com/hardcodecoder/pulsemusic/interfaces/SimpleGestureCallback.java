@@ -5,5 +5,5 @@ public interface SimpleGestureCallback {
 
     void onItemDismissed(int position);
 
-    void onItemMoved(int fromPosition, int toPosition);
+    void onItemMove(int fromPosition, int toPosition);
 }

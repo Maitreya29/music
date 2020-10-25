@@ -88,14 +88,16 @@ public class PlaylistProvider {
 
     public void deleteAllDuplicatesInPlaylist(@NonNull String playlistTitle, @NonNull List<MusicModel> tracks, @Nullable Callback<List<MusicModel>> callback) {
         TaskRunner.executeAsync(() -> {
-            Set<Integer> set = new HashSet<>();
-            List<MusicModel> sanitizedList = new ArrayList<>();
-            for (MusicModel md : tracks) {
-                if (set.add(md.getId()))
-                    sanitizedList.add(md);
+            final List<MusicModel> sanitizedList = new ArrayList<>();
+            if (!tracks.isEmpty()) {
+                Set<Integer> set = new HashSet<>();
+                for (MusicModel md : tracks) {
+                    if (set.add(md.getId()))
+                        sanitizedList.add(md);
+                }
+                if (tracks.size() != sanitizedList.size())
+                    updatePlaylistTracks(playlistTitle, sanitizedList);
             }
-            if (tracks.size() != sanitizedList.size())
-                updatePlaylistTracks(playlistTitle, sanitizedList);
             if (null != callback) mHandler.post(() -> callback.onComplete(sanitizedList));
         });
     }

@@ -182,7 +182,7 @@ public class PlaylistFragment extends Fragment implements PlaylistCardListener, 
     }
 
     @Override
-    public void onItemMoved(int fromPosition, int toPosition) {
+    public void onItemMove(int fromPosition, int toPosition) {
     }
 
     @Override

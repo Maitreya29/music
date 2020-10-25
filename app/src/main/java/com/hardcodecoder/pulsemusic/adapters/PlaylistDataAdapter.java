@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.TaskRunner;
-import com.hardcodecoder.pulsemusic.helper.PMBGridAdapterDiffCallback;
+import com.hardcodecoder.pulsemusic.helper.DiffCb;
 import com.hardcodecoder.pulsemusic.interfaces.ItemTouchHelperAdapter;
 import com.hardcodecoder.pulsemusic.interfaces.ItemTouchHelperViewHolder;
 import com.hardcodecoder.pulsemusic.interfaces.PlaylistItemListener;
@@ -25,6 +25,7 @@ import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.utils.ImageUtil;
 import com.hardcodecoder.pulsemusic.views.MediaArtImageView;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -32,27 +33,41 @@ public class PlaylistDataAdapter extends RecyclerView.Adapter<PlaylistDataAdapte
         implements ItemTouchHelperAdapter {
 
     private final LayoutInflater mInflater;
-    private final List<MusicModel> mPlaylistTracks;
+    private final List<MusicModel> mPlaylistTracks = new ArrayList<>();
     private final SimpleGestureCallback mCallback;
     private final PlaylistItemListener mListener;
     private int lastPosition = -1;
     private MusicModel deletedItem;
     private int deletedIndex;
 
-    public PlaylistDataAdapter(List<MusicModel> playlistTracks, LayoutInflater inflater, PlaylistItemListener mListener, @Nullable SimpleGestureCallback callback) {
-        this.mPlaylistTracks = playlistTracks;
-        this.mInflater = inflater;
-        this.mListener = mListener;
-        this.mCallback = callback;
+    public PlaylistDataAdapter(@NonNull List<MusicModel> playlistTracks,
+                               @NonNull LayoutInflater inflater,
+                               @NonNull PlaylistItemListener listener,
+                               @Nullable SimpleGestureCallback callback) {
+        mPlaylistTracks.addAll(playlistTracks);
+        mInflater = inflater;
+        mListener = listener;
+        mCallback = callback;
     }
 
-    public void updatePlaylist(List<MusicModel> newList) {
+    @NonNull
+    public List<MusicModel> getPlaylistTracks() {
+        return mPlaylistTracks;
+    }
+
+    public void addItems(final List<MusicModel> list) {
+        int startIndex = mPlaylistTracks.size();
+        mPlaylistTracks.addAll(list);
+        notifyItemRangeInserted(startIndex, list.size());
+    }
+
+    public void updatePlaylist(@NonNull List<MusicModel> newList) {
         final Handler handler = new Handler();
         TaskRunner.executeAsync(() -> {
-            final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new PMBGridAdapterDiffCallback(mPlaylistTracks, newList) {
+            final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new DiffCb(mPlaylistTracks, newList) {
                 @Override
                 public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-                    return mPlaylistTracks.get(oldItemPosition).getTrackName().equals(newList.get(newItemPosition).getTrackName());
+                    return mPlaylistTracks.get(oldItemPosition).getId() == newList.get(newItemPosition).getId();
                 }
             });
             handler.post(() -> {
@@ -63,13 +78,6 @@ public class PlaylistDataAdapter extends RecyclerView.Adapter<PlaylistDataAdapte
         });
     }
 
-    public void addItems(final List<MusicModel> list) {
-        int startIndex = mPlaylistTracks.size();
-        mPlaylistTracks.addAll(list);
-        notifyItemRangeInserted(startIndex, list.size());
-    }
-
-
     public void restoreItem() {
         mPlaylistTracks.add(deletedIndex, deletedItem);
         notifyItemInserted(deletedIndex);
@@ -79,13 +87,8 @@ public class PlaylistDataAdapter extends RecyclerView.Adapter<PlaylistDataAdapte
     public boolean onItemMove(int fromPosition, int toPosition) {
         Collections.swap(mPlaylistTracks, fromPosition, toPosition);
         notifyItemMoved(fromPosition, toPosition);
+        if (null != mCallback) mCallback.onItemMove(fromPosition, toPosition);
         return true;
-    }
-
-    @Override
-    public void onItemMoved(int fromPosition, int toPosition) {
-        if (null != mCallback)
-            mCallback.onItemMoved(fromPosition, toPosition);
     }
 
     @Override

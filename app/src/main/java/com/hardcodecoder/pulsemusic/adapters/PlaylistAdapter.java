@@ -50,10 +50,6 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.CardsS
     }
 
     @Override
-    public void onItemMoved(int fromPosition, int toPosition) {
-    }
-
-    @Override
     public void onItemDismiss(int position) {
         if (null != mCallback)
             mCallback.onItemDismissed(position);

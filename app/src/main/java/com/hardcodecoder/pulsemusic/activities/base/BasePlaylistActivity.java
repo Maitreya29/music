@@ -78,8 +78,7 @@ public abstract class BasePlaylistActivity extends MediaSessionActivity {
     }
 
     protected void shuffleTrackAndPlay(List<MusicModel> playlist) {
-        if (null == playlist || playlist.size() <= 0)
-            return;
+        if (null == playlist || playlist.isEmpty()) return;
         List<MusicModel> playListToPlay = new ArrayList<>(playlist);
         Collections.shuffle(playListToPlay);
         mTrackManager.buildDataList(playListToPlay, 0);

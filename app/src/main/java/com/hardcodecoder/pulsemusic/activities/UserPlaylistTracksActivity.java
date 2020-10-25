@@ -46,8 +46,11 @@ public class UserPlaylistTracksActivity extends AdvancePlaylist {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.menu_action_clear_duplicates) {
-            ProviderManager.getPlaylistProvider().deleteAllDuplicatesInPlaylist(playListTitle, mPlaylistTracks, result ->
-                    mAdapter.updatePlaylist(result));
+            if (null == mAdapter) return false;
+            ProviderManager.getPlaylistProvider().deleteAllDuplicatesInPlaylist(
+                    playListTitle,
+                    mAdapter.getPlaylistTracks(),
+                    result -> mAdapter.updatePlaylist(result));
             return true;
         }
         return false;
@@ -81,14 +84,14 @@ public class UserPlaylistTracksActivity extends AdvancePlaylist {
     }
 
     @Override
-    public void onItemMoved(int fromPosition, int toPosition) {
+    public void onItemMove(int fromPosition, int toPosition) {
         isPlaylistModified = true;
     }
 
     @Override
     protected void onDestroy() {
-        if (isPlaylistModified)
-            ProviderManager.getPlaylistProvider().updatePlaylistTracks(playListTitle, mPlaylistTracks);
+        if (isPlaylistModified && null != mAdapter)
+            ProviderManager.getPlaylistProvider().updatePlaylistTracks(playListTitle, mAdapter.getPlaylistTracks());
         super.onDestroy();
     }
 }

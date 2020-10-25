@@ -21,7 +21,7 @@ public class RecyclerViewGestureHelper extends ItemTouchHelper.Callback {
 
     @Override
     public boolean isLongPressDragEnabled() {
-        return true;
+        return false;
     }
 
     @Override
@@ -45,11 +45,6 @@ public class RecyclerViewGestureHelper extends ItemTouchHelper.Callback {
     }
 
     @Override
-    public void onMoved(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, int fromPos, @NonNull RecyclerView.ViewHolder target, int toPos, int x, int y) {
-        mAdapter.onItemMoved(fromPos, toPos);
-    }
-
-    @Override
     public void onSelectedChanged(RecyclerView.ViewHolder viewHolder, int actionState) {
         // We only want the active item to change
         if (actionState != ItemTouchHelper.ACTION_STATE_IDLE) {
@@ -62,7 +57,6 @@ public class RecyclerViewGestureHelper extends ItemTouchHelper.Callback {
 
         super.onSelectedChanged(viewHolder, actionState);
     }
-
 
     @Override
     public void onChildDraw(

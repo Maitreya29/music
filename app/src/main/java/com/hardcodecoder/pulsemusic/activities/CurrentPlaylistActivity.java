@@ -10,7 +10,6 @@ import com.google.android.material.snackbar.Snackbar;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.activities.base.AdvancePlaylist;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
-import com.hardcodecoder.pulsemusic.singleton.TrackManager;
 
 import java.util.ArrayList;
 
@@ -40,9 +39,8 @@ public class CurrentPlaylistActivity extends AdvancePlaylist {
             finish();
         });
         setShuffleButtonAction(v -> {
-            if (null == mPlaylistTracks) return;
-            shuffleTrackAndPlay(mPlaylistTracks);
-            mAdapter.updatePlaylist(TrackManager.getInstance().getActiveQueue());
+            shuffleTrackAndPlay(mAdapter.getPlaylistTracks());
+            mAdapter.updatePlaylist(mTrackManager.getActiveQueue());
         });
         setUpData(mTrackManager.getActiveQueue(), mTrackManager.getActiveIndex());
     }
@@ -54,7 +52,7 @@ public class CurrentPlaylistActivity extends AdvancePlaylist {
             mTrackManager.buildDataList(receivedData, 0);
         } else {
             mAdapter.addItems(receivedData);
-            mTrackManager.buildDataList(mPlaylistTracks, mTrackManager.getActiveIndex());
+            mTrackManager.buildDataList(mAdapter.getPlaylistTracks(), mTrackManager.getActiveIndex());
         }
         mHasTracksChanged = true;
     }
@@ -71,7 +69,7 @@ public class CurrentPlaylistActivity extends AdvancePlaylist {
         Snackbar sb = Snackbar.make(findViewById(R.id.playlist_data_root_view), R.string.item_removed, Snackbar.LENGTH_SHORT);
         sb.setAction(getString(R.string.snack_bar_action_undo), v -> {
             mAdapter.restoreItem();
-            mTrackManager.restoreItem(position, mPlaylistTracks.get(position));
+            mTrackManager.restoreItem(position, mAdapter.getPlaylistTracks().get(position));
             if (mTrackManager.getActiveIndex() == position)
                 playMedia();
         });
@@ -89,7 +87,7 @@ public class CurrentPlaylistActivity extends AdvancePlaylist {
     }
 
     @Override
-    public void onItemMoved(int fromPosition, int toPosition) {
+    public void onItemMove(int fromPosition, int toPosition) {
         mTrackManager.updateActiveQueue(fromPosition, toPosition);
         mHasTracksChanged = true;
     }
