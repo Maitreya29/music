@@ -17,6 +17,7 @@ import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.dialog.IgnoreFolderChooser;
 import com.hardcodecoder.pulsemusic.fragments.settings.base.SettingsBaseFragment;
+import com.hardcodecoder.pulsemusic.singleton.TrackManager;
 
 import java.util.Objects;
 
@@ -54,7 +55,8 @@ public class SettingsGeneralFragment extends SettingsBaseFragment {
             IgnoreFolderChooser ignoreFolderChooser = IgnoreFolderChooser.getInstance(hasChanged -> {
                 if (hasChanged) showRestartDialog(view);
             });
-            ignoreFolderChooser.show(getFragmentManager(), IgnoreFolderChooser.TAG);
+            if (getFragmentManager() != null)
+                ignoreFolderChooser.show(getFragmentManager(), IgnoreFolderChooser.TAG);
         });
     }
 
@@ -74,15 +76,17 @@ public class SettingsGeneralFragment extends SettingsBaseFragment {
 
         positiveBtn.setText(R.string.restart_dialog_positive_btn_title);
         positiveBtn.setOnClickListener(positive -> {
-            Intent restartIntent = getActivity().getPackageManager()
-                    .getLaunchIntentForPackage(getActivity().getPackageName());
-            if (null != restartIntent) {
-                restartIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(restartIntent);
-                MediaController controller = getActivity().getMediaController();
-                if (controller != null) controller.getTransportControls().stop();
-                restartDialog.dismiss();
-                getActivity().finish();
+            if (getActivity() != null) {
+                Intent restartIntent = getActivity().getPackageManager().getLaunchIntentForPackage(getActivity().getPackageName());
+                if (null != restartIntent) {
+                    restartIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(restartIntent);
+                    MediaController controller = getActivity().getMediaController();
+                    if (controller != null) controller.getTransportControls().stop();
+                    TrackManager.getInstance().resetTrackManager();
+                    restartDialog.dismiss();
+                    getActivity().finish();
+                }
             }
         });
 

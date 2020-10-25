@@ -89,7 +89,6 @@ public class PlaybackManager implements Playback.Callback {
     }
 
     private void handleStopRequest() {
-        mTrackManager.resetTrackManager();
         mServiceCallback.onPlaybackStopped();
         mPlayback.onStop(true);
     }
