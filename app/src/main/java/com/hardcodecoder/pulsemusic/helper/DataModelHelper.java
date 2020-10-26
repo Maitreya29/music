@@ -50,31 +50,36 @@ public class DataModelHelper {
         MediaMetadataRetriever mmr = new MediaMetadataRetriever();
         mmr.setDataSource(context, data.getData());
         String defText = context.getString(R.string.def_track_title);
+        String title;
+        String album;
+        String artist;
+        String dateAdded;
+        long dateModified;
+        int duration;
         try {
-            String title = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE);
-            String artist = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST);
-            String album = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM);
-            String dateAdded = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DATE);
-            String trackNumber = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_CD_TRACK_NUMBER);
-            int duration = Integer.parseInt(mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION));
+            title = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE);
+            artist = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST);
+            album = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM);
+            dateAdded = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DATE);
+            dateModified = null == dateAdded ? 0 : Long.parseLong(dateAdded);
+            duration = Integer.parseInt(mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION));
             mmr.release();
-            final long dateModified = null == dateAdded ? 0 : Long.parseLong(dateAdded);
-            return new MusicModel(
-                    mPickedTrackId,
-                    null == title ? defText : title,
-                    null == album ? defText : album,
-                    mPickedTrackId--,
-                    null == artist ? defText : artist,
-                    data.getDataString(),
-                    null,
-                    dateModified,
-                    dateModified,
-                    null == trackNumber ? 0 : Integer.parseInt(trackNumber),
-                    duration);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
+        return new MusicModel(
+                mPickedTrackId,
+                null == title ? defText : title,
+                null == album ? defText : album,
+                mPickedTrackId--,
+                null == artist ? defText : artist,
+                data.getDataString(),
+                null,
+                dateModified,
+                dateModified,
+                0,
+                duration);
     }
 
     static void getTrackInfo(Context context, MusicModel musicModel, TaskRunner.Callback<TrackFileModel> callback) {

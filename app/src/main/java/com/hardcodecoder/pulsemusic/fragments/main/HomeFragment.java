@@ -173,6 +173,7 @@ public class HomeFragment extends Fragment {
         Intent intent_upload = new Intent();
         intent_upload.setType("audio/*");
         intent_upload.setAction(Intent.ACTION_GET_CONTENT);
+        intent_upload.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         startActivityForResult(intent_upload, PICK_MUSIC);
     }
 

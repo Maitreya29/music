@@ -7,20 +7,20 @@ import java.io.Serializable;
 
 public class MusicModel implements Serializable {
 
-    private String mTrackName;
-    private String mTrackPath;
-    private String mAlbum;
-    private String mArtist;
-    private String mAlbumArtUrl;
+    private final String mTrackName;
+    private final String mTrackPath;
+    private final String mAlbum;
+    private final String mArtist;
+    private final String mAlbumArtUrl;
     // Unix Time: Elapsed seconds since 1 January 1970
-    private long mDateAdded;
+    private final long mDateAdded;
     // Unix Time: Elapsed seconds since 1 January 1970
-    private long mDateModified;
-    private int mId;
-    private int mAlbumId;
-    private int mTrackNumber;
+    private final long mDateModified;
+    private final int mId;
+    private final int mAlbumId;
+    private final int mTrackNumber;
     // Duration in milli seconds
-    private int mTrackDuration;
+    private final int mTrackDuration;
 
     public MusicModel(int mId,
                       @NonNull String trackName,
