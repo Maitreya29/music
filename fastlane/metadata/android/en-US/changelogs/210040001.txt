@@ -1,0 +1,9 @@
+Pulse Music V4.0.1-Release
+
+Note: Please uninstall any previous version (and clear app data) before installing this release. 
+
+- Hotfix update for V4.0.0
+- Fixed #17 
+- Fixed load failed when trying to play track from select tracks options
+- Fixed array index out of bounds error due to negative album id
+- Fixed crash when trying to clear all favorites/recent tracks
