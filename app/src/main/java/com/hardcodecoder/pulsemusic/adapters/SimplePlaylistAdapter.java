@@ -14,19 +14,27 @@ import com.hardcodecoder.pulsemusic.interfaces.SimpleItemClickListener;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.views.MediaArtImageView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SimplePlaylistAdapter extends RecyclerView.Adapter<SimplePlaylistAdapter.SimpleViewHolder> {
 
     private final LayoutInflater mInflater;
-    private List<MusicModel> mList;
+    private final List<MusicModel> mList;
     private SimpleItemClickListener mListener;
     private int lastPosition = -1;
 
-    public SimplePlaylistAdapter(List<MusicModel> list, LayoutInflater inflater, SimpleItemClickListener listener) {
-        this.mList = list;
-        this.mListener = listener;
-        this.mInflater = inflater;
+    public SimplePlaylistAdapter(@NonNull List<MusicModel> list,
+                                 @NonNull LayoutInflater inflater,
+                                 @NonNull SimpleItemClickListener listener) {
+        mList = new ArrayList<>(list);
+        mListener = listener;
+        mInflater = inflater;
+    }
+
+    @NonNull
+    public List<MusicModel> getPlaylistTracks() {
+        return mList;
     }
 
     public void clearAll() {
@@ -51,20 +59,18 @@ public class SimplePlaylistAdapter extends RecyclerView.Adapter<SimplePlaylistAd
 
     @Override
     public void onViewDetachedFromWindow(@NonNull SimpleViewHolder holder) {
-        super.onViewDetachedFromWindow(holder);
         holder.itemView.clearAnimation();
+        super.onViewDetachedFromWindow(holder);
     }
 
     @Override
     public int getItemCount() {
-        if (mList != null)
-            return mList.size();
-        return 0;
+        return mList.size();
     }
 
     @Override
     public void onDetachedFromRecyclerView(@NonNull RecyclerView recyclerView) {
-        mList = null;
+        mList.clear();
         mListener = null;
         super.onDetachedFromRecyclerView(recyclerView);
     }

@@ -17,31 +17,31 @@ import com.hardcodecoder.pulsemusic.helper.UIHelper;
 import com.hardcodecoder.pulsemusic.interfaces.SimpleItemClickListener;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SimplePlaylist extends BasePlaylistActivity implements SimpleItemClickListener {
 
     private SimplePlaylistAdapter mAdapter;
-    private List<MusicModel> mPlaylistTracks;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setShuffleButtonAction(v -> shuffleTrackAndPlay(mPlaylistTracks));
+        setShuffleButtonAction(v -> {
+            if (mAdapter != null) shuffleTrackAndPlay(mAdapter.getPlaylistTracks());
+        });
     }
 
-    protected void setUpData(List<MusicModel> dataList) {
+    protected void setUpData(@Nullable List<MusicModel> dataList) {
         new Handler(Looper.getMainLooper()).post(() -> {
-            if (null != dataList && dataList.size() > 0) {
+            if (null == dataList || dataList.isEmpty()) showEmptyListText();
+            else {
                 findViewById(R.id.no_tracks_found).setVisibility(View.GONE);
-                mPlaylistTracks = new ArrayList<>(dataList);
                 RecyclerView rv = (RecyclerView) ((ViewStub) findViewById(R.id.stub_playlist_tracks_rv)).inflate();
                 rv.setHasFixedSize(true);
                 rv.setLayoutManager(new LinearLayoutManager(rv.getContext(), RecyclerView.VERTICAL, false));
-                mAdapter = new SimplePlaylistAdapter(mPlaylistTracks, getLayoutInflater(), this);
+                mAdapter = new SimplePlaylistAdapter(dataList, getLayoutInflater(), this);
                 rv.setAdapter(mAdapter);
-            } else showEmptyListText();
+            }
         });
     }
 
@@ -52,19 +52,18 @@ public class SimplePlaylist extends BasePlaylistActivity implements SimpleItemCl
     }
 
     protected void clearAllTracks() {
-        if (null == mPlaylistTracks)
-            return;
+        if (null == mAdapter) return;
         mAdapter.clearAll();
         showEmptyListText();
     }
 
     @Override
     public void onItemClick(int position) {
-        setTrackAndPlay(mPlaylistTracks, position);
+        setTrackAndPlay(mAdapter.getPlaylistTracks(), position);
     }
 
     @Override
     public void onOptionsClick(int position) {
-        UIHelper.showMenuForLibraryTracks(this, getSupportFragmentManager(), mPlaylistTracks.get(position));
+        UIHelper.showMenuForLibraryTracks(this, getSupportFragmentManager(), mAdapter.getPlaylistTracks().get(position));
     }
 }

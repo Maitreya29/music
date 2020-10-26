@@ -75,7 +75,7 @@ public class FavoritesProvider {
     public void clearAllFavorites() {
         TaskRunner.executeAsync(() -> {
             StorageUtil.deleteFile(new File(mFavoritesFilePath));
-            mFavoritesSet.clear();
+            if (null != mFavoritesSet) mFavoritesSet.clear();
         });
     }
 
