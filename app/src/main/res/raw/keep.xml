@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:discard="@raw/*"
+    tools:keep="@drawable/ic_audio_48dp, @drawable/ic_queue_music, @drawable/ic_queue_play_next, @layout/library_item_menu"
+    tools:shrinkMode="safe" />

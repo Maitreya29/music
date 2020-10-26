@@ -17,6 +17,7 @@ public class MediaArtHelper {
     private static TypedArray mMediaArtColors;
 
     public static Drawable getDefaultAlbumArt(Context context, long albumId) {
+        albumId = Math.abs(albumId);
         if (null != MediaArtCache.getMediaArtDrawable(albumId))
             return MediaArtCache.getMediaArtDrawable(albumId);
         Drawable drawable = ImageUtil.generateTintedDefaultAlbumArt(context, getTintColor(context, albumId));

@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 public class MediaArtCache {
 
-    private static Drawable[] mMediaArtDefaultDrawables = new Drawable[7];
+    private static final Drawable[] mMediaArtDefaultDrawables = new Drawable[7];
 
     public static void addDrawableIfNotPresent(Drawable drawable, long albumId) {
         int index = (int) albumId % 7;
