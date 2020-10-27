@@ -90,6 +90,7 @@ public class TrackPickerActivity extends PMBActivity implements TrackPickerListe
         if (pendingUpdates.size() == 1)
             TaskRunner.executeAsync(new SearchQueryLoader(query), result -> {
                 pendingUpdates.remove(0);
+                if (null == result) return;
                 if (mAdapter != null)
                     mAdapter.updateItems(result);
 

@@ -19,7 +19,6 @@ import com.hardcodecoder.pulsemusic.adapters.SearchAdapter;
 import com.hardcodecoder.pulsemusic.helper.UIHelper;
 import com.hardcodecoder.pulsemusic.interfaces.SimpleItemClickListener;
 import com.hardcodecoder.pulsemusic.loaders.SearchQueryLoader;
-import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.singleton.TrackManager;
 import com.hardcodecoder.pulsemusic.themes.TintHelper;
 
@@ -29,7 +28,6 @@ import java.util.List;
 public class SearchActivity extends MediaSessionActivity implements SimpleItemClickListener {
 
     private final List<String> pendingUpdates = new ArrayList<>();
-    private List<MusicModel> mSearchResult;
     private MaterialTextView noResultsText;
     private SearchAdapter mAdapter;
     private TrackManager tm;
@@ -82,9 +80,9 @@ public class SearchActivity extends MediaSessionActivity implements SimpleItemCl
         if (pendingUpdates.size() == 1)
             TaskRunner.executeAsync(new SearchQueryLoader(query), result -> {
                 pendingUpdates.remove(0);
-                this.mSearchResult = result;
+                if (null == result) return;
 
-                if (mSearchResult.size() <= 0) noResultsText.setVisibility(View.VISIBLE);
+                if (result.size() <= 0) noResultsText.setVisibility(View.VISIBLE);
                 else noResultsText.setVisibility(View.INVISIBLE);
 
                 mAdapter.updateItems(result);
@@ -105,13 +103,15 @@ public class SearchActivity extends MediaSessionActivity implements SimpleItemCl
 
     @Override
     public void onItemClick(int position) {
-        tm.buildDataList(mSearchResult, position);
+        if (null == mAdapter) return;
+        tm.buildDataList(mAdapter.getList(), position);
         playMedia();
     }
 
     @Override
     public void onOptionsClick(int position) {
-        UIHelper.showMenuForLibraryTracks(this, getSupportFragmentManager(), mSearchResult.get(position));
+        if (null == mAdapter) return;
+        UIHelper.showMenuForLibraryTracks(this, getSupportFragmentManager(), mAdapter.getList().get(position));
     }
 
     @Override
@@ -128,4 +128,3 @@ public class SearchActivity extends MediaSessionActivity implements SimpleItemCl
         overridePendingTransition(R.anim.activity_fade_in, R.anim.activity_fade_out);
     }
 }
-

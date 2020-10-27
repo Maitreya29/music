@@ -47,7 +47,10 @@ public class ArtistFragment extends CardGridFragment {
     }
 
     private void loadArtistsList(View view, List<ArtistModel> list) {
-        if (null != list && list.size() > 0) {
+        if (list == null || list.isEmpty()) {
+            MaterialTextView noTracksText = (MaterialTextView) ((ViewStub) view.findViewById(R.id.stub_no_tracks_found)).inflate();
+            noTracksText.setText(getString(R.string.tracks_not_found));
+        } else {
             mRecyclerView = (RecyclerView) ((ViewStub) view.findViewById(R.id.stub_grid_rv)).inflate();
             mLayoutManager = new GridLayoutManager(mRecyclerView.getContext(), getCurrentSpanCount());
             mRecyclerView.setLayoutManager(mLayoutManager);
@@ -64,9 +67,6 @@ public class ArtistFragment extends CardGridFragment {
             LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(mRecyclerView.getContext(), R.anim.item_enter_slide_up);
             mRecyclerView.setLayoutAnimation(controller);
             mRecyclerView.setAdapter(mAdapter);
-        } else {
-            MaterialTextView noTracksText = (MaterialTextView) ((ViewStub) view.findViewById(R.id.stub_no_tracks_found)).inflate();
-            noTracksText.setText(getString(R.string.tracks_not_found));
         }
     }
 
@@ -92,6 +92,7 @@ public class ArtistFragment extends CardGridFragment {
 
     @Override
     public void onSortOrderChanged(int newSortOrder) {
+        if (mAdapter == null) return;
         mFirstVisibleItemPosition = mLayoutManager.findFirstVisibleItemPosition();
         mAdapter.updateSortOrder(resolveSortOrder(newSortOrder));
         if (null != getContext())
@@ -130,6 +131,7 @@ public class ArtistFragment extends CardGridFragment {
 
     @Override
     public void onLayoutSpanCountChanged(int currentOrientation, int spanCount) {
+        if (mLayoutManager == null) return;
         mFirstVisibleItemPosition = mLayoutManager.findFirstVisibleItemPosition();
         mAdapter.updateSpanCount(currentOrientation, spanCount);
         mRecyclerView.setAdapter(mAdapter);

@@ -80,93 +80,89 @@ public class HomeFragment extends Fragment {
     }
 
     private void loadTopAlbums(View view, List<TopAlbumModel> list) {
-        if (null != list && list.size() > 0) {
-            view.postDelayed(() -> {
-                MaterialTextView topAlbumsTitle = (MaterialTextView) ((ViewStub) view.findViewById(R.id.stub_top_albums_title)).inflate();
-                topAlbumsTitle.setText(getString(R.string.top_albums));
-                RecyclerView rv = (RecyclerView) ((ViewStub) view.findViewById(R.id.stub_top_albums_list)).inflate();
-                rv.setLayoutManager(new LinearLayoutManager(rv.getContext(), LinearLayoutManager.HORIZONTAL, false));
-                rv.setHasFixedSize(true);
-                HomeAdapterAlbum adapter = new HomeAdapterAlbum(list, getLayoutInflater(), (sharedView, position) -> {
-                    if (null != getActivity()) {
-                        TopAlbumModel albumModel = list.get(position);
-                        NavigationUtil.goToAlbum(getActivity(), sharedView, albumModel.getAlbumName(), albumModel.getAlbumId(), albumModel.getAlbumArt());
-                    }
-                });
-                SnapHelper helper = new PagerSnapHelper();
-                helper.attachToRecyclerView(rv);
-                rv.setAdapter(adapter);
-            }, 0);
-        }
+        if (list == null || list.isEmpty()) return;
+        view.postDelayed(() -> {
+            MaterialTextView topAlbumsTitle = (MaterialTextView) ((ViewStub) view.findViewById(R.id.stub_top_albums_title)).inflate();
+            topAlbumsTitle.setText(getString(R.string.top_albums));
+            RecyclerView rv = (RecyclerView) ((ViewStub) view.findViewById(R.id.stub_top_albums_list)).inflate();
+            rv.setLayoutManager(new LinearLayoutManager(rv.getContext(), LinearLayoutManager.HORIZONTAL, false));
+            rv.setHasFixedSize(true);
+            HomeAdapterAlbum adapter = new HomeAdapterAlbum(list, getLayoutInflater(), (sharedView, position) -> {
+                if (null != getActivity()) {
+                    TopAlbumModel albumModel = list.get(position);
+                    NavigationUtil.goToAlbum(getActivity(), sharedView, albumModel.getAlbumName(), albumModel.getAlbumId(), albumModel.getAlbumArt());
+                }
+            });
+            SnapHelper helper = new PagerSnapHelper();
+            helper.attachToRecyclerView(rv);
+            rv.setAdapter(adapter);
+        }, 0);
     }
 
     private void loadSuggestions(View view, List<MusicModel> list) {
-        if (null != list && list.size() > 0) {
-            view.postDelayed(() -> {
-                MaterialTextView suggestionsTitle = (MaterialTextView) ((ViewStub) view.findViewById(R.id.stub_suggestions_title)).inflate();
-                suggestionsTitle.setText(getString(R.string.random));
-                RecyclerView rv = (RecyclerView) ((ViewStub) view.findViewById(R.id.stub_suggested_list)).inflate();
-                rv.setLayoutManager(new LinearLayoutManager(rv.getContext(), LinearLayoutManager.HORIZONTAL, false));
-                rv.setHasFixedSize(true);
-                HomeAdapter adapter = new HomeAdapter(getLayoutInflater(), list, new SimpleItemClickListener() {
-                    @Override
-                    public void onItemClick(int position) {
-                        tm.buildDataList(list, position);
-                        play();
-                    }
+        if (list == null || list.isEmpty()) return;
+        view.postDelayed(() -> {
+            MaterialTextView suggestionsTitle = (MaterialTextView) ((ViewStub) view.findViewById(R.id.stub_suggestions_title)).inflate();
+            suggestionsTitle.setText(getString(R.string.random));
+            RecyclerView rv = (RecyclerView) ((ViewStub) view.findViewById(R.id.stub_suggested_list)).inflate();
+            rv.setLayoutManager(new LinearLayoutManager(rv.getContext(), LinearLayoutManager.HORIZONTAL, false));
+            rv.setHasFixedSize(true);
+            HomeAdapter adapter = new HomeAdapter(getLayoutInflater(), list, new SimpleItemClickListener() {
+                @Override
+                public void onItemClick(int position) {
+                    tm.buildDataList(list, position);
+                    play();
+                }
 
-                    @Override
-                    public void onOptionsClick(int position) {
-                        if (null != getActivity())
-                            UIHelper.showMenuForLibraryTracks(getActivity(), getActivity().getSupportFragmentManager(), list.get(position));
-                    }
-                });
-                rv.setAdapter(adapter);
-            }, BASE_DELAY_MILLS);
-        }
+                @Override
+                public void onOptionsClick(int position) {
+                    if (null != getActivity())
+                        UIHelper.showMenuForLibraryTracks(getActivity(), getActivity().getSupportFragmentManager(), list.get(position));
+                }
+            });
+            rv.setAdapter(adapter);
+        }, BASE_DELAY_MILLS);
     }
 
     private void loadLatestTracks(View view, List<MusicModel> list) {
-        if (null != list && list.size() > 0) {
-            view.postDelayed(() -> {
-                MaterialTextView newInStoreTitle = (MaterialTextView) ((ViewStub) view.findViewById(R.id.stub_new_in_store_title)).inflate();
-                newInStoreTitle.setText(getString(R.string.new_in_library));
-                RecyclerView rv = (RecyclerView) ((ViewStub) view.findViewById(R.id.stub_new_in_store_list)).inflate();
-                rv.setLayoutManager(new LinearLayoutManager(rv.getContext(), LinearLayoutManager.HORIZONTAL, false));
-                rv.setHasFixedSize(true);
-                HomeAdapter adapter = new HomeAdapter(getLayoutInflater(), list, new SimpleItemClickListener() {
-                    @Override
-                    public void onItemClick(int position) {
-                        tm.buildDataList(list, position);
-                        play();
-                    }
+        if (list == null || list.isEmpty()) return;
+        view.postDelayed(() -> {
+            MaterialTextView newInStoreTitle = (MaterialTextView) ((ViewStub) view.findViewById(R.id.stub_new_in_store_title)).inflate();
+            newInStoreTitle.setText(getString(R.string.new_in_library));
+            RecyclerView rv = (RecyclerView) ((ViewStub) view.findViewById(R.id.stub_new_in_store_list)).inflate();
+            rv.setLayoutManager(new LinearLayoutManager(rv.getContext(), LinearLayoutManager.HORIZONTAL, false));
+            rv.setHasFixedSize(true);
+            HomeAdapter adapter = new HomeAdapter(getLayoutInflater(), list, new SimpleItemClickListener() {
+                @Override
+                public void onItemClick(int position) {
+                    tm.buildDataList(list, position);
+                    play();
+                }
 
-                    @Override
-                    public void onOptionsClick(int position) {
-                        if (null != getActivity())
-                            UIHelper.showMenuForLibraryTracks(getActivity(), getActivity().getSupportFragmentManager(), list.get(position));
-                    }
-                });
-                rv.setAdapter(adapter);
-            }, BASE_DELAY_MILLS * 2);
-        }
+                @Override
+                public void onOptionsClick(int position) {
+                    if (null != getActivity())
+                        UIHelper.showMenuForLibraryTracks(getActivity(), getActivity().getSupportFragmentManager(), list.get(position));
+                }
+            });
+            rv.setAdapter(adapter);
+        }, BASE_DELAY_MILLS * 2);
     }
 
     private void loadTopArtists(View view, List<TopArtistModel> list) {
-        if (null != list && list.size() > 0) {
-            view.postDelayed(() -> {
-                MaterialTextView topAlbumsTitle = (MaterialTextView) ((ViewStub) view.findViewById(R.id.stub_top_artists_title)).inflate();
-                topAlbumsTitle.setText(getString(R.string.top_artist));
-                RecyclerView rv = (RecyclerView) ((ViewStub) view.findViewById(R.id.stub_top_artists_list)).inflate();
-                rv.setHasFixedSize(true);
-                rv.setLayoutManager(new LinearLayoutManager(rv.getContext(), RecyclerView.HORIZONTAL, false));
-                HomeAdapterArtist adapter = new HomeAdapterArtist(list, getLayoutInflater(), (sharedView, position) -> {
-                    if (null != getActivity())
-                        NavigationUtil.goToArtist(getActivity(), sharedView, list.get(position).getArtistName());
-                });
-                rv.setAdapter(adapter);
-            }, BASE_DELAY_MILLS * 3);
-        }
+        if (list == null || list.isEmpty()) return;
+        view.postDelayed(() -> {
+            MaterialTextView topAlbumsTitle = (MaterialTextView) ((ViewStub) view.findViewById(R.id.stub_top_artists_title)).inflate();
+            topAlbumsTitle.setText(getString(R.string.top_artist));
+            RecyclerView rv = (RecyclerView) ((ViewStub) view.findViewById(R.id.stub_top_artists_list)).inflate();
+            rv.setHasFixedSize(true);
+            rv.setLayoutManager(new LinearLayoutManager(rv.getContext(), RecyclerView.HORIZONTAL, false));
+            HomeAdapterArtist adapter = new HomeAdapterArtist(list, getLayoutInflater(), (sharedView, position) -> {
+                if (null != getActivity())
+                    NavigationUtil.goToArtist(getActivity(), sharedView, list.get(position).getArtistName());
+            });
+            rv.setAdapter(adapter);
+        }, BASE_DELAY_MILLS * 3);
     }
 
     private void pickMedia() {

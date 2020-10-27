@@ -14,10 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.Preferences;
 import com.hardcodecoder.pulsemusic.R;
-import com.hardcodecoder.pulsemusic.TaskRunner;
 import com.hardcodecoder.pulsemusic.activities.base.BaseDetailsActivity;
 import com.hardcodecoder.pulsemusic.adapters.AlbumsAdapter;
-import com.hardcodecoder.pulsemusic.loaders.ArtistTracksLoader;
+import com.hardcodecoder.pulsemusic.loaders.LoaderHelper;
 import com.hardcodecoder.pulsemusic.loaders.SortOrder;
 import com.hardcodecoder.pulsemusic.model.AlbumModel;
 import com.hardcodecoder.pulsemusic.themes.TintHelper;
@@ -33,8 +32,7 @@ public class ArtistDetailsActivity extends BaseDetailsActivity {
 
     public static final String KEY_ARTIST_TITLE = "AlbumTitle";
     private AlbumsAdapter mAdapter;
-    private String mArtistTitle;
-    private List<AlbumModel> mList;
+    private SortOrder.ALBUMS mSortOrder;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,12 +40,13 @@ public class ArtistDetailsActivity extends BaseDetailsActivity {
         setContentView(R.layout.activity_details);
         setUpTransitions();
 
-        mArtistTitle = getIntent().getStringExtra(KEY_ARTIST_TITLE);
+        String artistTitle = getIntent().getStringExtra(KEY_ARTIST_TITLE);
         loadImage();
 
-        setUpToolbar(findViewById(R.id.details_activity_toolbar), mArtistTitle);
+        setUpToolbar(findViewById(R.id.details_activity_toolbar), artistTitle);
 
-        loadItems();
+        mSortOrder = resolveSortOrder(getSortOrder());
+        LoaderHelper.loadArtistAlbums(getContentResolver(), artistTitle, mSortOrder, this::loadItems);
     }
 
     @Override
@@ -63,7 +62,8 @@ public class ArtistDetailsActivity extends BaseDetailsActivity {
     @Override
     public void onSortOrderChanged(int newSortOrder) {
         AppSettings.saveSortOrder(this, Preferences.SORT_ORDER_ARTIST_DETAILS_KEY, newSortOrder);
-        mAdapter.updateSortOrder(resolveSortOrder(newSortOrder));
+        mSortOrder = resolveSortOrder(newSortOrder);
+        mAdapter.updateSortOrder(mSortOrder);
     }
 
     @Override
@@ -100,34 +100,30 @@ public class ArtistDetailsActivity extends BaseDetailsActivity {
         supportStartPostponedEnterTransition();
     }
 
-    private void loadItems() {
-        final SortOrder.ALBUMS sortOrder = resolveSortOrder(getCurrentSortOrder());
-        TaskRunner.executeAsync(new ArtistTracksLoader(getContentResolver(), mArtistTitle, sortOrder), (data) -> {
-            if (null != data && data.size() > 0) {
-                mList = data;
-                MaterialTextView sub = findViewById(R.id.details_activity_title_sub);
-                sub.setText(String.format(Locale.ENGLISH, "%s %d %s", getString(R.string.num_artist_tracks), mList.size(), getString(R.string.album)));
+    private void loadItems(@Nullable List<AlbumModel> list) {
+        if (list == null || list.isEmpty()) return;
 
-                RecyclerView rv = (RecyclerView) ((ViewStub) findViewById(R.id.stub_details_activity_rv)).inflate();
-                int padding = DimensionsUtil.getDimensionPixelSize(this, 16f);
-                rv.setPadding(padding, padding, 0, 0);
-                rv.setHasFixedSize(true);
-                rv.setVerticalFadingEdgeEnabled(true);
-                GridLayoutManager layoutManager = new GridLayoutManager(rv.getContext(), 2);
-                rv.setLayoutManager(layoutManager);
-                mAdapter = new AlbumsAdapter(
-                        mList,
-                        getLayoutInflater(),
-                        sortOrder,
-                        (sharedView, position) -> {
-                            AlbumModel am = mList.get(position);
-                            NavigationUtil.goToAlbum(ArtistDetailsActivity.this, sharedView, am.getAlbumName(), am.getAlbumId(), am.getAlbumArt());
-                        },
-                        null);
-                LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(this, R.anim.item_enter_slide_up);
-                rv.setLayoutAnimation(controller);
-                rv.setAdapter(mAdapter);
-            }
-        });
+        MaterialTextView sub = findViewById(R.id.details_activity_title_sub);
+        sub.setText(String.format(Locale.getDefault(), "%s %d %s", getString(R.string.num_artist_tracks), list.size(), getString(R.string.album)));
+
+        RecyclerView rv = (RecyclerView) ((ViewStub) findViewById(R.id.stub_details_activity_rv)).inflate();
+        int padding = DimensionsUtil.getDimensionPixelSize(this, 16f);
+        rv.setPadding(padding, padding, 0, 0);
+        rv.setHasFixedSize(true);
+        rv.setVerticalFadingEdgeEnabled(true);
+        GridLayoutManager layoutManager = new GridLayoutManager(rv.getContext(), 2);
+        rv.setLayoutManager(layoutManager);
+        mAdapter = new AlbumsAdapter(
+                list,
+                getLayoutInflater(),
+                mSortOrder,
+                (sharedView, position) -> {
+                    AlbumModel am = list.get(position);
+                    NavigationUtil.goToAlbum(ArtistDetailsActivity.this, sharedView, am.getAlbumName(), am.getAlbumId(), am.getAlbumArt());
+                },
+                null);
+        LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(this, R.anim.item_enter_slide_up);
+        rv.setLayoutAnimation(controller);
+        rv.setAdapter(mAdapter);
     }
 }

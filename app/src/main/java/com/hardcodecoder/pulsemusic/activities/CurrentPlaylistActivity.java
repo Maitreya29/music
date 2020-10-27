@@ -39,6 +39,7 @@ public class CurrentPlaylistActivity extends AdvancePlaylist {
             finish();
         });
         setShuffleButtonAction(v -> {
+            if (mAdapter == null) return;
             shuffleTrackAndPlay(mAdapter.getPlaylistTracks());
             mAdapter.updatePlaylist(mTrackManager.getActiveQueue());
         });

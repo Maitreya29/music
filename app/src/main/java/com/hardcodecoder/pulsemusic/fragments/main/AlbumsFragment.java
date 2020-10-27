@@ -66,7 +66,10 @@ public class AlbumsFragment extends CardGridFragment {
     }
 
     private void loadAlbumsList(View view, List<AlbumModel> list) {
-        if (null != list && list.size() > 0) {
+        if (list == null || list.isEmpty()) {
+            MaterialTextView noTracksText = (MaterialTextView) ((ViewStub) view.findViewById(R.id.stub_no_tracks_found)).inflate();
+            noTracksText.setText(getString(R.string.tracks_not_found));
+        } else {
             RecyclerView rv = (RecyclerView) ((ViewStub) view.findViewById(R.id.stub_grid_rv)).inflate();
             mLayoutManager = new GridLayoutManager(rv.getContext(), getCurrentSpanCount());
             rv.setLayoutManager(mLayoutManager);
@@ -87,9 +90,6 @@ public class AlbumsFragment extends CardGridFragment {
             LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(rv.getContext(), R.anim.item_enter_slide_up);
             rv.setLayoutAnimation(controller);
             rv.setAdapter(mAdapter);
-        } else {
-            MaterialTextView noTracksText = (MaterialTextView) ((ViewStub) view.findViewById(R.id.stub_no_tracks_found)).inflate();
-            noTracksText.setText(getString(R.string.tracks_not_found));
         }
     }
 
@@ -127,6 +127,7 @@ public class AlbumsFragment extends CardGridFragment {
 
     @Override
     public void onSortOrderChanged(int newSortOrder) {
+        if (mAdapter == null) return;
         mFirstVisibleItemPosition = mLayoutManager.findFirstVisibleItemPosition();
         mAdapter.updateSortOrder(resolveSortOrder(newSortOrder));
         if (null != getContext())
@@ -165,6 +166,7 @@ public class AlbumsFragment extends CardGridFragment {
 
     @Override
     public void onLayoutSpanCountChanged(int currentOrientation, int spanCount) {
+        if (mLayoutManager == null) return;
         mLayoutManager.setSpanCount(spanCount);
     }
 }

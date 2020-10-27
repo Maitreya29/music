@@ -45,7 +45,11 @@ public class LibraryFragment extends ListGridFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         tm = TrackManager.getInstance();
 
-        if (null != LoaderCache.getAllTracksList() && !LoaderCache.getAllTracksList().isEmpty()) {
+        List<MusicModel> list = LoaderCache.getAllTracksList();
+        if (list == null || list.isEmpty()) {
+            MaterialTextView noTracksText = (MaterialTextView) ((ViewStub) view.findViewById(R.id.stub_no_tracks_found)).inflate();
+            noTracksText.setText(getString(R.string.tracks_not_found));
+        } else {
             final SortOrder sortOrder = resolveSortOrder(getCurrentSortOrder());
             mList = new ArrayList<>(LoaderCache.getAllTracksList());
             SortUtil.sortLibraryList(mList, sortOrder);
@@ -75,9 +79,6 @@ public class LibraryFragment extends ListGridFragment {
                     }, () -> mLayoutManager.scrollToPosition(mFirstVisibleItemPosition));
 
             recyclerView.setAdapter(mAdapter);
-        } else {
-            MaterialTextView noTracksText = (MaterialTextView) ((ViewStub) view.findViewById(R.id.stub_no_tracks_found)).inflate();
-            noTracksText.setText(getString(R.string.tracks_not_found));
         }
     }
 
@@ -119,6 +120,7 @@ public class LibraryFragment extends ListGridFragment {
 
     @Override
     public void onSortOrderChanged(int newSortOrder) {
+        if (null == mAdapter) return;
         mFirstVisibleItemPosition = mLayoutManager.findFirstVisibleItemPosition();
         mAdapter.updateSortOrder(resolveSortOrder(newSortOrder));
         if (null != getContext())
@@ -157,6 +159,7 @@ public class LibraryFragment extends ListGridFragment {
 
     @Override
     public void onLayoutSpanCountChanged(int currentOrientation, int spanCount) {
+        if (null == mLayoutManager) return;
         mLayoutManager.setSpanCount(spanCount);
     }
 

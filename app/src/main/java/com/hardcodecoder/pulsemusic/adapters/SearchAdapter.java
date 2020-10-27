@@ -28,11 +28,16 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
     private final SimpleItemClickListener mListener;
     private final LayoutInflater mInflater;
     private final Handler mMainHandler = new Handler();
-    protected List<MusicModel> list = new ArrayList<>();
+    private final List<MusicModel> mList = new ArrayList<>();
 
     public SearchAdapter(LayoutInflater inflater, SimpleItemClickListener clickListener) {
-        this.mListener = clickListener;
-        this.mInflater = inflater;
+        mListener = clickListener;
+        mInflater = inflater;
+    }
+
+    @NonNull
+    public List<MusicModel> getList() {
+        return mList;
     }
 
     @NonNull
@@ -43,29 +48,24 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolderLibrary holder, int position) {
-        holder.setItemData(list.get(position));
+        holder.setItemData(mList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        if (list != null)
-            return list.size();
-        else
-            return 0;
+        return mList.size();
     }
 
     public void updateItems(final List<MusicModel> newItems) {
         pendingUpdates.push(newItems);
-        if (pendingUpdates.size() > 1) {
-            return;
-        }
+        if (pendingUpdates.size() > 1) return;
         updateItemsInternal(newItems);
     }
 
 
     private void updateItemsInternal(final List<MusicModel> newItems) {
         TaskRunner.executeAsync(() -> {
-            final List<MusicModel> oldItems = new ArrayList<>(this.list);
+            final List<MusicModel> oldItems = new ArrayList<>(this.mList);
             final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new DiffCb(oldItems, newItems));
             mMainHandler.post(() -> applyDiffResult(newItems, diffResult));
         });
@@ -83,15 +83,15 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
 
     private void dispatchUpdates(List<MusicModel> newItems, DiffUtil.DiffResult diffResult) {
         diffResult.dispatchUpdatesTo(this);
-        list.clear();
-        list.addAll(newItems);
+        mList.clear();
+        mList.addAll(newItems);
     }
 
     @Override
     public void onDetachedFromRecyclerView(@NonNull RecyclerView recyclerView) {
         super.onDetachedFromRecyclerView(recyclerView);
         pendingUpdates.clear();
-        list.clear();
+        mList.clear();
     }
 
     /*
