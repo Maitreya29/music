@@ -14,13 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 
-public class ArtistTracksLoader implements Callable<List<AlbumModel>> {
+public class ArtistAlbumsLoader implements Callable<List<AlbumModel>> {
 
     private final ContentResolver mContentResolver;
     private final String mSortOrder;
     private final long mArtistId;
 
-    public ArtistTracksLoader(ContentResolver contentResolver, String artistName, SortOrder.ALBUMS sortOrder) {
+    public ArtistAlbumsLoader(ContentResolver contentResolver, String artistName, SortOrder.ALBUMS sortOrder) {
         this.mContentResolver = contentResolver;
         this.mArtistId = getArtistIdFromName(artistName);
         mSortOrder = MediaStoreHelper.getSortOrderFor(sortOrder);

@@ -1,8 +1,6 @@
 package com.hardcodecoder.pulsemusic.activities.base;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.view.View;
 import android.view.ViewStub;
 
@@ -31,18 +29,16 @@ public class SimplePlaylist extends BasePlaylistActivity implements SimpleItemCl
         });
     }
 
-    protected void setUpData(@Nullable List<MusicModel> dataList) {
-        new Handler(Looper.getMainLooper()).post(() -> {
-            if (null == dataList || dataList.isEmpty()) showEmptyListText();
-            else {
-                findViewById(R.id.no_tracks_found).setVisibility(View.GONE);
-                RecyclerView rv = (RecyclerView) ((ViewStub) findViewById(R.id.stub_playlist_tracks_rv)).inflate();
-                rv.setHasFixedSize(true);
-                rv.setLayoutManager(new LinearLayoutManager(rv.getContext(), RecyclerView.VERTICAL, false));
-                mAdapter = new SimplePlaylistAdapter(dataList, getLayoutInflater(), this);
-                rv.setAdapter(mAdapter);
-            }
-        });
+    protected void setUpData(@Nullable final List<MusicModel> dataList) {
+        if (null == dataList || dataList.isEmpty()) showEmptyListText();
+        else {
+            findViewById(R.id.no_tracks_found).setVisibility(View.GONE);
+            RecyclerView rv = (RecyclerView) ((ViewStub) findViewById(R.id.stub_playlist_tracks_rv)).inflate();
+            rv.setHasFixedSize(true);
+            rv.setLayoutManager(new LinearLayoutManager(rv.getContext(), RecyclerView.VERTICAL, false));
+            mAdapter = new SimplePlaylistAdapter(dataList, getLayoutInflater(), this);
+            rv.setAdapter(mAdapter);
+        }
     }
 
     private void showEmptyListText() {

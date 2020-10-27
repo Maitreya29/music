@@ -2,8 +2,6 @@ package com.hardcodecoder.pulsemusic.activities.base;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.view.View;
 import android.view.ViewStub;
 
@@ -40,25 +38,22 @@ public abstract class AdvancePlaylist extends BasePlaylistActivity implements Pl
     }
 
     protected void setUpData(@Nullable final List<MusicModel> dataList, int scrollTo) {
-        new Handler(Looper.getMainLooper()).post(() -> {
-            if (null == dataList || dataList.isEmpty()) {
-                MaterialTextView textView = findViewById(R.id.no_tracks_found);
-                textView.setText(getEmptyListStyledText());
-            } else {
-                findViewById(R.id.no_tracks_found).setVisibility(View.GONE);
-                RecyclerView recyclerView = (RecyclerView) ((ViewStub) findViewById(R.id.stub_playlist_tracks_rv)).inflate();
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
-                recyclerView.setLayoutManager(linearLayoutManager);
-                mAdapter = new PlaylistDataAdapter(dataList, getLayoutInflater(), this, this);
-                recyclerView.setAdapter(mAdapter);
+        if (null == dataList || dataList.isEmpty()) {
+            MaterialTextView textView = findViewById(R.id.no_tracks_found);
+            textView.setText(getEmptyListStyledText());
+        } else {
+            findViewById(R.id.no_tracks_found).setVisibility(View.GONE);
+            RecyclerView recyclerView = (RecyclerView) ((ViewStub) findViewById(R.id.stub_playlist_tracks_rv)).inflate();
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
+            recyclerView.setLayoutManager(linearLayoutManager);
+            mAdapter = new PlaylistDataAdapter(dataList, getLayoutInflater(), this, this);
+            recyclerView.setAdapter(mAdapter);
 
-                ItemTouchHelper.Callback itemTouchHelperCallback = new RecyclerViewGestureHelper(mAdapter);
-                mItemTouchHelper = new ItemTouchHelper(itemTouchHelperCallback);
-                mItemTouchHelper.attachToRecyclerView(recyclerView);
-                if (scrollTo > -1)
-                    recyclerView.scrollToPosition(scrollTo);
-            }
-        });
+            ItemTouchHelper.Callback itemTouchHelperCallback = new RecyclerViewGestureHelper(mAdapter);
+            mItemTouchHelper = new ItemTouchHelper(itemTouchHelperCallback);
+            mItemTouchHelper.attachToRecyclerView(recyclerView);
+            if (scrollTo > -1) recyclerView.scrollToPosition(scrollTo);
+        }
     }
 
     protected void onReceiveData(ArrayList<MusicModel> receivedData) {

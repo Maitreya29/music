@@ -17,15 +17,17 @@ public class SearchQueryLoader implements Callable<List<MusicModel>> {
     @Override
     public List<MusicModel> call() {
         final List<MusicModel> searchList = LoaderCache.getAllTracksList();
-        List<MusicModel> searchResult = new ArrayList<>();
-        if (!mSearchQuery.isEmpty() && null != searchList) {
-            mSearchQuery = mSearchQuery.toLowerCase();
-            for (MusicModel musicModel : searchList) {
-                if (musicModel.getTrackName().toLowerCase().contains(mSearchQuery) ||
-                        musicModel.getAlbum().toLowerCase().contains(mSearchQuery) ||
-                        musicModel.getArtist().toLowerCase().contains(mSearchQuery)) {
-                    searchResult.add(musicModel);
-                }
+        List<MusicModel> searchResult;
+
+        if (searchList == null || searchList.isEmpty()) return null;
+
+        searchResult = new ArrayList<>();
+        mSearchQuery = mSearchQuery.toLowerCase();
+        for (MusicModel musicModel : searchList) {
+            if (musicModel.getTrackName().toLowerCase().contains(mSearchQuery) ||
+                    musicModel.getAlbum().toLowerCase().contains(mSearchQuery) ||
+                    musicModel.getArtist().toLowerCase().contains(mSearchQuery)) {
+                searchResult.add(musicModel);
             }
         }
         return searchResult;

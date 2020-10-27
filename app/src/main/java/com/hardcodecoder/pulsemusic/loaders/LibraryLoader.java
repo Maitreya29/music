@@ -43,7 +43,7 @@ public class LibraryLoader implements Callable<List<MusicModel>> {
     @SuppressLint("InlinedApi")
     @Override
     public List<MusicModel> call() {
-        List<MusicModel> libraryList = new ArrayList<>();
+        List<MusicModel> libraryList = null;
         final Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
         final String[] cursor_cols = {
                 MediaStore.Audio.Media._ID,             // 0
@@ -65,8 +65,8 @@ public class LibraryLoader implements Callable<List<MusicModel>> {
                 mSortOrder);
 
         if (cursor != null && cursor.moveToFirst()) {
+            libraryList = new ArrayList<>();
             final Uri sArtworkUri = Uri.parse("content://media/external/audio/albumart");
-
             do {
                 int _id = cursor.getInt(0);
                 String songName = cursor.getString(1);
