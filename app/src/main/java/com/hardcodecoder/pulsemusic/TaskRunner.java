@@ -3,6 +3,10 @@ package com.hardcodecoder.pulsemusic;
 import android.os.Handler;
 import android.os.Looper;
 
+import androidx.annotation.Nullable;
+
+import com.hardcodecoder.pulsemusic.utils.LogUtils;
+
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -24,7 +28,10 @@ public class TaskRunner {
                 final V result = callable.call();
                 handler.post(() -> callback.onComplete(result));
             } catch (Exception e) {
-                e.printStackTrace();
+                if (BuildConfig.DEBUG) e.printStackTrace();
+                else // We log critical exceptions
+                    LogUtils.logException(e);
+
                 // Callback is necessary to trigger
                 // any fallback event that happen if load fails
                 handler.post(() -> callback.onComplete(null));
@@ -37,6 +44,6 @@ public class TaskRunner {
     }
 
     public interface Callback<V> {
-        void onComplete(V result);
+        void onComplete(@Nullable V result);
     }
 }
