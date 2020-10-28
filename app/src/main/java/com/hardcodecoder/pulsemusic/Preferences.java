@@ -90,4 +90,7 @@ public class Preferences {
 
     public static final String APP_SHORTCUT_THEME = "AppShortCutThemeMode";
     public static final String APP_SHORTCUT_THEME_MODE = "DarkThemeInUse";
+
+    public static final String LOADER_FILTER = "LoaderFilters";
+    public static final String FILTERED_DURATION = "FilteredDuration";
 }

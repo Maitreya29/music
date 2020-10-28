@@ -194,6 +194,8 @@
     <string name="ignored_folder_picker_add_success">Folder added to ignored list</string>
     <string name="ignored_folder_picker_add_failed">Failed to add folder to ignored list</string>
     <string name="ignored_folder_picker_remove_success">Folder removed from ignored list</string>
+    <string name="duration_filter_title">Filter tracks by duration</string>
+    <string name="duration_filter_unit">sec</string>
 
     <!-- Look and feel section -->
     <string name="laf_category_theme">Theme</string>

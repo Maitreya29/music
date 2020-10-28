@@ -3,14 +3,17 @@ package com.hardcodecoder.pulsemusic.loaders;
 import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.ContentUris;
+import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.providers.ProviderManager;
+import com.hardcodecoder.pulsemusic.utils.AppSettings;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,24 +23,17 @@ public class LibraryLoader implements Callable<List<MusicModel>> {
 
     private final ContentResolver mContentResolver;
     private final String mSortOrder;
-    private final String mSelectionString;
-    private final String[] mSelectionArgs;
+    private String mSelectionString;
+    private String[] mSelectionArgs;
 
-    LibraryLoader(ContentResolver contentResolver, SortOrder sortOrder) {
-        this(contentResolver, sortOrder, null, null);
+    LibraryLoader(Context context, SortOrder sortOrder) {
+        this(context, sortOrder, null, null);
     }
 
-    LibraryLoader(ContentResolver contentResolver, SortOrder sortOrder, @Nullable String selectionString, @Nullable String[] selectionArgs) {
-        mContentResolver = contentResolver;
+    LibraryLoader(Context context, SortOrder sortOrder, @Nullable String selectionString, @Nullable String[] selectionArgs) {
+        mContentResolver = context.getContentResolver();
         mSortOrder = MediaStoreHelper.getSortOrderFor(sortOrder);
-        List<String> ignoredFoldersList = ProviderManager.getIgnoredListProvider().getIgnoredList();
-        if (null != ignoredFoldersList && !ignoredFoldersList.isEmpty()) {
-            mSelectionString = getSelection(selectionString, ignoredFoldersList.size());
-            mSelectionArgs = getSelectionArgs(selectionArgs, ignoredFoldersList);
-        } else {
-            mSelectionString = selectionString;
-            mSelectionArgs = selectionArgs;
-        }
+        prepareSelection(context, selectionString, selectionArgs);
     }
 
     @SuppressLint("InlinedApi")
@@ -99,23 +95,52 @@ public class LibraryLoader implements Callable<List<MusicModel>> {
         return libraryList;
     }
 
-    private String getSelection(String selection, int numIgnoredFolders) {
-        StringBuilder newSelection = new StringBuilder(
+    @SuppressLint("InlinedApi")
+    private void prepareSelection(Context context, @Nullable String selection, @Nullable String[] selectionArgs) {
+        StringBuilder completeSelection = new StringBuilder(
                 selection == null || selection.trim().equals("") ? "" : selection + " AND ");
-        newSelection.append(MediaStore.Audio.AudioColumns.DATA + " NOT LIKE ?");
-        for (int i = 0; i < numIgnoredFolders - 1; i++)
-            newSelection.append(" AND " + MediaStore.Audio.AudioColumns.DATA + " NOT LIKE ?");
 
-        return newSelection.toString();
+        // Append ignored folders selection
+        List<String> ignoredFoldersList = ProviderManager.getIgnoredListProvider().getIgnoredList();
+        completeSelection.append(getIgnoreFolderSelection(ignoredFoldersList.size()));
+
+        // Append duration filter
+        completeSelection.append(" AND ").append(MediaStore.Audio.Media.DURATION).append(" >= ?");
+
+        if (selectionArgs == null) selectionArgs = new String[0];
+        final int completeArgsLength = selectionArgs.length + ignoredFoldersList.size() + 1; /* +1 for duration filter */
+        String[] completeSelectionArgs = new String[completeArgsLength];
+
+        // Copy the existing selection args
+        System.arraycopy(selectionArgs, 0, completeSelectionArgs, 0, selectionArgs.length);
+
+        // Copy args for ignore folders
+        String[] ignoredFolderArgs = getIgnoredFolderSelection(ignoredFoldersList);
+        System.arraycopy(ignoredFolderArgs, 0, completeSelectionArgs, selectionArgs.length, ignoredFolderArgs.length);
+
+        // Copy args for duration filter
+        int durationFilter = AppSettings.getFilterDuration(context);
+        completeSelectionArgs[completeArgsLength - 1] = String.valueOf(durationFilter * 1000 /*Must be in mills*/);
+
+        mSelectionString = completeSelection.toString();
+        mSelectionArgs = completeSelectionArgs;
     }
 
-    private String[] getSelectionArgs(String[] selectionArgs, List<String> ignoredFolders) {
-        if (selectionArgs == null) selectionArgs = new String[0];
-        String[] newSelectionValues = new String[selectionArgs.length + ignoredFolders.size()];
-        System.arraycopy(selectionArgs, 0, newSelectionValues, 0, selectionArgs.length);
-        for (int i = selectionArgs.length; i < newSelectionValues.length; i++)
-            newSelectionValues[i] = ignoredFolders.get(i - selectionArgs.length) + "%";
+    @NonNull
+    private String getIgnoreFolderSelection(int size) {
+        StringBuilder builder = new StringBuilder();
+        builder.append(MediaStore.Audio.AudioColumns.DATA).append(" NOT LIKE ?");
+        for (int i = 0; i < size - 1; i++) {
+            builder.append(" AND ").append(MediaStore.Audio.AudioColumns.DATA).append(" NOT LIKE ?");
+        }
+        return builder.toString();
+    }
 
-        return newSelectionValues;
+    @NonNull
+    private String[] getIgnoredFolderSelection(@NonNull List<String> list) {
+        String[] selectionArgs = new String[list.size()];
+        for (int i = 0; i < selectionArgs.length; i++)
+            selectionArgs[i] = list.get(i).concat("%");
+        return selectionArgs;
     }
 }

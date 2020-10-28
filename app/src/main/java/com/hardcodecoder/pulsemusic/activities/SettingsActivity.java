@@ -1,21 +1,28 @@
 package com.hardcodecoder.pulsemusic.activities;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.session.MediaController;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.Preferences;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.fragments.settings.SettingsMainFragment;
 import com.hardcodecoder.pulsemusic.fragments.settings.base.SettingsBaseFragment;
 import com.hardcodecoder.pulsemusic.interfaces.SettingsFragmentsListener;
 import com.hardcodecoder.pulsemusic.shortcuts.AppShortcutsManager;
+import com.hardcodecoder.pulsemusic.singleton.TrackManager;
 
 public class SettingsActivity extends MediaSessionActivity implements SettingsFragmentsListener {
 
@@ -72,8 +79,42 @@ public class SettingsActivity extends MediaSessionActivity implements SettingsFr
     }
 
     @Override
-    public void onRequestRestart() {
+    public void requiresActivityRestart() {
         recreate();
+    }
+
+    @Override
+    public void requiresApplicationRestart() {
+        View layout = View.inflate(this, R.layout.alert_dialog_view, null);
+        MaterialTextView title = layout.findViewById(R.id.alert_dialog_title);
+        MaterialTextView msg = layout.findViewById(R.id.alert_dialog_message);
+
+        MaterialButton negativeBtn = layout.findViewById(R.id.alert_dialog_negative_btn);
+        MaterialButton positiveBtn = layout.findViewById(R.id.alert_dialog_positive_btn);
+
+        title.setText(R.string.restart_dialog_title);
+        msg.setText(R.string.restart_dialog_desc);
+
+        AlertDialog restartDialog = new MaterialAlertDialogBuilder(this)
+                .setView(layout).create();
+
+        positiveBtn.setText(R.string.restart_dialog_positive_btn_title);
+        positiveBtn.setOnClickListener(positive -> {
+            Intent restartIntent = getPackageManager().getLaunchIntentForPackage(getPackageName());
+            if (null != restartIntent) {
+                restartIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(restartIntent);
+                MediaController controller = getMediaController();
+                if (controller != null) controller.getTransportControls().stop();
+                TrackManager.getInstance().resetTrackManager();
+                restartDialog.dismiss();
+                finish();
+            }
+        });
+
+        negativeBtn.setText(R.string.restart_dialog_negative_btn_title);
+        negativeBtn.setOnClickListener(negative -> restartDialog.dismiss());
+        restartDialog.show();
     }
 
     @Override

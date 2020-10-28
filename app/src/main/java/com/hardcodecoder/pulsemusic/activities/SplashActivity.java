@@ -63,7 +63,7 @@ public class SplashActivity extends PMBActivity {
     }
 
     private void startMusicLoader() {
-        LoaderHelper.loadAllTracks(getContentResolver(), result ->
+        LoaderHelper.loadAllTracks(this, result ->
                 ProviderManager.getHistoryProvider().deleteObsoleteHistoryFiles(success ->
                         ProviderManager.getHistoryProvider().deleteHistoryFiles(
                                 100,

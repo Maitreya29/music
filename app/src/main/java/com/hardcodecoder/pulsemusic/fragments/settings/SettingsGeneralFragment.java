@@ -1,7 +1,5 @@
 package com.hardcodecoder.pulsemusic.fragments.settings;
 
-import android.content.Intent;
-import android.media.session.MediaController;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,21 +7,18 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 
-import com.google.android.material.button.MaterialButton;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.dialog.IgnoreFolderChooser;
 import com.hardcodecoder.pulsemusic.fragments.settings.base.SettingsBaseFragment;
-import com.hardcodecoder.pulsemusic.singleton.TrackManager;
-
-import java.util.Objects;
+import com.hardcodecoder.pulsemusic.utils.AppSettings;
+import com.hardcodecoder.pulsemusic.views.ValueSlider;
 
 public class SettingsGeneralFragment extends SettingsBaseFragment {
 
     public static final String TAG = SettingsGeneralFragment.class.getSimpleName();
+    private ValueSlider mDurationFilter;
+    private int mCurrentFilterDuration;
 
     public static SettingsGeneralFragment getInstance() {
         return new SettingsGeneralFragment();
@@ -53,45 +48,22 @@ public class SettingsGeneralFragment extends SettingsBaseFragment {
             if (null == getActivity()) return;
 
             IgnoreFolderChooser ignoreFolderChooser = IgnoreFolderChooser.getInstance(hasChanged -> {
-                if (hasChanged) showRestartDialog(view);
+                if (hasChanged) requiresApplicationRestart();
             });
             if (getFragmentManager() != null)
                 ignoreFolderChooser.show(getFragmentManager(), IgnoreFolderChooser.TAG);
         });
+
+        mDurationFilter = view.findViewById(R.id.duration_filter_slider);
+        mCurrentFilterDuration = AppSettings.getFilterDuration(getContext());
+        mDurationFilter.setSliderValue(mCurrentFilterDuration);
     }
 
-    private void showRestartDialog(View view) {
-        View layout = View.inflate(view.getContext(), R.layout.alert_dialog_view, null);
-        MaterialTextView title = layout.findViewById(R.id.alert_dialog_title);
-        MaterialTextView msg = layout.findViewById(R.id.alert_dialog_message);
-
-        MaterialButton negativeBtn = layout.findViewById(R.id.alert_dialog_negative_btn);
-        MaterialButton positiveBtn = layout.findViewById(R.id.alert_dialog_positive_btn);
-
-        title.setText(R.string.restart_dialog_title);
-        msg.setText(R.string.restart_dialog_desc);
-
-        AlertDialog restartDialog = new MaterialAlertDialogBuilder(Objects.requireNonNull(getContext()))
-                .setView(layout).create();
-
-        positiveBtn.setText(R.string.restart_dialog_positive_btn_title);
-        positiveBtn.setOnClickListener(positive -> {
-            if (getActivity() != null) {
-                Intent restartIntent = getActivity().getPackageManager().getLaunchIntentForPackage(getActivity().getPackageName());
-                if (null != restartIntent) {
-                    restartIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(restartIntent);
-                    MediaController controller = getActivity().getMediaController();
-                    if (controller != null) controller.getTransportControls().stop();
-                    TrackManager.getInstance().resetTrackManager();
-                    restartDialog.dismiss();
-                    getActivity().finish();
-                }
-            }
-        });
-
-        negativeBtn.setText(R.string.restart_dialog_negative_btn_title);
-        negativeBtn.setOnClickListener(negative -> restartDialog.dismiss());
-        restartDialog.show();
+    @Override
+    public void onStop() {
+        super.onStop();
+        int newFilterDuration = mDurationFilter.getSliderValue();
+        AppSettings.setFilterDuration(getContext(), newFilterDuration);
+        if (mCurrentFilterDuration != newFilterDuration) requiresApplicationRestart();
     }
 }

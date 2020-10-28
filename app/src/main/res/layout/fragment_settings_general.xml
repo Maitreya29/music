@@ -25,4 +25,24 @@
         app:settingItemText="Add or remove folders to exclude tracks from showing in library"
         app:settingItemTitle="Select ignored folders"
         app:settingToggleableItemEnabled="true" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/duration_filter_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:text="@string/duration_filter_title"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
+
+    <com.hardcodecoder.pulsemusic.views.ValueSlider
+        android:id="@+id/duration_filter_slider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="32dp"
+        android:paddingEnd="32dp"
+        app:endValue="60"
+        app:startValue="0"
+        app:unit="@string/duration_filter_unit" />
 </LinearLayout>

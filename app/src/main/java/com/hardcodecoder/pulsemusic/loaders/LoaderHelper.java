@@ -1,6 +1,7 @@
 package com.hardcodecoder.pulsemusic.loaders;
 
 import android.content.ContentResolver;
+import android.content.Context;
 
 import androidx.annotation.NonNull;
 
@@ -17,11 +18,11 @@ import java.util.List;
 
 public class LoaderHelper {
 
-    public static void loadAllTracks(@NonNull ContentResolver contentResolver, @NonNull Callback<List<MusicModel>> callback) {
+    public static void loadAllTracks(@NonNull Context context, @NonNull Callback<List<MusicModel>> callback) {
         // Since we are loading the master list
         // Any previous cached tracks must be made invalid
         LoaderCache.releaseCache();
-        TaskRunner.executeAsync(new LibraryLoader(contentResolver, SortOrder.TITLE_ASC), result -> {
+        TaskRunner.executeAsync(new LibraryLoader(context, SortOrder.TITLE_ASC), result -> {
             LoaderCache.setAllTracksList(result);
             callback.onComplete(LoaderCache.getAllTracksList());
         });
@@ -59,11 +60,11 @@ public class LoaderHelper {
         TaskRunner.executeAsync(new TopArtistsLoader(), callback);
     }
 
-    public static void loadAlbumTracks(@NonNull ContentResolver contentResolver,
+    public static void loadAlbumTracks(@NonNull Context context,
                                        @NonNull SortOrder sortOrder,
                                        long albumId,
                                        @NonNull Callback<List<MusicModel>> callback) {
-        TaskRunner.executeAsync(new AlbumTracksLoader(contentResolver, sortOrder, albumId), callback);
+        TaskRunner.executeAsync(new AlbumTracksLoader(context, sortOrder, albumId), callback);
     }
 
     public static void loadArtistAlbums(@NonNull ContentResolver contentResolver,

@@ -24,7 +24,12 @@ public abstract class SettingsBaseFragment extends Fragment {
 
     protected void requestActivityRestart() {
         if (mListener instanceof SettingsActivity)
-            mListener.onRequestRestart();
+            mListener.requiresActivityRestart();
+    }
+
+    protected void requiresApplicationRestart() {
+        if (mListener instanceof SettingsActivity)
+            mListener.requiresApplicationRestart();
     }
 
     public abstract String getFragmentTag();

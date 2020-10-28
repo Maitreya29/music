@@ -146,15 +146,15 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
     }
 
     private void playLatest() {
-        LoaderHelper.loadAllTracks(getContentResolver(), result -> LoaderHelper.loadLatestTracks(this::playPlaylist));
+        LoaderHelper.loadAllTracks(this, result -> LoaderHelper.loadLatestTracks(this::playPlaylist));
     }
 
     private void playSuggested() {
-        LoaderHelper.loadAllTracks(getContentResolver(), result -> LoaderHelper.loadSuggestionsList(this::playPlaylist));
+        LoaderHelper.loadAllTracks(this, result -> LoaderHelper.loadSuggestionsList(this::playPlaylist));
     }
 
     private void playShuffle() {
-        LoaderHelper.loadAllTracks(getContentResolver(), result -> {
+        LoaderHelper.loadAllTracks(this, result -> {
             List<MusicModel> masterShuffledList = null;
             if (null != result) {
                 masterShuffledList = new ArrayList<>(result);

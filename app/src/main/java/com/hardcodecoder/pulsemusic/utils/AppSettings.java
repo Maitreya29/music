@@ -178,4 +178,15 @@ public class AppSettings {
         return context.getSharedPreferences(Preferences.APP_SHORTCUT_THEME, Context.MODE_PRIVATE)
                 .getBoolean(Preferences.APP_SHORTCUT_THEME_MODE, false);
     }
+
+    public static void setFilterDuration(@NonNull Context context, int duration) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.LOADER_FILTER, Context.MODE_PRIVATE).edit();
+        editor.putInt(Preferences.FILTERED_DURATION, duration);
+        editor.apply();
+    }
+
+    public static int getFilterDuration(@NonNull Context context) {
+        return context.getSharedPreferences(Preferences.LOADER_FILTER, Context.MODE_PRIVATE)
+                .getInt(Preferences.FILTERED_DURATION, 10); // By default filter duration is 10 sec
+    }
 }
