@@ -57,7 +57,11 @@
         <activity android:name=".activities.FavoritesActivity" />
         <activity android:name=".activities.CurrentPlaylistActivity" />
         <activity android:name=".activities.UserPlaylistTracksActivity" />
-        <activity android:name=".activities.NowPlayingScreenActivity" />
+
+        <!-- Set transparent theme when activity starts to prevent solid colored background -->
+        <activity
+            android:name=".activities.NowPlayingScreenActivity"
+            android:theme="@style/TransparentThemeOverlay" />
 
         <receiver android:name=".receivers.BootCompletedReceiver">
             <intent-filter>
