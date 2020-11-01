@@ -189,13 +189,18 @@
     <string name="restart_dialog_desc">App needs to restart for changes to take effect</string>
     <string name="restart_dialog_positive_btn_title">Restart</string>
     <string name="restart_dialog_negative_btn_title">Do it later</string>
+    <string name="ignored_folder_title">Select ignored folders</string>
+    <string name="ignored_folder_desc">Add or remove folders to exclude tracks from showing in library</string>
     <string name="ignored_folder_picker_title">Select folders</string>
     <string name="ignored_folder_picker_empty_text">Ignored list is empty</string>
     <string name="ignored_folder_picker_add_success">Folder added to ignored list</string>
     <string name="ignored_folder_picker_add_failed">Failed to add folder to ignored list</string>
     <string name="ignored_folder_picker_remove_success">Folder removed from ignored list</string>
-    <string name="duration_filter_title">Filter tracks by duration</string>
+    <string name="duration_filter_title">Filter duration</string>
+    <string name="duration_filter_desc">Filters track based on track duration. Tracks with duration greater than this appears in the library</string>
     <string name="duration_filter_unit">sec</string>
+    <string name="remember_last_played_option_title">Remember last track</string>
+    <string name="remember_last_played_option_text">Last played track will be remembered and will be shown, on app relaunch</string>
 
     <!-- Look and feel section -->
     <string name="laf_category_theme">Theme</string>

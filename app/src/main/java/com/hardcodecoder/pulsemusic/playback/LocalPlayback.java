@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.providers.ProviderManager;
 import com.hardcodecoder.pulsemusic.singleton.TrackManager;
+import com.hardcodecoder.pulsemusic.utils.AppSettings;
 
 import java.io.IOException;
 
@@ -31,6 +32,7 @@ public class LocalPlayback implements
     private final IntentFilter filter = new IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY);
     private final Context mContext;
     private final AudioManager mAudioManager;
+    private final TrackManager mTrackManager;
     private Playback.Callback mPlaybackCallback;
     private final BroadcastReceiver becomingNoisyReceiver = new BroadcastReceiver() {
         @Override
@@ -47,7 +49,6 @@ public class LocalPlayback implements
     private TelephonyManager mTelephonyManager;
     private AudioFocusRequest mAudioFocusRequest = null;
     private PhoneStateListener mPhoneStateListener;
-    private final TrackManager mTrackManager;
     private int mMediaId = -99;
     private Handler mHandler;
     private boolean mDelayedPlayback = false;
@@ -153,6 +154,12 @@ public class LocalPlayback implements
 
     @Override
     public void onStop(boolean abandonAudioFocus) {
+        // Remember last played track even if option is disabled in the settings
+        // We will only display last track if settings is enabled
+        // Store current duration and track id
+        AppSettings.setLastTrackId(mContext, mMediaId);
+        AppSettings.setLastTrackPosition(mContext, getCurrentStreamingPosition());
+
         if (abandonAudioFocus) abandonAudioFocus();
 
         releaseMediaPlayer();

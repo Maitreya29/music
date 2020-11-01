@@ -91,6 +91,9 @@ public class Preferences {
     public static final String APP_SHORTCUT_THEME = "AppShortCutThemeMode";
     public static final String APP_SHORTCUT_THEME_MODE = "DarkThemeInUse";
 
-    public static final String LOADER_FILTER = "LoaderFilters";
-    public static final String FILTERED_DURATION = "FilteredDuration";
+    public static final String GENERAL_SETTINGS_PREF = "GeneralSettings";
+    public static final String FILTER_DURATION = "FilteredDuration";
+    public static final String REMEMBER_LAST_TRACK = "RememberLastTrack";
+    public static final String LAST_TRACK_ID = "LastTrackId";
+    public static final String LAST_TRACK_POSITION = "LastTRackPosition";
 }

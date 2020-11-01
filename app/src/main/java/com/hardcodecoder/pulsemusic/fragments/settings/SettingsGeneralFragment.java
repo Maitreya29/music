@@ -12,6 +12,7 @@ import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.dialog.IgnoreFolderChooser;
 import com.hardcodecoder.pulsemusic.fragments.settings.base.SettingsBaseFragment;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
+import com.hardcodecoder.pulsemusic.views.SettingsToggleableItem;
 import com.hardcodecoder.pulsemusic.views.ValueSlider;
 
 public class SettingsGeneralFragment extends SettingsBaseFragment {
@@ -57,13 +58,21 @@ public class SettingsGeneralFragment extends SettingsBaseFragment {
         mDurationFilter = view.findViewById(R.id.duration_filter_slider);
         mCurrentFilterDuration = AppSettings.getFilterDuration(getContext());
         mDurationFilter.setSliderValue(mCurrentFilterDuration);
+
+        boolean remember = AppSettings.isRememberLastTrack(view.getContext());
+        SettingsToggleableItem rememberOption = view.findViewById(R.id.remember_last_song_option);
+        rememberOption.setSwitchChecked(remember);
+        rememberOption.setOnSwitchCheckedChangedListener((buttonView, isChecked) ->
+                AppSettings.setRememberLastTrack(buttonView.getContext(), isChecked));
     }
 
     @Override
     public void onStop() {
         super.onStop();
         int newFilterDuration = mDurationFilter.getSliderValue();
-        AppSettings.setFilterDuration(getContext(), newFilterDuration);
-        if (mCurrentFilterDuration != newFilterDuration) requiresApplicationRestart();
+        if (mCurrentFilterDuration != newFilterDuration) {
+            AppSettings.setFilterDuration(getContext(), newFilterDuration);
+            requiresApplicationRestart();
+        }
     }
 }

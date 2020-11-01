@@ -180,13 +180,46 @@ public class AppSettings {
     }
 
     public static void setFilterDuration(@NonNull Context context, int duration) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.LOADER_FILTER, Context.MODE_PRIVATE).edit();
-        editor.putInt(Preferences.FILTERED_DURATION, duration);
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, Context.MODE_PRIVATE).edit();
+        editor.putInt(Preferences.FILTER_DURATION, duration);
         editor.apply();
     }
 
     public static int getFilterDuration(@NonNull Context context) {
-        return context.getSharedPreferences(Preferences.LOADER_FILTER, Context.MODE_PRIVATE)
-                .getInt(Preferences.FILTERED_DURATION, 10); // By default filter duration is 10 sec
+        return context.getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, Context.MODE_PRIVATE)
+                .getInt(Preferences.FILTER_DURATION, 30); // By default filter duration is 30 sec
+    }
+
+    public static void setRememberLastTrack(@NonNull Context context, boolean enabled) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, Context.MODE_PRIVATE).edit();
+        editor.putBoolean(Preferences.REMEMBER_LAST_TRACK, enabled);
+        editor.apply();
+    }
+
+    public static boolean isRememberLastTrack(@NonNull Context context) {
+        return context.getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, Context.MODE_PRIVATE)
+                .getBoolean(Preferences.REMEMBER_LAST_TRACK, false); // By default do not remember last track
+    }
+
+    public static void setLastTrackId(@NonNull Context context, int id) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, Context.MODE_PRIVATE).edit();
+        editor.putInt(Preferences.LAST_TRACK_ID, id);
+        editor.apply();
+    }
+
+    public static int getLastTrackId(@NonNull Context context) {
+        return context.getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, Context.MODE_PRIVATE)
+                .getInt(Preferences.LAST_TRACK_ID, -1);
+    }
+
+    public static void setLastTrackPosition(@NonNull Context context, long position) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, Context.MODE_PRIVATE).edit();
+        editor.putLong(Preferences.LAST_TRACK_POSITION, position);
+        editor.apply();
+    }
+
+    public static long getLastTrackPosition(@NonNull Context context) {
+        return context.getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, Context.MODE_PRIVATE)
+                .getLong(Preferences.LAST_TRACK_POSITION, 0); // By default do not remember last track
     }
 }

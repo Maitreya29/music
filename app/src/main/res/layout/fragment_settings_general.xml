@@ -1,48 +1,63 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingTop="16dp"
-    android:paddingBottom="0dp">
+    android:layout_height="wrap_content">
 
-    <com.hardcodecoder.pulsemusic.views.AccentColorTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="72dp"
-        android:text="@string/general_category_loader_section_title"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Overline" />
-
-    <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
-        android:id="@+id/ignore_folder_picker"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textStyle="normal"
-        app:settingItemDesaturatedColorsInDarkMode="false"
-        app:settingItemIcon="@drawable/ic_folder_add"
-        app:settingItemIconBackgroundColor="?windowBackgroundColor"
-        app:settingItemIconColor="?attr/colorControlNormal"
-        app:settingItemText="Add or remove folders to exclude tracks from showing in library"
-        app:settingItemTitle="Select ignored folders"
-        app:settingToggleableItemEnabled="true" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/duration_filter_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="72dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
         android:paddingTop="16dp"
-        android:paddingBottom="16dp"
-        android:text="@string/duration_filter_title"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
+        android:paddingBottom="0dp">
 
-    <com.hardcodecoder.pulsemusic.views.ValueSlider
-        android:id="@+id/duration_filter_slider"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingStart="32dp"
-        android:paddingEnd="32dp"
-        app:endValue="60"
-        app:startValue="0"
-        app:unit="@string/duration_filter_unit" />
-</LinearLayout>
+        <com.hardcodecoder.pulsemusic.views.AccentColorTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="72dp"
+            android:text="@string/general_category_loader_section_title"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Overline" />
+
+        <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
+            android:id="@+id/ignore_folder_picker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="normal"
+            app:settingItemDesaturatedColorsInDarkMode="false"
+            app:settingItemIcon="@drawable/ic_folder_add"
+            app:settingItemIconBackgroundColor="?windowBackgroundColor"
+            app:settingItemIconColor="?attr/colorControlNormal"
+            app:settingItemText="@string/ignored_folder_desc"
+            app:settingItemTitle="@string/ignored_folder_title"
+            app:settingToggleableItemEnabled="true" />
+
+        <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
+            android:id="@+id/duration_filter_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="normal"
+            app:settingItemDesaturatedColorsInDarkMode="false"
+            app:settingItemIcon="@drawable/ic_filter"
+            app:settingItemIconBackgroundColor="?windowBackgroundColor"
+            app:settingItemIconColor="?attr/colorControlNormal"
+            app:settingItemText="@string/duration_filter_desc"
+            app:settingItemTitle="@string/duration_filter_title"
+            app:settingToggleableItemEnabled="true" />
+
+        <com.hardcodecoder.pulsemusic.views.ValueSlider
+            android:id="@+id/duration_filter_slider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="32dp"
+            android:paddingEnd="32dp"
+            app:endValue="60"
+            app:startValue="0"
+            app:unit="@string/duration_filter_unit" />
+
+        <com.hardcodecoder.pulsemusic.views.SettingsToggleableItem
+            android:id="@+id/remember_last_song_option"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:settingToggleableItemText="@string/remember_last_played_option_text"
+            app:settingToggleableItemTitle="@string/remember_last_played_option_title" />
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
