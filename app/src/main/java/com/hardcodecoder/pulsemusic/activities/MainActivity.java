@@ -25,7 +25,10 @@ import com.hardcodecoder.pulsemusic.fragments.main.ControlsFragment;
 import com.hardcodecoder.pulsemusic.fragments.main.HomeFragment;
 import com.hardcodecoder.pulsemusic.fragments.main.LibraryFragment;
 import com.hardcodecoder.pulsemusic.fragments.main.PlaylistFragment;
+import com.hardcodecoder.pulsemusic.loaders.LoaderHelper;
+import com.hardcodecoder.pulsemusic.playback.PlaybackManager;
 import com.hardcodecoder.pulsemusic.themes.ThemeColors;
+import com.hardcodecoder.pulsemusic.utils.AppSettings;
 
 public class MainActivity extends MediaSessionActivity {
 
@@ -210,6 +213,15 @@ public class MainActivity extends MediaSessionActivity {
                 mController.getPlaybackState() != null &&
                 mController.getPlaybackState().getState() != PlaybackState.STATE_STOPPED)
             showControlsFragment();
+
+        if (mController.getPlaybackState() == null) {
+            if (AppSettings.isRememberLastTrack(this)) {
+                LoaderHelper.loadLastPlayedTrackBundled(this, bundle -> {
+                    if (null == bundle) return;
+                    mController.getTransportControls().sendCustomAction(PlaybackManager.ACTION_LOAD_LAST_TRACK, bundle);
+                });
+            }
+        }
     }
 
     @Override

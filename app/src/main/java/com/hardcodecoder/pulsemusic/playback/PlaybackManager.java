@@ -7,8 +7,10 @@ import android.media.MediaMetadata;
 import android.media.session.MediaSession;
 import android.media.session.PlaybackState;
 import android.net.Uri;
+import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.hardcodecoder.pulsemusic.helper.MediaArtHelper;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
@@ -19,6 +21,9 @@ import java.io.InputStream;
 
 public class PlaybackManager implements Playback.Callback {
 
+    public static final String ACTION_LOAD_LAST_TRACK = "LoadLastTrack";
+    public static final String TRACK_ITEM = "TrackItem";
+    public static final String PLAYBACK_POSITION = "PlaybackPosition";
     public static final short ACTION_PLAY_NEXT = 1;
     public static final short ACTION_PLAY_PREV = -1;
     private final PlaybackState.Builder mStateBuilder = new PlaybackState.Builder();
@@ -59,6 +64,12 @@ public class PlaybackManager implements Playback.Callback {
         public void onSeekTo(long pos) {
             mPlayback.onSeekTo((int) pos);
         }
+
+        @Override
+        public void onCustomAction(@NonNull String action, @Nullable Bundle extras) {
+            if (action.equals(ACTION_LOAD_LAST_TRACK) && extras != null)
+                handleLoadLastTrack(extras);
+        }
     };
 
     public PlaybackManager(Context context, Playback playback, PlaybackServiceCallback serviceCallback) {
@@ -91,6 +102,16 @@ public class PlaybackManager implements Playback.Callback {
     private void handleSkipRequest(short di) {
         if (mTrackManager.canSkipTrack(di)) handlePlayRequest();
         else handlePauseRequest();
+    }
+
+    private void handleLoadLastTrack(@NonNull Bundle bundle) {
+        mServiceCallback.onPlaybackStart();
+        final MusicModel trackItem = (MusicModel) bundle.getSerializable(TRACK_ITEM);
+        if (trackItem == null) return;
+        final int resumePosition = bundle.getInt(PLAYBACK_POSITION);
+        mTrackManager.addToActiveQueue(trackItem);
+        mTrackManager.setActiveIndex(0);
+        mPlayback.onPlay(resumePosition, false);
     }
 
     private void updatePlaybackState(int currentState) {

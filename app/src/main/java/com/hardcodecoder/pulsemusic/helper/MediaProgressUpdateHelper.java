@@ -13,9 +13,9 @@ public class MediaProgressUpdateHelper extends Handler {
 
     private static final int CMD_REFRESH_PROGRESS = 18;
     private static final long DEFAULT_UPDATE_INTERVAL_MILLS = 1000;
-    private MediaController mController;
-    private Callback mCallback;
-    private long mUpdateIntervalMills;
+    private final MediaController mController;
+    private final Callback mCallback;
+    private final long mUpdateIntervalMills;
     private final MediaController.Callback controllerCallback = new MediaController.Callback() {
         @Override
         public void onPlaybackStateChanged(@Nullable PlaybackState state) {

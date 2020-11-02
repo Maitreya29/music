@@ -44,6 +44,14 @@ public class DataModelHelper {
         return modelList;
     }
 
+    @Nullable
+    public static MusicModel getModelFromId(int id) {
+        for (MusicModel md : LoaderCache.getAllTracksList()) {
+            if (md.getId() == id) return md;
+        }
+        return null;
+    }
+
     public static MusicModel buildMusicModelFrom(Context context, Intent data) {
         String path = data.getDataString();
         if (null == path) return null;

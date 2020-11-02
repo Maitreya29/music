@@ -95,5 +95,5 @@ public class Preferences {
     public static final String FILTER_DURATION = "FilteredDuration";
     public static final String REMEMBER_LAST_TRACK = "RememberLastTrack";
     public static final String LAST_TRACK_ID = "LastTrackId";
-    public static final String LAST_TRACK_POSITION = "LastTRackPosition";
+    public static final String LAST_TRACK_POSITION = "LastTrackPosition";
 }
