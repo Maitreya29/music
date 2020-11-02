@@ -8,8 +8,11 @@ import android.media.session.MediaSession;
 import android.media.session.PlaybackState;
 import android.net.Uri;
 
+import androidx.annotation.NonNull;
+
 import com.hardcodecoder.pulsemusic.helper.MediaArtHelper;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
+import com.hardcodecoder.pulsemusic.providers.ProviderManager;
 import com.hardcodecoder.pulsemusic.singleton.TrackManager;
 
 import java.io.InputStream;
@@ -25,10 +28,9 @@ public class PlaybackManager implements Playback.Callback {
     private final Context mContext;
     private boolean mManualPause;
     private final MediaSession.Callback mMediaSessionCallback = new MediaSession.Callback() {
-
         @Override
         public void onPlay() {
-            handlePlayRequest(false);
+            handlePlayRequest();
             mManualPause = false;
         }
 
@@ -60,10 +62,10 @@ public class PlaybackManager implements Playback.Callback {
     };
 
     public PlaybackManager(Context context, Playback playback, PlaybackServiceCallback serviceCallback) {
-        this.mContext = context;
-        this.mPlayback = playback;
-        this.mTrackManager = TrackManager.getInstance();
-        this.mServiceCallback = serviceCallback;
+        mContext = context;
+        mPlayback = playback;
+        mTrackManager = TrackManager.getInstance();
+        mServiceCallback = serviceCallback;
         mPlayback.setCallback(this);
     }
 
@@ -71,16 +73,9 @@ public class PlaybackManager implements Playback.Callback {
         return mMediaSessionCallback;
     }
 
-    private void handlePlayRequest(boolean repeatMode) {
-        boolean hasMediaChanged = false;
-        if (!repeatMode) {
-            MusicModel md = mTrackManager.getActiveQueueItem();
-            if (mPlayback.getActiveMediaId() != md.getId())
-                hasMediaChanged = true;
-            mServiceCallback.onPlaybackStart();
-            updateMetaData(md, hasMediaChanged);
-        }
-        mPlayback.onPlay(hasMediaChanged, repeatMode);
+    private void handlePlayRequest() {
+        mServiceCallback.onPlaybackStart();
+        mPlayback.onPlay(0, true);
     }
 
     private void handlePauseRequest() {
@@ -94,10 +89,8 @@ public class PlaybackManager implements Playback.Callback {
     }
 
     private void handleSkipRequest(short di) {
-        if (mTrackManager.canSkipTrack(di))
-            handlePlayRequest(mTrackManager.isCurrentTrackInRepeatMode());
-        else
-            handlePauseRequest();
+        if (mTrackManager.canSkipTrack(di)) handlePlayRequest();
+        else handlePauseRequest();
     }
 
     private void updatePlaybackState(int currentState) {
@@ -109,18 +102,6 @@ public class PlaybackManager implements Playback.Callback {
             mServiceCallback.onStartNotification();
         } else if (currentState == PlaybackState.STATE_STOPPED) {
             mServiceCallback.onStopNotification();
-        }
-    }
-
-    private void updateMetaData(MusicModel md, boolean hasMediaChanged) {
-        if (hasMediaChanged) {
-            MediaMetadata.Builder metadataBuilder = new MediaMetadata.Builder();
-            metadataBuilder.putLong(MediaMetadata.METADATA_KEY_DURATION, md.getTrackDuration());
-            metadataBuilder.putString(MediaMetadata.METADATA_KEY_TITLE, md.getTrackName());
-            metadataBuilder.putString(MediaMetadata.METADATA_KEY_ARTIST, md.getArtist());
-            metadataBuilder.putString(MediaMetadata.METADATA_KEY_ALBUM, md.getAlbum());
-            metadataBuilder.putBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART, loadAlbumArt(md.getAlbumArtUrl(), md.getAlbumId()));
-            mServiceCallback.onMetaDataChanged(metadataBuilder.build());
         }
     }
 
@@ -149,12 +130,9 @@ public class PlaybackManager implements Playback.Callback {
 
     @Override
     public void onFocusChanged(boolean resumePlayback) {
-        if (mManualPause)
-            return;
-        if (resumePlayback)
-            handlePlayRequest(false);
-        else
-            handlePauseRequest();
+        if (mManualPause) return;
+        if (resumePlayback) handlePlayRequest();
+        else handlePauseRequest();
     }
 
     @Override
@@ -165,6 +143,24 @@ public class PlaybackManager implements Playback.Callback {
     @Override
     public void onPlaybackStateChanged(int state) {
         updatePlaybackState(state);
+    }
+
+    @Override
+    public void onTrackChanged(@NonNull MusicModel trackItem) {
+        // Track has changed, need to update metadata
+        MediaMetadata.Builder metadataBuilder = new MediaMetadata.Builder();
+        metadataBuilder.putLong(MediaMetadata.METADATA_KEY_DURATION, trackItem.getTrackDuration());
+        metadataBuilder.putString(MediaMetadata.METADATA_KEY_TITLE, trackItem.getTrackName());
+        metadataBuilder.putString(MediaMetadata.METADATA_KEY_ARTIST, trackItem.getArtist());
+        metadataBuilder.putString(MediaMetadata.METADATA_KEY_ALBUM, trackItem.getAlbum());
+        metadataBuilder.putBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART, loadAlbumArt(trackItem.getAlbumArtUrl(), trackItem.getAlbumId()));
+        mServiceCallback.onMetaDataChanged(metadataBuilder.build());
+
+        // Do not save any media that was picked by user
+        // All data might not available to work with such tracks when building
+        // HistoryRecords and or TopAlbums/TopArtist
+        if (trackItem.getAlbumId() >= 0)
+            ProviderManager.getHistoryProvider().addToHistory(trackItem);
     }
 
     public interface PlaybackServiceCallback {
