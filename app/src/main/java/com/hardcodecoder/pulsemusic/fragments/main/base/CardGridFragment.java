@@ -1,11 +1,9 @@
 package com.hardcodecoder.pulsemusic.fragments.main.base;
 
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -28,37 +26,6 @@ public class CardGridFragment extends PMBGridFragment {
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(getMenuRes(getCurrentOrientation()), menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_action_sort_asc:
-                changeSortOrder(Preferences.SORT_ORDER_ASC);
-                break;
-            case R.id.menu_action_sort_desc:
-                changeSortOrder(Preferences.SORT_ORDER_DESC);
-                break;
-            case R.id.two:
-                updateGridSpanCount(Configuration.ORIENTATION_PORTRAIT, 2);
-                break;
-            case R.id.three:
-                updateGridSpanCount(Configuration.ORIENTATION_PORTRAIT, 3);
-                break;
-            case R.id.four:
-                updateGridSpanCount(Configuration.ORIENTATION_PORTRAIT, 4);
-                break;
-            case R.id.l_four:
-                updateGridSpanCount(Configuration.ORIENTATION_LANDSCAPE, 4);
-                break;
-            case R.id.l_five:
-                updateGridSpanCount(Configuration.ORIENTATION_LANDSCAPE, 5);
-                break;
-            case R.id.l_six:
-                updateGridSpanCount(Configuration.ORIENTATION_LANDSCAPE, 6);
-                break;
-        }
-        return true;
     }
 
     @Override

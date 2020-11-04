@@ -9,13 +9,17 @@
         app:iconTint="?attr/colorControlNormal"
         app:showAsAction="ifRoom">
         <menu>
-            <item
-                android:id="@+id/menu_action_sort_asc"
-                android:title="@string/alphabet_asc" />
+            <group
+                android:id="@+id/group_artist_sort"
+                android:checkableBehavior="single">
+                <item
+                    android:id="@+id/menu_action_sort_artist_title_asc"
+                    android:title="@string/alphabet_asc" />
 
-            <item
-                android:id="@+id/menu_action_sort_desc"
-                android:title="@string/alphabet_desc" />
+                <item
+                    android:id="@+id/menu_action_sort_artist_title_desc"
+                    android:title="@string/alphabet_desc" />
+            </group>
         </menu>
     </item>
     <item
@@ -25,17 +29,21 @@
         app:iconTint="?attr/colorControlNormal"
         app:showAsAction="ifRoom">
         <menu>
-            <item
-                android:id="@+id/l_four"
-                android:title="@string/four" />
+            <group
+                android:id="@+id/group_artist_grid"
+                android:checkableBehavior="single">
+                <item
+                    android:id="@+id/artist_four"
+                    android:title="@string/four" />
 
-            <item
-                android:id="@+id/l_five"
-                android:title="@string/five" />
+                <item
+                    android:id="@+id/artist_five"
+                    android:title="@string/five" />
 
-            <item
-                android:id="@+id/l_six"
-                android:title="@string/six" />
+                <item
+                    android:id="@+id/artist_six"
+                    android:title="@string/six" />
+            </group>
         </menu>
     </item>
 </menu>

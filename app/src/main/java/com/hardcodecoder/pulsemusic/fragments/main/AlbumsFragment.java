@@ -2,6 +2,7 @@ package com.hardcodecoder.pulsemusic.fragments.main;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewStub;
@@ -45,23 +46,87 @@ public class AlbumsFragment extends CardGridFragment {
     }
 
     @Override
+    public void onPrepareOptionsMenu(@NonNull Menu menu) {
+        MenuItem sortItem = null;
+        final int sortOrder = getCurrentSortOrder();
+
+        if (sortOrder == Preferences.SORT_ORDER_ASC)
+            sortItem = menu.findItem(R.id.menu_action_sort_album_title_asc);
+        else if (sortOrder == Preferences.SORT_ORDER_DESC)
+            sortItem = menu.findItem(R.id.menu_action_sort_album_title_desc);
+        else if (sortOrder == Preferences.SORT_ORDER_ALBUM_ARTIST_ASC)
+            sortItem = menu.findItem(R.id.menu_action_sort_album_artist_asc);
+        else if (sortOrder == Preferences.SORT_ORDER_ALBUM_ARTIST_DESC)
+            sortItem = menu.findItem(R.id.menu_action_sort_album_artist_desc);
+        else if (sortOrder == Preferences.SORT_ORDER_ALBUM_FIRST_YEAR_ASC)
+            sortItem = menu.findItem(R.id.menu_action_sort_album_first_year_asc);
+        else if (sortOrder == Preferences.SORT_ORDER_ALBUM_FIRST_YEAR_DESC)
+            sortItem = menu.findItem(R.id.menu_action_sort_album_first_year_desc);
+
+
+        MenuItem spanItem = null;
+        final int spanCount = getCurrentSpanCount();
+
+        if (spanCount == 2)
+            spanItem = menu.findItem(R.id.album_two);
+        else if (spanCount == 3)
+            spanItem = menu.findItem(R.id.album_three);
+        else if (spanCount == 4)
+            spanItem = menu.findItem(R.id.album_four);
+        else if (spanCount == 5)
+            spanItem = menu.findItem(R.id.album_five);
+        else if (spanCount == 6)
+            spanItem = menu.findItem(R.id.album_six);
+
+        if (sortItem != null)
+            sortItem.setChecked(true);
+        if (spanItem != null)
+            spanItem.setChecked(true);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_action_sort_artist_asc:
-                changeSortOrder(Preferences.SORT_ORDER_ALBUM_ARTIST_ASC);
-                break;
-            case R.id.menu_action_sort_artist_desc:
-                changeSortOrder(Preferences.SORT_ORDER_ALBUM_ARTIST_DESC);
-                break;
-            case R.id.menu_action_sort_first_year_asc:
-                changeSortOrder(Preferences.SORT_ORDER_ALBUM_FIRST_YEAR_ASC);
-                break;
-            case R.id.menu_action_sort_first_year_desc:
-                changeSortOrder(Preferences.SORT_ORDER_ALBUM_FIRST_YEAR_DESC);
-                break;
-            default:
-                super.onOptionsItemSelected(item);
+        final int groupId = item.getGroupId();
+        if (groupId == R.id.group_album_sort) {
+            final int id = item.getItemId();
+            int sortOrder;
+
+            if (id == R.id.menu_action_sort_album_title_asc)
+                sortOrder = Preferences.SORT_ORDER_ASC;
+            else if (id == R.id.menu_action_sort_album_title_desc)
+                sortOrder = Preferences.SORT_ORDER_DESC;
+            else if (id == R.id.menu_action_sort_album_artist_asc)
+                sortOrder = Preferences.SORT_ORDER_ALBUM_ARTIST_ASC;
+            else if (id == R.id.menu_action_sort_album_artist_desc)
+                sortOrder = Preferences.SORT_ORDER_ALBUM_ARTIST_DESC;
+            else if (id == R.id.menu_action_sort_album_first_year_asc)
+                sortOrder = Preferences.SORT_ORDER_ALBUM_FIRST_YEAR_ASC;
+            else if (id == R.id.menu_action_sort_album_first_year_desc)
+                sortOrder = Preferences.SORT_ORDER_ALBUM_FIRST_YEAR_DESC;
+            else sortOrder = Preferences.SORT_ORDER_ASC;
+
+            changeSortOrder(sortOrder);
+
+        } else if (groupId == R.id.group_album_grid) {
+            final int id = item.getItemId();
+            int spanCount;
+
+            if (id == R.id.album_two)
+                spanCount = 2;
+            else if (id == R.id.album_three)
+                spanCount = 3;
+            else if (id == R.id.album_four)
+                spanCount = 4;
+            else if (id == R.id.album_five)
+                spanCount = 5;
+            else if (id == R.id.album_six)
+                spanCount = 6;
+            else spanCount = 2;
+
+            updateGridSpanCount(getCurrentOrientation(), spanCount);
         }
+
+        item.setChecked(true);
         return true;
     }
 

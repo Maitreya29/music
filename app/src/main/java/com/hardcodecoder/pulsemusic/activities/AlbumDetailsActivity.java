@@ -3,6 +3,7 @@ package com.hardcodecoder.pulsemusic.activities;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewStub;
 import android.view.animation.AnimationUtils;
@@ -66,21 +67,46 @@ public class AlbumDetailsActivity extends BaseDetailsActivity {
     }
 
     @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem sortItem = null;
+        final int sortOrder = getCurrentSortOrder();
+
+        if (sortOrder == Preferences.SORT_ORDER_ASC)
+            sortItem = menu.findItem(R.id.menu_action_sort_album_title_asc);
+        else if (sortOrder == Preferences.SORT_ORDER_DESC)
+            sortItem = menu.findItem(R.id.menu_action_sort_album_title_desc);
+        else if (sortOrder == Preferences.SORT_ORDER_ALBUM_TRACK_NUMBER_ASC)
+            sortItem = menu.findItem(R.id.menu_action_sort_track_num_asc);
+        else if (sortOrder == Preferences.SORT_ORDER_ALBUM_TRACK_NUMBER_DESC)
+            sortItem = menu.findItem(R.id.menu_action_sort_track_num_desc);
+
+        if (sortItem != null)
+            sortItem.setChecked(true);
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_action_sort_asc:
-                onChangeSortOrder(Preferences.SORT_ORDER_ASC);
-                break;
-            case R.id.menu_action_sort_desc:
-                onChangeSortOrder(Preferences.SORT_ORDER_DESC);
-                break;
-            case R.id.menu_action_sort_track_num_asc:
-                onChangeSortOrder(Preferences.SORT_ORDER_ALBUM_TRACK_NUMBER_ASC);
-                break;
-            case R.id.menu_action_sort_track_num_desc:
-                onChangeSortOrder(Preferences.SORT_ORDER_ALBUM_TRACK_NUMBER_DESC);
-                break;
+        final int groupId = item.getGroupId();
+        if (groupId == R.id.group_album_sort) {
+            final int id = item.getItemId();
+            int sortOrder;
+
+            if (id == R.id.menu_action_sort_album_title_asc)
+                sortOrder = Preferences.SORT_ORDER_ASC;
+            else if (id == R.id.menu_action_sort_album_title_desc)
+                sortOrder = Preferences.SORT_ORDER_DESC;
+            else if (id == R.id.menu_action_sort_track_num_asc)
+                sortOrder = Preferences.SORT_ORDER_ALBUM_TRACK_NUMBER_ASC;
+            else if (id == R.id.menu_action_sort_track_num_desc)
+                sortOrder = Preferences.SORT_ORDER_ALBUM_TRACK_NUMBER_DESC;
+            else
+                sortOrder = Preferences.SORT_ORDER_ASC;
+
+            onChangeSortOrder(sortOrder);
         }
+
+        item.setChecked(true);
         return true;
     }
 

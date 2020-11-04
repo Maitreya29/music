@@ -9,12 +9,12 @@ import androidx.fragment.app.Fragment;
 public abstract class PMBGridFragment extends Fragment {
 
     private int mCurrentOrientation;
-    private int mSpanCount;
+    private int mCurrentSpanCount;
     private int mCurrentSortOrder;
 
     void initialize() {
         mCurrentOrientation = getResources().getConfiguration().orientation;
-        mSpanCount = mCurrentOrientation == Configuration.ORIENTATION_PORTRAIT ?
+        mCurrentSpanCount = mCurrentOrientation == Configuration.ORIENTATION_PORTRAIT ?
                 getPortraitModeSpanCount() : getLandscapeModeSpanCount();
         mCurrentSortOrder = getSortOrder();
     }
@@ -26,11 +26,11 @@ public abstract class PMBGridFragment extends Fragment {
         if (newOrientation != mCurrentOrientation) {
             mCurrentOrientation = newOrientation;
             if (newOrientation == Configuration.ORIENTATION_LANDSCAPE)
-                mSpanCount = getLandscapeModeSpanCount();
+                mCurrentSpanCount = getLandscapeModeSpanCount();
             else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT)
-                mSpanCount = getPortraitModeSpanCount();
+                mCurrentSpanCount = getPortraitModeSpanCount();
 
-            onLayoutSpanCountChanged(mCurrentOrientation, mSpanCount);
+            onLayoutSpanCountChanged(mCurrentOrientation, mCurrentSpanCount);
         }
         if (null != getActivity())
             getActivity().invalidateOptionsMenu();
@@ -45,7 +45,7 @@ public abstract class PMBGridFragment extends Fragment {
     }
 
     protected int getCurrentSpanCount() {
-        return mSpanCount;
+        return mCurrentSpanCount;
     }
 
     protected void changeSortOrder(int newSortOrder) {

@@ -1,11 +1,9 @@
 package com.hardcodecoder.pulsemusic.fragments.main.base;
 
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -28,52 +26,6 @@ public class ListGridFragment extends PMBGridFragment {
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(getMenuRes(getCurrentOrientation()), menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_action_sort_asc:
-                changeSortOrder(Preferences.SORT_ORDER_ASC);
-                break;
-            case R.id.menu_action_sort_desc:
-                changeSortOrder(Preferences.SORT_ORDER_DESC);
-                break;
-            case R.id.menu_action_sort_duration_asc:
-                changeSortOrder(Preferences.SORT_ORDER_DURATION_ASC);
-                break;
-            case R.id.menu_action_sort_duration_desc:
-                changeSortOrder(Preferences.SORT_ORDER_DURATION_DESC);
-                break;
-            case R.id.menu_action_sort_date_added_asc:
-                changeSortOrder(Preferences.SORT_ORDER_DATE_ADDED_ASC);
-                break;
-            case R.id.menu_action_sort_date_added_desc:
-                changeSortOrder(Preferences.SORT_ORDER_DATE_ADDED_DESC);
-                break;
-            case R.id.menu_action_sort_date_modified_asc:
-                changeSortOrder(Preferences.SORT_ORDER_DATE_MODIFIED_ASC);
-                break;
-            case R.id.menu_action_sort_date_modified_desc:
-                changeSortOrder(Preferences.SORT_ORDER_DATE_MODIFIED_DESC);
-                break;
-            case R.id.one:
-                updateGridSpanCount(Configuration.ORIENTATION_PORTRAIT, 1);
-                break;
-            case R.id.two:
-                updateGridSpanCount(Configuration.ORIENTATION_PORTRAIT, 2);
-                break;
-            case R.id.l_two:
-                updateGridSpanCount(Configuration.ORIENTATION_LANDSCAPE, 2);
-                break;
-            case R.id.l_three:
-                updateGridSpanCount(Configuration.ORIENTATION_LANDSCAPE, 3);
-                break;
-            case R.id.l_four:
-                updateGridSpanCount(Configuration.ORIENTATION_LANDSCAPE, 4);
-                break;
-        }
-        return true;
     }
 
     @Override

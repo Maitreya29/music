@@ -9,29 +9,33 @@
         app:iconTint="?attr/colorControlNormal"
         app:showAsAction="ifRoom">
         <menu>
-            <item
-                android:id="@+id/menu_action_sort_asc"
-                android:title="@string/alphabet_asc" />
+            <group
+                android:id="@+id/group_album_sort"
+                android:checkableBehavior="single">
+                <item
+                    android:id="@+id/menu_action_sort_album_title_asc"
+                    android:title="@string/alphabet_asc" />
 
-            <item
-                android:id="@+id/menu_action_sort_desc"
-                android:title="@string/alphabet_desc" />
+                <item
+                    android:id="@+id/menu_action_sort_album_title_desc"
+                    android:title="@string/alphabet_desc" />
 
-            <item
-                android:id="@+id/menu_action_sort_artist_asc"
-                android:title="@string/album_artist_asc" />
+                <item
+                    android:id="@+id/menu_action_sort_album_artist_asc"
+                    android:title="@string/album_artist_asc" />
 
-            <item
-                android:id="@+id/menu_action_sort_artist_desc"
-                android:title="@string/album_artist_desc" />
+                <item
+                    android:id="@+id/menu_action_sort_album_artist_desc"
+                    android:title="@string/album_artist_desc" />
 
-            <item
-                android:id="@+id/menu_action_sort_first_year_asc"
-                android:title="@string/album_first_year_asc" />
+                <item
+                    android:id="@+id/menu_action_sort_album_first_year_asc"
+                    android:title="@string/album_first_year_asc" />
 
-            <item
-                android:id="@+id/menu_action_sort_first_year_desc"
-                android:title="@string/album_first_year_desc" />
+                <item
+                    android:id="@+id/menu_action_sort_album_first_year_desc"
+                    android:title="@string/album_first_year_desc" />
+            </group>
         </menu>
     </item>
     <item
@@ -41,17 +45,21 @@
         app:iconTint="?attr/colorControlNormal"
         app:showAsAction="ifRoom">
         <menu>
-            <item
-                android:id="@+id/l_four"
-                android:title="@string/four" />
+            <group
+                android:id="@+id/group_album_grid"
+                android:checkableBehavior="single">
+                <item
+                    android:id="@+id/album_four"
+                    android:title="@string/four" />
 
-            <item
-                android:id="@+id/l_five"
-                android:title="@string/five" />
+                <item
+                    android:id="@+id/album_five"
+                    android:title="@string/five" />
 
-            <item
-                android:id="@+id/l_six"
-                android:title="@string/six" />
+                <item
+                    android:id="@+id/album_six"
+                    android:title="@string/six" />
+            </group>
         </menu>
     </item>
 </menu>

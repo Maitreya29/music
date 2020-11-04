@@ -1,6 +1,7 @@
 package com.hardcodecoder.pulsemusic.activities;
 
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewStub;
 import android.view.animation.AnimationUtils;
@@ -42,11 +43,45 @@ public class ArtistDetailsActivity extends BaseDetailsActivity {
 
         String artistTitle = getIntent().getStringExtra(KEY_ARTIST_TITLE);
         loadImage();
-
+        artistTitle = artistTitle == null ? "<unknown>" : artistTitle;
         setUpToolbar(findViewById(R.id.details_activity_toolbar), artistTitle);
 
         mSortOrder = resolveSortOrder(getSortOrder());
         LoaderHelper.loadArtistAlbums(getContentResolver(), artistTitle, mSortOrder, this::loadItems);
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem sortItem = null;
+        final int sortOrder = getCurrentSortOrder();
+
+        if (sortOrder == Preferences.SORT_ORDER_ASC)
+            sortItem = menu.findItem(R.id.menu_action_sort_artist_title_asc);
+        else if (sortOrder == Preferences.SORT_ORDER_DESC)
+            sortItem = menu.findItem(R.id.menu_action_sort_artist_title_desc);
+
+        if (sortItem != null)
+            sortItem.setChecked(true);
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        final int groupId = item.getGroupId();
+        if (groupId == R.id.group_artist_sort) {
+            final int id = item.getItemId();
+            int sortOrder;
+
+            if (id == R.id.menu_action_sort_artist_title_asc)
+                sortOrder = Preferences.SORT_ORDER_ASC;
+            else
+                sortOrder = Preferences.SORT_ORDER_DESC;
+
+            onChangeSortOrder(sortOrder);
+        }
+
+        item.setChecked(true);
+        return true;
     }
 
     @Override
@@ -64,19 +99,6 @@ public class ArtistDetailsActivity extends BaseDetailsActivity {
         AppSettings.saveSortOrder(this, Preferences.SORT_ORDER_ARTIST_DETAILS_KEY, newSortOrder);
         mSortOrder = resolveSortOrder(newSortOrder);
         mAdapter.updateSortOrder(mSortOrder);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_action_sort_asc:
-                onChangeSortOrder(Preferences.SORT_ORDER_ASC);
-                break;
-            case R.id.menu_action_sort_desc:
-                onChangeSortOrder(Preferences.SORT_ORDER_DESC);
-                break;
-        }
-        return true;
     }
 
     private SortOrder.ALBUMS resolveSortOrder(int sortOrder) {

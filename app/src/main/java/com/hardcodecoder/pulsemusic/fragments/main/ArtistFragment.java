@@ -2,6 +2,8 @@ package com.hardcodecoder.pulsemusic.fragments.main;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewStub;
 import android.view.animation.AnimationUtils;
@@ -44,6 +46,73 @@ public class ArtistFragment extends CardGridFragment {
         LoaderHelper.loadArtistsList(view.getContext().getContentResolver(),
                 artistSortOrder,
                 result -> loadArtistsList(view, result));
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(@NonNull Menu menu) {
+        MenuItem sortItem = null;
+        final int sortOrder = getCurrentSortOrder();
+
+        if (sortOrder == Preferences.SORT_ORDER_ASC)
+            sortItem = menu.findItem(R.id.menu_action_sort_artist_title_asc);
+        else if (sortOrder == Preferences.SORT_ORDER_DESC)
+            sortItem = menu.findItem(R.id.menu_action_sort_artist_title_desc);
+
+
+        MenuItem spanItem = null;
+        final int spanCount = getCurrentSpanCount();
+
+        if (spanCount == 2)
+            spanItem = menu.findItem(R.id.artist_two);
+        else if (spanCount == 3)
+            spanItem = menu.findItem(R.id.artist_three);
+        else if (spanCount == 4)
+            spanItem = menu.findItem(R.id.artist_four);
+        else if (spanCount == 5)
+            spanItem = menu.findItem(R.id.artist_five);
+        else if (spanCount == 6)
+            spanItem = menu.findItem(R.id.artist_six);
+
+        if (sortItem != null)
+            sortItem.setChecked(true);
+        if (spanItem != null)
+            spanItem.setChecked(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        final int groupId = item.getGroupId();
+        if (groupId == R.id.group_artist_sort) {
+            final int id = item.getItemId();
+            int sortOrder;
+
+            if (id == R.id.menu_action_sort_artist_title_desc)
+                sortOrder = Preferences.SORT_ORDER_DESC;
+            else sortOrder = Preferences.SORT_ORDER_ASC;
+
+            changeSortOrder(sortOrder);
+
+        } else if (groupId == R.id.group_artist_grid) {
+            final int id = item.getItemId();
+            int spanCount;
+
+            if (id == R.id.artist_two)
+                spanCount = 2;
+            else if (id == R.id.artist_three)
+                spanCount = 3;
+            else if (id == R.id.artist_four)
+                spanCount = 4;
+            else if (id == R.id.artist_five)
+                spanCount = 5;
+            else if (id == R.id.artist_six)
+                spanCount = 6;
+            else spanCount = 2;
+
+            updateGridSpanCount(getCurrentOrientation(), spanCount);
+        }
+
+        item.setChecked(true);
+        return true;
     }
 
     private void loadArtistsList(View view, List<ArtistModel> list) {

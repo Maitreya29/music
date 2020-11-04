@@ -9,31 +9,34 @@
         app:iconTint="?attr/colorControlNormal"
         app:showAsAction="never">
         <menu>
-            <item
-                android:id="@+id/menu_action_sort_asc"
-                android:title="@string/alphabet_asc" />
-
-            <item
-                android:id="@+id/menu_action_sort_desc"
-                android:title="@string/alphabet_desc" />
-            <item
-                android:id="@+id/menu_action_sort_duration_asc"
-                android:title="@string/duration_asc" />
-            <item
-                android:id="@+id/menu_action_sort_duration_desc"
-                android:title="@string/duration_desc" />
-            <item
-                android:id="@+id/menu_action_sort_date_added_desc"
-                android:title="@string/date_added_desc" />
-            <item
-                android:id="@+id/menu_action_sort_date_added_asc"
-                android:title="@string/date_added_asc" />
-            <item
-                android:id="@+id/menu_action_sort_date_modified_desc"
-                android:title="@string/date_modified_desc" />
-            <item
-                android:id="@+id/menu_action_sort_date_modified_asc"
-                android:title="@string/date_modified_asc" />
+            <group
+                android:id="@+id/group_library_sort"
+                android:checkableBehavior="single">
+                <item
+                    android:id="@+id/menu_action_sort_title_asc"
+                    android:title="@string/alphabet_asc" />
+                <item
+                    android:id="@+id/menu_action_sort_title_desc"
+                    android:title="@string/alphabet_desc" />
+                <item
+                    android:id="@+id/menu_action_sort_duration_asc"
+                    android:title="@string/duration_asc" />
+                <item
+                    android:id="@+id/menu_action_sort_duration_desc"
+                    android:title="@string/duration_desc" />
+                <item
+                    android:id="@+id/menu_action_sort_date_added_desc"
+                    android:title="@string/date_added_desc" />
+                <item
+                    android:id="@+id/menu_action_sort_date_added_asc"
+                    android:title="@string/date_added_asc" />
+                <item
+                    android:id="@+id/menu_action_sort_date_modified_desc"
+                    android:title="@string/date_modified_desc" />
+                <item
+                    android:id="@+id/menu_action_sort_date_modified_asc"
+                    android:title="@string/date_modified_asc" />
+            </group>
         </menu>
     </item>
 
@@ -44,13 +47,17 @@
         app:iconTint="?attr/colorControlNormal"
         app:showAsAction="never">
         <menu>
-            <item
-                android:id="@+id/one"
-                android:title="@string/one" />
+            <group
+                android:id="@+id/group_library_grid"
+                android:checkableBehavior="single">
+                <item
+                    android:id="@+id/library_one"
+                    android:title="@string/one" />
 
-            <item
-                android:id="@+id/two"
-                android:title="@string/two" />
+                <item
+                    android:id="@+id/library_two"
+                    android:title="@string/two" />
+            </group>
         </menu>
     </item>
 </menu>

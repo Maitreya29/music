@@ -3,6 +3,8 @@ package com.hardcodecoder.pulsemusic.fragments.main;
 import android.content.res.Configuration;
 import android.media.session.MediaController;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewStub;
 
@@ -76,10 +78,100 @@ public class LibraryFragment extends ListGridFragment {
                                 UIHelper.showMenuForLibraryTracks(getActivity(), getActivity().getSupportFragmentManager(), mList.get(position));
                             }
                         }
-                    }, () -> mLayoutManager.scrollToPosition(mFirstVisibleItemPosition));
-
+                    },
+                    () -> mLayoutManager.scrollToPosition(mFirstVisibleItemPosition));
             recyclerView.setAdapter(mAdapter);
         }
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(@NonNull Menu menu) {
+        MenuItem sortItem = null;
+        final int sortOrder = getCurrentSortOrder();
+
+        if (sortOrder == Preferences.SORT_ORDER_ASC)
+            sortItem = menu.findItem(R.id.menu_action_sort_title_asc);
+        else if (sortOrder == Preferences.SORT_ORDER_DESC)
+            sortItem = menu.findItem(R.id.menu_action_sort_title_desc);
+        else if (sortOrder == Preferences.SORT_ORDER_DURATION_ASC)
+            sortItem = menu.findItem(R.id.menu_action_sort_duration_asc);
+        else if (sortOrder == Preferences.SORT_ORDER_DURATION_DESC)
+            sortItem = menu.findItem(R.id.menu_action_sort_duration_desc);
+        else if (sortOrder == Preferences.SORT_ORDER_DATE_MODIFIED_ASC)
+            sortItem = menu.findItem(R.id.menu_action_sort_date_modified_asc);
+        else if (sortOrder == Preferences.SORT_ORDER_DATE_MODIFIED_DESC)
+            sortItem = menu.findItem(R.id.menu_action_sort_date_modified_desc);
+        else if (sortOrder == Preferences.SORT_ORDER_DATE_ADDED_ASC)
+            sortItem = menu.findItem(R.id.menu_action_sort_date_added_asc);
+        else if (sortOrder == Preferences.SORT_ORDER_DATE_ADDED_DESC)
+            sortItem = menu.findItem(R.id.menu_action_sort_date_added_desc);
+
+
+        MenuItem spanItem = null;
+        final int spanCount = getCurrentSpanCount();
+
+        if (spanCount == 1)
+            spanItem = menu.findItem(R.id.library_one);
+        else if (spanCount == 2)
+            spanItem = menu.findItem(R.id.library_two);
+        else if (spanCount == 3)
+            spanItem = menu.findItem(R.id.library_three);
+        else if (spanCount == 4)
+            spanItem = menu.findItem(R.id.library_four);
+
+        if (sortItem != null)
+            sortItem.setChecked(true);
+        if (spanItem != null)
+            spanItem.setChecked(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        final int groupId = item.getGroupId();
+        if (groupId == R.id.group_library_sort) {
+            final int id = item.getItemId();
+            int sortOrder;
+
+            if (id == R.id.menu_action_sort_title_asc)
+                sortOrder = Preferences.SORT_ORDER_ASC;
+            else if (id == R.id.menu_action_sort_title_desc)
+                sortOrder = Preferences.SORT_ORDER_DESC;
+            else if (id == R.id.menu_action_sort_duration_asc)
+                sortOrder = Preferences.SORT_ORDER_DURATION_ASC;
+            else if (id == R.id.menu_action_sort_duration_desc)
+                sortOrder = Preferences.SORT_ORDER_DURATION_DESC;
+            else if (id == R.id.menu_action_sort_date_added_asc)
+                sortOrder = Preferences.SORT_ORDER_DATE_ADDED_ASC;
+            else if (id == R.id.menu_action_sort_date_added_desc)
+                sortOrder = Preferences.SORT_ORDER_DATE_ADDED_DESC;
+            else if (id == R.id.menu_action_sort_date_modified_asc)
+                sortOrder = Preferences.SORT_ORDER_DATE_MODIFIED_ASC;
+            else if (id == R.id.menu_action_sort_date_modified_desc)
+                sortOrder = Preferences.SORT_ORDER_DATE_MODIFIED_DESC;
+            else
+                sortOrder = Preferences.SORT_ORDER_ASC;
+
+            changeSortOrder(sortOrder);
+
+        } else if (groupId == R.id.group_library_grid) {
+            final int id = item.getItemId();
+            int spanCount;
+
+            if (id == R.id.library_one)
+                spanCount = 1;
+            else if (id == R.id.library_two)
+                spanCount = 2;
+            else if (id == R.id.library_three)
+                spanCount = 3;
+            else if (id == R.id.library_four)
+                spanCount = 4;
+            else spanCount = 1;
+
+            updateGridSpanCount(getCurrentOrientation(), spanCount);
+        }
+
+        item.setChecked(true);
+        return true;
     }
 
     @Override
