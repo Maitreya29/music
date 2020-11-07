@@ -20,6 +20,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.media.session.MediaButtonReceiver;
 
 import com.hardcodecoder.pulsemusic.loaders.LoaderHelper;
@@ -100,49 +101,47 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
     public int onStartCommand(Intent intent, int flags, int startId) {
         MediaButtonReceiver.handleIntent(MediaSessionCompat.fromMediaSession(this, mMediaSession), intent);
         isServiceRunning = true;
-        handleStartCommand(intent);
+        mWorkerHandler.post(() -> handleStartCommand(intent));
         return START_NOT_STICKY;
     }
 
     private void handleStartCommand(Intent intent) {
-        mWorkerHandler.post(() -> {
-            int startCode;
-            if (null != intent && (startCode = intent.getIntExtra(PLAY_KEY, -1)) != -1) {
-                switch (startCode) {
-                    case PLAY_SHUFFLE:
-                        playShuffle();
-                        break;
-                    case PLAY_LATEST:
-                        playLatest();
-                        break;
-                    case PLAY_SUGGESTED:
-                        playSuggested();
-                        break;
-                    case PLAY_CONTINUE:
-                        PlaybackState state = mMediaSession.getController().getPlaybackState();
-                        if (state != null) {
-                            if (state.getState() == PlaybackState.STATE_PAUSED || state.getState() == PlaybackState.STATE_STOPPED)
-                                mMediaSession.getController().getTransportControls().play();
-                        } else {
-                            int currentAction = AppSettings.getBluetoothDeviceDetectionAction(getApplicationContext());
-                            switch (currentAction) {
-                                case Preferences.DEVICE_ACTION_PLAY_LATEST:
-                                    playLatest();
-                                    break;
-                                case Preferences.DEVICE_ACTION_PLAY_SUGGESTED:
-                                    playSuggested();
-                                    break;
-                                case Preferences.DEVICE_ACTION_PLAY_SHUFFLE:
-                                default:
-                                    playShuffle();
-                            }
+        int startCode;
+        if (null != intent && (startCode = intent.getIntExtra(PLAY_KEY, -1)) != -1) {
+            switch (startCode) {
+                case PLAY_SHUFFLE:
+                    playShuffle();
+                    break;
+                case PLAY_LATEST:
+                    playLatest();
+                    break;
+                case PLAY_SUGGESTED:
+                    playSuggested();
+                    break;
+                case PLAY_CONTINUE:
+                    PlaybackState state = mMediaSession.getController().getPlaybackState();
+                    if (state != null) {
+                        if (state.getState() == PlaybackState.STATE_PAUSED || state.getState() == PlaybackState.STATE_STOPPED)
+                            mMediaSession.getController().getTransportControls().play();
+                    } else {
+                        int currentAction = AppSettings.getBluetoothDeviceDetectionAction(getApplicationContext());
+                        switch (currentAction) {
+                            case Preferences.DEVICE_ACTION_PLAY_LATEST:
+                                playLatest();
+                                break;
+                            case Preferences.DEVICE_ACTION_PLAY_SUGGESTED:
+                                playSuggested();
+                                break;
+                            case Preferences.DEVICE_ACTION_PLAY_SHUFFLE:
+                            default:
+                                playShuffle();
                         }
-                        break;
-                    default:
-                        Log.e(TAG, "Unknown start command");
-                }
+                    }
+                    break;
+                default:
+                    Log.e(TAG, "Unknown start command");
             }
-        });
+        }
     }
 
     private void playLatest() {
@@ -198,7 +197,7 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
     public void onPlaybackStart() {
         mMediaSession.setActive(true);
         if (!isServiceRunning)
-            startService(new Intent(this.getApplicationContext(), PMS.class));
+            ContextCompat.startForegroundService(this, new Intent(this.getApplicationContext(), PMS.class));
     }
 
     @Override
