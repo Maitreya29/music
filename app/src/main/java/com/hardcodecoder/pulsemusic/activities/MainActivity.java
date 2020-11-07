@@ -70,7 +70,6 @@ public class MainActivity extends MediaSessionActivity {
         setUpMainContents(savedInstanceState);
     }
 
-
     private void setUpToolbar() {
         mAppBar = findViewById(R.id.main_app_bar);
         Toolbar toolbar = findViewById(R.id.main_toolbar);
@@ -94,33 +93,18 @@ public class MainActivity extends MediaSessionActivity {
         bottomNavigation.setItemIconTintList(colorStateList);
         bottomNavigation.setItemTextColor(colorStateList);
         bottomNavigation.setOnNavigationItemSelectedListener(menuItem -> {
-            int id = menuItem.getItemId();
-            switch (id) {
-                case R.id.nav_home:
-                    if (activeFrag != homeFrag) {
-                        switchFragment(homeFrag, HOME);
-                    }
-                    break;
-                case R.id.nav_library:
-                    if (activeFrag != libraryFrag) {
-                        switchFragment(libraryFrag, LIBRARY);
-                    }
-                    break;
-                case R.id.nav_playlist:
-                    if (activeFrag != playlistCardFrag) {
-                        switchFragment(playlistCardFrag, PLAYLIST_CARDS);
-                    }
-                    break;
-                case R.id.nav_album:
-                    if (activeFrag != albumsFrag) {
-                        switchFragment(albumsFrag, ALBUMS);
-                    }
-                    break;
-                case R.id.nav_artist:
-                    if (activeFrag != artistFrag) {
-                        switchFragment(artistFrag, ARTIST);
-                    }
-                    break;
+            final int id = menuItem.getItemId();
+            if (id == R.id.nav_home) {
+                if (activeFrag != homeFrag) switchFragment(homeFrag, HOME);
+            } else if (id == R.id.nav_library) {
+                if (activeFrag != libraryFrag) switchFragment(libraryFrag, LIBRARY);
+            } else if (id == R.id.nav_album) {
+                if (activeFrag != albumsFrag) switchFragment(albumsFrag, ALBUMS);
+            } else if (id == R.id.nav_artist) {
+                if (activeFrag != artistFrag) switchFragment(artistFrag, ARTIST);
+            } else if (id == R.id.nav_playlist) {
+                if (activeFrag != playlistCardFrag)
+                    switchFragment(playlistCardFrag, PLAYLIST_CARDS);
             }
             return true;
         });
@@ -129,7 +113,6 @@ public class MainActivity extends MediaSessionActivity {
     private void switchFragment(Fragment switchTo, String tag) {
         if (null == switchTo) {
             switch (tag) {
-
                 case HOME:
                     homeFrag = HomeFragment.getInstance();
                     switchTo = homeFrag;
@@ -140,11 +123,6 @@ public class MainActivity extends MediaSessionActivity {
                     switchTo = libraryFrag;
                     break;
 
-                case PLAYLIST_CARDS:
-                    playlistCardFrag = PlaylistFragment.getInstance();
-                    switchTo = playlistCardFrag;
-                    break;
-
                 case ALBUMS:
                     albumsFrag = AlbumsFragment.getInstance();
                     switchTo = albumsFrag;
@@ -153,6 +131,11 @@ public class MainActivity extends MediaSessionActivity {
                 case ARTIST:
                     artistFrag = ArtistFragment.getInstance();
                     switchTo = artistFrag;
+                    break;
+
+                case PLAYLIST_CARDS:
+                    playlistCardFrag = PlaylistFragment.getInstance();
+                    switchTo = playlistCardFrag;
                     break;
 
                 default:
