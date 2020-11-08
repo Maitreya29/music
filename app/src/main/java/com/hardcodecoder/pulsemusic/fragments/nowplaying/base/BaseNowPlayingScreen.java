@@ -294,7 +294,7 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
 
     private void updateFavoriteItem() {
         ProviderManager.getFavoritesProvider().isTemFavorite(mTrackManager.getActiveQueueItem(), isFavorite ->
-                onFavoriteStateChanged((mCurrentItemFavorite = isFavorite)));
+                onFavoriteStateChanged((mCurrentItemFavorite = isFavorite != null && isFavorite)));
     }
 
     protected void handleFavoriteStateChanged(ImageView imageView, boolean favorite) {

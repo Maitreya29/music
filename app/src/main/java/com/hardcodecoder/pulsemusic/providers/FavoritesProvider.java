@@ -66,8 +66,10 @@ public class FavoritesProvider {
             loadFavorites();
             if (mFavoritesSet.remove(id)) {
                 List<Integer> trackIds = StorageUtil.readPlaylistIdsFromFile(file);
-                trackIds.remove(id);
-                StorageUtil.writePlaylistIdsToFile(file, trackIds, false);
+                if (trackIds != null) {
+                    trackIds.remove(id);
+                    StorageUtil.writePlaylistIdsToFile(file, trackIds, false);
+                }
             }
         });
     }
