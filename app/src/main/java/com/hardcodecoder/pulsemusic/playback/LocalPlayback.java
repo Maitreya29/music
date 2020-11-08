@@ -132,13 +132,13 @@ public class LocalPlayback implements
 
     private void play(int startPosition) {
         if (mStartPlaybackWhenReady) {
-            if (startPosition > 0) mp.seekTo(startPosition);
+            if (startPosition > 0 && startPosition < mp.getDuration()) mp.seekTo(startPosition);
             mp.start();
             mPlaybackState = PlaybackState.STATE_PLAYING;
         } else {
             // We only skip the playback once when resource is ready
             // Further call to play should actually start playing
-            mPlaybackState = PlaybackState.STATE_BUFFERING;
+            mPlaybackState = PlaybackState.STATE_PAUSED;
             mStartPlaybackWhenReady = true;
         }
         mPlaybackCallback.onPlaybackStateChanged(mPlaybackState);

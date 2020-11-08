@@ -105,7 +105,6 @@ public class PlaybackManager implements Playback.Callback {
     }
 
     private void handleLoadLastTrack(@NonNull Bundle bundle) {
-        mServiceCallback.onPlaybackStart();
         final MusicModel trackItem = (MusicModel) bundle.getSerializable(TRACK_ITEM);
         if (trackItem == null) return;
         final int resumePosition = bundle.getInt(PLAYBACK_POSITION);
