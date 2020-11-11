@@ -19,10 +19,12 @@ import android.support.v4.media.session.MediaSessionCompat;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.media.session.MediaButtonReceiver;
 
+import com.hardcodecoder.pulsemusic.loaders.LoaderCache;
 import com.hardcodecoder.pulsemusic.loaders.LoaderHelper;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.playback.LocalPlayback;
@@ -145,22 +147,36 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
     }
 
     private void playLatest() {
-        LoaderHelper.loadAllTracks(this, result -> LoaderHelper.loadLatestTracks(this::playPlaylist));
+        if (LoaderCache.getAllTracksList() == null) {
+            LoaderHelper.loadAllTracks(this, result -> LoaderHelper.loadLatestTracks(this::playPlaylist));
+        } else {
+            LoaderHelper.loadLatestTracks(this::playPlaylist);
+        }
     }
 
     private void playSuggested() {
-        LoaderHelper.loadAllTracks(this, result -> LoaderHelper.loadSuggestionsList(this::playPlaylist));
+        if (LoaderCache.getAllTracksList() == null) {
+            LoaderHelper.loadAllTracks(this, result -> LoaderHelper.loadSuggestionsList(this::playPlaylist));
+        } else {
+            LoaderHelper.loadSuggestionsList(this::playPlaylist);
+        }
     }
 
     private void playShuffle() {
-        LoaderHelper.loadAllTracks(this, result -> {
-            List<MusicModel> masterShuffledList = null;
-            if (null != result) {
-                masterShuffledList = new ArrayList<>(result);
-                Collections.shuffle(masterShuffledList);
-            }
-            playPlaylist(masterShuffledList);
-        });
+        if (LoaderCache.getAllTracksList() == null) {
+            LoaderHelper.loadAllTracks(this, result -> {
+                if (result != null) shuffleTracks(result);
+                else playPlaylist(null);
+            });
+        } else {
+            shuffleTracks(LoaderCache.getAllTracksList());
+        }
+    }
+
+    private void shuffleTracks(@NonNull List<MusicModel> tracks) {
+        List<MusicModel> listToShuffle = new ArrayList<>(tracks);
+        Collections.shuffle(listToShuffle);
+        playPlaylist(listToShuffle);
     }
 
     private void playPlaylist(List<MusicModel> playlist) {

@@ -62,12 +62,8 @@ public class HomeFragment extends Fragment {
 
         if (null != LoaderCache.getAllTracksList() && null != getContext()) {
             LoaderHelper.loadTopAlbums(result -> loadTopAlbums(view, result));
-            if (null == LoaderCache.getSuggestions())
-                LoaderHelper.loadSuggestionsList(result -> loadSuggestions(view, result));
-            else loadSuggestions(view, LoaderCache.getSuggestions());
-            if (null == LoaderCache.getLatestTracks())
-                LoaderHelper.loadLatestTracks(result -> loadLatestTracks(view, result));
-            else loadLatestTracks(view, LoaderCache.getLatestTracks());
+            LoaderHelper.loadSuggestionsList(result -> loadSuggestions(view, result));
+            LoaderHelper.loadLatestTracks(result -> loadLatestTracks(view, result));
             LoaderHelper.loadTopArtist(result -> loadTopArtists(view, result));
         } else {
             MaterialTextView noTracksText = (MaterialTextView) ((ViewStub) view.findViewById(R.id.stub_no_tracks_found)).inflate();
