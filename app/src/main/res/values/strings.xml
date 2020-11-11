@@ -18,9 +18,10 @@
 
 
     <!-- Home Fragment -->
-    <string name="favorite_playlist">Favorite</string>
-    <string name="recent">Recent tracks</string>
-    <string name="select_track">Select track</string>
+    <string name="home_favorites">Favorites</string>
+    <string name="home_history">History</string>
+    <string name="home_select_track">Track picker</string>
+    <string name="home_shuffle">Shuffle</string>
     <string name="random">For you</string>
     <string name="new_in_library">New in store</string>
     <string name="top_artist">Top artists</string>
@@ -40,7 +41,7 @@
 
     <!-- Recent Activity-->
     <string name="no_recent_tracks">Nothing to show \n\u2639</string>
-
+    <string name="recent">Recent tracks</string>
 
     <!-- Home drawer contents -->
     <string name="drawer_welcome_message">Welcome,</string>

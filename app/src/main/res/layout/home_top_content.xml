@@ -20,19 +20,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="@string/recent"
+        android:text="@string/home_favorites"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
         android:textColor="?android:attr/textColorSecondary"
-        app:layout_constraintEnd_toEndOf="@id/ic_recent"
-        app:layout_constraintStart_toStartOf="@id/ic_recent"
-        app:layout_constraintTop_toBottomOf="@id/ic_recent" />
+        app:layout_constraintEnd_toEndOf="@id/ic_favorite"
+        app:layout_constraintStart_toStartOf="@id/ic_favorite"
+        app:layout_constraintTop_toBottomOf="@id/ic_favorite" />
 
     <com.hardcodecoder.pulsemusic.views.ColoredIconView
         android:id="@+id/ic_recent"
         android:layout_width="@dimen/colored_icon_width"
         android:layout_height="@dimen/colored_icon_height"
         app:icon="@drawable/ic_history"
-        app:iconColor="@color/md_blue_A400"
+        app:iconColor="@color/md_yellow_A400"
         app:layout_constraintEnd_toStartOf="@id/ic_folder"
         app:layout_constraintStart_toEndOf="@id/ic_favorite"
         app:layout_constraintTop_toTopOf="parent" />
@@ -41,20 +41,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="@string/favorite_playlist"
+        android:text="@string/home_history"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
         android:textColor="?android:attr/textColorSecondary"
-        app:layout_constraintEnd_toEndOf="@id/ic_favorite"
-        app:layout_constraintStart_toStartOf="@id/ic_favorite"
-        app:layout_constraintTop_toBottomOf="@id/ic_favorite" />
+        app:layout_constraintEnd_toEndOf="@id/ic_recent"
+        app:layout_constraintStart_toStartOf="@id/ic_recent"
+        app:layout_constraintTop_toBottomOf="@id/ic_recent" />
 
     <com.hardcodecoder.pulsemusic.views.ColoredIconView
         android:id="@+id/ic_folder"
         android:layout_width="@dimen/colored_icon_width"
         android:layout_height="@dimen/colored_icon_height"
         app:icon="@drawable/ic_folder"
-        app:iconColor="@color/md_green_A700"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:iconColor="@color/md_blue_A400"
+        app:layout_constraintEnd_toStartOf="@id/ic_shuffle"
         app:layout_constraintStart_toEndOf="@+id/ic_recent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -62,10 +62,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="@string/select_track"
+        android:text="@string/home_select_track"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
         android:textColor="?android:attr/textColorSecondary"
         app:layout_constraintEnd_toEndOf="@id/ic_folder"
         app:layout_constraintStart_toStartOf="@id/ic_folder"
         app:layout_constraintTop_toBottomOf="@id/ic_folder" />
+
+    <com.hardcodecoder.pulsemusic.views.ColoredIconView
+        android:id="@+id/ic_shuffle"
+        android:layout_width="@dimen/colored_icon_width"
+        android:layout_height="@dimen/colored_icon_height"
+        app:icon="@drawable/ic_shuffle"
+        app:iconColor="@color/md_green_A700"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ic_folder"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/home_shuffle"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+        android:textColor="?android:attr/textColorSecondary"
+        app:layout_constraintEnd_toEndOf="@id/ic_shuffle"
+        app:layout_constraintStart_toStartOf="@id/ic_shuffle"
+        app:layout_constraintTop_toBottomOf="@id/ic_shuffle" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 
 import com.google.android.material.textview.MaterialTextView;
+import com.hardcodecoder.pulsemusic.PMS;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.activities.FavoritesActivity;
 import com.hardcodecoder.pulsemusic.activities.RecentActivity;
@@ -70,9 +71,22 @@ public class HomeFragment extends Fragment {
             noTracksText.setText(getString(R.string.tracks_not_found));
         }
 
-        view.findViewById(R.id.ic_recent).setOnClickListener(v -> startActivity(new Intent(getContext(), RecentActivity.class)));
-        view.findViewById(R.id.ic_folder).setOnClickListener(v -> pickMedia());
-        view.findViewById(R.id.ic_favorite).setOnClickListener(v -> startActivity(new Intent(getContext(), FavoritesActivity.class)));
+        view.findViewById(R.id.ic_recent)
+                .setOnClickListener(v -> startActivity(new Intent(getContext(), RecentActivity.class)));
+
+        view.findViewById(R.id.ic_folder)
+                .setOnClickListener(v -> pickMedia());
+
+        view.findViewById(R.id.ic_favorite)
+                .setOnClickListener(v -> startActivity(new Intent(getContext(), FavoritesActivity.class)));
+
+        view.findViewById(R.id.ic_shuffle)
+                .setOnClickListener(v -> {
+                    if (getActivity() == null) return;
+                    Intent intent = new Intent(getContext(), PMS.class);
+                    intent.putExtra(PMS.PLAY_KEY, PMS.PLAY_SHUFFLE);
+                    getActivity().startService(intent);
+                });
     }
 
     private void loadTopAlbums(View view, List<TopAlbumModel> list) {
