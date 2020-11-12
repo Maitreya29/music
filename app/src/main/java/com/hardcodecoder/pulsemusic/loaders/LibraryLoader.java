@@ -102,21 +102,29 @@ public class LibraryLoader implements Callable<List<MusicModel>> {
 
         // Append ignored folders selection
         List<String> ignoredFoldersList = ProviderManager.getIgnoredListProvider().getIgnoredList();
-        completeSelection.append(getIgnoreFolderSelection(ignoredFoldersList.size()));
+        int ignoredListSize = (ignoredFoldersList == null) ? 0 : ignoredFoldersList.size();
+
+        String ignoredFolderSelection = "";
+        if (ignoredListSize > 0) {
+            ignoredFolderSelection = getIgnoreFolderSelection(ignoredListSize);
+            completeSelection.append(ignoredFolderSelection);
+        }
 
         // Append duration filter
-        completeSelection.append(" AND ").append(MediaStore.Audio.Media.DURATION).append(" >= ?");
+        completeSelection.append(ignoredFolderSelection.equals("") ? "" : " AND ").append(MediaStore.Audio.Media.DURATION).append(" >= ?");
 
         if (selectionArgs == null) selectionArgs = new String[0];
-        final int completeArgsLength = selectionArgs.length + ignoredFoldersList.size() + 1; /* +1 for duration filter */
+        final int completeArgsLength = selectionArgs.length + ignoredListSize + 1; /* +1 for duration filter */
         String[] completeSelectionArgs = new String[completeArgsLength];
 
         // Copy the existing selection args
         System.arraycopy(selectionArgs, 0, completeSelectionArgs, 0, selectionArgs.length);
 
-        // Copy args for ignore folders
-        String[] ignoredFolderArgs = getIgnoredFolderSelection(ignoredFoldersList);
-        System.arraycopy(ignoredFolderArgs, 0, completeSelectionArgs, selectionArgs.length, ignoredFolderArgs.length);
+        if (ignoredFoldersList != null && ignoredListSize > 0) {
+            // Copy args for ignore folders
+            String[] ignoredFolderArgs = getIgnoreFolderSelectionArgs(ignoredFoldersList);
+            System.arraycopy(ignoredFolderArgs, 0, completeSelectionArgs, selectionArgs.length, ignoredFolderArgs.length);
+        }
 
         // Copy args for duration filter
         int durationFilter = AppSettings.getFilterDuration(context);
@@ -137,7 +145,7 @@ public class LibraryLoader implements Callable<List<MusicModel>> {
     }
 
     @NonNull
-    private String[] getIgnoredFolderSelection(@NonNull List<String> list) {
+    private String[] getIgnoreFolderSelectionArgs(@NonNull List<String> list) {
         String[] selectionArgs = new String[list.size()];
         for (int i = 0; i < selectionArgs.length; i++)
             selectionArgs[i] = list.get(i).concat("%");
