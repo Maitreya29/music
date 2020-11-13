@@ -1,6 +1,6 @@
 package com.hardcodecoder.pulsemusic.interfaces;
 
-public interface TrackPickerCallbackAdapter {
+public interface ItemSelectorAdapterCallback {
 
     void onItemSelected(int position);
 

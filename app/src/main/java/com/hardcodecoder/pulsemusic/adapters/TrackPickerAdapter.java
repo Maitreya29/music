@@ -14,9 +14,9 @@ import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.TaskRunner;
 import com.hardcodecoder.pulsemusic.helper.DiffCb;
+import com.hardcodecoder.pulsemusic.interfaces.ItemSelectorAdapterCallback;
+import com.hardcodecoder.pulsemusic.interfaces.ItemSelectorListener;
 import com.hardcodecoder.pulsemusic.interfaces.ItemTouchHelperViewHolder;
-import com.hardcodecoder.pulsemusic.interfaces.TrackPickerCallbackAdapter;
-import com.hardcodecoder.pulsemusic.interfaces.TrackPickerListener;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.utils.ImageUtil;
 import com.hardcodecoder.pulsemusic.views.MediaArtImageView;
@@ -30,19 +30,41 @@ import java.util.List;
 import java.util.Set;
 
 public class TrackPickerAdapter extends RecyclerView.Adapter<TrackPickerAdapter.TrackPickerSVH>
-        implements TrackPickerCallbackAdapter, FastScroller.SectionIndexer {
+        implements ItemSelectorAdapterCallback, FastScroller.SectionIndexer {
 
     private final Handler mMainHandler = new Handler();
     private final Set<MusicModel> mSelectedTracks = new LinkedHashSet<>();
     private final Deque<List<MusicModel>> pendingUpdates = new ArrayDeque<>();
     private final List<MusicModel> mList;
     private final LayoutInflater mInflater;
-    private TrackPickerListener mListener;
+    private final ItemSelectorListener mListener;
 
-    public TrackPickerAdapter(List<MusicModel> list, LayoutInflater mInflater, TrackPickerListener listener) {
-        this.mList = new ArrayList<>(list);
-        this.mInflater = mInflater;
-        this.mListener = listener;
+    public TrackPickerAdapter(List<MusicModel> list, LayoutInflater inflater, ItemSelectorListener listener) {
+        mList = new ArrayList<>(list);
+        mInflater = inflater;
+        mListener = listener;
+    }
+
+    @NonNull
+    @Override
+    public TrackPickerSVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new TrackPickerSVH(mInflater.inflate(R.layout.list_item, parent, false), mListener);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull TrackPickerSVH holder, int position) {
+        boolean isSelected = mSelectedTracks.contains(mList.get(position));
+        holder.updateViewData(mList.get(position), isSelected);
+    }
+
+    @Override
+    public int getItemCount() {
+        return mList.size();
+    }
+
+    @Override
+    public CharSequence getSectionText(int position) {
+        return mList.get(position).getTrackName().substring(0, 1);
     }
 
     @Override
@@ -53,37 +75,6 @@ public class TrackPickerAdapter extends RecyclerView.Adapter<TrackPickerAdapter.
     @Override
     public void onItemUnselected(int position) {
         mSelectedTracks.remove(mList.get(position));
-    }
-
-    @NonNull
-    @Override
-    public TrackPickerSVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new TrackPickerSVH(mInflater.inflate(R.layout.list_item, parent, false));
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull TrackPickerSVH holder, int position) {
-        boolean isSelected = mSelectedTracks.contains(mList.get(position));
-        holder.itemView.setOnClickListener(v ->
-                mListener.onItemClick(holder, holder.getAdapterPosition(),
-                        mSelectedTracks.contains(mList.get(holder.getAdapterPosition()))));
-
-        if (isSelected)
-            holder.itemView.setBackground(ImageUtil.getAccentTintedSelectedItemBackground(holder.itemView.getContext()));
-        else
-            holder.itemView.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(), android.R.color.transparent));
-
-        holder.updateViewData(mList.get(position));
-    }
-
-    @Override
-    public CharSequence getSectionText(int position) {
-        return mList.get(position).getTrackName().substring(0, 1);
-    }
-
-    @Override
-    public int getItemCount() {
-        return mList.size();
     }
 
     public void updateItems(final List<MusicModel> newItems) {
@@ -112,7 +103,7 @@ public class TrackPickerAdapter extends RecyclerView.Adapter<TrackPickerAdapter.
         }
     }
 
-    private void dispatchUpdates(List<MusicModel> newItems, DiffUtil.DiffResult diffResult) {
+    private void dispatchUpdates(List<MusicModel> newItems, @NonNull DiffUtil.DiffResult diffResult) {
         diffResult.dispatchUpdatesTo(this);
         mList.clear();
         mList.addAll(newItems);
@@ -123,7 +114,6 @@ public class TrackPickerAdapter extends RecyclerView.Adapter<TrackPickerAdapter.
         mSelectedTracks.clear();
         pendingUpdates.clear();
         mList.clear();
-        mListener = null;
         super.onDetachedFromRecyclerView(recyclerView);
     }
 
@@ -136,28 +126,36 @@ public class TrackPickerAdapter extends RecyclerView.Adapter<TrackPickerAdapter.
         private final MediaArtImageView albumArt;
         private final MaterialTextView title;
         private final MaterialTextView artist;
+        private boolean mItemSelected = false;
 
-        TrackPickerSVH(@NonNull View itemView) {
+        TrackPickerSVH(@NonNull View itemView, ItemSelectorListener listener) {
             super(itemView);
             albumArt = itemView.findViewById(R.id.list_item_album_art);
             title = itemView.findViewById(R.id.list_item_title);
             artist = itemView.findViewById(R.id.list_item_sub_title);
+            itemView.setOnClickListener(v ->
+                    listener.onItemClick(this, getAdapterPosition(), !mItemSelected));
         }
 
-        void updateViewData(MusicModel md) {
+        void updateViewData(@NonNull MusicModel md, boolean selected) {
             title.setText(md.getTrackName());
             artist.setText(md.getArtist());
             albumArt.loadAlbumArt(md.getAlbumArtUrl(), md.getAlbumId());
+            if (mItemSelected == selected) return;
+            if (selected) onItemSelected();
+            else onItemClear();
         }
 
         @Override
         public void onItemSelected() {
             itemView.setBackground(ImageUtil.getAccentTintedSelectedItemBackground(itemView.getContext()));
+            mItemSelected = true;
         }
 
         @Override
         public void onItemClear() {
             itemView.setBackground(ContextCompat.getDrawable(itemView.getContext(), android.R.color.transparent));
+            mItemSelected = false;
         }
     }
 }

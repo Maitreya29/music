@@ -1,19 +1,20 @@
 package com.hardcodecoder.pulsemusic.helper;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.hardcodecoder.pulsemusic.interfaces.ItemSelectorAdapterCallback;
 import com.hardcodecoder.pulsemusic.interfaces.ItemTouchHelperViewHolder;
-import com.hardcodecoder.pulsemusic.interfaces.TrackPickerCallbackAdapter;
 
 public class RecyclerViewSelectorHelper {
 
-    private final TrackPickerCallbackAdapter mAdapter;
+    private final ItemSelectorAdapterCallback mAdapter;
 
-    public RecyclerViewSelectorHelper(TrackPickerCallbackAdapter mAdapter) {
-        this.mAdapter = mAdapter;
+    public RecyclerViewSelectorHelper(ItemSelectorAdapterCallback adapter) {
+        mAdapter = adapter;
     }
 
-    public void onItemSelected(RecyclerView.ViewHolder viewHolder, int position) {
+    public void onItemSelected(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
         mAdapter.onItemSelected(position);
 
         if (viewHolder instanceof ItemTouchHelperViewHolder) {
@@ -22,7 +23,7 @@ public class RecyclerViewSelectorHelper {
         }
     }
 
-    public void onItemUnSelected(RecyclerView.ViewHolder viewHolder, int position) {
+    public void onItemUnSelected(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
         mAdapter.onItemUnselected(position);
 
         if (viewHolder instanceof ItemTouchHelperViewHolder) {

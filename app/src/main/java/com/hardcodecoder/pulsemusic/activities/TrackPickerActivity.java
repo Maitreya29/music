@@ -6,6 +6,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.ViewStub;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,7 +18,7 @@ import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.TaskRunner;
 import com.hardcodecoder.pulsemusic.adapters.TrackPickerAdapter;
 import com.hardcodecoder.pulsemusic.helper.RecyclerViewSelectorHelper;
-import com.hardcodecoder.pulsemusic.interfaces.TrackPickerListener;
+import com.hardcodecoder.pulsemusic.interfaces.ItemSelectorListener;
 import com.hardcodecoder.pulsemusic.loaders.LoaderCache;
 import com.hardcodecoder.pulsemusic.loaders.SearchQueryLoader;
 import com.hardcodecoder.pulsemusic.themes.TintHelper;
@@ -25,7 +26,7 @@ import com.hardcodecoder.pulsemusic.themes.TintHelper;
 import java.util.ArrayList;
 import java.util.Stack;
 
-public class TrackPickerActivity extends PMBActivity implements TrackPickerListener {
+public class TrackPickerActivity extends PMBActivity implements ItemSelectorListener {
 
     public static final String ID_PICKED_TRACKS = "picked_tracks";
     public static final int REQUEST_CODE = 100;
@@ -115,9 +116,9 @@ public class TrackPickerActivity extends PMBActivity implements TrackPickerListe
     }
 
     @Override
-    public void onItemClick(RecyclerView.ViewHolder viewHolder, int position, boolean isSelected) {
-        if (isSelected) mSelectorHelper.onItemUnSelected(viewHolder, position);
-        else mSelectorHelper.onItemSelected(viewHolder, position);
+    public void onItemClick(@NonNull RecyclerView.ViewHolder viewHolder, int position, boolean selected) {
+        if (selected) mSelectorHelper.onItemSelected(viewHolder, position);
+        else mSelectorHelper.onItemUnSelected(viewHolder, position);
     }
 
     private void overrideActivityTransition() {
