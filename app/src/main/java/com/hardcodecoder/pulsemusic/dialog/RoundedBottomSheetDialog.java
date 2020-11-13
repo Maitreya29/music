@@ -30,7 +30,7 @@ public class RoundedBottomSheetDialog extends BottomSheetDialog {
                 behavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
                     @Override
                     public void onStateChanged(@NonNull View bottomSheet, int newState) {
-                        if (newState == BottomSheetBehavior.STATE_HIDDEN) dismiss();
+                        if (newState == BottomSheetBehavior.STATE_COLLAPSED) dismiss();
                     }
 
                     @Override
