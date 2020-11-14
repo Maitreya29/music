@@ -29,10 +29,9 @@
             android:id="@+id/text_input_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/manrope"
             android:inputType="textPersonName"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             tools:text="@tools:sample/full_names" />
-
     </com.hardcodecoder.pulsemusic.views.AccentColorTextInputLayout>
 
     <com.hardcodecoder.pulsemusic.views.MaterialTextButton

@@ -46,7 +46,6 @@ public class AccentColorTextInputLayout extends TextInputLayout {
         colors[2] = ColorUtil.changeAlphaComponentTo(colorOnSurface, 0.38f);
         colors[3] = ColorUtil.changeAlphaComponentTo(colorOnSurface, 0.42f);
 
-        setDefaultHintTextColor(ColorStateList.valueOf(colorOnSurface));
         setHintTextColor(ThemeColors.getAccentColorStateList());
         setBoxStrokeColorStateList(new ColorStateList(states, colors));
 
