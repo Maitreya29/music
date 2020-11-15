@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,17 +25,17 @@ import com.hardcodecoder.pulsemusic.providers.ProviderManager;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class IgnoreFolderChooser extends RoundedBottomSheetDialogFragment {
 
     public static final String TAG = IgnoreFolderChooser.class.getSimpleName();
-    private static final int REQUEST_CODE_FOLDER_SELECT = 44;
+    public static final int REQUEST_CODE_FOLDER_SELECT = 44;
     private IgnoredFoldersAdapter mAdapter;
     private MaterialTextView mEmptyListText;
     private DialogDismissCallback mCallback;
     private boolean mHasChanged = false;
 
+    @NonNull
     public static IgnoreFolderChooser getInstance(DialogDismissCallback callback) {
         IgnoreFolderChooser folderChooser = new IgnoreFolderChooser();
         folderChooser.mCallback = callback;
@@ -61,37 +60,11 @@ public class IgnoreFolderChooser extends RoundedBottomSheetDialogFragment {
                 // Open folder picker
                 Intent intent = new Intent();
                 intent.setAction(Intent.ACTION_OPEN_DOCUMENT_TREE);
-                intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 startActivityForResult(intent, REQUEST_CODE_FOLDER_SELECT);
             }
         });
 
         ProviderManager.getIgnoredListProvider().getIgnoredList(this::setUpRecyclerView);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE_FOLDER_SELECT && resultCode == Activity.RESULT_OK) {
-            if (null == data || null == data.getData()) {
-                Toast.makeText(getContext(), getString(R.string.ignored_folder_picker_add_failed), Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            Uri folder = data.getData();
-            String[] paths = Objects.requireNonNull(folder.getPath()).split(":");
-            String completePath = Environment.getExternalStorageDirectory() + (paths.length > 1 ? File.separator + paths[1] : "");
-            if (null == mAdapter) {
-                List<String> list = new ArrayList<>();
-                list.add(completePath);
-                setUpRecyclerView(list);
-            } else {
-                mAdapter.addItem(completePath);
-            }
-            mHasChanged = true;
-            Toast.makeText(getContext(), getString(R.string.ignored_folder_picker_add_success), Toast.LENGTH_SHORT).show();
-            ProviderManager.getIgnoredListProvider().addToIgnoreList(completePath);
-        }
     }
 
     private void setUpRecyclerView(List<String> foldersList) {
@@ -118,6 +91,57 @@ public class IgnoreFolderChooser extends RoundedBottomSheetDialogFragment {
                     Toast.makeText(recyclerView.getContext(), getString(R.string.ignored_folder_picker_remove_success), Toast.LENGTH_SHORT).show();
                 });
         recyclerView.setAdapter(mAdapter);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == REQUEST_CODE_FOLDER_SELECT) handleSelectedFolders(data);
+        }
+    }
+
+    private void handleSelectedFolders(Intent data) {
+        if (null == data || null == data.getData()) {
+            Toast.makeText(getContext(), getString(R.string.ignored_folder_picker_add_failed), Toast.LENGTH_SHORT).show();
+            return;
+        }
+        String completePath = getPath(data);
+        if (null == completePath) {
+            Toast.makeText(getContext(), getString(R.string.ignored_folder_picker_add_failed), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (null == mAdapter) {
+            List<String> list = new ArrayList<>();
+            list.add(completePath);
+            setUpRecyclerView(list);
+        } else {
+            mAdapter.addItem(completePath);
+        }
+        mHasChanged = true;
+        Toast.makeText(getContext(), getString(R.string.ignored_folder_picker_add_success), Toast.LENGTH_SHORT).show();
+        ProviderManager.getIgnoredListProvider().addToIgnoreList(completePath);
+    }
+
+    @Nullable
+    private String getPath(@NonNull Intent data) {
+        Uri folder = data.getData();
+        if (folder == null || folder.getPath() == null) return null;
+
+        String[] paths = folder.getPath().split(":");
+        String completePath = null;
+
+        if (paths.length > 0) {
+            // Length of "/tree/" = 5, we want everything from index 6
+            String volumeIdentifier = paths[0].substring(6);
+            if (volumeIdentifier.contains("primary"))
+                volumeIdentifier = "0";
+            completePath = File.separator + volumeIdentifier + File.separator
+                    // paths[1] can be null if user selected root directory
+                    + (paths.length == 1 ? "" : paths[1]);
+        }
+        return completePath;
     }
 
     @Override

@@ -30,7 +30,7 @@ public class LibraryLoader implements Callable<List<MusicModel>> {
         this(context, sortOrder, null, null);
     }
 
-    LibraryLoader(Context context, SortOrder sortOrder, @Nullable String selectionString, @Nullable String[] selectionArgs) {
+    LibraryLoader(@NonNull Context context, SortOrder sortOrder, @Nullable String selectionString, @Nullable String[] selectionArgs) {
         mContentResolver = context.getContentResolver();
         mSortOrder = MediaStoreHelper.getSortOrderFor(sortOrder);
         prepareSelection(context, selectionString, selectionArgs);
@@ -100,35 +100,34 @@ public class LibraryLoader implements Callable<List<MusicModel>> {
         StringBuilder completeSelection = new StringBuilder(
                 selection == null || selection.trim().equals("") ? "" : selection + " AND ");
 
+        // Append duration filter
+        completeSelection.append(MediaStore.Audio.Media.DURATION).append(" >= ?");
+
         // Append ignored folders selection
         List<String> ignoredFoldersList = ProviderManager.getIgnoredListProvider().getIgnoredList();
         int ignoredListSize = (ignoredFoldersList == null) ? 0 : ignoredFoldersList.size();
 
-        String ignoredFolderSelection = "";
         if (ignoredListSize > 0) {
-            ignoredFolderSelection = getIgnoreFolderSelection(ignoredListSize);
+            String ignoredFolderSelection = getIgnoreFolderSelection(ignoredListSize);
             completeSelection.append(ignoredFolderSelection);
         }
 
-        // Append duration filter
-        completeSelection.append(ignoredFolderSelection.equals("") ? "" : " AND ").append(MediaStore.Audio.Media.DURATION).append(" >= ?");
-
         if (selectionArgs == null) selectionArgs = new String[0];
-        final int completeArgsLength = selectionArgs.length + ignoredListSize + 1; /* +1 for duration filter */
+        final int completeArgsLength = selectionArgs.length + 1 + ignoredListSize;
         String[] completeSelectionArgs = new String[completeArgsLength];
 
         // Copy the existing selection args
         System.arraycopy(selectionArgs, 0, completeSelectionArgs, 0, selectionArgs.length);
 
+        // Copy args for duration filter
+        int durationFilter = AppSettings.getFilterDuration(context);
+        completeSelectionArgs[selectionArgs.length] = String.valueOf(durationFilter * 1000 /*Must be in mills*/);
+
         if (ignoredFoldersList != null && ignoredListSize > 0) {
             // Copy args for ignore folders
             String[] ignoredFolderArgs = getIgnoreFolderSelectionArgs(ignoredFoldersList);
-            System.arraycopy(ignoredFolderArgs, 0, completeSelectionArgs, selectionArgs.length, ignoredFolderArgs.length);
+            System.arraycopy(ignoredFolderArgs, 0, completeSelectionArgs, selectionArgs.length + 1, ignoredFolderArgs.length);
         }
-
-        // Copy args for duration filter
-        int durationFilter = AppSettings.getFilterDuration(context);
-        completeSelectionArgs[completeArgsLength - 1] = String.valueOf(durationFilter * 1000 /*Must be in mills*/);
 
         mSelectionString = completeSelection.toString();
         mSelectionArgs = completeSelectionArgs;
@@ -137,8 +136,7 @@ public class LibraryLoader implements Callable<List<MusicModel>> {
     @NonNull
     private String getIgnoreFolderSelection(int size) {
         StringBuilder builder = new StringBuilder();
-        builder.append(MediaStore.Audio.AudioColumns.DATA).append(" NOT LIKE ?");
-        for (int i = 0; i < size - 1; i++) {
+        for (int i = 0; i < size; i++) {
             builder.append(" AND ").append(MediaStore.Audio.AudioColumns.DATA).append(" NOT LIKE ?");
         }
         return builder.toString();
@@ -148,7 +146,7 @@ public class LibraryLoader implements Callable<List<MusicModel>> {
     private String[] getIgnoreFolderSelectionArgs(@NonNull List<String> list) {
         String[] selectionArgs = new String[list.size()];
         for (int i = 0; i < selectionArgs.length; i++)
-            selectionArgs[i] = list.get(i).concat("%");
+            selectionArgs[i] = "%".concat(list.get(i)).concat("%");
         return selectionArgs;
     }
 }

@@ -32,7 +32,7 @@ public class IgnoredFoldersAdapter extends RecyclerView.Adapter<IgnoredFoldersAd
         return new IgnoreFolderSVH(mInflater.inflate(R.layout.rv_ignored_folder_item, parent, false), mListener);
     }
 
-    public void addItem(String item) {
+    public void addItem(@NonNull String item) {
         if (null == mIgnoredFoldersList) mIgnoredFoldersList = new ArrayList<>();
         mIgnoredFoldersList.add(item);
         notifyItemInserted(mIgnoredFoldersList.size() - 1);
