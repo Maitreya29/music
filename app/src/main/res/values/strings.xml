@@ -7,6 +7,7 @@
     <string name="iv_btn_close_description">Close button</string>
     <string name="iv_btn_action_description">Action button</string>
     <string name="icon_desc">Icon button</string>
+    <string name="fab_done_dec">Confirm selection</string>
 
 
     <!-- Bottom Nav bar -->
@@ -136,7 +137,9 @@
     <string name="up_next_title_none">Playlist completed</string>
 
 
-    <!-- TrackPickerActivity -->
+    <!-- Media Folder Chooser Activity -->
+    <string name="folder_chooser_toolbar_title">Select folders</string>
+    <string name="folder_chooser_empty_folders_list">No media folders found in storage\n\u2639</string>
 
 
     <!-- Details Activity -->

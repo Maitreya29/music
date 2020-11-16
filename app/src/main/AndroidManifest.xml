@@ -57,6 +57,7 @@
         <activity android:name=".activities.FavoritesActivity" />
         <activity android:name=".activities.CurrentPlaylistActivity" />
         <activity android:name=".activities.UserPlaylistTracksActivity" />
+        <activity android:name=".activities.MediaFolderChooserActivity" />
 
         <!-- Set transparent theme when activity starts to prevent solid colored background -->
         <activity

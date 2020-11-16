@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:gravity="center"
+    android:minHeight="56dp"
+    android:orientation="horizontal">
+
+    <ImageView
+        style="@style/ButtonStyle24"
+        android:contentDescription="@string/iv_content_desc"
+        android:src="@drawable/ic_folder" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/folder_path"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="3"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+        tools:text="@tools:sample/lorem/random" />
+</LinearLayout>
