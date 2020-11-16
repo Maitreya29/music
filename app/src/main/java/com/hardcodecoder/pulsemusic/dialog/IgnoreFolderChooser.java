@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
+import com.hardcodecoder.pulsemusic.activities.MediaFolderChooserActivity;
 import com.hardcodecoder.pulsemusic.adapters.IgnoredFoldersAdapter;
 import com.hardcodecoder.pulsemusic.providers.ProviderManager;
 
@@ -29,7 +31,8 @@ import java.util.List;
 public class IgnoreFolderChooser extends RoundedBottomSheetDialogFragment {
 
     public static final String TAG = IgnoreFolderChooser.class.getSimpleName();
-    public static final int REQUEST_CODE_FOLDER_SELECT = 44;
+    private static final int REQUEST_CODE_FOLDER_SELECT = 44;
+    private static final int REQUEST_CODE_FOLDER_SELECT_Q = 45;
     private IgnoredFoldersAdapter mAdapter;
     private MaterialTextView mEmptyListText;
     private DialogDismissCallback mCallback;
@@ -57,10 +60,14 @@ public class IgnoreFolderChooser extends RoundedBottomSheetDialogFragment {
         addBtn.setImageResource(R.drawable.ic_folder_add);
         addBtn.setOnClickListener(v -> {
             if (null != getActivity()) {
-                // Open folder picker
-                Intent intent = new Intent();
-                intent.setAction(Intent.ACTION_OPEN_DOCUMENT_TREE);
-                startActivityForResult(intent, REQUEST_CODE_FOLDER_SELECT);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    startActivityForResult(new Intent(getActivity(), MediaFolderChooserActivity.class), REQUEST_CODE_FOLDER_SELECT_Q);
+                } else {
+                    // Open folder picker
+                    Intent intent = new Intent();
+                    intent.setAction(Intent.ACTION_OPEN_DOCUMENT_TREE);
+                    startActivityForResult(intent, REQUEST_CODE_FOLDER_SELECT);
+                }
             }
         });
 
@@ -98,6 +105,7 @@ public class IgnoreFolderChooser extends RoundedBottomSheetDialogFragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == REQUEST_CODE_FOLDER_SELECT) handleSelectedFolders(data);
+            else if (requestCode == REQUEST_CODE_FOLDER_SELECT_Q) handleSelectedFoldersQ(data);
         }
     }
 
@@ -139,9 +147,26 @@ public class IgnoreFolderChooser extends RoundedBottomSheetDialogFragment {
                 volumeIdentifier = "0";
             completePath = File.separator + volumeIdentifier + File.separator
                     // paths[1] can be null if user selected root directory
-                    + (paths.length == 1 ? "" : paths[1]);
+                    + (paths.length == 1 ? "" : paths[1] + File.separator);
         }
         return completePath;
+    }
+
+    private void handleSelectedFoldersQ(Intent data) {
+        if (null == data) {
+            Toast.makeText(getContext(), getString(R.string.ignored_folder_picker_add_failed), Toast.LENGTH_SHORT).show();
+            return;
+        }
+        List<String> ignoredFoldersLList = data.getStringArrayListExtra(MediaFolderChooserActivity.RESULT_SELECTED_FOLDERS);
+        if (null == ignoredFoldersLList) return;
+        if (null == mAdapter) {
+            setUpRecyclerView(ignoredFoldersLList);
+        } else {
+            mAdapter.addItems(ignoredFoldersLList);
+        }
+        mHasChanged = true;
+        Toast.makeText(getContext(), getString(R.string.ignored_folder_picker_add_success), Toast.LENGTH_SHORT).show();
+        ProviderManager.getIgnoredListProvider().addToIgnoreList(ignoredFoldersLList);
     }
 
     @Override

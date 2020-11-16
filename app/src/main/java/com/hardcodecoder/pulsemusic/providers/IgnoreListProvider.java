@@ -1,7 +1,9 @@
 package com.hardcodecoder.pulsemusic.providers;
 
+import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
+import android.provider.MediaStore;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,7 +22,10 @@ public class IgnoreListProvider {
 
     public IgnoreListProvider(String baseFilesDir, Handler handler) {
         mHandler = handler;
-        mIgnoredFilePath = baseFilesDir + File.separator + "ignoredList.txt";
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
+            mIgnoredFilePath = baseFilesDir + File.separator + "ignoredList_Q.txt";
+        else
+            mIgnoredFilePath = baseFilesDir + File.separator + "ignoredList_pre_Q.txt";
         createFileIfNotExists();
     }
 
@@ -29,6 +34,18 @@ public class IgnoreListProvider {
             if (createFileIfNotExists()) {
                 File ignoredListFile = new File(mIgnoredFilePath);
                 StorageUtil.writeStringToFile(ignoredListFile, folderToAdd + System.lineSeparator(), true);
+            }
+        });
+    }
+
+    public void addToIgnoreList(@NonNull List<String> foldersToAdd) {
+        TaskRunner.executeAsync(() -> {
+            if (createFileIfNotExists()) {
+                StringBuilder builder = new StringBuilder();
+                for (String s : foldersToAdd)
+                    builder.append(s).append(System.lineSeparator());
+                File ignoredListFile = new File(mIgnoredFilePath);
+                StorageUtil.writeStringToFile(ignoredListFile, builder.toString(), true);
             }
         });
     }
@@ -76,13 +93,23 @@ public class IgnoreListProvider {
 
         if (StorageUtil.createFile(ignoredListFile)) {
             // Default ignored folders
-            String folders =
-                    Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_ALARMS) +
-                            System.lineSeparator() +
-                            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_RINGTONES) +
-                            System.lineSeparator() +
-                            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_NOTIFICATIONS) +
-                            System.lineSeparator();
+            String folders;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                String volume = MediaStore.VOLUME_EXTERNAL_PRIMARY;
+                folders = volume + ":" + Environment.DIRECTORY_ALARMS + File.separator +
+                        System.lineSeparator() +
+                        volume + ":" + Environment.DIRECTORY_RINGTONES + File.separator +
+                        System.lineSeparator() +
+                        volume + ":" + Environment.DIRECTORY_NOTIFICATIONS + File.separator +
+                        System.lineSeparator();
+            } else {
+                folders = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_ALARMS) +
+                        System.lineSeparator() +
+                        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_RINGTONES) +
+                        System.lineSeparator() +
+                        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_NOTIFICATIONS) +
+                        System.lineSeparator();
+            }
             StorageUtil.writeStringToFile(ignoredListFile, folders, false);
             return true;
         }

@@ -19,6 +19,7 @@
     <ImageView
         android:id="@+id/ignored_folder_item_delete_btn"
         style="@style/ButtonStyle24"
+        android:background="?attr/selectableItemBackground"
         android:contentDescription="@string/iv_btn_close_description"
         android:src="@drawable/ic_close" />
 </LinearLayout>

@@ -38,6 +38,13 @@ public class IgnoredFoldersAdapter extends RecyclerView.Adapter<IgnoredFoldersAd
         notifyItemInserted(mIgnoredFoldersList.size() - 1);
     }
 
+    public void addItems(@NonNull List<String> items) {
+        if (null == mIgnoredFoldersList) mIgnoredFoldersList = new ArrayList<>();
+        int oldSize = mIgnoredFoldersList.size();
+        mIgnoredFoldersList.addAll(items);
+        notifyItemRangeInserted(oldSize, mIgnoredFoldersList.size());
+    }
+
     public void deleteItem(int position) {
         mIgnoredFoldersList.remove(position);
         notifyItemRemoved(position);
