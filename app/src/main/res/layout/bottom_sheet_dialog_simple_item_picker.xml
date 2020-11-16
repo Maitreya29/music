@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:minHeight="260dp"
-    android:paddingStart="24dp"
+    android:paddingStart="16dp"
     android:paddingTop="32dp"
-    android:paddingEnd="32dp"
+    android:paddingEnd="16dp"
     android:paddingBottom="32dp">
 
     <com.google.android.material.textview.MaterialTextView
@@ -16,12 +16,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginEnd="36dp"
-        app:layout_constraintBottom_toBottomOf="@id/bottom_dialog_picker_add_btn"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
         android:textColor="?android:attr/textColorPrimary"
+        app:layout_constraintBottom_toBottomOf="@id/bottom_dialog_picker_add_btn"
         app:layout_constraintEnd_toStartOf="@id/bottom_dialog_picker_add_btn"
-        app:layout_constraintTop_toTopOf="@id/bottom_dialog_picker_add_btn"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/bottom_dialog_picker_add_btn"
         tools:text="@tools:sample/full_names" />
 
     <ImageView
