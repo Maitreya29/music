@@ -28,6 +28,8 @@ public class ThemeColors {
     private static int mCurrentColorSurface;
     @ColorInt
     private static int mCurrentColorOnSurface;
+    @ColorInt
+    private static int mCurrentSecondaryTextColor;
     private static boolean mInitialized = false;
 
     /**
@@ -42,16 +44,18 @@ public class ThemeColors {
         mCurrentColorRipple = ColorUtil.changeAlphaComponentTo(getAccentColorForCurrentTheme(), 0.2f);
 
         int[] attrs = new int[]{
-                R.attr.colorControlNormal, //[0]
-                R.attr.overlayColor, // [1]
-                R.attr.colorSurface, // [2]
-                R.attr.colorOnSurface, // [3]
+                R.attr.colorControlNormal,           // [0]
+                R.attr.overlayColor,                 // [1]
+                R.attr.colorSurface,                 // [2]
+                R.attr.colorOnSurface,               // [3]
+                android.R.attr.textColorSecondary,   // [4]
         };
         TypedArray array = context.obtainStyledAttributes(ThemeManagerUtils.getThemeToApply(), attrs);
         mCurrentColorControlNormal = array.getColor(0, 0x8A000000);
         mCurrentColorOverlay = array.getColor(1, 0x0DFFFFFF);
         mCurrentColorSurface = array.getColor(2, 0xFFFFFFFF);
         mCurrentColorOnSurface = array.getColor(3, 0xFF000000);
+        mCurrentSecondaryTextColor = array.getColor(4, 0xFF000000);
         array.recycle();
         mInitialized = true;
     }
@@ -108,6 +112,13 @@ public class ThemeColors {
     @ColorInt
     public static int getCurrentColorOnSurface() {
         return mCurrentColorOnSurface;
+    }
+
+    /**
+     * @return color int
+     */
+    public static int getCurrentSecondaryTextColor() {
+        return mCurrentSecondaryTextColor;
     }
 
     /**
