@@ -13,6 +13,7 @@ import com.hardcodecoder.pulsemusic.utils.StorageUtil;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -40,6 +41,7 @@ public class PlaylistProvider {
         TaskRunner.executeAsync(() -> {
             File[] files = new File(mPlaylistDirPath).listFiles();
             if (null != files && files.length > 0) {
+                Arrays.sort(files, (f1, f2) -> Long.compare(f2.lastModified(), f1.lastModified()));
                 List<String> playlistItems = new ArrayList<>(files.length);
                 for (File file : files)
                     playlistItems.add(file.getName());
