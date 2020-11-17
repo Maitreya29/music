@@ -8,6 +8,9 @@ import android.os.Build;
 import android.provider.BaseColumns;
 import android.provider.MediaStore;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.hardcodecoder.pulsemusic.model.AlbumModel;
 
 import java.util.ArrayList;
@@ -20,9 +23,9 @@ public class ArtistAlbumsLoader implements Callable<List<AlbumModel>> {
     private final String mSortOrder;
     private final long mArtistId;
 
-    public ArtistAlbumsLoader(ContentResolver contentResolver, String artistName, SortOrder.ALBUMS sortOrder) {
-        this.mContentResolver = contentResolver;
-        this.mArtistId = getArtistIdFromName(artistName);
+    public ArtistAlbumsLoader(@NonNull ContentResolver contentResolver, @NonNull String artistName, @Nullable SortOrder.ALBUMS sortOrder) {
+        mContentResolver = contentResolver;
+        mArtistId = getArtistIdFromName(artistName);
         mSortOrder = MediaStoreHelper.getSortOrderFor(sortOrder);
     }
 

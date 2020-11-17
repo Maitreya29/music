@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.hardcodecoder.pulsemusic.model.AlbumModel;
@@ -23,14 +24,14 @@ public class AlbumsLoader implements Callable<List<AlbumModel>> {
     private final String mSortOrder;
     private final String mSelection;
 
-    AlbumsLoader(ContentResolver contentResolver, SortOrder.ALBUMS sortOrder) {
+    AlbumsLoader(@NonNull ContentResolver contentResolver, @Nullable SortOrder.ALBUMS sortOrder) {
         this(contentResolver, sortOrder, null);
     }
 
-    AlbumsLoader(ContentResolver mContentResolver, SortOrder.ALBUMS sortOrder, @Nullable String selection) {
-        this.mContentResolver = mContentResolver;
+    AlbumsLoader(@NonNull ContentResolver contentResolver, @Nullable SortOrder.ALBUMS sortOrder, @Nullable String selection) {
+        mContentResolver = contentResolver;
         mSortOrder = MediaStoreHelper.getSortOrderFor(sortOrder);
-        this.mSelection = selection;
+        mSelection = selection;
     }
 
     @Override

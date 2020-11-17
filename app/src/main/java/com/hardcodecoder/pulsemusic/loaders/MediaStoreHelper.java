@@ -3,12 +3,16 @@ package com.hardcodecoder.pulsemusic.loaders;
 import android.annotation.SuppressLint;
 import android.provider.MediaStore;
 
+import androidx.annotation.Nullable;
+
 public class MediaStoreHelper {
 
     // MediaStore.Audio.Media.DURATION existed well before APi 29
     // Suppress lint
     @SuppressLint("InlinedApi")
-    public static String getSortOrderFor(SortOrder sortOrder) {
+    @Nullable
+    public static String getSortOrderFor(@Nullable SortOrder sortOrder) {
+        if (null == sortOrder) return null;
         switch (sortOrder) {
             case TITLE_ASC:
                 return MediaStore.Audio.Media.TITLE + " COLLATE NOCASE ASC";
@@ -31,7 +35,9 @@ public class MediaStoreHelper {
         }
     }
 
-    public static String getSortOrderFor(SortOrder.ALBUMS sortOrder) {
+    @Nullable
+    public static String getSortOrderFor(@Nullable SortOrder.ALBUMS sortOrder) {
+        if (sortOrder == null) return null;
         switch (sortOrder) {
             case TITLE_ASC:
                 return MediaStore.Audio.Albums.ALBUM + " COLLATE NOCASE ASC";
@@ -54,7 +60,9 @@ public class MediaStoreHelper {
         }
     }
 
-    public static String getSortOrderFor(SortOrder.ARTIST sortOrder) {
+    @Nullable
+    public static String getSortOrderFor(@Nullable SortOrder.ARTIST sortOrder) {
+        if (sortOrder == null) return null;
         switch (sortOrder) {
             case TITLE_ASC:
                 return MediaStore.Audio.Artists.ARTIST + " COLLATE NOCASE ASC";

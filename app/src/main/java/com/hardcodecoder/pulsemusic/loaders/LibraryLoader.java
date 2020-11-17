@@ -26,11 +26,11 @@ public class LibraryLoader implements Callable<List<MusicModel>> {
     private String mSelectionString;
     private String[] mSelectionArgs;
 
-    LibraryLoader(Context context, SortOrder sortOrder) {
+    LibraryLoader(@NonNull Context context, @Nullable SortOrder sortOrder) {
         this(context, sortOrder, null, null);
     }
 
-    LibraryLoader(@NonNull Context context, SortOrder sortOrder, @Nullable String selectionString, @Nullable String[] selectionArgs) {
+    LibraryLoader(@NonNull Context context, @Nullable SortOrder sortOrder, @Nullable String selectionString, @Nullable String[] selectionArgs) {
         mContentResolver = context.getContentResolver();
         mSortOrder = MediaStoreHelper.getSortOrderFor(sortOrder);
         prepareSelection(context, selectionString, selectionArgs);
