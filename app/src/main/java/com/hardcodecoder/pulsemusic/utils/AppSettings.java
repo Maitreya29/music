@@ -201,21 +201,16 @@ public class AppSettings {
                 .getBoolean(Preferences.REMEMBER_LAST_TRACK, false); // By default do not remember last track
     }
 
-    public static void setLastTrackId(@NonNull Context context, int id) {
+    public static void saveTrackAndPosition(@NonNull Context context, int trackId, long position) {
         SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, Context.MODE_PRIVATE).edit();
-        editor.putInt(Preferences.LAST_TRACK_ID, id);
+        editor.putInt(Preferences.LAST_TRACK_ID, trackId);
+        editor.putLong(Preferences.LAST_TRACK_POSITION, position);
         editor.apply();
     }
 
     public static int getLastTrackId(@NonNull Context context) {
         return context.getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, Context.MODE_PRIVATE)
                 .getInt(Preferences.LAST_TRACK_ID, -1);
-    }
-
-    public static void setLastTrackPosition(@NonNull Context context, long position) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, Context.MODE_PRIVATE).edit();
-        editor.putLong(Preferences.LAST_TRACK_POSITION, position);
-        editor.apply();
     }
 
     public static long getLastTrackPosition(@NonNull Context context) {

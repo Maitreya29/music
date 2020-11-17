@@ -197,13 +197,11 @@ public class MainActivity extends MediaSessionActivity {
                 mController.getPlaybackState().getState() != PlaybackState.STATE_STOPPED)
             showControlsFragment();
 
-        if (mController.getPlaybackState() == null) {
-            if (AppSettings.isRememberLastTrack(this)) {
-                LoaderHelper.loadLastPlayedTrackBundled(this, bundle -> {
-                    if (null == bundle) return;
-                    mController.getTransportControls().sendCustomAction(PlaybackManager.ACTION_LOAD_LAST_TRACK, bundle);
-                });
-            }
+        if (mController.getPlaybackState() == null && AppSettings.isRememberLastTrack(this)) {
+            LoaderHelper.loadLastPlayedTrackBundled(this, bundle -> {
+                if (null == bundle) return;
+                mController.getTransportControls().sendCustomAction(PlaybackManager.ACTION_LOAD_LAST_TRACK, bundle);
+            });
         }
     }
 

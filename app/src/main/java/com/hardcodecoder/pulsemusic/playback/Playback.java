@@ -34,6 +34,13 @@ public interface Playback {
     void onStop(boolean abandonAudioFocus);
 
     /**
+     * Returns the id of the track currently being played
+     *
+     * @return int id of the track
+     */
+    int getActiveMediaId();
+
+    /**
      * @return the current media player playback position
      */
     long getCurrentStreamingPosition();

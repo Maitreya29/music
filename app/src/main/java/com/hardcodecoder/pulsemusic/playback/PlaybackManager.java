@@ -16,6 +16,7 @@ import com.hardcodecoder.pulsemusic.helper.MediaArtHelper;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.providers.ProviderManager;
 import com.hardcodecoder.pulsemusic.singleton.TrackManager;
+import com.hardcodecoder.pulsemusic.utils.AppSettings;
 
 import java.io.InputStream;
 
@@ -90,11 +91,13 @@ public class PlaybackManager implements Playback.Callback {
     }
 
     private void handlePauseRequest() {
+        saveTrackAndPosition();
         mServiceCallback.onPlaybackStopped();
         mPlayback.onPause();
     }
 
     private void handleStopRequest() {
+        saveTrackAndPosition();
         mServiceCallback.onPlaybackStopped();
         mPlayback.onStop(true);
     }
@@ -181,6 +184,17 @@ public class PlaybackManager implements Playback.Callback {
         // HistoryRecords and or TopAlbums/TopArtist
         if (trackItem.getAlbumId() >= 0)
             ProviderManager.getHistoryProvider().addToHistory(trackItem);
+    }
+
+    private void saveTrackAndPosition() {
+        final int trackId = mPlayback.getActiveMediaId();
+        final long position = mPlayback.getCurrentStreamingPosition();
+        if (trackId >= 0 && position > 0) {
+            // Remember last played track even if option is disabled in the settings
+            // We will only display last track if settings is enabled
+            // Store current duration and track id
+            AppSettings.saveTrackAndPosition(mContext, mPlayback.getActiveMediaId(), mPlayback.getCurrentStreamingPosition());
+        }
     }
 
     public interface PlaybackServiceCallback {

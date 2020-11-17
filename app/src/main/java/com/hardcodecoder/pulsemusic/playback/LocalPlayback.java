@@ -20,7 +20,6 @@ import androidx.annotation.NonNull;
 
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.singleton.TrackManager;
-import com.hardcodecoder.pulsemusic.utils.AppSettings;
 
 import java.io.IOException;
 
@@ -176,12 +175,6 @@ public class LocalPlayback implements
 
     @Override
     public void onStop(boolean abandonAudioFocus) {
-        // Remember last played track even if option is disabled in the settings
-        // We will only display last track if settings is enabled
-        // Store current duration and track id
-        AppSettings.setLastTrackId(mContext, mMediaId);
-        AppSettings.setLastTrackPosition(mContext, getCurrentStreamingPosition());
-
         if (abandonAudioFocus) abandonAudioFocus();
 
         releaseMediaPlayer();
@@ -209,6 +202,11 @@ public class LocalPlayback implements
             mp.release();
             mp = null;
         }
+    }
+
+    @Override
+    public int getActiveMediaId() {
+        return mMediaId;
     }
 
     @Override

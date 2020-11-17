@@ -195,7 +195,10 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
 
     @Override
     public void onTaskRemoved(Intent rootIntent) {
-        if (mMediaSession != null && !mMediaSession.isActive()) stopSelf();
+        if (mMediaSession != null && !mMediaSession.isActive()) {
+            TrackManager.getInstance().resetTrackManager();
+            stopSelf();
+        }
         super.onTaskRemoved(rootIntent);
     }
 
