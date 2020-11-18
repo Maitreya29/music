@@ -121,25 +121,25 @@
         tools:ignore="contentDescription"
         tools:tint="@color/md_red_A400" />
 
-    <com.hardcodecoder.pulsemusic.views.MaterialTextButton
+    <com.hardcodecoder.pulsemusic.views.AccentColorMaterialButton
         android:id="@+id/custom_accents_apply_btn"
-        style="@style/MaterialTextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/color_preview"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="@string/apply" />
+        android:text="@string/apply"
+        app:accentButtonStyle="text" />
 
-    <com.hardcodecoder.pulsemusic.views.MaterialTextButton
+    <com.hardcodecoder.pulsemusic.views.AccentColorMaterialButton
         android:id="@+id/custom_accents_presets_btn"
-        style="@style/MaterialTextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/color_preview"
         android:layout_alignParentStart="true"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="@string/presets" />
+        android:text="@string/presets"
+        app:accentButtonStyle="text" />
 </RelativeLayout>

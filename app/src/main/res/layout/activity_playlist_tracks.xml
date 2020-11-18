@@ -24,24 +24,24 @@
             android:orientation="horizontal"
             app:layout_scrollFlags="scroll|snapMargins">
 
-            <com.google.android.material.button.MaterialButton
+            <com.hardcodecoder.pulsemusic.views.AccentColorMaterialButton
                 android:id="@+id/playlist_shuffle_btn"
-                style="@style/MaterialButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:maxWidth="164dp"
                 android:text="@string/playlist_shuffle"
+                app:accentButtonStyle="filled"
                 app:icon="@drawable/ic_shuffle"
                 app:iconPadding="0dp" />
 
-            <com.google.android.material.button.MaterialButton
+            <com.hardcodecoder.pulsemusic.views.AccentColorMaterialButton
                 android:id="@+id/playlist_dynamic_btn"
-                style="@style/MaterialOutlineButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_weight="1"
+                app:accentButtonStyle="outlined"
                 app:iconPadding="0dp"
                 tools:icon="@drawable/ic_playlist_add"
                 tools:text="Any action" />

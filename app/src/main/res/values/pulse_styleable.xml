@@ -48,4 +48,12 @@
             <enum name="cut" value="1" />
         </attr>
     </declare-styleable>
+
+    <declare-styleable name="AccentColorMaterialButton">
+        <attr name="accentButtonStyle">
+            <enum name="text" value="0" />
+            <enum name="filled" value="1" />
+            <enum name="outlined" value="2" />
+        </attr>
+    </declare-styleable>
 </resources>

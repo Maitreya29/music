@@ -15,6 +15,7 @@ import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.fragments.settings.base.SettingsBaseFragment;
 import com.hardcodecoder.pulsemusic.themes.TintHelper;
 
+
 public class SettingsDonationFragment extends SettingsBaseFragment {
 
     public static final String TAG = SettingsDonationFragment.class.getSimpleName();
@@ -35,8 +36,8 @@ public class SettingsDonationFragment extends SettingsBaseFragment {
         MaterialButton coffeeBtn = view.findViewById(R.id.bmc_btn);
         MaterialButton payPalBtn = view.findViewById(R.id.pp_btn);
 
-        TintHelper.setAccentTintToMaterialButton(coffeeBtn);
-        TintHelper.setAccentTintToMaterialButton(payPalBtn);
+        TintHelper.setAccentTintToMaterialButton(coffeeBtn, false);
+        TintHelper.setAccentTintToMaterialButton(payPalBtn, false);
 
         coffeeBtn.setOnClickListener(v -> openLink("https://www.buymeacoffee.com/HardcodeCoder"));
         payPalBtn.setOnClickListener(v -> openLink("https://paypal.me/HardcodeCoder"));

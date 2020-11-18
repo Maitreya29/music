@@ -29,6 +29,10 @@ public class ThemeColors {
     @ColorInt
     private static int mCurrentColorOnSurface;
     @ColorInt
+    private static int mCurrentColorWindowBackground;
+    @ColorInt
+    private static int mCurrentColorOnPrimary;
+    @ColorInt
     private static int mCurrentSecondaryTextColor;
     private static boolean mInitialized = false;
 
@@ -48,14 +52,18 @@ public class ThemeColors {
                 R.attr.overlayColor,                 // [1]
                 R.attr.colorSurface,                 // [2]
                 R.attr.colorOnSurface,               // [3]
-                android.R.attr.textColorSecondary,   // [4]
+                R.attr.windowBackgroundColor,        // [4]
+                R.attr.colorOnPrimary,               // [5]
+                android.R.attr.textColorSecondary,   // [6]
         };
         TypedArray array = context.obtainStyledAttributes(ThemeManagerUtils.getThemeToApply(), attrs);
         mCurrentColorControlNormal = array.getColor(0, 0x8A000000);
         mCurrentColorOverlay = array.getColor(1, 0x0DFFFFFF);
         mCurrentColorSurface = array.getColor(2, 0xFFFFFFFF);
         mCurrentColorOnSurface = array.getColor(3, 0xFF000000);
-        mCurrentSecondaryTextColor = array.getColor(4, 0xFF000000);
+        mCurrentColorWindowBackground = array.getColor(4, 0xFFFFFFFF);
+        mCurrentColorOnPrimary = array.getColor(5, 0xFFFFFFFF);
+        mCurrentSecondaryTextColor = array.getColor(6, 0xFF000000);
         array.recycle();
         mInitialized = true;
     }
@@ -112,6 +120,20 @@ public class ThemeColors {
     @ColorInt
     public static int getCurrentColorOnSurface() {
         return mCurrentColorOnSurface;
+    }
+
+    /**
+     * @return the current theme color applied to window background
+     */
+    public static int getCurrentColorWindowBackground() {
+        return mCurrentColorWindowBackground;
+    }
+
+    /**
+     * @return the color used on top of primary/accent color
+     */
+    public static int getCurrentColorOnPrimary() {
+        return mCurrentColorOnPrimary;
     }
 
     /**

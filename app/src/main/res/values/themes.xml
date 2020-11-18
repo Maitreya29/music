@@ -11,6 +11,17 @@
         <item name="fontFamily">@font/manrope</item>
     </style>
 
+    <style name="PulseMaterialButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:fontFamily">@font/manrope</item>
+        <item name="fontFamily">@font/manrope</item>
+        <item name="android:paddingTop">@dimen/button_padding_vertical</item>
+        <item name="android:paddingBottom">@dimen/button_padding_vertical</item>
+        <item name="iconSize">20dp</item>
+        <item name="iconPadding">12dp</item>
+    </style>
+
     <style name="WindowTransitions" parent="@android:style/Animation.Activity">
         <!-- Animations for entering activity and closing activity
         when new activity is opened on top of current-->
@@ -33,6 +44,7 @@
         <item name="android:windowContentTransitions">true</item>
         <item name="android:textViewStyle">@style/PulseTextViewStyle</item>
         <item name="android:buttonStyle">@style/PulseButtonStyle</item>
+        <item name="materialButtonStyle">@style/PulseMaterialButton</item>
     </style>
 
     <style name="BaseThemeDark" parent="Theme.MaterialComponents.NoActionBar">
@@ -45,6 +57,7 @@
         <item name="android:windowContentTransitions">true</item>
         <item name="android:textViewStyle">@style/PulseTextViewStyle</item>
         <item name="android:buttonStyle">@style/PulseButtonStyle</item>
+        <item name="materialButtonStyle">@style/PulseMaterialButton</item>
     </style>
 
     <style name="ThemeLight" parent="BaseThemeLight" />

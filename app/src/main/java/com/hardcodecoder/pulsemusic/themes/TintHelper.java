@@ -8,41 +8,75 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.hardcodecoder.pulsemusic.R;
+import com.hardcodecoder.pulsemusic.utils.DimensionsUtil;
 
 import java.lang.reflect.Field;
 
 public class TintHelper {
 
-    public static void setAccentTintTo(ImageView imageView) {
+    public static void setAccentTintTo(@NonNull ImageView imageView) {
         imageView.setImageTintList(ColorStateList.valueOf(ThemeColors.getAccentColorForCurrentTheme()));
     }
 
-    public static Drawable setAccentTintTo(Drawable drawable, boolean mutate) {
+    public static Drawable setAccentTintTo(@NonNull Drawable drawable, boolean mutate) {
         if (mutate) drawable.mutate();
         drawable.setTint(ThemeColors.getAccentColorForCurrentTheme());
         return drawable;
     }
 
-    public static void setAccentTintTo(FloatingActionButton fab) {
+    public static void setAccentTintTo(@NonNull FloatingActionButton fab) {
         fab.setBackgroundTintList(ThemeColors.getAccentColorStateList());
     }
 
-    public static void setAccentTintToMaterialButton(MaterialButton materialButton) {
-        materialButton.setBackgroundTintList(ColorStateList.valueOf(ThemeColors.getAccentColorForCurrentTheme()));
+    public static void setAccentTintToMaterialButton(@NonNull MaterialButton materialButton, boolean tintIcon) {
+        materialButton.setBackgroundTintList(ThemeColors.getAccentColorStateList());
+        ColorStateList foregroundTint = ColorStateList.valueOf(ThemeColors.getCurrentColorOnPrimary());
+        materialButton.setTextColor(foregroundTint);
+        if (tintIcon) materialButton.setIconTint(foregroundTint);
     }
 
-    public static void setAccentTintToMaterialOutlineButton(MaterialButton materialButton) {
-        ColorStateList stateList = ColorStateList.valueOf(ThemeColors.getAccentColorForCurrentTheme());
-        materialButton.setRippleColor(ColorStateList.valueOf(
-                ColorUtil.changeAlphaComponentTo(ThemeColors.getCurrentAccentColor(), 0.26f)));
-        materialButton.setTextColor(stateList);
-        materialButton.setIconTint(stateList);
-        materialButton.setStrokeColor(stateList);
+    public static void setAccentColorToMaterialTextButton(@NonNull MaterialButton materialTextButton, boolean tintIcon) {
+        final ColorStateList accentColorStateList = ThemeColors.getAccentColorStateList();
+        materialTextButton.setTextColor(accentColorStateList);
+        if (tintIcon) materialTextButton.setIconTint(accentColorStateList);
+        materialTextButton.setBackgroundTintList(ColorStateList.valueOf(ThemeColors.getCurrentColorWindowBackground()));
+
+        int[][] states = new int[][]{
+                new int[]{android.R.attr.state_pressed},
+                new int[]{android.R.attr.state_focused, android.R.attr.state_hovered},
+                new int[]{android.R.attr.state_focused},
+                new int[]{android.R.attr.state_hovered},
+                new int[]{},
+        };
+
+        final int accentColor = ThemeColors.getCurrentAccentColor();
+
+        int[] colors = new int[]{
+                ColorUtil.changeAlphaComponentTo(accentColor, 0.12f),
+                ColorUtil.changeAlphaComponentTo(accentColor, 0.24f),
+                ColorUtil.changeAlphaComponentTo(accentColor, 0.20f),
+                ColorUtil.changeAlphaComponentTo(accentColor, 0.20f),
+                ColorUtil.changeAlphaComponentTo(accentColor, 0.12f),
+        };
+
+        ColorStateList rippleStateList = new ColorStateList(states, colors);
+
+        materialTextButton.setRippleColor(rippleStateList);
+        materialTextButton.setStateListAnimator(null);
+        materialTextButton.setElevation(0);
+    }
+
+    public static void setAccentTintToMaterialOutlineButton(@NonNull MaterialButton materialOutlineButton, boolean tintIcon) {
+        setAccentColorToMaterialTextButton(materialOutlineButton, tintIcon);
+        materialOutlineButton.setStrokeWidth(
+                DimensionsUtil.getDimensionPixelSize(materialOutlineButton.getContext(), 1));
+        materialOutlineButton.setStrokeColor(ThemeColors.getAccentColorStateList());
     }
 
     public static void setAccentTintToCursor(EditText editText) {

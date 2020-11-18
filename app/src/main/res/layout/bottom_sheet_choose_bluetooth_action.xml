@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="32dp">
@@ -49,21 +50,21 @@
             android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2" />
     </RadioGroup>
 
-    <com.hardcodecoder.pulsemusic.views.MaterialTextButton
+    <com.hardcodecoder.pulsemusic.views.AccentColorMaterialButton
         android:id="@+id/choose_bluetooth_action_cancel_btn"
-        style="@style/MaterialTextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/radio_button_group"
         android:layout_toStartOf="@id/choose_bluetooth_action_set_btn"
-        android:text="@string/cancel" />
+        android:text="@string/cancel"
+        app:accentButtonStyle="text" />
 
-    <com.hardcodecoder.pulsemusic.views.MaterialTextButton
+    <com.hardcodecoder.pulsemusic.views.AccentColorMaterialButton
         android:id="@+id/choose_bluetooth_action_set_btn"
-        style="@style/MaterialTextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/radio_button_group"
         android:layout_alignParentEnd="true"
-        android:text="@string/set" />
+        android:text="@string/set"
+        app:accentButtonStyle="text" />
 </RelativeLayout>

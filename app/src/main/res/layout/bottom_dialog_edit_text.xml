@@ -34,23 +34,23 @@
             tools:text="@tools:sample/full_names" />
     </com.hardcodecoder.pulsemusic.views.AccentColorTextInputLayout>
 
-    <com.hardcodecoder.pulsemusic.views.MaterialTextButton
+    <com.hardcodecoder.pulsemusic.views.AccentColorMaterialButton
         android:id="@+id/cancel_btn"
-        style="@style/MaterialTextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/cancel"
+        app:accentButtonStyle="text"
         app:layout_constraintEnd_toStartOf="@+id/confirm_btn"
         app:layout_constraintTop_toBottomOf="@id/edit_text_container" />
 
-    <com.hardcodecoder.pulsemusic.views.MaterialTextButton
+    <com.hardcodecoder.pulsemusic.views.AccentColorMaterialButton
         android:id="@+id/confirm_btn"
-        style="@style/MaterialTextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/create"
+        app:accentButtonStyle="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/edit_text_container" />
 </androidx.constraintlayout.widget.ConstraintLayout>

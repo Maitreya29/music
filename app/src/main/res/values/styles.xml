@@ -71,37 +71,6 @@
 
     <style name="RoundedBottomSheet" parent="@style/BaseBottomSheet" />
 
-    <style name="MaterialOutlineButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
-        <item name="android:textSize">14sp</item>
-        <item name="android:textAllCaps">true</item>
-        <item name="android:paddingTop">@dimen/button_padding_vertical</item>
-        <item name="android:paddingBottom">@dimen/button_padding_vertical</item>
-        <item name="backgroundTint">?android:attr/windowBackground</item>
-        <item name="iconSize">20dp</item>
-        <item name="iconPadding">12dp</item>
-        <item name="android:fontFamily">@font/manrope</item>
-    </style>
-
-    <style name="MaterialTextButton" parent="Widget.MaterialComponents.Button.TextButton">
-        <item name="android:textSize">14sp</item>
-        <item name="android:textAllCaps">true</item>
-        <item name="android:paddingTop">@dimen/button_padding_vertical</item>
-        <item name="android:paddingBottom">@dimen/button_padding_vertical</item>
-        <item name="android:fontFamily">@font/manrope</item>
-    </style>
-
-    <style name="MaterialButton" parent="Widget.MaterialComponents.Button">
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">?attr/colorOnPrimary</item>
-        <item name="android:textAllCaps">true</item>
-        <item name="android:paddingTop">@dimen/button_padding_vertical</item>
-        <item name="android:paddingBottom">@dimen/button_padding_vertical</item>
-        <item name="iconSize">20dp</item>
-        <item name="iconPadding">12dp</item>
-        <item name="iconTint">?attr/colorOnPrimary</item>
-        <item name="android:fontFamily">@font/manrope</item>
-    </style>
-
     <style name="TextAppearanceSearch" parent="TextAppearance.MaterialComponents.Headline6">
         <item name="android:textSize">16sp</item>
         <item name="android:textStyle">bold</item>
