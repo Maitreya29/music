@@ -54,11 +54,11 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.AlbumsSVH>
         final Handler handler = new Handler();
         TaskRunner.executeAsync(() -> {
             List<AlbumModel> oldSortedTracks = new ArrayList<>(mList);
-            List<AlbumModel> updatedTracks = SortUtil.sortAlbumList(mList, sortOrder);
-            final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new PMBGridAdapterDiffCallback(oldSortedTracks, updatedTracks) {
+            SortUtil.sortAlbumList(mList, sortOrder);
+            final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new PMBGridAdapterDiffCallback(oldSortedTracks, mList) {
                 @Override
                 public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-                    return oldSortedTracks.get(oldItemPosition).getAlbumName().equals(updatedTracks.get(newItemPosition).getAlbumName());
+                    return oldSortedTracks.get(oldItemPosition).getAlbumName().equals(mList.get(newItemPosition).getAlbumName());
                 }
             });
             handler.post(() -> {

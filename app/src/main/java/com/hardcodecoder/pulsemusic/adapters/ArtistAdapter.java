@@ -55,11 +55,11 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistSVH>
         final Handler handler = new Handler();
         TaskRunner.executeAsync(() -> {
             List<ArtistModel> oldSortedTracks = new ArrayList<>(mList);
-            List<ArtistModel> updatedTracks = SortUtil.sortArtistList(mList, sortOrder);
-            final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new PMBGridAdapterDiffCallback(oldSortedTracks, updatedTracks) {
+            SortUtil.sortArtistList(mList, sortOrder);
+            final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new PMBGridAdapterDiffCallback(oldSortedTracks, mList) {
                 @Override
                 public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-                    return oldSortedTracks.get(oldItemPosition).getArtistName().equals(updatedTracks.get(newItemPosition).getArtistName());
+                    return oldSortedTracks.get(oldItemPosition).getArtistName().equals(mList.get(newItemPosition).getArtistName());
                 }
             });
             handler.post(() -> {
