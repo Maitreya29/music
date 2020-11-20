@@ -1,0 +1,11 @@
+Pulse Music V4.0.2-Release
+
+Note: Please reselct (if previously selected) blacklisted folders after updating to this release
+
+- Added option to remember last played track
+- Added option to filter tracks by duration
+- Added support for multi-disc albums #24
+- Added shuffle option in home screen
+- New implementation for selecting blacklist folders in Android Q+
+- Fixed Exclude folders does not work #20
+- Minor under the hood changes

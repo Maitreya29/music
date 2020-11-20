@@ -18,9 +18,7 @@
 
 
     <!-- Home Fragment -->
-    <string name="favorite_playlist">Favoriten</string>
     <string name="recent">Kürzlich abgespielt</string>
-    <string name="select_track">Titel auswählen</string>
     <string name="random">Für dich</string>
     <string name="new_in_library">Neu in der Bibliothek</string>
     <string name="top_artist">Top Künstler</string>
