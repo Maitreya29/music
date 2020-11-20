@@ -81,7 +81,7 @@ public class NowPlayingScreenActivity extends AppCompatActivity {
 
             @Override
             public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-                float alpha = slideOffset >= 0 ? (slideOffset + 1) / 2 : slideOffset / 2 + 0.5f;
+                float alpha = (slideOffset >= 0 ? (slideOffset + 1) / 2 : slideOffset / 2 + 0.5f) + 0.2f;
                 bottomSheet.setAlpha(alpha);
             }
         });
