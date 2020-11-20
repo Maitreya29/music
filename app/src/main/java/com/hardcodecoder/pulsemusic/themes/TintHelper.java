@@ -18,7 +18,7 @@ import com.hardcodecoder.pulsemusic.utils.DimensionsUtil;
 
 import java.lang.reflect.Field;
 
-public class TintHelper {
+public final class TintHelper {
 
     public static void setAccentTintTo(@NonNull ImageView imageView) {
         imageView.setImageTintList(ColorStateList.valueOf(ThemeColors.getAccentColorForCurrentTheme()));
@@ -45,7 +45,7 @@ public class TintHelper {
         final ColorStateList accentColorStateList = ThemeColors.getAccentColorStateList();
         materialTextButton.setTextColor(accentColorStateList);
         if (tintIcon) materialTextButton.setIconTint(accentColorStateList);
-        materialTextButton.setBackgroundTintList(ColorStateList.valueOf(ThemeColors.getCurrentColorWindowBackground()));
+        materialTextButton.setBackgroundTintList(ColorStateList.valueOf(0));
 
         int[][] states = new int[][]{
                 new int[]{android.R.attr.state_pressed},
