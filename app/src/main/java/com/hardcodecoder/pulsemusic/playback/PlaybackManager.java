@@ -48,12 +48,12 @@ public class PlaybackManager implements Playback.Callback {
 
         @Override
         public void onSkipToNext() {
-            handleSkipRequest(ACTION_PLAY_NEXT);
+            handleSkipRequest(ACTION_PLAY_NEXT, true);
         }
 
         @Override
         public void onSkipToPrevious() {
-            handleSkipRequest(ACTION_PLAY_PREV);
+            handleSkipRequest(ACTION_PLAY_PREV, true);
         }
 
         @Override
@@ -102,7 +102,9 @@ public class PlaybackManager implements Playback.Callback {
         mPlayback.onStop(true);
     }
 
-    private void handleSkipRequest(short di) {
+    private void handleSkipRequest(short di, boolean manualSkip) {
+        // User manually skipped the track, so we stop repeat
+        if (manualSkip) mTrackManager.repeatCurrentTrack(false);
         if (mTrackManager.canSkipTrack(di)) handlePlayRequest();
         else handlePauseRequest();
     }
@@ -160,7 +162,7 @@ public class PlaybackManager implements Playback.Callback {
 
     @Override
     public void onPlaybackCompletion() {
-        handleSkipRequest(ACTION_PLAY_NEXT);
+        handleSkipRequest(ACTION_PLAY_NEXT, false);
     }
 
     @Override
@@ -170,15 +172,16 @@ public class PlaybackManager implements Playback.Callback {
 
     @Override
     public void onTrackChanged(@NonNull MusicModel trackItem) {
-        // Track has changed, need to update metadata
-        MediaMetadata.Builder metadataBuilder = new MediaMetadata.Builder();
-        metadataBuilder.putLong(MediaMetadata.METADATA_KEY_DURATION, trackItem.getTrackDuration());
-        metadataBuilder.putString(MediaMetadata.METADATA_KEY_TITLE, trackItem.getTrackName());
-        metadataBuilder.putString(MediaMetadata.METADATA_KEY_ARTIST, trackItem.getArtist());
-        metadataBuilder.putString(MediaMetadata.METADATA_KEY_ALBUM, trackItem.getAlbum());
-        metadataBuilder.putBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART, loadAlbumArt(trackItem.getAlbumArtUrl(), trackItem.getAlbumId()));
-        mServiceCallback.onMetaDataChanged(metadataBuilder.build());
-
+        if (mPlayback.getActiveMediaId() != trackItem.getId()) {
+            // Track has changed, need to update metadata
+            MediaMetadata.Builder metadataBuilder = new MediaMetadata.Builder();
+            metadataBuilder.putLong(MediaMetadata.METADATA_KEY_DURATION, trackItem.getTrackDuration());
+            metadataBuilder.putString(MediaMetadata.METADATA_KEY_TITLE, trackItem.getTrackName());
+            metadataBuilder.putString(MediaMetadata.METADATA_KEY_ARTIST, trackItem.getArtist());
+            metadataBuilder.putString(MediaMetadata.METADATA_KEY_ALBUM, trackItem.getAlbum());
+            metadataBuilder.putBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART, loadAlbumArt(trackItem.getAlbumArtUrl(), trackItem.getAlbumId()));
+            mServiceCallback.onMetaDataChanged(metadataBuilder.build());
+        }
         // Do not save any media that was picked by user
         // All data might not available to work with such tracks when building
         // HistoryRecords and or TopAlbums/TopArtist

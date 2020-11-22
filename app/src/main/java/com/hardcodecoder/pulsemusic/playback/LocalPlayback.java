@@ -93,11 +93,9 @@ public class LocalPlayback implements
             if (trackItem.getId() == mMediaId) {
                 // Track item has not changed
                 if (mTrackManager.isCurrentTrackInRepeatMode()) {
-                    // We are in repeat mode
+                    // We are in repeat mode (infinite lop), release media player
+                    // and let it re-init with same track
                     releaseMediaPlayer();
-                    // We have started repeating current track
-                    // Set it false now to prevent future repetition
-                    mTrackManager.repeatCurrentTrack(false);
                     mPlaybackCallback.onTrackChanged(trackItem);
                 }
                 if (null == mp) {

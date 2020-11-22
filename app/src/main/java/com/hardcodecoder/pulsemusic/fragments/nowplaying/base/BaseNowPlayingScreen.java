@@ -125,9 +125,13 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
                 if (position == mTrackManager.getActiveIndex()) return;
 
                 if (userScrollChange) {
-                    // User changed page, manually change active track index and start playing
-                    mTrackManager.setActiveIndex(position);
-                    if (null != mTransportControls) mTransportControls.play();
+                    // User changed page, check the active index to determine
+                    // whether to skip next or previous
+                    final int activeIndex = mTrackManager.getActiveIndex();
+                    if (null != mTransportControls) {
+                        if (position > activeIndex) mTransportControls.skipToNext();
+                        else if (position < activeIndex) mTransportControls.skipToPrevious();
+                    }
                 } else {
                     // For some reason onPageSelected is triggered
                     // after a call to notifyDataSetChanged with arbitrary position
@@ -285,10 +289,8 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
     protected void handleRepeatStateChanged(ImageView imageView, boolean repeating) {
         if (repeating) {
             imageView.setImageTintList(ThemeColors.getAccentColorStateList());
-            imageView.setImageResource(R.drawable.ic_repeat_one);
         } else {
             imageView.setImageTintList(ThemeColors.getColorControlNormalTintList());
-            imageView.setImageResource(R.drawable.ic_repeat);
         }
     }
 
