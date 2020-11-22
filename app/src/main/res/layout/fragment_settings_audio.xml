@@ -36,7 +36,6 @@
             app:settingItemIconBackgroundColor="?windowBackgroundColor"
             app:settingItemIconColor="?attr/colorControlNormal"
             app:settingItemText="@string/audio_category_select_bluetooth_action_text"
-            app:settingItemTitle="@string/audio_category_select_bluetooth_action_title"
-            app:settingToggleableItemEnabled="true" />
+            app:settingItemTitle="@string/audio_category_select_bluetooth_action_title" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

@@ -15,8 +15,6 @@
             android:id="@+id/stub_top_albums_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="16dp"
             android:layout="@layout/home_category_title" />
 
         <ViewStub
@@ -29,8 +27,6 @@
             android:id="@+id/stub_suggestions_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="16dp"
             android:layout="@layout/home_category_title" />
 
         <ViewStub
@@ -43,24 +39,18 @@
             android:id="@+id/stub_new_in_store_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="16dp"
             android:layout="@layout/home_category_title" />
 
         <ViewStub
             android:id="@+id/stub_new_in_store_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout="@layout/home_category_list"
-            android:paddingStart="0dp"
-            android:paddingEnd="0dp" />
+            android:layout="@layout/home_category_list" />
 
         <ViewStub
             android:id="@+id/stub_top_artists_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="16dp"
             android:layout="@layout/home_category_title" />
 
         <ViewStub

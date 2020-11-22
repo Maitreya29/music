@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_toEndOf="@id/settings_list_item_icon"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
         tools:text="@tools:sample/full_names" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -40,6 +40,7 @@
         android:layout_marginTop="2dp"
         android:layout_toEndOf="@id/settings_list_item_icon"
         android:maxLines="4"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
         android:textColor="?android:attr/textColorSecondary"
         tools:text="@tools:sample/lorem/random" />
 </RelativeLayout>

@@ -27,8 +27,7 @@
             app:settingItemIconBackgroundColor="?windowBackgroundColor"
             app:settingItemIconColor="?attr/colorControlNormal"
             app:settingItemText="@string/ignored_folder_desc"
-            app:settingItemTitle="@string/ignored_folder_title"
-            app:settingToggleableItemEnabled="true" />
+            app:settingItemTitle="@string/ignored_folder_title" />
 
         <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
             android:id="@+id/duration_filter_title"
@@ -40,8 +39,7 @@
             app:settingItemIconBackgroundColor="?windowBackgroundColor"
             app:settingItemIconColor="?attr/colorControlNormal"
             app:settingItemText="@string/duration_filter_desc"
-            app:settingItemTitle="@string/duration_filter_title"
-            app:settingToggleableItemEnabled="true" />
+            app:settingItemTitle="@string/duration_filter_title" />
 
         <com.hardcodecoder.pulsemusic.views.ValueSlider
             android:id="@+id/duration_filter_slider"

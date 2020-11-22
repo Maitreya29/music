@@ -13,7 +13,7 @@
         android:id="@+id/accent_color"
         android:layout_width="72dp"
         android:layout_height="72dp"
-        tools:color="@color/exodus_fruit_desaturated" />
+        tools:color="@color/md_green_A700" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/accent_title"

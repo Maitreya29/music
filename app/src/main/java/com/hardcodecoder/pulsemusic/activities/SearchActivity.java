@@ -54,7 +54,7 @@ public class SearchActivity extends MediaSessionActivity implements SimpleItemCl
     }
 
     private void setUpSearchUi() {
-        AppCompatEditText editText = findViewById(R.id.search_activity_edit_text);
+        AppCompatEditText editText = findViewById(R.id.search_edit_text);
         TintHelper.setAccentTintToCursor(editText);
         editText.addTextChangedListener(new TextWatcher() {
             @Override

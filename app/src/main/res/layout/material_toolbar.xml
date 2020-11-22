@@ -5,8 +5,8 @@
     android:id="@+id/material_toolbar"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
-    android:paddingBottom="4dp"
     app:layout_scrollFlags="scroll|enterAlways|snapMargins"
     app:navigationIcon="@drawable/ic_keyboard_backspace"
     app:titleTextAppearance="@style/TextAppearanceToolbar"
+    app:titleTextColor="?android:attr/textColorPrimary"
     tools:title="@tools:sample/full_names" />

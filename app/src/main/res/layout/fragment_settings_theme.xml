@@ -29,8 +29,7 @@
             app:settingItemIconBackgroundColor="?attr/windowBackgroundColor"
             app:settingItemIconColor="?attr/colorControlNormal"
             app:settingItemText="@string/laf_category_select_dark_theme_desc"
-            app:settingItemTitle="@string/laf_category_select_dark_theme"
-            app:settingToggleableItemEnabled="true" />
+            app:settingItemTitle="@string/laf_category_select_dark_theme" />
 
         <com.hardcodecoder.pulsemusic.views.SettingsToggleableItem
             android:id="@+id/laf_enable_dark_mode"
@@ -71,7 +70,6 @@
             app:settingItemIconBackgroundColor="?attr/windowBackgroundColor"
             app:settingItemIconColor="?attr/colorControlNormal"
             app:settingItemText="@string/laf_category_select_color_desc"
-            app:settingItemTitle="@string/laf_category_select_color"
-            app:settingToggleableItemEnabled="true" />
+            app:settingItemTitle="@string/laf_category_select_color" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
