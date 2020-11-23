@@ -92,6 +92,7 @@ public class MainActivity extends MediaSessionActivity {
         ColorStateList colorStateList = ThemeColors.getEnabledSelectedColorStateList();
         bottomNavigation.setItemIconTintList(colorStateList);
         bottomNavigation.setItemTextColor(colorStateList);
+        bottomNavigation.setItemRippleColor(ThemeColors.getBottomNavigationViewRippleColor());
         bottomNavigation.setOnNavigationItemSelectedListener(menuItem -> {
             final int id = menuItem.getItemId();
             if (id == R.id.nav_home) {

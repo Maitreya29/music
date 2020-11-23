@@ -57,7 +57,7 @@ public class AccentColorSwitch extends SwitchCompat {
     private ColorStateList getMaterialThemeColorsThumbTintList() {
         if (materialThemeColorsThumbTintList == null) {
             int colorSurface = ThemeColors.getCurrentColorSurface();
-            int colorControlActivated = ThemeColors.getAccentColorForCurrentTheme();
+            int colorControlActivated = ThemeColors.getCurrentColorPrimary();
             int[] switchThumbColorsList = new int[ENABLED_CHECKED_STATES.length];
 
             float thumbElevation = getResources().getDimension(R.dimen.rounding_radius_4dp);
@@ -84,7 +84,7 @@ public class AccentColorSwitch extends SwitchCompat {
         if (materialThemeColorsTrackTintList == null) {
             int[] switchTrackColorsList = new int[ENABLED_CHECKED_STATES.length];
             int colorSurface = ThemeColors.getCurrentColorSurface();
-            int colorControlActivated = ThemeColors.getAccentColorForCurrentTheme();
+            int colorControlActivated = ThemeColors.getCurrentColorPrimary();
             int colorOnSurface = ThemeColors.getCurrentColorOnSurface();
 
             switchTrackColorsList[0] = MaterialColors.layer(colorSurface, colorControlActivated, MaterialColors.ALPHA_MEDIUM);

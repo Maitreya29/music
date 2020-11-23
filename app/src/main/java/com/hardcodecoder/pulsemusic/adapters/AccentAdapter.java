@@ -73,7 +73,7 @@ public class AccentAdapter extends RecyclerView.Adapter<AccentAdapter.AccentAdap
             drawable.setCornerRadius(DimensionsUtil.getDimension(itemView.getContext(), 8));
             drawable.setStroke(
                     DimensionsUtil.getDimensionPixelSize(itemView.getContext(), 2),
-                    ThemeColors.getAccentColorForCurrentTheme());
+                    ThemeColors.getCurrentColorPrimary());
             itemView.setBackground(drawable);
         }
     }

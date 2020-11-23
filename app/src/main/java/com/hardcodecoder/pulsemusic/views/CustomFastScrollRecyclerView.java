@@ -29,7 +29,7 @@ public class CustomFastScrollRecyclerView extends FastScrollRecyclerView {
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        int accentColor = ThemeColors.getAccentColorForCurrentTheme();
+        int accentColor = ThemeColors.getCurrentColorPrimary();
         setBubbleColor(accentColor);
         setHandleColor(accentColor);
         setTrackColor(ThemeColors.getCurrentColorOverlay());

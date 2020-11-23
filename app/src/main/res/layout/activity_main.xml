@@ -55,6 +55,7 @@
         app:elevation="0dp"
         app:itemHorizontalTranslationEnabled="true"
         app:itemIconSize="20dp"
+        app:labelVisibilityMode="selected"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/bottom_navigation_items" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -28,7 +28,6 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.google.android.material.color.MaterialColors;
 import com.google.android.material.shape.CornerFamily;
 import com.google.android.material.shape.ShapeAppearanceModel;
 import com.google.android.material.slider.Slider;
@@ -228,8 +227,8 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
     }
 
     protected void setDefaultTintToPlayBtn(@NonNull ImageView playPauseBtn) {
-        playPauseBtn.setBackgroundTintList(ColorStateList.valueOf(ThemeColors.getAccentColorForCurrentTheme()));
-        playPauseBtn.setImageTintList(ColorStateList.valueOf(MaterialColors.getColor(playPauseBtn, R.attr.colorOnPrimary)));
+        playPauseBtn.setBackgroundTintList(ThemeColors.getPrimaryColorStateList());
+        playPauseBtn.setImageTintList(ColorStateList.valueOf(ThemeColors.getCurrentColorOnPrimary()));
     }
 
     protected void togglePlayPause() {
@@ -288,7 +287,7 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
 
     protected void handleRepeatStateChanged(ImageView imageView, boolean repeating) {
         if (repeating) {
-            imageView.setImageTintList(ThemeColors.getAccentColorStateList());
+            imageView.setImageTintList(ThemeColors.getPrimaryColorStateList());
         } else {
             imageView.setImageTintList(ThemeColors.getColorControlNormalTintList());
         }
@@ -301,7 +300,7 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
 
     protected void handleFavoriteStateChanged(ImageView imageView, boolean favorite) {
         if (favorite) {
-            imageView.setImageTintList(ThemeColors.getAccentColorStateList());
+            imageView.setImageTintList(ThemeColors.getPrimaryColorStateList());
             imageView.setImageResource(R.drawable.ic_favorite);
         } else {
             imageView.setImageTintList(ThemeColors.getColorControlNormalTintList());

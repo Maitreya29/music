@@ -27,7 +27,7 @@ public class AccentColorRadioButton extends MaterialRadioButton {
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        ColorStateList stateList = ColorStateList.valueOf(ThemeColors.getAccentColorForCurrentTheme());
+        ColorStateList stateList = ColorStateList.valueOf(ThemeColors.getCurrentColorPrimary());
         setButtonTintList(stateList);
     }
 }

@@ -21,53 +21,33 @@ import java.lang.reflect.Field;
 public final class TintHelper {
 
     public static void setAccentTintTo(@NonNull ImageView imageView) {
-        imageView.setImageTintList(ColorStateList.valueOf(ThemeColors.getAccentColorForCurrentTheme()));
+        imageView.setImageTintList(ColorStateList.valueOf(ThemeColors.getCurrentColorPrimary()));
     }
 
     public static Drawable setAccentTintTo(@NonNull Drawable drawable, boolean mutate) {
         if (mutate) drawable.mutate();
-        drawable.setTint(ThemeColors.getAccentColorForCurrentTheme());
+        drawable.setTint(ThemeColors.getCurrentColorPrimary());
         return drawable;
     }
 
     public static void setAccentTintTo(@NonNull FloatingActionButton fab) {
-        fab.setBackgroundTintList(ThemeColors.getAccentColorStateList());
+        fab.setBackgroundTintList(ThemeColors.getPrimaryColorStateList());
     }
 
     public static void setAccentTintToMaterialButton(@NonNull MaterialButton materialButton, boolean tintIcon) {
-        materialButton.setBackgroundTintList(ThemeColors.getAccentColorStateList());
+        materialButton.setBackgroundTintList(ThemeColors.getPrimaryColorStateList());
+        materialButton.setRippleColor(ThemeColors.getMaterialButtonRippleColor());
         ColorStateList foregroundTint = ColorStateList.valueOf(ThemeColors.getCurrentColorOnPrimary());
         materialButton.setTextColor(foregroundTint);
         if (tintIcon) materialButton.setIconTint(foregroundTint);
     }
 
     public static void setAccentColorToMaterialTextButton(@NonNull MaterialButton materialTextButton, boolean tintIcon) {
-        final ColorStateList accentColorStateList = ThemeColors.getAccentColorStateList();
+        final ColorStateList accentColorStateList = ThemeColors.getPrimaryColorStateList();
         materialTextButton.setTextColor(accentColorStateList);
         if (tintIcon) materialTextButton.setIconTint(accentColorStateList);
         materialTextButton.setBackgroundTintList(ColorStateList.valueOf(0));
-
-        int[][] states = new int[][]{
-                new int[]{android.R.attr.state_pressed},
-                new int[]{android.R.attr.state_focused, android.R.attr.state_hovered},
-                new int[]{android.R.attr.state_focused},
-                new int[]{android.R.attr.state_hovered},
-                new int[]{},
-        };
-
-        final int accentColor = ThemeColors.getCurrentAccentColor();
-
-        int[] colors = new int[]{
-                ColorUtil.changeAlphaComponentTo(accentColor, 0.12f),
-                ColorUtil.changeAlphaComponentTo(accentColor, 0.24f),
-                ColorUtil.changeAlphaComponentTo(accentColor, 0.20f),
-                ColorUtil.changeAlphaComponentTo(accentColor, 0.20f),
-                ColorUtil.changeAlphaComponentTo(accentColor, 0.12f),
-        };
-
-        ColorStateList rippleStateList = new ColorStateList(states, colors);
-
-        materialTextButton.setRippleColor(rippleStateList);
+        materialTextButton.setRippleColor(ThemeColors.getMaterialButtonTextRippleColor());
         materialTextButton.setStateListAnimator(null);
         materialTextButton.setElevation(0);
     }
@@ -76,7 +56,7 @@ public final class TintHelper {
         setAccentColorToMaterialTextButton(materialOutlineButton, tintIcon);
         materialOutlineButton.setStrokeWidth(
                 DimensionsUtil.getDimensionPixelSize(materialOutlineButton.getContext(), 1));
-        materialOutlineButton.setStrokeColor(ThemeColors.getAccentColorStateList());
+        materialOutlineButton.setStrokeColor(ThemeColors.getMaterialOutlineColorSelector());
     }
 
     public static void setAccentTintToCursor(EditText editText) {
@@ -88,7 +68,7 @@ public final class TintHelper {
             return;
         }
 
-        int color = ThemeColors.getAccentColorForCurrentTheme();
+        int color = ThemeColors.getCurrentColorPrimary();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             // Use TextView#setTextCursorDrawable to set custom tinted drawable

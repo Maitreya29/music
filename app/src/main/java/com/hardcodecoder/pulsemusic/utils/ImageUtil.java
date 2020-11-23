@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
 import com.hardcodecoder.pulsemusic.R;
@@ -21,11 +22,15 @@ public class ImageUtil {
         return drawable;
     }
 
+    @NonNull
     public static Drawable getAccentTintedSelectedItemBackground(Context context) {
         GradientDrawable drawable = new GradientDrawable(
-                GradientDrawable.Orientation.RIGHT_LEFT,
-                new int[]{ColorUtil.generatePrimaryTintedColorOverlay(), android.R.color.transparent});
+                GradientDrawable.Orientation.LEFT_RIGHT,
+                new int[]{
+                        android.R.color.transparent,
+                        ColorUtil.generatePrimaryTintedColorOverlay()});
         drawable.setCornerRadius(DimensionsUtil.getDimension(context, 8));
+        drawable.setGradientCenter(34, 0);
         return drawable;
     }
 }

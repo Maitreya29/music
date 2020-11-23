@@ -116,7 +116,7 @@ public class EdgeNowPlayingScreen extends BaseNowPlayingScreen {
 
     private void applySeekBarTint() {
         mProgressSeekBar.setProgressBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#1F000000")));
-        mProgressSeekBar.setProgressTintList(ColorStateList.valueOf(ThemeColors.getAccentColorForCurrentTheme()));
+        mProgressSeekBar.setProgressTintList(ThemeColors.getPrimaryColorStateList());
     }
 
     @Override

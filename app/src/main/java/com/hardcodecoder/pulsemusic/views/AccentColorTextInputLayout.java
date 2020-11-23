@@ -41,12 +41,12 @@ public class AccentColorTextInputLayout extends TextInputLayout {
         };
         int[] colors = new int[states.length];
 
-        colors[0] = ThemeColors.getAccentColorForCurrentTheme();
+        colors[0] = ThemeColors.getCurrentColorPrimary();
         colors[1] = ColorUtil.changeAlphaComponentTo(colorOnSurface, 0.42f);
         colors[2] = ColorUtil.changeAlphaComponentTo(colorOnSurface, 0.38f);
         colors[3] = ColorUtil.changeAlphaComponentTo(colorOnSurface, 0.42f);
 
-        setHintTextColor(ThemeColors.getAccentColorStateList());
+        setHintTextColor(ThemeColors.getPrimaryColorStateList());
         setBoxStrokeColorStateList(new ColorStateList(states, colors));
 
         if (getEditText() == null) return;

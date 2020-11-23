@@ -26,6 +26,6 @@ public class AccentColorTextView extends MaterialTextView {
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        setTextColor(ThemeColors.getAccentColorForCurrentTheme());
+        setTextColor(ThemeColors.getCurrentColorPrimary());
     }
 }

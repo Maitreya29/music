@@ -32,7 +32,7 @@ public class CustomRecyclerView extends RecyclerView {
      * Called by Android {@link android.view.View#onDrawScrollBars(Canvas)}
      **/
     protected void onDrawHorizontalScrollBar(Canvas canvas, Drawable scrollBar, int l, int t, int r, int b) {
-        scrollBar.setColorFilter(ThemeColors.getAccentColorForCurrentTheme(), PorterDuff.Mode.SRC);
+        scrollBar.setColorFilter(ThemeColors.getCurrentColorPrimary(), PorterDuff.Mode.SRC);
         scrollBar.setBounds(l, t, r, b);
         scrollBar.draw(canvas);
     }
@@ -41,7 +41,7 @@ public class CustomRecyclerView extends RecyclerView {
      * Called by Android {@link android.view.View#onDrawScrollBars(Canvas)}
      **/
     protected void onDrawVerticalScrollBar(Canvas canvas, Drawable scrollBar, int l, int t, int r, int b) {
-        scrollBar.setColorFilter(ThemeColors.getAccentColorForCurrentTheme(), PorterDuff.Mode.SRC);
+        scrollBar.setColorFilter(ThemeColors.getCurrentColorPrimary(), PorterDuff.Mode.SRC);
         scrollBar.setBounds(l, t, r, b);
         scrollBar.draw(canvas);
     }
@@ -54,7 +54,7 @@ public class CustomRecyclerView extends RecyclerView {
             @Override
             protected EdgeEffect createEdgeEffect(@NonNull RecyclerView view, int direction) {
                 EdgeEffect edgeEffect = new EdgeEffect(view.getContext());
-                edgeEffect.setColor(ColorUtil.changeAlphaComponentTo(ThemeColors.getAccentColorForCurrentTheme(), 0.36f));
+                edgeEffect.setColor(ColorUtil.changeAlphaComponentTo(ThemeColors.getCurrentColorPrimary(), 0.36f));
                 return edgeEffect;
             }
         });

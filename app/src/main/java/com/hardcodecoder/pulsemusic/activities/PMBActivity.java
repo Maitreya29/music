@@ -24,14 +24,14 @@ public abstract class PMBActivity extends AppCompatActivity {
         // Initialize ThemeColors only after applying theme to the calling activity
         ThemeColors.initColors(this);
         mCurrentTheme = ThemeManagerUtils.getThemeToApply();
-        mCurrentAccent = ThemeColors.getAccentColorForCurrentTheme();
+        mCurrentAccent = ThemeColors.getCurrentColorPrimary();
         super.onCreate(savedInstanceState);
     }
 
     @Override
     protected void onStart() {
         if (mCurrentTheme != ThemeManagerUtils.getThemeToApply() ||
-                mCurrentAccent != ThemeColors.getAccentColorForCurrentTheme()) {
+                mCurrentAccent != ThemeColors.getCurrentColorPrimary()) {
             supportInvalidateOptionsMenu();
             recreate();
         }

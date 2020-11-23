@@ -60,7 +60,7 @@ public class CustomAccentChooserDialogFragment extends RoundedBottomSheetDialogF
 
         // Initialize current accent color
         // Make sure to initialize before setting up listeners
-        mSelectedColor = ThemeColors.getCurrentAccentColor();
+        mSelectedColor = ThemeColors.getSelectedAccentColor();
         updateSliders();
         updateColorCodeAndPreview();
 

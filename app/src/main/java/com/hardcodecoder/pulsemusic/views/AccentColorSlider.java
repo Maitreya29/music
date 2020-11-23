@@ -29,7 +29,7 @@ public class AccentColorSlider extends Slider {
         super.onAttachedToWindow();
 
         ColorStateList inactiveTrackColor = ColorStateList.valueOf(ThemeColors.getCurrentColorOverlay());
-        ColorStateList activeTrackColor = ThemeColors.getAccentColorStateList();
+        ColorStateList activeTrackColor = ThemeColors.getPrimaryColorStateList();
 
         setTrackInactiveTintList(inactiveTrackColor);
         setTrackActiveTintList(activeTrackColor);
