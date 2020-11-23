@@ -171,9 +171,9 @@ public class PlaybackManager implements Playback.Callback {
     }
 
     @Override
-    public void onTrackChanged(@NonNull MusicModel trackItem) {
+    public void onTrackConfigured(@NonNull MusicModel trackItem) {
         if (mPlayback.getActiveMediaId() != trackItem.getId()) {
-            // Track has changed, need to update metadata
+            // Track has changed, we need to update metadata
             MediaMetadata.Builder metadataBuilder = new MediaMetadata.Builder();
             metadataBuilder.putLong(MediaMetadata.METADATA_KEY_DURATION, trackItem.getTrackDuration());
             metadataBuilder.putString(MediaMetadata.METADATA_KEY_TITLE, trackItem.getTrackName());

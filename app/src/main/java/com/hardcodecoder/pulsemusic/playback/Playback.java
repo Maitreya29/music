@@ -76,10 +76,10 @@ public interface Playback {
         void onFocusChanged(boolean resumePlayback);
 
         /**
-         * Notifies about track change
+         * Called when player has identified {@param trackItem} as the track to be played
          *
-         * @param trackItem the new track item that is going to be played
+         * @param trackItem indicates the track that will be played
          */
-        void onTrackChanged(@NonNull MusicModel trackItem);
+        void onTrackConfigured(@NonNull MusicModel trackItem);
     }
 }

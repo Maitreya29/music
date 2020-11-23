@@ -96,7 +96,7 @@ public class LocalPlayback implements
                     // We are in repeat mode (infinite lop), release media player
                     // and let it re-init with same track
                     releaseMediaPlayer();
-                    mPlaybackCallback.onTrackChanged(trackItem);
+                    mPlaybackCallback.onTrackConfigured(trackItem);
                 }
                 if (null == mp) {
                     // if media player becomes null when trying to resume playback
@@ -116,10 +116,10 @@ public class LocalPlayback implements
                 mStartPlaybackWhenReady = startPlaying;
                 // Initialize new Media player
                 initMediaPlayer(trackItem);
+                // Notify Playback Manager of track change
+                mPlaybackCallback.onTrackConfigured(trackItem);
                 // Update current Media id
                 mMediaId = trackItem.getId();
-                // Notify Playback Manager of track change
-                mPlaybackCallback.onTrackChanged(trackItem);
             }
             // Register listeners
             registerBecomingNoisyReceiver();
