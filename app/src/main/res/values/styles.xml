@@ -33,11 +33,10 @@
     <style name="BottomDialogOptionsMenuTextStyle">
         <item name="android:layout_height">48dp</item>
         <item name="android:layout_width">match_parent</item>
-        <item name="android:paddingStart">32dp</item>
-        <item name="android:paddingEnd">32dp</item>
+        <item name="android:paddingStart">24dp</item>
+        <item name="android:paddingEnd">24dp</item>
         <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Subtitle2
         </item>
-        <item name="android:textStyle">bold</item>
         <item name="android:drawablePadding">16dp</item>
         <item name="android:maxLines">1</item>
         <item name="android:background">?selectableItemBackground</item>

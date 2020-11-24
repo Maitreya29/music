@@ -8,7 +8,7 @@
     android:paddingStart="16dp"
     android:paddingTop="32dp"
     android:paddingEnd="16dp"
-    android:paddingBottom="32dp">
+    android:paddingBottom="24dp">
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/bottom_dialog_picker_title"
@@ -36,7 +36,7 @@
         android:id="@+id/bottom_dialog_picker_stub_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:layout="@layout/recycler_view_vertical"
         app:layout_constraintTop_toBottomOf="@id/bottom_dialog_picker_title" />
 

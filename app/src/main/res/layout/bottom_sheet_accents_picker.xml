@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingTop="32dp">
+    android:paddingTop="32dp"
+    android:paddingBottom="24dp">
 
     <com.hardcodecoder.pulsemusic.views.AccentColorTextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginStart="24dp"
         android:gravity="start"
         android:text="@string/laf_accents_picker_title"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
@@ -22,8 +22,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/title"
-        android:layout_marginBottom="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="24dp"
         android:clipToPadding="false"
+        android:overScrollMode="never"
         android:paddingStart="24dp"
         android:paddingEnd="0dp" />
 
@@ -35,7 +37,6 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="16dp"
         android:layout_marginTop="2dp"
-        android:layout_marginBottom="32dp"
         android:text="@string/custom"
         app:accentButtonStyle="text" />
 
@@ -46,7 +47,6 @@
         android:layout_below="@id/accents_display_rv"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="32dp"
         android:text="@string/cancel"
         app:accentButtonStyle="text" />
 </RelativeLayout>
