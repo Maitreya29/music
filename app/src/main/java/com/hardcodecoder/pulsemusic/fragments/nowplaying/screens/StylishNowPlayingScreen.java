@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.slider.Slider;
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
@@ -28,7 +29,7 @@ public class StylishNowPlayingScreen extends BaseNowPlayingScreen {
     private Slider mProgressSlider;
     private ImageView mFavoriteBtn;
     private ImageView mRepeatBtn;
-    private ImageView mPlayPauseBtn;
+    private FloatingActionButton mPlayPauseBtn;
     private MaterialTextView mTitle;
     private MaterialTextView mSubTitle;
     private MaterialTextView mStartTime;

@@ -112,25 +112,22 @@
         app:layout_constraintTop_toTopOf="@id/modern_nps_play_pause_btn"
         tools:ignore="contentDescription" />
 
-    <ImageView
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/modern_nps_play_pause_btn"
-        style="@style/ButtonStyle48"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="18dp"
-        android:background="@drawable/ic_app_shortcut_background"
-        android:padding="12dp"
-        android:stateListAnimator="@animator/focused_elevation_up"
+        android:contentDescription="@string/fab_play_pause_desc"
+        android:src="@drawable/anim_play_pause_selector"
         app:layout_constraintBottom_toTopOf="@id/modern_nps_close_btn"
         app:layout_constraintEnd_toStartOf="@+id/modern_nps_next_btn"
         app:layout_constraintStart_toEndOf="@+id/modern_nps_prev_btn"
         app:layout_constraintTop_toBottomOf="@id/modern_nps_slider"
         app:layout_constraintVertical_bias="0.1"
         app:tint="?attr/colorOnPrimary"
-        tools:ignore="contentDescription"
-        tools:src="@drawable/pause_to_play" />
+        tools:src="@drawable/ic_round_play" />
 
     <ImageView
         android:id="@+id/modern_nps_next_btn"

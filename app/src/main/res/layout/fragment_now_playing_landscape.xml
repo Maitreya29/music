@@ -126,25 +126,22 @@
         app:layout_constraintTop_toTopOf="@id/fragment_nps_land_play_pause_btn"
         tools:ignore="contentDescription" />
 
-    <ImageButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fragment_nps_land_play_pause_btn"
-        style="@style/ButtonStyle48"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="18dp"
-        android:background="@drawable/ic_app_shortcut_background"
-        android:padding="12dp"
-        android:stateListAnimator="@animator/focused_elevation_up"
-        android:tint="?attr/colorOnPrimary"
+        android:contentDescription="@string/fab_play_pause_desc"
+        android:src="@drawable/anim_play_pause_selector"
         app:layout_constraintBottom_toTopOf="@id/fragment_nps_land_close_btn"
         app:layout_constraintEnd_toStartOf="@id/fragment_nps_land_next_btn"
         app:layout_constraintStart_toEndOf="@id/fragment_nps_land_prev_btn"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.86"
-        tools:ignore="contentDescription"
-        tools:src="@drawable/pause_to_play" />
+        app:tint="?attr/colorOnPrimary"
+        tools:src="@drawable/ic_round_play" />
 
     <ImageButton
         android:id="@+id/fragment_nps_land_next_btn"

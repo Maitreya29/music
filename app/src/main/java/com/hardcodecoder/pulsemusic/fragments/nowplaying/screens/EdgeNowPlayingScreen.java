@@ -20,6 +20,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatSeekBar;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.fragments.nowplaying.base.BaseNowPlayingScreen;
@@ -31,7 +32,7 @@ public class EdgeNowPlayingScreen extends BaseNowPlayingScreen {
     private AppCompatSeekBar mProgressSeekBar;
     private ImageView mFavoriteBtn;
     private ImageView mRepeatBtn;
-    private ImageView mPlayPauseBtn;
+    private FloatingActionButton mPlayPauseBtn;
     private MaterialTextView mTitle;
     private MaterialTextView mStartTime;
     private MaterialTextView mEndTime;

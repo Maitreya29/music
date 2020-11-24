@@ -5,8 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.res.ColorStateList;
-import android.graphics.drawable.AnimatedVectorDrawable;
-import android.graphics.drawable.Drawable;
 import android.media.MediaMetadata;
 import android.media.session.MediaController;
 import android.media.session.PlaybackState;
@@ -24,7 +22,6 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatSeekBar;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -239,18 +236,9 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
         else mTransportControls.play();
     }
 
-    protected void togglePlayPauseAnimation(ImageView playPauseBtn, PlaybackState state) {
+    protected void togglePlayPauseAnimation(View playPauseBtn, PlaybackState state) {
         if (null == state || null == getContext() || null == playPauseBtn) return;
-
-        if (state.getState() == PlaybackState.STATE_PLAYING) {
-            Drawable d = ContextCompat.getDrawable(getContext(), R.drawable.play_to_pause_linear_out_slow_in);
-            playPauseBtn.setImageDrawable(d);
-            if (d instanceof AnimatedVectorDrawable) ((AnimatedVectorDrawable) d).start();
-        } else {
-            Drawable d = ContextCompat.getDrawable(getContext(), R.drawable.pause_to_play);
-            playPauseBtn.setImageDrawable(d);
-            if (d instanceof AnimatedVectorDrawable) ((AnimatedVectorDrawable) d).start();
-        }
+        playPauseBtn.setSelected(state.getState() == PlaybackState.STATE_PLAYING);
     }
 
     protected String getFormattedElapsedTime(long elapsedTime) {
