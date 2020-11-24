@@ -97,8 +97,10 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
         updateRepeat();
     }
 
-    protected void setUpPagerAlbumArt(ViewPager2 pager, @LayoutRes int redId, ShapeAppearanceModel model) {
+    protected void setUpPagerAlbumArt(@NonNull ViewPager2 pager, @LayoutRes int redId, ShapeAppearanceModel model) {
         mMediaArtPager = pager;
+        // Workaround to disable over scroll mode
+        mMediaArtPager.getChildAt(0).setOverScrollMode(ViewPager2.OVER_SCROLL_NEVER);
         mMediaArtAdapter = new MediaArtPagerAdapter(getContext(), TrackManager.getInstance().getActiveQueue(), redId, model);
         mMediaArtPager.setAdapter(mMediaArtAdapter);
         mMediaArtPager.setCurrentItem(mTrackManager.getActiveIndex(), false);

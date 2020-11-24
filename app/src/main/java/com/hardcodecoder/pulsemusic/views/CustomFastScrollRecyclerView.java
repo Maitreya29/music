@@ -38,7 +38,7 @@ public class CustomFastScrollRecyclerView extends FastScrollRecyclerView {
             @Override
             protected EdgeEffect createEdgeEffect(@NonNull RecyclerView view, int direction) {
                 EdgeEffect edgeEffect = new EdgeEffect(view.getContext());
-                edgeEffect.setColor(ColorUtil.changeAlphaComponentTo(accentColor, 0.36f));
+                edgeEffect.setColor(ColorUtil.changeAlphaComponentTo(accentColor, 0.04f));
                 return edgeEffect;
             }
         });

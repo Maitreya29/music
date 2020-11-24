@@ -54,7 +54,7 @@ public class CustomRecyclerView extends RecyclerView {
             @Override
             protected EdgeEffect createEdgeEffect(@NonNull RecyclerView view, int direction) {
                 EdgeEffect edgeEffect = new EdgeEffect(view.getContext());
-                edgeEffect.setColor(ColorUtil.changeAlphaComponentTo(ThemeColors.getCurrentColorPrimary(), 0.36f));
+                edgeEffect.setColor(ColorUtil.changeAlphaComponentTo(ThemeColors.getCurrentColorPrimary(), 0.04f));
                 return edgeEffect;
             }
         });
