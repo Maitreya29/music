@@ -37,7 +37,7 @@
         <attr name="unit" format="string" />
     </declare-styleable>
 
-    <declare-styleable name="ModernImageView">
+    <declare-styleable name="MediaArtImageView">
         <attr name="radiusTopLeft" format="dimension" />
         <attr name="radiusTopRight" format="dimension" />
         <attr name="radiusBottomLeft" format="dimension" />

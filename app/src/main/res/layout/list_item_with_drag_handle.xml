@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="72dp"
     android:background="?attr/selectableItemBackground"
-    android:gravity="center_vertical"
     android:paddingStart="16dp"
-    android:paddingTop="10dp"
-    android:paddingEnd="0dp"
-    android:paddingBottom="10dp">
+    android:paddingEnd="0dp">
 
     <com.hardcodecoder.pulsemusic.views.MediaArtImageView
         android:id="@+id/list_item_drag_album_art"
@@ -18,13 +16,14 @@
         android:layout_centerVertical="true"
         android:layout_marginEnd="16dp"
         android:scaleType="centerCrop"
+        app:radius="@dimen/rounding_radius_8dp"
         tools:ignore="contentDescription"
         tools:src="@tools:sample/backgrounds/scenic" />
 
     <include
         layout="@layout/list_item_title"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="22dp"
         android:layout_alignTop="@id/list_item_drag_album_art"
         android:layout_toStartOf="@id/list_item_drag_drag_handle"
         android:layout_toEndOf="@id/list_item_drag_album_art" />
@@ -32,7 +31,7 @@
     <include
         layout="@layout/list_item_sub_title"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="20dp"
         android:layout_alignBottom="@id/list_item_drag_album_art"
         android:layout_toStartOf="@id/list_item_drag_drag_handle"
         android:layout_toEndOf="@id/list_item_drag_album_art" />
@@ -41,6 +40,9 @@
         android:id="@+id/list_item_drag_drag_handle"
         style="@style/ButtonStyle24"
         android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="4dp"
         android:src="@drawable/ic_drag_handle"
         tools:ignore="contentDescription" />
 </RelativeLayout>
