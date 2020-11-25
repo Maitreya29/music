@@ -90,6 +90,7 @@ public class UIHelper {
                 handler.post(() -> {
                     final StyleSpan styleSpan = new StyleSpan(Typeface.BOLD);
                     displayTextView.setText(infoModel.getDisplayName());
+                    displayTextView.setSelected(true);
                     setInfo(trackTitle, context.getString(R.string.head_title), musicModel.getTrackName(), styleSpan);
                     setInfo(trackAlbum, context.getString(R.string.head_album), musicModel.getAlbum(), styleSpan);
                     setInfo(trackArtist, context.getString(R.string.head_artist), musicModel.getArtist(), styleSpan);
