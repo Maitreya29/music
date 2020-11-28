@@ -125,7 +125,12 @@ public class PlaylistFragment extends Fragment implements PlaylistCardListener, 
 
             Button create = layout.findViewById(R.id.confirm_btn);
             create.setOnClickListener(v -> {
-                if (et.getText() != null && et.getText().toString().length() > 0) {
+                if (et.getText() != null) {
+                    String text = et.getText().toString().trim();
+                    if (text.length() == 0 || text.charAt(0) == ' ') {
+                        Toast.makeText(mContext, mContext.getString(R.string.create_playlist_hint), Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                     String oldName = mPlaylistNames.remove(pos);
                     String newName = et.getText().toString();
                     if (ProviderManager.getPlaylistProvider().renamePlaylistItem(oldName, newName)) {

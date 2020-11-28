@@ -54,7 +54,12 @@ public class UIHelper {
         TextInputEditText et = layout.findViewById(R.id.text_input_field);
 
         layout.findViewById(R.id.confirm_btn).setOnClickListener(v -> {
-            if (et.getText() != null && et.getText().toString().length() > 0) {
+            if (et.getText() != null) {
+                String text = et.getText().toString().trim();
+                if (text.length() == 0 || text.charAt(0) == ' ') {
+                    Toast.makeText(context, context.getString(R.string.create_playlist_hint), Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 String playlistName = et.getText().toString();
                 ProviderManager.getPlaylistProvider().addPlaylistItem(playlistName);
                 callback.onPlaylistCreated(playlistName);
