@@ -17,7 +17,6 @@
         app:expandedTitleGravity="bottom|center_horizontal"
         app:expandedTitleMarginBottom="18dp"
         app:expandedTitleTextAppearance="@style/TextAppearanceExpanded"
-        app:layout_scrollFlags="scroll|enterAlwaysCollapsed|exitUntilCollapsed"
         app:scrimAnimationDuration="@android:integer/config_shortAnimTime"
         app:scrimVisibleHeightTrigger="300dp"
         app:statusBarScrim="?attr/statusBarScrim"

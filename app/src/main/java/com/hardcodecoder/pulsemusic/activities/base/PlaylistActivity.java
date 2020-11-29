@@ -92,6 +92,7 @@ public abstract class PlaylistActivity extends MediaSessionActivity {
         if (isListEmpty) return;
 
         final RecyclerView recyclerView = (RecyclerView) ((ViewStub) findViewById(R.id.stub_playlist_rv)).inflate();
+        recyclerView.setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
 
         loadRecyclerList(recyclerView, list);
         loadPlaylistMediaArt(list);
@@ -135,6 +136,11 @@ public abstract class PlaylistActivity extends MediaSessionActivity {
             playlistArt.loadAlbumArt("", 1);
             playlistArt.setImageTintList(ThemeColors.getPrimaryColorStateList());
 
+            // Disable appbar scrolling
+            AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) mCollapsingToolbarLayout.getLayoutParams();
+            params.setScrollFlags(0);
+            mCollapsingToolbarLayout.setLayoutParams(params);
+
             updateTracksInfo(0, 0);
         } else {
             if (stub == null) {
@@ -147,6 +153,13 @@ public abstract class PlaylistActivity extends MediaSessionActivity {
             MediaArtImageView playlistArt = findViewById(R.id.playlist_media_art);
             playlistArt.setImageDrawable(null);
             playlistArt.setImageTintList(null);
+
+            // Enable appbar scrolling
+            AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) mCollapsingToolbarLayout.getLayoutParams();
+            params.setScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL |
+                    AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS_COLLAPSED |
+                    AppBarLayout.LayoutParams.SCROLL_FLAG_EXIT_UNTIL_COLLAPSED);
+            mCollapsingToolbarLayout.setLayoutParams(params);
         }
     }
 
