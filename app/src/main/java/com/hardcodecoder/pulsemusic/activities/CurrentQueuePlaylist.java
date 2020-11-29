@@ -53,19 +53,17 @@ public class CurrentQueuePlaylist extends PlaylistActivity implements PlaylistIt
     protected void onInitializeDynamicButtons() {
         setPlaylistDynamicFabButton(R.drawable.ic_shuffle, v -> {
             // Shuffle and play
-            if (mAdapter != null)
+            if (mAdapter != null) {
                 shuffleTrackAndPlay(mAdapter.getPlaylistTracks());
+                mAdapter.updatePlaylist(mTrackManager.getActiveQueue());
+            }
         });
 
-        setPlaylistDynamicButton1(getString(R.string.playlist_play), R.drawable.ic_round_play, v -> {
-            // Start playing this playlist
-            onItemClick(0);
-        });
+        setPlaylistDynamicButton1(getString(R.string.playlist_play), R.drawable.ic_round_play, v ->
+                onItemClick(0));
 
-        setPlaylistDynamicButton2(getString(R.string.playlist_add_more), R.drawable.ic_playlist_add, v -> {
-            // Open track picker to add tracks to this playlist
-            openTrackPicker();
-        });
+        setPlaylistDynamicButton2(getString(R.string.playlist_add_more), R.drawable.ic_playlist_add, v ->
+                openTrackPicker());
     }
 
     @Override
@@ -121,6 +119,7 @@ public class CurrentQueuePlaylist extends PlaylistActivity implements PlaylistIt
             mTrackManager.buildDataList(list, 0);
         } else {
             mAdapter.addItems(list);
+            updateTracksInfo(mAdapter.getItemCount(), getTotalPlaylistDuration() + calculatePlaylistDuration(list));
             mTrackManager.buildDataList(mAdapter.getPlaylistTracks(), mTrackManager.getActiveIndex());
         }
         mHasTracksChanged = true;
