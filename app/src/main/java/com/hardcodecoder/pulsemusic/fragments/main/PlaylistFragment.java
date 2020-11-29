@@ -27,27 +27,28 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.hardcodecoder.pulsemusic.R;
-import com.hardcodecoder.pulsemusic.activities.CurrentPlaylistActivity;
-import com.hardcodecoder.pulsemusic.activities.UserPlaylistTracksActivity;
+import com.hardcodecoder.pulsemusic.activities.CurrentQueuePlaylist;
+import com.hardcodecoder.pulsemusic.activities.CustomizablePlaylist;
 import com.hardcodecoder.pulsemusic.adapters.PlaylistAdapter;
 import com.hardcodecoder.pulsemusic.dialog.RoundedBottomSheetDialog;
 import com.hardcodecoder.pulsemusic.helper.RecyclerViewGestureHelper;
 import com.hardcodecoder.pulsemusic.helper.UIHelper;
+import com.hardcodecoder.pulsemusic.interfaces.ItemGestureCallback;
 import com.hardcodecoder.pulsemusic.interfaces.PlaylistCardListener;
-import com.hardcodecoder.pulsemusic.interfaces.SimpleGestureCallback;
 import com.hardcodecoder.pulsemusic.providers.ProviderManager;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class PlaylistFragment extends Fragment implements PlaylistCardListener, SimpleGestureCallback {
+public class PlaylistFragment extends Fragment implements PlaylistCardListener, ItemGestureCallback<String> {
 
     private FileObserver mObserver;
     private PlaylistAdapter mAdapter;
     private Context mContext;
     private List<String> mPlaylistNames;
 
+    @NonNull
     public static PlaylistFragment getInstance() {
         return new PlaylistFragment();
     }
@@ -96,7 +97,7 @@ public class PlaylistFragment extends Fragment implements PlaylistCardListener, 
         return true;
     }
 
-    private void loadPlaylistCards(View view) {
+    private void loadPlaylistCards(@NonNull View view) {
         view.post(() -> {
             RecyclerView recyclerView = (RecyclerView) ((ViewStub) view.findViewById(R.id.stub_playlist_cards_rv)).inflate();
             recyclerView.setLayoutManager(new LinearLayoutManager(mContext, RecyclerView.VERTICAL, false));
@@ -156,10 +157,10 @@ public class PlaylistFragment extends Fragment implements PlaylistCardListener, 
     @Override
     public void onItemClick(int pos) {
         if (pos == 0)
-            startActivity(new Intent(mContext, CurrentPlaylistActivity.class));
+            startActivity(new Intent(mContext, CurrentQueuePlaylist.class));
         else {
-            Intent i = new Intent(mContext, UserPlaylistTracksActivity.class);
-            i.putExtra(UserPlaylistTracksActivity.KEY_TITLE, mPlaylistNames.get(pos));
+            Intent i = new Intent(mContext, CustomizablePlaylist.class);
+            i.putExtra(CustomizablePlaylist.PLAYLIST_TITLE_KEY, mPlaylistNames.get(pos));
             Objects.requireNonNull(getActivity()).startActivityFromFragment(this, i, 100);
         }
     }
@@ -170,18 +171,18 @@ public class PlaylistFragment extends Fragment implements PlaylistCardListener, 
     }
 
     @Override
-    public void onItemDismissed(int position) {
-        if (position == 0) {
+    public void onItemDismissed(@NonNull String dismissedItem, int itemPosition) {
+        if (itemPosition == 0) {
             Toast.makeText(mContext, getString(R.string.cannot_delete_default_playlist), Toast.LENGTH_SHORT).show();
-            mAdapter.notifyItemChanged(position);
+            mAdapter.notifyItemChanged(itemPosition);
         } else {
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext)
                     .setMessage(getString(R.string.playlist_delete_dialog_title))
                     .setPositiveButton(getString(R.string.yes), (dialog, which) -> {
-                        ProviderManager.getPlaylistProvider().deletePlaylistItem(mPlaylistNames.get(position));
+                        ProviderManager.getPlaylistProvider().deletePlaylistItem(mPlaylistNames.get(itemPosition));
                         Toast.makeText(getContext(), getString(R.string.playlist_deleted_toast), Toast.LENGTH_SHORT).show();
-                        mAdapter.removePlaylist(position);
-                    }).setNegativeButton(getString(R.string.no), (dialog, which) -> mAdapter.notifyItemChanged(position));
+                        mAdapter.removePlaylist(itemPosition);
+                    }).setNegativeButton(getString(R.string.no), (dialog, which) -> mAdapter.notifyItemChanged(itemPosition));
             alertDialog.create().show();
         }
     }

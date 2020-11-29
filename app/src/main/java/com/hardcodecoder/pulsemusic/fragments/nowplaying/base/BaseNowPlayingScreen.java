@@ -30,7 +30,7 @@ import com.google.android.material.shape.ShapeAppearanceModel;
 import com.google.android.material.slider.Slider;
 import com.hardcodecoder.pulsemusic.PMS;
 import com.hardcodecoder.pulsemusic.R;
-import com.hardcodecoder.pulsemusic.activities.CurrentPlaylistActivity;
+import com.hardcodecoder.pulsemusic.activities.CurrentQueuePlaylist;
 import com.hardcodecoder.pulsemusic.helper.MediaProgressUpdateHelper;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.providers.ProviderManager;
@@ -45,6 +45,7 @@ import static android.app.Activity.RESULT_OK;
 
 public abstract class BaseNowPlayingScreen extends Fragment implements MediaProgressUpdateHelper.Callback {
 
+    private static final short OPEN_CURRENT_QUEUE = 55;
     private final TrackManager mTrackManager = TrackManager.getInstance();
     private MediaController mController;
     private MediaController.TransportControls mTransportControls;
@@ -253,9 +254,8 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
 
     protected void setGotToCurrentQueueCLickListener(@NonNull View view) {
         view.setOnClickListener(v -> {
-            Intent intent = new Intent(getContext(), CurrentPlaylistActivity.class);
-            intent.putExtra(CurrentPlaylistActivity.TRANSITION_STYLE_KEY, CurrentPlaylistActivity.TRANSITION_STYLE_SLIDE);
-            startActivityForResult(intent, CurrentPlaylistActivity.REQUEST_UPDATE_TRACK);
+            Intent intent = new Intent(getContext(), CurrentQueuePlaylist.class);
+            startActivityForResult(intent, OPEN_CURRENT_QUEUE);
         });
     }
 
@@ -312,8 +312,8 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (null != mMediaArtAdapter && requestCode == CurrentPlaylistActivity.REQUEST_UPDATE_TRACK && resultCode == RESULT_OK) {
-            if (null != data && data.getBooleanExtra(CurrentPlaylistActivity.TRACK_CHANGED, false)) {
+        if (null != mMediaArtAdapter && requestCode == OPEN_CURRENT_QUEUE && resultCode == RESULT_OK) {
+            if (null != data && data.getBooleanExtra(CurrentQueuePlaylist.TRACK_CHANGED, false)) {
 
                 List<MusicModel> modifiedTracks = mTrackManager.getActiveQueue();
                 int trackIndex = mTrackManager.getActiveIndex();

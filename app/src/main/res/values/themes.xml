@@ -19,7 +19,8 @@
         <item name="android:paddingTop">@dimen/button_padding_vertical</item>
         <item name="android:paddingBottom">@dimen/button_padding_vertical</item>
         <item name="iconSize">20dp</item>
-        <item name="iconPadding">12dp</item>
+        <item name="iconPadding">8dp</item>
+        <item name="iconGravity">textStart</item>
     </style>
 
     <style name="WindowTransitions" parent="@android:style/Animation.Activity">
@@ -38,6 +39,7 @@
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="android:statusBarColor">@color/md_grey_500</item>
+        <item name="statusBarScrim">@android:color/transparent</item>
         <item name="navigationBarColor">@color/md_grey_500</item>
         <item name="android:navigationBarColor">?attr/navigationBarColor</item>
         <item name="android:windowAnimationStyle">@style/WindowTransitions</item>
@@ -51,6 +53,7 @@
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="statusBarScrim">@android:color/transparent</item>
         <item name="navigationBarColor">?attr/windowBackgroundColor</item>
         <item name="android:navigationBarColor">?attr/navigationBarColor</item>
         <item name="android:windowAnimationStyle">@style/WindowTransitions</item>
@@ -60,7 +63,9 @@
         <item name="materialButtonStyle">@style/PulseMaterialButton</item>
     </style>
 
-    <style name="ThemeLight" parent="BaseThemeLight" />
+    <style name="ThemeLight" parent="BaseThemeLight">
+        <item name="statusBarScrim">@color/md_grey_500</item>
+    </style>
 
     <style name="ThemeDark" parent="BaseThemeDark" />
 

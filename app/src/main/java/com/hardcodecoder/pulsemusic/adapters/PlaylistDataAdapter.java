@@ -17,10 +17,10 @@ import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.TaskRunner;
 import com.hardcodecoder.pulsemusic.helper.DiffCb;
+import com.hardcodecoder.pulsemusic.interfaces.ItemGestureCallback;
 import com.hardcodecoder.pulsemusic.interfaces.ItemTouchHelperAdapter;
 import com.hardcodecoder.pulsemusic.interfaces.ItemTouchHelperViewHolder;
 import com.hardcodecoder.pulsemusic.interfaces.PlaylistItemListener;
-import com.hardcodecoder.pulsemusic.interfaces.SimpleGestureCallback;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.utils.ImageUtil;
 import com.hardcodecoder.pulsemusic.views.MediaArtImageView;
@@ -34,7 +34,7 @@ public class PlaylistDataAdapter extends RecyclerView.Adapter<PlaylistDataAdapte
 
     private final LayoutInflater mInflater;
     private final List<MusicModel> mPlaylistTracks = new ArrayList<>();
-    private final SimpleGestureCallback mCallback;
+    private final ItemGestureCallback<MusicModel> mItemGestureCallback;
     private final PlaylistItemListener mListener;
     private int lastPosition = -1;
     private MusicModel deletedItem;
@@ -43,11 +43,11 @@ public class PlaylistDataAdapter extends RecyclerView.Adapter<PlaylistDataAdapte
     public PlaylistDataAdapter(@NonNull List<MusicModel> playlistTracks,
                                @NonNull LayoutInflater inflater,
                                @NonNull PlaylistItemListener listener,
-                               @Nullable SimpleGestureCallback callback) {
+                               @Nullable ItemGestureCallback<MusicModel> callback) {
         mPlaylistTracks.addAll(playlistTracks);
         mInflater = inflater;
         mListener = listener;
-        mCallback = callback;
+        mItemGestureCallback = callback;
     }
 
     @NonNull
@@ -82,7 +82,7 @@ public class PlaylistDataAdapter extends RecyclerView.Adapter<PlaylistDataAdapte
     public boolean onItemMove(int fromPosition, int toPosition) {
         Collections.swap(mPlaylistTracks, fromPosition, toPosition);
         notifyItemMoved(fromPosition, toPosition);
-        if (null != mCallback) mCallback.onItemMove(fromPosition, toPosition);
+        if (null != mItemGestureCallback) mItemGestureCallback.onItemMove(fromPosition, toPosition);
         return true;
     }
 
@@ -91,8 +91,8 @@ public class PlaylistDataAdapter extends RecyclerView.Adapter<PlaylistDataAdapte
         deletedItem = mPlaylistTracks.remove(position);
         deletedIndex = position;
         notifyItemRemoved(position);
-        if (null != mCallback)
-            mCallback.onItemDismissed(position);
+        if (null != mItemGestureCallback)
+            mItemGestureCallback.onItemDismissed(deletedItem, position);
     }
 
     @NonNull

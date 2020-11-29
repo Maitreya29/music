@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/playlist_layout_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <include layout="@layout/playlist_header" />
+
+    <ViewStub
+        android:id="@+id/stub_playlist_rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout="@layout/recycler_view_vertical"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
+
+    <ViewStub
+        android:id="@+id/stub_empty_playlist_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="320dp"
+        android:layout="@layout/empty_tracks_text" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

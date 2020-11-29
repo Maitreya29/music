@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.appbar.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/playlist_app_bar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:backgroundTint="?attr/colorSurface"
+    app:liftOnScroll="true">
+
+    <com.google.android.material.appbar.CollapsingToolbarLayout
+        android:id="@+id/playlist_collapsing_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="360dp"
+        app:collapsedTitleTextAppearance="@style/TextAppearanceToolbar"
+        app:contentScrim="?attr/colorSurface"
+        app:expandedTitleGravity="bottom|center_horizontal"
+        app:expandedTitleMarginBottom="18dp"
+        app:expandedTitleTextAppearance="@style/TextAppearanceExpanded"
+        app:layout_scrollFlags="scroll|enterAlwaysCollapsed|exitUntilCollapsed"
+        app:scrimAnimationDuration="@android:integer/config_shortAnimTime"
+        app:scrimVisibleHeightTrigger="300dp"
+        app:statusBarScrim="?attr/statusBarScrim"
+        app:toolbarId="@id/playlist_toolbar"
+        tools:title="Your playlist">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="top"
+            android:layout_marginTop="30dp"
+            app:layout_collapseMode="parallax"
+            app:layout_collapseParallaxMultiplier="0.4">
+
+            <com.hardcodecoder.pulsemusic.views.MediaArtImageView
+                android:id="@+id/playlist_media_art"
+                android:layout_width="196dp"
+                android:layout_height="196dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:radius="@dimen/rounding_radius_8dp"
+                tools:src="@tools:sample/backgrounds/scenic" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/playlist_dynamic_fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/fab_play_pause_desc"
+                android:padding="12dp"
+                android:src="@drawable/ic_shuffle"
+                app:backgroundTint="?attr/colorSurface"
+                app:layout_constraintBottom_toBottomOf="@id/playlist_media_art"
+                app:layout_constraintEnd_toEndOf="@id/playlist_media_art"
+                app:layout_constraintStart_toStartOf="@id/playlist_media_art"
+                app:layout_constraintTop_toBottomOf="@id/playlist_media_art" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/playlist_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                android:textColor="?android:attr/textColorSecondary"
+                app:layout_constraintEnd_toEndOf="@id/playlist_media_art"
+                app:layout_constraintStart_toStartOf="@id/playlist_media_art"
+                app:layout_constraintTop_toBottomOf="@id/playlist_dynamic_fab"
+                tools:text="● 12 tracks ● 45:46" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.hardcodecoder.pulsemusic.views.CustomToolbar
+            android:id="@+id/playlist_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_collapseMode="pin" />
+    </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="?attr/colorSurface"
+        android:clipToPadding="false"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="8dp">
+
+        <com.hardcodecoder.pulsemusic.views.AccentColorMaterialButton
+            android:id="@+id/playlist_dynamic_btn1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/playlist_play"
+            app:accentButtonStyle="filled"
+            app:icon="@drawable/ic_round_play" />
+
+        <com.hardcodecoder.pulsemusic.views.AccentColorMaterialButton
+            android:id="@+id/playlist_dynamic_btn2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_weight="1"
+            android:icon="@drawable/ic_playlist_add"
+            android:text="@string/playlist_add_more"
+            app:accentButtonStyle="outlined" />
+    </LinearLayout>
+</com.google.android.material.appbar.AppBarLayout>

@@ -11,10 +11,10 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hardcodecoder.pulsemusic.R;
+import com.hardcodecoder.pulsemusic.interfaces.ItemGestureCallback;
 import com.hardcodecoder.pulsemusic.interfaces.ItemTouchHelperAdapter;
 import com.hardcodecoder.pulsemusic.interfaces.ItemTouchHelperViewHolder;
 import com.hardcodecoder.pulsemusic.interfaces.PlaylistCardListener;
-import com.hardcodecoder.pulsemusic.interfaces.SimpleGestureCallback;
 import com.hardcodecoder.pulsemusic.utils.ImageUtil;
 
 import java.util.List;
@@ -25,13 +25,17 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.CardsS
     private final List<String> mPlaylistNames;
     private final PlaylistCardListener mListener;
     private final LayoutInflater mInflater;
-    private final SimpleGestureCallback mCallback;
+    private final ItemGestureCallback<String> mCallback;
 
-    public PlaylistAdapter(List<String> playlistNames, LayoutInflater inflater, PlaylistCardListener mListener, @Nullable SimpleGestureCallback callback) {
-        this.mPlaylistNames = playlistNames;
-        this.mInflater = inflater;
-        this.mListener = mListener;
-        this.mCallback = callback;
+    public PlaylistAdapter(
+            @NonNull List<String> playlistNames,
+            @NonNull LayoutInflater inflater,
+            @NonNull PlaylistCardListener listener,
+            @Nullable ItemGestureCallback<String> callback) {
+        mPlaylistNames = playlistNames;
+        mInflater = inflater;
+        mListener = listener;
+        mCallback = callback;
     }
 
     public void addPlaylist(String playlistName) {
@@ -52,7 +56,7 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.CardsS
     @Override
     public void onItemDismiss(int position) {
         if (null != mCallback)
-            mCallback.onItemDismissed(position);
+            mCallback.onItemDismissed(mPlaylistNames.get(position), position);
     }
 
     @NonNull
@@ -68,9 +72,7 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.CardsS
 
     @Override
     public int getItemCount() {
-        if (mPlaylistNames != null)
-            return mPlaylistNames.size();
-        else return 0;
+        return mPlaylistNames.size();
     }
 
     static class CardsSVH extends RecyclerView.ViewHolder implements ItemTouchHelperViewHolder {

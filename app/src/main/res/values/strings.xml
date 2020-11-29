@@ -8,6 +8,7 @@
     <string name="iv_btn_action_description">Action button</string>
     <string name="icon_desc">Icon button</string>
     <string name="fab_done_dec">Confirm selection</string>
+    <string name="fab_add_dec">Add item</string>
     <string name="fab_play_pause_desc">Media play and pause button</string>
 
 
@@ -34,16 +35,6 @@
     <!-- Select tracks default's-->
     <string name="def_track_title">Unknown</string>
     <string name="selected_track_load_failed_toast">Cannot play selected track, load failed</string>
-
-
-    <!-- Favorites Playlist Activity-->
-    <string name="favorites">Your favorites</string>
-    <string name="no_favorites_tracks">No tracks found\nadd some tracks to favorites\n\u2665</string>
-
-
-    <!-- Recent Activity-->
-    <string name="no_recent_tracks">Nothing to show \n\u2639</string>
-    <string name="recent">Recent tracks</string>
 
     <!-- Home drawer contents -->
     <string name="drawer_welcome_message">Welcome,</string>
@@ -91,7 +82,7 @@
     <string name="four">Four</string>
     <string name="five">Five</string>
     <string name="six">Six</string>
-    <string name="clear_dulicates">Clear duplicates</string>
+    <string name="clear_duplicates">Remove duplicates</string>
 
 
     <!-- Options menu for list items -->
@@ -120,13 +111,24 @@
 
 
     <!-- Playlist Activity -->
-    <string name="no_playlist_tracks_found">No playlist tracks found\n\u2639</string>
+    <string name="no_playlist_tracks_found">This playlist is empty\nYou can add tracks using the add button</string>
+    <string name="no_playlist_tracks_desc">Click on the Add button to start adding tracks to this playlist</string>
     <string name="item_removed">Song removed from queue !!!</string>
     <string name="snack_bar_action_undo">Undo</string>
     <string name="playlist_shuffle">Shuffle</string>
+    <string name="playlist_play">Play</string>
     <string name="playlist_add_more">Add</string>
     <string name="playlist_clear_all">Clear all</string>
     <string name="playlist_shuffled_success_toast">Playlist shuffled successfully</string>
+
+    <!-- Favorites Playlist Activity-->
+    <string name="favorites_playlist_title">Your favorites</string>
+    <string name="no_favorites_tracks">Your favorites is empty\nAdd some tracks to favorites\n\u2665</string>
+
+
+    <!-- Recent Activity-->
+    <string name="history_playlist_title">Recently played</string>
+    <string name="no_history_tracks">No records found\n\u2639</string>
 
 
     <!-- Now Playing Activity -->
@@ -254,7 +256,7 @@
 
     <!-- Contributors -->
     <string name="lead_developer_title">Lead developers</string>
-    <string name="lead_developer_1" translatable="false">Ashutosh Patoa</string>
+    <string name="lead_developer_1" translatable="false">Ashutosh P.</string>
     <string name="lead_developer_user_name" translatable="false">\@HardcodeCoder</string>
 
     <!-- Donations -->
