@@ -40,6 +40,8 @@ public class ThemeColors {
     @ColorInt
     private static int mCurrentColorOverlay;
     @ColorInt
+    private static int mCurrentPrimaryTextColor;
+    @ColorInt
     private static int mCurrentSecondaryTextColor;
     private static boolean mInitialized = false;
 
@@ -61,7 +63,8 @@ public class ThemeColors {
                 R.attr.colorOnSurface,               // [3]
                 R.attr.windowBackgroundColor,        // [4]
                 R.attr.colorOnPrimary,               // [5]
-                android.R.attr.textColorSecondary,   // [6]
+                android.R.attr.textColorPrimary,     // [6]
+                android.R.attr.textColorSecondary,   // [7]
         };
         TypedArray array = context.obtainStyledAttributes(ThemeManagerUtils.getThemeToApply(), attrs);
         mCurrentColorControlNormal = array.getColor(0, 0x8A000000);
@@ -70,7 +73,8 @@ public class ThemeColors {
         mCurrentColorOnSurface = array.getColor(3, 0xFF000000);
         mCurrentColorWindowBackground = array.getColor(4, 0xFFFFFFFF);
         mCurrentColorOnPrimary = array.getColor(5, 0xFFFFFFFF);
-        mCurrentSecondaryTextColor = array.getColor(6, 0xFF000000);
+        mCurrentPrimaryTextColor = array.getColor(6, 0xFF000000);
+        mCurrentSecondaryTextColor = array.getColor(7, 0xFF000000);
         array.recycle();
         mInitialized = true;
     }
@@ -141,6 +145,13 @@ public class ThemeColors {
      */
     public static int getCurrentColorOnPrimary() {
         return mCurrentColorOnPrimary;
+    }
+
+    /**
+     * @return color int
+     */
+    public static int getCurrentPrimaryTextColor() {
+        return mCurrentPrimaryTextColor;
     }
 
     /**

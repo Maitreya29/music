@@ -18,7 +18,6 @@
 
 
     <!-- Home Fragment -->
-    <string name="recent">Canción recientes</string>
     <string name="random">Para ti</string>
     <string name="new_in_library">Nuevo en la tienda</string>
     <string name="top_artist">Top artistas</string>
@@ -28,12 +27,10 @@
 
 
     <!-- Favorites Playlist Activity-->
-    <string name="favorites">Tus favoritos</string>
     <string name="no_favorites_tracks">Sin canciones encontradas, añade algunas pistas favoritas\n\u2665</string>
 
 
     <!-- Recent Activity-->
-    <string name="no_recent_tracks">Nada que mostrar \n\u2639</string>
 
 
     <!-- Home drawer contents -->

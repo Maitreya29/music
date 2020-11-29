@@ -8,7 +8,6 @@
     <string name="iv_btn_action_description">Action button</string>
     <string name="icon_desc">Icon button</string>
     <string name="fab_done_dec">Confirm selection</string>
-    <string name="fab_add_dec">Add item</string>
     <string name="fab_play_pause_desc">Media play and pause button</string>
 
 
@@ -112,10 +111,8 @@
 
     <!-- Playlist Activity -->
     <string name="no_playlist_tracks_found">This playlist is empty\nYou can add tracks using the add button</string>
-    <string name="no_playlist_tracks_desc">Click on the Add button to start adding tracks to this playlist</string>
     <string name="item_removed">Song removed from queue !!!</string>
     <string name="snack_bar_action_undo">Undo</string>
-    <string name="playlist_shuffle">Shuffle</string>
     <string name="playlist_play">Play</string>
     <string name="playlist_add_more">Add</string>
     <string name="playlist_clear_all">Clear all</string>
@@ -123,7 +120,7 @@
 
     <!-- Favorites Playlist Activity-->
     <string name="favorites_playlist_title">Your favorites</string>
-    <string name="no_favorites_tracks">Your favorites is empty\nAdd some tracks to favorites\n\u2665</string>
+    <string name="no_favorites_tracks">Your favorites is empty\nAdd some tracks to favorites\n\n\u2665</string>
 
 
     <!-- Recent Activity-->

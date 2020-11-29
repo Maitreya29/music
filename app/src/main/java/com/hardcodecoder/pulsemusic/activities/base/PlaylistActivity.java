@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.media.session.MediaController;
 import android.os.Bundle;
 import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.format.DateUtils;
+import android.text.style.AbsoluteSizeSpan;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.view.ViewStub;
 import android.widget.Toast;
@@ -25,6 +28,7 @@ import com.hardcodecoder.pulsemusic.activities.TrackPickerActivity;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.singleton.TrackManager;
 import com.hardcodecoder.pulsemusic.themes.ThemeColors;
+import com.hardcodecoder.pulsemusic.utils.DimensionsUtil;
 import com.hardcodecoder.pulsemusic.views.AccentColorMaterialButton;
 import com.hardcodecoder.pulsemusic.views.CustomToolbar;
 import com.hardcodecoder.pulsemusic.views.MediaArtImageView;
@@ -171,7 +175,17 @@ public abstract class PlaylistActivity extends MediaSessionActivity {
 
     protected SpannableString getEmptyPlaylistText() {
         String text = getString(R.string.no_playlist_tracks_found);
-        return new SpannableString(text);
+        SpannableString spannableString = new SpannableString(text);
+        int lineEnd = text.indexOf("\n");
+        spannableString.setSpan(new ForegroundColorSpan(ThemeColors.getCurrentPrimaryTextColor()),
+                0,
+                lineEnd,
+                Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        spannableString.setSpan(new AbsoluteSizeSpan(DimensionsUtil.getDimensionPixelSize(this, 20)),
+                0,
+                lineEnd,
+                Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        return spannableString;
     }
 
     protected void setTrackAndPlay(@Nullable List<MusicModel> playlist, int startIndex) {
