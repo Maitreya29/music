@@ -16,6 +16,7 @@ import com.hardcodecoder.pulsemusic.TaskRunner;
 import com.hardcodecoder.pulsemusic.loaders.LoaderCache;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.model.TrackFileModel;
+import com.hardcodecoder.pulsemusic.themes.ThemeColors;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,7 +26,13 @@ import java.util.Map;
 
 public class DataModelHelper {
 
-    private static int mPickedTrackId = -1;
+    /**
+     * This is used to indicate the id of tracks and album id of the track
+     * selected by the user via select track options
+     * <p>
+     * -1 as albumId is used for tinting default album art with {@link ThemeColors#getCurrentColorPrimary()}
+     */
+    private static int mPickedTrackId = -2;
 
     @Nullable
     public static List<MusicModel> getModelObjectFromId(List<Integer> idList) {
@@ -83,7 +90,7 @@ public class DataModelHelper {
                 mPickedTrackId--,
                 null == artist ? defText : artist,
                 data.getDataString(),
-                null,
+                "",
                 dateModified,
                 dateModified,
                 0,
