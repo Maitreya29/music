@@ -20,7 +20,7 @@ import com.hardcodecoder.pulsemusic.helper.MediaArtHelper;
 
 public class MediaArtImageView extends ShapeableImageView {
 
-    private static final String BACKGROUND_COLOR = "#1E1E1E";
+    private static final int BACKGROUND_COLOR = Color.parseColor("#1E1E1E");
 
     public MediaArtImageView(Context context) {
         this(context, null, 0);
@@ -67,14 +67,23 @@ public class MediaArtImageView extends ShapeableImageView {
         typedArray.recycle();
     }
 
-    public void loadAlbumArt(final String albumArtUrl, final int albumId) {
+    /**
+     * Clears the loaded image if {@param albumArtUrl} is null else
+     * Loads image from {@param albumArtUrl} into this ImageView
+     *
+     * @param albumArtUrl the image url to load from, can be uri string or a url or a file path
+     * @param albumId     the albumId of the track used to generate fallback image if load from {@param albumArtUrl} fails
+     *                    If this is -1 and load from {@param albumArtUrl} fails or is null,
+     *                    fallback image wil be tinted with ThemeColor#getCurrentColorPrimary
+     */
+    public void loadAlbumArt(@Nullable final String albumArtUrl, final int albumId) {
         GlideApp.with(this)
                 .load(albumArtUrl)
                 .listener(new RequestListener<Drawable>() {
                     @Override
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                         post(() -> {
-                            setBackgroundColor(Color.parseColor(BACKGROUND_COLOR));
+                            setBackgroundColor(BACKGROUND_COLOR);
                             setImageDrawable(MediaArtHelper.getDefaultAlbumArt(getContext(), albumId));
                         });
                         return true;
@@ -86,5 +95,10 @@ public class MediaArtImageView extends ShapeableImageView {
                     }
                 })
                 .into(this);
+    }
+
+    public void clearLoadedArt() {
+        GlideApp.with(this).clear(this);
+        setBackgroundColor(0);
     }
 }

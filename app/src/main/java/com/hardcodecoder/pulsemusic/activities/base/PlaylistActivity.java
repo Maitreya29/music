@@ -23,8 +23,10 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
+import com.hardcodecoder.pulsemusic.TaskRunner;
 import com.hardcodecoder.pulsemusic.activities.MediaSessionActivity;
 import com.hardcodecoder.pulsemusic.activities.TrackPickerActivity;
+import com.hardcodecoder.pulsemusic.loaders.MediaArtCollageLoader;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.singleton.TrackManager;
 import com.hardcodecoder.pulsemusic.themes.ThemeColors;
@@ -107,9 +109,11 @@ public abstract class PlaylistActivity extends MediaSessionActivity {
     }
 
     private void loadPlaylistMediaArt(@NonNull List<MusicModel> list) {
-        MediaArtImageView playlistArt = findViewById(R.id.playlist_media_art);
-        MusicModel md = list.get(0);
-        playlistArt.loadAlbumArt(md.getAlbumArtUrl(), md.getAlbumId());
+        TaskRunner.executeAsync(new MediaArtCollageLoader(this, list), result -> {
+            MediaArtImageView playlistArt = findViewById(R.id.playlist_media_art);
+            if (null != result) playlistArt.setImageBitmap(result);
+            else playlistArt.loadAlbumArt(null, -1);
+        });
     }
 
     protected void updateTracksInfo(int size, long duration) {
@@ -133,8 +137,7 @@ public abstract class PlaylistActivity extends MediaSessionActivity {
 
             // Set playlist art
             MediaArtImageView playlistArt = findViewById(R.id.playlist_media_art);
-            playlistArt.loadAlbumArt("", 1);
-            playlistArt.setImageTintList(ThemeColors.getPrimaryColorStateList());
+            playlistArt.loadAlbumArt(null, -1);
 
             // Disable appbar scrolling
             AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) mCollapsingToolbarLayout.getLayoutParams();
@@ -151,8 +154,7 @@ public abstract class PlaylistActivity extends MediaSessionActivity {
 
             // Clear Playlist art
             MediaArtImageView playlistArt = findViewById(R.id.playlist_media_art);
-            playlistArt.setImageDrawable(null);
-            playlistArt.setImageTintList(null);
+            playlistArt.clearLoadedArt();
 
             // Enable appbar scrolling
             AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) mCollapsingToolbarLayout.getLayoutParams();
