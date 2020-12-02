@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="md_white_1000">#FFFFFF</color>
     <!-- Grey -->
     <color name="md_grey_500">#9E9E9E</color>
     <color name="md_grey_800">#424242</color>
     <color name="md_grey_900">#212121</color>
-    <color name="md_grey_1000">#1e1e1e</color>
 
     <!-- Material colors used by settings icons -->
     <color name="md_red_A400">#FF1744</color>

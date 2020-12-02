@@ -2,8 +2,6 @@
 <resources>
     <declare-styleable name="Base">
         <attr name="windowBackgroundColor" format="color|reference" />
-        <attr name="overlayColor" format="color|reference" />
-
         <attr name="navigationBarColor" format="color|reference" />
     </declare-styleable>
 </resources>

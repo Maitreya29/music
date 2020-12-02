@@ -38,7 +38,9 @@ public class ThemeColors {
     @ColorInt
     private static int mCurrentColorControlNormal;
     @ColorInt
-    private static int mCurrentColorOverlay;
+    private static int mCurrentColorControlHighlight;
+    @ColorInt
+    private static int mCurrentColorBackgroundHighlight;
     @ColorInt
     private static int mCurrentPrimaryTextColor;
     @ColorInt
@@ -58,7 +60,7 @@ public class ThemeColors {
 
         int[] attrs = new int[]{
                 R.attr.colorControlNormal,           // [0]
-                R.attr.overlayColor,                 // [1]
+                R.attr.colorControlHighlight,        // [1]
                 R.attr.colorSurface,                 // [2]
                 R.attr.colorOnSurface,               // [3]
                 R.attr.windowBackgroundColor,        // [4]
@@ -68,7 +70,7 @@ public class ThemeColors {
         };
         TypedArray array = context.obtainStyledAttributes(ThemeManagerUtils.getThemeToApply(), attrs);
         mCurrentColorControlNormal = array.getColor(0, 0x8A000000);
-        mCurrentColorOverlay = array.getColor(1, 0x0DFFFFFF);
+        mCurrentColorControlHighlight = array.getColor(1, 0x0DFFFFFF);
         mCurrentColorSurface = array.getColor(2, 0xFFFFFFFF);
         mCurrentColorOnSurface = array.getColor(3, 0xFF000000);
         mCurrentColorWindowBackground = array.getColor(4, 0xFFFFFFFF);
@@ -76,6 +78,8 @@ public class ThemeColors {
         mCurrentPrimaryTextColor = array.getColor(6, 0xFF000000);
         mCurrentSecondaryTextColor = array.getColor(7, 0xFF000000);
         array.recycle();
+        mCurrentColorBackgroundHighlight = ThemeManagerUtils.isDarkModeEnabled() ?
+                mCurrentColorSurface : ColorUtil.changeAlphaComponentTo(0x000000, 0.05f);
         mInitialized = true;
     }
 
@@ -113,8 +117,16 @@ public class ThemeColors {
      * @return color int
      */
     @ColorInt
-    public static int getCurrentColorOverlay() {
-        return mCurrentColorOverlay;
+    public static int getCurrentColorControlHighlight() {
+        return mCurrentColorControlHighlight;
+    }
+
+    /**
+     * @return color int
+     */
+    @ColorInt
+    public static int getCurrentColorBackgroundHighlight() {
+        return mCurrentColorBackgroundHighlight;
     }
 
     /**

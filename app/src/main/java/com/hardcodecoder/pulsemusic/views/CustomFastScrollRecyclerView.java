@@ -32,7 +32,7 @@ public class CustomFastScrollRecyclerView extends FastScrollRecyclerView {
         int accentColor = ThemeColors.getCurrentColorPrimary();
         setBubbleColor(accentColor);
         setHandleColor(accentColor);
-        setTrackColor(ThemeColors.getCurrentColorOverlay());
+        setTrackColor(ThemeColors.getCurrentColorControlHighlight());
         setEdgeEffectFactory(new EdgeEffectFactory() {
             @NonNull
             @Override

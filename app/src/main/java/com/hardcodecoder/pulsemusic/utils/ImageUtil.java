@@ -11,6 +11,8 @@ import androidx.core.content.ContextCompat;
 
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.themes.ColorUtil;
+import com.hardcodecoder.pulsemusic.themes.ThemeColors;
+import com.hardcodecoder.pulsemusic.themes.TintHelper;
 
 public class ImageUtil {
 
@@ -33,6 +35,14 @@ public class ImageUtil {
         drawable.setCornerRadius(DimensionsUtil.getDimension(context, 8));
         drawable.setGradientCenter(34, 0);
         return drawable;
+    }
+
+    @NonNull
+    public static Drawable getHighlightedItemBackground(@NonNull Context context) {
+        return TintHelper.setTintTo(
+                ContextCompat.getDrawable(context, R.drawable.shape_rounded_rectangle),
+                ThemeColors.getCurrentColorBackgroundHighlight(),
+                false);
     }
 
     public static int calculateInSampleSize(@NonNull BitmapFactory.Options options, int reqWidth, int reqHeight) {

@@ -71,32 +71,29 @@
 
     <style name="PulseLightTheme" parent="ThemeLight">
         <item name="android:windowBackground">@color/lightColorBackground</item>
-        <item name="colorOnPrimary">@color/lightColorOnPrimary</item>
         <item name="windowBackgroundColor">@color/lightColorBackground</item>
-        <item name="backgroundColor">?attr/colorSurface</item>
-        <item name="overlayColor">@color/lightColorOverlay</item>
+        <item name="colorOnPrimary">@color/lightColorOnPrimary</item>
     </style>
 
     <style name="PulseDarkTheme" parent="ThemeDark">
         <item name="android:windowBackground">@color/darkColorBackground</item>
-        <item name="colorOnPrimary">@color/darkColorOnPrimary</item>
         <item name="windowBackgroundColor">@color/darkColorBackground</item>
         <item name="colorSurface">@color/darkColorSurface</item>
-        <item name="overlayColor">@color/darkColorOverlay</item>
+        <item name="colorOnPrimary">@color/darkColorBackground</item>
     </style>
 
     <style name="PulseSignatureTheme" parent="PulseDarkTheme">
         <item name="android:windowBackground">@color/signatureColorBackground</item>
         <item name="windowBackgroundColor">@color/signatureColorBackground</item>
         <item name="colorSurface">@color/signatureColorSurface</item>
+        <item name="colorOnPrimary">@color/signatureColorOnPrimary</item>
     </style>
 
     <style name="PulseDarkTheme.Black">
         <item name="android:windowBackground">@color/blackColorBackground</item>
-        <item name="colorOnPrimary">@color/blackColorOnPrimary</item>
         <item name="windowBackgroundColor">@color/blackColorBackground</item>
         <item name="colorSurface">@color/blackColorSurface</item>
-        <item name="overlayColor">@color/blackColorOverlay</item>
+        <item name="colorOnPrimary">@color/blackColorOnPrimary</item>
     </style>
 
     <style name="TransparentThemeOverlay">

@@ -20,6 +20,7 @@ import com.hardcodecoder.pulsemusic.interfaces.SimpleTransitionClickListener;
 import com.hardcodecoder.pulsemusic.loaders.SortOrder;
 import com.hardcodecoder.pulsemusic.model.ArtistModel;
 import com.hardcodecoder.pulsemusic.themes.TintHelper;
+import com.hardcodecoder.pulsemusic.utils.ImageUtil;
 import com.hardcodecoder.pulsemusic.utils.SortUtil;
 import com.l4digital.fastscroll.FastScroller;
 
@@ -113,6 +114,7 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistSVH>
 
         ArtistSVH(@NonNull View itemView, SimpleTransitionClickListener mListener) {
             super(itemView);
+            itemView.setBackground(ImageUtil.getHighlightedItemBackground(itemView.getContext()));
             artistArt = itemView.findViewById(R.id.grid_item_artist_iv);
             TintHelper.setAccentTintTo(artistArt);
             title = itemView.findViewById(R.id.grid_item_artist_tv);

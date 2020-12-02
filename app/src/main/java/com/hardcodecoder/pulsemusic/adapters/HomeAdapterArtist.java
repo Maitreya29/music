@@ -13,6 +13,7 @@ import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.interfaces.SimpleTransitionClickListener;
 import com.hardcodecoder.pulsemusic.model.TopArtistModel;
 import com.hardcodecoder.pulsemusic.themes.TintHelper;
+import com.hardcodecoder.pulsemusic.utils.ImageUtil;
 
 import java.util.List;
 import java.util.Locale;
@@ -55,6 +56,7 @@ public class HomeAdapterArtist extends RecyclerView.Adapter<HomeAdapterArtist.Ad
 
         AdapterSVH(@NonNull View itemView, SimpleTransitionClickListener listener) {
             super(itemView);
+            itemView.setBackground(ImageUtil.getHighlightedItemBackground(itemView.getContext()));
             artistArt = itemView.findViewById(R.id.home_rv_artist_list_item_art);
             TintHelper.setAccentTintTo(artistArt);
             artistName = itemView.findViewById(R.id.home_rv_list_item_title);

@@ -4,36 +4,32 @@
 
     <!-- ********************************************* -->
     <!-- *********** COLORS FOR LIGHT MODE *********** -->
-    <color name="lightColorOnPrimary">@color/md_white_1000</color>
-    <color name="lightColorBackground">@color/md_white_1000</color>
-    <color name="lightColorOverlay">#0D000000</color>
+    <color name="lightColorBackground">#FFFFFF</color>
+    <color name="lightColorOnPrimary">#FFFFFF</color>
 
 
     <!-- ********************************************* -->
     <!-- *********** COLORS FOR DARK GREY *********** -->
-    <color name="darkColorOnPrimary">#202124</color>
-    <color name="darkColorBackground">#202124</color>
-    <color name="darkColorSurface">@color/md_grey_800</color>
-    <color name="darkColorOverlay">#0DFFFFFF</color>
+    <color name="darkColorBackground">#121212</color>
+    <color name="darkColorSurface">#1e1e1e</color>
 
 
     <!-- ******************************************************** -->
     <!-- ***************** COLORS FOR KINDA MODE **************** -->
 
     <!-- To create branded dark surfaces, overlay the primary
-    brand color at a low opacity over the recommended dark theme
-    surface color (#121212). The color #1F1B24 -->
-    <color name="signatureColorBackground">#1F1B24</color>
-
-    <!--4dp elevated surface 9% alpha over white -->
-    <color name="signatureColorSurface">#121F1B24</color>
+         brand color (#6c5ce7) at a 8% opacity over the recommended dark theme
+         surface color (#121212).-->
+    <color name="signatureColorBackground">#191823</color>
+    <!--1dp elevated surface 5% alpha over white overlay on background color-->
+    <color name="signatureColorSurface">#25242e</color>
+    <color name="signatureColorOnPrimary">@color/signatureColorSurface</color>
 
 
     <!-- ******************************************************** -->
     <!-- *************** COLORS FOR BLACK ******************** -->
 
     <color name="blackColorBackground">#000000</color>
+    <color name="blackColorSurface">#0d0d0d</color>
     <color name="blackColorOnPrimary">@color/md_grey_900</color>
-    <color name="blackColorSurface">@color/md_grey_1000</color>
-    <color name="blackColorOverlay">#1AFFFFFF</color>
 </resources>

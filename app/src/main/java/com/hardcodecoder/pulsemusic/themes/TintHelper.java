@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
@@ -24,9 +25,15 @@ public final class TintHelper {
         imageView.setImageTintList(ColorStateList.valueOf(ThemeColors.getCurrentColorPrimary()));
     }
 
+    @NonNull
     public static Drawable setAccentTintTo(@NonNull Drawable drawable, boolean mutate) {
+        return setTintTo(drawable, ThemeColors.getCurrentColorPrimary(), mutate);
+    }
+
+    @NonNull
+    public static Drawable setTintTo(@NonNull Drawable drawable, @ColorInt int color, boolean mutate) {
         if (mutate) drawable.mutate();
-        drawable.setTint(ThemeColors.getCurrentColorPrimary());
+        drawable.setTint(color);
         return drawable;
     }
 

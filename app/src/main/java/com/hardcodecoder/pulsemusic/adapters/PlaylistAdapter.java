@@ -7,7 +7,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hardcodecoder.pulsemusic.R;
@@ -81,11 +80,11 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.CardsS
 
         CardsSVH(@NonNull View itemView, PlaylistCardListener listener) {
             super(itemView);
-            title = itemView.findViewById(R.id.playlist_title);
-
+            itemView.setBackground(ImageUtil.getHighlightedItemBackground(itemView.getContext()));
+            itemView.setOnClickListener(v -> listener.onItemClick(getAdapterPosition()));
             itemView.findViewById(R.id.edit_btn).setOnClickListener(v -> listener.onItemEdit(getAdapterPosition()));
 
-            itemView.setOnClickListener(v -> listener.onItemClick(getAdapterPosition()));
+            title = itemView.findViewById(R.id.playlist_title);
         }
 
         void updateView(String s) {
@@ -101,7 +100,7 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.CardsS
 
         @Override
         public void onItemClear() {
-            itemView.setBackground(ContextCompat.getDrawable(itemView.getContext(), R.drawable.overlay_color_bck_drawable));
+            itemView.setBackground(ImageUtil.getHighlightedItemBackground(itemView.getContext()));
         }
     }
 }
