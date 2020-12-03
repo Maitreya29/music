@@ -28,6 +28,7 @@ public class SettingsActivity extends MediaSessionActivity implements SettingsFr
 
     private Toolbar mToolbar;
     private FragmentManager mFragmentManager;
+    private AlertDialog mRestartDialog;
     private SharedPreferences.OnSharedPreferenceChangeListener mAccentsChangedListener;
 
     @Override
@@ -95,7 +96,7 @@ public class SettingsActivity extends MediaSessionActivity implements SettingsFr
         title.setText(R.string.restart_dialog_title);
         msg.setText(R.string.restart_dialog_desc);
 
-        AlertDialog restartDialog = new MaterialAlertDialogBuilder(this)
+        mRestartDialog = new MaterialAlertDialogBuilder(this)
                 .setView(layout).create();
 
         positiveBtn.setText(R.string.restart_dialog_positive_btn_title);
@@ -107,14 +108,14 @@ public class SettingsActivity extends MediaSessionActivity implements SettingsFr
                 MediaController controller = getMediaController();
                 if (controller != null) controller.getTransportControls().stop();
                 TrackManager.getInstance().resetTrackManager();
-                restartDialog.dismiss();
+                mRestartDialog.dismiss();
                 finish();
             }
         });
 
         negativeBtn.setText(R.string.restart_dialog_negative_btn_title);
-        negativeBtn.setOnClickListener(negative -> restartDialog.dismiss());
-        restartDialog.show();
+        negativeBtn.setOnClickListener(negative -> mRestartDialog.dismiss());
+        mRestartDialog.show();
     }
 
     @Override
@@ -132,6 +133,7 @@ public class SettingsActivity extends MediaSessionActivity implements SettingsFr
         if (null != mAccentsChangedListener)
             getSharedPreferences(Preferences.PULSE_THEMES_PREFS, MODE_PRIVATE)
                     .unregisterOnSharedPreferenceChangeListener(mAccentsChangedListener);
+        if (null != mRestartDialog) mRestartDialog.dismiss();
         super.onDestroy();
     }
 
