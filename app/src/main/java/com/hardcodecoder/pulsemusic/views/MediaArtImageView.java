@@ -2,7 +2,6 @@ package com.hardcodecoder.pulsemusic.views;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 
@@ -17,10 +16,11 @@ import com.google.android.material.shape.CornerFamily;
 import com.hardcodecoder.pulsemusic.GlideApp;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.helper.MediaArtHelper;
+import com.hardcodecoder.pulsemusic.themes.ThemeColors;
 
 public class MediaArtImageView extends ShapeableImageView {
 
-    private static final int BACKGROUND_COLOR = Color.parseColor("#1E1E1E");
+    private Target<Drawable> target = null;
 
     public MediaArtImageView(Context context) {
         this(context, null, 0);
@@ -77,13 +77,14 @@ public class MediaArtImageView extends ShapeableImageView {
      *                    fallback image wil be tinted with ThemeColor#getCurrentColorPrimary
      */
     public void loadAlbumArt(@Nullable final String albumArtUrl, final int albumId) {
-        GlideApp.with(this)
+        target = GlideApp
+                .with(this)
                 .load(albumArtUrl)
                 .listener(new RequestListener<Drawable>() {
                     @Override
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                         post(() -> {
-                            setBackgroundColor(BACKGROUND_COLOR);
+                            setBackgroundColor(ThemeColors.getCurrentColorBackgroundHighlight());
                             setImageDrawable(MediaArtHelper.getDefaultAlbumArt(getContext(), albumId));
                         });
                         return true;
@@ -91,6 +92,7 @@ public class MediaArtImageView extends ShapeableImageView {
 
                     @Override
                     public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                        if (null != getBackground()) setBackgroundColor(0);
                         return false;
                     }
                 })
@@ -98,7 +100,7 @@ public class MediaArtImageView extends ShapeableImageView {
     }
 
     public void clearLoadedArt() {
-        GlideApp.with(this).clear(this);
+        GlideApp.with(this).clear(target);
         setBackgroundColor(0);
     }
 }
