@@ -7,8 +7,9 @@ import androidx.annotation.NonNull;
 
 import com.bumptech.glide.GlideBuilder;
 import com.bumptech.glide.annotation.GlideModule;
-import com.bumptech.glide.load.engine.cache.InternalCacheDiskCacheFactory;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.module.AppGlideModule;
+import com.bumptech.glide.request.RequestOptions;
 
 @GlideModule
 public final class MyAppGlideModule extends AppGlideModule {
@@ -16,8 +17,9 @@ public final class MyAppGlideModule extends AppGlideModule {
     @Override
     public void applyOptions(@NonNull Context context, @NonNull GlideBuilder builder) {
         super.applyOptions(context, builder);
-        int diskCacheSizeBytes = 1024 * 1024 * 50; // 50 MB
-        builder.setDiskCache(new InternalCacheDiskCacheFactory(context, diskCacheSizeBytes));
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions = requestOptions.diskCacheStrategy(DiskCacheStrategy.RESOURCE);
+        builder.setDefaultRequestOptions(requestOptions);
         if (BuildConfig.DEBUG) builder.setLogLevel(Log.DEBUG);
         else builder.setLogLevel(Log.ERROR);
     }
