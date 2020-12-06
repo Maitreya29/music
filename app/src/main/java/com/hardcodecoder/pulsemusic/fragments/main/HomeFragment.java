@@ -23,9 +23,9 @@ import com.hardcodecoder.pulsemusic.PMS;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.activities.FavoritesActivity;
 import com.hardcodecoder.pulsemusic.activities.RecentActivity;
-import com.hardcodecoder.pulsemusic.adapters.HomeAdapter;
-import com.hardcodecoder.pulsemusic.adapters.HomeAdapterAlbum;
-import com.hardcodecoder.pulsemusic.adapters.HomeAdapterArtist;
+import com.hardcodecoder.pulsemusic.adapters.main.HomeSectionAdapter;
+import com.hardcodecoder.pulsemusic.adapters.main.TopAlbumsAdapter;
+import com.hardcodecoder.pulsemusic.adapters.main.TopArtistsAdapter;
 import com.hardcodecoder.pulsemusic.helper.DataModelHelper;
 import com.hardcodecoder.pulsemusic.helper.UIHelper;
 import com.hardcodecoder.pulsemusic.interfaces.SimpleItemClickListener;
@@ -47,6 +47,7 @@ public class HomeFragment extends Fragment {
     private MediaController.TransportControls mTransportControl;
     private TrackManager tm;
 
+    @NonNull
     public static HomeFragment getInstance() {
         return new HomeFragment();
     }
@@ -89,7 +90,7 @@ public class HomeFragment extends Fragment {
                 });
     }
 
-    private void loadTopAlbums(View view, List<TopAlbumModel> list) {
+    private void loadTopAlbums(@NonNull View view, @Nullable List<TopAlbumModel> list) {
         if (list == null || list.isEmpty()) return;
         view.postDelayed(() -> {
             MaterialTextView topAlbumsTitle = (MaterialTextView) ((ViewStub) view.findViewById(R.id.stub_top_albums_title)).inflate();
@@ -97,7 +98,7 @@ public class HomeFragment extends Fragment {
             RecyclerView rv = (RecyclerView) ((ViewStub) view.findViewById(R.id.stub_top_albums_list)).inflate();
             rv.setLayoutManager(new LinearLayoutManager(rv.getContext(), LinearLayoutManager.HORIZONTAL, false));
             rv.setHasFixedSize(true);
-            HomeAdapterAlbum adapter = new HomeAdapterAlbum(list, getLayoutInflater(), (sharedView, position) -> {
+            TopAlbumsAdapter adapter = new TopAlbumsAdapter(getLayoutInflater(), list, (sharedView, position) -> {
                 if (null != getActivity()) {
                     TopAlbumModel albumModel = list.get(position);
                     NavigationUtil.goToAlbum(getActivity(), sharedView, albumModel.getAlbumName(), albumModel.getAlbumId(), albumModel.getAlbumArt());
@@ -109,7 +110,7 @@ public class HomeFragment extends Fragment {
         }, 0);
     }
 
-    private void loadSuggestions(View view, List<MusicModel> list) {
+    private void loadSuggestions(@NonNull View view, @Nullable List<MusicModel> list) {
         if (list == null || list.isEmpty()) return;
         view.postDelayed(() -> {
             MaterialTextView suggestionsTitle = (MaterialTextView) ((ViewStub) view.findViewById(R.id.stub_suggestions_title)).inflate();
@@ -117,7 +118,7 @@ public class HomeFragment extends Fragment {
             RecyclerView rv = (RecyclerView) ((ViewStub) view.findViewById(R.id.stub_suggested_list)).inflate();
             rv.setLayoutManager(new LinearLayoutManager(rv.getContext(), LinearLayoutManager.HORIZONTAL, false));
             rv.setHasFixedSize(true);
-            HomeAdapter adapter = new HomeAdapter(getLayoutInflater(), list, new SimpleItemClickListener() {
+            HomeSectionAdapter adapter = new HomeSectionAdapter(getLayoutInflater(), list, new SimpleItemClickListener() {
                 @Override
                 public void onItemClick(int position) {
                     tm.buildDataList(list, position);
@@ -134,7 +135,7 @@ public class HomeFragment extends Fragment {
         }, BASE_DELAY_MILLS);
     }
 
-    private void loadLatestTracks(View view, List<MusicModel> list) {
+    private void loadLatestTracks(@NonNull View view, @Nullable List<MusicModel> list) {
         if (list == null || list.isEmpty()) return;
         view.postDelayed(() -> {
             MaterialTextView newInStoreTitle = (MaterialTextView) ((ViewStub) view.findViewById(R.id.stub_new_in_store_title)).inflate();
@@ -142,7 +143,7 @@ public class HomeFragment extends Fragment {
             RecyclerView rv = (RecyclerView) ((ViewStub) view.findViewById(R.id.stub_new_in_store_list)).inflate();
             rv.setLayoutManager(new LinearLayoutManager(rv.getContext(), LinearLayoutManager.HORIZONTAL, false));
             rv.setHasFixedSize(true);
-            HomeAdapter adapter = new HomeAdapter(getLayoutInflater(), list, new SimpleItemClickListener() {
+            HomeSectionAdapter adapter = new HomeSectionAdapter(getLayoutInflater(), list, new SimpleItemClickListener() {
                 @Override
                 public void onItemClick(int position) {
                     tm.buildDataList(list, position);
@@ -159,7 +160,7 @@ public class HomeFragment extends Fragment {
         }, BASE_DELAY_MILLS * 2);
     }
 
-    private void loadTopArtists(View view, List<TopArtistModel> list) {
+    private void loadTopArtists(@NonNull View view, @Nullable List<TopArtistModel> list) {
         if (list == null || list.isEmpty()) return;
         view.postDelayed(() -> {
             MaterialTextView topAlbumsTitle = (MaterialTextView) ((ViewStub) view.findViewById(R.id.stub_top_artists_title)).inflate();
@@ -167,7 +168,7 @@ public class HomeFragment extends Fragment {
             RecyclerView rv = (RecyclerView) ((ViewStub) view.findViewById(R.id.stub_top_artists_list)).inflate();
             rv.setHasFixedSize(true);
             rv.setLayoutManager(new LinearLayoutManager(rv.getContext(), RecyclerView.HORIZONTAL, false));
-            HomeAdapterArtist adapter = new HomeAdapterArtist(list, getLayoutInflater(), (sharedView, position) -> {
+            TopArtistsAdapter adapter = new TopArtistsAdapter(getLayoutInflater(), list, (sharedView, position) -> {
                 if (null != getActivity())
                     NavigationUtil.goToArtist(getActivity(), sharedView, list.get(position).getArtistName());
             });

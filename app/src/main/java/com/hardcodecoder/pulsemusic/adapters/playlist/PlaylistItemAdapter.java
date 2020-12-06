@@ -1,4 +1,4 @@
-package com.hardcodecoder.pulsemusic.adapters;
+package com.hardcodecoder.pulsemusic.adapters.playlist;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,46 +13,46 @@ import com.hardcodecoder.pulsemusic.interfaces.SingleClickListener;
 
 import java.util.List;
 
-public class ATPAdapter extends RecyclerView.Adapter<ATPAdapter.ATPViewHolder> {
+public class PlaylistItemAdapter extends RecyclerView.Adapter<PlaylistItemAdapter.PlaylistItemHolder> {
 
     private final LayoutInflater mInflater;
-    private final List<String> mDataList;
+    private final List<String> mPlaylistNames;
     private final SingleClickListener mListener;
 
-    public ATPAdapter(LayoutInflater inflater, List<String> dataList, SingleClickListener listener) {
+    public PlaylistItemAdapter(@NonNull LayoutInflater inflater,
+                               @NonNull List<String> playlistNames,
+                               @NonNull SingleClickListener listener) {
         mInflater = inflater;
-        mDataList = dataList;
+        mPlaylistNames = playlistNames;
         mListener = listener;
     }
 
     public void addItem(String name) {
-        mDataList.add(0, name);
+        mPlaylistNames.add(0, name);
         notifyItemInserted(0);
     }
 
     @NonNull
     @Override
-    public ATPViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ATPViewHolder(mInflater.inflate(R.layout.rv_item_playlist_names, parent, false), mListener);
+    public PlaylistItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new PlaylistItemHolder(mInflater.inflate(R.layout.rv_item_playlist_names, parent, false), mListener);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ATPViewHolder holder, int position) {
-        holder.setData(mDataList.get(position));
+    public void onBindViewHolder(@NonNull PlaylistItemHolder holder, int position) {
+        holder.setData(mPlaylistNames.get(position));
     }
 
     @Override
     public int getItemCount() {
-        if (null == mDataList)
-            return 0;
-        return mDataList.size();
+        return mPlaylistNames.size();
     }
 
-    static class ATPViewHolder extends RecyclerView.ViewHolder {
+    static class PlaylistItemHolder extends RecyclerView.ViewHolder {
 
         private final MaterialTextView mPlaylistName;
 
-        ATPViewHolder(@NonNull View itemView, SingleClickListener listener) {
+        PlaylistItemHolder(@NonNull View itemView, SingleClickListener listener) {
             super(itemView);
             mPlaylistName = itemView.findViewById(R.id.rv_item_playlist_name);
             itemView.setOnClickListener(v -> listener.onItemCLick(getAdapterPosition()));

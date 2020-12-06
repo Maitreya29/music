@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.TaskRunner;
-import com.hardcodecoder.pulsemusic.adapters.SearchAdapter;
+import com.hardcodecoder.pulsemusic.adapters.main.SearchResultAdapter;
 import com.hardcodecoder.pulsemusic.helper.UIHelper;
 import com.hardcodecoder.pulsemusic.interfaces.SimpleItemClickListener;
 import com.hardcodecoder.pulsemusic.loaders.SearchQueryLoader;
@@ -29,7 +29,7 @@ public class SearchActivity extends MediaSessionActivity implements SimpleItemCl
 
     private final List<String> pendingUpdates = new ArrayList<>();
     private MaterialTextView noResultsText;
-    private SearchAdapter mAdapter;
+    private SearchResultAdapter mAdapter;
     private TrackManager tm;
     private String mQuery = "";
 
@@ -97,21 +97,21 @@ public class SearchActivity extends MediaSessionActivity implements SimpleItemCl
     private void setRecyclerView() {
         RecyclerView rv = (RecyclerView) ((ViewStub) findViewById(R.id.stub_search_rv)).inflate();
         rv.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
-        mAdapter = new SearchAdapter(getLayoutInflater(), this);
+        mAdapter = new SearchResultAdapter(getLayoutInflater(), this);
         rv.setAdapter(mAdapter);
     }
 
     @Override
     public void onItemClick(int position) {
         if (null == mAdapter) return;
-        tm.buildDataList(mAdapter.getList(), position);
+        tm.buildDataList(mAdapter.getDataList(), position);
         playMedia();
     }
 
     @Override
     public void onOptionsClick(int position) {
         if (null == mAdapter) return;
-        UIHelper.showMenuForLibraryTracks(this, getSupportFragmentManager(), mAdapter.getList().get(position));
+        UIHelper.showMenuForLibraryTracks(this, getSupportFragmentManager(), mAdapter.getDataList().get(position));
     }
 
     @Override

@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
-import com.hardcodecoder.pulsemusic.adapters.ATPAdapter;
+import com.hardcodecoder.pulsemusic.adapters.playlist.PlaylistItemAdapter;
 import com.hardcodecoder.pulsemusic.helper.UIHelper;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.providers.ProviderManager;
@@ -27,7 +27,7 @@ public class AddToPlaylistDialog extends RoundedBottomSheetDialogFragment {
 
     public static final String TAG = "AddToPlaylistDialog";
     public static final String MUSIC_MODEL_KEY = "data";
-    private ATPAdapter mAdapter;
+    private PlaylistItemAdapter mAdapter;
     private MaterialTextView mEmptyListText;
     private List<String> mPlaylistNames;
     private MusicModel mItemToAdd = null;
@@ -72,7 +72,7 @@ public class AddToPlaylistDialog extends RoundedBottomSheetDialogFragment {
                 if (null != mEmptyListText) mEmptyListText.setVisibility(View.GONE);
                 RecyclerView recyclerView = (RecyclerView) ((ViewStub) view.findViewById(R.id.bottom_dialog_picker_stub_rv)).inflate();
                 recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), RecyclerView.VERTICAL, false));
-                mAdapter = new ATPAdapter(
+                mAdapter = new PlaylistItemAdapter(
                         getLayoutInflater(),
                         mPlaylistNames,
                         position -> {

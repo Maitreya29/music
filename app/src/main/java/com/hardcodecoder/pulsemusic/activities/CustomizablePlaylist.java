@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.snackbar.Snackbar;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.activities.base.PlaylistActivity;
-import com.hardcodecoder.pulsemusic.adapters.PlaylistDataAdapter;
+import com.hardcodecoder.pulsemusic.adapters.playlist.CustomizablePlaylistAdapter;
 import com.hardcodecoder.pulsemusic.helper.RecyclerViewGestureHelper;
 import com.hardcodecoder.pulsemusic.interfaces.ItemGestureCallback;
 import com.hardcodecoder.pulsemusic.interfaces.PlaylistItemListener;
@@ -22,7 +22,7 @@ import java.util.List;
 
 public class CustomizablePlaylist extends PlaylistActivity implements PlaylistItemListener, ItemGestureCallback<MusicModel> {
 
-    private PlaylistDataAdapter mAdapter;
+    private CustomizablePlaylistAdapter mAdapter;
     private ItemTouchHelper mItemTouchHelper;
     private boolean mPlaylistModified = false;
 
@@ -37,7 +37,7 @@ public class CustomizablePlaylist extends PlaylistActivity implements PlaylistIt
     protected void loadRecyclerList(@NonNull RecyclerView recyclerView, @NonNull List<MusicModel> list) {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
-        mAdapter = new PlaylistDataAdapter(list, getLayoutInflater(), this, this);
+        mAdapter = new CustomizablePlaylistAdapter(getLayoutInflater(), list, this, this);
         recyclerView.setAdapter(mAdapter);
 
         ItemTouchHelper.Callback itemTouchHelperCallback = new RecyclerViewGestureHelper(mAdapter);
@@ -48,7 +48,7 @@ public class CustomizablePlaylist extends PlaylistActivity implements PlaylistIt
     @Override
     protected void onInitializeDynamicButtons() {
         setPlaylistDynamicFabButton(R.drawable.ic_shuffle, v ->
-                shuffleTrackAndPlay(mAdapter == null ? null : mAdapter.getPlaylistTracks()));
+                shuffleTrackAndPlay(mAdapter == null ? null : mAdapter.getDataList()));
 
         setPlaylistDynamicButton1(getString(R.string.playlist_play), R.drawable.ic_round_play, v ->
                 onItemClick(0));
@@ -69,7 +69,7 @@ public class CustomizablePlaylist extends PlaylistActivity implements PlaylistIt
             if (null == mAdapter || getPlaylistTitle() == null) return false;
             ProviderManager.getPlaylistProvider().deleteAllDuplicatesInPlaylist(
                     getPlaylistTitle(),
-                    mAdapter.getPlaylistTracks(),
+                    mAdapter.getDataList(),
                     result -> {
                         if (null != result) mAdapter.updatePlaylist(result);
                     });
@@ -80,7 +80,7 @@ public class CustomizablePlaylist extends PlaylistActivity implements PlaylistIt
 
     @Override
     public void onItemClick(int position) {
-        if (mAdapter != null) setTrackAndPlay(mAdapter.getPlaylistTracks(), position);
+        if (mAdapter != null) setTrackAndPlay(mAdapter.getDataList(), position);
     }
 
     @Override
@@ -121,7 +121,7 @@ public class CustomizablePlaylist extends PlaylistActivity implements PlaylistIt
     @Override
     protected void onDestroy() {
         if (mPlaylistModified && null != mAdapter && null != getPlaylistTitle())
-            ProviderManager.getPlaylistProvider().updatePlaylistTracks(getPlaylistTitle(), mAdapter.getPlaylistTracks());
+            ProviderManager.getPlaylistProvider().updatePlaylistTracks(getPlaylistTitle(), mAdapter.getDataList());
         super.onDestroy();
     }
 }

@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.Preferences;
 import com.hardcodecoder.pulsemusic.R;
-import com.hardcodecoder.pulsemusic.adapters.ArtistAdapter;
+import com.hardcodecoder.pulsemusic.adapters.main.ArtistAdapter;
 import com.hardcodecoder.pulsemusic.fragments.main.base.CardGridFragment;
 import com.hardcodecoder.pulsemusic.loaders.LoaderHelper;
 import com.hardcodecoder.pulsemusic.loaders.SortOrder.ARTIST;
@@ -115,30 +115,6 @@ public class ArtistFragment extends CardGridFragment {
         return true;
     }
 
-    private void loadArtistsList(View view, List<ArtistModel> list) {
-        if (list == null || list.isEmpty()) {
-            MaterialTextView noTracksText = (MaterialTextView) ((ViewStub) view.findViewById(R.id.stub_no_tracks_found)).inflate();
-            noTracksText.setText(getString(R.string.tracks_not_found));
-        } else {
-            mRecyclerView = (RecyclerView) ((ViewStub) view.findViewById(R.id.stub_grid_rv)).inflate();
-            mLayoutManager = new GridLayoutManager(mRecyclerView.getContext(), getCurrentSpanCount());
-            mRecyclerView.setLayoutManager(mLayoutManager);
-            mRecyclerView.setHasFixedSize(true);
-            mAdapter = new ArtistAdapter(list,
-                    getLayoutInflater(),
-                    (sharedView, position) -> {
-                        if (null != getActivity())
-                            NavigationUtil.goToArtist(getActivity(), sharedView, list.get(position).getArtistName());
-                    },
-                    () -> mLayoutManager.scrollToPosition(mFirstVisibleItemPosition),
-                    getCurrentOrientation(),
-                    getCurrentSpanCount());
-            LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(mRecyclerView.getContext(), R.anim.item_enter_slide_up);
-            mRecyclerView.setLayoutAnimation(controller);
-            mRecyclerView.setAdapter(mAdapter);
-        }
-    }
-
     private ARTIST resolveSortOrder(int sortOrder) {
         if (sortOrder == Preferences.SORT_ORDER_ASC)
             return ARTIST.TITLE_ASC;
@@ -206,5 +182,31 @@ public class ArtistFragment extends CardGridFragment {
         mRecyclerView.setAdapter(mAdapter);
         mLayoutManager.setSpanCount(spanCount);
         mLayoutManager.scrollToPosition(mFirstVisibleItemPosition);
+    }
+
+    private void loadArtistsList(@NonNull View view, @Nullable List<ArtistModel> list) {
+        if (list == null || list.isEmpty()) {
+            MaterialTextView noTracksText = (MaterialTextView) ((ViewStub) view.findViewById(R.id.stub_no_tracks_found)).inflate();
+            noTracksText.setText(getString(R.string.tracks_not_found));
+        } else {
+            mRecyclerView = (RecyclerView) ((ViewStub) view.findViewById(R.id.stub_grid_rv)).inflate();
+            mLayoutManager = new GridLayoutManager(mRecyclerView.getContext(), getCurrentSpanCount());
+            mRecyclerView.setLayoutManager(mLayoutManager);
+            mRecyclerView.setHasFixedSize(true);
+            mAdapter = new ArtistAdapter(
+                    getLayoutInflater(),
+                    list,
+                    (sharedView, position) -> {
+                        if (null != getActivity())
+                            NavigationUtil.goToArtist(getActivity(), sharedView, list.get(position).getArtistName());
+                    },
+                    () -> mLayoutManager.scrollToPosition(mFirstVisibleItemPosition),
+                    getCurrentOrientation(),
+                    getCurrentSpanCount());
+
+            LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(mRecyclerView.getContext(), R.anim.item_enter_slide_up);
+            mRecyclerView.setLayoutAnimation(controller);
+            mRecyclerView.setAdapter(mAdapter);
+        }
     }
 }

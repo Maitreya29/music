@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.Preferences;
 import com.hardcodecoder.pulsemusic.R;
-import com.hardcodecoder.pulsemusic.adapters.LibraryAdapter;
+import com.hardcodecoder.pulsemusic.adapters.main.TracksAdapter;
 import com.hardcodecoder.pulsemusic.fragments.main.base.ListGridFragment;
 import com.hardcodecoder.pulsemusic.helper.UIHelper;
 import com.hardcodecoder.pulsemusic.interfaces.SimpleItemClickListener;
@@ -30,13 +30,12 @@ import com.hardcodecoder.pulsemusic.utils.SortUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LibraryFragment extends ListGridFragment {
+public class LibraryFragment extends ListGridFragment implements SimpleItemClickListener {
 
     private MediaController.TransportControls mTransportControl;
-    private List<MusicModel> mList;
     private GridLayoutManager mLayoutManager;
-    private LibraryAdapter mAdapter;
-    private TrackManager tm;
+    private TracksAdapter mAdapter;
+    private List<MusicModel> mList;
     private int mFirstVisibleItemPosition;
 
     public static LibraryFragment getInstance() {
@@ -45,15 +44,13 @@ public class LibraryFragment extends ListGridFragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        tm = TrackManager.getInstance();
-
         List<MusicModel> list = LoaderCache.getAllTracksList();
         if (list == null || list.isEmpty()) {
             MaterialTextView noTracksText = (MaterialTextView) ((ViewStub) view.findViewById(R.id.stub_no_tracks_found)).inflate();
             noTracksText.setText(getString(R.string.tracks_not_found));
         } else {
             final SortOrder sortOrder = resolveSortOrder(getCurrentSortOrder());
-            mList = new ArrayList<>(LoaderCache.getAllTracksList());
+            mList = new ArrayList<>(list);
             SortUtil.sortLibraryList(mList, sortOrder);
 
             RecyclerView recyclerView = (RecyclerView) ((ViewStub) view.findViewById(R.id.stub_library_fragment_rv)).inflate();
@@ -61,25 +58,13 @@ public class LibraryFragment extends ListGridFragment {
             recyclerView.setLayoutManager(mLayoutManager);
             recyclerView.setHasFixedSize(true);
 
-            mAdapter = new LibraryAdapter(
-                    mList,
+            mAdapter = new TracksAdapter(
                     getLayoutInflater(),
+                    mList,
+                    this,
+                    this::onSortUpdateComplete,
                     sortOrder,
-                    new SimpleItemClickListener() {
-                        @Override
-                        public void onItemClick(int position) {
-                            tm.buildDataList(mList, position);
-                            play();
-                        }
-
-                        @Override
-                        public void onOptionsClick(int position) {
-                            if (null != getActivity()) {
-                                UIHelper.showMenuForLibraryTracks(getActivity(), getActivity().getSupportFragmentManager(), mList.get(position));
-                            }
-                        }
-                    },
-                    () -> mLayoutManager.scrollToPosition(mFirstVisibleItemPosition));
+                    true);
             recyclerView.setAdapter(mAdapter);
         }
     }
@@ -172,6 +157,22 @@ public class LibraryFragment extends ListGridFragment {
 
         item.setChecked(true);
         return true;
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        TrackManager.getInstance().buildDataList(mList, position);
+        play();
+    }
+
+    @Override
+    public void onOptionsClick(int position) {
+        if (null != getActivity())
+            UIHelper.showMenuForLibraryTracks(getActivity(), getActivity().getSupportFragmentManager(), mList.get(position));
+    }
+
+    public void onSortUpdateComplete() {
+        mLayoutManager.scrollToPosition(mFirstVisibleItemPosition);
     }
 
     @Override

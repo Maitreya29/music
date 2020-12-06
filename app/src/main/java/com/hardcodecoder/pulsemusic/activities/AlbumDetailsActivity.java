@@ -23,7 +23,7 @@ import com.hardcodecoder.pulsemusic.GlideApp;
 import com.hardcodecoder.pulsemusic.Preferences;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.activities.base.BaseDetailsActivity;
-import com.hardcodecoder.pulsemusic.adapters.LibraryAdapter;
+import com.hardcodecoder.pulsemusic.adapters.main.TracksAdapter;
 import com.hardcodecoder.pulsemusic.helper.MediaArtHelper;
 import com.hardcodecoder.pulsemusic.helper.UIHelper;
 import com.hardcodecoder.pulsemusic.interfaces.SimpleItemClickListener;
@@ -42,7 +42,7 @@ public class AlbumDetailsActivity extends BaseDetailsActivity {
     public static final String KEY_ALBUM_TITLE = "AlbumTitle";
     public static final String KEY_ALBUM_ID = "AlbumId";
     public static final String KEY_ALBUM_ART_URL = "AlbumArtUrl";
-    private LibraryAdapter mAdapter;
+    private TracksAdapter mAdapter;
     private TrackManager tm;
     private SortOrder mSortOrder;
     private Long mAlbumId;
@@ -179,10 +179,9 @@ public class AlbumDetailsActivity extends BaseDetailsActivity {
         rv.setHorizontalFadingEdgeEnabled(true);
         rv.setLayoutManager(new LinearLayoutManager(rv.getContext(), RecyclerView.VERTICAL, false));
 
-        mAdapter = new LibraryAdapter(
-                list,
+        mAdapter = new TracksAdapter(
                 getLayoutInflater(),
-                mSortOrder,
+                list,
                 new SimpleItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
@@ -194,7 +193,10 @@ public class AlbumDetailsActivity extends BaseDetailsActivity {
                     public void onOptionsClick(int position) {
                         UIHelper.showMenuForAlbumDetails(AlbumDetailsActivity.this, getSupportFragmentManager(), list.get(position));
                     }
-                }, null);
+                },
+                null,
+                mSortOrder,
+                true);
 
         LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(this, R.anim.item_falls_down_animation);
         rv.setLayoutAnimation(controller);

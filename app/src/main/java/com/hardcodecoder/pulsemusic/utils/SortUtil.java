@@ -1,6 +1,7 @@
 package com.hardcodecoder.pulsemusic.utils;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.hardcodecoder.pulsemusic.loaders.SortOrder;
 import com.hardcodecoder.pulsemusic.loaders.SortOrder.ALBUMS;
@@ -14,11 +15,9 @@ import java.util.List;
 
 public class SortUtil {
 
-    public static void sortLibraryList(@NonNull List<MusicModel> list, @NonNull SortOrder sortOrder) {
+    public static void sortLibraryList(@NonNull List<MusicModel> list, @Nullable SortOrder sortOrder) {
+        if (null == sortOrder) sortOrder = SortOrder.TITLE_ASC;
         switch (sortOrder) {
-            case TITLE_ASC:
-                Collections.sort(list, (o1, o2) -> o1.getTrackName().compareToIgnoreCase(o2.getTrackName()));
-                break;
             case TITLE_DESC:
                 Collections.sort(list, (o1, o2) -> o2.getTrackName().compareToIgnoreCase(o1.getTrackName()));
                 break;
@@ -62,6 +61,10 @@ public class SortUtil {
                     return disc;
                 });
                 break;
+            case TITLE_ASC:
+            default:
+                Collections.sort(list, (o1, o2) -> o1.getTrackName().compareToIgnoreCase(o2.getTrackName()));
+                break;
         }
     }
 
@@ -69,7 +72,7 @@ public class SortUtil {
     private static int[] getDiscTrackNumber(int track) {
         String trackString = String.valueOf(track);
         int[] discTrackNumber = new int[]{0, track}; // Disc number, track number
-        if (trackString != null && trackString.length() == 4) {
+        if (trackString.length() == 4) {
             // For multi-disc sets, track will be 1xxx for tracks on the first disc,
             // 2xxx for tracks on the second disc, etc.
             discTrackNumber[0] = Character.getNumericValue(trackString.charAt(0));
@@ -79,19 +82,27 @@ public class SortUtil {
         return discTrackNumber;
     }
 
-    public static void sortArtistList(List<ArtistModel> list, ARTIST sortOrder) {
-        if (sortOrder == ARTIST.TITLE_ASC)
-            Collections.sort(list, (o1, o2) -> o1.getArtistName().compareToIgnoreCase(o2.getArtistName()));
-        else if (sortOrder == ARTIST.TITLE_DESC) {
-            Collections.sort(list, (o1, o2) -> o2.getArtistName().compareToIgnoreCase(o1.getArtistName()));
-        } else if (sortOrder == ARTIST.NUM_OF_TRACKS_ASC) {
-            Collections.sort(list, (o1, o2) -> o1.getNumOfTracks() - o2.getNumOfTracks());
-        } else if (sortOrder == ARTIST.NUM_OF_TRACKS_DESC) {
-            Collections.sort(list, (o1, o2) -> o2.getNumOfTracks() - o1.getNumOfTracks());
+    public static void sortArtistList(@NonNull List<ArtistModel> list, @Nullable ARTIST sortOrder) {
+        if (null == sortOrder) sortOrder = ARTIST.TITLE_ASC;
+        switch (sortOrder) {
+            case TITLE_DESC:
+                Collections.sort(list, (o1, o2) -> o2.getArtistName().compareToIgnoreCase(o1.getArtistName()));
+                break;
+            case NUM_OF_TRACKS_ASC:
+                Collections.sort(list, (o1, o2) -> o1.getNumOfTracks() - o2.getNumOfTracks());
+                break;
+            case NUM_OF_TRACKS_DESC:
+                Collections.sort(list, (o1, o2) -> o2.getNumOfTracks() - o1.getNumOfTracks());
+                break;
+            case TITLE_ASC:
+            default:
+                Collections.sort(list, (o1, o2) -> o1.getArtistName().compareToIgnoreCase(o2.getArtistName()));
+                break;
         }
     }
 
-    public static void sortAlbumList(List<AlbumModel> list, @NonNull ALBUMS sortOrder) {
+    public static void sortAlbumList(@NonNull List<AlbumModel> list, @Nullable ALBUMS sortOrder) {
+        if (null == sortOrder) sortOrder = ALBUMS.TITLE_ASC;
         switch (sortOrder) {
             case TITLE_DESC:
                 Collections.sort(list, (o1, o2) -> o2.getAlbumName().compareToIgnoreCase(o1.getAlbumName()));

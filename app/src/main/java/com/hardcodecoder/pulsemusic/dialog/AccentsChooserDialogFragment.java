@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hardcodecoder.pulsemusic.R;
-import com.hardcodecoder.pulsemusic.adapters.AccentAdapter;
+import com.hardcodecoder.pulsemusic.adapters.bottomsheet.AccentAdapter;
 import com.hardcodecoder.pulsemusic.model.AccentsModel;
 import com.hardcodecoder.pulsemusic.themes.PresetColors;
 import com.hardcodecoder.pulsemusic.themes.ThemeManagerUtils;

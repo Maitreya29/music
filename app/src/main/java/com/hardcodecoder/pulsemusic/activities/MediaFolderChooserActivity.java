@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
-import com.hardcodecoder.pulsemusic.adapters.MediaFolderAdapter;
+import com.hardcodecoder.pulsemusic.adapters.main.FoldersListAdapter;
 import com.hardcodecoder.pulsemusic.helper.RecyclerViewSelectorHelper;
 import com.hardcodecoder.pulsemusic.interfaces.ItemSelectorListener;
 import com.hardcodecoder.pulsemusic.loaders.LoaderHelper;
@@ -24,13 +24,12 @@ import com.hardcodecoder.pulsemusic.model.Folder;
 import com.hardcodecoder.pulsemusic.themes.TintHelper;
 import com.hardcodecoder.pulsemusic.views.CustomToolbar;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MediaFolderChooserActivity extends PMBActivity implements ItemSelectorListener {
 
     public static final String RESULT_SELECTED_FOLDERS = "selected_folders";
-    private MediaFolderAdapter mAdapter;
+    private FoldersListAdapter mAdapter;
     private RecyclerViewSelectorHelper mSelectorHelper;
 
     @Override
@@ -53,7 +52,7 @@ public class MediaFolderChooserActivity extends PMBActivity implements ItemSelec
         fab.setOnClickListener(v -> {
             if (null != mAdapter) {
                 Intent i = new Intent();
-                i.putExtra(RESULT_SELECTED_FOLDERS, new ArrayList<>(mAdapter.getSelectedItems()));
+                i.putExtra(RESULT_SELECTED_FOLDERS, mAdapter.getSelectedFoldersPath());
                 setResult(RESULT_OK, i);
             }
             finish();
@@ -75,7 +74,7 @@ public class MediaFolderChooserActivity extends PMBActivity implements ItemSelec
             RecyclerView rv = (RecyclerView) ((ViewStub) findViewById(R.id.stub_folder_chooser_rv)).inflate();
             rv.setHasFixedSize(true);
             rv.setLayoutManager(new LinearLayoutManager(rv.getContext(), RecyclerView.VERTICAL, false));
-            mAdapter = new MediaFolderAdapter(foldersList, getLayoutInflater(), this);
+            mAdapter = new FoldersListAdapter(getLayoutInflater(), foldersList, this);
             rv.setAdapter(mAdapter);
             mSelectorHelper = new RecyclerViewSelectorHelper(mAdapter);
         }

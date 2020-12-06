@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.Preferences;
 import com.hardcodecoder.pulsemusic.R;
-import com.hardcodecoder.pulsemusic.adapters.AlbumsAdapter;
+import com.hardcodecoder.pulsemusic.adapters.main.AlbumsAdapter;
 import com.hardcodecoder.pulsemusic.fragments.main.base.CardGridFragment;
 import com.hardcodecoder.pulsemusic.loaders.LoaderHelper;
 import com.hardcodecoder.pulsemusic.loaders.SortOrder.ALBUMS;
@@ -33,6 +33,7 @@ public class AlbumsFragment extends CardGridFragment {
     private AlbumsAdapter mAdapter;
     private int mFirstVisibleItemPosition;
 
+    @NonNull
     public static AlbumsFragment getInstance() {
         return new AlbumsFragment();
     }
@@ -130,34 +131,6 @@ public class AlbumsFragment extends CardGridFragment {
         return true;
     }
 
-    private void loadAlbumsList(View view, List<AlbumModel> list) {
-        if (list == null || list.isEmpty()) {
-            MaterialTextView noTracksText = (MaterialTextView) ((ViewStub) view.findViewById(R.id.stub_no_tracks_found)).inflate();
-            noTracksText.setText(getString(R.string.tracks_not_found));
-        } else {
-            RecyclerView rv = (RecyclerView) ((ViewStub) view.findViewById(R.id.stub_grid_rv)).inflate();
-            mLayoutManager = new GridLayoutManager(rv.getContext(), getCurrentSpanCount());
-            rv.setLayoutManager(mLayoutManager);
-            rv.setHasFixedSize(true);
-
-            mAdapter = new AlbumsAdapter(
-                    list,
-                    getLayoutInflater(),
-                    resolveSortOrder(getCurrentSortOrder()),
-                    (sharedView, position) -> {
-                        if (null != getActivity()) {
-                            AlbumModel albumModel = list.get(position);
-                            NavigationUtil.goToAlbum(getActivity(), sharedView, albumModel.getAlbumName(), albumModel.getAlbumId(), albumModel.getAlbumArt());
-                        }
-                    },
-                    () -> mLayoutManager.scrollToPosition(mFirstVisibleItemPosition));
-
-            LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(rv.getContext(), R.anim.item_enter_slide_up);
-            rv.setLayoutAnimation(controller);
-            rv.setAdapter(mAdapter);
-        }
-    }
-
     private ALBUMS resolveSortOrder(int sortOrder) {
         switch (sortOrder) {
             case Preferences.SORT_ORDER_DESC:
@@ -233,5 +206,33 @@ public class AlbumsFragment extends CardGridFragment {
     public void onLayoutSpanCountChanged(int currentOrientation, int spanCount) {
         if (mLayoutManager == null) return;
         mLayoutManager.setSpanCount(spanCount);
+    }
+
+    private void loadAlbumsList(@NonNull View view, @Nullable List<AlbumModel> list) {
+        if (list == null || list.isEmpty()) {
+            MaterialTextView noTracksText = (MaterialTextView) ((ViewStub) view.findViewById(R.id.stub_no_tracks_found)).inflate();
+            noTracksText.setText(getString(R.string.tracks_not_found));
+        } else {
+            RecyclerView rv = (RecyclerView) ((ViewStub) view.findViewById(R.id.stub_grid_rv)).inflate();
+            mLayoutManager = new GridLayoutManager(rv.getContext(), getCurrentSpanCount());
+            rv.setLayoutManager(mLayoutManager);
+            rv.setHasFixedSize(true);
+
+            mAdapter = new AlbumsAdapter(
+                    getLayoutInflater(),
+                    list,
+                    ((sharedView, position) -> {
+                        if (null != getActivity()) {
+                            AlbumModel albumModel = list.get(position);
+                            NavigationUtil.goToAlbum(getActivity(), sharedView, albumModel.getAlbumName(), albumModel.getAlbumId(), albumModel.getAlbumArt());
+                        }
+                    }),
+                    () -> mLayoutManager.scrollToPosition(mFirstVisibleItemPosition),
+                    resolveSortOrder(getCurrentSortOrder()));
+
+            LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(rv.getContext(), R.anim.item_enter_slide_up);
+            rv.setLayoutAnimation(controller);
+            rv.setAdapter(mAdapter);
+        }
     }
 }

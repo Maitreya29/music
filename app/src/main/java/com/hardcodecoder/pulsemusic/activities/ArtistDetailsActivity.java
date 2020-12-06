@@ -16,7 +16,7 @@ import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.Preferences;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.activities.base.BaseDetailsActivity;
-import com.hardcodecoder.pulsemusic.adapters.AlbumsAdapter;
+import com.hardcodecoder.pulsemusic.adapters.main.AlbumsAdapter;
 import com.hardcodecoder.pulsemusic.loaders.LoaderHelper;
 import com.hardcodecoder.pulsemusic.loaders.SortOrder;
 import com.hardcodecoder.pulsemusic.model.AlbumModel;
@@ -136,14 +136,14 @@ public class ArtistDetailsActivity extends BaseDetailsActivity {
         GridLayoutManager layoutManager = new GridLayoutManager(rv.getContext(), 2);
         rv.setLayoutManager(layoutManager);
         mAdapter = new AlbumsAdapter(
-                list,
                 getLayoutInflater(),
-                mSortOrder,
+                list,
                 (sharedView, position) -> {
                     AlbumModel am = list.get(position);
                     NavigationUtil.goToAlbum(ArtistDetailsActivity.this, sharedView, am.getAlbumName(), am.getAlbumId(), am.getAlbumArt());
                 },
-                null);
+                null,
+                mSortOrder);
         LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(this, R.anim.item_enter_slide_up);
         rv.setLayoutAnimation(controller);
         rv.setAdapter(mAdapter);

@@ -1,4 +1,4 @@
-package com.hardcodecoder.pulsemusic.adapters;
+package com.hardcodecoder.pulsemusic.adapters.bottomsheet;
 
 import android.view.LayoutInflater;
 import android.view.View;

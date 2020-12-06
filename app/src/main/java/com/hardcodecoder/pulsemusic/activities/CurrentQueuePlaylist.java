@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.snackbar.Snackbar;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.activities.base.PlaylistActivity;
-import com.hardcodecoder.pulsemusic.adapters.PlaylistDataAdapter;
+import com.hardcodecoder.pulsemusic.adapters.playlist.CustomizablePlaylistAdapter;
 import com.hardcodecoder.pulsemusic.helper.RecyclerViewGestureHelper;
 import com.hardcodecoder.pulsemusic.interfaces.ItemGestureCallback;
 import com.hardcodecoder.pulsemusic.interfaces.PlaylistItemListener;
@@ -26,7 +26,7 @@ public class CurrentQueuePlaylist extends PlaylistActivity implements PlaylistIt
     public static final String TRACK_CHANGED = "HasTracksChanged";
     private MediaController mController;
     private TrackManager mTrackManager;
-    private PlaylistDataAdapter mAdapter;
+    private CustomizablePlaylistAdapter mAdapter;
     private ItemTouchHelper mItemTouchHelper;
     private boolean mHasTracksChanged = false;
 
@@ -41,7 +41,7 @@ public class CurrentQueuePlaylist extends PlaylistActivity implements PlaylistIt
     protected void loadRecyclerList(@NonNull RecyclerView recyclerView, @NonNull List<MusicModel> list) {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
-        mAdapter = new PlaylistDataAdapter(list, getLayoutInflater(), this, this);
+        mAdapter = new CustomizablePlaylistAdapter(getLayoutInflater(), list, this, this);
         recyclerView.setAdapter(mAdapter);
 
         ItemTouchHelper.Callback itemTouchHelperCallback = new RecyclerViewGestureHelper(mAdapter);
@@ -54,7 +54,7 @@ public class CurrentQueuePlaylist extends PlaylistActivity implements PlaylistIt
         setPlaylistDynamicFabButton(R.drawable.ic_shuffle, v -> {
             // Shuffle and play
             if (mAdapter != null) {
-                shuffleTrackAndPlay(mAdapter.getPlaylistTracks());
+                shuffleTrackAndPlay(mAdapter.getDataList());
                 mAdapter.updatePlaylist(mTrackManager.getActiveQueue());
             }
         });
@@ -120,7 +120,7 @@ public class CurrentQueuePlaylist extends PlaylistActivity implements PlaylistIt
         } else {
             mAdapter.addItems(list);
             updateTracksInfo(mAdapter.getItemCount(), getTotalPlaylistDuration() + calculatePlaylistDuration(list));
-            mTrackManager.buildDataList(mAdapter.getPlaylistTracks(), mTrackManager.getActiveIndex());
+            mTrackManager.buildDataList(mAdapter.getDataList(), mTrackManager.getActiveIndex());
         }
         mHasTracksChanged = true;
     }

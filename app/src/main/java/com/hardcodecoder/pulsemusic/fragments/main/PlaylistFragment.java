@@ -29,7 +29,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.activities.CurrentQueuePlaylist;
 import com.hardcodecoder.pulsemusic.activities.CustomizablePlaylist;
-import com.hardcodecoder.pulsemusic.adapters.PlaylistAdapter;
+import com.hardcodecoder.pulsemusic.adapters.main.PlaylistsAdapter;
 import com.hardcodecoder.pulsemusic.dialog.RoundedBottomSheetDialog;
 import com.hardcodecoder.pulsemusic.helper.RecyclerViewGestureHelper;
 import com.hardcodecoder.pulsemusic.helper.UIHelper;
@@ -44,7 +44,7 @@ import java.util.Objects;
 public class PlaylistFragment extends Fragment implements PlaylistCardListener, ItemGestureCallback<String> {
 
     private FileObserver mObserver;
-    private PlaylistAdapter mAdapter;
+    private PlaylistsAdapter mAdapter;
     private Context mContext;
     private List<String> mPlaylistNames;
 
@@ -97,11 +97,54 @@ public class PlaylistFragment extends Fragment implements PlaylistCardListener, 
         return true;
     }
 
+    @Override
+    public void onItemClick(int pos) {
+        if (pos == 0)
+            startActivity(new Intent(mContext, CurrentQueuePlaylist.class));
+        else {
+            Intent i = new Intent(mContext, CustomizablePlaylist.class);
+            i.putExtra(CustomizablePlaylist.PLAYLIST_TITLE_KEY, mPlaylistNames.get(pos));
+            Objects.requireNonNull(getActivity()).startActivityFromFragment(this, i, 100);
+        }
+    }
+
+    @Override
+    public void onItemEdit(int pos) {
+        showEditPlaylistDialog(pos);
+    }
+
+    @Override
+    public void onItemDismissed(@NonNull String dismissedItem, int itemPosition) {
+        if (itemPosition == 0) {
+            Toast.makeText(mContext, getString(R.string.cannot_delete_default_playlist), Toast.LENGTH_SHORT).show();
+            mAdapter.notifyItemChanged(itemPosition);
+        } else {
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext)
+                    .setMessage(getString(R.string.playlist_delete_dialog_title))
+                    .setPositiveButton(getString(R.string.yes), (dialog, which) -> {
+                        ProviderManager.getPlaylistProvider().deletePlaylistItem(mPlaylistNames.get(itemPosition));
+                        Toast.makeText(getContext(), getString(R.string.playlist_deleted_toast), Toast.LENGTH_SHORT).show();
+                        mAdapter.removePlaylist(itemPosition);
+                    }).setNegativeButton(getString(R.string.no), (dialog, which) -> mAdapter.notifyItemChanged(itemPosition));
+            alertDialog.create().show();
+        }
+    }
+
+    @Override
+    public void onItemMove(int fromPosition, int toPosition) {
+    }
+
+    @Override
+    public void onDestroyView() {
+        mObserver.stopWatching();
+        super.onDestroyView();
+    }
+
     private void loadPlaylistCards(@NonNull View view) {
         view.post(() -> {
             RecyclerView recyclerView = (RecyclerView) ((ViewStub) view.findViewById(R.id.stub_playlist_cards_rv)).inflate();
             recyclerView.setLayoutManager(new LinearLayoutManager(mContext, RecyclerView.VERTICAL, false));
-            mAdapter = new PlaylistAdapter(mPlaylistNames, getLayoutInflater(), this, this);
+            mAdapter = new PlaylistsAdapter(getLayoutInflater(), mPlaylistNames, this, this);
             recyclerView.setAdapter(mAdapter);
             ItemTouchHelper.Callback itemTouchHelperCallback = new RecyclerViewGestureHelper(mAdapter);
             ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemTouchHelperCallback);
@@ -152,48 +195,5 @@ public class PlaylistFragment extends Fragment implements PlaylistCardListener, 
                     sheetDialog.dismiss();
             });
         }
-    }
-
-    @Override
-    public void onItemClick(int pos) {
-        if (pos == 0)
-            startActivity(new Intent(mContext, CurrentQueuePlaylist.class));
-        else {
-            Intent i = new Intent(mContext, CustomizablePlaylist.class);
-            i.putExtra(CustomizablePlaylist.PLAYLIST_TITLE_KEY, mPlaylistNames.get(pos));
-            Objects.requireNonNull(getActivity()).startActivityFromFragment(this, i, 100);
-        }
-    }
-
-    @Override
-    public void onItemEdit(int pos) {
-        showEditPlaylistDialog(pos);
-    }
-
-    @Override
-    public void onItemDismissed(@NonNull String dismissedItem, int itemPosition) {
-        if (itemPosition == 0) {
-            Toast.makeText(mContext, getString(R.string.cannot_delete_default_playlist), Toast.LENGTH_SHORT).show();
-            mAdapter.notifyItemChanged(itemPosition);
-        } else {
-            AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext)
-                    .setMessage(getString(R.string.playlist_delete_dialog_title))
-                    .setPositiveButton(getString(R.string.yes), (dialog, which) -> {
-                        ProviderManager.getPlaylistProvider().deletePlaylistItem(mPlaylistNames.get(itemPosition));
-                        Toast.makeText(getContext(), getString(R.string.playlist_deleted_toast), Toast.LENGTH_SHORT).show();
-                        mAdapter.removePlaylist(itemPosition);
-                    }).setNegativeButton(getString(R.string.no), (dialog, which) -> mAdapter.notifyItemChanged(itemPosition));
-            alertDialog.create().show();
-        }
-    }
-
-    @Override
-    public void onItemMove(int fromPosition, int toPosition) {
-    }
-
-    @Override
-    public void onDestroyView() {
-        mObserver.stopWatching();
-        super.onDestroyView();
     }
 }

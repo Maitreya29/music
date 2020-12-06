@@ -1,4 +1,4 @@
-package com.hardcodecoder.pulsemusic.adapters;
+package com.hardcodecoder.pulsemusic.adapters.main;
 
 import android.content.res.Configuration;
 import android.os.Handler;
@@ -9,11 +9,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DiffUtil;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.TaskRunner;
+import com.hardcodecoder.pulsemusic.adapters.base.EfficientRecyclerViewAdapter;
 import com.hardcodecoder.pulsemusic.helper.PMBGridAdapterDiffCallback;
 import com.hardcodecoder.pulsemusic.interfaces.GridAdapterCallback;
 import com.hardcodecoder.pulsemusic.interfaces.SimpleTransitionClickListener;
@@ -22,15 +23,12 @@ import com.hardcodecoder.pulsemusic.model.ArtistModel;
 import com.hardcodecoder.pulsemusic.themes.TintHelper;
 import com.hardcodecoder.pulsemusic.utils.ImageUtil;
 import com.hardcodecoder.pulsemusic.utils.SortUtil;
-import com.l4digital.fastscroll.FastScroller;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistSVH>
-        implements FastScroller.SectionIndexer {
+public class ArtistAdapter extends EfficientRecyclerViewAdapter<ArtistModel, ArtistAdapter.ArtistItemHolder> {
 
-    private final List<ArtistModel> mList;
     private final LayoutInflater mInflater;
     private final SimpleTransitionClickListener mListener;
     private final GridAdapterCallback mCallback;
@@ -38,12 +36,13 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistSVH>
     private int mCurrentSpanCount;
     private int mLayoutId;
 
-    public ArtistAdapter(List<ArtistModel> list, LayoutInflater inflater,
-                         SimpleTransitionClickListener listener,
-                         GridAdapterCallback callback,
+    public ArtistAdapter(@NonNull LayoutInflater inflater,
+                         @NonNull List<ArtistModel> artistList,
+                         @NonNull SimpleTransitionClickListener listener,
+                         @Nullable GridAdapterCallback callback,
                          int orientation,
                          int spanCount) {
-        mList = list;
+        super(artistList);
         mInflater = inflater;
         mListener = listener;
         mCallback = callback;
@@ -55,12 +54,13 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistSVH>
     public void updateSortOrder(SortOrder.ARTIST sortOrder) {
         final Handler handler = new Handler();
         TaskRunner.executeAsync(() -> {
-            List<ArtistModel> oldSortedTracks = new ArrayList<>(mList);
-            SortUtil.sortArtistList(mList, sortOrder);
-            final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new PMBGridAdapterDiffCallback(oldSortedTracks, mList) {
+            List<ArtistModel> currentDataList = getDataList();
+            List<ArtistModel> oldSortedTracks = new ArrayList<>(currentDataList);
+            SortUtil.sortArtistList(currentDataList, sortOrder);
+            final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new PMBGridAdapterDiffCallback(oldSortedTracks, currentDataList) {
                 @Override
                 public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-                    return oldSortedTracks.get(oldItemPosition).getArtistName().equals(mList.get(newItemPosition).getArtistName());
+                    return oldSortedTracks.get(oldItemPosition).getArtistName().equals(currentDataList.get(newItemPosition).getArtistName());
                 }
             });
             handler.post(() -> {
@@ -85,45 +85,39 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistSVH>
     }
 
     @Override
-    public CharSequence getSectionText(int position) {
-        return mList.get(position).getArtistName().substring(0, 1);
+    protected CharSequence getSectionText(@NonNull ArtistModel data) {
+        return data.getArtistName().substring(0, 1);
     }
 
     @NonNull
     @Override
-    public ArtistAdapter.ArtistSVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ArtistSVH(mInflater.inflate(mLayoutId, parent, false), mListener);
+    public ArtistItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new ArtistItemHolder(mInflater.inflate(mLayoutId, parent, false), mListener);
     }
 
-    @Override
-    public void onBindViewHolder(@NonNull ArtistSVH holder, int position) {
-        holder.setData(mList.get(position));
-    }
+    static class ArtistItemHolder extends EfficientRecyclerViewAdapter.SmartViewHolder<ArtistModel> {
 
-    @Override
-    public int getItemCount() {
-        if (null != mList)
-            return mList.size();
-        return 0;
-    }
+        private final ImageView mArtistArt;
+        private final TextView mArtistTitle;
 
-    static class ArtistSVH extends RecyclerView.ViewHolder {
-
-        private final ImageView artistArt;
-        private final TextView title;
-
-        ArtistSVH(@NonNull View itemView, SimpleTransitionClickListener mListener) {
+        public ArtistItemHolder(@NonNull View itemView, @NonNull SimpleTransitionClickListener listener) {
             super(itemView);
             itemView.setBackground(ImageUtil.getHighlightedItemBackground(itemView.getContext()));
-            artistArt = itemView.findViewById(R.id.grid_item_artist_iv);
-            TintHelper.setAccentTintTo(artistArt);
-            title = itemView.findViewById(R.id.grid_item_artist_tv);
-            itemView.setOnClickListener(v -> mListener.onItemClick(artistArt, getAdapterPosition()));
+            mArtistArt = itemView.findViewById(R.id.grid_item_artist_iv);
+            TintHelper.setAccentTintTo(mArtistArt);
+            mArtistTitle = itemView.findViewById(R.id.grid_item_artist_tv);
+            itemView.setOnClickListener(v ->
+                    listener.onItemClick(mArtistArt, getAdapterPosition()));
         }
 
-        void setData(ArtistModel am) {
-            artistArt.setTransitionName("shared_transition_artist_iv_" + getAdapterPosition());
-            title.setText(am.getArtistName());
+        @Override
+        public void bindData(@NonNull ArtistModel data) {
+            mArtistArt.setTransitionName("shared_transition_artist_iv_" + getAdapterPosition());
+            mArtistTitle.setText(data.getArtistName());
+        }
+
+        @Override
+        public void unbindData() {
         }
     }
 }

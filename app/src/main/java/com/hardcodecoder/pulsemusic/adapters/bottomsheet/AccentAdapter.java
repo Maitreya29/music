@@ -1,4 +1,4 @@
-package com.hardcodecoder.pulsemusic.adapters;
+package com.hardcodecoder.pulsemusic.adapters.bottomsheet;
 
 import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;

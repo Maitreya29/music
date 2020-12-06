@@ -16,7 +16,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.TaskRunner;
-import com.hardcodecoder.pulsemusic.adapters.TrackPickerAdapter;
+import com.hardcodecoder.pulsemusic.adapters.main.TracksSelectorAdapter;
 import com.hardcodecoder.pulsemusic.helper.RecyclerViewSelectorHelper;
 import com.hardcodecoder.pulsemusic.interfaces.ItemSelectorListener;
 import com.hardcodecoder.pulsemusic.loaders.LoaderCache;
@@ -33,7 +33,7 @@ public class TrackPickerActivity extends PMBActivity implements ItemSelectorList
     private final Stack<String> pendingUpdates = new Stack<>();
     private RecyclerViewSelectorHelper mSelectorHelper;
     @Nullable
-    private TrackPickerAdapter mAdapter;
+    private TracksSelectorAdapter mAdapter;
     private String mQuery = "";
 
     @Override
@@ -49,7 +49,7 @@ public class TrackPickerActivity extends PMBActivity implements ItemSelectorList
         fab.setOnClickListener(v -> {
             Intent i = new Intent();
             if (null != mAdapter)
-                i.putExtra(ID_PICKED_TRACKS, new ArrayList<>(mAdapter.getSelectedTracks()));
+                i.putExtra(ID_PICKED_TRACKS, new ArrayList<>(mAdapter.getSelectedData()));
             setResult(RESULT_OK, i);
             finishActivity(REQUEST_CODE);
             finish();
@@ -109,7 +109,7 @@ public class TrackPickerActivity extends PMBActivity implements ItemSelectorList
         } else {
             RecyclerView recyclerView = (RecyclerView) ((ViewStub) findViewById(R.id.stub_track_picker_rv)).inflate();
             recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
-            mAdapter = new TrackPickerAdapter(LoaderCache.getAllTracksList(), getLayoutInflater(), this);
+            mAdapter = new TracksSelectorAdapter(getLayoutInflater(), LoaderCache.getAllTracksList(), this);
             recyclerView.setAdapter(mAdapter);
             mSelectorHelper = new RecyclerViewSelectorHelper(mAdapter);
         }
