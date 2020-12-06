@@ -39,12 +39,17 @@
         </LinearLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <ViewStub
-        android:id="@+id/stub_track_picker_rv"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout="@layout/recycler_view_vertical_fast_scroll"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <ViewStub
+            android:id="@+id/stub_track_picker_rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout="@layout/recycler_view_vertical_fast_scroll" />
+    </FrameLayout>
 
     <ViewStub
         android:id="@+id/stub_no_tracks_found"
