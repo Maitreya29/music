@@ -4,9 +4,8 @@ import android.content.res.Configuration;
 
 import androidx.annotation.MenuRes;
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 
-public abstract class PMBGridFragment extends Fragment {
+public abstract class PMBGridFragment extends SmoothTransactionFragments {
 
     private int mCurrentOrientation;
     private int mCurrentSpanCount;

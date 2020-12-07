@@ -13,7 +13,7 @@ import androidx.annotation.Nullable;
 import com.hardcodecoder.pulsemusic.Preferences;
 import com.hardcodecoder.pulsemusic.R;
 
-public class CardGridFragment extends PMBGridFragment {
+public abstract class CardGridFragment extends PMBGridFragment {
 
     @Nullable
     @Override

@@ -94,19 +94,21 @@ public class MainActivity extends MediaSessionActivity {
         bottomNavigation.setItemTextColor(colorStateList);
         bottomNavigation.setItemRippleColor(ThemeColors.getBottomNavigationViewRippleColor());
         bottomNavigation.setOnNavigationItemSelectedListener(menuItem -> {
-            final int id = menuItem.getItemId();
-            if (id == R.id.nav_home) {
-                if (activeFrag != homeFrag) switchFragment(homeFrag, HOME);
-            } else if (id == R.id.nav_library) {
-                if (activeFrag != libraryFrag) switchFragment(libraryFrag, LIBRARY);
-            } else if (id == R.id.nav_album) {
-                if (activeFrag != albumsFrag) switchFragment(albumsFrag, ALBUMS);
-            } else if (id == R.id.nav_artist) {
-                if (activeFrag != artistFrag) switchFragment(artistFrag, ARTIST);
-            } else if (id == R.id.nav_playlist) {
-                if (activeFrag != playlistCardFrag)
-                    switchFragment(playlistCardFrag, PLAYLIST_CARDS);
-            }
+            bottomNavigation.postOnAnimation(() -> {
+                final int id = menuItem.getItemId();
+                if (id == R.id.nav_home) {
+                    if (activeFrag != homeFrag) switchFragment(homeFrag, HOME);
+                } else if (id == R.id.nav_library) {
+                    if (activeFrag != libraryFrag) switchFragment(libraryFrag, LIBRARY);
+                } else if (id == R.id.nav_album) {
+                    if (activeFrag != albumsFrag) switchFragment(albumsFrag, ALBUMS);
+                } else if (id == R.id.nav_artist) {
+                    if (activeFrag != artistFrag) switchFragment(artistFrag, ARTIST);
+                } else if (id == R.id.nav_playlist) {
+                    if (activeFrag != playlistCardFrag)
+                        switchFragment(playlistCardFrag, PLAYLIST_CARDS);
+                }
+            });
             return true;
         });
     }
@@ -146,20 +148,17 @@ public class MainActivity extends MediaSessionActivity {
             if (switchTo != null && activeFrag != null) {
                 fm.beginTransaction()
                         .add(R.id.fragment_container, switchTo, tag)
-                        .setCustomAnimations(R.anim.fragment_enter, R.anim.fragment_exit)
                         .hide(activeFrag)
                         .show(switchTo)
                         .commit();
             } else if (switchTo != null) {
                 fm.beginTransaction()
                         .add(R.id.fragment_container, switchTo, tag)
-                        .setCustomAnimations(R.anim.fragment_enter, R.anim.fragment_exit)
                         .show(switchTo)
                         .commit();
             }
         } else
             fm.beginTransaction()
-                    .setCustomAnimations(R.anim.fragment_enter, R.anim.fragment_exit)
                     .hide(activeFrag)
                     .show(switchTo)
                     .commit();

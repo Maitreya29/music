@@ -18,7 +18,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -31,6 +30,7 @@ import com.hardcodecoder.pulsemusic.activities.CurrentQueuePlaylist;
 import com.hardcodecoder.pulsemusic.activities.CustomizablePlaylist;
 import com.hardcodecoder.pulsemusic.adapters.main.PlaylistsAdapter;
 import com.hardcodecoder.pulsemusic.dialog.RoundedBottomSheetDialog;
+import com.hardcodecoder.pulsemusic.fragments.main.base.SmoothTransactionFragments;
 import com.hardcodecoder.pulsemusic.helper.RecyclerViewGestureHelper;
 import com.hardcodecoder.pulsemusic.helper.UIHelper;
 import com.hardcodecoder.pulsemusic.interfaces.ItemGestureCallback;
@@ -41,7 +41,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class PlaylistFragment extends Fragment implements PlaylistCardListener, ItemGestureCallback<String> {
+public class PlaylistFragment extends SmoothTransactionFragments implements PlaylistCardListener, ItemGestureCallback<String> {
 
     private FileObserver mObserver;
     private PlaylistsAdapter mAdapter;
@@ -63,15 +63,15 @@ public class PlaylistFragment extends Fragment implements PlaylistCardListener, 
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void setUpContent(@NonNull View view) {
         mPlaylistNames = new ArrayList<>();
         mPlaylistNames.add(getString(R.string.playlist_current_queue));
         ProviderManager.getPlaylistProvider().getAllPlaylistItem(result -> {
             if (null != result) mPlaylistNames.addAll(result);
             loadPlaylistCards(view);
         });
-        mObserver = new FileObserver(ProviderManager.getPlaylistProvider().getPlaylistParentFolder().getAbsolutePath(),
-                FileObserver.CREATE) {
+
+        mObserver = new FileObserver(ProviderManager.getPlaylistProvider().getPlaylistParentFolder().getAbsolutePath(), FileObserver.CREATE) {
             @Override
             public void onEvent(int event, @Nullable String path) {
                 if (null != path) view.post(() -> mAdapter.addPlaylist(path));
@@ -141,11 +141,12 @@ public class PlaylistFragment extends Fragment implements PlaylistCardListener, 
     }
 
     private void loadPlaylistCards(@NonNull View view) {
-        view.post(() -> {
+        view.postOnAnimation(() -> {
             RecyclerView recyclerView = (RecyclerView) ((ViewStub) view.findViewById(R.id.stub_playlist_cards_rv)).inflate();
             recyclerView.setLayoutManager(new LinearLayoutManager(mContext, RecyclerView.VERTICAL, false));
             mAdapter = new PlaylistsAdapter(getLayoutInflater(), mPlaylistNames, this, this);
             recyclerView.setAdapter(mAdapter);
+
             ItemTouchHelper.Callback itemTouchHelperCallback = new RecyclerViewGestureHelper(mAdapter);
             ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemTouchHelperCallback);
             itemTouchHelper.attachToRecyclerView(recyclerView);

@@ -1,7 +1,6 @@
 package com.hardcodecoder.pulsemusic.fragments.main;
 
 import android.content.res.Configuration;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,7 +9,6 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,6 +17,8 @@ import com.hardcodecoder.pulsemusic.Preferences;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.adapters.main.AlbumsAdapter;
 import com.hardcodecoder.pulsemusic.fragments.main.base.CardGridFragment;
+import com.hardcodecoder.pulsemusic.interfaces.GridAdapterCallback;
+import com.hardcodecoder.pulsemusic.interfaces.SimpleTransitionClickListener;
 import com.hardcodecoder.pulsemusic.loaders.LoaderHelper;
 import com.hardcodecoder.pulsemusic.loaders.SortOrder.ALBUMS;
 import com.hardcodecoder.pulsemusic.model.AlbumModel;
@@ -27,10 +27,11 @@ import com.hardcodecoder.pulsemusic.utils.NavigationUtil;
 
 import java.util.List;
 
-public class AlbumsFragment extends CardGridFragment {
+public class AlbumsFragment extends CardGridFragment implements SimpleTransitionClickListener, GridAdapterCallback {
 
     private GridLayoutManager mLayoutManager;
     private AlbumsAdapter mAdapter;
+    private ALBUMS mSortOrder;
     private int mFirstVisibleItemPosition;
 
     @NonNull
@@ -39,11 +40,16 @@ public class AlbumsFragment extends CardGridFragment {
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        final int sortOrder = getCurrentSortOrder();
+    public void setUpContent(@NonNull View view) {
+        mSortOrder = resolveSortOrder(getCurrentSortOrder());
         LoaderHelper.loadAlbumsList(view.getContext().getContentResolver(),
-                resolveSortOrder(sortOrder),
-                result -> loadAlbumsList(view, result));
+                mSortOrder,
+                list -> {
+                    if (list == null || list.isEmpty()) {
+                        MaterialTextView noTracksText = (MaterialTextView) ((ViewStub) view.findViewById(R.id.stub_no_tracks_found)).inflate();
+                        noTracksText.setText(getString(R.string.tracks_not_found));
+                    } else loadAlbumsList(view, list);
+                });
     }
 
     @Override
@@ -167,7 +173,8 @@ public class AlbumsFragment extends CardGridFragment {
     public void onSortOrderChanged(int newSortOrder) {
         if (mAdapter == null) return;
         mFirstVisibleItemPosition = mLayoutManager.findFirstVisibleItemPosition();
-        mAdapter.updateSortOrder(resolveSortOrder(newSortOrder));
+        mSortOrder = resolveSortOrder(newSortOrder);
+        mAdapter.updateSortOrder(mSortOrder);
         if (null != getContext())
             AppSettings.saveSortOrder(getContext(), Preferences.SORT_ORDER_ALBUMS_KEY, newSortOrder);
     }
@@ -208,31 +215,31 @@ public class AlbumsFragment extends CardGridFragment {
         mLayoutManager.setSpanCount(spanCount);
     }
 
-    private void loadAlbumsList(@NonNull View view, @Nullable List<AlbumModel> list) {
-        if (list == null || list.isEmpty()) {
-            MaterialTextView noTracksText = (MaterialTextView) ((ViewStub) view.findViewById(R.id.stub_no_tracks_found)).inflate();
-            noTracksText.setText(getString(R.string.tracks_not_found));
-        } else {
+    @Override
+    public void onSortUpdateComplete() {
+        mLayoutManager.scrollToPosition(mFirstVisibleItemPosition);
+    }
+
+    @Override
+    public void onItemClick(View sharedView, int position) {
+        if (null != getActivity()) {
+            AlbumModel albumModel = mAdapter.getDataList().get(position);
+            NavigationUtil.goToAlbum(getActivity(), sharedView, albumModel.getAlbumName(), albumModel.getAlbumId(), albumModel.getAlbumArt());
+        }
+    }
+
+    private void loadAlbumsList(@NonNull View view, @NonNull List<AlbumModel> list) {
+        view.postOnAnimation(() -> {
             RecyclerView rv = (RecyclerView) ((ViewStub) view.findViewById(R.id.stub_grid_rv)).inflate();
             mLayoutManager = new GridLayoutManager(rv.getContext(), getCurrentSpanCount());
             rv.setLayoutManager(mLayoutManager);
             rv.setHasFixedSize(true);
 
-            mAdapter = new AlbumsAdapter(
-                    getLayoutInflater(),
-                    list,
-                    ((sharedView, position) -> {
-                        if (null != getActivity()) {
-                            AlbumModel albumModel = list.get(position);
-                            NavigationUtil.goToAlbum(getActivity(), sharedView, albumModel.getAlbumName(), albumModel.getAlbumId(), albumModel.getAlbumArt());
-                        }
-                    }),
-                    () -> mLayoutManager.scrollToPosition(mFirstVisibleItemPosition),
-                    resolveSortOrder(getCurrentSortOrder()));
+            mAdapter = new AlbumsAdapter(getLayoutInflater(), list, this, this, mSortOrder);
 
             LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(rv.getContext(), R.anim.item_enter_slide_up);
             rv.setLayoutAnimation(controller);
             rv.setAdapter(mAdapter);
-        }
+        });
     }
 }

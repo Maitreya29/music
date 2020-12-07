@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,6 +25,7 @@ import com.hardcodecoder.pulsemusic.activities.RecentActivity;
 import com.hardcodecoder.pulsemusic.adapters.main.HomeSectionAdapter;
 import com.hardcodecoder.pulsemusic.adapters.main.TopAlbumsAdapter;
 import com.hardcodecoder.pulsemusic.adapters.main.TopArtistsAdapter;
+import com.hardcodecoder.pulsemusic.fragments.main.base.SmoothTransactionFragments;
 import com.hardcodecoder.pulsemusic.helper.DataModelHelper;
 import com.hardcodecoder.pulsemusic.helper.UIHelper;
 import com.hardcodecoder.pulsemusic.interfaces.SimpleItemClickListener;
@@ -40,7 +40,7 @@ import com.hardcodecoder.pulsemusic.utils.NavigationUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends SmoothTransactionFragments {
 
     private static final long BASE_DELAY_MILLS = 275;
     private static final int PICK_MUSIC = 1600;
@@ -59,10 +59,10 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void setUpContent(@NonNull View view) {
         tm = TrackManager.getInstance();
 
-        if (null != LoaderCache.getAllTracksList() && null != getContext()) {
+        if (null != LoaderCache.getAllTracksList() && !LoaderCache.getAllTracksList().isEmpty() && null != getActivity()) {
             LoaderHelper.loadTopAlbums(result -> loadTopAlbums(view, result));
             LoaderHelper.loadSuggestionsList(result -> loadSuggestions(view, result));
             LoaderHelper.loadLatestTracks(result -> loadLatestTracks(view, result));
@@ -73,18 +73,18 @@ public class HomeFragment extends Fragment {
         }
 
         view.findViewById(R.id.ic_recent)
-                .setOnClickListener(v -> startActivity(new Intent(getContext(), RecentActivity.class)));
+                .setOnClickListener(v -> startActivity(new Intent(getActivity(), RecentActivity.class)));
 
         view.findViewById(R.id.ic_folder)
                 .setOnClickListener(v -> pickMedia());
 
         view.findViewById(R.id.ic_favorite)
-                .setOnClickListener(v -> startActivity(new Intent(getContext(), FavoritesActivity.class)));
+                .setOnClickListener(v -> startActivity(new Intent(getActivity(), FavoritesActivity.class)));
 
         view.findViewById(R.id.ic_shuffle)
                 .setOnClickListener(v -> {
                     if (getActivity() == null) return;
-                    Intent intent = new Intent(getContext(), PMS.class);
+                    Intent intent = new Intent(getActivity(), PMS.class);
                     intent.putExtra(PMS.PLAY_KEY, PMS.PLAY_SHUFFLE);
                     getActivity().startService(intent);
                 });
@@ -92,7 +92,7 @@ public class HomeFragment extends Fragment {
 
     private void loadTopAlbums(@NonNull View view, @Nullable List<TopAlbumModel> list) {
         if (list == null || list.isEmpty()) return;
-        view.postDelayed(() -> {
+        view.postOnAnimation(() -> {
             MaterialTextView topAlbumsTitle = (MaterialTextView) ((ViewStub) view.findViewById(R.id.stub_top_albums_title)).inflate();
             topAlbumsTitle.setText(getString(R.string.top_albums));
             RecyclerView rv = (RecyclerView) ((ViewStub) view.findViewById(R.id.stub_top_albums_list)).inflate();
@@ -107,12 +107,12 @@ public class HomeFragment extends Fragment {
             SnapHelper helper = new PagerSnapHelper();
             helper.attachToRecyclerView(rv);
             rv.setAdapter(adapter);
-        }, 0);
+        });
     }
 
     private void loadSuggestions(@NonNull View view, @Nullable List<MusicModel> list) {
         if (list == null || list.isEmpty()) return;
-        view.postDelayed(() -> {
+        view.postOnAnimationDelayed(() -> {
             MaterialTextView suggestionsTitle = (MaterialTextView) ((ViewStub) view.findViewById(R.id.stub_suggestions_title)).inflate();
             suggestionsTitle.setText(getString(R.string.random));
             RecyclerView rv = (RecyclerView) ((ViewStub) view.findViewById(R.id.stub_suggested_list)).inflate();
@@ -137,7 +137,7 @@ public class HomeFragment extends Fragment {
 
     private void loadLatestTracks(@NonNull View view, @Nullable List<MusicModel> list) {
         if (list == null || list.isEmpty()) return;
-        view.postDelayed(() -> {
+        view.postOnAnimationDelayed(() -> {
             MaterialTextView newInStoreTitle = (MaterialTextView) ((ViewStub) view.findViewById(R.id.stub_new_in_store_title)).inflate();
             newInStoreTitle.setText(getString(R.string.new_in_library));
             RecyclerView rv = (RecyclerView) ((ViewStub) view.findViewById(R.id.stub_new_in_store_list)).inflate();
@@ -162,7 +162,7 @@ public class HomeFragment extends Fragment {
 
     private void loadTopArtists(@NonNull View view, @Nullable List<TopArtistModel> list) {
         if (list == null || list.isEmpty()) return;
-        view.postDelayed(() -> {
+        view.postOnAnimationDelayed(() -> {
             MaterialTextView topAlbumsTitle = (MaterialTextView) ((ViewStub) view.findViewById(R.id.stub_top_artists_title)).inflate();
             topAlbumsTitle.setText(getString(R.string.top_artist));
             RecyclerView rv = (RecyclerView) ((ViewStub) view.findViewById(R.id.stub_top_artists_list)).inflate();

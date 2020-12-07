@@ -2,20 +2,19 @@ package com.hardcodecoder.pulsemusic.fragments.main;
 
 import android.content.res.Configuration;
 import android.media.session.MediaController;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewStub;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.Preferences;
 import com.hardcodecoder.pulsemusic.R;
+import com.hardcodecoder.pulsemusic.TaskRunner;
 import com.hardcodecoder.pulsemusic.adapters.main.TracksAdapter;
 import com.hardcodecoder.pulsemusic.fragments.main.base.ListGridFragment;
 import com.hardcodecoder.pulsemusic.helper.UIHelper;
@@ -35,37 +34,27 @@ public class LibraryFragment extends ListGridFragment implements SimpleItemClick
     private MediaController.TransportControls mTransportControl;
     private GridLayoutManager mLayoutManager;
     private TracksAdapter mAdapter;
-    private List<MusicModel> mList;
+    private SortOrder mSortOrder;
     private int mFirstVisibleItemPosition;
 
+    @NonNull
     public static LibraryFragment getInstance() {
         return new LibraryFragment();
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void setUpContent(@NonNull View view) {
         List<MusicModel> list = LoaderCache.getAllTracksList();
         if (list == null || list.isEmpty()) {
             MaterialTextView noTracksText = (MaterialTextView) ((ViewStub) view.findViewById(R.id.stub_no_tracks_found)).inflate();
             noTracksText.setText(getString(R.string.tracks_not_found));
         } else {
-            final SortOrder sortOrder = resolveSortOrder(getCurrentSortOrder());
-            mList = new ArrayList<>(list);
-            SortUtil.sortLibraryList(mList, sortOrder);
-
-            RecyclerView recyclerView = (RecyclerView) ((ViewStub) view.findViewById(R.id.stub_library_fragment_rv)).inflate();
-            mLayoutManager = new GridLayoutManager(recyclerView.getContext(), getCurrentSpanCount());
-            recyclerView.setLayoutManager(mLayoutManager);
-            recyclerView.setHasFixedSize(true);
-
-            mAdapter = new TracksAdapter(
-                    getLayoutInflater(),
-                    mList,
-                    this,
-                    this::onSortUpdateComplete,
-                    sortOrder,
-                    true);
-            recyclerView.setAdapter(mAdapter);
+            mSortOrder = resolveSortOrder(getCurrentSortOrder());
+            TaskRunner.executeAsync(() -> {
+                List<MusicModel> libraryTracks = new ArrayList<>(list);
+                SortUtil.sortLibraryList(libraryTracks, mSortOrder);
+                view.post(() -> loadLibrary(view, libraryTracks));
+            });
         }
     }
 
@@ -161,14 +150,14 @@ public class LibraryFragment extends ListGridFragment implements SimpleItemClick
 
     @Override
     public void onItemClick(int position) {
-        TrackManager.getInstance().buildDataList(mList, position);
+        TrackManager.getInstance().buildDataList(mAdapter.getDataList(), position);
         play();
     }
 
     @Override
     public void onOptionsClick(int position) {
         if (null != getActivity())
-            UIHelper.showMenuForLibraryTracks(getActivity(), getActivity().getSupportFragmentManager(), mList.get(position));
+            UIHelper.showMenuForLibraryTracks(getActivity(), getActivity().getSupportFragmentManager(), mAdapter.getDataList().get(position));
     }
 
     public void onSortUpdateComplete() {
@@ -254,6 +243,24 @@ public class LibraryFragment extends ListGridFragment implements SimpleItemClick
     public void onLayoutSpanCountChanged(int currentOrientation, int spanCount) {
         if (null == mLayoutManager) return;
         mLayoutManager.setSpanCount(spanCount);
+    }
+
+    private void loadLibrary(@NonNull View view, @NonNull List<MusicModel> list) {
+        view.postOnAnimation(() -> {
+            RecyclerView recyclerView = (RecyclerView) ((ViewStub) view.findViewById(R.id.stub_library_fragment_rv)).inflate();
+            mLayoutManager = new GridLayoutManager(recyclerView.getContext(), getCurrentSpanCount());
+            recyclerView.setLayoutManager(mLayoutManager);
+            recyclerView.setHasFixedSize(true);
+
+            mAdapter = new TracksAdapter(
+                    getLayoutInflater(),
+                    list,
+                    this,
+                    this::onSortUpdateComplete,
+                    mSortOrder,
+                    true);
+            recyclerView.setAdapter(mAdapter);
+        });
     }
 
     private void play() {
