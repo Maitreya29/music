@@ -31,7 +31,7 @@ public class TopAlbumsAdapter extends EfficientRecyclerViewAdapter<TopAlbumModel
     @NonNull
     @Override
     public HomeSectionAlbumItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new HomeSectionAlbumItemHolder(mInflater.inflate(R.layout.rv_album_card_item, parent, false), mListener);
+        return new HomeSectionAlbumItemHolder(mInflater.inflate(R.layout.rv_top_albums_item, parent, false), mListener);
     }
 
     static class HomeSectionAlbumItemHolder extends EfficientRecyclerViewAdapter.SmartViewHolder<TopAlbumModel> {
