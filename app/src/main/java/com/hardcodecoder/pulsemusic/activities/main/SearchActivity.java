@@ -1,4 +1,4 @@
-package com.hardcodecoder.pulsemusic.activities;
+package com.hardcodecoder.pulsemusic.activities.main;
 
 import android.media.session.MediaController;
 import android.os.Bundle;
@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.TaskRunner;
+import com.hardcodecoder.pulsemusic.activities.main.base.MediaSessionActivity;
 import com.hardcodecoder.pulsemusic.adapters.main.SearchResultAdapter;
 import com.hardcodecoder.pulsemusic.helper.UIHelper;
 import com.hardcodecoder.pulsemusic.interfaces.SimpleItemClickListener;

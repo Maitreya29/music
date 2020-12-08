@@ -1,4 +1,4 @@
-package com.hardcodecoder.pulsemusic.activities.base;
+package com.hardcodecoder.pulsemusic.activities.playlist.base;
 
 import android.content.Intent;
 import android.media.session.MediaController;
@@ -24,8 +24,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.TaskRunner;
-import com.hardcodecoder.pulsemusic.activities.MediaSessionActivity;
-import com.hardcodecoder.pulsemusic.activities.TrackPickerActivity;
+import com.hardcodecoder.pulsemusic.activities.main.TrackPickerActivity;
+import com.hardcodecoder.pulsemusic.activities.main.base.MediaSessionActivity;
 import com.hardcodecoder.pulsemusic.loaders.MediaArtCollageLoader;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.singleton.TrackManager;

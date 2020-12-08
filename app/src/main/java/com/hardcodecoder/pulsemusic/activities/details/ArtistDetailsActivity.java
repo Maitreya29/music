@@ -1,4 +1,4 @@
-package com.hardcodecoder.pulsemusic.activities;
+package com.hardcodecoder.pulsemusic.activities.details;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.Preferences;
 import com.hardcodecoder.pulsemusic.R;
-import com.hardcodecoder.pulsemusic.activities.base.BaseDetailsActivity;
+import com.hardcodecoder.pulsemusic.activities.details.base.BaseDetailsActivity;
 import com.hardcodecoder.pulsemusic.adapters.main.AlbumsAdapter;
 import com.hardcodecoder.pulsemusic.loaders.LoaderHelper;
 import com.hardcodecoder.pulsemusic.loaders.SortOrder;

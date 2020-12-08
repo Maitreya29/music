@@ -1,4 +1,4 @@
-package com.hardcodecoder.pulsemusic.activities;
+package com.hardcodecoder.pulsemusic.activities.main;
 
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -18,6 +18,7 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.hardcodecoder.pulsemusic.R;
+import com.hardcodecoder.pulsemusic.activities.main.base.MediaSessionActivity;
 import com.hardcodecoder.pulsemusic.dialog.HomeBottomSheetFragment;
 import com.hardcodecoder.pulsemusic.fragments.main.AlbumsFragment;
 import com.hardcodecoder.pulsemusic.fragments.main.ArtistFragment;

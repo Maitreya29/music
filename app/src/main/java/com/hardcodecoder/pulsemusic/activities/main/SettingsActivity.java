@@ -1,4 +1,4 @@
-package com.hardcodecoder.pulsemusic.activities;
+package com.hardcodecoder.pulsemusic.activities.main;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,6 +18,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.Preferences;
 import com.hardcodecoder.pulsemusic.R;
+import com.hardcodecoder.pulsemusic.activities.main.base.MediaSessionActivity;
 import com.hardcodecoder.pulsemusic.fragments.settings.SettingsMainFragment;
 import com.hardcodecoder.pulsemusic.fragments.settings.base.SettingsBaseFragment;
 import com.hardcodecoder.pulsemusic.interfaces.SettingsFragmentsListener;

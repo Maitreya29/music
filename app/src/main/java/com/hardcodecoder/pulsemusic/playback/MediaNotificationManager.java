@@ -21,7 +21,7 @@ import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
 import com.hardcodecoder.pulsemusic.R;
-import com.hardcodecoder.pulsemusic.activities.MainActivity;
+import com.hardcodecoder.pulsemusic.activities.main.MainActivity;
 
 public class MediaNotificationManager {
 
@@ -67,9 +67,9 @@ public class MediaNotificationManager {
             }
         }
     };
-    private Context mContext;
+    private final Context mContext;
     private MediaController mController;
-    private NotificationCallback mCallback;
+    private final NotificationCallback mCallback;
     private MediaController.TransportControls mTransportControls;
     private MediaSession.Token mSessionToken;
     private boolean mStarted;

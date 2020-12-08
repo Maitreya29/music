@@ -1,4 +1,4 @@
-package com.hardcodecoder.pulsemusic.activities.base;
+package com.hardcodecoder.pulsemusic.activities.details.base;
 
 import android.media.session.MediaController;
 import android.os.Bundle;
@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.hardcodecoder.pulsemusic.R;
-import com.hardcodecoder.pulsemusic.activities.MediaSessionActivity;
+import com.hardcodecoder.pulsemusic.activities.main.base.MediaSessionActivity;
 import com.hardcodecoder.pulsemusic.views.MarqueeTitleToolbar;
 
 public abstract class BaseDetailsActivity extends MediaSessionActivity {

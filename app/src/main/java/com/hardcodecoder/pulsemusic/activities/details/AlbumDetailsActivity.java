@@ -1,4 +1,4 @@
-package com.hardcodecoder.pulsemusic.activities;
+package com.hardcodecoder.pulsemusic.activities.details;
 
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -22,7 +22,7 @@ import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.GlideApp;
 import com.hardcodecoder.pulsemusic.Preferences;
 import com.hardcodecoder.pulsemusic.R;
-import com.hardcodecoder.pulsemusic.activities.base.BaseDetailsActivity;
+import com.hardcodecoder.pulsemusic.activities.details.base.BaseDetailsActivity;
 import com.hardcodecoder.pulsemusic.adapters.main.TracksAdapter;
 import com.hardcodecoder.pulsemusic.helper.MediaArtHelper;
 import com.hardcodecoder.pulsemusic.helper.UIHelper;

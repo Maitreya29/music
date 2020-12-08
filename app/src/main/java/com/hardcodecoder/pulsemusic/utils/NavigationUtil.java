@@ -10,8 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityOptionsCompat;
 
-import com.hardcodecoder.pulsemusic.activities.AlbumDetailsActivity;
-import com.hardcodecoder.pulsemusic.activities.ArtistDetailsActivity;
+import com.hardcodecoder.pulsemusic.activities.details.AlbumDetailsActivity;
+import com.hardcodecoder.pulsemusic.activities.details.ArtistDetailsActivity;
 
 public class NavigationUtil {
 

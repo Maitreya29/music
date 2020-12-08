@@ -20,7 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
-import com.hardcodecoder.pulsemusic.activities.MediaFolderChooserActivity;
+import com.hardcodecoder.pulsemusic.activities.main.MediaFolderChooserActivity;
 import com.hardcodecoder.pulsemusic.adapters.bottomsheet.IgnoredFoldersAdapter;
 import com.hardcodecoder.pulsemusic.providers.ProviderManager;
 

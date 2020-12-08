@@ -21,7 +21,7 @@
         android:theme="@style/ActivityThemeDark"
         tools:targetApi="Q">
 
-        <activity android:name=".activities.SplashActivity">
+        <activity android:name=".activities.main.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,35 +33,35 @@
         </activity>
 
         <activity
-            android:name=".activities.MainActivity"
+            android:name=".activities.main.MainActivity"
             android:clearTaskOnLaunch="true"
             android:configChanges="orientation|screenSize" />
 
         <activity
-            android:name=".activities.SearchActivity"
+            android:name=".activities.main.SearchActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="adjustResize" />
 
         <activity
-            android:name=".activities.TrackPickerActivity"
+            android:name=".activities.main.TrackPickerActivity"
             android:configChanges="orientation|screenSize" />
 
         <activity
             android:name=".shortcuts.ShortcutsLauncher"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
-        <activity android:name=".activities.SettingsActivity" />
-        <activity android:name=".activities.AlbumDetailsActivity" />
-        <activity android:name=".activities.ArtistDetailsActivity" />
-        <activity android:name=".activities.RecentActivity" />
-        <activity android:name=".activities.FavoritesActivity" />
-        <activity android:name=".activities.CustomizablePlaylist" />
-        <activity android:name=".activities.CurrentQueuePlaylist" />
-        <activity android:name=".activities.MediaFolderChooserActivity" />
+        <activity android:name=".activities.main.SettingsActivity" />
+        <activity android:name=".activities.details.AlbumDetailsActivity" />
+        <activity android:name=".activities.details.ArtistDetailsActivity" />
+        <activity android:name=".activities.playlist.RecentActivity" />
+        <activity android:name=".activities.playlist.FavoritesActivity" />
+        <activity android:name=".activities.playlist.CustomizablePlaylist" />
+        <activity android:name=".activities.playlist.CurrentQueuePlaylist" />
+        <activity android:name=".activities.main.MediaFolderChooserActivity" />
 
         <!-- Set transparent theme when activity starts to prevent solid colored background -->
         <activity
-            android:name=".activities.NowPlayingScreenActivity"
+            android:name=".activities.main.NowPlayingScreenActivity"
             android:theme="@style/TransparentThemeOverlay" />
 
         <receiver android:name=".receivers.BootCompletedReceiver">

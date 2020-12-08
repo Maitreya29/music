@@ -1,4 +1,4 @@
-package com.hardcodecoder.pulsemusic.activities.base;
+package com.hardcodecoder.pulsemusic.activities.playlist.base;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
