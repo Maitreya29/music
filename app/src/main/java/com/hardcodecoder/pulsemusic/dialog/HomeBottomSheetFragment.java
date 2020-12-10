@@ -22,9 +22,10 @@ import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.GlideApp;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.activities.main.SettingsActivity;
+import com.hardcodecoder.pulsemusic.dialog.base.RoundedBottomSheetFragment;
 import com.hardcodecoder.pulsemusic.utils.UserInfo;
 
-public class HomeBottomSheetFragment extends RoundedBottomSheetDialogFragment {
+public class HomeBottomSheetFragment extends RoundedBottomSheetFragment {
 
     public static final String TAG = "HomeBottomSheetFragment";
     private static final int REQUEST_CODE_OPEN_EQUALIZER = 599;
@@ -32,10 +33,10 @@ public class HomeBottomSheetFragment extends RoundedBottomSheetDialogFragment {
     private ImageView mUserPic;
     private MaterialTextView mUserName;
 
+    @NonNull
     public static HomeBottomSheetFragment newInstance() {
         return new HomeBottomSheetFragment();
     }
-
 
     @Nullable
     @Override

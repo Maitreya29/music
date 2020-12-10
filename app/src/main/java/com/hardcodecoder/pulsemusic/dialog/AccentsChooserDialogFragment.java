@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.adapters.bottomsheet.AccentAdapter;
+import com.hardcodecoder.pulsemusic.dialog.base.RoundedBottomSheetFragment;
 import com.hardcodecoder.pulsemusic.model.AccentsModel;
 import com.hardcodecoder.pulsemusic.themes.PresetColors;
 import com.hardcodecoder.pulsemusic.themes.ThemeManagerUtils;
@@ -19,11 +20,12 @@ import com.hardcodecoder.pulsemusic.utils.AppSettings;
 
 import java.util.Objects;
 
-public class AccentsChooserDialogFragment extends RoundedBottomSheetDialogFragment {
+public class AccentsChooserDialogFragment extends RoundedBottomSheetFragment {
 
     public static final String TAG = "AccentsChooser";
     private int newAccentId;
 
+    @NonNull
     public static AccentsChooserDialogFragment getInstance() {
         return new AccentsChooserDialogFragment();
     }

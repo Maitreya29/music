@@ -46,31 +46,47 @@
         <item name="android:clickable">true</item>
     </style>
 
-    <style name="BottomSheet" parent="@style/Widget.Design.BottomSheet.Modal">
+    <style name="BottomSheetShapeAppearance" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">16dp</item>
+        <item name="cornerSizeTopRight">16dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+    </style>
+
+    <style name="BottomSheetStandard" parent="@style/Widget.MaterialComponents.BottomSheet">
+        <item name="shapeAppearanceOverlay">@style/BottomSheetShapeAppearance</item>
+    </style>
+
+    <style name="BottomSheetRounded" parent="@style/Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/bottom_sheet_rounded_corners</item>
     </style>
 
-    <style name="BaseBottomSheet" parent="@style/Theme.MaterialComponents.BottomSheetDialog">
+    <style name="RoundedBottomSheet" parent="@style/Theme.MaterialComponents.BottomSheetDialog">
         <item name="android:windowIsFloating">false</item>
-        <item name="bottomSheetStyle">@style/BottomSheet</item>
+        <item name="bottomSheetStyle">@style/BottomSheetRounded</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">?attr/navigationBarColor</item>
         <item name="android:fontFamily">@font/open_sans</item>
         <item name="fontFamily">@font/open_sans</item>
     </style>
 
-    <style name="BaseBottomSheetLight" parent="@style/Theme.MaterialComponents.Light.BottomSheetDialog">
+    <style name="RoundedBottomSheetLight" parent="@style/Theme.MaterialComponents.Light.BottomSheetDialog">
         <item name="android:windowIsFloating">false</item>
-        <item name="bottomSheetStyle">@style/BottomSheet</item>
+        <item name="bottomSheetStyle">@style/BottomSheetRounded</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">?attr/navigationBarColor</item>
         <item name="android:fontFamily">@font/open_sans</item>
         <item name="fontFamily">@font/open_sans</item>
     </style>
 
-    <style name="RoundedBottomSheetLight" parent="@style/BaseBottomSheetLight" />
+    <style name="CustomBottomSheetLight" parent="@style/RoundedBottomSheetLight">
+        <item name="bottomSheetStyle">@style/BottomSheetStandard</item>
+    </style>
 
-    <style name="RoundedBottomSheet" parent="@style/BaseBottomSheet" />
+    <style name="CustomBottomSheet" parent="@style/RoundedBottomSheet">
+        <item name="bottomSheetStyle">@style/BottomSheetStandard</item>
+    </style>
 
     <style name="TextAppearanceSearch" parent="TextAppearance.MaterialComponents.Body1">
         <item name="android:textSize">17sp</item>

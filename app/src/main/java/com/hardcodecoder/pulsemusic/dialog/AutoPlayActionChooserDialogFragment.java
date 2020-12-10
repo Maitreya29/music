@@ -13,14 +13,16 @@ import androidx.annotation.Nullable;
 
 import com.hardcodecoder.pulsemusic.Preferences;
 import com.hardcodecoder.pulsemusic.R;
+import com.hardcodecoder.pulsemusic.dialog.base.RoundedBottomSheetFragment;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 
-public class AutoPlayActionChooserDialogFragment extends RoundedBottomSheetDialogFragment {
+public class AutoPlayActionChooserDialogFragment extends RoundedBottomSheetFragment {
 
     public static final String TAG = "AutoPlayActionChooserDialogFragment";
     private Context mContext;
     private boolean mOptionChanged = false;
 
+    @NonNull
     public static AutoPlayActionChooserDialogFragment getInstance() {
         return new AutoPlayActionChooserDialogFragment();
     }
