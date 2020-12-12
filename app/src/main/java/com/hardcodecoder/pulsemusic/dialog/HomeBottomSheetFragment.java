@@ -40,7 +40,7 @@ public class HomeBottomSheetFragment extends RoundedBottomSheetFragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.boottom_sheet_home_dialog, container, false);
     }
 
@@ -55,10 +55,9 @@ public class HomeBottomSheetFragment extends RoundedBottomSheetFragment {
 
         mUserPic.setOnClickListener(v -> pickPhoto());
         mUserName.setOnClickListener(v1 -> addUserName());
-        view.findViewById(R.id.drawer_option_settings).setOnClickListener(v -> {
-            startActivity(new Intent(getContext(), SettingsActivity.class));
-            if (isVisible()) dismiss();
-        });
+        view.findViewById(R.id.drawer_option_settings).setOnClickListener(v ->
+                startActivity(new Intent(getContext(), SettingsActivity.class)));
+
         view.findViewById(R.id.drawer_option_equalizer).setOnClickListener(v -> {
             final Intent intent = new Intent(AudioEffect.ACTION_DISPLAY_AUDIO_EFFECT_CONTROL_PANEL);
             if (null != getContext()) {

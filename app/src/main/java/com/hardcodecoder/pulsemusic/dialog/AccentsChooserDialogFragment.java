@@ -49,7 +49,7 @@ public class AccentsChooserDialogFragment extends RoundedBottomSheetFragment {
             recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), RecyclerView.HORIZONTAL, false));
             AccentAdapter adapter = new AccentAdapter(mAccentsModels, getLayoutInflater(), currentId, position -> {
                 newAccentId = mAccentsModels[position].getId();
-                dismiss();
+
                 if (ThemeManagerUtils.setSelectedPresetAccentColor(view.getContext(), newAccentId))
                     if (null != getActivity()) {
                         ThemeManagerUtils.init(getActivity(), true);
