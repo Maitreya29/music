@@ -8,24 +8,12 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.material.transition.MaterialSharedAxis;
 import com.hardcodecoder.pulsemusic.activities.main.SettingsActivity;
 import com.hardcodecoder.pulsemusic.interfaces.SettingsFragmentsListener;
 
 public abstract class SettingsBaseFragment extends Fragment {
 
     private SettingsFragmentsListener mListener;
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setEnterTransition(new MaterialSharedAxis(MaterialSharedAxis.X, true));
-        setExitTransition(new MaterialSharedAxis(MaterialSharedAxis.X, true));
-
-        setReenterTransition(new MaterialSharedAxis(MaterialSharedAxis.X, false));
-        setReturnTransition(new MaterialSharedAxis(MaterialSharedAxis.X, false));
-    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

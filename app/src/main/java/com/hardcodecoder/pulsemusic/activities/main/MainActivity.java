@@ -148,18 +148,21 @@ public class MainActivity extends MediaSessionActivity {
 
             if (switchTo != null && activeFrag != null) {
                 fm.beginTransaction()
+                        .setCustomAnimations(R.anim.translate_y_enter, R.anim.translate_y_exit)
                         .add(R.id.fragment_container, switchTo, tag)
                         .hide(activeFrag)
                         .show(switchTo)
                         .commit();
             } else if (switchTo != null) {
                 fm.beginTransaction()
+                        .setCustomAnimations(R.anim.translate_y_enter, R.anim.translate_y_exit)
                         .add(R.id.fragment_container, switchTo, tag)
                         .show(switchTo)
                         .commit();
             }
         } else
             fm.beginTransaction()
+                    .setCustomAnimations(R.anim.translate_y_enter, R.anim.translate_y_exit)
                     .hide(activeFrag)
                     .show(switchTo)
                     .commit();

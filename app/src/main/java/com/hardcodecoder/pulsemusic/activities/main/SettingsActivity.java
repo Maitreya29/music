@@ -69,6 +69,7 @@ public class SettingsActivity extends MediaSessionActivity implements SettingsFr
     @Override
     public void changeFragment(SettingsBaseFragment fragment) {
         mFragmentManager.beginTransaction()
+                .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_right)
                 .replace(R.id.settings_content_container, fragment, fragment.getFragmentTag())
                 .addToBackStack(null)
                 .commit();
