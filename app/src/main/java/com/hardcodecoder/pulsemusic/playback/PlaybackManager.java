@@ -12,10 +12,10 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.hardcodecoder.pulsemusic.PulseController;
 import com.hardcodecoder.pulsemusic.helper.MediaArtHelper;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.providers.ProviderManager;
-import com.hardcodecoder.pulsemusic.singleton.TrackManager;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 
 import java.io.InputStream;
@@ -30,7 +30,7 @@ public class PlaybackManager implements Playback.Callback {
     private final PlaybackState.Builder mStateBuilder = new PlaybackState.Builder();
     private final Playback mPlayback;
     private final PlaybackServiceCallback mServiceCallback;
-    private final TrackManager mTrackManager;
+    private final PulseController.QueueManager mQueueManager;
     private final Context mContext;
     private boolean mManualPause;
     private final MediaSession.Callback mMediaSessionCallback = new MediaSession.Callback() {
@@ -73,12 +73,12 @@ public class PlaybackManager implements Playback.Callback {
         }
     };
 
-    public PlaybackManager(Context context, Playback playback, PlaybackServiceCallback serviceCallback) {
+    public PlaybackManager(@NonNull Context context, @NonNull Playback playback, @NonNull PlaybackServiceCallback serviceCallback) {
         mContext = context;
         mPlayback = playback;
-        mTrackManager = TrackManager.getInstance();
         mServiceCallback = serviceCallback;
         mPlayback.setCallback(this);
+        mQueueManager = PulseController.getInstance().getQueueManager();
     }
 
     public MediaSession.Callback getSessionCallbacks() {
@@ -104,8 +104,8 @@ public class PlaybackManager implements Playback.Callback {
 
     private void handleSkipRequest(short di, boolean manualSkip) {
         // User manually skipped the track, so we stop repeat
-        if (manualSkip) mTrackManager.repeatCurrentTrack(false);
-        if (mTrackManager.canSkipTrack(di)) handlePlayRequest();
+        if (manualSkip) mQueueManager.repeatCurrentTrack(false);
+        if (mQueueManager.canSkipTrack(di)) handlePlayRequest();
         else handlePauseRequest();
     }
 
@@ -113,8 +113,8 @@ public class PlaybackManager implements Playback.Callback {
         final MusicModel trackItem = (MusicModel) bundle.getSerializable(TRACK_ITEM);
         if (trackItem == null) return;
         final int resumePosition = bundle.getInt(PLAYBACK_POSITION);
-        mTrackManager.addToActiveQueue(trackItem);
-        mTrackManager.setActiveIndex(0);
+        PulseController.getInstance().addToQueue(trackItem);
+        mQueueManager.setActiveIndex(0);
         mPlayback.onPlay(resumePosition, false);
     }
 

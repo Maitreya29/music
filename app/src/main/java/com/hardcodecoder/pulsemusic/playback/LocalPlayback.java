@@ -18,8 +18,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.hardcodecoder.pulsemusic.PulseController;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
-import com.hardcodecoder.pulsemusic.singleton.TrackManager;
 
 import java.io.IOException;
 
@@ -32,7 +32,7 @@ public class LocalPlayback implements
     private final IntentFilter filter = new IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY);
     private final Context mContext;
     private final AudioManager mAudioManager;
-    private final TrackManager mTrackManager;
+    private final PulseController.QueueManager mQueueManager;
     private Playback.Callback mPlaybackCallback;
     private final BroadcastReceiver becomingNoisyReceiver = new BroadcastReceiver() {
         @Override
@@ -61,7 +61,7 @@ public class LocalPlayback implements
         mAudioManager = (AudioManager) applicationContext.getSystemService(Context.AUDIO_SERVICE);
         mHandler = handler;
         if (mHandler == null) mHandler = new Handler();
-        mTrackManager = TrackManager.getInstance();
+        mQueueManager = PulseController.getInstance().getQueueManager();
     }
 
     @Override
@@ -87,12 +87,12 @@ public class LocalPlayback implements
 
     @Override
     public void onPlay(int startPosition, boolean startPlaying) {
-        final MusicModel trackItem = mTrackManager.getActiveQueueItem();
+        final MusicModel trackItem = mQueueManager.getActiveQueueItem();
         if (tryGetAudioFocus()) {
             mDelayedPlayback = false;
             if (trackItem.getId() == mMediaId) {
                 // Track item has not changed
-                if (mTrackManager.isCurrentTrackInRepeatMode()) {
+                if (mQueueManager.isCurrentTrackInRepeatMode()) {
                     // We are in repeat mode (infinite lop), release media player
                     // and let it re-init with same track
                     releaseMediaPlayer();

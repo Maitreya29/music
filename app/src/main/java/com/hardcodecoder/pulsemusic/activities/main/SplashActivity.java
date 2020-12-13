@@ -13,12 +13,12 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.hardcodecoder.pulsemusic.R;
-import com.hardcodecoder.pulsemusic.activities.main.base.PMBActivity;
+import com.hardcodecoder.pulsemusic.activities.base.ThemeActivity;
 import com.hardcodecoder.pulsemusic.loaders.LoaderHelper;
 import com.hardcodecoder.pulsemusic.providers.ProviderManager;
 import com.hardcodecoder.pulsemusic.themes.TintHelper;
 
-public class SplashActivity extends PMBActivity {
+public class SplashActivity extends ThemeActivity {
 
     private static final int REQUEST_CODE = 69;
     private final Handler mHandler = new Handler();

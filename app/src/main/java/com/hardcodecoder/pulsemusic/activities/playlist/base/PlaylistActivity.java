@@ -1,7 +1,6 @@
 package com.hardcodecoder.pulsemusic.activities.playlist.base;
 
 import android.content.Intent;
-import android.media.session.MediaController;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -24,11 +23,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.TaskRunner;
+import com.hardcodecoder.pulsemusic.activities.base.ControllerActivity;
 import com.hardcodecoder.pulsemusic.activities.main.TrackPickerActivity;
-import com.hardcodecoder.pulsemusic.activities.main.base.MediaSessionActivity;
 import com.hardcodecoder.pulsemusic.loaders.MediaArtCollageLoader;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
-import com.hardcodecoder.pulsemusic.singleton.TrackManager;
 import com.hardcodecoder.pulsemusic.themes.ThemeColors;
 import com.hardcodecoder.pulsemusic.utils.DimensionsUtil;
 import com.hardcodecoder.pulsemusic.views.AccentColorMaterialButton;
@@ -39,7 +37,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class PlaylistActivity extends MediaSessionActivity {
+public abstract class PlaylistActivity extends ControllerActivity {
 
     public static final String PLAYLIST_TITLE_KEY = "playlist title";
     public static final short REQUEST_CODE_PICK_TRACKS = 120;
@@ -205,25 +203,21 @@ public abstract class PlaylistActivity extends MediaSessionActivity {
 
     protected void setTrackAndPlay(@Nullable List<MusicModel> playlist, int startIndex) {
         if (null == playlist || playlist.isEmpty()) return;
-        TrackManager.getInstance().buildDataList(playlist, startIndex);
-        playMedia();
+        mPulseController.setPlaylist(playlist, startIndex);
+        mRemote.play();
     }
 
     protected void shuffleTrackAndPlay(@Nullable List<MusicModel> playlist) {
         if (null == playlist || playlist.isEmpty()) return;
         List<MusicModel> playListToPlay = new ArrayList<>(playlist);
         Collections.shuffle(playListToPlay);
-        TrackManager.getInstance().buildDataList(playListToPlay, 0);
-        playMedia();
+        mPulseController.setPlaylist(playlist);
+        mRemote.play();
         Toast.makeText(this, getString(R.string.playlist_shuffled_success_toast), Toast.LENGTH_SHORT).show();
     }
 
     protected void openTrackPicker() {
         startActivityForResult(new Intent(this, TrackPickerActivity.class), REQUEST_CODE_PICK_TRACKS);
-    }
-
-    @Override
-    public void onMediaServiceConnected(MediaController controller) {
     }
 
     @SuppressWarnings("unchecked")

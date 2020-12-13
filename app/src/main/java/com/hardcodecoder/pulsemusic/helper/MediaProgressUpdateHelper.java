@@ -37,10 +37,12 @@ public class MediaProgressUpdateHelper extends Handler {
         mController.registerCallback(controllerCallback);
 
         // Make a callbacks so that the receiver initialises itself with current data
-        mCallback.onMetadataDataChanged(mController.getMetadata());
-        mCallback.onPlaybackStateChanged(mController.getPlaybackState());
-        if (null != mController.getPlaybackState())
-            mCallback.onProgressValueChanged((int) mController.getPlaybackState().getPosition() / 1000);
+        post(() -> mCallback.onMetadataDataChanged(mController.getMetadata()));
+        post(() -> mCallback.onPlaybackStateChanged(mController.getPlaybackState()));
+        post(() -> {
+            if (null != mController.getPlaybackState())
+                mCallback.onProgressValueChanged((int) mController.getPlaybackState().getPosition() / 1000);
+        });
         start();
     }
 

@@ -1,6 +1,5 @@
 package com.hardcodecoder.pulsemusic.activities.details.base;
 
-import android.media.session.MediaController;
 import android.os.Bundle;
 import android.transition.Fade;
 import android.view.Menu;
@@ -10,10 +9,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.hardcodecoder.pulsemusic.R;
-import com.hardcodecoder.pulsemusic.activities.main.base.MediaSessionActivity;
+import com.hardcodecoder.pulsemusic.activities.base.ControllerActivity;
 import com.hardcodecoder.pulsemusic.views.MarqueeTitleToolbar;
 
-public abstract class BaseDetailsActivity extends MediaSessionActivity {
+public abstract class BaseDetailsActivity extends ControllerActivity {
 
     public static final String KEY_TRANSITION_NAME = "Transition";
     private int mCurrentSortOrder;
@@ -55,10 +54,6 @@ public abstract class BaseDetailsActivity extends MediaSessionActivity {
             mCurrentSortOrder = newSortOrder;
             onSortOrderChanged(newSortOrder);
         }
-    }
-
-    @Override
-    public void onMediaServiceConnected(MediaController controller) {
     }
 
     public abstract int getSortOrder();

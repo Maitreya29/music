@@ -15,17 +15,18 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.textview.MaterialTextView;
+import com.hardcodecoder.pulsemusic.PulseController;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.activities.main.NowPlayingScreenActivity;
 
 public class ControlsFragment extends Fragment {
 
+    public static final String TAG = ControlsFragment.class.getSimpleName();
     private MaterialTextView tv1;
     private ImageView playPause;
-    private MediaController mController;
-    private MediaController.TransportControls mTransportControl;
+    private PulseController mPulseController;
+    private PulseController.PulseRemote mRemote;
     private PlaybackState mState;
-
     private final MediaController.Callback mCallback = new MediaController.Callback() {
         @Override
         public void onPlaybackStateChanged(PlaybackState state) {
@@ -39,7 +40,9 @@ public class ControlsFragment extends Fragment {
         }
     };
 
-    public ControlsFragment() {
+    @NonNull
+    public static ControlsFragment getInstance() {
+        return new ControlsFragment();
     }
 
     @Nullable
@@ -56,6 +59,9 @@ public class ControlsFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View v, @Nullable Bundle savedInstanceState) {
+        mPulseController = PulseController.getInstance();
+        mRemote = mPulseController.getRemote();
+
         tv1 = v.findViewById(R.id.song_name);
         tv1.setSelected(true);
         playPause = v.findViewById(R.id.cf_play_pause_btn);
@@ -64,13 +70,13 @@ public class ControlsFragment extends Fragment {
 
         playPause.setOnClickListener(v1 -> {
             if (mState.getState() == PlaybackState.STATE_PLAYING)
-                mTransportControl.pause();
+                mRemote.pause();
             else
-                mTransportControl.play();
+                mRemote.play();
         });
 
-        skipNext.setOnClickListener(v1 -> mTransportControl.skipToNext());
-        skipPrev.setOnClickListener(v1 -> mTransportControl.skipToPrevious());
+        skipNext.setOnClickListener(v1 -> mRemote.skipToNextTrack());
+        skipPrev.setOnClickListener(v1 -> mRemote.skipToPreviousTrack());
 
         v.setOnClickListener(v1 -> {
             Intent intent = new Intent(getActivity(), NowPlayingScreenActivity.class);
@@ -93,22 +99,18 @@ public class ControlsFragment extends Fragment {
     }
 
     private void updateController() {
-        if (mController == null && getActivity() != null)
-            mController = getActivity().getMediaController();
-        if (mController != null) {
-            mController.registerCallback(mCallback);
-            mState = mController.getPlaybackState();
-            if (mTransportControl == null)
-                mTransportControl = mController.getTransportControls();
-            updateMetadata(mController.getMetadata());
-            updateControls();
-        }
+        MediaController controller = mPulseController.getController();
+        if (null == controller) return;
+        controller.registerCallback(mCallback);
+        mState = controller.getPlaybackState();
+        updateMetadata(controller.getMetadata());
+        updateControls();
     }
 
     @Override
     public void onStop() {
-        if (mController != null)
-            mController.unregisterCallback(mCallback);
+        if (mPulseController.getController() != null)
+            mPulseController.getController().unregisterCallback(mCallback);
         super.onStop();
     }
 }

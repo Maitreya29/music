@@ -17,15 +17,15 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.Preferences;
+import com.hardcodecoder.pulsemusic.PulseController;
 import com.hardcodecoder.pulsemusic.R;
-import com.hardcodecoder.pulsemusic.activities.main.base.MediaSessionActivity;
+import com.hardcodecoder.pulsemusic.activities.base.ControllerActivity;
 import com.hardcodecoder.pulsemusic.fragments.settings.SettingsMainFragment;
 import com.hardcodecoder.pulsemusic.fragments.settings.base.SettingsBaseFragment;
 import com.hardcodecoder.pulsemusic.interfaces.SettingsFragmentsListener;
 import com.hardcodecoder.pulsemusic.shortcuts.AppShortcutsManager;
-import com.hardcodecoder.pulsemusic.singleton.TrackManager;
 
-public class SettingsActivity extends MediaSessionActivity implements SettingsFragmentsListener {
+public class SettingsActivity extends ControllerActivity implements SettingsFragmentsListener {
 
     private Toolbar mToolbar;
     private FragmentManager mFragmentManager;
@@ -108,7 +108,7 @@ public class SettingsActivity extends MediaSessionActivity implements SettingsFr
                 startActivity(restartIntent);
                 MediaController controller = getMediaController();
                 if (controller != null) controller.getTransportControls().stop();
-                TrackManager.getInstance().resetTrackManager();
+                PulseController.getInstance().getQueueManager().resetQueue();
                 mRestartDialog.dismiss();
                 finish();
             }
@@ -136,9 +136,5 @@ public class SettingsActivity extends MediaSessionActivity implements SettingsFr
                     .unregisterOnSharedPreferenceChangeListener(mAccentsChangedListener);
         if (null != mRestartDialog) mRestartDialog.dismiss();
         super.onDestroy();
-    }
-
-    @Override
-    public void onMediaServiceConnected(MediaController controller) {
     }
 }

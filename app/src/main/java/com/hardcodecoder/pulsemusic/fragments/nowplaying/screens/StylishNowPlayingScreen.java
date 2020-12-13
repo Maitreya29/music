@@ -36,6 +36,7 @@ public class StylishNowPlayingScreen extends BaseNowPlayingScreen {
     private MaterialTextView mEndTime;
     private MaterialTextView mUpNext;
 
+    @NonNull
     public static StylishNowPlayingScreen getInstance() {
         return new StylishNowPlayingScreen();
     }
@@ -47,9 +48,7 @@ public class StylishNowPlayingScreen extends BaseNowPlayingScreen {
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
+    public void onInitializeViews(@NonNull View view) {
         ViewPager2 pager = view.findViewById(R.id.stylish_nps_album_container);
         setUpPagerAlbumArt(pager,
                 R.layout.stylish_nps_media_art,

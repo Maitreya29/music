@@ -1,6 +1,5 @@
 package com.hardcodecoder.pulsemusic.activities.main;
 
-import android.media.session.MediaController;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -15,23 +14,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.TaskRunner;
-import com.hardcodecoder.pulsemusic.activities.main.base.MediaSessionActivity;
+import com.hardcodecoder.pulsemusic.activities.base.ControllerActivity;
 import com.hardcodecoder.pulsemusic.adapters.main.SearchResultAdapter;
 import com.hardcodecoder.pulsemusic.helper.UIHelper;
 import com.hardcodecoder.pulsemusic.interfaces.SimpleItemClickListener;
 import com.hardcodecoder.pulsemusic.loaders.SearchQueryLoader;
-import com.hardcodecoder.pulsemusic.singleton.TrackManager;
 import com.hardcodecoder.pulsemusic.themes.TintHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchActivity extends MediaSessionActivity implements SimpleItemClickListener {
+public class SearchActivity extends ControllerActivity implements SimpleItemClickListener {
 
     private final List<String> pendingUpdates = new ArrayList<>();
     private MaterialTextView noResultsText;
     private SearchResultAdapter mAdapter;
-    private TrackManager tm;
     private String mQuery = "";
 
     @Override
@@ -43,7 +40,6 @@ public class SearchActivity extends MediaSessionActivity implements SimpleItemCl
 
         noResultsText = (MaterialTextView) ((ViewStub) findViewById(R.id.stub_no_result_found)).inflate();
         noResultsText.setText(getString(R.string.search_null));
-        tm = TrackManager.getInstance();
         setRecyclerView();
         setUpSearchUi();
     }
@@ -105,18 +101,14 @@ public class SearchActivity extends MediaSessionActivity implements SimpleItemCl
     @Override
     public void onItemClick(int position) {
         if (null == mAdapter) return;
-        tm.buildDataList(mAdapter.getDataList(), position);
-        playMedia();
+        mPulseController.setPlaylist(mAdapter.getDataList(), position);
+        mRemote.play();
     }
 
     @Override
     public void onOptionsClick(int position) {
         if (null == mAdapter) return;
         UIHelper.showMenuForLibraryTracks(this, getSupportFragmentManager(), mAdapter.getDataList().get(position));
-    }
-
-    @Override
-    public void onMediaServiceConnected(MediaController controller) {
     }
 
     @Override

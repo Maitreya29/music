@@ -21,6 +21,7 @@ import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.views.MediaArtImageView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class MediaArtPagerAdapter extends RecyclerView.Adapter<MediaArtPagerAdapter.AlbumArtSVH> {
@@ -49,6 +50,21 @@ public class MediaArtPagerAdapter extends RecyclerView.Adapter<MediaArtPagerAdap
                 if (callback != null) callback.onComplete(null);
             });
         });
+    }
+
+    public void notifyTrackAdded(@NonNull MusicModel item, int position) {
+        mTracksList.add(position, item);
+        notifyItemInserted(position);
+    }
+
+    public void notifyTrackRemoved(int position) {
+        mTracksList.remove(position);
+        notifyItemRemoved(position);
+    }
+
+    public void notifyTracksSwapped(int from, int to) {
+        Collections.swap(mTracksList, from, to);
+        notifyItemMoved(from, to);
     }
 
     @Override

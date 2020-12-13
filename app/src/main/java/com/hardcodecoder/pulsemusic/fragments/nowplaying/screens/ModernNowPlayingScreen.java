@@ -36,6 +36,7 @@ public class ModernNowPlayingScreen extends BaseNowPlayingScreen {
     private MaterialTextView mSubTitle;
     private MaterialTextView mUpNext;
 
+    @NonNull
     public static ModernNowPlayingScreen getInstance() {
         return new ModernNowPlayingScreen();
     }
@@ -47,9 +48,7 @@ public class ModernNowPlayingScreen extends BaseNowPlayingScreen {
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
+    public void onInitializeViews(@NonNull View view) {
         ViewPager2 pager = view.findViewById(R.id.modern_nps_album_container);
         setUpPagerAlbumArt(pager,
                 R.layout.modern_nps_media_art,

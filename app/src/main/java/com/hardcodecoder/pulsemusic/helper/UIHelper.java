@@ -19,13 +19,13 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textview.MaterialTextView;
+import com.hardcodecoder.pulsemusic.PulseController;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.dialog.AddToPlaylistDialog;
 import com.hardcodecoder.pulsemusic.dialog.RoundedBottomSheetDialog;
 import com.hardcodecoder.pulsemusic.interfaces.CreatePlaylist;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.providers.ProviderManager;
-import com.hardcodecoder.pulsemusic.singleton.TrackManager;
 import com.hardcodecoder.pulsemusic.utils.DataUtils;
 import com.hardcodecoder.pulsemusic.utils.NavigationUtil;
 import com.hardcodecoder.pulsemusic.views.MediaArtImageView;
@@ -129,7 +129,6 @@ public class UIHelper {
                                                 @NonNull FragmentManager fragmentManager,
                                                 @NonNull final MusicModel data,
                                                 boolean showGoToAlbums) {
-        final TrackManager tm = TrackManager.getInstance();
         View view = View.inflate(activity, R.layout.library_item_menu, null);
         BottomSheetDialog bottomSheetDialog = new RoundedBottomSheetDialog(view.getContext());
 
@@ -144,13 +143,13 @@ public class UIHelper {
         trackSubTitle.setText(data.getArtist());
 
         view.findViewById(R.id.track_play_next).setOnClickListener(v -> {
-            tm.playNext(data);
+            PulseController.getInstance().playNext(data);
             Toast.makeText(v.getContext(), activity.getString(R.string.play_next_toast), Toast.LENGTH_SHORT).show();
             dismiss(bottomSheetDialog);
         });
 
         view.findViewById(R.id.add_to_queue).setOnClickListener(v -> {
-            tm.addToActiveQueue(data);
+            PulseController.getInstance().addToQueue(data);
             Toast.makeText(v.getContext(), activity.getString(R.string.add_to_queue_toast), Toast.LENGTH_SHORT).show();
             dismiss(bottomSheetDialog);
         });

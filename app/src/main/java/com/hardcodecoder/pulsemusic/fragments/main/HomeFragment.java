@@ -2,7 +2,6 @@ package com.hardcodecoder.pulsemusic.fragments.main;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.media.session.MediaController;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +18,7 @@ import androidx.recyclerview.widget.SnapHelper;
 
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.PMS;
+import com.hardcodecoder.pulsemusic.PulseController;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.activities.playlist.FavoritesActivity;
 import com.hardcodecoder.pulsemusic.activities.playlist.RecentActivity;
@@ -34,7 +34,6 @@ import com.hardcodecoder.pulsemusic.loaders.LoaderHelper;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.model.TopAlbumModel;
 import com.hardcodecoder.pulsemusic.model.TopArtistModel;
-import com.hardcodecoder.pulsemusic.singleton.TrackManager;
 import com.hardcodecoder.pulsemusic.utils.NavigationUtil;
 
 import java.util.ArrayList;
@@ -44,8 +43,9 @@ public class HomeFragment extends SmoothTransactionFragments {
 
     private static final long BASE_DELAY_MILLS = 275;
     private static final int PICK_MUSIC = 1600;
-    private MediaController.TransportControls mTransportControl;
-    private TrackManager tm;
+    private final PulseController mPulseController = PulseController.getInstance();
+    private final PulseController.PulseRemote mRemote = mPulseController.getRemote();
+
 
     @NonNull
     public static HomeFragment getInstance() {
@@ -60,8 +60,6 @@ public class HomeFragment extends SmoothTransactionFragments {
 
     @Override
     public void setUpContent(@NonNull View view) {
-        tm = TrackManager.getInstance();
-
         if (null != LoaderCache.getAllTracksList() && !LoaderCache.getAllTracksList().isEmpty() && null != getActivity()) {
             LoaderHelper.loadTopAlbums(result -> loadTopAlbums(view, result));
             LoaderHelper.loadSuggestionsList(result -> loadSuggestions(view, result));
@@ -121,8 +119,8 @@ public class HomeFragment extends SmoothTransactionFragments {
             HomeSectionAdapter adapter = new HomeSectionAdapter(getLayoutInflater(), list, new SimpleItemClickListener() {
                 @Override
                 public void onItemClick(int position) {
-                    tm.buildDataList(list, position);
-                    play();
+                    mPulseController.setPlaylist(list, position);
+                    mRemote.play();
                 }
 
                 @Override
@@ -146,8 +144,8 @@ public class HomeFragment extends SmoothTransactionFragments {
             HomeSectionAdapter adapter = new HomeSectionAdapter(getLayoutInflater(), list, new SimpleItemClickListener() {
                 @Override
                 public void onItemClick(int position) {
-                    tm.buildDataList(list, position);
-                    play();
+                    mPulseController.setPlaylist(list, position);
+                    mRemote.play();
                 }
 
                 @Override
@@ -191,19 +189,10 @@ public class HomeFragment extends SmoothTransactionFragments {
             if (md != null) {
                 List<MusicModel> singlePickedItemList = new ArrayList<>();
                 singlePickedItemList.add(md);
-                tm.buildDataList(singlePickedItemList, 0);
-                play();
+                mPulseController.setPlaylist(singlePickedItemList, 0);
+                mRemote.play();
             } else
                 Toast.makeText(getContext(), getString(R.string.selected_track_load_failed_toast), Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private void play() {
-        if (mTransportControl != null) {
-            mTransportControl.play();
-        } else if (getActivity() != null) {
-            mTransportControl = getActivity().getMediaController().getTransportControls();
-            mTransportControl.play();
         }
     }
 }

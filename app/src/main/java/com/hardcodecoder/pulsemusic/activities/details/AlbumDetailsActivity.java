@@ -30,7 +30,6 @@ import com.hardcodecoder.pulsemusic.interfaces.SimpleItemClickListener;
 import com.hardcodecoder.pulsemusic.loaders.LoaderHelper;
 import com.hardcodecoder.pulsemusic.loaders.SortOrder;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
-import com.hardcodecoder.pulsemusic.singleton.TrackManager;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 import com.hardcodecoder.pulsemusic.views.MediaArtImageView;
 
@@ -43,7 +42,6 @@ public class AlbumDetailsActivity extends BaseDetailsActivity {
     public static final String KEY_ALBUM_ID = "AlbumId";
     public static final String KEY_ALBUM_ART_URL = "AlbumArtUrl";
     private TracksAdapter mAdapter;
-    private TrackManager tm;
     private SortOrder mSortOrder;
     private Long mAlbumId;
 
@@ -55,8 +53,6 @@ public class AlbumDetailsActivity extends BaseDetailsActivity {
 
         String mAlbumTitle = getIntent().getStringExtra(KEY_ALBUM_TITLE);
         mAlbumId = getIntent().getLongExtra(KEY_ALBUM_ID, 0);
-
-        tm = TrackManager.getInstance();
 
         setUpToolbar(findViewById(R.id.details_activity_toolbar), mAlbumTitle == null ? "" : mAlbumTitle);
 
@@ -185,8 +181,8 @@ public class AlbumDetailsActivity extends BaseDetailsActivity {
                 new SimpleItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
-                        tm.buildDataList(list, position);
-                        playMedia();
+                        mPulseController.setPlaylist(list, position);
+                        mRemote.play();
                     }
 
                     @Override

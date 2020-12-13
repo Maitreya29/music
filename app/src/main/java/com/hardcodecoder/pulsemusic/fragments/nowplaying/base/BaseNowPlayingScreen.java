@@ -29,40 +29,58 @@ import com.google.android.material.shape.CornerFamily;
 import com.google.android.material.shape.ShapeAppearanceModel;
 import com.google.android.material.slider.Slider;
 import com.hardcodecoder.pulsemusic.PMS;
+import com.hardcodecoder.pulsemusic.PulseController;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.activities.playlist.CurrentQueuePlaylist;
 import com.hardcodecoder.pulsemusic.helper.MediaProgressUpdateHelper;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.providers.ProviderManager;
-import com.hardcodecoder.pulsemusic.singleton.TrackManager;
 import com.hardcodecoder.pulsemusic.themes.ThemeColors;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 
 import java.util.List;
 import java.util.Objects;
 
-import static android.app.Activity.RESULT_OK;
-
 public abstract class BaseNowPlayingScreen extends Fragment implements MediaProgressUpdateHelper.Callback {
 
-    private static final short OPEN_CURRENT_QUEUE = 55;
-    private final TrackManager mTrackManager = TrackManager.getInstance();
-    private MediaController mController;
-    private MediaController.TransportControls mTransportControls;
-    private MediaProgressUpdateHelper mUpdateHelper;
-    private final ServiceConnection mServiceConnection = new ServiceConnection() {
+    private PulseController mPulseController;
+    private PulseController.QueueManager mQueueManager;
+    private final PulseController.Callback mControllerCallback = new PulseController.Callback() {
         @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            PMS.ServiceBinder serviceBinder = (PMS.ServiceBinder) service;
-            mController = serviceBinder.getMediaController();
-            mTransportControls = mController.getTransportControls();
-            mUpdateHelper = new MediaProgressUpdateHelper(mController, BaseNowPlayingScreen.this);
+        public void onTrackListChanged(@NonNull List<MusicModel> newTracks) {
+            int trackIndex = mQueueManager.getActiveIndex();
+            int currentItemIndex = mMediaArtPager.getCurrentItem();
+            mMediaArtAdapter.notifyTracksChanged(newTracks, completed -> {
+                if (currentItemIndex != trackIndex)
+                    mMediaArtPager.setCurrentItem(mQueueManager.getActiveIndex(), false);
+            });
         }
 
         @Override
-        public void onServiceDisconnected(ComponentName name) {
+        public void onTrackItemAdded(@NonNull MusicModel trackItem, int position) {
+            mMediaArtAdapter.notifyTrackAdded(trackItem, position);
+            if (position == mMediaArtPager.getCurrentItem() + 1)
+                onUpNextItemChanged(getUpNextText());
+        }
+
+        @Override
+        public void onTrackItemRemoved(int position) {
+            mMediaArtAdapter.notifyTrackRemoved(position);
+            if (position == mMediaArtPager.getCurrentItem() + 1)
+                onUpNextItemChanged(getUpNextText());
+        }
+
+        @Override
+        public void onTrackItemMoved(int from, int to) {
+            mMediaArtAdapter.notifyTracksSwapped(from, to);
+            int upNextPosition = mMediaArtPager.getCurrentItem() + 1;
+            if (from == upNextPosition || to == upNextPosition)
+                onUpNextItemChanged(getUpNextText());
         }
     };
+    private PulseController.PulseRemote mRemote;
+    private MediaProgressUpdateHelper mUpdateHelper;
+    private ServiceConnection mServiceConnection = null;
     private ViewPager2 mMediaArtPager;
     private MediaArtPagerAdapter mMediaArtAdapter;
     private long mDuration = 1;
@@ -74,14 +92,40 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
     @CallSuper
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        connectToService();
+        mPulseController = PulseController.getInstance();
+        mQueueManager = mPulseController.getQueueManager();
+        mRemote = mPulseController.getRemote();
+
+        onInitializeViews(view);
+
+        if (mPulseController.getController() != null) {
+            mUpdateHelper = new MediaProgressUpdateHelper(mPulseController.getController(), BaseNowPlayingScreen.this);
+            mPulseController.registerCallback(mControllerCallback);
+        } else {
+            mServiceConnection = new ServiceConnection() {
+                @Override
+                public void onServiceConnected(ComponentName name, IBinder service) {
+                    PMS.ServiceBinder serviceBinder = (PMS.ServiceBinder) service;
+                    mPulseController.setController(serviceBinder.getMediaController());
+                    mUpdateHelper = new MediaProgressUpdateHelper(mPulseController.getController(), BaseNowPlayingScreen.this);
+                }
+
+                @Override
+                public void onServiceDisconnected(ComponentName name) {
+                }
+            };
+            if (null != getActivity()) {
+                Intent intent = new Intent(getActivity(), PMS.class);
+                getActivity().bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE);
+            }
+        }
     }
 
     @CallSuper
     @Override
     public void onMetadataDataChanged(MediaMetadata metadata) {
         if (null != mMediaArtPager)
-            mMediaArtPager.setCurrentItem(mTrackManager.getActiveIndex(), mShouldAnimateMediaArt);
+            mMediaArtPager.setCurrentItem(mQueueManager.getActiveIndex(), mShouldAnimateMediaArt);
         updateFavoriteItem();
         updateRepeat();
         long seconds = metadata.getLong(MediaMetadata.METADATA_KEY_DURATION) / 1000;
@@ -102,9 +146,9 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
         mMediaArtPager = pager;
         // Workaround to disable over scroll mode
         mMediaArtPager.getChildAt(0).setOverScrollMode(ViewPager2.OVER_SCROLL_NEVER);
-        mMediaArtAdapter = new MediaArtPagerAdapter(getContext(), TrackManager.getInstance().getActiveQueue(), redId, model);
+        mMediaArtAdapter = new MediaArtPagerAdapter(getContext(), mQueueManager.getQueue(), redId, model);
         mMediaArtPager.setAdapter(mMediaArtAdapter);
-        mMediaArtPager.setCurrentItem(mTrackManager.getActiveIndex(), false);
+        mMediaArtPager.setCurrentItem(mQueueManager.getActiveIndex(), false);
         mMediaArtPager.setSaveEnabled(false);
         mMediaArtPager.setSaveFromParentEnabled(false);
         mMediaArtPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
@@ -121,21 +165,20 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
 
             @Override
             public void onPageSelected(int position) {
-                if (position == mTrackManager.getActiveIndex()) return;
+                if (position == mQueueManager.getActiveIndex()) return;
 
                 if (userScrollChange) {
                     // User changed page, check the active index to determine
                     // whether to skip next or previous
-                    final int activeIndex = mTrackManager.getActiveIndex();
-                    if (null != mTransportControls) {
-                        if (position > activeIndex) mTransportControls.skipToNext();
-                        else if (position < activeIndex) mTransportControls.skipToPrevious();
-                    }
+                    final int activeIndex = mQueueManager.getActiveIndex();
+                    if (position > activeIndex) mRemote.skipToNextTrack();
+                    else if (position < activeIndex) mRemote.skipToPreviousTrack();
+
                 } else {
                     // For some reason onPageSelected is triggered
                     // after a call to notifyDataSetChanged with arbitrary position
                     // We set it back to whatever is the current active track index
-                    mMediaArtPager.setCurrentItem(mTrackManager.getActiveIndex(), false);
+                    mMediaArtPager.setCurrentItem(mQueueManager.getActiveIndex(), false);
                 }
             }
         });
@@ -167,7 +210,7 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
             @Override
             public void onStopTrackingTouch(@NonNull Slider slider) {
                 // Pass progress in milli seconds
-                mTransportControls.seekTo((long) slider.getValue() * 1000);
+                mRemote.seekTo((long) slider.getValue() * 1000);
                 onProgressValueChanged((int) slider.getValue());
             }
         });
@@ -188,7 +231,7 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 // Pass progress in milli seconds
-                mTransportControls.seekTo((long) seekBar.getProgress() * 1000);
+                mRemote.seekTo((long) seekBar.getProgress() * 1000);
                 onProgressValueChanged(seekBar.getProgress());
             }
         });
@@ -200,22 +243,22 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
     }
 
     protected void setUpSkipControls(@NonNull ImageView skipPrev, @NonNull ImageView skipNext) {
-        skipPrev.setOnClickListener(v -> mTransportControls.skipToPrevious());
-        skipNext.setOnClickListener(v -> mTransportControls.skipToNext());
+        skipPrev.setOnClickListener(v -> mRemote.skipToPreviousTrack());
+        skipNext.setOnClickListener(v -> mRemote.skipToNextTrack());
     }
 
     protected void toggleRepeatMode() {
-        boolean repeat = !mTrackManager.isCurrentTrackInRepeatMode();
-        mTrackManager.repeatCurrentTrack(repeat);
+        boolean repeat = !mQueueManager.isCurrentTrackInRepeatMode();
+        mQueueManager.repeatCurrentTrack(repeat);
         onRepeatStateChanged(repeat);
     }
 
     protected void toggleFavorite() {
         if (mCurrentItemFavorite) {
-            ProviderManager.getFavoritesProvider().removeFromFavorite(mTrackManager.getActiveQueueItem());
+            ProviderManager.getFavoritesProvider().removeFromFavorite(mQueueManager.getActiveQueueItem());
             Toast.makeText(getContext(), getString(R.string.removed_from_fav), Toast.LENGTH_SHORT).show();
         } else {
-            MusicModel md = mTrackManager.getActiveQueueItem();
+            MusicModel md = mQueueManager.getActiveQueueItem();
             if (md.getId() < 0)
                 Toast.makeText(getContext(), getString(R.string.cannot_add_to_fav), Toast.LENGTH_SHORT).show();
             else {
@@ -232,11 +275,11 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
     }
 
     protected void togglePlayPause() {
-        if (null == mController.getPlaybackState()) return;
-        PlaybackState state = mController.getPlaybackState();
-
-        if (state.getState() == PlaybackState.STATE_PLAYING) mTransportControls.pause();
-        else mTransportControls.play();
+        MediaController controller = mPulseController.getController();
+        if (null == controller || null == controller.getPlaybackState()) return;
+        PlaybackState state = controller.getPlaybackState();
+        if (state.getState() == PlaybackState.STATE_PLAYING) mRemote.pause();
+        else mRemote.play();
     }
 
     protected void togglePlayPauseAnimation(View playPauseBtn, PlaybackState state) {
@@ -255,7 +298,7 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
     protected void setGotToCurrentQueueCLickListener(@NonNull View view) {
         view.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), CurrentQueuePlaylist.class);
-            startActivityForResult(intent, OPEN_CURRENT_QUEUE);
+            startActivity(intent);
         });
     }
 
@@ -263,7 +306,7 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
     }
 
     private String getUpNextText() {
-        MusicModel nextItem = mTrackManager.getNextQueueItem();
+        MusicModel nextItem = mQueueManager.getNextQueueItem();
         String upNextText;
         if (null != nextItem)
             upNextText = getString(R.string.up_next_title).concat(" ").concat(nextItem.getTrackName());
@@ -272,7 +315,7 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
     }
 
     private void updateRepeat() {
-        onRepeatStateChanged(mTrackManager.isCurrentTrackInRepeatMode());
+        onRepeatStateChanged(mQueueManager.isCurrentTrackInRepeatMode());
     }
 
     protected void handleRepeatStateChanged(ImageView imageView, boolean repeating) {
@@ -284,7 +327,7 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
     }
 
     private void updateFavoriteItem() {
-        ProviderManager.getFavoritesProvider().isTemFavorite(mTrackManager.getActiveQueueItem(), isFavorite ->
+        ProviderManager.getFavoritesProvider().isTemFavorite(mQueueManager.getActiveQueueItem(), isFavorite ->
                 onFavoriteStateChanged((mCurrentItemFavorite = isFavorite != null && isFavorite)));
     }
 
@@ -298,42 +341,8 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
         }
     }
 
-    private void connectToService() {
-        if (null != getActivity()) {
-            Intent intent = new Intent(getActivity(), PMS.class);
-            getActivity().bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE);
-        }
-    }
-
     private void finishActivity() {
         if (getActivity() != null) getActivity().finish();
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (null != mMediaArtAdapter && requestCode == OPEN_CURRENT_QUEUE && resultCode == RESULT_OK) {
-            if (null != data && data.getBooleanExtra(CurrentQueuePlaylist.TRACK_CHANGED, false)) {
-
-                List<MusicModel> modifiedTracks = mTrackManager.getActiveQueue();
-                int trackIndex = mTrackManager.getActiveIndex();
-                int currentItemIndex = mMediaArtPager.getCurrentItem();
-
-                if (null != modifiedTracks && !modifiedTracks.isEmpty()) {
-                    onUpNextItemChanged(getUpNextText());
-                    mMediaArtAdapter.notifyTracksChanged(mTrackManager.getActiveQueue(), completed -> {
-                        if (currentItemIndex != trackIndex)
-                            mMediaArtPager.setCurrentItem(mTrackManager.getActiveIndex(), false);
-                    });
-                } else {
-                    // Since playlist is null or empty maybe because the
-                    // user cleared the last active playlist item (which triggers playback stop)
-                    // There is no point in showing a blank NowPlayingScreen
-                    // We finish the activity itself.
-                    finishActivity();
-                }
-            }
-        }
     }
 
     @Override
@@ -342,10 +351,13 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
             mMediaArtPager.requestDisallowInterceptTouchEvent(false);
         if (null != mUpdateHelper)
             mUpdateHelper.destroy();
-        if (null != getActivity())
+        if (null != getActivity() && null != mServiceConnection)
             getActivity().unbindService(mServiceConnection);
+        mPulseController.unregisterCallback(mControllerCallback);
         super.onDestroy();
     }
+
+    public abstract void onInitializeViews(@NonNull View view);
 
     public abstract void onRepeatStateChanged(boolean repeat);
 

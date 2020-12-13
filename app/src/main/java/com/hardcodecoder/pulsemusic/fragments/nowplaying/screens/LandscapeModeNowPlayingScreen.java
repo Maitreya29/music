@@ -36,6 +36,7 @@ public class LandscapeModeNowPlayingScreen extends BaseNowPlayingScreen {
     private MaterialTextView mSubTitle;
     private MaterialTextView mUpNext;
 
+    @NonNull
     public static LandscapeModeNowPlayingScreen getInstance() {
         return new LandscapeModeNowPlayingScreen();
     }
@@ -47,9 +48,7 @@ public class LandscapeModeNowPlayingScreen extends BaseNowPlayingScreen {
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
+    public void onInitializeViews(@NonNull View view) {
         ViewPager2 pager = view.findViewById(R.id.fragment_nps_land_album_container);
         setUpPagerAlbumArt(pager,
                 R.layout.land_nps_media_art,

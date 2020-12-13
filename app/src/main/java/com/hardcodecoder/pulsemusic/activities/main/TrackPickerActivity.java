@@ -16,7 +16,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.TaskRunner;
-import com.hardcodecoder.pulsemusic.activities.main.base.PMBActivity;
+import com.hardcodecoder.pulsemusic.activities.base.ThemeActivity;
 import com.hardcodecoder.pulsemusic.adapters.main.TracksSelectorAdapter;
 import com.hardcodecoder.pulsemusic.helper.RecyclerViewSelectorHelper;
 import com.hardcodecoder.pulsemusic.interfaces.ItemSelectorListener;
@@ -27,7 +27,7 @@ import com.hardcodecoder.pulsemusic.themes.TintHelper;
 import java.util.ArrayList;
 import java.util.Stack;
 
-public class TrackPickerActivity extends PMBActivity implements ItemSelectorListener {
+public class TrackPickerActivity extends ThemeActivity implements ItemSelectorListener {
 
     public static final String ID_PICKED_TRACKS = "picked_tracks";
     public static final int REQUEST_CODE = 100;

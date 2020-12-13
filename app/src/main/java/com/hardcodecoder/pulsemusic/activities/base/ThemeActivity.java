@@ -1,4 +1,4 @@
-package com.hardcodecoder.pulsemusic.activities.main.base;
+package com.hardcodecoder.pulsemusic.activities.base;
 
 import android.os.Bundle;
 
@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.hardcodecoder.pulsemusic.themes.ThemeColors;
 import com.hardcodecoder.pulsemusic.themes.ThemeManagerUtils;
 
-public abstract class PMBActivity extends AppCompatActivity {
+public class ThemeActivity extends AppCompatActivity {
 
     @StyleRes
     private int mCurrentTheme;

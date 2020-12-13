@@ -1,7 +1,6 @@
 package com.hardcodecoder.pulsemusic.fragments.main;
 
 import android.content.res.Configuration;
-import android.media.session.MediaController;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.Preferences;
+import com.hardcodecoder.pulsemusic.PulseController;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.TaskRunner;
 import com.hardcodecoder.pulsemusic.adapters.main.TracksAdapter;
@@ -22,7 +22,6 @@ import com.hardcodecoder.pulsemusic.interfaces.SimpleItemClickListener;
 import com.hardcodecoder.pulsemusic.loaders.LoaderCache;
 import com.hardcodecoder.pulsemusic.loaders.SortOrder;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
-import com.hardcodecoder.pulsemusic.singleton.TrackManager;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 import com.hardcodecoder.pulsemusic.utils.SortUtil;
 
@@ -31,7 +30,6 @@ import java.util.List;
 
 public class LibraryFragment extends ListGridFragment implements SimpleItemClickListener {
 
-    private MediaController.TransportControls mTransportControl;
     private GridLayoutManager mLayoutManager;
     private TracksAdapter mAdapter;
     private SortOrder mSortOrder;
@@ -150,8 +148,9 @@ public class LibraryFragment extends ListGridFragment implements SimpleItemClick
 
     @Override
     public void onItemClick(int position) {
-        TrackManager.getInstance().buildDataList(mAdapter.getDataList(), position);
-        play();
+        PulseController controller = PulseController.getInstance();
+        controller.setPlaylist(mAdapter.getDataList(), position);
+        controller.getRemote().play();
     }
 
     @Override
@@ -261,14 +260,5 @@ public class LibraryFragment extends ListGridFragment implements SimpleItemClick
                     true);
             recyclerView.setAdapter(mAdapter);
         });
-    }
-
-    private void play() {
-        if (mTransportControl != null) {
-            mTransportControl.play();
-        } else if (getActivity() != null) {
-            mTransportControl = getActivity().getMediaController().getTransportControls();
-            mTransportControl.play();
-        }
     }
 }

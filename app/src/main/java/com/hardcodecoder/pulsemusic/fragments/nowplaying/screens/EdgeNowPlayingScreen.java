@@ -39,6 +39,7 @@ public class EdgeNowPlayingScreen extends BaseNowPlayingScreen {
     private MaterialTextView mSubTitle;
     private MaterialTextView mUpNext;
 
+    @NonNull
     public static EdgeNowPlayingScreen getInstance() {
         return new EdgeNowPlayingScreen();
     }
@@ -50,9 +51,7 @@ public class EdgeNowPlayingScreen extends BaseNowPlayingScreen {
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
+    public void onInitializeViews(@NonNull View view) {
         ViewPager2 pager = view.findViewById(R.id.edge_nps_album_container);
         setUpPagerAlbumArt(pager,
                 R.layout.edge_nps_media_art,

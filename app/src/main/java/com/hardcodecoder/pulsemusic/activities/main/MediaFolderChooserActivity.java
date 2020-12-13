@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
-import com.hardcodecoder.pulsemusic.activities.main.base.PMBActivity;
+import com.hardcodecoder.pulsemusic.activities.base.ThemeActivity;
 import com.hardcodecoder.pulsemusic.adapters.main.FoldersListAdapter;
 import com.hardcodecoder.pulsemusic.helper.RecyclerViewSelectorHelper;
 import com.hardcodecoder.pulsemusic.interfaces.ItemSelectorListener;
@@ -27,7 +27,7 @@ import com.hardcodecoder.pulsemusic.views.CustomToolbar;
 
 import java.util.List;
 
-public class MediaFolderChooserActivity extends PMBActivity implements ItemSelectorListener {
+public class MediaFolderChooserActivity extends ThemeActivity implements ItemSelectorListener {
 
     public static final String RESULT_SELECTED_FOLDERS = "selected_folders";
     private FoldersListAdapter mAdapter;

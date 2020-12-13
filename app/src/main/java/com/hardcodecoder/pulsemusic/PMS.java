@@ -31,7 +31,6 @@ import com.hardcodecoder.pulsemusic.playback.LocalPlayback;
 import com.hardcodecoder.pulsemusic.playback.MediaNotificationManager;
 import com.hardcodecoder.pulsemusic.playback.PlaybackManager;
 import com.hardcodecoder.pulsemusic.providers.ProviderManager;
-import com.hardcodecoder.pulsemusic.singleton.TrackManager;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 
 import java.util.ArrayList;
@@ -72,6 +71,7 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
         mMediaSession = new MediaSession(this.getApplicationContext(), TAG);
         mMediaSession.setCallback(mPlaybackManager.getSessionCallbacks(), mWorkerHandler);
         mMediaSession.setFlags(MediaSession.FLAG_HANDLES_MEDIA_BUTTONS | MediaSession.FLAG_HANDLES_TRANSPORT_CONTROLS);
+        PulseController.getInstance().setController(mMediaSession.getController());
 
         Intent mediaButtonIntent = new Intent(Intent.ACTION_MEDIA_BUTTON);
         mediaButtonIntent.setClass(getApplicationContext(), MediaButtonReceiver.class);
@@ -181,7 +181,7 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
 
     private void playPlaylist(List<MusicModel> playlist) {
         if (null != playlist && playlist.size() > 0) {
-            TrackManager.getInstance().buildDataList(playlist, 0);
+            PulseController.getInstance().setPlaylist(playlist);
             mMediaSession.getController().getTransportControls().play();
         } else
             Toast.makeText(this, getString(R.string.no_playlist_tracks_found), Toast.LENGTH_SHORT).show();
@@ -196,7 +196,7 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
     @Override
     public void onTaskRemoved(Intent rootIntent) {
         if (mMediaSession != null && !mMediaSession.isActive()) {
-            TrackManager.getInstance().resetTrackManager();
+            PulseController.getInstance().getQueueManager().resetQueue();
             stopSelf();
         }
         super.onTaskRemoved(rootIntent);

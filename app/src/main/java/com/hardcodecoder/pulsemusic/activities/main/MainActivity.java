@@ -1,11 +1,15 @@
 package com.hardcodecoder.pulsemusic.activities.main;
 
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.res.ColorStateList;
 import android.media.MediaMetadata;
 import android.media.session.MediaController;
 import android.media.session.PlaybackState;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
 
@@ -17,8 +21,9 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.hardcodecoder.pulsemusic.PMS;
 import com.hardcodecoder.pulsemusic.R;
-import com.hardcodecoder.pulsemusic.activities.main.base.MediaSessionActivity;
+import com.hardcodecoder.pulsemusic.activities.base.ThemeActivity;
 import com.hardcodecoder.pulsemusic.dialog.HomeBottomSheetFragment;
 import com.hardcodecoder.pulsemusic.fragments.main.AlbumsFragment;
 import com.hardcodecoder.pulsemusic.fragments.main.ArtistFragment;
@@ -31,7 +36,7 @@ import com.hardcodecoder.pulsemusic.playback.PlaybackManager;
 import com.hardcodecoder.pulsemusic.themes.ThemeColors;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 
-public class MainActivity extends MediaSessionActivity {
+public class MainActivity extends ThemeActivity {
 
     public static final String TAG = "MainActivity";
     private static final String HOME = "HomeFragment";
@@ -60,15 +65,33 @@ public class MainActivity extends MediaSessionActivity {
                 hideControlsFragment();
         }
     };
+    private final ServiceConnection serviceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder binder) {
+            PMS.ServiceBinder serviceBinder = (PMS.ServiceBinder) binder;
+            mController = serviceBinder.getMediaController();
+            onControllerReady();
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+        }
+    };
     private AppBarLayout mAppBar;
     private MediaController mController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(null); // Pass null to prevent restoration of fragments on activity recreate
+        connectToMediaService();
         setContentView(R.layout.activity_main);
         setUpToolbar();
         setUpMainContents(savedInstanceState);
+    }
+
+    private void connectToMediaService() {
+        Intent intent = new Intent(this, PMS.class);
+        bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
     }
 
     private void setUpToolbar() {
@@ -172,11 +195,11 @@ public class MainActivity extends MediaSessionActivity {
 
     private void showControlsFragment() {
         if (controlsFrag == null) {
-            controlsFrag = new ControlsFragment();
+            controlsFrag = ControlsFragment.getInstance();
             findViewById(R.id.controls_fragment_container).setVisibility(View.VISIBLE);
             getSupportFragmentManager().beginTransaction()
                     .setCustomAnimations(R.anim.slide_in_bottom, R.anim.slide_out_bottom)
-                    .replace(R.id.controls_fragment_container, controlsFrag)
+                    .replace(R.id.controls_fragment_container, controlsFrag, ControlsFragment.TAG)
                     .commit();
         }
     }
@@ -191,11 +214,8 @@ public class MainActivity extends MediaSessionActivity {
         controlsFrag = null;
     }
 
-    @Override
-    public void onMediaServiceConnected(MediaController controller) {
-        mController = controller;
+    public void onControllerReady() {
         mController.registerCallback(mCallback);
-
         if (mController.getMetadata() != null &&
                 mController.getPlaybackState() != null &&
                 mController.getPlaybackState().getState() != PlaybackState.STATE_STOPPED)
@@ -234,5 +254,11 @@ public class MainActivity extends MediaSessionActivity {
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString(ACTIVE, activeFrag.getTag());
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (null != serviceConnection) unbindService(serviceConnection);
+        super.onDestroy();
     }
 }
