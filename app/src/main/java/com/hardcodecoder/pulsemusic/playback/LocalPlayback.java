@@ -92,20 +92,23 @@ public class LocalPlayback implements
             mDelayedPlayback = false;
             if (trackItem.getId() == mMediaId) {
                 // Track item has not changed
-                if (mQueueManager.isCurrentTrackInRepeatMode()) {
+                if (mPlaybackState == PlaybackState.STATE_PAUSED) {
+                    // We were previously paused
+                    // resume playback
+                    if (null == mp) {
+                        // if media player becomes null when trying to resume playback
+                        // initialize a new media player object
+                        initMediaPlayer(trackItem);
+                    } else {
+                        // Start playback with the resume position
+                        play(mResumePosition);
+                    }
+                } else if (mQueueManager.isCurrentTrackInRepeatMode()) {
                     // We are in repeat mode (infinite lop), release media player
                     // and let it re-init with same track
                     releaseMediaPlayer();
                     mPlaybackCallback.onTrackConfigured(trackItem);
-                }
-                if (null == mp) {
-                    // if media player becomes null when trying to resume playback
-                    // initialize a new media player object
                     initMediaPlayer(trackItem);
-                } else {
-                    // Media player is not null, we are resuming a playback
-                    // Start playback with the resume position
-                    play(mResumePosition);
                 }
             } else {
                 // Track item changed, release old Media player
