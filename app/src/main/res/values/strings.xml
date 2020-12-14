@@ -9,6 +9,7 @@
     <string name="icon_desc">Icon button</string>
     <string name="fab_done_dec">Confirm selection</string>
     <string name="fab_play_pause_desc">Media play and pause button</string>
+    <string name="bullet" translatable="false">●</string>
 
 
     <!-- Bottom Nav bar -->
@@ -109,7 +110,7 @@
     <string name="atp_track_add_error_toast">Error adding track to playlist</string>
 
 
-    <!-- Playlist Activity -->
+    <!-- Playlist tracks Activity -->
     <string name="no_playlist_tracks_found">This playlist is empty\nYou can add tracks using the add button</string>
     <string name="item_removed">Song removed from queue !!!</string>
     <string name="snack_bar_action_undo">Undo</string>
@@ -117,6 +118,9 @@
     <string name="playlist_add_more">Add</string>
     <string name="playlist_clear_all">Clear all</string>
     <string name="playlist_shuffled_success_toast">Playlist shuffled successfully</string>
+    <string name="playlist_up_next_title">Up next</string>
+    <string name="playlist_current_queue_list_title">Current queue</string>
+
 
     <!-- Favorites Playlist Activity-->
     <string name="favorites_playlist_title">Your favorites</string>
@@ -133,7 +137,6 @@
     <string name="added_to_fav">Track added to favorites</string>
     <string name="removed_from_fav">Track removed from favorites</string>
     <string name="cannot_add_to_fav">Track cannot be added to favorites</string>
-    <string name="up_next_title">Up next ●</string>
     <string name="up_next_title_none">Playlist completed</string>
 
 
@@ -151,8 +154,6 @@
 
     <!-- Song info dialog -->
     <string name="head_title">Track</string>
-    <string name="head_album">Album</string>
-    <string name="head_artist">Artist</string>
     <string name="head_file_size">File size</string>
     <string name="head_file_type">File type</string>
     <string name="head_bitrate">Bit rate</string>

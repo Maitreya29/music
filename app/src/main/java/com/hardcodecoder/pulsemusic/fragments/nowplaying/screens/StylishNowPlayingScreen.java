@@ -128,7 +128,7 @@ public class StylishNowPlayingScreen extends BaseNowPlayingScreen {
         mStartTime.setText(getFormattedElapsedTime(0));
         mEndTime.setText(getFormattedElapsedTime(seconds));
         mTitle.setText(metadata.getText(MediaMetadata.METADATA_KEY_TITLE));
-        mSubTitle.setText(String.format("%s● %s", getString(R.string.artist), metadata.getString(MediaMetadata.METADATA_KEY_ARTIST)));
+        mSubTitle.setText(String.format("%s%s", mArtistTitle, metadata.getString(MediaMetadata.METADATA_KEY_ARTIST)));
     }
 
     @Override

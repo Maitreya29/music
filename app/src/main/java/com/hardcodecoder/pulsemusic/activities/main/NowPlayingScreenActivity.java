@@ -34,14 +34,13 @@ public class NowPlayingScreenActivity extends AppCompatActivity {
 
         overridePendingTransition(R.anim.slide_in_bottom, R.anim.activity_open_exit);
 
+        super.onCreate(null);
         Fragment screenFragment;
         String tag;
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            super.onCreate(null);
             screenFragment = LandscapeModeNowPlayingScreen.getInstance();
             tag = LandscapeModeNowPlayingScreen.TAG;
         } else {
-            super.onCreate(savedInstanceState);
             int id = AppSettings.getNowPlayingScreenStyle(this);
             switch (id) {
                 case Preferences.NOW_PLAYING_SCREEN_STYLISH:

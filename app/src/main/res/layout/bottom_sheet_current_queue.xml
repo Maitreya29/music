@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_sheet_current_queue_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
+        android:orientation="vertical">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/current_queue_title"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:gravity="center"
+            android:text="@string/playlist_current_queue"
+            android:textAppearance="@style/TextAppearanceToolbar" />
+
+        <com.hardcodecoder.pulsemusic.views.AccentColorTextView
+            android:id="@+id/current_queue_now_playing_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/playlist_up_next_title"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Overline" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/up_next_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:cardBackgroundColor="?attr/windowBackgroundColor"
+            app:cardCornerRadius="@dimen/rounding_radius_8dp"
+            app:cardElevation="6dp"
+            app:strokeColor="#ff4242"
+            app:strokeWidth="3dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="84dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="32dp">
+
+                <com.hardcodecoder.pulsemusic.views.MediaArtImageView
+                    android:id="@+id/up_next_track_album_art"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="16dp"
+                    android:scaleType="centerCrop"
+                    app:radius="@dimen/rounding_radius_8dp"
+                    tools:ignore="contentDescription"
+                    tools:src="@tools:sample/backgrounds/scenic" />
+
+                <com.hardcodecoder.pulsemusic.views.AccentColorTextView
+                    android:id="@+id/up_next_track_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/up_next_track_album_art"
+                    android:layout_marginTop="4dp"
+                    android:layout_toEndOf="@id/up_next_track_album_art"
+                    android:maxLines="1"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                    tools:text="@tools:sample/full_names" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/up_next_track_sub_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/up_next_track_title"
+                    android:layout_toEndOf="@id/up_next_track_album_art"
+                    android:maxLines="1"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                    android:textColor="?android:attr/textColorSecondary"
+                    tools:text="@tools:sample/lorem/random" />
+            </RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.hardcodecoder.pulsemusic.views.AccentColorTextView
+            android:id="@+id/current_queue_list_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/playlist_current_queue_list_title"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Overline" />
+
+        <ViewStub
+            android:id="@+id/current_queue_stub_queue_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout="@layout/recycler_view_vertical"
+            android:paddingTop="8dp" />
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

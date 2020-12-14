@@ -31,7 +31,7 @@ import com.google.android.material.slider.Slider;
 import com.hardcodecoder.pulsemusic.PMS;
 import com.hardcodecoder.pulsemusic.PulseController;
 import com.hardcodecoder.pulsemusic.R;
-import com.hardcodecoder.pulsemusic.activities.playlist.CurrentQueuePlaylist;
+import com.hardcodecoder.pulsemusic.dialog.CurrentQueueBottomSheet;
 import com.hardcodecoder.pulsemusic.helper.MediaProgressUpdateHelper;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.providers.ProviderManager;
@@ -43,8 +43,15 @@ import java.util.Objects;
 
 public abstract class BaseNowPlayingScreen extends Fragment implements MediaProgressUpdateHelper.Callback {
 
+    protected String mUpNextTitle = "";
+    protected String mArtistTitle = "";
     private PulseController mPulseController;
     private PulseController.QueueManager mQueueManager;
+    private PulseController.PulseRemote mRemote;
+    private MediaProgressUpdateHelper mUpdateHelper;
+    private ServiceConnection mServiceConnection = null;
+    private ViewPager2 mMediaArtPager;
+    private MediaArtPagerAdapter mMediaArtAdapter;
     private final PulseController.Callback mControllerCallback = new PulseController.Callback() {
         @Override
         public void onTrackListChanged(@NonNull List<MusicModel> newTracks) {
@@ -78,11 +85,6 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
                 onUpNextItemChanged(getUpNextText());
         }
     };
-    private PulseController.PulseRemote mRemote;
-    private MediaProgressUpdateHelper mUpdateHelper;
-    private ServiceConnection mServiceConnection = null;
-    private ViewPager2 mMediaArtPager;
-    private MediaArtPagerAdapter mMediaArtAdapter;
     private long mDuration = 1;
     private int previousState;
     private boolean userScrollChange = false;
@@ -95,6 +97,9 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
         mPulseController = PulseController.getInstance();
         mQueueManager = mPulseController.getQueueManager();
         mRemote = mPulseController.getRemote();
+
+        mUpNextTitle = getString(R.string.playlist_up_next_title) + " " + getString(R.string.bullet) + " ";
+        mArtistTitle = getString(R.string.artist) + " " + getString(R.string.bullet) + " ";
 
         onInitializeViews(view);
 
@@ -297,19 +302,22 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
 
     protected void setGotToCurrentQueueCLickListener(@NonNull View view) {
         view.setOnClickListener(v -> {
-            Intent intent = new Intent(getContext(), CurrentQueuePlaylist.class);
-            startActivity(intent);
+            if (null != getActivity()) {
+                CurrentQueueBottomSheet currentQueueBottomSheet = CurrentQueueBottomSheet.getInstance();
+                currentQueueBottomSheet.show(getActivity().getSupportFragmentManager(), CurrentQueueBottomSheet.TAG);
+            }
         });
     }
 
     protected void onUpNextItemChanged(String upNextTitle) {
     }
 
+    @NonNull
     private String getUpNextText() {
         MusicModel nextItem = mQueueManager.getNextQueueItem();
         String upNextText;
         if (null != nextItem)
-            upNextText = getString(R.string.up_next_title).concat(" ").concat(nextItem.getTrackName());
+            upNextText = mUpNextTitle + nextItem.getTrackName();
         else upNextText = getString(R.string.up_next_title_none);
         return upNextText;
     }

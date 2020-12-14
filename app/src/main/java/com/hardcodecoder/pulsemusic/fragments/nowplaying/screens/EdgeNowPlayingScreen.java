@@ -127,7 +127,7 @@ public class EdgeNowPlayingScreen extends BaseNowPlayingScreen {
         mProgressSeekBar.setMax((int) seconds);
         mStartTime.setText(getFormattedElapsedTime(0));
         mEndTime.setText(getFormattedElapsedTime(seconds));
-        mSubTitle.setText(String.format("%s● %s", getString(R.string.artist), metadata.getString(MediaMetadata.METADATA_KEY_ARTIST)));
+        mSubTitle.setText(String.format("%s%s", mArtistTitle, metadata.getString(MediaMetadata.METADATA_KEY_ARTIST)));
         mTitle.setText(metadata.getText(MediaMetadata.METADATA_KEY_TITLE));
     }
 
