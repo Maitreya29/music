@@ -74,7 +74,7 @@ public class PulseController {
     }
 
     public void addToQueue(@NonNull MusicModel item) {
-        addToQueue(item, mQueueManager.getQueue().size() - 1);
+        addToQueue(item, Math.max(mQueueManager.getQueue().size() - 1, 0));
     }
 
     public void addToQueue(@NonNull MusicModel item, int position) {
