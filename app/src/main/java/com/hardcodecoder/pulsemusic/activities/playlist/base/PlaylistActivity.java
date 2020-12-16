@@ -211,7 +211,7 @@ public abstract class PlaylistActivity extends ControllerActivity {
         if (null == playlist || playlist.isEmpty()) return;
         List<MusicModel> playListToPlay = new ArrayList<>(playlist);
         Collections.shuffle(playListToPlay);
-        mPulseController.setPlaylist(playlist);
+        mPulseController.setPlaylist(playListToPlay);
         mRemote.play();
         Toast.makeText(this, getString(R.string.playlist_shuffled_success_toast), Toast.LENGTH_SHORT).show();
     }
