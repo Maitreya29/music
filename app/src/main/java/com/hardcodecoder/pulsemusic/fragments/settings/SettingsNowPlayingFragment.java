@@ -51,7 +51,7 @@ public class SettingsNowPlayingFragment extends SettingsBaseFragment {
         view.findViewById(R.id.now_playing_album_cover_corner_radius).setOnClickListener(v -> {
             if (null != getActivity()) {
                 CornerRadiusChangeDialogFragment dialog = CornerRadiusChangeDialogFragment.getInstance();
-                dialog.show(getActivity().getSupportFragmentManager(), CornerRadiusChangeDialogFragment.TAG);
+                dialog.show(getFragmentManager(), CornerRadiusChangeDialogFragment.TAG);
             }
         });
     }

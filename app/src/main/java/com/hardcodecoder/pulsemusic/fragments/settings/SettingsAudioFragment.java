@@ -16,8 +16,6 @@ import com.hardcodecoder.pulsemusic.fragments.settings.base.SettingsBaseFragment
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 import com.hardcodecoder.pulsemusic.views.SettingsToggleableItem;
 
-import java.util.Objects;
-
 public class SettingsAudioFragment extends SettingsBaseFragment {
 
     public static final String TAG = SettingsAudioFragment.class.getSimpleName();
@@ -61,7 +59,7 @@ public class SettingsAudioFragment extends SettingsBaseFragment {
 
         view.findViewById(R.id.audio_device_bluetooth_action_picker).setOnClickListener(v -> {
             AutoPlayActionChooserDialogFragment dialog = AutoPlayActionChooserDialogFragment.getInstance();
-            dialog.show(Objects.requireNonNull(getActivity()).getSupportFragmentManager(), AutoPlayActionChooserDialogFragment.TAG);
+            dialog.show(getFragmentManager(), AutoPlayActionChooserDialogFragment.TAG);
         });
     }
 }

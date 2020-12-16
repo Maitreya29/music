@@ -43,13 +43,20 @@ public class SettingsMainFragment extends SettingsBaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mListener = (SettingsFragmentsListener) getActivity();
-        view.findViewById(R.id.generalSettings).setOnClickListener(v -> openSettingsFragment(SettingsGeneralFragment.getInstance()));
-        view.findViewById(R.id.themeSettings).setOnClickListener(v -> openSettingsFragment(SettingsThemeFragment.getInstance()));
-        view.findViewById(R.id.nowPlayingSettings).setOnClickListener(v -> openSettingsFragment(SettingsNowPlayingFragment.getInstance()));
-        view.findViewById(R.id.audioSettings).setOnClickListener(v -> openSettingsFragment(SettingsAudioFragment.getInstance()));
-        view.findViewById(R.id.contributorsSettings).setOnClickListener(v -> openSettingsFragment(SettingsContributorsFragment.getInstance()));
-        view.findViewById(R.id.donationSettings).setOnClickListener(v -> openSettingsFragment(SettingsDonationFragment.getInstance()));
-        view.findViewById(R.id.aboutSettings).setOnClickListener(v -> openSettingsFragment(SettingsAboutFragment.getInstance()));
+        view.findViewById(R.id.generalSettings).setOnClickListener(v ->
+                v.postOnAnimation(() -> openSettingsFragment(SettingsGeneralFragment.getInstance())));
+        view.findViewById(R.id.themeSettings).setOnClickListener(v ->
+                v.postOnAnimation(() -> openSettingsFragment(SettingsThemeFragment.getInstance())));
+        view.findViewById(R.id.nowPlayingSettings).setOnClickListener(v ->
+                v.postOnAnimation(() -> openSettingsFragment(SettingsNowPlayingFragment.getInstance())));
+        view.findViewById(R.id.audioSettings).setOnClickListener(v ->
+                v.postOnAnimation(() -> openSettingsFragment(SettingsAudioFragment.getInstance())));
+        view.findViewById(R.id.contributorsSettings).setOnClickListener(v ->
+                v.postOnAnimation(() -> openSettingsFragment(SettingsContributorsFragment.getInstance())));
+        view.findViewById(R.id.donationSettings).setOnClickListener(v ->
+                v.postOnAnimation(() -> openSettingsFragment(SettingsDonationFragment.getInstance())));
+        view.findViewById(R.id.aboutSettings).setOnClickListener(v ->
+                v.postOnAnimation(() -> openSettingsFragment(SettingsAboutFragment.getInstance())));
     }
 
     private void openSettingsFragment(SettingsBaseFragment fragment) {

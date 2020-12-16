@@ -17,8 +17,6 @@ import com.hardcodecoder.pulsemusic.themes.ThemeManagerUtils;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 import com.hardcodecoder.pulsemusic.views.SettingsToggleableItem;
 
-import java.util.Objects;
-
 public class SettingsThemeFragment extends SettingsBaseFragment {
 
     public static final String TAG = SettingsThemeFragment.class.getSimpleName();
@@ -67,14 +65,14 @@ public class SettingsThemeFragment extends SettingsBaseFragment {
 
         view.findViewById(R.id.laf_select_accent_color).setOnClickListener(v -> {
             AccentsChooserDialogFragment dialogFragment = AccentsChooserDialogFragment.getInstance();
-            dialogFragment.show(Objects.requireNonNull(getActivity()).getSupportFragmentManager(), AccentsChooserDialogFragment.TAG);
+            dialogFragment.show(getFragmentManager(), AccentsChooserDialogFragment.TAG);
         });
     }
 
     private void updateThemeSection(View view) {
         view.findViewById(R.id.laf_select_dark_theme).setOnClickListener(v -> {
             ThemeChooserBottomSheetDialogFragment dialog = ThemeChooserBottomSheetDialogFragment.getInstance();
-            dialog.show(Objects.requireNonNull(getActivity()).getSupportFragmentManager(), ThemeChooserBottomSheetDialogFragment.TAG);
+            dialog.show(getFragmentManager(), ThemeChooserBottomSheetDialogFragment.TAG);
         });
 
         // Get custom views

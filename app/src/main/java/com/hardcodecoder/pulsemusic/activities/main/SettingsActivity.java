@@ -17,7 +17,6 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.Preferences;
-import com.hardcodecoder.pulsemusic.PulseController;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.activities.base.ControllerActivity;
 import com.hardcodecoder.pulsemusic.fragments.settings.SettingsMainFragment;
@@ -48,7 +47,7 @@ public class SettingsActivity extends ControllerActivity implements SettingsFrag
         if (null == savedInstanceState) {
             //Set up the main fragment when activity is first created
             mFragmentManager.beginTransaction()
-                    .replace(R.id.settings_content_container, SettingsMainFragment.getInstance())
+                    .replace(R.id.settings_content_container, SettingsMainFragment.getInstance(), SettingsMainFragment.TAG)
                     .commit();
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
@@ -108,7 +107,7 @@ public class SettingsActivity extends ControllerActivity implements SettingsFrag
                 startActivity(restartIntent);
                 MediaController controller = getMediaController();
                 if (controller != null) controller.getTransportControls().stop();
-                PulseController.getInstance().getQueueManager().resetQueue();
+                mPulseController.getQueueManager().resetQueue();
                 mRestartDialog.dismiss();
                 finish();
             }
