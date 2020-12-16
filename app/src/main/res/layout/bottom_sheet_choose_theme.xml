@@ -12,8 +12,7 @@
         android:layout_marginTop="8dp"
         android:gravity="start"
         android:text="@string/select_dark_theme"
-        android:textAppearance="@style/Appearance.Text.Body1"
-        android:textStyle="bold" />
+        android:textAppearance="@style/Appearance.Text.Subtitle1" />
 
     <RadioGroup
         android:id="@+id/radio_button_group"
