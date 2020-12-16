@@ -6,7 +6,5 @@
     android:layout_height="wrap_content"
     android:ellipsize="end"
     android:maxLines="1"
-    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-    android:textSize="15sp"
-    android:textStyle="bold"
+    android:textAppearance="@style/ItemTitle"
     tools:text="@tools:sample/full_names" />

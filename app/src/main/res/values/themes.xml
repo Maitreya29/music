@@ -1,21 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="PulseTextViewStyle" parent="android:Widget.TextView">
-        <item name="android:fontFamily">@font/open_sans</item>
-        <item name="fontFamily">@font/open_sans</item>
-    </style>
-
-    <style name="PulseButtonStyle" parent="Widget.MaterialComponents.Button">
-        <item name="android:fontFamily">@font/open_sans</item>
-        <item name="fontFamily">@font/open_sans</item>
-    </style>
-
     <style name="PulseMaterialButton" parent="Widget.MaterialComponents.Button">
         <item name="android:textSize">14sp</item>
         <item name="android:textAllCaps">true</item>
-        <item name="android:fontFamily">@font/open_sans</item>
-        <item name="fontFamily">@font/open_sans</item>
+        <item name="android:textAppearance">@style/Appearance.Text.Button</item>
         <item name="android:paddingTop">@dimen/button_padding_vertical</item>
         <item name="android:paddingBottom">@dimen/button_padding_vertical</item>
         <item name="iconSize">20dp</item>
@@ -44,8 +33,6 @@
         <item name="android:navigationBarColor">?attr/navigationBarColor</item>
         <item name="android:windowAnimationStyle">@style/WindowTransitions</item>
         <item name="android:windowContentTransitions">true</item>
-        <item name="android:textViewStyle">@style/PulseTextViewStyle</item>
-        <item name="android:buttonStyle">@style/PulseButtonStyle</item>
         <item name="materialButtonStyle">@style/PulseMaterialButton</item>
     </style>
 
@@ -58,8 +45,6 @@
         <item name="android:navigationBarColor">?attr/navigationBarColor</item>
         <item name="android:windowAnimationStyle">@style/WindowTransitions</item>
         <item name="android:windowContentTransitions">true</item>
-        <item name="android:textViewStyle">@style/PulseTextViewStyle</item>
-        <item name="android:buttonStyle">@style/PulseButtonStyle</item>
         <item name="materialButtonStyle">@style/PulseMaterialButton</item>
     </style>
 

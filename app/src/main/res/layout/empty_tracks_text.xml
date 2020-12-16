@@ -5,6 +5,6 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:gravity="center"
-    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+    android:textAppearance="@style/Appearance.Text.Subtitle2"
     android:textColor="?android:attr/textColorSecondary"
     tools:text="@string/tracks_not_found" />

@@ -12,7 +12,7 @@
         android:layout_marginTop="8dp"
         android:gravity="start"
         android:text="@string/select_bluetooth_action"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+        android:textAppearance="@style/Appearance.Text.Body1"
         android:textStyle="bold" />
 
     <RadioGroup
@@ -31,7 +31,7 @@
             android:paddingStart="32dp"
             android:paddingEnd="0dp"
             android:text="@string/radio_btn_shuffle"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2" />
+            android:textAppearance="@style/Appearance.Text.Subtitle2" />
 
         <com.hardcodecoder.pulsemusic.views.AccentColorRadioButton
             android:id="@+id/radio_btn_suggested"
@@ -40,7 +40,7 @@
             android:paddingStart="32dp"
             android:paddingEnd="0dp"
             android:text="@string/radio_btn_suggested"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2" />
+            android:textAppearance="@style/Appearance.Text.Subtitle2" />
 
         <com.hardcodecoder.pulsemusic.views.AccentColorRadioButton
             android:id="@+id/radio_btn_latest"
@@ -49,7 +49,7 @@
             android:paddingStart="32dp"
             android:paddingEnd="0dp"
             android:text="@string/radio_btn_latest"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2" />
+            android:textAppearance="@style/Appearance.Text.Subtitle2" />
     </RadioGroup>
 
     <com.hardcodecoder.pulsemusic.views.AccentColorMaterialButton

@@ -13,7 +13,7 @@
         android:layout_marginTop="8dp"
         android:gravity="start"
         android:text="@string/now_playing_cover_corner_radius_changer_title"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+        android:textAppearance="@style/Appearance.Text.Body1"
         android:textStyle="bold" />
 
     <androidx.core.widget.NestedScrollView

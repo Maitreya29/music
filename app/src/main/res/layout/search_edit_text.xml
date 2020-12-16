@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@null"
-    android:fontFamily="@font/open_sans"
     android:hint="@string/searchHint"
     android:inputType="textPersonName"
-    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+    android:textAppearance="@style/Appearance.Text.Body1"
     android:textSize="17sp" />

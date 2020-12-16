@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:gravity="center"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+        android:textAppearance="@style/Appearance.Text.Subtitle2"
         app:layout_constraintEnd_toEndOf="@id/details_activity_art"
         app:layout_constraintStart_toStartOf="@id/details_activity_art"
         app:layout_constraintTop_toBottomOf="@id/details_activity_art"

@@ -63,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:gravity="center"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                android:textAppearance="@style/Appearance.Text.Subtitle2"
                 android:textColor="?android:attr/textColorSecondary"
                 app:layout_constraintEnd_toEndOf="@id/playlist_media_art"
                 app:layout_constraintStart_toStartOf="@id/playlist_media_art"

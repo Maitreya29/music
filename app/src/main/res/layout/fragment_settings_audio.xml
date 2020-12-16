@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="72dp"
             android:text="@string/audio_category_auto_play"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Overline" />
+            android:textAppearance="@style/Appearance.Text.Overline" />
 
         <com.hardcodecoder.pulsemusic.views.SettingsToggleableItem
             android:id="@+id/audio_device_bluetooth_toggle"

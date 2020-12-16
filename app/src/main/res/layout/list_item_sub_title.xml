@@ -7,7 +7,5 @@
     android:ellipsize="end"
     android:gravity="top"
     android:maxLines="1"
-    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
-    android:textColor="?android:attr/textColorSecondary"
-    android:textSize="12sp"
+    android:textAppearance="@style/ItemSub"
     tools:text="@tools:sample/lorem/random" />

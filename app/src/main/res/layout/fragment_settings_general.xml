@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="72dp"
             android:text="@string/general_category_loader_section_title"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Overline" />
+            android:textAppearance="@style/Appearance.Text.Overline" />
 
         <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
             android:id="@+id/ignore_folder_picker"

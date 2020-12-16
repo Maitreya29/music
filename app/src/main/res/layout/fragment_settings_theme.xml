@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="72dp"
             android:text="@string/laf_category_theme"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Overline" />
+            android:textAppearance="@style/Appearance.Text.Overline" />
 
         <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
             android:id="@+id/laf_select_dark_theme"
@@ -51,7 +51,7 @@
             android:layout_marginStart="72dp"
             android:layout_marginTop="32dp"
             android:text="@string/laf_category_colors"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Overline" />
+            android:textAppearance="@style/Appearance.Text.Overline" />
 
         <com.hardcodecoder.pulsemusic.views.SettingsToggleableItem
             android:id="@+id/laf_enable_desaturated"

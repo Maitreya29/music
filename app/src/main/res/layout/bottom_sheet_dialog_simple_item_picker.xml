@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginEnd="36dp"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+        android:textAppearance="@style/Appearance.Text.Body1"
         android:textColor="?android:attr/textColorPrimary"
         app:layout_constraintBottom_toBottomOf="@id/bottom_dialog_picker_add_btn"
         app:layout_constraintEnd_toStartOf="@id/bottom_dialog_picker_add_btn"

@@ -27,7 +27,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:text="@string/playlist_up_next_title"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Overline" />
+            android:textAppearance="@style/Appearance.Text.Overline" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/up_next_card"
@@ -68,7 +68,7 @@
                     android:layout_marginTop="4dp"
                     android:layout_toEndOf="@id/up_next_track_album_art"
                     android:maxLines="1"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                    android:textAppearance="@style/Appearance.Text.Subtitle1"
                     tools:text="@tools:sample/full_names" />
 
                 <com.google.android.material.textview.MaterialTextView
@@ -78,7 +78,7 @@
                     android:layout_below="@id/up_next_track_title"
                     android:layout_toEndOf="@id/up_next_track_album_art"
                     android:maxLines="1"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                    android:textAppearance="@style/Appearance.Text.Subtitle2"
                     android:textColor="?android:attr/textColorSecondary"
                     tools:text="@tools:sample/lorem/random" />
             </RelativeLayout>
@@ -91,7 +91,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
             android:text="@string/playlist_current_queue_list_title"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Overline" />
+            android:textAppearance="@style/Appearance.Text.Overline" />
 
         <ViewStub
             android:id="@+id/current_queue_stub_queue_list"

@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:text="@string/donation_category_head"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Overline" />
+        android:textAppearance="@style/Appearance.Text.Overline" />
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/donation_title"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
+                android:textAppearance="@style/Appearance.Text.Headline6" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/donate_subhead"
@@ -49,7 +49,7 @@
                 android:layout_marginBottom="32dp"
                 android:gravity="center"
                 android:text="@string/donation_text"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2" />
+                android:textAppearance="@style/Appearance.Text.Body2" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/bmc_btn"

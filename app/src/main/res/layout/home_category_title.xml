@@ -6,6 +6,6 @@
     android:paddingStart="16dp"
     android:paddingEnd="0dp"
     android:paddingBottom="12dp"
-    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+    android:textAppearance="@style/Appearance.Text.Headline6"
     android:textStyle="bold"
     tools:text="@string/top_albums" />

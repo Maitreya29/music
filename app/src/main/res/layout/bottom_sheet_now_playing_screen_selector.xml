@@ -12,7 +12,7 @@
         android:layout_marginTop="8dp"
         android:gravity="start"
         android:text="@string/now_playing_screen_style_title"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+        android:textAppearance="@style/Appearance.Text.Body1"
         android:textStyle="bold" />
 
     <RadioGroup
@@ -31,7 +31,7 @@
             android:paddingStart="32dp"
             android:paddingEnd="0dp"
             android:text="@string/now_playing_screen_style_modern"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+            android:textAppearance="@style/Appearance.Text.Subtitle2"
             android:textColor="?android:attr/textColorPrimary" />
 
         <com.hardcodecoder.pulsemusic.views.AccentColorRadioButton
@@ -41,7 +41,7 @@
             android:paddingStart="32dp"
             android:paddingEnd="0dp"
             android:text="@string/now_playing_screen_style_stylish"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+            android:textAppearance="@style/Appearance.Text.Subtitle2"
             android:textColor="?android:attr/textColorPrimary" />
 
         <com.hardcodecoder.pulsemusic.views.AccentColorRadioButton
@@ -51,7 +51,7 @@
             android:paddingStart="32dp"
             android:paddingEnd="0dp"
             android:text="@string/now_playing_screen_style_edge"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+            android:textAppearance="@style/Appearance.Text.Subtitle2"
             android:textColor="?android:attr/textColorPrimary" />
     </RadioGroup>
 
