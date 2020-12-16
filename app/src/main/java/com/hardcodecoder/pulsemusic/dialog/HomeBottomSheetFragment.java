@@ -55,15 +55,18 @@ public class HomeBottomSheetFragment extends RoundedBottomSheetFragment {
 
         mUserPic.setOnClickListener(v -> pickPhoto());
         mUserName.setOnClickListener(v1 -> addUserName());
-        view.findViewById(R.id.drawer_option_settings).setOnClickListener(v ->
-                startActivity(new Intent(getContext(), SettingsActivity.class)));
+        view.findViewById(R.id.drawer_option_settings).setOnClickListener(v -> {
+            startActivity(new Intent(getContext(), SettingsActivity.class));
+            view.postOnAnimation(this::dismiss);
+        });
 
         view.findViewById(R.id.drawer_option_equalizer).setOnClickListener(v -> {
             final Intent intent = new Intent(AudioEffect.ACTION_DISPLAY_AUDIO_EFFECT_CONTROL_PANEL);
             if (null != getContext()) {
-                if ((intent.resolveActivity(getContext().getPackageManager()) != null))
+                if ((intent.resolveActivity(getContext().getPackageManager()) != null)) {
                     startActivityForResult(intent, REQUEST_CODE_OPEN_EQUALIZER);
-                else
+                    view.postOnAnimation(this::dismiss);
+                } else
                     Toast.makeText(getContext(), getString(R.string.equalizer_error), Toast.LENGTH_SHORT).show();
             }
         });

@@ -33,7 +33,6 @@ public class CustomBottomSheet extends BottomSheetDialog {
     @Override
     public void setContentView(View view) {
         super.setContentView(view);
-        setDismissWithAnimation(true);
         BottomSheetBehavior<FrameLayout> behavior = getBehavior();
         if (null != mCallback) mCallback.onBehaviourReady(behavior);
     }

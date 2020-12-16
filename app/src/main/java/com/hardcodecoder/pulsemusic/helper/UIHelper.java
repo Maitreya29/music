@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.StyleSpan;
@@ -74,9 +73,9 @@ public class UIHelper {
         sheetDialog.show();
     }
 
-    public static void buildSongInfoDialog(Context context, final MusicModel musicModel) {
+    public static void buildSongInfoDialog(@NonNull Context context, @NonNull final MusicModel musicModel) {
         BottomSheetDialog bottomSheetDialog = new RoundedBottomSheetDialog(context);
-        View view = View.inflate(context, R.layout.bottom_sheet_track_info, null);
+        final View view = View.inflate(context, R.layout.bottom_sheet_track_info, null);
         bottomSheetDialog.setContentView(view);
         view.findViewById(R.id.dialog_ok).setOnClickListener(v -> dismiss(bottomSheetDialog));
         // Reference view fields which needs to be filled with data
@@ -89,10 +88,10 @@ public class UIHelper {
         MaterialTextView trackBitRate = view.findViewById(R.id.dialog_bitrate);
         MaterialTextView trackSampleRate = view.findViewById(R.id.dialog_sample_rate);
         MaterialTextView trackChannelCount = view.findViewById(R.id.dialog_channel_count);
-        final Handler handler = new Handler();
+        bottomSheetDialog.show();
         DataModelHelper.getTrackInfo(view.getContext(), musicModel, infoModel -> {
             if (null != infoModel) {
-                handler.post(() -> {
+                view.postOnAnimation(() -> {
                     final StyleSpan styleSpan = new StyleSpan(Typeface.BOLD);
                     displayTextView.setText(infoModel.getDisplayName());
                     displayTextView.setSelected(true);
@@ -112,12 +111,12 @@ public class UIHelper {
 
     private static void setInfo(@NonNull MaterialTextView textView, @NonNull String head, @NonNull String info, @NonNull StyleSpan styleSpan) {
         String text = String.format("%s: %s", head, info);
-        SpannableString artist = new SpannableString(text);
-        artist.setSpan(styleSpan, 0, head.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
-        textView.setText(artist);
+        SpannableString sub = new SpannableString(text);
+        sub.setSpan(styleSpan, 0, head.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        textView.setText(sub);
     }
 
-    public static void openAddToPlaylistDialog(FragmentManager fragmentManager, final MusicModel itemToAdd) {
+    public static void openAddToPlaylistDialog(@NonNull FragmentManager fragmentManager, @NonNull final MusicModel itemToAdd) {
         AddToPlaylistDialog dialog = AddToPlaylistDialog.getInstance();
         Bundle b = new Bundle();
         b.putSerializable(AddToPlaylistDialog.MUSIC_MODEL_KEY, itemToAdd);
@@ -178,7 +177,7 @@ public class UIHelper {
         bottomSheetDialog.show();
     }
 
-    private static void dismiss(BottomSheetDialog dialog) {
+    private static void dismiss(@NonNull BottomSheetDialog dialog) {
         if (dialog.isShowing())
             dialog.dismiss();
     }
