@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Appearance.Text.Headline6" parent="Appearance.Text.Base.Headline6">
+        <item name="android:textFontWeight">600</item>
+    </style>
+
+    <style name="Appearance.Text.Subtitle2" parent="Appearance.Text.Base.Subtitle2">
+        <item name="android:textFontWeight">500</item>
+    </style>
+
+    <style name="Appearance.Text.Button" parent="Appearance.Text.Base.Button">
+        <item name="android:textFontWeight">500</item>
+    </style>
+
+    <style name="ItemTitle" parent="Base.ItemTitle">
+        <item name="android:textFontWeight">500</item>
+    </style>
+</resources>

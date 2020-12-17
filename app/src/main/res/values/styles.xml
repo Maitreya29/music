@@ -94,14 +94,9 @@
         <item name="android:textSize">17sp</item>
     </style>
 
-    <style name="ItemTitle" parent="Appearance.Text.Subtitle1">
-        <item name="android:textSize">15sp</item>
+    <style name="ItemTitle" parent="Base.ItemTitle">
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
     </style>
 
-    <style name="ItemSub" parent="Appearance.Text.Subtitle2">
-        <item name="android:textSize">13sp</item>
-        <item name="android:textColor">?android:attr/textColorSecondary</item>
-    </style>
+    <style name="ItemSub" parent="Base.ItemSub" />
 </resources>

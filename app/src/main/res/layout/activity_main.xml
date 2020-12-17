@@ -55,6 +55,8 @@
         app:elevation="0dp"
         app:itemHorizontalTranslationEnabled="false"
         app:itemIconSize="20dp"
+        app:itemTextAppearanceActive="@style/Appearance.Text.Subtitle2"
+        app:itemTextAppearanceInactive="@style/Appearance.Text.Subtitle2"
         app:labelVisibilityMode="selected"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/bottom_navigation_items" />
