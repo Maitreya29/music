@@ -21,7 +21,9 @@
         android:theme="@style/ActivityThemeDark"
         tools:targetApi="Q">
 
-        <activity android:name=".activities.main.SplashActivity">
+        <activity
+            android:name=".activities.main.SplashActivity"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,7 +37,8 @@
         <activity
             android:name=".activities.main.MainActivity"
             android:clearTaskOnLaunch="true"
-            android:configChanges="orientation|screenSize" />
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTop" />
 
         <activity
             android:name=".activities.main.SearchActivity"
@@ -62,6 +65,7 @@
         <!-- Set transparent theme when activity starts to prevent solid colored background -->
         <activity
             android:name=".activities.main.NowPlayingScreenActivity"
+            android:launchMode="singleTop"
             android:theme="@style/TransparentThemeOverlay" />
 
         <receiver android:name=".receivers.BootCompletedReceiver">
