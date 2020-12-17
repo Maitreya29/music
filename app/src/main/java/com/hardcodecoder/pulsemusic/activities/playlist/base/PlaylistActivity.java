@@ -158,7 +158,8 @@ public abstract class PlaylistActivity extends ControllerActivity {
             AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) mCollapsingToolbarLayout.getLayoutParams();
             params.setScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL |
                     AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS_COLLAPSED |
-                    AppBarLayout.LayoutParams.SCROLL_FLAG_EXIT_UNTIL_COLLAPSED);
+                    AppBarLayout.LayoutParams.SCROLL_FLAG_EXIT_UNTIL_COLLAPSED |
+                    AppBarLayout.LayoutParams.SCROLL_FLAG_SNAP);
             mCollapsingToolbarLayout.setLayoutParams(params);
         }
     }
