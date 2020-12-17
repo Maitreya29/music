@@ -2,7 +2,6 @@ package com.hardcodecoder.pulsemusic.activities.main;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.session.MediaController;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -105,8 +104,7 @@ public class SettingsActivity extends ControllerActivity implements SettingsFrag
             if (null != restartIntent) {
                 restartIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(restartIntent);
-                MediaController controller = getMediaController();
-                if (controller != null) controller.getTransportControls().stop();
+                mRemote.stop();
                 mPulseController.getQueueManager().resetQueue();
                 mRestartDialog.dismiss();
                 finish();
