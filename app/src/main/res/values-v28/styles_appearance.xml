@@ -6,14 +6,14 @@
     </style>
 
     <style name="Appearance.Text.Subtitle2" parent="Appearance.Text.Base.Subtitle2">
-        <item name="android:textFontWeight">500</item>
+        <item name="android:textFontWeight">600</item>
     </style>
 
     <style name="Appearance.Text.Button" parent="Appearance.Text.Base.Button">
-        <item name="android:textFontWeight">500</item>
+        <item name="android:textFontWeight">600</item>
     </style>
 
     <style name="ItemTitle" parent="Base.ItemTitle">
-        <item name="android:textFontWeight">500</item>
+        <item name="android:textFontWeight">600</item>
     </style>
 </resources>

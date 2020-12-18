@@ -100,6 +100,5 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:text="@string/okay"
-        android:textStyle="bold"
         app:accentButtonStyle="text" />
 </LinearLayout>

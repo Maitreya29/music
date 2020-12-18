@@ -96,7 +96,7 @@ public class UIHelper {
                     displayTextView.setText(infoModel.getDisplayName());
                     displayTextView.setSelected(true);
                     setInfo(trackTitle, context.getString(R.string.head_title), musicModel.getTrackName(), styleSpan);
-                    setInfo(trackAlbum, context.getString(R.string.album), musicModel.getAlbum(), styleSpan);
+                    setInfo(trackAlbum, context.getString(R.string.albums), musicModel.getAlbum(), styleSpan);
                     setInfo(trackArtist, context.getString(R.string.artist), musicModel.getArtist(), styleSpan);
                     setInfo(trackFileSize, context.getString(R.string.head_file_size), DataUtils.getFormattedFileSize(infoModel.getFileSize()), styleSpan);
                     setInfo(trackFileType, context.getString(R.string.head_file_type), infoModel.getFileType(), styleSpan);
