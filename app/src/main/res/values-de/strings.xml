@@ -102,11 +102,7 @@
     <string name="now_playing">Jetzt am Spielen</string>
     <string name="added_to_fav">Titel zu den Favoriten hinzugefügt</string>
     <string name="removed_from_fav">Titel von den Favoriten entfernt</string>
-    <string name="up_next_title">Als Nächstes ●</string>
     <string name="up_next_title_none">Playlist abgeschlossen</string>
-
-
-    <!-- TrackPickerActivity -->
 
 
     <!-- Details Activity -->
@@ -115,8 +111,6 @@
 
     <!-- Song info dialog -->
     <string name="head_title">Titel</string>
-    <string name="head_album">Album</string>
-    <string name="head_artist">Künstler</string>
     <string name="head_file_size">Dateigröße</string>
     <string name="head_file_type">Dateityp</string>
     <string name="head_bitrate">Bitrate</string>

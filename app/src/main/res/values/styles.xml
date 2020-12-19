@@ -20,8 +20,6 @@
         <item name="tint">?attr/colorControlNormal</item>
     </style>
 
-    <style name="ButtonStyle48" parent="ButtonStyleBase" />
-
     <style name="ButtonStyle36" parent="ButtonStyleBase">
         <item name="android:padding">6dp</item>
     </style>
