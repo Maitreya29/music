@@ -1,0 +1,10 @@
+Pulse Music V4.0.3-Release
+
+- Replaced repeat once option with repeat endlessly (#26) 
+- Redesigned Playlist section 
+- Added bottom sheet style current queue in now playing screen
+- Update ripple colors of clickable items to match accent color
+- Removed custom fonts and allow text views to use system fonts
+- Performance improvements
+- Animation improvements
+- Minor bug fixes here and there
