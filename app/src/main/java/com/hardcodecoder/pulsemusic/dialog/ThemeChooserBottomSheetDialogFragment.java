@@ -56,17 +56,13 @@ public class ThemeChooserBottomSheetDialogFragment extends RoundedBottomSheetFra
 
         view.findViewById(R.id.choose_theme_set_btn).setOnClickListener(v1 -> {
             if (mOptionChanged) {
-                switch (radioGroup.getCheckedRadioButtonId()) {
-                    case R.id.radio_btn_dark_theme_gray:
-                        ThemeManagerUtils.setSelectedDarkTheme(mContext, Preferences.DARK_THEME_GRAY);
-                        break;
-                    case R.id.radio_btn_dark_theme_kinda:
-                        ThemeManagerUtils.setSelectedDarkTheme(mContext, Preferences.DARK_THEME_KINDA);
-                        break;
-                    case R.id.radio_btn_dark_theme_pure_black:
-                        ThemeManagerUtils.setSelectedDarkTheme(mContext, Preferences.DARK_THEME_PURE_BLACK);
-                        break;
-                }
+                final int id = radioGroup.getCheckedRadioButtonId();
+                if (id == R.id.radio_btn_dark_theme_gray)
+                    ThemeManagerUtils.setSelectedDarkTheme(mContext, Preferences.DARK_THEME_GRAY);
+                else if (id == R.id.radio_btn_dark_theme_kinda)
+                    ThemeManagerUtils.setSelectedDarkTheme(mContext, Preferences.DARK_THEME_KINDA);
+                else if (id == R.id.radio_btn_dark_theme_pure_black)
+                    ThemeManagerUtils.setSelectedDarkTheme(mContext, Preferences.DARK_THEME_PURE_BLACK);
 
                 if (ThemeManagerUtils.needToApplyNewDarkTheme()) {
                     //Theme need to be updated

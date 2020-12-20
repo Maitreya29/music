@@ -55,17 +55,13 @@ public class AutoPlayActionChooserDialogFragment extends RoundedBottomSheetFragm
 
         view.findViewById(R.id.choose_bluetooth_action_set_btn).setOnClickListener(v1 -> {
             if (mOptionChanged) {
-                switch (radioGroup.getCheckedRadioButtonId()) {
-                    case R.id.radio_btn_shuffle:
-                        AppSettings.saveBluetoothDeviceDetectionAction(mContext, Preferences.DEVICE_ACTION_PLAY_SHUFFLE);
-                        break;
-                    case R.id.radio_btn_suggested:
-                        AppSettings.saveBluetoothDeviceDetectionAction(mContext, Preferences.DEVICE_ACTION_PLAY_SUGGESTED);
-                        break;
-                    case R.id.radio_btn_latest:
-                        AppSettings.saveBluetoothDeviceDetectionAction(mContext, Preferences.DEVICE_ACTION_PLAY_LATEST);
-                        break;
-                }
+                final int id = radioGroup.getCheckedRadioButtonId();
+                if (id == R.id.radio_btn_shuffle)
+                    AppSettings.saveBluetoothDeviceDetectionAction(mContext, Preferences.DEVICE_ACTION_PLAY_SHUFFLE);
+                else if (id == R.id.radio_btn_suggested)
+                    AppSettings.saveBluetoothDeviceDetectionAction(mContext, Preferences.DEVICE_ACTION_PLAY_SUGGESTED);
+                else if (id == R.id.radio_btn_latest)
+                    AppSettings.saveBluetoothDeviceDetectionAction(mContext, Preferences.DEVICE_ACTION_PLAY_LATEST);
             }
             dismiss();
         });
