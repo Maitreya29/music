@@ -14,7 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.signature.ObjectKey;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -25,6 +25,8 @@ import com.hardcodecoder.pulsemusic.activities.main.SettingsActivity;
 import com.hardcodecoder.pulsemusic.dialog.base.RoundedBottomSheetFragment;
 import com.hardcodecoder.pulsemusic.utils.UserInfo;
 
+import java.io.File;
+
 public class HomeBottomSheetFragment extends RoundedBottomSheetFragment {
 
     public static final String TAG = "HomeBottomSheetFragment";
@@ -34,7 +36,7 @@ public class HomeBottomSheetFragment extends RoundedBottomSheetFragment {
     private MaterialTextView mUserName;
 
     @NonNull
-    public static HomeBottomSheetFragment newInstance() {
+    public static HomeBottomSheetFragment getInstance() {
         return new HomeBottomSheetFragment();
     }
 
@@ -49,7 +51,7 @@ public class HomeBottomSheetFragment extends RoundedBottomSheetFragment {
         super.onViewCreated(view, savedInstanceState);
 
         mUserPic = view.findViewById(R.id.drawer_user_logo);
-        loadProfilePic();
+        loadProfilePic(UserInfo.getUserProfilePic(mUserPic.getContext()));
         mUserName = view.findViewById(R.id.drawer_user_name);
         if (null != getContext()) updateUserName(UserInfo.getUserName(getContext()));
 
@@ -72,12 +74,11 @@ public class HomeBottomSheetFragment extends RoundedBottomSheetFragment {
         });
     }
 
-    private void loadProfilePic() {
+    private void loadProfilePic(@NonNull File profilePicFile) {
         GlideApp.with(this)
-                .load(UserInfo.getUserProfilePic(mUserPic.getContext()))
+                .load(profilePicFile)
+                .signature(new ObjectKey(profilePicFile.lastModified()))
                 .error(R.drawable.def_avatar)
-                .skipMemoryCache(true)
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .circleCrop()
                 .into(mUserPic);
     }
@@ -133,7 +134,7 @@ public class HomeBottomSheetFragment extends RoundedBottomSheetFragment {
                 return;
             }
             if (null != getContext())
-                UserInfo.saveUserProfilePic(getContext(), data.getData(), result -> loadProfilePic());
+                UserInfo.saveUserProfilePic(getContext(), data.getData(), this::loadProfilePic);
         }
     }
 }

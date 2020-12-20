@@ -99,7 +99,7 @@ public class MainActivity extends ThemeActivity {
         Toolbar toolbar = findViewById(R.id.main_toolbar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(v -> {
-            HomeBottomSheetFragment homeBottomSheetFragment = HomeBottomSheetFragment.newInstance();
+            HomeBottomSheetFragment homeBottomSheetFragment = HomeBottomSheetFragment.getInstance();
             homeBottomSheetFragment.show(getSupportFragmentManager(), HomeBottomSheetFragment.TAG);
         });
         toolbar.setOnClickListener(v -> startActivity(new Intent(this, SearchActivity.class)));
