@@ -6,11 +6,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
-import android.view.animation.DecelerateInterpolator;
-import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -35,6 +30,10 @@ public class StylishNowPlayingScreen extends BaseNowPlayingScreen {
     private MaterialTextView mStartTime;
     private MaterialTextView mEndTime;
     private MaterialTextView mUpNext;
+
+    public StylishNowPlayingScreen() {
+        super(true);
+    }
 
     @NonNull
     public static StylishNowPlayingScreen getInstance() {
@@ -66,10 +65,7 @@ public class StylishNowPlayingScreen extends BaseNowPlayingScreen {
         mFavoriteBtn = view.findViewById(R.id.stylish_nps_favourite_btn);
         mUpNext = view.findViewById(R.id.stylish_nps_up_next);
 
-        view.findViewById(R.id.stylish_nps_close_btn).setOnClickListener(v -> {
-            if (null != getActivity())
-                getActivity().finish();
-        });
+        view.findViewById(R.id.stylish_nps_close_btn).setOnClickListener(v -> dismiss());
         mRepeatBtn.setOnClickListener(v -> toggleRepeatMode());
         mPlayPauseBtn.setOnClickListener(v -> togglePlayPause());
         mFavoriteBtn.setOnClickListener(v -> toggleFavorite());
@@ -78,36 +74,6 @@ public class StylishNowPlayingScreen extends BaseNowPlayingScreen {
         setUpSliderControls(mProgressSlider);
         setUpSkipControls(skipPrev, skipNext);
         setDefaultTintToPlayBtn(mPlayPauseBtn);
-
-        TranslateAnimation translateAnimation = new TranslateAnimation(
-                Animation.ABSOLUTE, 0,
-                Animation.ABSOLUTE, 0,
-                Animation.RELATIVE_TO_PARENT, 0.36f,
-                Animation.RELATIVE_TO_PARENT, 0);
-
-        translateAnimation.setDuration(500);
-        translateAnimation.setInterpolator(new DecelerateInterpolator(1.1f));
-
-        AlphaAnimation alphaAnimation = new AlphaAnimation(0, 1);
-        alphaAnimation.setInterpolator(new DecelerateInterpolator(1.1f));
-        alphaAnimation.setDuration(800);
-
-        AnimationSet set = new AnimationSet(false);
-        set.addAnimation(alphaAnimation);
-        set.addAnimation(translateAnimation);
-
-        mTitle.startAnimation(set);
-        mUpNext.startAnimation(set);
-        pager.startAnimation(set);
-        mSubTitle.startAnimation(set);
-        mProgressSlider.startAnimation(set);
-        mStartTime.startAnimation(set);
-        mEndTime.startAnimation(set);
-        mRepeatBtn.startAnimation(set);
-        skipPrev.startAnimation(set);
-        mPlayPauseBtn.startAnimation(set);
-        skipNext.startAnimation(set);
-        mFavoriteBtn.startAnimation(set);
     }
 
     @Override

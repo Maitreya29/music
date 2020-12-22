@@ -21,7 +21,7 @@ import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
 import com.hardcodecoder.pulsemusic.R;
-import com.hardcodecoder.pulsemusic.activities.main.MainActivity;
+import com.hardcodecoder.pulsemusic.activities.main.MainContentActivity;
 
 public class MediaNotificationManager {
 
@@ -36,12 +36,16 @@ public class MediaNotificationManager {
     private static final int REQUEST_CODE = 100;
 
     private final NotificationManager mNotificationManager;
+    private final Context mContext;
+    private final NotificationCallback mCallback;
     private PendingIntent mPlayIntent;
     private PendingIntent mPauseIntent;
     private PendingIntent mPreviousIntent;
     private PendingIntent mNextIntent;
     private PendingIntent mStopIntent;
     private PendingIntent pi;
+    private MediaController mController;
+    private MediaController.TransportControls mTransportControls;
     private final BroadcastReceiver controlsReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -67,10 +71,6 @@ public class MediaNotificationManager {
             }
         }
     };
-    private final Context mContext;
-    private MediaController mController;
-    private final NotificationCallback mCallback;
-    private MediaController.TransportControls mTransportControls;
     private MediaSession.Token mSessionToken;
     private boolean mStarted;
     private boolean mInitialised = false;
@@ -153,7 +153,7 @@ public class MediaNotificationManager {
         mNextIntent = PendingIntent.getBroadcast(mContext, REQUEST_CODE, new Intent(ACTION_NEXT).setPackage(pkg), PendingIntent.FLAG_CANCEL_CURRENT);
         mPreviousIntent = PendingIntent.getBroadcast(mContext, REQUEST_CODE, new Intent(ACTION_PREV).setPackage(pkg), PendingIntent.FLAG_CANCEL_CURRENT);
         if (mNotificationManager != null) mNotificationManager.cancelAll();
-        pi = PendingIntent.getActivity(mContext, REQUEST_CODE, new Intent(mContext, MainActivity.class), PendingIntent.FLAG_UPDATE_CURRENT);
+        pi = PendingIntent.getActivity(mContext, REQUEST_CODE, new Intent(mContext, MainContentActivity.class), PendingIntent.FLAG_UPDATE_CURRENT);
         mInitialised = true;
     }
 

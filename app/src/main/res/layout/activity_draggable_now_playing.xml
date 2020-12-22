@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/draggable_activity_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:fitsSystemWindows="true">
+
+    <FrameLayout
+        android:id="@+id/draggable_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/windowBackgroundColor"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone"
+        app:behavior_peekHeight="0dp"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+        <FrameLayout
+            android:id="@+id/expanded_content_frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <FrameLayout
+            android:id="@+id/peeking_content_frame"
+            android:layout_width="match_parent"
+            android:layout_height="48dp" />
+    </FrameLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_nav_bar"
+        style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_gravity="bottom"
+        android:background="?attr/windowBackgroundColor"
+        android:elevation="0dp"
+        android:translationZ="1dp"
+        app:elevation="0dp"
+        app:itemHorizontalTranslationEnabled="false"
+        app:itemIconSize="20dp"
+        app:itemTextAppearanceActive="@style/Appearance.Text.Subtitle2"
+        app:itemTextAppearanceInactive="@style/Appearance.Text.Subtitle2"
+        app:labelVisibilityMode="selected"
+        app:menu="@menu/bottom_navigation_items" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

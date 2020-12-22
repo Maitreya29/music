@@ -8,11 +8,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
-import android.view.animation.DecelerateInterpolator;
-import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -38,6 +33,10 @@ public class EdgeNowPlayingScreen extends BaseNowPlayingScreen {
     private MaterialTextView mEndTime;
     private MaterialTextView mSubTitle;
     private MaterialTextView mUpNext;
+
+    private EdgeNowPlayingScreen() {
+        super(false);
+    }
 
     @NonNull
     public static EdgeNowPlayingScreen getInstance() {
@@ -69,10 +68,7 @@ public class EdgeNowPlayingScreen extends BaseNowPlayingScreen {
         mFavoriteBtn = view.findViewById(R.id.edge_nps_favourite_btn);
         mUpNext = view.findViewById(R.id.edge_nps_up_next);
 
-        view.findViewById(R.id.edge_nps_close_btn).setOnClickListener(v -> {
-            if (null != getActivity())
-                getActivity().finish();
-        });
+        view.findViewById(R.id.edge_nps_close_btn).setOnClickListener(v -> dismiss());
         mRepeatBtn.setOnClickListener(v -> toggleRepeatMode());
         mPlayPauseBtn.setOnClickListener(v -> togglePlayPause());
         mFavoriteBtn.setOnClickListener(v -> toggleFavorite());
@@ -82,36 +78,6 @@ public class EdgeNowPlayingScreen extends BaseNowPlayingScreen {
         setUpSkipControls(skipPrev, skipNext);
         setDefaultTintToPlayBtn(mPlayPauseBtn);
         applySeekBarTint();
-
-        TranslateAnimation translateAnimation = new TranslateAnimation(
-                Animation.ABSOLUTE, 0,
-                Animation.ABSOLUTE, 0,
-                Animation.RELATIVE_TO_PARENT, 0.3f,
-                Animation.RELATIVE_TO_PARENT, 0);
-
-        translateAnimation.setDuration(500);
-        translateAnimation.setInterpolator(new DecelerateInterpolator());
-
-        AlphaAnimation alphaAnimation = new AlphaAnimation(0, 1);
-        alphaAnimation.setInterpolator(new DecelerateInterpolator(1.1f));
-        alphaAnimation.setDuration(800);
-
-        AnimationSet set = new AnimationSet(false);
-        set.addAnimation(alphaAnimation);
-        set.addAnimation(translateAnimation);
-
-        mTitle.startAnimation(set);
-        mUpNext.startAnimation(set);
-        pager.startAnimation(set);
-        mSubTitle.startAnimation(set);
-        mProgressSeekBar.startAnimation(set);
-        mStartTime.startAnimation(set);
-        mEndTime.startAnimation(set);
-        mRepeatBtn.startAnimation(set);
-        skipPrev.startAnimation(set);
-        mPlayPauseBtn.startAnimation(set);
-        skipNext.startAnimation(set);
-        mFavoriteBtn.startAnimation(set);
     }
 
     private void applySeekBarTint() {

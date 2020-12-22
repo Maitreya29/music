@@ -1,6 +1,5 @@
 package com.hardcodecoder.pulsemusic.fragments.main;
 
-import android.content.Intent;
 import android.media.MediaMetadata;
 import android.media.session.MediaController;
 import android.media.session.PlaybackState;
@@ -17,7 +16,6 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.PulseController;
 import com.hardcodecoder.pulsemusic.R;
-import com.hardcodecoder.pulsemusic.activities.main.NowPlayingScreenActivity;
 
 public class ControlsFragment extends Fragment {
 
@@ -77,11 +75,6 @@ public class ControlsFragment extends Fragment {
 
         skipNext.setOnClickListener(v1 -> mRemote.skipToNextTrack());
         skipPrev.setOnClickListener(v1 -> mRemote.skipToPreviousTrack());
-
-        v.setOnClickListener(v1 -> {
-            Intent intent = new Intent(getActivity(), NowPlayingScreenActivity.class);
-            startActivity(intent);
-        });
     }
 
     private void updateControls() {

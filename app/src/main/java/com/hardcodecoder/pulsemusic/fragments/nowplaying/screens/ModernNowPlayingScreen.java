@@ -6,11 +6,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
-import android.view.animation.DecelerateInterpolator;
-import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -35,6 +30,10 @@ public class ModernNowPlayingScreen extends BaseNowPlayingScreen {
     private MaterialTextView mEndTime;
     private MaterialTextView mSubTitle;
     private MaterialTextView mUpNext;
+
+    private ModernNowPlayingScreen() {
+        super(true);
+    }
 
     @NonNull
     public static ModernNowPlayingScreen getInstance() {
@@ -66,10 +65,7 @@ public class ModernNowPlayingScreen extends BaseNowPlayingScreen {
         mFavoriteBtn = view.findViewById(R.id.modern_nps_fav_btn);
         mUpNext = view.findViewById(R.id.modern_nps_up_next);
 
-        view.findViewById(R.id.modern_nps_close_btn).setOnClickListener(v -> {
-            if (null != getActivity())
-                getActivity().finishAfterTransition();
-        });
+        view.findViewById(R.id.modern_nps_close_btn).setOnClickListener(v -> dismiss());
         mRepeatBtn.setOnClickListener(v -> toggleRepeatMode());
         mPlayPauseBtn.setOnClickListener(v -> togglePlayPause());
         mFavoriteBtn.setOnClickListener(v -> toggleFavorite());
@@ -79,7 +75,7 @@ public class ModernNowPlayingScreen extends BaseNowPlayingScreen {
         setUpSkipControls(skipPrev, skipNext);
         setDefaultTintToPlayBtn(mPlayPauseBtn);
 
-        TranslateAnimation translateAnimation = new TranslateAnimation(
+        /*TranslateAnimation translateAnimation = new TranslateAnimation(
                 Animation.ABSOLUTE, 0,
                 Animation.ABSOLUTE, 0,
                 Animation.RELATIVE_TO_PARENT, 0.3f,
@@ -107,7 +103,7 @@ public class ModernNowPlayingScreen extends BaseNowPlayingScreen {
         mPlayPauseBtn.startAnimation(set);
         skipNext.startAnimation(set);
         mFavoriteBtn.startAnimation(set);
-        mUpNext.startAnimation(set);
+        mUpNext.startAnimation(set);*/
     }
 
     @Override

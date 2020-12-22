@@ -31,6 +31,7 @@ import com.google.android.material.slider.Slider;
 import com.hardcodecoder.pulsemusic.PMS;
 import com.hardcodecoder.pulsemusic.PulseController;
 import com.hardcodecoder.pulsemusic.R;
+import com.hardcodecoder.pulsemusic.activities.base.DraggableNowPlayingSheetActivity;
 import com.hardcodecoder.pulsemusic.dialog.CurrentQueueBottomSheet;
 import com.hardcodecoder.pulsemusic.helper.MediaProgressUpdateHelper;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
@@ -43,6 +44,7 @@ import java.util.Objects;
 
 public abstract class BaseNowPlayingScreen extends Fragment implements MediaProgressUpdateHelper.Callback {
 
+    private final boolean mRequiresStatusBarPadding;
     protected String mUpNextTitle = "";
     protected String mArtistTitle = "";
     private PulseController mPulseController;
@@ -91,9 +93,29 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
     private boolean mCurrentItemFavorite = false;
     private boolean mShouldAnimateMediaArt = false;
 
+    public BaseNowPlayingScreen(boolean requiresStatusBarPadding) {
+        mRequiresStatusBarPadding = requiresStatusBarPadding;
+    }
+
     @CallSuper
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        if (mRequiresStatusBarPadding) {
+            view.setOnApplyWindowInsetsListener((v, insets) -> {
+                v.setPadding(
+                        0,
+                        insets.getSystemWindowInsetTop(),
+                        0,
+                        0);
+                return insets.replaceSystemWindowInsets(
+                        insets.getSystemWindowInsetLeft(),
+                        0,
+                        insets.getStableInsetRight(),
+                        insets.getStableInsetBottom());
+            });
+            view.requestApplyInsets();
+        }
+
         mPulseController = PulseController.getInstance();
         mQueueManager = mPulseController.getQueueManager();
         mRemote = mPulseController.getRemote();
@@ -142,8 +164,6 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
     @CallSuper
     @Override
     public void onPlaybackStateChanged(PlaybackState state) {
-        if (null != state && state.getState() == PlaybackState.STATE_STOPPED)
-            finishActivity();
         updateRepeat();
     }
 
@@ -349,8 +369,10 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
         }
     }
 
-    private void finishActivity() {
-        if (getActivity() != null) getActivity().finish();
+    protected void dismiss() {
+        if (getActivity() != null) {
+            ((DraggableNowPlayingSheetActivity) getActivity()).collapseBottomSheet();
+        }
     }
 
     @Override

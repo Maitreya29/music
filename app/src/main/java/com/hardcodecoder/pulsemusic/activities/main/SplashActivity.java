@@ -57,7 +57,7 @@ public class SplashActivity extends ThemeActivity {
 
     private void startHomeActivity() {
         mHandler.postDelayed(() -> {
-            Intent i = new Intent(SplashActivity.this, MainActivity.class);
+            Intent i = new Intent(SplashActivity.this, MainContentActivity.class);
             startActivity(i);
             finish();
         }, 400);
