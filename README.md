@@ -94,6 +94,13 @@ It requires a lot of effort and time to develop an application, and that too kee
   </a>
 </p>
 
+## Contribution
+**Help us make Pulse Music even better**
+
+**Submit your changes/modifications/features via pull request.**
+
+**Looking to translate this app to your own language? Submit your translations on [Crowdin](https://crwd.in/pulse-music)**
+
 ## Releases
 [<img alt="Get it on Github" height="70" src="https://raw.githubusercontent.com/flocke/andOTP/master/assets/badges/get-it-on-github.png">](https://github.com/HardcodeCoder/PulseMusic/releases/)
 ### Latest release: [Here](https://github.com/HardcodeCoder/PulseMusic/releases/latest/)
