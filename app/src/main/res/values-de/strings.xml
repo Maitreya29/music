@@ -1,12 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Pulse Music</string>
-
     <string name="channel_name">Pulse Music Benachrichtigung</string>
-
     <string name="iv_content_desc">Albumcover</string>
     <string name="iv_btn_close_description">Schließen Button</string>
     <string name="iv_btn_action_description">Aktionsbutton</string>
     <string name="icon_desc">Icon Button</string>
+    <string name="fab_done_dec">Auswahl bestätigen</string>
+    <string name="fab_play_pause_desc">Medien-Wiedergabe- und Pause-Taste</string>
 
 
     <!-- Bottom Nav bar -->
@@ -18,6 +19,10 @@
 
 
     <!-- Home Fragment -->
+    <string name="home_favorites">Favoriten</string>
+    <string name="home_history">Verlauf</string>
+    <string name="home_select_track">Titelauswahl</string>
+    <string name="home_shuffle">Mischen</string>
     <string name="random">Für dich</string>
     <string name="new_in_library">Neu in der Bibliothek</string>
     <string name="top_artist">Top Künstler</string>
@@ -26,11 +31,9 @@
     <string name="tracks_not_found">Keine Titel gefunden</string>
 
 
-    <!-- Favorites Playlist Activity-->
-    <string name="no_favorites_tracks">Keine Titel gefunden. Füge welche zu deinen Favoriten dazu \\u2665</string>
-
-
-    <!-- Recent Activity-->
+    <!-- Select tracks default's-->
+    <string name="def_track_title">Unbekannt</string>
+    <string name="selected_track_load_failed_toast">Ausgewählten Titel kann nicht wiedergegeben werden, Laden fehlgeschlagen</string>
 
 
     <!-- Home drawer contents -->
@@ -59,6 +62,16 @@
     <string name="alphabet_desc">Z bis A</string>
     <string name="duration_asc">Länge ↑</string>
     <string name="duration_desc">Länge ↓</string>
+    <string name="date_added_asc">Hinzugefügtes Datum (älteste zuerst)</string>
+    <string name="date_added_desc">Datum hinzugefügt (neueste zuerst)</string>
+    <string name="date_modified_asc">Datum geändert (älteste zuerst)</string>
+    <string name="date_modified_desc">Datum geändert (neueste zuerst)</string>
+    <string name="album_track_number_asc">Tracknummer asc</string>
+    <string name="album_track_number_desc">Tracknummer desc</string>
+    <string name="album_artist_asc">Album Interpret asc</string>
+    <string name="album_artist_desc">Album Interpret desc</string>
+    <string name="album_first_year_asc">Album-Jahr asc</string>
+    <string name="album_first_year_desc">Album-Jahr-desc</string>
     <string name="add_playlist">Zur Playlist hinzufügen</string>
     <string name="equalizer_error">Standard Equalizer nicht gefunden</string>
     <string name="grid_count">Anzahl Spalten</string>
@@ -69,6 +82,7 @@
     <string name="four">Vier</string>
     <string name="five">Fünf</string>
     <string name="six">Sechs</string>
+    <string name="clear_duplicates">Duplikate entfernen</string>
 
 
     <!-- Options menu for list items -->
@@ -77,10 +91,13 @@
     <string name="add_to_queue">Zur Wiedergabeliste hinzufügen</string>
     <string name="add_to_queue_toast">Titel zur aktuellen Wiedergabeliste hinzugefügt</string>
     <string name="add_to_playlist">Zur Wiedergabeliste hinzufügen</string>
+    <string name="go_to_album">Gehe zum Album</string>
+    <string name="go_to_artist">Gehe zu Interpret</string>
     <string name="info">Titel Informationen</string>
 
 
     <!-- Bottom sheet dialog -->
+    <string name="enter_name">Gib deinen Namen ein</string>
     <string name="enter_name_toast">Bitte gib deinen Namen ein</string>
     <string name="create_playlist">Wiedergabeliste erschaffen</string>
     <string name="edit_playlist">Wiedergabelistentitel bearbeiten</string>
@@ -89,24 +106,50 @@
     <string name="cancel">Abbrechen</string>
     <string name="atp_title">Titel hinzufügen zu\\.\\.\\.</string>
     <string name="atp_no_user_playlist_found">Keine Wiedergabeliste gefunden\nKlicke auf den Hinzufügen-Button um eine zu erschaffen</string>
+    <string name="atp_track_added_toast">Titel erfolgreich zur Wiedergabeliste hinzugefügt</string>
     <string name="atp_track_add_error_toast">Fehler beim Hinzufügen des Titels zur Wiedergabeliste</string>
 
 
-    <!-- Playlist Activity -->
+    <!-- Playlist tracks Activity -->
     <string name="no_playlist_tracks_found">Keine Titel in der Wiedergabeliste gefunden\n\\u2639</string>
     <string name="item_removed">Titel von der Wiedergabeliste entfernt !!!</string>
     <string name="snack_bar_action_undo">Rückgängig machen</string>
+    <string name="playlist_play">Abspielen</string>
+    <string name="playlist_add_more">Hinzufügen</string>
+    <string name="playlist_clear_all">Alles löschen</string>
+    <string name="playlist_shuffled_success_toast">Wiedergabeliste erfolgreich gemischt</string>
+    <string name="playlist_up_next_title">Als nächstes</string>
+    <string name="playlist_current_queue_list_title">Aktuelle Warteschlange</string>
+
+
+    <!-- Favorites Playlist Activity-->
+    <string name="favorites_playlist_title">Deine Favoriten</string>
+    <string name="no_favorites_tracks">Keine Titel gefunden. Füge welche zu deinen Favoriten dazu \\u2665</string>
+
+
+    <!-- Recent Activity-->
+    <string name="history_playlist_title">Zuletzt gespielt</string>
+    <string name="no_history_tracks">Keine Einträge gefunden\n\u2639</string>
 
 
     <!-- Now Playing Activity -->
     <string name="now_playing">Jetzt am Spielen</string>
     <string name="added_to_fav">Titel zu den Favoriten hinzugefügt</string>
     <string name="removed_from_fav">Titel von den Favoriten entfernt</string>
+    <string name="cannot_add_to_fav">Track kann nicht zu Favoriten hinzugefügt werden</string>
     <string name="up_next_title_none">Playlist abgeschlossen</string>
 
 
+    <!-- Media Folder Chooser Activity -->
+    <string name="folder_chooser_toolbar_title">Ordner auswählen</string>
+    <string name="folder_chooser_empty_folders_list">Keine Medienordner im Speicher gefunden\n\u2639</string>
+
+
     <!-- Details Activity -->
+    <string name="num_artist_tracks">Interpret hat ●</string>
+    <string name="num_album_tracks">Album enthält ●</string>
     <string name="tracks">Titel</string>
+    <string name="album">alben</string>
 
 
     <!-- Song info dialog -->
@@ -126,21 +169,42 @@
 
     <!-- Settings Activity -->
     <string name="settings_title">Einstellungen</string>
+
+
     <!-- Category -->
+    <string name="general">Allgemein</string>
+    <string name="general_desc">Grundeinstellungen konfigurieren</string>
     <string name="look_and_feel">Erscheinungsbild</string>
     <string name="look_and_feel_desc">Ändere das Theme und Weiteres</string>
-
     <string name="now_playing_title">Jetzt am Spielen</string>
     <string name="now_playing_desc">Passe \"Jetzt am Spielen\" an</string>
-
     <string name="contributors">Mitgewirkte</string>
     <string name="contributors_desc">Lerne die Entwickler kennen</string>
-
     <string name="donations">Unterstütze die Entwicklung</string>
     <string name="donations_desc">Spende etwas, um die Entwickler zu unterstützen</string>
-
     <string name="about">Über</string>
     <string name="about_desc">App Version, Soziale Links</string>
+
+
+    <!-- General Section -->
+    <string name="general_category_loader_section_title">Lader</string>
+    <string name="restart_dialog_title">App Neustart</string>
+    <string name="restart_dialog_desc">Die App muss neu gestartet werden, damit die Änderungen wirksam werden</string>
+    <string name="restart_dialog_positive_btn_title">Neustart</string>
+    <string name="restart_dialog_negative_btn_title">Später erledigen</string>
+    <string name="ignored_folder_title">Ignorierte Ordner auswählen</string>
+    <string name="ignored_folder_desc">Ordner hinzufügen oder entfernen, um Titel von der Anzeige in der Bibliothek auszuschließen</string>
+    <string name="ignored_folder_picker_title">Ordner auswählen</string>
+    <string name="ignored_folder_picker_empty_text">Ignorierte Liste ist leer</string>
+    <string name="ignored_folder_picker_add_success">Ordner zur Ignorierliste hinzugefügt</string>
+    <string name="ignored_folder_picker_add_failed">Ordner zur ignorierten Liste konnte nicht hinzugefügt werden</string>
+    <string name="ignored_folder_picker_remove_success">Ordner von ignorierter Liste gelöscht</string>
+    <string name="duration_filter_title">Filterdauer</string>
+    <string name="duration_filter_desc">Filter-Track basierend auf der Länge der Spuren. Tracks mit einer Länge größer als dies in der Bibliothek angezeigt wird</string>
+    <string name="duration_filter_unit">sek</string>
+    <string name="remember_last_played_option_title">Letzten Artikel merken</string>
+    <string name="remember_last_played_option_text">Zuletzt gespielter Track wird beim Neustart der App gespeichert und angezeigt</string>
+
 
     <!-- Look and feel section -->
     <string name="laf_category_theme">Theme</string>
@@ -150,29 +214,24 @@
     <string name="laf_category_enable_dark_mode_text">Aktivier das bevorzugte dunkle Theme direkt</string>
     <string name="laf_category_enable_auto_mode_title">Ändere das Theme automatisch</string>
     <string name="laf_category_enable_auto_mode_text">Ändere das helle und bevorzugte dunkle Theme basierend auf der Tageszeit</string>
-
     <string name="laf_category_colors">Farben</string>
     <string name="laf_category_select_color">Wähle eine Akzentfarbe</string>
     <string name="laf_category_select_color_desc">Wähle eine Akzentfarbe für die App</string>
-
     <string name="laf_accents_picker_title">Wähle eine Akzentfarbe</string>
-
     <string name="laf_accents_picker_desaturated_title">Entsättigte Farben</string>
     <string name="laf_accents_picker_accent_desaturated_desc">Entsättigt Farben, wenn das dunkle Theme aktiv ist</string>
-
     <string name="dark_theme_name_gray">Nur Grau</string>
     <string name="dark_theme_name_kinda_dark">Standard dunkles Farbschema</string>
     <string name="dark_theme_name_pure_black">Finsterniss</string>
-
     <string name="select_dark_theme">Ändere das bevorzugte dunkle Theme</string>
     <string name="set">Setze</string>
+    <string name="custom">Benutzerdefiniert</string>
+    <string name="custom_accent_title">Benutzerdefinierte Farbe anpassen</string>
 
 
     <!-- Now playing settings -->
     <string name="now_playing_album_style_section_title">Stil</string>
     <string name="now_playing_screen_style_desc">Wähle den \"Jetzt am Spielen\" Stil</string>
-    <!--    <string name="now_playing_album_decoration_title">Enable gradient overlay</string>-->
-    <!--    <string name="now_playing_album_decoration_desc">Adds a fading overlay on top of album card</string>-->
     <string name="now_playing_screen_style_title">\"Jetzt am Spielen\" Stil</string>
     <string name="now_playing_screen_style_modern">Modern</string>
     <string name="now_playing_screen_style_stylish">Stylish</string>
@@ -186,11 +245,9 @@
     <string name="now_playing_cover_corner_radius_br">Unten rechts</string>
     <string name="now_playing_cover_corner_radius_unit">dp</string>
 
+
     <!-- Contributors -->
     <string name="lead_developer_title">Führender Entwickler</string>
-    <string name="lead_developer_1" translatable="false">Ashutosh Patoa</string>
-    <string name="lead_developer_user_name" translatable="false">\@HardcodeCoder</string>
-
     <!-- Donations -->
     <string name="donation_category_head">Unterstütze</string>
     <string name="donation_title">Gefällt dir Pulse Music?</string>
@@ -206,14 +263,10 @@
     <string name="about_app_build_code">Build Code</string>
     <string name="about_check_source_code">Quelle auf Github</string>
 
+
     <!-- Profile Links -->
-    <string name="profile_icon_link" translatable="false">https://pbs.twimg.com/profile_images/1159497870514376704/U5JEGSc6_400x400.jpg</string>
     <string name="social_links">Soziale Links</string>
-    <string name="github_link" translatable="false">https://github.com/HardcodeCoder</string>
-    <string name="source_code_link" translatable="false">https://github.com/HardcodeCoder/PulseMusic</string>
-    <string name="facebook_link" translatable="false">https://www.facebook.com/ashutosh.patoa.5</string>
-    <string name="twitter_link" translatable="false">https://www.twitter.com/hardcodecoder</string>
-    <string name="telegram_link" translatable="false">https://t.me/HardcodeCoder</string>
+
 
     <!-- Accents -->
     <string name="exodus_fruit">Exodus Frucht</string>
@@ -225,24 +278,34 @@
     <string name="sunkist">Sunkist</string>
     <string name="blue_pink">Blaues Pink</string>
 
+
+    <!-- Custom accents dialog -->
+    <string name="hex_color_hint">Hex-Farbcode</string>
+    <string name="hex_color_error">Ungültige Farbe</string>
+    <string name="r_channel_label">R</string>
+    <string name="g_channel_label">G</string>
+    <string name="b_channel_label">B</string>
+    <string name="apply">Anwenden</string>
+    <string name="presets">Voreinstellungen</string>
+
+
     <!-- App shortcuts -->
     <string name="shortcut_shuffle_label">Mischen</string>
     <string name="shortcut_shuffle_label_long">Gemischt</string>
-
     <string name="shortcut_latest_label">Letzten Titel</string>
     <string name="shortcut_latest_label_long">Letzten Titel</string>
-
     <string name="shortcut_suggested_label">Für dich</string>
     <string name="shortcut_suggested_label_long">Für dich</string>
-    <string name="enter_name">Gib deinen Namen ein</string>
-    <string name="atp_track_added_toast">Titel erfolgreich zur Wiedergabeliste hinzugefügt</string>
-    <string name="apply">Anwenden</string>
-    <string name="presets">Voreinstellungen</string>
     <string name="audio">Audio</string>
     <string name="audio_desc">Ändere Audio Einstellungen</string>
+    <string name="audio_category_auto_play">Automatisch abspielen</string>
+    <string name="audio_category_toggle_bluetooth_title">Bluetooth-Auto-Wiedergabe</string>
+    <string name="audio_category_toggle_bluetooth_text">Startet Musik beim Verbinden mit Bluetooth-Gerät</string>
     <string name="audio_category_select_bluetooth_action_title">Wähle eine Bluetooth Abspielaktion</string>
     <string name="audio_category_select_bluetooth_action_text">Wähl aus, was für Musik bei Verbindung eines Bluetooth-Gerätes abgespielt wird</string>
+    <string name="audio_detection_channel_name">Audio-Geräteerkennung</string>
     <string name="select_bluetooth_action">Wähle die bevorzugte Bluetooth-Aktion</string>
     <string name="radio_btn_shuffle">Spiel vermischte Musik</string>
+    <string name="radio_btn_latest">Neueste Titel abspielen</string>
     <string name="radio_btn_suggested">Spiel vorgeschlagene Musik</string>
 </resources>
