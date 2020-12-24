@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:clipChildren="false"
     android:clipToPadding="false"
-    android:fitsSystemWindows="false">
+    android:fitsSystemWindows="false"
+    android:paddingBottom="56dp">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/main_app_bar"

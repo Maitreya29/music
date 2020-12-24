@@ -43,6 +43,8 @@ public abstract class DraggableNowPlayingSheetActivity extends ControllerActivit
     private Fragment mExpandedFragment = null;
     private BottomNavigationView mBottomNavBar;
     private boolean mPendingUpdateExpandedFragment = false;
+    private int mPaddingBottomDefault;
+    private int mPaddingBottomWhenPeeking;
     private int mCurrentOrientation;
     private int mDefaultSystemUiVisibility = -1;
 
@@ -77,6 +79,9 @@ public abstract class DraggableNowPlayingSheetActivity extends ControllerActivit
         final int peekHeight = DimensionsUtil.getDimensionPixelSize(this, 104);
         mBehaviour.setPeekHeight(peekHeight, true);
         mBehaviour.setHideable(true);
+        mPaddingBottomDefault = DimensionsUtil.getDimensionPixelSize(this, 56);
+        mPaddingBottomWhenPeeking = peekHeight;
+        updateMainContentBottomPadding(mPaddingBottomWhenPeeking);
 
         mPeekingFrame = findViewById(R.id.peeking_content_frame);
         mExpandedFrame = findViewById(R.id.expanded_content_frame);
@@ -112,6 +117,7 @@ public abstract class DraggableNowPlayingSheetActivity extends ControllerActivit
                         break;
                     case BottomSheetBehavior.STATE_HIDDEN:
                         mRemote.stop();
+                        updateMainContentBottomPadding(mPaddingBottomDefault);
                         updateBottomBarElevation(false);
                         break;
                     case BottomSheetBehavior.STATE_DRAGGING:
@@ -209,13 +215,13 @@ public abstract class DraggableNowPlayingSheetActivity extends ControllerActivit
     protected void updateDraggableSheet(boolean show) {
         if (show) {
             if (null == mBehaviour) initializeBottomSheet();
-            mBehaviour.setState(BottomSheetBehavior.STATE_COLLAPSED);
-            int bottomPaddingWhenPeeking = DimensionsUtil.getDimensionPixelSize(this, 104);
-            updateMainContentBottomPadding(bottomPaddingWhenPeeking);
+            if (mBehaviour.getState() != BottomSheetBehavior.STATE_HIDDEN) return;
+            collapseBottomSheet();
+            updateMainContentBottomPadding(mPaddingBottomWhenPeeking);
         } else {
+            if (mBehaviour.getState() == BottomSheetBehavior.STATE_HIDDEN) return;
             mBehaviour.setState(BottomSheetBehavior.STATE_HIDDEN);
-            int bottomNavBarHeight = DimensionsUtil.getDimensionPixelSize(this, 56);
-            updateMainContentBottomPadding(bottomNavBarHeight);
+            updateMainContentBottomPadding(mPaddingBottomDefault);
         }
     }
 
