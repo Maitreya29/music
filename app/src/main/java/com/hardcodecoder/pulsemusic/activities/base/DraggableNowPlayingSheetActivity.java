@@ -28,6 +28,7 @@ import com.hardcodecoder.pulsemusic.fragments.nowplaying.screens.LandscapeModeNo
 import com.hardcodecoder.pulsemusic.fragments.nowplaying.screens.ModernNowPlayingScreen;
 import com.hardcodecoder.pulsemusic.fragments.nowplaying.screens.StylishNowPlayingScreen;
 import com.hardcodecoder.pulsemusic.themes.ThemeColors;
+import com.hardcodecoder.pulsemusic.themes.ThemeManagerUtils;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 import com.hardcodecoder.pulsemusic.utils.DimensionsUtil;
 
@@ -189,7 +190,8 @@ public abstract class DraggableNowPlayingSheetActivity extends ControllerActivit
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             Window w = getWindow();
             if (setLightIcons) {
-                mDefaultSystemUiVisibility = w.getDecorView().getSystemUiVisibility();
+                if (mDefaultSystemUiVisibility == -1)
+                    mDefaultSystemUiVisibility = w.getDecorView().getSystemUiVisibility();
                 w.getDecorView().setSystemUiVisibility(mDefaultSystemUiVisibility & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
             } else {
                 // Instead of toggling back the View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
@@ -209,7 +211,8 @@ public abstract class DraggableNowPlayingSheetActivity extends ControllerActivit
     }
 
     private boolean needsLightStatusBarIcons() {
-        return null != mExpandedFragment && mExpandedFragment instanceof EdgeNowPlayingScreen;
+        return null != mExpandedFragment && !ThemeManagerUtils.isDarkModeEnabled()
+                && mExpandedFragment instanceof EdgeNowPlayingScreen;
     }
 
     protected void updateDraggableSheet(boolean show) {
