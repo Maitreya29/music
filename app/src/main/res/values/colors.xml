@@ -2,6 +2,9 @@
 <resources>
     <color name="ic_launcher_background">#6c5ce7</color>
 
+    <color name="translucent">#5C000000</color>
+    <color name="translucent_rgb">#a3a3a3</color>
+
     <!-- ********************************************* -->
     <!-- *********** COLORS FOR LIGHT MODE *********** -->
     <color name="lightColorBackground">#FFFFFF</color>

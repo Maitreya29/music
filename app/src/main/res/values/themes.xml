@@ -27,9 +27,8 @@
     <style name="BaseThemeLight" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
-        <item name="android:statusBarColor">@color/md_grey_500</item>
-        <item name="statusBarScrim">@android:color/transparent</item>
-        <item name="navigationBarColor">@color/md_grey_500</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="navigationBarColor">?attr/windowBackgroundColor</item>
         <item name="android:navigationBarColor">?attr/navigationBarColor</item>
         <item name="android:windowAnimationStyle">@style/WindowTransitions</item>
         <item name="android:windowContentTransitions">true</item>
@@ -40,7 +39,6 @@
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="statusBarScrim">@android:color/transparent</item>
         <item name="navigationBarColor">?attr/windowBackgroundColor</item>
         <item name="android:navigationBarColor">?attr/navigationBarColor</item>
         <item name="android:windowAnimationStyle">@style/WindowTransitions</item>
@@ -49,7 +47,9 @@
     </style>
 
     <style name="ThemeLight" parent="BaseThemeLight">
-        <item name="statusBarScrim">@color/md_grey_500</item>
+        <item name="android:statusBarColor">@color/translucent</item>
+        <item name="navigationBarColor">@color/translucent_rgb</item>
+        <item name="android:navigationBarColor">?attr/navigationBarColor</item>
     </style>
 
     <style name="ThemeDark" parent="BaseThemeDark" />

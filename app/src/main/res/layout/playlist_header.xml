@@ -21,7 +21,7 @@
         app:expandedTitleTextAppearance="@style/TextAppearanceExpanded"
         app:scrimAnimationDuration="@android:integer/config_shortAnimTime"
         app:scrimVisibleHeightTrigger="300dp"
-        app:statusBarScrim="?attr/statusBarScrim"
+        app:statusBarScrim="@android:color/transparent"
         app:toolbarId="@id/playlist_toolbar"
         tools:title="Your playlist">
 
