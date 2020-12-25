@@ -62,7 +62,7 @@ public class PulseController {
     public void setPlaylist(@NonNull List<MusicModel> playlist, int startIndex) {
         mQueueManager.setQueue(playlist, startIndex);
         for (Callback callback : mCallbacksList)
-            callback.onTrackListChanged(playlist);
+            mMainHandler.post(() -> callback.onTrackListChanged(playlist));
     }
 
     public void playNext(@NonNull MusicModel item) {
