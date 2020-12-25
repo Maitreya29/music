@@ -4,6 +4,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.media.MediaMetadata;
 import android.media.session.PlaybackState;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,6 +56,10 @@ public class EdgeNowPlayingScreen extends BaseNowPlayingScreen {
         setUpPagerAlbumArt(pager,
                 R.layout.edge_nps_media_art,
                 null);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            view.findViewById(R.id.status_bar_translucent_overlay).setVisibility(View.VISIBLE);
+        }
 
         mTitle = view.findViewById(R.id.edge_nps_title);
         mSubTitle = view.findViewById(R.id.edge_nps_sub_title);
