@@ -62,12 +62,6 @@
         <activity android:name=".activities.playlist.CurrentQueuePlaylist" />
         <activity android:name=".activities.main.MediaFolderChooserActivity" />
 
-        <!-- Set transparent theme when activity starts to prevent solid colored background -->
-        <activity
-            android:name=".activities.main.NowPlayingScreenActivity"
-            android:launchMode="singleTop"
-            android:theme="@style/TransparentThemeOverlay" />
-
         <receiver android:name=".receivers.BootCompletedReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />

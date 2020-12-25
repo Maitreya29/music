@@ -80,13 +80,4 @@
         <item name="colorSurface">@color/blackColorSurface</item>
         <item name="colorOnPrimary">@color/blackColorOnPrimary</item>
     </style>
-
-    <style name="TransparentThemeOverlay">
-        <item name="android:background">@android:color/transparent</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:colorBackgroundCacheHint">@null</item>
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowAnimationStyle">@style/WindowTransitions</item>
-    </style>
 </resources>
