@@ -48,6 +48,8 @@ public abstract class DraggableNowPlayingSheetActivity extends ControllerActivit
     private int mPaddingBottomWhenPeeking;
     private int mCurrentOrientation;
     private int mDefaultSystemUiVisibility = -1;
+    private boolean mSafeToCommit = true;
+    private boolean mPendingInitializeBottomSheet = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -72,7 +74,12 @@ public abstract class DraggableNowPlayingSheetActivity extends ControllerActivit
         });
     }
 
-    private void initializeBottomSheet() {
+    private boolean initializeBottomSheet() {
+        if (!mSafeToCommit) {
+            mPendingInitializeBottomSheet = true;
+            return false;
+        }
+
         FrameLayout draggableFrame = findViewById(R.id.draggable_frame);
         draggableFrame.setVisibility(View.VISIBLE);
 
@@ -143,9 +150,16 @@ public abstract class DraggableNowPlayingSheetActivity extends ControllerActivit
             }
         };
         mBehaviour.addBottomSheetCallback(mBehaviourCallback);
+        mPendingInitializeBottomSheet = false;
+        return true;
     }
 
     private void createExpandedFragment(boolean force) {
+        if (!mSafeToCommit) {
+            mPendingUpdateExpandedFragment = true;
+            return;
+        }
+
         if ((null != mExpandedFragment && !force) || null == mBehaviour) return;
         String tag;
         mCurrentOrientation = getResources().getConfiguration().orientation;
@@ -171,7 +185,8 @@ public abstract class DraggableNowPlayingSheetActivity extends ControllerActivit
         }
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.expanded_content_frame, mExpandedFragment, tag)
-                .commit();
+                .commitAllowingStateLoss();
+        mPendingUpdateExpandedFragment = false;
     }
 
     private void updateBottomBarElevation(boolean isPeeking) {
@@ -217,7 +232,7 @@ public abstract class DraggableNowPlayingSheetActivity extends ControllerActivit
 
     protected void updateDraggableSheet(boolean show) {
         if (show) {
-            if (null == mBehaviour) initializeBottomSheet();
+            if (null == mBehaviour && !initializeBottomSheet()) return;
             if (mBehaviour.getState() != BottomSheetBehavior.STATE_HIDDEN) return;
             collapseBottomSheet();
             updateMainContentBottomPadding(mPaddingBottomWhenPeeking);
@@ -241,7 +256,9 @@ public abstract class DraggableNowPlayingSheetActivity extends ControllerActivit
     @Override
     protected void onStart() {
         super.onStart();
-        if (mPendingUpdateExpandedFragment) createExpandedFragment(true);
+        mSafeToCommit = true;
+        if (mPendingInitializeBottomSheet) initializeBottomSheet();
+        else if (mPendingUpdateExpandedFragment) createExpandedFragment(true);
     }
 
     @Override
@@ -255,7 +272,13 @@ public abstract class DraggableNowPlayingSheetActivity extends ControllerActivit
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, @NonNull String key) {
         if (key.equals(Preferences.NOW_PLAYING_SCREEN_STYLE_KEY))
-            mPendingUpdateExpandedFragment = true;
+            createExpandedFragment(true);
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        mSafeToCommit = false;
+        super.onSaveInstanceState(outState);
     }
 
     @Override
