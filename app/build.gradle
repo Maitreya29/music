@@ -4,13 +4,13 @@ import java.time.format.DateTimeFormatter
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion '29.0.3'
+    compileSdkVersion 30
+    buildToolsVersion '30.0.3'
 
     defaultConfig {
         applicationId "com.hardcodecoder.pulsemusic"
         minSdkVersion 21
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 210040003
         versionName "4.0.3"
         vectorDrawables.useSupportLibrary = true
