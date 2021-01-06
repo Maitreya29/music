@@ -36,6 +36,18 @@
             android:layout="@layout/home_category_list" />
 
         <ViewStub
+            android:id="@+id/stub_rediscover_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout="@layout/home_category_title" />
+
+        <ViewStub
+            android:id="@+id/stub_rediscover_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout="@layout/home_category_list" />
+
+        <ViewStub
             android:id="@+id/stub_new_in_store_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

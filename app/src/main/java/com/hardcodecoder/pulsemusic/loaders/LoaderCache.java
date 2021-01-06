@@ -10,6 +10,7 @@ import java.util.List;
 public class LoaderCache {
 
     private static List<MusicModel> mAllTracksList = null;
+    private static List<MusicModel> mRediscoverList = null;
     private static List<MusicModel> mSuggestions = null;
     private static List<MusicModel> mLatestTracks = null;
 
@@ -26,6 +27,19 @@ public class LoaderCache {
         }
         if (null != allTracksList)
             mAllTracksList = new ArrayList<>(allTracksList);
+    }
+
+    @Nullable
+    public static List<MusicModel> getRediscoverList() { return mRediscoverList; }
+
+    static void setRediscoverList(List<MusicModel> rediscoverList) {
+        if (null != mRediscoverList) {
+            // Let gc do its work
+            mRediscoverList.clear();
+            mRediscoverList = null;
+        }
+        if (null != rediscoverList)
+            mRediscoverList = new ArrayList<>(rediscoverList);
     }
 
     @Nullable

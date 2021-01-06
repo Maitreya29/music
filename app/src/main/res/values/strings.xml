@@ -26,6 +26,7 @@
     <string name="home_select_track">Track picker</string>
     <string name="home_shuffle">Shuffle</string>
     <string name="random">For you</string>
+    <string name="rediscover">Rediscover</string>
     <string name="new_in_library">New in store</string>
     <string name="top_artist">Top artists</string>
     <string name="top_albums">Top albums</string>

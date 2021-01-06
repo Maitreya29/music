@@ -92,6 +92,12 @@ public class MusicModel implements Serializable {
 
     @Override
     public int hashCode() {
-        return mTrackPath.hashCode();
+        // The id is unique for each track
+        return mId;
+    }
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        return obj instanceof MusicModel && mId == ((MusicModel) obj).getId();
     }
 }

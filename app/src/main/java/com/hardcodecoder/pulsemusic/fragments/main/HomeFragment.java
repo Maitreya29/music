@@ -62,7 +62,14 @@ public class HomeFragment extends SmoothTransactionFragments {
     public void setUpContent(@NonNull View view) {
         if (null != LoaderCache.getAllTracksList() && !LoaderCache.getAllTracksList().isEmpty() && null != getActivity()) {
             LoaderHelper.loadTopAlbums(result -> loadTopAlbums(view, result));
-            LoaderHelper.loadSuggestionsList(result -> loadSuggestions(view, result));
+            LoaderHelper.loadSuggestionsList(result -> {
+                loadSuggestions(view, result);
+                // We kick start rediscover load after loading suggestions
+                // so that we can use Suggestions as exclusion list
+                LoaderHelper.loadRediscoverSection(LoaderCache.getSuggestions(),
+                        rediscoverList -> loadRediscoverSection(view, rediscoverList));
+            });
+
             LoaderHelper.loadLatestTracks(result -> loadLatestTracks(view, result));
             LoaderHelper.loadTopArtist(result -> loadTopArtists(view, result));
         } else {
@@ -133,6 +140,31 @@ public class HomeFragment extends SmoothTransactionFragments {
         }, BASE_DELAY_MILLS);
     }
 
+    private void loadRediscoverSection(@NonNull View view, @Nullable List<MusicModel> list) {
+        if (list == null || list.isEmpty()) return;
+        view.postOnAnimationDelayed(() -> {
+            MaterialTextView suggestionsTitle = (MaterialTextView) ((ViewStub) view.findViewById(R.id.stub_rediscover_title)).inflate();
+            suggestionsTitle.setText(getString(R.string.rediscover));
+            RecyclerView rv = (RecyclerView) ((ViewStub) view.findViewById(R.id.stub_rediscover_list)).inflate();
+            rv.setLayoutManager(new LinearLayoutManager(rv.getContext(), LinearLayoutManager.HORIZONTAL, false));
+            rv.setHasFixedSize(true);
+            HomeSectionAdapter adapter = new HomeSectionAdapter(getLayoutInflater(), list, new SimpleItemClickListener() {
+                @Override
+                public void onItemClick(int position) {
+                    mPulseController.setPlaylist(list, position);
+                    mRemote.play();
+                }
+
+                @Override
+                public void onOptionsClick(int position) {
+                    if (null != getActivity())
+                        UIHelper.showMenuForLibraryTracks(getActivity(), getActivity().getSupportFragmentManager(), list.get(position));
+                }
+            });
+            rv.setAdapter(adapter);
+        }, BASE_DELAY_MILLS * 2);
+    }
+
     private void loadLatestTracks(@NonNull View view, @Nullable List<MusicModel> list) {
         if (list == null || list.isEmpty()) return;
         view.postOnAnimationDelayed(() -> {
@@ -155,7 +187,7 @@ public class HomeFragment extends SmoothTransactionFragments {
                 }
             });
             rv.setAdapter(adapter);
-        }, BASE_DELAY_MILLS * 2);
+        }, BASE_DELAY_MILLS * 3);
     }
 
     private void loadTopArtists(@NonNull View view, @Nullable List<TopArtistModel> list) {
@@ -171,7 +203,7 @@ public class HomeFragment extends SmoothTransactionFragments {
                     NavigationUtil.goToArtist(getActivity(), sharedView, list.get(position).getArtistName());
             });
             rv.setAdapter(adapter);
-        }, BASE_DELAY_MILLS * 3);
+        }, BASE_DELAY_MILLS * 4);
     }
 
     private void pickMedia() {

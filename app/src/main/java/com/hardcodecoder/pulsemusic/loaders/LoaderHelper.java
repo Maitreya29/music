@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
 import com.hardcodecoder.pulsemusic.TaskRunner;
@@ -51,6 +52,12 @@ public class LoaderHelper {
         if (null != LoaderCache.getSuggestions())
             callback.onComplete(LoaderCache.getSuggestions());
         else TaskRunner.executeAsync(new SuggestionsLoader(), callback);
+    }
+
+    public static void loadRediscoverSection(@Nullable List<MusicModel> exclusionsList, @NonNull Callback<List<MusicModel>> callback) {
+        if (null != LoaderCache.getRediscoverList())
+            callback.onComplete(LoaderCache.getRediscoverList());
+        else TaskRunner.executeAsync(new RediscoverLoader(exclusionsList), callback);
     }
 
     public static void loadRecentTracks(@NonNull Callback<List<MusicModel>> callback) {

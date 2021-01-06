@@ -49,18 +49,24 @@ public class HistoryProvider {
         });
     }
 
+    @Nullable
+    public List<MusicModel> getHistoryTracks() {
+        List<MusicModel> historyTracks = null;
+        File[] files = new File(mHistoryDir).listFiles();
+        if (null != files && files.length > 0) {
+            sortHistory(files);
+            List<Integer> trackIds = new ArrayList<>();
+            for (File file : files)
+                trackIds.add(Integer.parseInt(file.getName()));
+            historyTracks = DataModelHelper.getModelObjectFromId(trackIds);
+        }
+        return historyTracks;
+    }
+
     public void getHistoryTracks(@NonNull Callback<List<MusicModel>> callback) {
         TaskRunner.executeAsync(() -> {
-            File[] files = new File(mHistoryDir).listFiles();
-            if (null != files && files.length > 0) {
-                sortHistory(files);
-                List<Integer> trackIds = new ArrayList<>();
-                for (File file : files)
-                    trackIds.add(Integer.parseInt(file.getName()));
-
-                List<MusicModel> historyTracks = DataModelHelper.getModelObjectFromId(trackIds);
-                mHandler.post(() -> callback.onComplete(historyTracks));
-            } else mHandler.post(() -> callback.onComplete(null));
+            List<MusicModel> historyTracks = getHistoryTracks();
+            mHandler.post(() -> callback.onComplete(historyTracks));
         });
     }
 
