@@ -19,11 +19,9 @@ android {
     }
     buildTypes {
         debug {
-            versionNameSuffix "-Debug"
             buildConfigField "String", "BUILD_DATE", getBuildTime()
         }
         release {
-            versionNameSuffix "-Release"
             buildConfigField "String", "BUILD_DATE", getBuildTime()
             minifyEnabled true
             shrinkResources true
