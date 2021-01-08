@@ -20,6 +20,7 @@ public class SettingsDonationFragment extends SettingsBaseFragment {
 
     public static final String TAG = SettingsDonationFragment.class.getSimpleName();
 
+    @NonNull
     public static SettingsDonationFragment getInstance() {
         return new SettingsDonationFragment();
     }

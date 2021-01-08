@@ -15,7 +15,7 @@ public class CustomBottomSheetFragment extends BottomSheetDialogFragment impleme
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        return new CustomBottomSheet(getContext(), this);
+        return new CustomBottomSheet(requireContext(), this);
     }
 
     @Override

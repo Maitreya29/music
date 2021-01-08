@@ -33,38 +33,35 @@ public class NowPlayingStyleChooser extends RoundedBottomSheetFragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        if (null != getContext()) {
-            RadioGroup radioGroup = view.findViewById(R.id.selector_radio_button_group);
-            int currentStyle = AppSettings.getNowPlayingScreenStyle(getContext());
+        RadioGroup radioGroup = view.findViewById(R.id.selector_radio_button_group);
+        int currentStyle = AppSettings.getNowPlayingScreenStyle(requireContext());
 
-            switch (currentStyle) {
-                case Preferences.NOW_PLAYING_SCREEN_MODERN:
-                    ((RadioButton) radioGroup.findViewById(R.id.selector_now_playing_screen_modern)).setChecked(true);
-                    break;
-                case Preferences.NOW_PLAYING_SCREEN_STYLISH:
-                    ((RadioButton) radioGroup.findViewById(R.id.selector_now_playing_screen_stylish)).setChecked(true);
-                    break;
-                case Preferences.NOW_PLAYING_SCREEN_EDGE:
-                    ((RadioButton) radioGroup.findViewById(R.id.selector_now_playing_screen_edge)).setChecked(true);
-                    break;
-            }
-
-            radioGroup.setOnCheckedChangeListener((group, checkedId) -> mOptionChanged = true);
-
-            view.findViewById(R.id.selector_set_btn).setOnClickListener(v1 -> {
-                if (mOptionChanged) {
-                    final int id = radioGroup.getCheckedRadioButtonId();
-                    if (id == R.id.selector_now_playing_screen_modern)
-                        AppSettings.setNowPlayingScreenStyle(getContext(), Preferences.NOW_PLAYING_SCREEN_MODERN);
-                    else if (id == R.id.selector_now_playing_screen_stylish)
-                        AppSettings.setNowPlayingScreenStyle(getContext(), Preferences.NOW_PLAYING_SCREEN_STYLISH);
-                    else if (id == R.id.selector_now_playing_screen_edge)
-                        AppSettings.setNowPlayingScreenStyle(getContext(), Preferences.NOW_PLAYING_SCREEN_EDGE);
-                }
-                dismiss();
-            });
-
-            view.findViewById(R.id.selector_cancel_btn).setOnClickListener(v -> dismiss());
+        switch (currentStyle) {
+            case Preferences.NOW_PLAYING_SCREEN_MODERN:
+                ((RadioButton) radioGroup.findViewById(R.id.selector_now_playing_screen_modern)).setChecked(true);
+                break;
+            case Preferences.NOW_PLAYING_SCREEN_STYLISH:
+                ((RadioButton) radioGroup.findViewById(R.id.selector_now_playing_screen_stylish)).setChecked(true);
+                break;
+            case Preferences.NOW_PLAYING_SCREEN_EDGE:
+                ((RadioButton) radioGroup.findViewById(R.id.selector_now_playing_screen_edge)).setChecked(true);
+                break;
         }
+
+        radioGroup.setOnCheckedChangeListener((group, checkedId) -> mOptionChanged = true);
+
+        view.findViewById(R.id.selector_set_btn).setOnClickListener(v1 -> {
+            if (mOptionChanged) {
+                final int id = radioGroup.getCheckedRadioButtonId();
+                if (id == R.id.selector_now_playing_screen_modern)
+                    AppSettings.setNowPlayingScreenStyle(requireContext(), Preferences.NOW_PLAYING_SCREEN_MODERN);
+                else if (id == R.id.selector_now_playing_screen_stylish)
+                    AppSettings.setNowPlayingScreenStyle(requireContext(), Preferences.NOW_PLAYING_SCREEN_STYLISH);
+                else if (id == R.id.selector_now_playing_screen_edge)
+                    AppSettings.setNowPlayingScreenStyle(requireContext(), Preferences.NOW_PLAYING_SCREEN_EDGE);
+            }
+            dismiss();
+        });
+        view.findViewById(R.id.selector_cancel_btn).setOnClickListener(v -> dismiss());
     }
 }

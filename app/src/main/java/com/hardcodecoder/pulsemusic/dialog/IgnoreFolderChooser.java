@@ -60,15 +60,13 @@ public class IgnoreFolderChooser extends RoundedBottomSheetFragment {
         ImageView addBtn = view.findViewById(R.id.bottom_dialog_picker_add_btn);
         addBtn.setImageResource(R.drawable.ic_folder_add);
         addBtn.setOnClickListener(v -> {
-            if (null != getActivity()) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                    startActivityForResult(new Intent(getActivity(), MediaFolderChooserActivity.class), REQUEST_CODE_FOLDER_SELECT_Q);
-                } else {
-                    // Open folder picker
-                    Intent intent = new Intent();
-                    intent.setAction(Intent.ACTION_OPEN_DOCUMENT_TREE);
-                    startActivityForResult(intent, REQUEST_CODE_FOLDER_SELECT);
-                }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                startActivityForResult(new Intent(requireActivity(), MediaFolderChooserActivity.class), REQUEST_CODE_FOLDER_SELECT_Q);
+            } else {
+                // Open folder picker
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_OPEN_DOCUMENT_TREE);
+                startActivityForResult(intent, REQUEST_CODE_FOLDER_SELECT);
             }
         });
 
@@ -96,7 +94,7 @@ public class IgnoreFolderChooser extends RoundedBottomSheetFragment {
                     ProviderManager.getIgnoredListProvider().removeFromIgnoreList(foldersList.get(position));
                     mAdapter.deleteItem(position);
                     mHasChanged = true;
-                    Toast.makeText(recyclerView.getContext(), getString(R.string.ignored_folder_picker_remove_success), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), getString(R.string.ignored_folder_picker_remove_success), Toast.LENGTH_SHORT).show();
                 });
         recyclerView.setAdapter(mAdapter);
     }
@@ -112,12 +110,12 @@ public class IgnoreFolderChooser extends RoundedBottomSheetFragment {
 
     private void handleSelectedFolders(Intent data) {
         if (null == data || null == data.getData()) {
-            Toast.makeText(getContext(), getString(R.string.ignored_folder_picker_add_failed), Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), getString(R.string.ignored_folder_picker_add_failed), Toast.LENGTH_SHORT).show();
             return;
         }
         String completePath = getPath(data);
         if (null == completePath) {
-            Toast.makeText(getContext(), getString(R.string.ignored_folder_picker_add_failed), Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), getString(R.string.ignored_folder_picker_add_failed), Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -129,7 +127,7 @@ public class IgnoreFolderChooser extends RoundedBottomSheetFragment {
             mAdapter.addItem(completePath);
         }
         mHasChanged = true;
-        Toast.makeText(getContext(), getString(R.string.ignored_folder_picker_add_success), Toast.LENGTH_SHORT).show();
+        Toast.makeText(requireContext(), getString(R.string.ignored_folder_picker_add_success), Toast.LENGTH_SHORT).show();
         ProviderManager.getIgnoredListProvider().addToIgnoreList(completePath);
     }
 
@@ -155,7 +153,7 @@ public class IgnoreFolderChooser extends RoundedBottomSheetFragment {
 
     private void handleSelectedFoldersQ(Intent data) {
         if (null == data) {
-            Toast.makeText(getContext(), getString(R.string.ignored_folder_picker_add_failed), Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), getString(R.string.ignored_folder_picker_add_failed), Toast.LENGTH_SHORT).show();
             return;
         }
         List<String> ignoredFoldersLList = data.getStringArrayListExtra(MediaFolderChooserActivity.RESULT_SELECTED_FOLDERS);
@@ -166,7 +164,7 @@ public class IgnoreFolderChooser extends RoundedBottomSheetFragment {
             mAdapter.addItems(ignoredFoldersLList);
         }
         mHasChanged = true;
-        Toast.makeText(getContext(), getString(R.string.ignored_folder_picker_add_success), Toast.LENGTH_SHORT).show();
+        Toast.makeText(requireContext(), getString(R.string.ignored_folder_picker_add_success), Toast.LENGTH_SHORT).show();
         ProviderManager.getIgnoredListProvider().addToIgnoreList(ignoredFoldersLList);
     }
 

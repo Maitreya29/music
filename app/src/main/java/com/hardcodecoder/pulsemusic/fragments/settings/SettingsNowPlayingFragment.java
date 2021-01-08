@@ -17,6 +17,7 @@ public class SettingsNowPlayingFragment extends SettingsBaseFragment {
 
     public static final String TAG = SettingsNowPlayingFragment.class.getSimpleName();
 
+    @NonNull
     public static SettingsNowPlayingFragment getInstance() {
         return new SettingsNowPlayingFragment();
     }
@@ -42,17 +43,13 @@ public class SettingsNowPlayingFragment extends SettingsBaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
         view.findViewById(R.id.now_playing_screen_style).setOnClickListener(v -> {
-            if (null != getActivity()) {
-                NowPlayingStyleChooser dialog = NowPlayingStyleChooser.getInstance();
-                dialog.show(getActivity().getSupportFragmentManager(), NowPlayingStyleChooser.TAG);
-            }
+            NowPlayingStyleChooser dialog = NowPlayingStyleChooser.getInstance();
+            dialog.show(requireFragmentManager(), NowPlayingStyleChooser.TAG);
         });
 
         view.findViewById(R.id.now_playing_album_cover_corner_radius).setOnClickListener(v -> {
-            if (null != getActivity()) {
-                CornerRadiusChangeDialogFragment dialog = CornerRadiusChangeDialogFragment.getInstance();
-                dialog.show(getFragmentManager(), CornerRadiusChangeDialogFragment.TAG);
-            }
+            CornerRadiusChangeDialogFragment dialog = CornerRadiusChangeDialogFragment.getInstance();
+            dialog.show(requireFragmentManager(), CornerRadiusChangeDialogFragment.TAG);
         });
     }
 }

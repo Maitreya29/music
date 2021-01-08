@@ -19,6 +19,7 @@ public class SettingsAboutFragment extends SettingsBaseFragment {
 
     public static final String TAG = SettingsAboutFragment.class.getSimpleName();
 
+    @NonNull
     public static SettingsAboutFragment getInstance() {
         return new SettingsAboutFragment();
     }

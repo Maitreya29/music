@@ -18,9 +18,9 @@ import com.hardcodecoder.pulsemusic.fragments.settings.base.SettingsBaseFragment
 
 public class SettingsContributorsFragment extends SettingsBaseFragment {
 
-
     public static final String TAG = SettingsContributorsFragment.class.getSimpleName();
 
+    @NonNull
     public static SettingsContributorsFragment getInstance() {
         return new SettingsContributorsFragment();
     }

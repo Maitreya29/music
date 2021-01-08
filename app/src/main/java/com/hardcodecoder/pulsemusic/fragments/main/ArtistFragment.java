@@ -43,7 +43,7 @@ public class ArtistFragment extends CardGridFragment implements SimpleTransition
     @Override
     public void setUpContent(@NonNull View view) {
         mSortOrder = resolveSortOrder(getCurrentSortOrder());
-        LoaderHelper.loadArtistsList(view.getContext().getContentResolver(),
+        LoaderHelper.loadArtistsList(requireActivity().getContentResolver(),
                 mSortOrder,
                 list -> {
                     if (list == null || list.isEmpty()) {
@@ -146,8 +146,7 @@ public class ArtistFragment extends CardGridFragment implements SimpleTransition
         mFirstVisibleItemPosition = mLayoutManager.findFirstVisibleItemPosition();
         mSortOrder = resolveSortOrder(newSortOrder);
         mAdapter.updateSortOrder(mSortOrder);
-        if (null != getContext())
-            AppSettings.saveSortOrder(getContext(), Preferences.SORT_ORDER_ARTIST_KEY, newSortOrder);
+        AppSettings.saveSortOrder(requireContext(), Preferences.SORT_ORDER_ARTIST_KEY, newSortOrder);
     }
 
     @Override
@@ -172,12 +171,10 @@ public class ArtistFragment extends CardGridFragment implements SimpleTransition
 
     @Override
     public void saveNewSpanCount(int configId, int spanCount) {
-        if (null != getContext()) {
-            if (configId == Configuration.ORIENTATION_PORTRAIT)
-                AppSettings.savePortraitModeGridSpanCount(getContext(), Preferences.ARTIST_SPAN_COUNT_PORTRAIT_KEY, spanCount);
-            else if (configId == Configuration.ORIENTATION_LANDSCAPE)
-                AppSettings.saveLandscapeModeGridSpanCount(getContext(), Preferences.ARTIST_SPAN_COUNT_LANDSCAPE_KEY, spanCount);
-        }
+        if (configId == Configuration.ORIENTATION_PORTRAIT)
+            AppSettings.savePortraitModeGridSpanCount(requireContext(), Preferences.ARTIST_SPAN_COUNT_PORTRAIT_KEY, spanCount);
+        else if (configId == Configuration.ORIENTATION_LANDSCAPE)
+            AppSettings.saveLandscapeModeGridSpanCount(requireContext(), Preferences.ARTIST_SPAN_COUNT_LANDSCAPE_KEY, spanCount);
     }
 
     @Override
@@ -197,8 +194,7 @@ public class ArtistFragment extends CardGridFragment implements SimpleTransition
 
     @Override
     public void onItemClick(View sharedView, int position) {
-        if (null != getActivity())
-            NavigationUtil.goToArtist(getActivity(), sharedView, mAdapter.getDataList().get(position).getArtistName());
+        NavigationUtil.goToArtist(requireActivity(), sharedView, mAdapter.getDataList().get(position).getArtistName());
     }
 
     private void loadArtistsList(@NonNull View view, @NonNull List<ArtistModel> list) {

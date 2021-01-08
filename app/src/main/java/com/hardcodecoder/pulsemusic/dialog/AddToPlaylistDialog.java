@@ -53,13 +53,10 @@ public class AddToPlaylistDialog extends RoundedBottomSheetFragment {
         title.setText(R.string.atp_title);
         ImageView addBtn = view.findViewById(R.id.bottom_dialog_picker_add_btn);
         addBtn.setImageResource(R.drawable.ic_playlist_add);
-        addBtn.setOnClickListener(v -> {
-            if (null != getActivity())
-                UIHelper.buildCreatePlaylistDialog(getActivity(), playlistName -> {
-                    if (null == mAdapter) setUpRecyclerView(view);
-                    else view.post(() -> mAdapter.addItem(playlistName));
-                });
-        });
+        addBtn.setOnClickListener(v -> UIHelper.buildCreatePlaylistDialog(requireActivity(), playlistName -> {
+            if (null == mAdapter) setUpRecyclerView(view);
+            else view.post(() -> mAdapter.addItem(playlistName));
+        }));
     }
 
     private void setUpRecyclerView(View view) {
@@ -79,13 +76,13 @@ public class AddToPlaylistDialog extends RoundedBottomSheetFragment {
                         mPlaylistNames,
                         position -> {
                             if (null == mItemToAdd) {
-                                Toast.makeText(view.getContext(), getString(R.string.atp_track_add_error_toast), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(requireContext(), getString(R.string.atp_track_add_error_toast), Toast.LENGTH_SHORT).show();
                                 return;
                             }
                             List<MusicModel> tracks = new ArrayList<>();
                             tracks.add(mItemToAdd);
                             ProviderManager.getPlaylistProvider().addTracksToPlaylist(tracks, mPlaylistNames.get(position), true);
-                            Toast.makeText(view.getContext(), getString(R.string.atp_track_added_toast), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(requireContext(), getString(R.string.atp_track_added_toast), Toast.LENGTH_SHORT).show();
                             if (isVisible())
                                 dismiss();
                         });

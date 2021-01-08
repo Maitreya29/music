@@ -155,8 +155,7 @@ public class LibraryFragment extends ListGridFragment implements SimpleItemClick
 
     @Override
     public void onOptionsClick(int position) {
-        if (null != getActivity())
-            UIHelper.showMenuForLibraryTracks(getActivity(), getActivity().getSupportFragmentManager(), mAdapter.getDataList().get(position));
+        UIHelper.showMenuForLibraryTracks(requireActivity(), requireFragmentManager(), mAdapter.getDataList().get(position));
     }
 
     public void onSortUpdateComplete() {
@@ -204,8 +203,7 @@ public class LibraryFragment extends ListGridFragment implements SimpleItemClick
         if (null == mAdapter) return;
         mFirstVisibleItemPosition = mLayoutManager.findFirstVisibleItemPosition();
         mAdapter.updateSortOrder(resolveSortOrder(newSortOrder));
-        if (null != getContext())
-            AppSettings.saveSortOrder(getContext(), Preferences.SORT_ORDER_LIBRARY_KEY, newSortOrder);
+        AppSettings.saveSortOrder(requireContext(), Preferences.SORT_ORDER_LIBRARY_KEY, newSortOrder);
     }
 
     @Override
@@ -230,12 +228,10 @@ public class LibraryFragment extends ListGridFragment implements SimpleItemClick
 
     @Override
     public void saveNewSpanCount(int configId, int spanCount) {
-        if (null != getContext()) {
-            if (configId == Configuration.ORIENTATION_PORTRAIT)
-                AppSettings.savePortraitModeGridSpanCount(getContext(), Preferences.LIBRARY_SPAN_COUNT_PORTRAIT_KEY, spanCount);
-            else if (configId == Configuration.ORIENTATION_LANDSCAPE)
-                AppSettings.saveLandscapeModeGridSpanCount(getContext(), Preferences.LIBRARY_SPAN_COUNT_LANDSCAPE_KEY, spanCount);
-        }
+        if (configId == Configuration.ORIENTATION_PORTRAIT)
+            AppSettings.savePortraitModeGridSpanCount(requireContext(), Preferences.LIBRARY_SPAN_COUNT_PORTRAIT_KEY, spanCount);
+        else if (configId == Configuration.ORIENTATION_LANDSCAPE)
+            AppSettings.saveLandscapeModeGridSpanCount(requireContext(), Preferences.LIBRARY_SPAN_COUNT_LANDSCAPE_KEY, spanCount);
     }
 
     @Override

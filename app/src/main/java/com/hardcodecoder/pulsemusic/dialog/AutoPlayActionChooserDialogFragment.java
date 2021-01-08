@@ -1,6 +1,5 @@
 package com.hardcodecoder.pulsemusic.dialog;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +18,6 @@ import com.hardcodecoder.pulsemusic.utils.AppSettings;
 public class AutoPlayActionChooserDialogFragment extends RoundedBottomSheetFragment {
 
     public static final String TAG = "AutoPlayActionChooserDialogFragment";
-    private Context mContext;
     private boolean mOptionChanged = false;
 
     @NonNull
@@ -35,9 +33,8 @@ public class AutoPlayActionChooserDialogFragment extends RoundedBottomSheetFragm
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        mContext = getContext();
         RadioGroup radioGroup = view.findViewById(R.id.radio_button_group);
-        int currentAction = AppSettings.getBluetoothDeviceDetectionAction(mContext);
+        int currentAction = AppSettings.getBluetoothDeviceDetectionAction(requireContext());
 
         switch (currentAction) {
             case Preferences.DEVICE_ACTION_PLAY_SHUFFLE:
@@ -57,11 +54,11 @@ public class AutoPlayActionChooserDialogFragment extends RoundedBottomSheetFragm
             if (mOptionChanged) {
                 final int id = radioGroup.getCheckedRadioButtonId();
                 if (id == R.id.radio_btn_shuffle)
-                    AppSettings.saveBluetoothDeviceDetectionAction(mContext, Preferences.DEVICE_ACTION_PLAY_SHUFFLE);
+                    AppSettings.saveBluetoothDeviceDetectionAction(requireContext(), Preferences.DEVICE_ACTION_PLAY_SHUFFLE);
                 else if (id == R.id.radio_btn_suggested)
-                    AppSettings.saveBluetoothDeviceDetectionAction(mContext, Preferences.DEVICE_ACTION_PLAY_SUGGESTED);
+                    AppSettings.saveBluetoothDeviceDetectionAction(requireContext(), Preferences.DEVICE_ACTION_PLAY_SUGGESTED);
                 else if (id == R.id.radio_btn_latest)
-                    AppSettings.saveBluetoothDeviceDetectionAction(mContext, Preferences.DEVICE_ACTION_PLAY_LATEST);
+                    AppSettings.saveBluetoothDeviceDetectionAction(requireContext(), Preferences.DEVICE_ACTION_PLAY_LATEST);
             }
             dismiss();
         });

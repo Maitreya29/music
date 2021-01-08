@@ -1,6 +1,5 @@
 package com.hardcodecoder.pulsemusic.fragments.settings;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,8 +19,8 @@ import com.hardcodecoder.pulsemusic.views.SettingsToggleableItem;
 public class SettingsThemeFragment extends SettingsBaseFragment {
 
     public static final String TAG = SettingsThemeFragment.class.getSimpleName();
-    private Context mContext;
 
+    @NonNull
     public static SettingsThemeFragment getInstance() {
         return new SettingsThemeFragment();
     }
@@ -45,20 +44,17 @@ public class SettingsThemeFragment extends SettingsBaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mContext = getActivity();
 
         updateThemeSection(view);
 
         SettingsToggleableItem desaturatedAccentItem = view.findViewById(R.id.laf_enable_desaturated);
 
-        boolean desaturatedAccents = false;
-        if (null != getContext()) {
-            desaturatedAccents = AppSettings.getAccentDesaturatedColor(getContext());
-        }
+        boolean desaturatedAccents;
+        desaturatedAccents = AppSettings.getAccentDesaturatedColor(requireContext());
 
         desaturatedAccentItem.setSwitchChecked(desaturatedAccents);
         desaturatedAccentItem.setOnSwitchCheckedChangedListener((buttonView, isChecked) -> {
-            AppSettings.saveAccentDesaturatedColor(buttonView.getContext(), isChecked);
+            AppSettings.saveAccentDesaturatedColor(requireActivity(), isChecked);
             if (ThemeManagerUtils.isDarkModeEnabled())
                 applyTheme();
         });
@@ -69,7 +65,7 @@ public class SettingsThemeFragment extends SettingsBaseFragment {
         });
     }
 
-    private void updateThemeSection(View view) {
+    private void updateThemeSection(@NonNull View view) {
         view.findViewById(R.id.laf_select_dark_theme).setOnClickListener(v -> {
             ThemeChooserBottomSheetDialogFragment dialog = ThemeChooserBottomSheetDialogFragment.getInstance();
             dialog.show(getFragmentManager(), ThemeChooserBottomSheetDialogFragment.TAG);
@@ -80,22 +76,22 @@ public class SettingsThemeFragment extends SettingsBaseFragment {
         SettingsToggleableItem enableAutoThemeItem = view.findViewById(R.id.laf_enable_auto_mode);
 
         // Configure state of views based on saved settings
-        boolean darkModeEnable = AppSettings.isDarkModeEnabled(mContext);
+        boolean darkModeEnable = AppSettings.isDarkModeEnabled(requireContext());
         enableDarkThemeItem.setSwitchChecked(darkModeEnable);
 
-        boolean autoModeEnable = AppSettings.isAutoThemeEnabled(mContext);
+        boolean autoModeEnable = AppSettings.isAutoThemeEnabled(requireContext());
         enableAutoThemeItem.setSwitchChecked(autoModeEnable);
         enableDarkThemeItem.setEnabled(!autoModeEnable);
 
         //Add listeners to switch views
         enableDarkThemeItem.setOnSwitchCheckedChangedListener((buttonView, isChecked) -> {
-            if (ThemeManagerUtils.toggleDarkTheme(mContext, isChecked))
+            if (ThemeManagerUtils.toggleDarkTheme(requireContext(), isChecked))
                 applyTheme();
         });
 
         enableAutoThemeItem.setOnSwitchCheckedChangedListener((buttonView, isChecked) -> {
             enableDarkThemeItem.setEnabled(!isChecked);
-            if (ThemeManagerUtils.toggleAutoTheme(mContext, isChecked))
+            if (ThemeManagerUtils.toggleAutoTheme(requireContext(), isChecked))
                 applyTheme();
             else {
                 // User does not want auto theme based on time of day
@@ -114,7 +110,7 @@ public class SettingsThemeFragment extends SettingsBaseFragment {
     }
 
     private void applyTheme() {
-        ThemeManagerUtils.init(getActivity(), true);
+        ThemeManagerUtils.init(requireActivity(), true);
         requestActivityRestart();
     }
 }

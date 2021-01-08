@@ -11,14 +11,12 @@ import androidx.annotation.Nullable;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.activities.main.SettingsActivity;
 import com.hardcodecoder.pulsemusic.fragments.settings.base.SettingsBaseFragment;
-import com.hardcodecoder.pulsemusic.interfaces.SettingsFragmentsListener;
-
 
 public class SettingsMainFragment extends SettingsBaseFragment {
 
     public static final String TAG = SettingsMainFragment.class.getSimpleName();
-    private SettingsFragmentsListener mListener;
 
+    @NonNull
     public static SettingsMainFragment getInstance() {
         return new SettingsMainFragment();
     }
@@ -42,7 +40,6 @@ public class SettingsMainFragment extends SettingsBaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mListener = (SettingsFragmentsListener) getActivity();
         view.findViewById(R.id.generalSettings).setOnClickListener(v ->
                 v.postOnAnimation(() -> openSettingsFragment(SettingsGeneralFragment.getInstance())));
         view.findViewById(R.id.themeSettings).setOnClickListener(v ->

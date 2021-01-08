@@ -13,7 +13,7 @@ import com.hardcodecoder.pulsemusic.interfaces.SettingsFragmentsListener;
 
 public abstract class SettingsBaseFragment extends Fragment {
 
-    private SettingsFragmentsListener mListener;
+    protected SettingsFragmentsListener mListener;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

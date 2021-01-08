@@ -42,7 +42,7 @@ public class AlbumsFragment extends CardGridFragment implements SimpleTransition
     @Override
     public void setUpContent(@NonNull View view) {
         mSortOrder = resolveSortOrder(getCurrentSortOrder());
-        LoaderHelper.loadAlbumsList(view.getContext().getContentResolver(),
+        LoaderHelper.loadAlbumsList(requireActivity().getContentResolver(),
                 mSortOrder,
                 list -> {
                     if (list == null || list.isEmpty()) {
@@ -175,8 +175,7 @@ public class AlbumsFragment extends CardGridFragment implements SimpleTransition
         mFirstVisibleItemPosition = mLayoutManager.findFirstVisibleItemPosition();
         mSortOrder = resolveSortOrder(newSortOrder);
         mAdapter.updateSortOrder(mSortOrder);
-        if (null != getContext())
-            AppSettings.saveSortOrder(getContext(), Preferences.SORT_ORDER_ALBUMS_KEY, newSortOrder);
+        AppSettings.saveSortOrder(requireContext(), Preferences.SORT_ORDER_ALBUMS_KEY, newSortOrder);
     }
 
     @Override
@@ -201,12 +200,10 @@ public class AlbumsFragment extends CardGridFragment implements SimpleTransition
 
     @Override
     public void saveNewSpanCount(int configId, int spanCount) {
-        if (null != getContext()) {
-            if (configId == Configuration.ORIENTATION_PORTRAIT)
-                AppSettings.savePortraitModeGridSpanCount(getContext(), Preferences.ALBUMS_SPAN_COUNT_PORTRAIT_KEY, spanCount);
-            else if (configId == Configuration.ORIENTATION_LANDSCAPE)
-                AppSettings.saveLandscapeModeGridSpanCount(getContext(), Preferences.ALBUMS_SPAN_COUNT_LANDSCAPE_KEY, spanCount);
-        }
+        if (configId == Configuration.ORIENTATION_PORTRAIT)
+            AppSettings.savePortraitModeGridSpanCount(requireContext(), Preferences.ALBUMS_SPAN_COUNT_PORTRAIT_KEY, spanCount);
+        else if (configId == Configuration.ORIENTATION_LANDSCAPE)
+            AppSettings.saveLandscapeModeGridSpanCount(requireContext(), Preferences.ALBUMS_SPAN_COUNT_LANDSCAPE_KEY, spanCount);
     }
 
     @Override
@@ -222,10 +219,8 @@ public class AlbumsFragment extends CardGridFragment implements SimpleTransition
 
     @Override
     public void onItemClick(View sharedView, int position) {
-        if (null != getActivity()) {
-            AlbumModel albumModel = mAdapter.getDataList().get(position);
-            NavigationUtil.goToAlbum(getActivity(), sharedView, albumModel.getAlbumName(), albumModel.getAlbumId(), albumModel.getAlbumArt());
-        }
+        AlbumModel albumModel = mAdapter.getDataList().get(position);
+        NavigationUtil.goToAlbum(requireActivity(), sharedView, albumModel.getAlbumName(), albumModel.getAlbumId(), albumModel.getAlbumArt());
     }
 
     private void loadAlbumsList(@NonNull View view, @NonNull List<AlbumModel> list) {

@@ -20,6 +20,7 @@ public class SettingsAudioFragment extends SettingsBaseFragment {
 
     public static final String TAG = SettingsAudioFragment.class.getSimpleName();
 
+    @NonNull
     public static SettingsAudioFragment getInstance() {
         return new SettingsAudioFragment();
     }
@@ -44,17 +45,15 @@ public class SettingsAudioFragment extends SettingsBaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        if (null == getContext()) return;
-
         SettingsToggleableItem bluetoothDeviceDetectionItem = view.findViewById(R.id.audio_device_bluetooth_toggle);
-        boolean bluetoothDeviceDetection = AppSettings.isBluetoothDeviceDetectionEnabled(getContext());
+        boolean bluetoothDeviceDetection = AppSettings.isBluetoothDeviceDetectionEnabled(requireContext());
 
         bluetoothDeviceDetectionItem.setSwitchChecked(bluetoothDeviceDetection);
         bluetoothDeviceDetectionItem.setOnSwitchCheckedChangedListener((buttonView, isChecked) -> {
-            AppSettings.saveBluetoothDeviceDetection(buttonView.getContext(), isChecked);
-            Intent bluetoothServiceIntent = new Intent(getContext().getApplicationContext(), AudioDeviceService.class);
-            if (isChecked) getContext().startService(bluetoothServiceIntent);
-            else getContext().stopService(bluetoothServiceIntent);
+            AppSettings.saveBluetoothDeviceDetection(requireContext(), isChecked);
+            Intent bluetoothServiceIntent = new Intent(requireContext().getApplicationContext(), AudioDeviceService.class);
+            if (isChecked) requireContext().startService(bluetoothServiceIntent);
+            else requireContext().stopService(bluetoothServiceIntent);
         });
 
         view.findViewById(R.id.audio_device_bluetooth_action_picker).setOnClickListener(v -> {

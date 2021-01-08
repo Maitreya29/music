@@ -51,26 +51,24 @@ public class HomeBottomSheetFragment extends RoundedBottomSheetFragment {
         super.onViewCreated(view, savedInstanceState);
 
         mUserPic = view.findViewById(R.id.drawer_user_logo);
-        loadProfilePic(UserInfo.getUserProfilePic(mUserPic.getContext()));
+        loadProfilePic(UserInfo.getUserProfilePic(requireContext()));
         mUserName = view.findViewById(R.id.drawer_user_name);
-        if (null != getContext()) updateUserName(UserInfo.getUserName(getContext()));
+        updateUserName(UserInfo.getUserName(requireContext()));
 
         mUserPic.setOnClickListener(v -> pickPhoto());
         mUserName.setOnClickListener(v1 -> addUserName());
         view.findViewById(R.id.drawer_option_settings).setOnClickListener(v -> {
-            startActivity(new Intent(getContext(), SettingsActivity.class));
+            startActivity(new Intent(requireActivity(), SettingsActivity.class));
             view.postOnAnimation(this::dismiss);
         });
 
         view.findViewById(R.id.drawer_option_equalizer).setOnClickListener(v -> {
             final Intent intent = new Intent(AudioEffect.ACTION_DISPLAY_AUDIO_EFFECT_CONTROL_PANEL);
-            if (null != getContext()) {
-                if ((intent.resolveActivity(getContext().getPackageManager()) != null)) {
-                    startActivityForResult(intent, REQUEST_CODE_OPEN_EQUALIZER);
-                    view.postOnAnimation(this::dismiss);
-                } else
-                    Toast.makeText(getContext(), getString(R.string.equalizer_error), Toast.LENGTH_SHORT).show();
-            }
+            if ((intent.resolveActivity(requireContext().getPackageManager()) != null)) {
+                startActivityForResult(intent, REQUEST_CODE_OPEN_EQUALIZER);
+                view.postOnAnimation(this::dismiss);
+            } else
+                Toast.makeText(requireContext(), getString(R.string.equalizer_error), Toast.LENGTH_SHORT).show();
         });
     }
 
@@ -101,7 +99,7 @@ public class HomeBottomSheetFragment extends RoundedBottomSheetFragment {
     }
 
     private void addUserName() {
-        View layout = View.inflate(getContext(), R.layout.bottom_dialog_edit_text, null);
+        View layout = View.inflate(requireContext(), R.layout.bottom_dialog_edit_text, null);
         BottomSheetDialog sheetDialog = new RoundedBottomSheetDialog(layout.getContext());
         sheetDialog.setContentView(layout);
         sheetDialog.show();
@@ -111,13 +109,13 @@ public class HomeBottomSheetFragment extends RoundedBottomSheetFragment {
         TextInputEditText et = layout.findViewById(R.id.text_input_field);
 
         layout.findViewById(R.id.confirm_btn).setOnClickListener(v -> {
-            if (null != getContext() && et.getText() != null && et.getText().toString().length() > 0) {
+            if (et.getText() != null && et.getText().toString().length() > 0) {
                 String name = et.getText().toString();
-                UserInfo.saveUserName(getContext(), name);
+                UserInfo.saveUserName(requireContext(), name);
                 if (sheetDialog.isShowing()) sheetDialog.dismiss();
                 updateUserName(name);
             } else
-                Toast.makeText(getContext(), getString(R.string.enter_name_toast), Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), getString(R.string.enter_name_toast), Toast.LENGTH_SHORT).show();
         });
 
         layout.findViewById(R.id.cancel_btn).setOnClickListener(v -> {
@@ -130,11 +128,10 @@ public class HomeBottomSheetFragment extends RoundedBottomSheetFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK && requestCode == PICK_AVATAR) {
             if (null == data || data.getData() == null) {
-                Toast.makeText(getContext(), getString(R.string.error_select_image_toast), Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), getString(R.string.error_select_image_toast), Toast.LENGTH_SHORT).show();
                 return;
             }
-            if (null != getContext())
-                UserInfo.saveUserProfilePic(getContext(), data.getData(), this::loadProfilePic);
+            UserInfo.saveUserProfilePic(requireContext(), data.getData(), this::loadProfilePic);
         }
     }
 }

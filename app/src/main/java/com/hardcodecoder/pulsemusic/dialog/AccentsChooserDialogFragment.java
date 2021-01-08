@@ -18,8 +18,6 @@ import com.hardcodecoder.pulsemusic.themes.PresetColors;
 import com.hardcodecoder.pulsemusic.themes.ThemeManagerUtils;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 
-import java.util.Objects;
-
 public class AccentsChooserDialogFragment extends RoundedBottomSheetFragment {
 
     public static final String TAG = "AccentsChooser";
@@ -38,10 +36,10 @@ public class AccentsChooserDialogFragment extends RoundedBottomSheetFragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        AccentsModel[] mAccentsModels = PresetColors.getPresetColorsModel(view.getContext());
+        AccentsModel[] mAccentsModels = PresetColors.getPresetColorsModel(requireContext());
         int currentId = -1;
         if (ThemeManagerUtils.isUsingPresetColors())
-            currentId = AppSettings.getSelectedAccentId(view.getContext());
+            currentId = AppSettings.getSelectedAccentId(requireContext());
 
         if (mAccentsModels.length > 0) {
             RecyclerView recyclerView = view.findViewById(R.id.accents_display_rv);
@@ -50,7 +48,7 @@ public class AccentsChooserDialogFragment extends RoundedBottomSheetFragment {
             AccentAdapter adapter = new AccentAdapter(mAccentsModels, getLayoutInflater(), currentId, position -> {
                 newAccentId = mAccentsModels[position].getId();
 
-                if (ThemeManagerUtils.setSelectedPresetAccentColor(view.getContext(), newAccentId))
+                if (ThemeManagerUtils.setSelectedPresetAccentColor(requireContext(), newAccentId))
                     if (null != getActivity()) {
                         ThemeManagerUtils.init(getActivity(), true);
                         getActivity().recreate();
@@ -62,7 +60,7 @@ public class AccentsChooserDialogFragment extends RoundedBottomSheetFragment {
 
         view.findViewById(R.id.choose_accents_custom_btn).setOnClickListener(v -> {
             CustomAccentChooserDialogFragment dialogFragment = CustomAccentChooserDialogFragment.getInstance();
-            dialogFragment.show(Objects.requireNonNull(getActivity()).getSupportFragmentManager(), CustomAccentChooserDialogFragment.TAG);
+            dialogFragment.show(requireFragmentManager(), CustomAccentChooserDialogFragment.TAG);
             dismiss();
         });
     }

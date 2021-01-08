@@ -46,7 +46,6 @@ public class HomeFragment extends SmoothTransactionFragments {
     private final PulseController mPulseController = PulseController.getInstance();
     private final PulseController.PulseRemote mRemote = mPulseController.getRemote();
 
-
     @NonNull
     public static HomeFragment getInstance() {
         return new HomeFragment();
@@ -60,7 +59,7 @@ public class HomeFragment extends SmoothTransactionFragments {
 
     @Override
     public void setUpContent(@NonNull View view) {
-        if (null != LoaderCache.getAllTracksList() && !LoaderCache.getAllTracksList().isEmpty() && null != getActivity()) {
+        if (null != LoaderCache.getAllTracksList() && !LoaderCache.getAllTracksList().isEmpty()) {
             LoaderHelper.loadTopAlbums(result -> loadTopAlbums(view, result));
             LoaderHelper.loadSuggestionsList(result -> {
                 loadSuggestions(view, result);
@@ -78,20 +77,19 @@ public class HomeFragment extends SmoothTransactionFragments {
         }
 
         view.findViewById(R.id.ic_recent)
-                .setOnClickListener(v -> startActivity(new Intent(getActivity(), RecentActivity.class)));
+                .setOnClickListener(v -> startActivity(new Intent(requireActivity(), RecentActivity.class)));
 
         view.findViewById(R.id.ic_folder)
                 .setOnClickListener(v -> pickMedia());
 
         view.findViewById(R.id.ic_favorite)
-                .setOnClickListener(v -> startActivity(new Intent(getActivity(), FavoritesActivity.class)));
+                .setOnClickListener(v -> startActivity(new Intent(requireActivity(), FavoritesActivity.class)));
 
         view.findViewById(R.id.ic_shuffle)
                 .setOnClickListener(v -> {
-                    if (getActivity() == null) return;
-                    Intent intent = new Intent(getActivity(), PMS.class);
+                    Intent intent = new Intent(requireActivity(), PMS.class);
                     intent.putExtra(PMS.PLAY_KEY, PMS.PLAY_SHUFFLE);
-                    getActivity().startService(intent);
+                    requireActivity().startService(intent);
                 });
     }
 
@@ -104,10 +102,8 @@ public class HomeFragment extends SmoothTransactionFragments {
             rv.setLayoutManager(new LinearLayoutManager(rv.getContext(), LinearLayoutManager.HORIZONTAL, false));
             rv.setHasFixedSize(true);
             TopAlbumsAdapter adapter = new TopAlbumsAdapter(getLayoutInflater(), list, (sharedView, position) -> {
-                if (null != getActivity()) {
-                    TopAlbumModel albumModel = list.get(position);
-                    NavigationUtil.goToAlbum(getActivity(), sharedView, albumModel.getAlbumName(), albumModel.getAlbumId(), albumModel.getAlbumArt());
-                }
+                TopAlbumModel albumModel = list.get(position);
+                NavigationUtil.goToAlbum(requireActivity(), sharedView, albumModel.getAlbumName(), albumModel.getAlbumId(), albumModel.getAlbumArt());
             });
             SnapHelper helper = new PagerSnapHelper();
             helper.attachToRecyclerView(rv);
@@ -132,8 +128,7 @@ public class HomeFragment extends SmoothTransactionFragments {
 
                 @Override
                 public void onOptionsClick(int position) {
-                    if (null != getActivity())
-                        UIHelper.showMenuForLibraryTracks(getActivity(), getActivity().getSupportFragmentManager(), list.get(position));
+                    UIHelper.showMenuForLibraryTracks(requireActivity(), requireFragmentManager(), list.get(position));
                 }
             });
             rv.setAdapter(adapter);
@@ -157,8 +152,7 @@ public class HomeFragment extends SmoothTransactionFragments {
 
                 @Override
                 public void onOptionsClick(int position) {
-                    if (null != getActivity())
-                        UIHelper.showMenuForLibraryTracks(getActivity(), getActivity().getSupportFragmentManager(), list.get(position));
+                    UIHelper.showMenuForLibraryTracks(requireActivity(), requireFragmentManager(), list.get(position));
                 }
             });
             rv.setAdapter(adapter);
@@ -182,8 +176,7 @@ public class HomeFragment extends SmoothTransactionFragments {
 
                 @Override
                 public void onOptionsClick(int position) {
-                    if (null != getActivity())
-                        UIHelper.showMenuForLibraryTracks(getActivity(), getActivity().getSupportFragmentManager(), list.get(position));
+                    UIHelper.showMenuForLibraryTracks(requireActivity(), requireFragmentManager(), list.get(position));
                 }
             });
             rv.setAdapter(adapter);
@@ -198,10 +191,8 @@ public class HomeFragment extends SmoothTransactionFragments {
             RecyclerView rv = (RecyclerView) ((ViewStub) view.findViewById(R.id.stub_top_artists_list)).inflate();
             rv.setHasFixedSize(true);
             rv.setLayoutManager(new LinearLayoutManager(rv.getContext(), RecyclerView.HORIZONTAL, false));
-            TopArtistsAdapter adapter = new TopArtistsAdapter(getLayoutInflater(), list, (sharedView, position) -> {
-                if (null != getActivity())
-                    NavigationUtil.goToArtist(getActivity(), sharedView, list.get(position).getArtistName());
-            });
+            TopArtistsAdapter adapter = new TopArtistsAdapter(getLayoutInflater(), list, (sharedView, position) ->
+                    NavigationUtil.goToArtist(requireActivity(), sharedView, list.get(position).getArtistName()));
             rv.setAdapter(adapter);
         }, BASE_DELAY_MILLS * 4);
     }
@@ -217,14 +208,14 @@ public class HomeFragment extends SmoothTransactionFragments {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK && requestCode == PICK_MUSIC) {
-            MusicModel md = DataModelHelper.buildMusicModelFrom(getContext(), data);
+            MusicModel md = DataModelHelper.buildMusicModelFrom(requireContext(), data);
             if (md != null) {
                 List<MusicModel> singlePickedItemList = new ArrayList<>();
                 singlePickedItemList.add(md);
                 mPulseController.setPlaylist(singlePickedItemList, 0);
                 mRemote.play();
             } else
-                Toast.makeText(getContext(), getString(R.string.selected_track_load_failed_toast), Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), getString(R.string.selected_track_load_failed_toast), Toast.LENGTH_SHORT).show();
         }
     }
 }

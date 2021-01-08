@@ -20,8 +20,6 @@ import com.hardcodecoder.pulsemusic.dialog.base.RoundedBottomSheetFragment;
 import com.hardcodecoder.pulsemusic.themes.ThemeColors;
 import com.hardcodecoder.pulsemusic.themes.ThemeManagerUtils;
 
-import java.util.Objects;
-
 public class CustomAccentChooserDialogFragment extends RoundedBottomSheetFragment {
 
     public static final String TAG = CustomAccentChooserDialogFragment.class.getSimpleName();
@@ -115,7 +113,7 @@ public class CustomAccentChooserDialogFragment extends RoundedBottomSheetFragmen
         // Button sends user back to presets
         view.findViewById(R.id.custom_accents_presets_btn).setOnClickListener(v -> {
             AccentsChooserDialogFragment dialogFragment = AccentsChooserDialogFragment.getInstance();
-            dialogFragment.show(Objects.requireNonNull(getActivity()).getSupportFragmentManager(), AccentsChooserDialogFragment.TAG);
+            dialogFragment.show(requireFragmentManager(), AccentsChooserDialogFragment.TAG);
             dismiss();
         });
 

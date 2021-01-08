@@ -1,6 +1,5 @@
 package com.hardcodecoder.pulsemusic.dialog;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +20,6 @@ public class ThemeChooserBottomSheetDialogFragment extends RoundedBottomSheetFra
 
     public static final String TAG = "ThemeChooserBottomSheetDialog";
     private boolean mOptionChanged = false;
-    private Context mContext;
 
     @NonNull
     public static ThemeChooserBottomSheetDialogFragment getInstance() {
@@ -36,9 +34,8 @@ public class ThemeChooserBottomSheetDialogFragment extends RoundedBottomSheetFra
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        mContext = getContext();
         RadioGroup radioGroup = view.findViewById(R.id.radio_button_group);
-        int currentTheme = AppSettings.getSelectedDarkTheme(mContext);
+        int currentTheme = AppSettings.getSelectedDarkTheme(requireContext());
 
         switch (currentTheme) {
             case Preferences.DARK_THEME_GRAY:
@@ -58,11 +55,11 @@ public class ThemeChooserBottomSheetDialogFragment extends RoundedBottomSheetFra
             if (mOptionChanged) {
                 final int id = radioGroup.getCheckedRadioButtonId();
                 if (id == R.id.radio_btn_dark_theme_gray)
-                    ThemeManagerUtils.setSelectedDarkTheme(mContext, Preferences.DARK_THEME_GRAY);
+                    ThemeManagerUtils.setSelectedDarkTheme(requireContext(), Preferences.DARK_THEME_GRAY);
                 else if (id == R.id.radio_btn_dark_theme_kinda)
-                    ThemeManagerUtils.setSelectedDarkTheme(mContext, Preferences.DARK_THEME_KINDA);
+                    ThemeManagerUtils.setSelectedDarkTheme(requireContext(), Preferences.DARK_THEME_KINDA);
                 else if (id == R.id.radio_btn_dark_theme_pure_black)
-                    ThemeManagerUtils.setSelectedDarkTheme(mContext, Preferences.DARK_THEME_PURE_BLACK);
+                    ThemeManagerUtils.setSelectedDarkTheme(requireContext(), Preferences.DARK_THEME_PURE_BLACK);
 
                 if (ThemeManagerUtils.needToApplyNewDarkTheme()) {
                     //Theme need to be updated

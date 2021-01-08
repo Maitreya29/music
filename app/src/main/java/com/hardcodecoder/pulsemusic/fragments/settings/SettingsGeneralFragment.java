@@ -21,6 +21,7 @@ public class SettingsGeneralFragment extends SettingsBaseFragment {
     private ValueSlider mDurationFilter;
     private int mCurrentFilterDuration;
 
+    @NonNull
     public static SettingsGeneralFragment getInstance() {
         return new SettingsGeneralFragment();
     }
@@ -46,24 +47,21 @@ public class SettingsGeneralFragment extends SettingsBaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
         view.findViewById(R.id.ignore_folder_picker).setOnClickListener(v -> {
-            if (null == getActivity()) return;
-
             IgnoreFolderChooser ignoreFolderChooser = IgnoreFolderChooser.getInstance(hasChanged -> {
                 if (hasChanged) requiresApplicationRestart();
             });
-            if (getFragmentManager() != null)
-                ignoreFolderChooser.show(getFragmentManager(), IgnoreFolderChooser.TAG);
+            ignoreFolderChooser.show(requireFragmentManager(), IgnoreFolderChooser.TAG);
         });
 
         mDurationFilter = view.findViewById(R.id.duration_filter_slider);
-        mCurrentFilterDuration = AppSettings.getFilterDuration(getContext());
+        mCurrentFilterDuration = AppSettings.getFilterDuration(requireContext());
         mDurationFilter.setSliderValue(mCurrentFilterDuration);
 
-        boolean remember = AppSettings.isRememberLastTrack(view.getContext());
+        boolean remember = AppSettings.isRememberLastTrack(requireContext());
         SettingsToggleableItem rememberOption = view.findViewById(R.id.remember_last_song_option);
         rememberOption.setSwitchChecked(remember);
         rememberOption.setOnSwitchCheckedChangedListener((buttonView, isChecked) ->
-                AppSettings.setRememberLastTrack(buttonView.getContext(), isChecked));
+                AppSettings.setRememberLastTrack(requireContext(), isChecked));
     }
 
     @Override
@@ -71,7 +69,7 @@ public class SettingsGeneralFragment extends SettingsBaseFragment {
         super.onStop();
         int newFilterDuration = mDurationFilter.getSliderValue();
         if (mCurrentFilterDuration != newFilterDuration) {
-            AppSettings.setFilterDuration(getContext(), newFilterDuration);
+            AppSettings.setFilterDuration(requireContext(), newFilterDuration);
             requiresApplicationRestart();
         }
     }

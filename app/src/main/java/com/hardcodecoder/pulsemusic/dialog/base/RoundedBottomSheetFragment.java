@@ -15,7 +15,7 @@ public class RoundedBottomSheetFragment extends CustomBottomSheetFragment {
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         return new CustomBottomSheet(
-                getContext(),
+                requireContext(),
                 ThemeManagerUtils.isDarkModeEnabled() ? R.style.RoundedBottomSheet : R.style.RoundedBottomSheetLight,
                 this);
     }

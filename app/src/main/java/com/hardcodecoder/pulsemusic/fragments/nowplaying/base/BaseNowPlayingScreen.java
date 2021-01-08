@@ -40,7 +40,6 @@ import com.hardcodecoder.pulsemusic.themes.ThemeColors;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 
 import java.util.List;
-import java.util.Objects;
 
 public abstract class BaseNowPlayingScreen extends Fragment implements MediaProgressUpdateHelper.Callback {
 
@@ -171,7 +170,7 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
         mMediaArtPager = pager;
         // Workaround to disable over scroll mode
         mMediaArtPager.getChildAt(0).setOverScrollMode(ViewPager2.OVER_SCROLL_NEVER);
-        mMediaArtAdapter = new MediaArtPagerAdapter(getContext(), mQueueManager.getQueue(), redId, model);
+        mMediaArtAdapter = new MediaArtPagerAdapter(pager.getContext(), mQueueManager.getQueue(), redId, model);
         mMediaArtPager.setAdapter(mMediaArtAdapter);
         mMediaArtPager.setCurrentItem(mQueueManager.getActiveIndex(), false);
         mMediaArtPager.setSaveEnabled(false);
@@ -211,7 +210,7 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
 
     protected ShapeAppearanceModel getMediaImageViewShapeAppearanceModel() {
         float factor = (float) getResources().getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT;
-        int[] radiusDP = AppSettings.getNowPlayingAlbumCoverCornerRadius(Objects.requireNonNull(getContext()));
+        int[] radiusDP = AppSettings.getNowPlayingAlbumCoverCornerRadius(requireContext());
         float tl = radiusDP[0] * factor;
         float tr = radiusDP[1] * factor;
         float bl = radiusDP[2] * factor;
@@ -281,14 +280,14 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
     protected void toggleFavorite() {
         if (mCurrentItemFavorite) {
             ProviderManager.getFavoritesProvider().removeFromFavorite(mQueueManager.getActiveQueueItem());
-            Toast.makeText(getContext(), getString(R.string.removed_from_fav), Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), getString(R.string.removed_from_fav), Toast.LENGTH_SHORT).show();
         } else {
             MusicModel md = mQueueManager.getActiveQueueItem();
             if (md.getId() < 0)
-                Toast.makeText(getContext(), getString(R.string.cannot_add_to_fav), Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), getString(R.string.cannot_add_to_fav), Toast.LENGTH_SHORT).show();
             else {
                 ProviderManager.getFavoritesProvider().addToFavorites(md);
-                Toast.makeText(getContext(), getString(R.string.added_to_fav), Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), getString(R.string.added_to_fav), Toast.LENGTH_SHORT).show();
             }
         }
         updateFavoriteItem();
@@ -308,7 +307,7 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
     }
 
     protected void togglePlayPauseAnimation(View playPauseBtn, PlaybackState state) {
-        if (null == state || null == getContext() || null == playPauseBtn) return;
+        if (null == state || null == playPauseBtn) return;
         playPauseBtn.setSelected(state.getState() == PlaybackState.STATE_PLAYING);
     }
 
@@ -322,10 +321,8 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
 
     protected void setGotToCurrentQueueCLickListener(@NonNull View view) {
         view.setOnClickListener(v -> {
-            if (null != getActivity()) {
-                CurrentQueueBottomSheet currentQueueBottomSheet = CurrentQueueBottomSheet.getInstance();
-                currentQueueBottomSheet.show(getActivity().getSupportFragmentManager(), CurrentQueueBottomSheet.TAG);
-            }
+            CurrentQueueBottomSheet currentQueueBottomSheet = CurrentQueueBottomSheet.getInstance();
+            currentQueueBottomSheet.show(requireFragmentManager(), CurrentQueueBottomSheet.TAG);
         });
     }
 
@@ -370,9 +367,7 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
     }
 
     protected void dismiss() {
-        if (getActivity() != null) {
-            ((DraggableNowPlayingSheetActivity) getActivity()).collapseBottomSheet();
-        }
+        ((DraggableNowPlayingSheetActivity) requireActivity()).collapseBottomSheet();
     }
 
     @Override
