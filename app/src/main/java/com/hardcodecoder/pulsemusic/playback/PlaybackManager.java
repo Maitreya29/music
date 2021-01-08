@@ -113,6 +113,7 @@ public class PlaybackManager implements Playback.Callback {
         final MusicModel trackItem = (MusicModel) bundle.getSerializable(TRACK_ITEM);
         if (trackItem == null) return;
         final int resumePosition = bundle.getInt(PLAYBACK_POSITION);
+        PulseController.getInstance().getQueueManager().resetQueue();
         PulseController.getInstance().addToQueue(trackItem);
         mQueueManager.setActiveIndex(0);
         mPlayback.onPlay(resumePosition, false);
