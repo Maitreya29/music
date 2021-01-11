@@ -9,11 +9,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.hardcodecoder.pulsemusic.R;
-import com.hardcodecoder.pulsemusic.dialog.base.RoundedBottomSheetFragment;
+import com.hardcodecoder.pulsemusic.dialog.base.RoundedCustomBottomSheetFragment;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 import com.hardcodecoder.pulsemusic.views.ValueSlider;
 
-public class CornerRadiusChangeDialogFragment extends RoundedBottomSheetFragment {
+public class CornerRadiusChangeDialogFragment extends RoundedCustomBottomSheetFragment {
 
     public static final String TAG = CornerRadiusChangeDialogFragment.class.getSimpleName();
 

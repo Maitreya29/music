@@ -28,7 +28,7 @@ import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.activities.playlist.CurrentQueuePlaylist;
 import com.hardcodecoder.pulsemusic.activities.playlist.CustomizablePlaylist;
 import com.hardcodecoder.pulsemusic.adapters.main.PlaylistsAdapter;
-import com.hardcodecoder.pulsemusic.dialog.RoundedBottomSheetDialog;
+import com.hardcodecoder.pulsemusic.dialog.base.RoundedCustomBottomSheet;
 import com.hardcodecoder.pulsemusic.fragments.main.base.SmoothTransactionFragments;
 import com.hardcodecoder.pulsemusic.helper.RecyclerViewGestureHelper;
 import com.hardcodecoder.pulsemusic.helper.UIHelper;
@@ -148,7 +148,7 @@ public class PlaylistFragment extends SmoothTransactionFragments implements Play
     }
 
     private void showEditPlaylistDialog(int pos) {
-        BottomSheetDialog sheetDialog = new RoundedBottomSheetDialog(requireContext());
+        BottomSheetDialog sheetDialog = new RoundedCustomBottomSheet(requireContext());
         View layout = View.inflate(requireContext(), R.layout.bottom_dialog_edit_text, null);
         sheetDialog.setContentView(layout);
         sheetDialog.show();

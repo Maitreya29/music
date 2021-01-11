@@ -10,12 +10,12 @@ import androidx.annotation.Nullable;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
-public class CustomBottomSheetFragment extends BottomSheetDialogFragment implements CustomBottomSheet.BehaviourCallback {
+public class RoundedCustomBottomSheetFragment extends BottomSheetDialogFragment implements RoundedCustomBottomSheet.BehaviourCallback {
 
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        return new CustomBottomSheet(requireContext(), this);
+        return new RoundedCustomBottomSheet(requireContext(), this);
     }
 
     @Override

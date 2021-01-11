@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.adapters.playlist.PlaylistItemAdapter;
-import com.hardcodecoder.pulsemusic.dialog.base.RoundedBottomSheetFragment;
+import com.hardcodecoder.pulsemusic.dialog.base.RoundedCustomBottomSheetFragment;
 import com.hardcodecoder.pulsemusic.helper.UIHelper;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.providers.ProviderManager;
@@ -24,7 +24,7 @@ import com.hardcodecoder.pulsemusic.providers.ProviderManager;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddToPlaylistDialog extends RoundedBottomSheetFragment {
+public class AddToPlaylistDialog extends RoundedCustomBottomSheetFragment {
 
     public static final String TAG = "AddToPlaylistDialog";
     public static final String MUSIC_MODEL_KEY = "data";

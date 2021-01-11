@@ -16,11 +16,11 @@ import com.google.android.material.slider.Slider;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.hardcodecoder.pulsemusic.R;
-import com.hardcodecoder.pulsemusic.dialog.base.RoundedBottomSheetFragment;
+import com.hardcodecoder.pulsemusic.dialog.base.RoundedCustomBottomSheetFragment;
 import com.hardcodecoder.pulsemusic.themes.ThemeColors;
 import com.hardcodecoder.pulsemusic.themes.ThemeManagerUtils;
 
-public class CustomAccentChooserDialogFragment extends RoundedBottomSheetFragment {
+public class CustomAccentChooserDialogFragment extends RoundedCustomBottomSheetFragment {
 
     public static final String TAG = CustomAccentChooserDialogFragment.class.getSimpleName();
     private TextInputEditText mHexCode;

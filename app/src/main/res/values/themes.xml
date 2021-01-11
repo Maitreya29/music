@@ -80,4 +80,38 @@
         <item name="colorSurface">@color/blackColorSurface</item>
         <item name="colorOnPrimary">@color/blackColorOnPrimary</item>
     </style>
+
+    <style name="BottomSheetRounded" parent="@style/Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bottom_sheet_rounded_corners</item>
+    </style>
+
+    <style name="BottomSheetBase.Light" parent="@style/Theme.MaterialComponents.Light.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="bottomSheetStyle">@style/BottomSheetRounded</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@color/translucent_rgb</item>
+    </style>
+
+    <style name="BottomSheetBase.Dark" parent="@style/Theme.MaterialComponents.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="bottomSheetStyle">@style/BottomSheetRounded</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">?attr/colorSurface</item>
+    </style>
+
+    <style name="RoundedBottomSheet.Light" parent="BottomSheetBase.Light">
+        <item name="colorSurface">@color/lightColorBackground</item>
+    </style>
+
+    <style name="RoundedBottomSheet.Dark" parent="BottomSheetBase.Dark">
+        <item name="colorSurface">@color/darkColorSurface</item>
+    </style>
+
+    <style name="RoundedBottomSheet.Signature" parent="BottomSheetBase.Dark">
+        <item name="colorSurface">@color/signatureColorSurface</item>
+    </style>
+
+    <style name="RoundedBottomSheet.Black" parent="BottomSheetBase.Dark">
+        <item name="colorSurface">@color/blackColorSurface</item>
+    </style>
 </resources>

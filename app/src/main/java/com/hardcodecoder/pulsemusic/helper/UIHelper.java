@@ -21,7 +21,7 @@ import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.PulseController;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.dialog.AddToPlaylistDialog;
-import com.hardcodecoder.pulsemusic.dialog.RoundedBottomSheetDialog;
+import com.hardcodecoder.pulsemusic.dialog.base.RoundedCustomBottomSheet;
 import com.hardcodecoder.pulsemusic.interfaces.CreatePlaylist;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.providers.ProviderManager;
@@ -40,7 +40,7 @@ public class UIHelper {
     }
 
     public static void buildCreatePlaylistDialog(@NonNull Context context, @NonNull CreatePlaylist callback) {
-        BottomSheetDialog sheetDialog = new RoundedBottomSheetDialog(context);
+        BottomSheetDialog sheetDialog = new RoundedCustomBottomSheet(context);
         View layout = View.inflate(context, R.layout.bottom_dialog_edit_text, null);
         sheetDialog.setContentView(layout);
 
@@ -74,7 +74,7 @@ public class UIHelper {
     }
 
     public static void buildSongInfoDialog(@NonNull Context context, @NonNull final MusicModel musicModel) {
-        BottomSheetDialog bottomSheetDialog = new RoundedBottomSheetDialog(context);
+        BottomSheetDialog bottomSheetDialog = new RoundedCustomBottomSheet(context);
         final View view = View.inflate(context, R.layout.bottom_sheet_track_info, null);
         bottomSheetDialog.setContentView(view);
         view.findViewById(R.id.dialog_ok).setOnClickListener(v -> dismiss(bottomSheetDialog));
@@ -129,7 +129,7 @@ public class UIHelper {
                                                 @NonNull final MusicModel data,
                                                 boolean showGoToAlbums) {
         View view = View.inflate(activity, R.layout.library_item_menu, null);
-        BottomSheetDialog bottomSheetDialog = new RoundedBottomSheetDialog(view.getContext());
+        BottomSheetDialog bottomSheetDialog = new RoundedCustomBottomSheet(view.getContext());
 
         MediaArtImageView trackAlbumArt = view.findViewById(R.id.track_album_art);
         trackAlbumArt.setTransitionName("song_info_transition_" + data.getId());

@@ -1,7 +1,6 @@
 package com.hardcodecoder.pulsemusic.dialog.base;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -10,24 +9,26 @@ import androidx.annotation.Nullable;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.hardcodecoder.pulsemusic.R;
-import com.hardcodecoder.pulsemusic.themes.ThemeColors;
 import com.hardcodecoder.pulsemusic.themes.ThemeManagerUtils;
 
-public class CustomBottomSheet extends BottomSheetDialog {
+public class RoundedCustomBottomSheet extends BottomSheetDialog {
 
     private final BehaviourCallback mCallback;
 
-    protected CustomBottomSheet(@NonNull Context context, @Nullable BehaviourCallback callback) {
-        this(context, ThemeManagerUtils.isDarkModeEnabled() ? R.style.CustomBottomSheet : R.style.CustomBottomSheetLight, callback);
+    public RoundedCustomBottomSheet(@NonNull Context context) {
+        this(context, null);
     }
 
-    protected CustomBottomSheet(@NonNull Context context, int theme, @Nullable BehaviourCallback callback) {
+    public RoundedCustomBottomSheet(@NonNull Context context, @Nullable BehaviourCallback callback) {
+        this(context, ThemeManagerUtils.getBottomSheetThemeToApply(), callback);
+    }
+
+    public RoundedCustomBottomSheet(@NonNull Context context, int theme, @Nullable BehaviourCallback callback) {
         super(context, theme);
         mCallback = callback;
     }
 
-    protected CustomBottomSheet(@NonNull Context context, boolean cancelable, OnCancelListener cancelListener, @Nullable BehaviourCallback callback) {
+    public RoundedCustomBottomSheet(@NonNull Context context, boolean cancelable, OnCancelListener cancelListener, @Nullable BehaviourCallback callback) {
         super(context, cancelable, cancelListener);
         mCallback = callback;
     }
@@ -37,12 +38,6 @@ public class CustomBottomSheet extends BottomSheetDialog {
         super.setContentView(view);
         BottomSheetBehavior<FrameLayout> behavior = getBehavior();
         if (null != mCallback) mCallback.onBehaviourReady(behavior);
-
-        View root = findViewById(R.id.design_bottom_sheet);
-        if (null != root) {
-            Drawable background = root.getBackground();
-            if (null != background) background.setTint(ThemeColors.getCurrentColorSurface());
-        }
     }
 
     public interface BehaviourCallback {

@@ -21,4 +21,19 @@ class ThemeStore {
                 return R.style.ActivityThemeLight;
         }
     }
+
+    @StyleRes
+    static int getBottomSheetThemeById(int activityThemeId) {
+        switch (activityThemeId) {
+            case Preferences.DARK_THEME_GRAY:
+                return R.style.RoundedBottomSheet_Dark;
+            case Preferences.DARK_THEME_KINDA:
+                return R.style.RoundedBottomSheet_Signature;
+            case Preferences.DARK_THEME_PURE_BLACK:
+                return R.style.RoundedBottomSheet_Black;
+            case Preferences.LIGHT_THEME:
+            default:
+                return R.style.RoundedBottomSheet_Light;
+        }
+    }
 }

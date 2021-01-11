@@ -3,6 +3,7 @@ package com.hardcodecoder.pulsemusic.themes;
 import android.content.Context;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.StyleRes;
 
 import com.hardcodecoder.pulsemusic.Preferences;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
@@ -81,8 +82,14 @@ public class ThemeManagerUtils {
         return mDarkMode;
     }
 
+    @StyleRes
     public static int getThemeToApply() {
         return ThemeStore.getThemeById(mThemeId);
+    }
+
+    @StyleRes
+    public static int getBottomSheetThemeToApply() {
+        return ThemeStore.getBottomSheetThemeById(mThemeId);
     }
 
     @ColorInt

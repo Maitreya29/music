@@ -22,14 +22,14 @@ import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.activities.main.MediaFolderChooserActivity;
 import com.hardcodecoder.pulsemusic.adapters.bottomsheet.IgnoredFoldersAdapter;
-import com.hardcodecoder.pulsemusic.dialog.base.RoundedBottomSheetFragment;
+import com.hardcodecoder.pulsemusic.dialog.base.RoundedCustomBottomSheetFragment;
 import com.hardcodecoder.pulsemusic.providers.ProviderManager;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IgnoreFolderChooser extends RoundedBottomSheetFragment {
+public class IgnoreFolderChooser extends RoundedCustomBottomSheetFragment {
 
     public static final String TAG = IgnoreFolderChooser.class.getSimpleName();
     private static final int REQUEST_CODE_FOLDER_SELECT = 44;

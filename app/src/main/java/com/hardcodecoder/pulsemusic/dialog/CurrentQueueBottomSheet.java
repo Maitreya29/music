@@ -23,7 +23,7 @@ import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.PulseController;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.adapters.playlist.CustomizablePlaylistAdapter;
-import com.hardcodecoder.pulsemusic.dialog.base.CustomBottomSheetFragment;
+import com.hardcodecoder.pulsemusic.dialog.base.RoundedCustomBottomSheetFragment;
 import com.hardcodecoder.pulsemusic.helper.RecyclerViewGestureHelper;
 import com.hardcodecoder.pulsemusic.interfaces.ItemGestureCallback;
 import com.hardcodecoder.pulsemusic.interfaces.PlaylistItemListener;
@@ -32,7 +32,7 @@ import com.hardcodecoder.pulsemusic.views.MediaArtImageView;
 
 import java.util.List;
 
-public class CurrentQueueBottomSheet extends CustomBottomSheetFragment implements PlaylistItemListener, ItemGestureCallback<MusicModel> {
+public class CurrentQueueBottomSheet extends RoundedCustomBottomSheetFragment implements PlaylistItemListener, ItemGestureCallback<MusicModel> {
 
     public static final String TAG = CurrentQueueBottomSheet.class.getSimpleName();
     private final BottomSheetBehavior.BottomSheetCallback mBottomSheetCallback = new BottomSheetBehavior.BottomSheetCallback() {
