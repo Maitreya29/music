@@ -35,16 +35,6 @@ import java.util.List;
 public class CurrentQueueBottomSheet extends RoundedCustomBottomSheetFragment implements PlaylistItemListener, ItemGestureCallback<MusicModel> {
 
     public static final String TAG = CurrentQueueBottomSheet.class.getSimpleName();
-    private final BottomSheetBehavior.BottomSheetCallback mBottomSheetCallback = new BottomSheetBehavior.BottomSheetCallback() {
-        @Override
-        public void onStateChanged(@NonNull View bottomSheet, int newState) {
-            if (newState == BottomSheetBehavior.STATE_HIDDEN) dismiss();
-        }
-
-        @Override
-        public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-        }
-    };
     private View rootView;
     private MediaArtImageView mUpNextTrackAlbumArt;
     private MaterialTextView mUpNextTrackTitle;
@@ -81,7 +71,6 @@ public class CurrentQueueBottomSheet extends RoundedCustomBottomSheetFragment im
             updateUpNextCard();
         }
     };
-    private BottomSheetBehavior<FrameLayout> mBehaviour;
     private PulseController.PulseRemote mRemote;
 
     @NonNull
@@ -123,8 +112,6 @@ public class CurrentQueueBottomSheet extends RoundedCustomBottomSheetFragment im
 
     @Override
     public void onBehaviourReady(@NonNull BottomSheetBehavior<FrameLayout> behavior) {
-        mBehaviour = behavior;
-        mBehaviour.addBottomSheetCallback(mBottomSheetCallback);
     }
 
     @Override
@@ -171,8 +158,7 @@ public class CurrentQueueBottomSheet extends RoundedCustomBottomSheetFragment im
     @Override
     public void onDismiss(@NonNull DialogInterface dialog) {
         mPulseController.unregisterCallback(mCallback);
-        mBehaviour.removeBottomSheetCallback(mBottomSheetCallback);
-        super.onCancel(dialog);
+        super.onDismiss(dialog);
     }
 
     private void updateUpNextCard() {
