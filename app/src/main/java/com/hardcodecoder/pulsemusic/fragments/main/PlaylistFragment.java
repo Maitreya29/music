@@ -148,8 +148,8 @@ public class PlaylistFragment extends SmoothTransactionFragments implements Play
     }
 
     private void showEditPlaylistDialog(int pos) {
-        BottomSheetDialog sheetDialog = new RoundedCustomBottomSheet(requireContext());
         View layout = View.inflate(requireContext(), R.layout.bottom_dialog_edit_text, null);
+        BottomSheetDialog sheetDialog = new RoundedCustomBottomSheet(layout.getContext(), RoundedCustomBottomSheet::setDefaultBehaviour);
         sheetDialog.setContentView(layout);
         sheetDialog.show();
 

@@ -43,4 +43,9 @@ public class RoundedCustomBottomSheet extends BottomSheetDialog {
     public interface BehaviourCallback {
         void onBehaviourReady(@NonNull BottomSheetBehavior<FrameLayout> behavior);
     }
+
+    public static void setDefaultBehaviour(@NonNull BottomSheetBehavior<FrameLayout> behavior) {
+        behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+        behavior.setSkipCollapsed(true);
+    }
 }

@@ -101,7 +101,7 @@ public class HomeBottomSheetFragment extends RoundedCustomBottomSheetFragment {
 
     private void addUserName() {
         View layout = View.inflate(requireContext(), R.layout.bottom_dialog_edit_text, null);
-        BottomSheetDialog sheetDialog = new RoundedCustomBottomSheet(layout.getContext());
+        BottomSheetDialog sheetDialog = new RoundedCustomBottomSheet(layout.getContext(), RoundedCustomBottomSheet::setDefaultBehaviour);
         sheetDialog.setContentView(layout);
         sheetDialog.show();
 

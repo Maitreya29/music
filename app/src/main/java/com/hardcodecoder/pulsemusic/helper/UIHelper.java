@@ -40,7 +40,7 @@ public class UIHelper {
     }
 
     public static void buildCreatePlaylistDialog(@NonNull Context context, @NonNull CreatePlaylist callback) {
-        BottomSheetDialog sheetDialog = new RoundedCustomBottomSheet(context);
+        BottomSheetDialog sheetDialog = new RoundedCustomBottomSheet(context, RoundedCustomBottomSheet::setDefaultBehaviour);
         View layout = View.inflate(context, R.layout.bottom_dialog_edit_text, null);
         sheetDialog.setContentView(layout);
 
@@ -74,7 +74,7 @@ public class UIHelper {
     }
 
     public static void buildSongInfoDialog(@NonNull Context context, @NonNull final MusicModel musicModel) {
-        BottomSheetDialog bottomSheetDialog = new RoundedCustomBottomSheet(context);
+        BottomSheetDialog bottomSheetDialog = new RoundedCustomBottomSheet(context, RoundedCustomBottomSheet::setDefaultBehaviour);
         final View view = View.inflate(context, R.layout.bottom_sheet_track_info, null);
         bottomSheetDialog.setContentView(view);
         view.findViewById(R.id.dialog_ok).setOnClickListener(v -> dismiss(bottomSheetDialog));
@@ -129,8 +129,7 @@ public class UIHelper {
                                                 @NonNull final MusicModel data,
                                                 boolean showGoToAlbums) {
         View view = View.inflate(activity, R.layout.library_item_menu, null);
-        BottomSheetDialog bottomSheetDialog = new RoundedCustomBottomSheet(view.getContext());
-
+        BottomSheetDialog bottomSheetDialog = new RoundedCustomBottomSheet(activity, RoundedCustomBottomSheet::setDefaultBehaviour);
         MediaArtImageView trackAlbumArt = view.findViewById(R.id.track_album_art);
         trackAlbumArt.setTransitionName("song_info_transition_" + data.getId());
         MaterialTextView trackTitle = view.findViewById(R.id.track_title);
