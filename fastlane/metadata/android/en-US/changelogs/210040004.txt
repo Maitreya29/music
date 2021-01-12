@@ -1,0 +1,7 @@
+Pulse Music V4.0.4
+
+- Added sliding now playing screen
+- Added Rediscover section (dynamic)
+- Fixed global and bottom sheet dialog theme issues
+- Updated german translations
+- Other misc changes and fixes
