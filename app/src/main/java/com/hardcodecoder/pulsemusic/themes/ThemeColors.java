@@ -79,7 +79,7 @@ public class ThemeColors {
         mCurrentSecondaryTextColor = array.getColor(7, 0xFF000000);
         array.recycle();
         mCurrentColorBackgroundHighlight = ThemeManagerUtils.isDarkModeEnabled() ?
-                mCurrentColorSurface : ColorUtil.changeAlphaComponentTo(0x000000, 0.05f);
+                mCurrentColorSurface : 0xFFF2F2F2;
         mInitialized = true;
     }
 

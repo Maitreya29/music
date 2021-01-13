@@ -20,6 +20,7 @@ import com.hardcodecoder.pulsemusic.adapters.main.AlbumsAdapter;
 import com.hardcodecoder.pulsemusic.loaders.LoaderHelper;
 import com.hardcodecoder.pulsemusic.loaders.SortOrder;
 import com.hardcodecoder.pulsemusic.model.AlbumModel;
+import com.hardcodecoder.pulsemusic.themes.ThemeColors;
 import com.hardcodecoder.pulsemusic.themes.TintHelper;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 import com.hardcodecoder.pulsemusic.utils.DimensionsUtil;
@@ -113,11 +114,11 @@ public class ArtistDetailsActivity extends BaseDetailsActivity {
 
     private void loadImage() {
         String transitionName = getIntent().getStringExtra(KEY_TRANSITION_NAME);
-
         MediaArtImageView sharedImageView = findViewById(R.id.details_activity_art);
-        TintHelper.setAccentTintTo(sharedImageView);
         sharedImageView.setTransitionName(transitionName);
+        sharedImageView.setBackgroundColor(ThemeColors.getCurrentColorBackgroundHighlight());
         sharedImageView.setImageResource(R.drawable.ic_artist_art);
+        TintHelper.setAccentTintTo(sharedImageView);
 
         supportStartPostponedEnterTransition();
     }

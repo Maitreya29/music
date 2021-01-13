@@ -1,6 +1,5 @@
 package com.hardcodecoder.pulsemusic.activities.details;
 
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
@@ -30,6 +29,7 @@ import com.hardcodecoder.pulsemusic.interfaces.SimpleItemClickListener;
 import com.hardcodecoder.pulsemusic.loaders.LoaderHelper;
 import com.hardcodecoder.pulsemusic.loaders.SortOrder;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
+import com.hardcodecoder.pulsemusic.themes.ThemeColors;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 import com.hardcodecoder.pulsemusic.views.MediaArtImageView;
 
@@ -148,7 +148,7 @@ public class AlbumDetailsActivity extends BaseDetailsActivity {
                 .listener(new RequestListener<Drawable>() {
                     @Override
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                        sharedImageView.setBackgroundColor(Color.parseColor("#1E1E1E"));
+                        sharedImageView.setBackgroundColor(ThemeColors.getCurrentColorBackgroundHighlight());
                         sharedImageView.setImageDrawable(MediaArtHelper.getDefaultAlbumArt(sharedImageView.getContext(), mAlbumId));
                         supportStartPostponedEnterTransition();
                         return true;
