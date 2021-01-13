@@ -1,6 +1,7 @@
 package com.hardcodecoder.pulsemusic.dialog;
 
 import android.content.DialogInterface;
+import android.content.res.Configuration;
 import android.media.MediaMetadata;
 import android.media.session.MediaController;
 import android.media.session.PlaybackState;
@@ -112,6 +113,10 @@ public class CurrentQueueBottomSheet extends RoundedCustomBottomSheetFragment im
 
     @Override
     public void onBehaviourReady(@NonNull BottomSheetBehavior<FrameLayout> behavior) {
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+            behavior.setSkipCollapsed(true);
+        }
     }
 
     @Override
