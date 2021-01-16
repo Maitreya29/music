@@ -51,8 +51,7 @@ public class SettingsContributorsFragment extends SettingsBaseFragment {
         view.findViewById(R.id.telegram_logo).setOnClickListener(v -> openLink(R.string.telegram_link));
 
         GlideApp.with(view)
-                .load(getString(R.string.profile_icon_link))
-                .error(R.drawable.def_avatar)
+                .load(R.drawable.def_avatar)
                 .circleCrop()
                 .into((ImageView) view.findViewById(R.id.lead_developer_profile_icon));
     }

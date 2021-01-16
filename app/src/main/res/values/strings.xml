@@ -274,7 +274,6 @@
     <string name="about_check_source_code">Source on github</string>
 
     <!-- Profile Links -->
-    <string name="profile_icon_link" translatable="false">https://pbs.twimg.com/profile_images/1159497870514376704/U5JEGSc6_400x400.jpg</string>
     <string name="social_links">Social links</string>
     <string name="github_link" translatable="false">https://github.com/HardcodeCoder</string>
     <string name="source_code_link" translatable="false">https://github.com/HardcodeCoder/PulseMusic</string>
