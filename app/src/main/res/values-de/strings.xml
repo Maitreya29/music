@@ -72,7 +72,7 @@
     <string name="album_artist_desc">Album Interpret absteigend</string>
     <string name="album_first_year_asc">Album-Jahr aufsteigend</string>
     <string name="album_first_year_desc">Album-Jahr absteigend</string>
-    <string name="add_playlist">Zur Playlist hinzufügen</string>
+    <string name="add_playlist">Playlist hinzufügen</string>
     <string name="equalizer_error">Standard Equalizer nicht gefunden</string>
     <string name="grid_count">Anzahl Spalten</string>
     <string name="grid_count_land">Anzahl Spalten (Landschaft)</string>
@@ -90,7 +90,7 @@
     <string name="play_next_toast">Titel wurde hinzugefügt und wird als Nächstes abgespielt</string>
     <string name="add_to_queue">Zur Wiedergabeliste hinzufügen</string>
     <string name="add_to_queue_toast">Titel zur aktuellen Wiedergabeliste hinzugefügt</string>
-    <string name="add_to_playlist">Zur Wiedergabeliste hinzufügen</string>
+    <string name="add_to_playlist">Zu einer Playlist hinzufügen</string>
     <string name="go_to_album">Gehe zum Album</string>
     <string name="go_to_artist">Gehe zu Interpret</string>
     <string name="info">Titel Informationen</string>
@@ -99,32 +99,32 @@
     <!-- Bottom sheet dialog -->
     <string name="enter_name">Gib deinen Namen ein</string>
     <string name="enter_name_toast">Bitte gib deinen Namen ein</string>
-    <string name="create_playlist">Wiedergabeliste erschaffen</string>
-    <string name="edit_playlist">Wiedergabelistentitel bearbeiten</string>
-    <string name="create_playlist_hint">Gib den Namen der Wiedergabeliste ein</string>
+    <string name="create_playlist">Playlist erstellen</string>
+    <string name="edit_playlist">Playlisttitel bearbeiten</string>
+    <string name="create_playlist_hint">Gib den Namen der Playlist ein</string>
     <string name="create">Okay</string>
     <string name="cancel">Abbrechen</string>
     <string name="atp_title">Titel hinzufügen zu\.\.\.</string>
-    <string name="atp_no_user_playlist_found">Keine Wiedergabeliste gefunden\nKlicke auf den Hinzufügen-Button um eine zu erschaffen</string>
-    <string name="atp_track_added_toast">Titel erfolgreich zur Wiedergabeliste hinzugefügt</string>
-    <string name="atp_track_add_error_toast">Fehler beim Hinzufügen des Titels zur Wiedergabeliste</string>
+    <string name="atp_no_user_playlist_found">Keine Playlist gefunden\nKlicke auf den Hinzufügen-Button um eine zu erstellen</string>
+    <string name="atp_track_added_toast">Titel erfolgreich zur Playlist hinzugefügt</string>
+    <string name="atp_track_add_error_toast">Fehler beim Hinzufügen des Titels zur Playlist</string>
 
 
     <!-- Playlist tracks Activity -->
-    <string name="no_playlist_tracks_found">Diese Wiedergabeliste ist leer\nSie können mit "Hinzufügen" Titel hinzufügen</string>
-    <string name="item_removed">Titel von der Wiedergabeliste entfernt !!!</string>
+    <string name="no_playlist_tracks_found">Diese Playlist ist leer\nSie können mit "Hinzufügen" Titel hinzufügen</string>
+    <string name="item_removed">Titel von der Playlist entfernt !!!</string>
     <string name="snack_bar_action_undo">Rückgängig machen</string>
     <string name="playlist_play">Abspielen</string>
     <string name="playlist_add_more">Hinzufügen</string>
     <string name="playlist_clear_all">Alles löschen</string>
-    <string name="playlist_shuffled_success_toast">Wiedergabeliste erfolgreich gemischt</string>
+    <string name="playlist_shuffled_success_toast">Playlist erfolgreich gemischt</string>
     <string name="playlist_up_next_title">Als nächstes</string>
     <string name="playlist_current_queue_list_title">Aktuelle Warteschlange</string>
 
 
     <!-- Favorites Playlist Activity-->
     <string name="favorites_playlist_title">Deine Favoriten</string>
-    <string name="no_favorites_tracks">Keine Titel gefunden. Füge welche zu deinen Favoriten dazu \\u2665</string>
+    <string name="no_favorites_tracks">Keine Titel gefunden.\nFüge welche zu deinen Favoriten dazu\n\n\u2665</string>
 
 
     <!-- Recent Activity-->
@@ -163,7 +163,7 @@
 
 
     <!-- Search Activity -->
-    <string name="searchHint">Suche nach einem Künstler, Liedern oder Alben\.\.\.</string>
+    <string name="searchHint">Suche nach Künstlern, Liedern oder Alben\.\.\.</string>
     <string name="search_null">Keine Ergebnisse gefunden</string>
 
 
@@ -202,8 +202,8 @@
     <string name="duration_filter_title">Filterdauer</string>
     <string name="duration_filter_desc">Filter-Track basierend auf der Länge der Spuren. Tracks mit einer Länge größer als dies in der Bibliothek angezeigt wird</string>
     <string name="duration_filter_unit">sek</string>
-    <string name="remember_last_played_option_title">Letzten Artikel merken</string>
-    <string name="remember_last_played_option_text">Zuletzt gespielter Track wird beim Neustart der App gespeichert und angezeigt</string>
+    <string name="remember_last_played_option_title">Letzten Titel merken</string>
+    <string name="remember_last_played_option_text">Zuletzt gespielter Titel wird gespeichert und beim Neustart der App angezeigt</string>
 
 
     <!-- Look and feel section -->
@@ -220,7 +220,7 @@
     <string name="laf_accents_picker_title">Wähle eine Akzentfarbe</string>
     <string name="laf_accents_picker_desaturated_title">Entsättigte Farben</string>
     <string name="laf_accents_picker_accent_desaturated_desc">Entsättigt Farben, wenn das dunkle Theme aktiv ist</string>
-    <string name="dark_theme_name_gray">Nur Grau</string>
+    <string name="dark_theme_name_gray">Einfach Grau</string>
     <string name="dark_theme_name_kinda_dark">Standard dunkles Farbschema</string>
     <string name="dark_theme_name_pure_black">Finsterniss</string>
     <string name="select_dark_theme">Ändere das bevorzugte dunkle Theme</string>
