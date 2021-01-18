@@ -282,6 +282,15 @@ public abstract class DraggableNowPlayingSheetActivity extends ControllerActivit
     }
 
     @Override
+    public void onBackPressed() {
+        int state = BottomSheetBehavior.STATE_COLLAPSED;
+        if (null != mBehaviour) state = mBehaviour.getState();
+        if (state == BottomSheetBehavior.STATE_COLLAPSED || state == BottomSheetBehavior.STATE_HIDDEN)
+            super.onBackPressed();
+        else collapseBottomSheet();
+    }
+
+    @Override
     protected void onDestroy() {
         getSharedPreferences(Preferences.NOW_PLAYING_SCREEN_STYLE_KEY, Context.MODE_PRIVATE)
                 .unregisterOnSharedPreferenceChangeListener(this);
