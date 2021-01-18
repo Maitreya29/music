@@ -16,6 +16,7 @@
         android:focusable="true"
         android:visibility="gone"
         app:behavior_peekHeight="0dp"
+        android:fitsSystemWindows="false"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
         <FrameLayout
