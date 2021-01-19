@@ -10,5 +10,5 @@
     android:paddingStart="8dp"
     android:paddingTop="0dp"
     android:paddingEnd="8dp"
-    android:paddingBottom="24dp"
+    android:paddingBottom="18dp"
     tools:listitem="@layout/rv_home_item_sq" />

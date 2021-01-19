@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="164dp"
+    android:layout_width="154dp"
     android:layout_height="wrap_content"
     android:background="?attr/selectableItemBackground"
     android:orientation="vertical"
@@ -10,8 +10,8 @@
 
     <com.hardcodecoder.pulsemusic.views.MediaArtImageView
         android:id="@+id/home_rv_list_item_album_art"
-        android:layout_width="148dp"
-        android:layout_height="148dp"
+        android:layout_width="138dp"
+        android:layout_height="138dp"
         android:scaleType="centerCrop"
         app:radius="@dimen/rounding_radius_8dp"
         tools:ignore="contentDescription"
