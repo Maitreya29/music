@@ -1,5 +1,6 @@
 package com.hardcodecoder.pulsemusic.activities.base;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
@@ -82,6 +83,20 @@ public abstract class DraggableNowPlayingSheetActivity extends ControllerActivit
 
         FrameLayout draggableFrame = findViewById(R.id.draggable_frame);
         draggableFrame.setVisibility(View.VISIBLE);
+        // We provide a custom implementation as to how insets is handled for the
+        // draggable frame layout, to eliminate top padding in some devices
+        // We will not apply any top insets to this view (no matter what)
+        // and return the insets unchanged
+        draggableFrame.setOnApplyWindowInsetsListener((v, insets) -> {
+            draggableFrame.setPadding(
+                    draggableFrame.getPaddingLeft(),
+                    0,
+                    draggableFrame.getPaddingRight(),
+                    draggableFrame.getPaddingBottom());
+            return insets;
+        });
+        // Request to force apply our implementation of insets
+        draggableFrame.requestApplyInsets();
 
         mBehaviour = BottomSheetBehavior.from(draggableFrame);
         final int peekHeight = DimensionsUtil.getDimensionPixelSize(this, 104);
@@ -218,11 +233,16 @@ public abstract class DraggableNowPlayingSheetActivity extends ControllerActivit
     }
 
     private void updateMainContentBottomPadding(int bottomPadding) {
-        mMainContent.setPadding(
-                mMainContent.getPaddingLeft(),
-                mMainContent.getPaddingTop(),
-                mMainContent.getPaddingRight(),
-                bottomPadding);
+        ValueAnimator animator = ValueAnimator.ofInt(mMainContent.getPaddingBottom(), bottomPadding);
+        animator.addUpdateListener(valueAnimator ->
+                mMainContent.setPadding(
+                        mMainContent.getPaddingLeft(),
+                        mMainContent.getPaddingTop(),
+                        mMainContent.getPaddingRight(),
+                        (Integer) valueAnimator.getAnimatedValue()
+                ));
+        animator.setDuration(getResources().getInteger(android.R.integer.config_shortAnimTime));
+        animator.start();
     }
 
     private boolean needsLightStatusBarIcons() {
