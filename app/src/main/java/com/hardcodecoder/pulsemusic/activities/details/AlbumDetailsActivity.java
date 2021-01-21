@@ -59,7 +59,7 @@ public class AlbumDetailsActivity extends BaseDetailsActivity {
         loadImage();
 
         mSortOrder = resolveSortOrder(getCurrentSortOrder());
-        LoaderHelper.loadAlbumTracks(this, mSortOrder, mAlbumId, this::loadItems);
+        LoaderHelper.loadAlbumTracks(mAlbumId, mSortOrder, this::loadItems);
     }
 
     @Override

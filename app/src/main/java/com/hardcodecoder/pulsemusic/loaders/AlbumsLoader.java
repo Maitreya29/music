@@ -23,20 +23,21 @@ public class AlbumsLoader implements Callable<List<AlbumModel>> {
     private final ContentResolver mContentResolver;
     private final String mSortOrder;
     private final String mSelection;
+    private final String[] mArgs;
 
     AlbumsLoader(@NonNull ContentResolver contentResolver, @Nullable SortOrder.ALBUMS sortOrder) {
-        this(contentResolver, sortOrder, null);
+        this(contentResolver, sortOrder, null, null);
     }
 
-    AlbumsLoader(@NonNull ContentResolver contentResolver, @Nullable SortOrder.ALBUMS sortOrder, @Nullable String selection) {
+    AlbumsLoader(@NonNull ContentResolver contentResolver, @Nullable SortOrder.ALBUMS sortOrder, @Nullable String selection, @Nullable String[] args) {
         mContentResolver = contentResolver;
         mSortOrder = MediaStoreHelper.getSortOrderFor(sortOrder);
         mSelection = selection;
+        mArgs = args;
     }
 
     @Override
     public List<AlbumModel> call() {
-
         String[] col = {MediaStore.Audio.Albums._ID,
                 MediaStore.Audio.Albums.ALBUM,
                 MediaStore.Audio.Albums.ARTIST,
@@ -48,7 +49,7 @@ public class AlbumsLoader implements Callable<List<AlbumModel>> {
                 MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI,
                 col,
                 mSelection,
-                null,
+                mArgs,
                 mSortOrder);
 
         List<AlbumModel> sanitizedAlbumsList = null;

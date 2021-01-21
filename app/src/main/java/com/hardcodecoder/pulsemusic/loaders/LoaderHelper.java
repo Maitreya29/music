@@ -78,11 +78,10 @@ public class LoaderHelper {
         TaskRunner.executeAsync(new TopArtistsLoader(), callback);
     }
 
-    public static void loadAlbumTracks(@NonNull Context context,
+    public static void loadAlbumTracks(long albumId,
                                        @NonNull SortOrder sortOrder,
-                                       long albumId,
                                        @NonNull Callback<List<MusicModel>> callback) {
-        TaskRunner.executeAsync(new AlbumTracksLoader(context, sortOrder, albumId), callback);
+        TaskRunner.executeAsync(new AlbumTracksLoader(albumId, sortOrder), callback);
     }
 
     public static void loadArtistAlbums(@NonNull ContentResolver contentResolver,
