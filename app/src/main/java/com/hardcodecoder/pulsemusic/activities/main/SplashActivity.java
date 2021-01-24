@@ -3,6 +3,7 @@ package com.hardcodecoder.pulsemusic.activities.main;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.ImageView;
@@ -57,8 +58,10 @@ public class SplashActivity extends ThemeActivity {
 
     private void startHomeActivity() {
         mHandler.postDelayed(() -> {
-            Intent i = new Intent(SplashActivity.this, MainContentActivity.class);
-            startActivity(i);
+            Intent intent = new Intent(SplashActivity.this, MainContentActivity.class);
+            Uri uri = getIntent().getData();
+            if (uri != null) intent.putExtra(MainContentActivity.URI_DATA, uri.toString());
+            startActivity(intent);
             finish();
         }, 400);
     }

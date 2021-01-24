@@ -1,7 +1,6 @@
 package com.hardcodecoder.pulsemusic.helper;
 
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.media.MediaExtractor;
 import android.media.MediaFormat;
@@ -9,14 +8,17 @@ import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.provider.OpenableColumns;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.hardcodecoder.pulsemusic.BuildConfig;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.TaskRunner;
 import com.hardcodecoder.pulsemusic.loaders.LoaderCache;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.model.TrackFileModel;
 import com.hardcodecoder.pulsemusic.themes.ThemeColors;
+import com.hardcodecoder.pulsemusic.utils.LogUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -36,7 +38,8 @@ public class DataModelHelper {
 
     @Nullable
     public static List<MusicModel> getModelObjectFromId(List<Integer> idList) {
-        if (null == idList || idList.isEmpty()) return null;
+        List<MusicModel> masterList = LoaderCache.getAllTracksList();
+        if (null == masterList || null == idList || idList.isEmpty()) return null;
 
         Map<Integer, MusicModel> modelMap = new HashMap<>();
 
@@ -53,17 +56,19 @@ public class DataModelHelper {
 
     @Nullable
     public static MusicModel getModelFromId(int id) {
-        for (MusicModel md : LoaderCache.getAllTracksList()) {
+        List<MusicModel> masterList = LoaderCache.getAllTracksList();
+        if (null == masterList) return null;
+        for (MusicModel md : masterList) {
             if (md.getId() == id) return md;
         }
         return null;
     }
 
-    public static MusicModel buildMusicModelFrom(Context context, Intent data) {
-        String path = data.getDataString();
-        if (null == path) return null;
+    @Nullable
+    public static MusicModel buildMusicModelFrom(@NonNull Context context, @Nullable Uri data) {
+        if (null == data) return null;
         MediaMetadataRetriever mmr = new MediaMetadataRetriever();
-        mmr.setDataSource(context, data.getData());
+        mmr.setDataSource(context, data);
         String defText = context.getString(R.string.def_track_title);
         String title;
         String album;
@@ -80,7 +85,8 @@ public class DataModelHelper {
             duration = Integer.parseInt(mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION));
             mmr.release();
         } catch (Exception e) {
-            e.printStackTrace();
+            if (BuildConfig.DEBUG) e.printStackTrace();
+            else LogUtils.logException(e);
             return null;
         }
         return new MusicModel(
@@ -89,7 +95,7 @@ public class DataModelHelper {
                 null == album ? defText : album,
                 mPickedTrackId--,
                 null == artist ? defText : artist,
-                data.getDataString(),
+                data.toString(),
                 "",
                 dateModified,
                 dateModified,
@@ -109,7 +115,8 @@ public class DataModelHelper {
                 try {
                     mediaExtractor.setDataSource(context, uri, null);
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    if (BuildConfig.DEBUG) e.printStackTrace();
+                    else LogUtils.logException(e);
                 }
 
                 int nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
@@ -128,7 +135,8 @@ public class DataModelHelper {
                     sampleRate = mediaFormat.getInteger(MediaFormat.KEY_SAMPLE_RATE);
                     channelCount = mediaFormat.getInteger(MediaFormat.KEY_CHANNEL_COUNT);
                 } catch (NullPointerException e) {
-                    e.printStackTrace();
+                    if (BuildConfig.DEBUG) e.printStackTrace();
+                    else LogUtils.logException(e);
                 }
                 cursor.close();
                 TrackFileModel trackFileModel = new TrackFileModel(displayName, mimeType, fileSize, bitRate, sampleRate, channelCount);

@@ -208,7 +208,7 @@ public class HomeFragment extends SmoothTransactionFragments {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK && requestCode == PICK_MUSIC) {
-            MusicModel md = DataModelHelper.buildMusicModelFrom(requireContext(), data);
+            MusicModel md = DataModelHelper.buildMusicModelFrom(requireContext(), data.getData());
             if (md != null) {
                 List<MusicModel> singlePickedItemList = new ArrayList<>();
                 singlePickedItemList.add(md);

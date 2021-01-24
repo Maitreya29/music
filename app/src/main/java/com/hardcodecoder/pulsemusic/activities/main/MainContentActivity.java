@@ -7,6 +7,7 @@ import android.content.ServiceConnection;
 import android.media.MediaMetadata;
 import android.media.session.MediaController;
 import android.media.session.PlaybackState;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
@@ -30,13 +31,19 @@ import com.hardcodecoder.pulsemusic.fragments.main.ArtistFragment;
 import com.hardcodecoder.pulsemusic.fragments.main.HomeFragment;
 import com.hardcodecoder.pulsemusic.fragments.main.LibraryFragment;
 import com.hardcodecoder.pulsemusic.fragments.main.PlaylistFragment;
+import com.hardcodecoder.pulsemusic.helper.DataModelHelper;
 import com.hardcodecoder.pulsemusic.loaders.LoaderHelper;
+import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.playback.PlaybackManager;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainContentActivity extends DraggableNowPlayingSheetActivity {
 
     public static final String TAG = "MainActivity";
+    public static final String URI_DATA = "TrackData";
     private static final String HOME = "HomeFragment";
     private static final String LIBRARY = "LibraryFragment";
     private static final String ALBUMS = "AlbumsFragment";
@@ -193,6 +200,18 @@ public class MainContentActivity extends DraggableNowPlayingSheetActivity {
                 if (null == bundle) return;
                 mController.getTransportControls().sendCustomAction(PlaybackManager.ACTION_LOAD_LAST_TRACK, bundle);
             });
+        }
+
+        String path = getIntent().getStringExtra(URI_DATA);
+        if (null != path) {
+            Uri data = Uri.parse(path);
+            MusicModel md = DataModelHelper.buildMusicModelFrom(this, data);
+            if (null != md) {
+                List<MusicModel> singlePickedItemList = new ArrayList<>();
+                singlePickedItemList.add(md);
+                mPulseController.setPlaylist(singlePickedItemList, 0);
+                mRemote.play();
+            }
         }
     }
 
