@@ -88,53 +88,55 @@ public class LocalPlayback implements
     @Override
     public void onPlay(int startPosition, boolean startPlaying) {
         final MusicModel trackItem = mQueueManager.getActiveQueueItem();
-        if (tryGetAudioFocus()) {
-            mDelayedPlayback = false;
-            if (trackItem.getId() == mMediaId) {
-                // Track item has not changed
-                if (mPlaybackState == PlaybackState.STATE_PAUSED) {
-                    // We were previously paused
-                    // resume playback
-                    if (null == mp) {
-                        // if media player becomes null when trying to resume playback
-                        // initialize a new media player object
-                        initMediaPlayer(trackItem);
-                    } else {
-                        // Start playback with the resume position
-                        play(mResumePosition);
-                    }
-                } else if (mQueueManager.isCurrentTrackInRepeatMode()) {
-                    // We are in repeat mode (infinite lop), release media player
-                    // and let it re-init with same track
-                    releaseMediaPlayer();
-                    mPlaybackCallback.onTrackConfigured(trackItem);
+        mDelayedPlayback = false;
+        if (trackItem.getId() == mMediaId) {
+            // Track item has not changed
+            if (mPlaybackState == PlaybackState.STATE_PAUSED) {
+                // We were previously paused
+                // resume playback
+                if (null == mp) {
+                    // if media player becomes null when trying to resume playback
+                    // initialize a new media player object
                     initMediaPlayer(trackItem);
+                } else {
+                    // Start playback with the resume position
+                    play(mResumePosition);
                 }
-            } else {
-                // Track item changed, release old Media player
+            } else if (mQueueManager.isCurrentTrackInRepeatMode()) {
+                // We are in repeat mode (infinite lop), release media player
+                // and let it re-init with same track
                 releaseMediaPlayer();
-                // We need playback to start from the given start Position
-                mResumePosition = startPosition;
-                // Whether we should start playback when resource is ready
-                mStartPlaybackWhenReady = startPlaying;
-                // Initialize new Media player
-                initMediaPlayer(trackItem);
-                // Notify Playback Manager of track change
                 mPlaybackCallback.onTrackConfigured(trackItem);
-                // Update current Media id
-                mMediaId = trackItem.getId();
+                initMediaPlayer(trackItem);
             }
-            // Register listeners
-            registerBecomingNoisyReceiver();
-            callStateListener();
-        } else if (mDelayedPlayback) mMediaId = trackItem.getId();
+        } else {
+            // Track item changed, release old Media player
+            releaseMediaPlayer();
+            // We need playback to start from the given start Position
+            mResumePosition = startPosition;
+            // Whether we should start playback when resource is ready
+            mStartPlaybackWhenReady = startPlaying;
+            // Initialize new Media player
+            initMediaPlayer(trackItem);
+            // Notify Playback Manager of track change
+            mPlaybackCallback.onTrackConfigured(trackItem);
+            // Update current Media id
+            mMediaId = trackItem.getId();
+        }
+        // Register listeners
+        registerBecomingNoisyReceiver();
+        callStateListener();
     }
 
     private void play(int startPosition) {
         if (mStartPlaybackWhenReady) {
             if (startPosition > 0 && startPosition < mp.getDuration()) mp.seekTo(startPosition);
-            mp.start();
-            mPlaybackState = PlaybackState.STATE_PLAYING;
+            if (mCurrentState == AudioManager.AUDIOFOCUS_GAIN || tryGetAudioFocus()) {
+                mp.start();
+                mPlaybackState = PlaybackState.STATE_PLAYING;
+            } else {
+                mPlaybackState = PlaybackState.STATE_PAUSED;
+            }
         } else {
             // We only skip the playback once when resource is ready
             // Further call to play should actually start playing
