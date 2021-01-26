@@ -27,9 +27,9 @@ public abstract class SettingsBaseFragment extends Fragment {
             mListener.requiresActivityRestart();
     }
 
-    protected void requiresApplicationRestart() {
+    protected void requiresApplicationRestart(boolean shouldStopPlayback) {
         if (mListener instanceof SettingsActivity)
-            mListener.requiresApplicationRestart();
+            mListener.requiresApplicationRestart(shouldStopPlayback);
     }
 
     public abstract String getFragmentTag();

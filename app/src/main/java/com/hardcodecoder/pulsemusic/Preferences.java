@@ -2,6 +2,7 @@ package com.hardcodecoder.pulsemusic;
 
 public class Preferences {
 
+    public static final String FIRST_RUN = "FirstRun";
     public static final String SORT_ORDER_PREFS_KEY = "SortOrder";
     public static final String SORT_ORDER_LIBRARY_KEY = "LibrarySortOrder";
     public static final String SORT_ORDER_ALBUMS_KEY = "AlbumsSortOrder";
@@ -96,4 +97,11 @@ public class Preferences {
     public static final String REMEMBER_LAST_TRACK = "RememberLastTrack";
     public static final String LAST_TRACK_ID = "LastTrackId";
     public static final String LAST_TRACK_POSITION = "LastTrackPosition";
+
+    public static final String HOME_PLAYLIST_SECTIONS = "HomePlaylistSections";
+    public static final String HOME_PLAYLIST_TOP_ALBUMS = "HomePlaylistTopAlbums";
+    public static final String HOME_PLAYLIST_FOR_YOU = "HomePlaylistForYou";
+    public static final String HOME_PLAYLIST_REDISCOVER = "HomePlaylistRediscover";
+    public static final String HOME_PLAYLIST_NEW_IN_LIBRARY = "HomePlaylistNewInLibrary";
+    public static final String HOME_PLAYLIST_TOP_ARTIST = "HomePlaylistTopArtist";
 }

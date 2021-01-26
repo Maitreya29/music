@@ -2,6 +2,7 @@ package com.hardcodecoder.pulsemusic.loaders;
 
 import androidx.annotation.Nullable;
 
+import com.hardcodecoder.pulsemusic.BuildConfig;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.providers.ProviderManager;
 
@@ -14,6 +15,7 @@ public class RediscoverLoader implements Callable<List<MusicModel>> {
 
     @Nullable
     private final List<MusicModel> mExcludeTracks;
+    private final int MIN_COUNT = BuildConfig.DEBUG ? 0 : 10;
 
     /**
      * Default constructor, that accepts a list, which is considered
@@ -37,7 +39,7 @@ public class RediscoverLoader implements Callable<List<MusicModel>> {
         master = new ArrayList<>(LoaderCache.getAllTracksList());
 
         List<MusicModel> historyTracks = ProviderManager.getHistoryProvider().getHistoryTracks();
-        if (historyTracks == null || historyTracks.isEmpty() || historyTracks.size() <= 5) {
+        if (historyTracks == null || historyTracks.isEmpty() || historyTracks.size() <= MIN_COUNT) {
             // Rediscover playlist is generated only when user
             // has played few songs earlier in the app
             return null;

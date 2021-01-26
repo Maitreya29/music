@@ -10,8 +10,10 @@ import androidx.annotation.Nullable;
 
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.dialog.IgnoreFolderChooser;
+import com.hardcodecoder.pulsemusic.dialog.PlaylistSectionSelector;
 import com.hardcodecoder.pulsemusic.fragments.settings.base.SettingsBaseFragment;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
+import com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView;
 import com.hardcodecoder.pulsemusic.views.SettingsToggleableItem;
 import com.hardcodecoder.pulsemusic.views.ValueSlider;
 
@@ -48,7 +50,7 @@ public class SettingsGeneralFragment extends SettingsBaseFragment {
 
         view.findViewById(R.id.ignore_folder_picker).setOnClickListener(v -> {
             IgnoreFolderChooser ignoreFolderChooser = IgnoreFolderChooser.getInstance(hasChanged -> {
-                if (hasChanged) requiresApplicationRestart();
+                if (hasChanged) requiresApplicationRestart(true);
             });
             ignoreFolderChooser.show(requireFragmentManager(), IgnoreFolderChooser.TAG);
         });
@@ -62,6 +64,16 @@ public class SettingsGeneralFragment extends SettingsBaseFragment {
         rememberOption.setSwitchChecked(remember);
         rememberOption.setOnSwitchCheckedChangedListener((buttonView, isChecked) ->
                 AppSettings.setRememberLastTrack(requireContext(), isChecked));
+
+        SettingsCategoryItemView editPlaylist = view.findViewById(R.id.home_section_playlist_selector);
+        editPlaylist.setOnClickListener(v -> {
+            if (null != getFragmentManager()) {
+                PlaylistSectionSelector playlistSectionSelector = PlaylistSectionSelector.getInstance(needsRestartOnDismiss -> {
+                    if (needsRestartOnDismiss) requiresApplicationRestart(false);
+                });
+                playlistSectionSelector.show(getFragmentManager(), PlaylistSectionSelector.TAG);
+            }
+        });
     }
 
     @Override
@@ -70,7 +82,7 @@ public class SettingsGeneralFragment extends SettingsBaseFragment {
         int newFilterDuration = mDurationFilter.getSliderValue();
         if (mCurrentFilterDuration != newFilterDuration) {
             AppSettings.setFilterDuration(requireContext(), newFilterDuration);
-            requiresApplicationRestart();
+            requiresApplicationRestart(true);
         }
     }
 }

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="32dp"
+    android:paddingBottom="32dp">
+
+    <com.hardcodecoder.pulsemusic.views.AccentColorTextView
+        android:id="@+id/playlist_selector_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:text="@string/playlist_section_toggle_title"
+        android:textAppearance="@style/Appearance.Text.Headline6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/playlist_top_albums"
+        style="@style/ToggleItemText"
+        android:layout_marginTop="16dp"
+        android:text="@string/top_albums"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/playlist_selector_title" />
+
+    <com.hardcodecoder.pulsemusic.views.AccentColorSwitch
+        android:id="@+id/switch_top_albums"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintBottom_toBottomOf="@id/playlist_top_albums"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/playlist_top_albums" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/playlist_for_you"
+        style="@style/ToggleItemText"
+        android:text="@string/random"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/playlist_top_albums" />
+
+    <com.hardcodecoder.pulsemusic.views.AccentColorSwitch
+        android:id="@+id/switch_for_you"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintBottom_toBottomOf="@id/playlist_for_you"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/playlist_for_you" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/playlist_rediscover"
+        style="@style/ToggleItemText"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:paddingEnd="64dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/playlist_for_you"
+        tools:text="Rediscover\nNote: Rediscover section is only shown after the user has played few tracks" />
+
+    <com.hardcodecoder.pulsemusic.views.AccentColorSwitch
+        android:id="@+id/switch_rediscover"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintBottom_toBottomOf="@id/playlist_rediscover"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/playlist_rediscover" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/playlist_new_in_library"
+        style="@style/ToggleItemText"
+        android:text="@string/new_in_library"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/playlist_rediscover" />
+
+    <com.hardcodecoder.pulsemusic.views.AccentColorSwitch
+        android:id="@+id/switch_new_in_library"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintBottom_toBottomOf="@id/playlist_new_in_library"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/playlist_new_in_library" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/playlist_top_artist"
+        style="@style/ToggleItemText"
+        android:text="@string/top_artist"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/playlist_new_in_library" />
+
+    <com.hardcodecoder.pulsemusic.views.AccentColorSwitch
+        android:id="@+id/switch_top_artist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintBottom_toBottomOf="@id/playlist_top_artist"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/playlist_top_artist" />
+</androidx.constraintlayout.widget.ConstraintLayout>

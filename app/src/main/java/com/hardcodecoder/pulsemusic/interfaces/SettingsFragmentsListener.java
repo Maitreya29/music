@@ -12,5 +12,5 @@ public interface SettingsFragmentsListener {
 
     void requiresActivityRestart();
 
-    void requiresApplicationRestart();
+    void requiresApplicationRestart(boolean shouldStopPlayback);
 }

@@ -18,8 +18,10 @@ import androidx.recyclerview.widget.SnapHelper;
 
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.PMS;
+import com.hardcodecoder.pulsemusic.Preferences;
 import com.hardcodecoder.pulsemusic.PulseController;
 import com.hardcodecoder.pulsemusic.R;
+import com.hardcodecoder.pulsemusic.TaskRunner;
 import com.hardcodecoder.pulsemusic.activities.playlist.FavoritesActivity;
 import com.hardcodecoder.pulsemusic.activities.playlist.RecentActivity;
 import com.hardcodecoder.pulsemusic.adapters.main.HomeSectionAdapter;
@@ -34,6 +36,7 @@ import com.hardcodecoder.pulsemusic.loaders.LoaderHelper;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.model.TopAlbumModel;
 import com.hardcodecoder.pulsemusic.model.TopArtistModel;
+import com.hardcodecoder.pulsemusic.utils.AppSettings;
 import com.hardcodecoder.pulsemusic.utils.NavigationUtil;
 
 import java.util.ArrayList;
@@ -41,7 +44,6 @@ import java.util.List;
 
 public class HomeFragment extends SmoothTransactionFragments {
 
-    private static final long BASE_DELAY_MILLS = 275;
     private static final int PICK_MUSIC = 1600;
     private final PulseController mPulseController = PulseController.getInstance();
     private final PulseController.PulseRemote mRemote = mPulseController.getRemote();
@@ -60,17 +62,38 @@ public class HomeFragment extends SmoothTransactionFragments {
     @Override
     public void setUpContent(@NonNull View view) {
         if (null != LoaderCache.getAllTracksList() && !LoaderCache.getAllTracksList().isEmpty()) {
-            LoaderHelper.loadTopAlbums(result -> loadTopAlbums(view, result));
-            LoaderHelper.loadSuggestionsList(result -> {
-                loadSuggestions(view, result);
-                // We kick start rediscover load after loading suggestions
-                // so that we can use Suggestions as exclusion list
-                LoaderHelper.loadRediscoverSection(LoaderCache.getSuggestions(),
-                        rediscoverList -> loadRediscoverSection(view, rediscoverList));
-            });
+            TaskRunner.executeAsync(() -> {
+                boolean isTopAlbumsEnabled = AppSettings.isPlaylistSectionEnabled(requireContext(), Preferences.HOME_PLAYLIST_TOP_ALBUMS);
+                boolean isForYouEnabled = AppSettings.isPlaylistSectionEnabled(requireContext(), Preferences.HOME_PLAYLIST_FOR_YOU);
+                boolean isRediscoverEnabled = AppSettings.isPlaylistSectionEnabled(requireContext(), Preferences.HOME_PLAYLIST_REDISCOVER);
+                boolean isNewInLibraryEnabled = AppSettings.isPlaylistSectionEnabled(requireContext(), Preferences.HOME_PLAYLIST_NEW_IN_LIBRARY);
+                boolean isTopArtistEnabled = AppSettings.isPlaylistSectionEnabled(requireContext(), Preferences.HOME_PLAYLIST_TOP_ARTIST);
 
-            LoaderHelper.loadLatestTracks(result -> loadLatestTracks(view, result));
-            LoaderHelper.loadTopArtist(result -> loadTopArtists(view, result));
+                if (isTopAlbumsEnabled)
+                    LoaderHelper.loadTopAlbums(result -> loadTopAlbums(view, result));
+
+                if (isForYouEnabled) {
+                    LoaderHelper.loadSuggestionsList(result -> {
+                        loadSuggestions(view, result);
+                        if (isRediscoverEnabled) {
+                            // We kick start rediscover load after loading suggestions
+                            // so that we can use Suggestions as exclusion list
+                            LoaderHelper.loadRediscoverSection(LoaderCache.getSuggestions(),
+                                    rediscoverList -> loadRediscoverSection(view, rediscoverList));
+                        }
+                    });
+                } else if (isRediscoverEnabled) {
+                    LoaderHelper.loadRediscoverSection(null,
+                            rediscoverList -> loadRediscoverSection(view, rediscoverList));
+                }
+
+                if (isNewInLibraryEnabled)
+                    LoaderHelper.loadLatestTracks(result -> loadLatestTracks(view, result));
+
+                if (isTopArtistEnabled)
+                    LoaderHelper.loadTopArtist(result -> loadTopArtists(view, result));
+
+            });
         } else {
             MaterialTextView noTracksText = (MaterialTextView) ((ViewStub) view.findViewById(R.id.stub_no_tracks_found)).inflate();
             noTracksText.setText(getString(R.string.tracks_not_found));
@@ -113,7 +136,7 @@ public class HomeFragment extends SmoothTransactionFragments {
 
     private void loadSuggestions(@NonNull View view, @Nullable List<MusicModel> list) {
         if (list == null || list.isEmpty()) return;
-        view.postOnAnimationDelayed(() -> {
+        view.postOnAnimation(() -> {
             MaterialTextView suggestionsTitle = (MaterialTextView) ((ViewStub) view.findViewById(R.id.stub_suggestions_title)).inflate();
             suggestionsTitle.setText(getString(R.string.random));
             RecyclerView rv = (RecyclerView) ((ViewStub) view.findViewById(R.id.stub_suggested_list)).inflate();
@@ -132,12 +155,12 @@ public class HomeFragment extends SmoothTransactionFragments {
                 }
             });
             rv.setAdapter(adapter);
-        }, BASE_DELAY_MILLS);
+        });
     }
 
     private void loadRediscoverSection(@NonNull View view, @Nullable List<MusicModel> list) {
         if (list == null || list.isEmpty()) return;
-        view.postOnAnimationDelayed(() -> {
+        view.postOnAnimation(() -> {
             MaterialTextView suggestionsTitle = (MaterialTextView) ((ViewStub) view.findViewById(R.id.stub_rediscover_title)).inflate();
             suggestionsTitle.setText(getString(R.string.rediscover));
             RecyclerView rv = (RecyclerView) ((ViewStub) view.findViewById(R.id.stub_rediscover_list)).inflate();
@@ -156,12 +179,12 @@ public class HomeFragment extends SmoothTransactionFragments {
                 }
             });
             rv.setAdapter(adapter);
-        }, BASE_DELAY_MILLS * 2);
+        });
     }
 
     private void loadLatestTracks(@NonNull View view, @Nullable List<MusicModel> list) {
         if (list == null || list.isEmpty()) return;
-        view.postOnAnimationDelayed(() -> {
+        view.postOnAnimation(() -> {
             MaterialTextView newInStoreTitle = (MaterialTextView) ((ViewStub) view.findViewById(R.id.stub_new_in_store_title)).inflate();
             newInStoreTitle.setText(getString(R.string.new_in_library));
             RecyclerView rv = (RecyclerView) ((ViewStub) view.findViewById(R.id.stub_new_in_store_list)).inflate();
@@ -180,12 +203,12 @@ public class HomeFragment extends SmoothTransactionFragments {
                 }
             });
             rv.setAdapter(adapter);
-        }, BASE_DELAY_MILLS * 3);
+        });
     }
 
     private void loadTopArtists(@NonNull View view, @Nullable List<TopArtistModel> list) {
         if (list == null || list.isEmpty()) return;
-        view.postOnAnimationDelayed(() -> {
+        view.postOnAnimation(() -> {
             MaterialTextView topAlbumsTitle = (MaterialTextView) ((ViewStub) view.findViewById(R.id.stub_top_artists_title)).inflate();
             topAlbumsTitle.setText(getString(R.string.top_artist));
             RecyclerView rv = (RecyclerView) ((ViewStub) view.findViewById(R.id.stub_top_artists_list)).inflate();
@@ -194,7 +217,7 @@ public class HomeFragment extends SmoothTransactionFragments {
             TopArtistsAdapter adapter = new TopArtistsAdapter(getLayoutInflater(), list, (sharedView, position) ->
                     NavigationUtil.goToArtist(requireActivity(), sharedView, list.get(position).getArtistName()));
             rv.setAdapter(adapter);
-        }, BASE_DELAY_MILLS * 4);
+        });
     }
 
     private void pickMedia() {

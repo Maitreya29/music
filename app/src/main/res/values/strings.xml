@@ -207,6 +207,10 @@
     <string name="duration_filter_unit">sec</string>
     <string name="remember_last_played_option_title">Remember last track</string>
     <string name="remember_last_played_option_text">Last played track will be remembered and will be shown, on app relaunch</string>
+    <string name="playlist_section_selector">Edit playlist section</string>
+    <string name="playlist_section_selector_desc">Select which playlist\'s to show in the home screen</string>
+    <string name="playlist_section_toggle_title">Toggle playlist section</string>
+    <string name="rediscover_desc">Note: This section is dynamic and may not be shown always, even if enabled</string>
 
     <!-- Look and feel section -->
     <string name="laf_category_theme">Theme</string>

@@ -11,6 +11,17 @@ import com.hardcodecoder.pulsemusic.themes.PresetColors;
 
 public class AppSettings {
 
+    public static boolean isFirstRun(@NonNull Context context) {
+        return context.getSharedPreferences(Preferences.FIRST_RUN, Context.MODE_PRIVATE)
+                .getBoolean(Preferences.FIRST_RUN, true);
+    }
+
+    public static void setFirstRun(@NonNull Context context, boolean firstRun) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.FIRST_RUN, Context.MODE_PRIVATE).edit();
+        editor.putBoolean(Preferences.FIRST_RUN, firstRun);
+        editor.apply();
+    }
+
     public static void savePortraitModeGridSpanCount(@NonNull Context context, String prefId, int count) {
         SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.SPAN_COUNT, Context.MODE_PRIVATE).edit();
         editor.putInt(prefId, count);
@@ -216,5 +227,16 @@ public class AppSettings {
     public static long getLastTrackPosition(@NonNull Context context) {
         return context.getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, Context.MODE_PRIVATE)
                 .getLong(Preferences.LAST_TRACK_POSITION, 0); // By default do not remember last track
+    }
+
+    public static boolean isPlaylistSectionEnabled(@NonNull Context context, @NonNull String playlistSection) {
+        return context.getSharedPreferences(Preferences.HOME_PLAYLIST_SECTIONS, Context.MODE_PRIVATE)
+                .getBoolean(playlistSection, false);
+    }
+
+    public static void setPlaylistSectionEnabled(@NonNull Context context, @NonNull String playlistSection, boolean enable) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.HOME_PLAYLIST_SECTIONS, Context.MODE_PRIVATE).edit();
+        editor.putBoolean(playlistSection, enable);
+        editor.apply();
     }
 }

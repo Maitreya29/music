@@ -84,7 +84,7 @@ public class SettingsActivity extends ControllerActivity implements SettingsFrag
     }
 
     @Override
-    public void requiresApplicationRestart() {
+    public void requiresApplicationRestart(boolean shouldStopPlayback) {
         View layout = View.inflate(this, R.layout.alert_dialog_view, null);
         MaterialTextView title = layout.findViewById(R.id.alert_dialog_title);
         MaterialTextView msg = layout.findViewById(R.id.alert_dialog_message);
@@ -104,9 +104,11 @@ public class SettingsActivity extends ControllerActivity implements SettingsFrag
             if (null != restartIntent) {
                 restartIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(restartIntent);
-                mRemote.stop();
-                mPulseController.getQueueManager().resetQueue();
-                mRestartDialog.dismiss();
+                if (shouldStopPlayback) {
+                    mRemote.stop();
+                    mPulseController.getQueueManager().resetQueue();
+                    mRestartDialog.dismiss();
+                }
                 finish();
             }
         });

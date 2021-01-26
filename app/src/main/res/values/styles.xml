@@ -43,6 +43,17 @@
         <item name="android:clickable">true</item>
     </style>
 
+    <style name="ToggleItemText">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:paddingStart">32dp</item>
+        <item name="android:paddingEnd">0dp</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+        <item name="android:textAppearance">@style/Appearance.Text.Subtitle1</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_marginTop">8dp</item>
+    </style>
+
     <style name="TextAppearanceToolbar" parent="Appearance.Text.Headline6" />
 
     <style name="TextAppearanceExpanded" parent="Appearance.Text.Headline4">
