@@ -4,6 +4,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.media.MediaMetadata;
 import android.media.session.MediaController;
@@ -29,6 +30,7 @@ import com.google.android.material.shape.CornerFamily;
 import com.google.android.material.shape.ShapeAppearanceModel;
 import com.google.android.material.slider.Slider;
 import com.hardcodecoder.pulsemusic.PMS;
+import com.hardcodecoder.pulsemusic.Preferences;
 import com.hardcodecoder.pulsemusic.PulseController;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.activities.base.DraggableNowPlayingSheetActivity;
@@ -41,7 +43,9 @@ import com.hardcodecoder.pulsemusic.utils.AppSettings;
 
 import java.util.List;
 
-public abstract class BaseNowPlayingScreen extends Fragment implements MediaProgressUpdateHelper.Callback {
+public abstract class BaseNowPlayingScreen extends Fragment
+        implements MediaProgressUpdateHelper.Callback,
+        SharedPreferences.OnSharedPreferenceChangeListener {
 
     private final boolean mRequiresStatusBarPadding;
     protected String mUpNextTitle = "";
@@ -86,7 +90,10 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
                 onUpNextItemChanged(getUpNextText());
         }
     };
-    private long mDuration = 1;
+    private long mCurrentTrackDuration = 1;
+    private long mCurrentStreamingPosition = 0;
+    private long mForwardSeekDuration = 10000;
+    private long mBackwardsSeekDuration = 10000;
     private int previousState;
     private boolean userScrollChange = false;
     private boolean mCurrentItemFavorite = false;
@@ -145,6 +152,26 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
                 getActivity().bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE);
             }
         }
+
+        // Convert the int values to mills
+        mForwardSeekDuration = 1000 * AppSettings.getSeekButtonDuration(requireContext(), Preferences.NOW_PLAYING_SEEK_DURATION_FORWARD);
+        mBackwardsSeekDuration = 1000 * AppSettings.getSeekButtonDuration(requireContext(), Preferences.NOW_PLAYING_SEEK_DURATION_BACKWARD);
+
+        requireActivity().getSharedPreferences(Preferences.NOW_PLAYING_SEEK_DURATION_KEY, Context.MODE_PRIVATE)
+                .registerOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(@NonNull SharedPreferences sharedPreferences, @NonNull String key) {
+        if (key.equals(Preferences.NOW_PLAYING_SEEK_DURATION_FORWARD)) {
+            mForwardSeekDuration = 1000 * sharedPreferences.getInt(
+                    Preferences.NOW_PLAYING_SEEK_DURATION_FORWARD,
+                    Preferences.NOW_PLAYING_SEEK_DURATION_DEF);
+        } else if (key.equals(Preferences.NOW_PLAYING_SEEK_DURATION_BACKWARD)) {
+            mBackwardsSeekDuration = 1000 * sharedPreferences.getInt(
+                    Preferences.NOW_PLAYING_SEEK_DURATION_BACKWARD,
+                    Preferences.NOW_PLAYING_SEEK_DURATION_DEF);
+        }
     }
 
     @CallSuper
@@ -155,7 +182,7 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
         updateFavoriteItem();
         updateRepeat();
         long seconds = metadata.getLong(MediaMetadata.METADATA_KEY_DURATION) / 1000;
-        mDuration = seconds == 0 ? 1 : seconds;
+        mCurrentTrackDuration = seconds == 0 ? 1 : seconds;
         mShouldAnimateMediaArt = true;
         onUpNextItemChanged(getUpNextText());
     }
@@ -164,6 +191,12 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
     @Override
     public void onPlaybackStateChanged(PlaybackState state) {
         updateRepeat();
+    }
+
+    @Override
+    public void onProgressValueChanged(long progress) {
+        mCurrentStreamingPosition = progress;
+        onProgressUpdated((int) mCurrentStreamingPosition / 1000);
     }
 
     protected void setUpPagerAlbumArt(@NonNull ViewPager2 pager, @LayoutRes int redId, ShapeAppearanceModel model) {
@@ -263,12 +296,12 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
 
     protected void resetSliderValues(@NonNull Slider slider) {
         slider.setValue(0);
-        slider.setValueTo(mDuration);
+        slider.setValueTo(mCurrentTrackDuration);
     }
 
     protected void setUpSkipControls(@NonNull ImageView skipPrev, @NonNull ImageView skipNext) {
-        skipPrev.setOnClickListener(v -> mRemote.skipToPreviousTrack());
-        skipNext.setOnClickListener(v -> mRemote.skipToNextTrack());
+        skipPrev.setOnClickListener(v -> seekTo(mCurrentStreamingPosition - mBackwardsSeekDuration));
+        skipNext.setOnClickListener(v -> seekTo(mCurrentStreamingPosition + mForwardSeekDuration));
     }
 
     protected void toggleRepeatMode() {
@@ -316,7 +349,7 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
     }
 
     protected long getDurationSeconds() {
-        return mDuration;
+        return mCurrentTrackDuration;
     }
 
     protected void setGotToCurrentQueueCLickListener(@NonNull View view) {
@@ -327,6 +360,15 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
     }
 
     protected void onUpNextItemChanged(String upNextTitle) {
+    }
+
+    private void seekTo(long milliseconds) {
+        long currentTrackDurationMills = mCurrentTrackDuration * 1000;
+        if (milliseconds > currentTrackDurationMills)
+            mCurrentStreamingPosition = currentTrackDurationMills;
+        else mCurrentStreamingPosition = Math.max(milliseconds, 0);
+        mRemote.seekTo(mCurrentStreamingPosition);
+        onProgressUpdated((int) mCurrentStreamingPosition / 1000);
     }
 
     @NonNull
@@ -376,8 +418,11 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
             mMediaArtPager.requestDisallowInterceptTouchEvent(false);
         if (null != mUpdateHelper)
             mUpdateHelper.destroy();
-        if (null != getActivity() && null != mServiceConnection)
-            getActivity().unbindService(mServiceConnection);
+        if (null != getActivity()) {
+            requireActivity().getSharedPreferences(Preferences.NOW_PLAYING_SEEK_DURATION_KEY, Context.MODE_PRIVATE)
+                    .unregisterOnSharedPreferenceChangeListener(this);
+            if (null != mServiceConnection) getActivity().unbindService(mServiceConnection);
+        }
         mPulseController.unregisterCallback(mControllerCallback);
         super.onDestroy();
     }
@@ -387,4 +432,6 @@ public abstract class BaseNowPlayingScreen extends Fragment implements MediaProg
     public abstract void onRepeatStateChanged(boolean repeat);
 
     public abstract void onFavoriteStateChanged(boolean isFavorite);
+
+    public abstract void onProgressUpdated(int progressInSeconds);
 }

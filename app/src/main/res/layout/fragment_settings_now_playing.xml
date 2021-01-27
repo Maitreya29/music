@@ -39,4 +39,18 @@
         app:settingItemIconColor="?attr/colorControlNormal"
         app:settingItemText="@string/now_playing_cover_corner_radius_desc"
         app:settingItemTitle="@string/now_playing_cover_corner_radius_title" />
+
+    <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
+        android:id="@+id/now_playing_seek_duration_selector"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="0dp"
+        android:paddingEnd="64dp"
+        android:textStyle="normal"
+        app:settingItemDesaturatedColorsInDarkMode="false"
+        app:settingItemIcon="@drawable/ic_fast_forward"
+        app:settingItemIconBackgroundColor="?attr/windowBackgroundColor"
+        app:settingItemIconColor="?attr/colorControlNormal"
+        app:settingItemText="@string/np_seek_duration_desc"
+        app:settingItemTitle="@string/np_seek_duration_title" />
 </LinearLayout>

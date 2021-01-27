@@ -170,6 +170,7 @@ public class AppSettings {
         editor.apply();
     }
 
+    @NonNull
     public static int[] getNowPlayingAlbumCoverCornerRadius(@NonNull Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(Preferences.NOW_PLAYING_ALBUM_COVER_CORNER_RADIUS, Context.MODE_PRIVATE);
         int tl = sharedPreferences.getInt(Preferences.NOW_PLAYING_ALBUM_COVER_RADIUS_TL, Preferences.NOW_PLAYING_ALBUM_COVER_RADIUS_DEF);
@@ -238,5 +239,16 @@ public class AppSettings {
         SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.HOME_PLAYLIST_SECTIONS, Context.MODE_PRIVATE).edit();
         editor.putBoolean(playlistSection, enable);
         editor.apply();
+    }
+
+    public static void setSeekButtonDuration(@NonNull Context context, @NonNull String key, int duration) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.NOW_PLAYING_SEEK_DURATION_KEY, Context.MODE_PRIVATE).edit();
+        editor.putInt(key, duration);
+        editor.apply();
+    }
+
+    public static int getSeekButtonDuration(@NonNull Context context, @NonNull String key) {
+        return context.getSharedPreferences(Preferences.NOW_PLAYING_SEEK_DURATION_KEY, Context.MODE_PRIVATE)
+                .getInt(key, Preferences.NOW_PLAYING_SEEK_DURATION_DEF);
     }
 }

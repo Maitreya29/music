@@ -4,6 +4,7 @@ import android.media.MediaMetadata;
 import android.media.session.MediaController;
 import android.media.session.PlaybackState;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 
 import androidx.annotation.NonNull;
@@ -31,6 +32,7 @@ public class MediaProgressUpdateHelper extends Handler {
     };
 
     public MediaProgressUpdateHelper(@NonNull MediaController controller, @NonNull Callback callback, long updateIntervalMills) {
+        super(Looper.getMainLooper());
         mController = controller;
         mCallback = callback;
         mUpdateIntervalMills = updateIntervalMills;
@@ -41,7 +43,7 @@ public class MediaProgressUpdateHelper extends Handler {
         post(() -> mCallback.onPlaybackStateChanged(mController.getPlaybackState()));
         post(() -> {
             if (null != mController.getPlaybackState())
-                mCallback.onProgressValueChanged((int) mController.getPlaybackState().getPosition() / 1000);
+                mCallback.onProgressValueChanged(mController.getPlaybackState().getPosition());
         });
         start();
     }
@@ -59,7 +61,7 @@ public class MediaProgressUpdateHelper extends Handler {
         super.handleMessage(msg);
         if (msg.what == CMD_REFRESH_PROGRESS) {
             if (null != mController.getPlaybackState())
-                mCallback.onProgressValueChanged((int) mController.getPlaybackState().getPosition() / 1000);
+                mCallback.onProgressValueChanged(mController.getPlaybackState().getPosition());
             queueNextRefresh(mUpdateIntervalMills);
         }
     }
@@ -84,6 +86,6 @@ public class MediaProgressUpdateHelper extends Handler {
 
         void onPlaybackStateChanged(PlaybackState state);
 
-        void onProgressValueChanged(int progressInSec);
+        void onProgressValueChanged(long progress);
     }
 }

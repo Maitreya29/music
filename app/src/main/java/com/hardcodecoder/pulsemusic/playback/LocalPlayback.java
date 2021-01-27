@@ -170,7 +170,8 @@ public class LocalPlayback implements
     @Override
     public void onSeekTo(int position) {
         if (mp != null) {
-            mResumePosition = position;
+            if (position > mp.getDuration()) mResumePosition = mp.getDuration();
+            else mResumePosition = Math.max(position, 0);
             mp.seekTo(mResumePosition);
             mPlaybackCallback.onPlaybackStateChanged(mPlaybackState);
         }

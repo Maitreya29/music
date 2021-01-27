@@ -103,7 +103,8 @@
     <ImageView
         android:id="@+id/modern_nps_prev_btn"
         style="@style/ButtonStyle36"
-        android:src="@drawable/ic_round_skip_previous"
+        android:rotation="180"
+        android:src="@drawable/ic_fast_forward"
         app:layout_constraintBottom_toBottomOf="@id/modern_nps_play_pause_btn"
         app:layout_constraintEnd_toStartOf="@+id/modern_nps_play_pause_btn"
         app:layout_constraintStart_toEndOf="@id/modern_nps_repeat_btn"
@@ -130,7 +131,7 @@
     <ImageView
         android:id="@+id/modern_nps_next_btn"
         style="@style/ButtonStyle36"
-        android:src="@drawable/ic_round_skip_next"
+        android:src="@drawable/ic_fast_forward"
         app:layout_constraintBottom_toBottomOf="@id/modern_nps_play_pause_btn"
         app:layout_constraintEnd_toStartOf="@id/modern_nps_fav_btn"
         app:layout_constraintStart_toEndOf="@+id/modern_nps_play_pause_btn"

@@ -81,6 +81,11 @@ public class Preferences {
     public static final String NOW_PLAYING_ALBUM_COVER_RADIUS_BR = "RadiusBottomRight";
     public static final int NOW_PLAYING_ALBUM_COVER_RADIUS_DEF = 16;
 
+    public static final String NOW_PLAYING_SEEK_DURATION_KEY = "NowPlayingSeekDuration";
+    public static final String NOW_PLAYING_SEEK_DURATION_FORWARD = "NowPlayingSeekForward";
+    public static final String NOW_PLAYING_SEEK_DURATION_BACKWARD = "NowPlayingSeekBackward";
+    public static final int NOW_PLAYING_SEEK_DURATION_DEF = 10; // 10 seconds
+
     public static final String AUDIO_DEVICE_AUTO_PLAY = "AudioDeviceAutoPlay";
     public static final String BLUETOOTH_DEVICE_DETECTION_KEY = "BluetoothDetectionEnabled";
     public static final String BLUETOOTH_DEVICE_ACTION_KEY = "BluetoothDeviceAction";

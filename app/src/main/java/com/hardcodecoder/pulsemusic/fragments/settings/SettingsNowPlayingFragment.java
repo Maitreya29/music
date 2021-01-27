@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.dialog.CornerRadiusChangeDialogFragment;
 import com.hardcodecoder.pulsemusic.dialog.NowPlayingStyleChooser;
+import com.hardcodecoder.pulsemusic.dialog.SeekDurationSelector;
 import com.hardcodecoder.pulsemusic.fragments.settings.base.SettingsBaseFragment;
 
 public class SettingsNowPlayingFragment extends SettingsBaseFragment {
@@ -50,6 +51,11 @@ public class SettingsNowPlayingFragment extends SettingsBaseFragment {
         view.findViewById(R.id.now_playing_album_cover_corner_radius).setOnClickListener(v -> {
             CornerRadiusChangeDialogFragment dialog = CornerRadiusChangeDialogFragment.getInstance();
             dialog.show(requireFragmentManager(), CornerRadiusChangeDialogFragment.TAG);
+        });
+
+        view.findViewById(R.id.now_playing_seek_duration_selector).setOnClickListener(v -> {
+            SeekDurationSelector seekDurationSelector = SeekDurationSelector.getInstance();
+            seekDurationSelector.show(requireFragmentManager(), SeekDurationSelector.TAG);
         });
     }
 }

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <com.hardcodecoder.pulsemusic.views.AccentColorTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/np_seek_duration_selector_title"
+        android:textAppearance="@style/Appearance.Text.Subtitle1" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/np_seek_duration_selector_forward"
+        android:textAppearance="@style/Appearance.Text.Subtitle2" />
+
+    <com.hardcodecoder.pulsemusic.views.ValueSlider
+        android:id="@+id/forward_seek_duration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:endValue="60"
+        app:startValue="1"
+        app:unit="@string/duration_filter_unit"
+        tools:defaultValue="10" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/np_seek_duration_selector_backward"
+        android:textAppearance="@style/Appearance.Text.Subtitle2" />
+
+    <com.hardcodecoder.pulsemusic.views.ValueSlider
+        android:id="@+id/backwards_seek_duration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:endValue="60"
+        app:startValue="1"
+        app:unit="@string/duration_filter_unit"
+        tools:defaultValue="10" />
+
+    <com.hardcodecoder.pulsemusic.views.AccentColorMaterialButton
+        android:id="@+id/seek_duration_confirm_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginTop="8dp"
+        android:text="@string/okay"
+        app:accentButtonStyle="text" />
+</LinearLayout>

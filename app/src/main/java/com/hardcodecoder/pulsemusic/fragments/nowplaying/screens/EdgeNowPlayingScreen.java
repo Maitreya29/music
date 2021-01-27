@@ -119,9 +119,9 @@ public class EdgeNowPlayingScreen extends BaseNowPlayingScreen {
     }
 
     @Override
-    public void onProgressValueChanged(int progressInSec) {
-        mProgressSeekBar.setProgress(progressInSec);
-        mStartTime.setText(getFormattedElapsedTime(progressInSec));
+    public void onProgressUpdated(int progressInSeconds) {
+        mProgressSeekBar.setProgress(progressInSeconds);
+        mStartTime.setText(getFormattedElapsedTime(progressInSeconds));
     }
 
     @Override

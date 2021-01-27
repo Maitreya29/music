@@ -20,8 +20,8 @@
         android:id="@+id/status_bar_translucent_overlay"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:visibility="gone"
         android:background="@drawable/status_bar_gradient"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/edge_nps_album_container"
         app:layout_constraintEnd_toEndOf="@id/edge_nps_album_container"
         app:layout_constraintHeight_percent="0.16"
@@ -111,7 +111,8 @@
     <ImageView
         android:id="@+id/edge_nps_prev_btn"
         style="@style/ButtonStyle36"
-        android:src="@drawable/ic_round_skip_previous"
+        android:rotation="180"
+        android:src="@drawable/ic_fast_forward"
         app:layout_constraintBottom_toBottomOf="@id/edge_nps_play_pause_btn"
         app:layout_constraintEnd_toStartOf="@+id/edge_nps_play_pause_btn"
         app:layout_constraintStart_toEndOf="@id/edge_nps_repeat_btn"
@@ -137,7 +138,7 @@
     <ImageView
         android:id="@+id/edge_nps_next_btn"
         style="@style/ButtonStyle36"
-        android:src="@drawable/ic_round_skip_next"
+        android:src="@drawable/ic_fast_forward"
         app:layout_constraintBottom_toBottomOf="@id/edge_nps_play_pause_btn"
         app:layout_constraintEnd_toStartOf="@id/edge_nps_favourite_btn"
         app:layout_constraintStart_toEndOf="@+id/edge_nps_play_pause_btn"

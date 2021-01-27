@@ -111,7 +111,8 @@
     <ImageView
         android:id="@+id/stylish_nps_prev_btn"
         style="@style/ButtonStyle36"
-        android:src="@drawable/ic_round_skip_previous"
+        android:rotation="180"
+        android:src="@drawable/ic_fast_forward"
         app:layout_constraintBottom_toBottomOf="@id/stylish_nps_play_pause_btn"
         app:layout_constraintEnd_toStartOf="@+id/stylish_nps_play_pause_btn"
         app:layout_constraintStart_toEndOf="@id/stylish_nps_repeat_btn"
@@ -137,7 +138,7 @@
     <ImageView
         android:id="@+id/stylish_nps_next_btn"
         style="@style/ButtonStyle36"
-        android:src="@drawable/ic_round_skip_next"
+        android:src="@drawable/ic_fast_forward"
         app:layout_constraintBottom_toBottomOf="@id/stylish_nps_play_pause_btn"
         app:layout_constraintEnd_toStartOf="@id/stylish_nps_favourite_btn"
         app:layout_constraintStart_toEndOf="@+id/stylish_nps_play_pause_btn"

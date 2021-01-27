@@ -256,6 +256,11 @@
     <string name="now_playing_cover_corner_radius_bl">Bottom left</string>
     <string name="now_playing_cover_corner_radius_br">Bottom right</string>
     <string name="now_playing_cover_corner_radius_unit">dp</string>
+    <string name="np_seek_duration_title">Change seek duration</string>
+    <string name="np_seek_duration_desc">Change the duration of seek buttons</string>
+    <string name="np_seek_duration_selector_title">Seek duration</string>
+    <string name="np_seek_duration_selector_forward">Forward seek</string>
+    <string name="np_seek_duration_selector_backward">Backward seek</string>
 
     <!-- Contributors -->
     <string name="lead_developer_title">Lead developers</string>
