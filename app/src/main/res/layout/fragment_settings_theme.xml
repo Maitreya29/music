@@ -57,8 +57,8 @@
             android:id="@+id/laf_enable_desaturated"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:settingToggleableItemText="@string/laf_accents_picker_accent_desaturated_desc"
-            app:settingToggleableItemTitle="@string/laf_accents_picker_desaturated_title" />
+            app:settingToggleableItemText="@string/laf_accents_desaturated_desc"
+            app:settingToggleableItemTitle="@string/laf_accents_desaturated_title" />
 
         <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
             android:id="@+id/laf_select_accent_color"

@@ -23,8 +23,8 @@
             android:id="@+id/audio_device_bluetooth_toggle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:settingToggleableItemText="@string/audio_category_toggle_bluetooth_text"
-            app:settingToggleableItemTitle="@string/audio_category_toggle_bluetooth_title" />
+            app:settingToggleableItemText="@string/audio_bluetooth_auto_play_text"
+            app:settingToggleableItemTitle="@string/audio_bluetooth_auto_play_title" />
 
         <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
             android:id="@+id/audio_device_bluetooth_action_picker"
@@ -35,7 +35,7 @@
             app:settingItemIcon="@drawable/ic_play_circle"
             app:settingItemIconBackgroundColor="?windowBackgroundColor"
             app:settingItemIconColor="?attr/colorControlNormal"
-            app:settingItemText="@string/audio_category_select_bluetooth_action_text"
-            app:settingItemTitle="@string/audio_category_select_bluetooth_action_title" />
+            app:settingItemText="@string/audio_bluetooth_auto_play_action_text"
+            app:settingItemTitle="@string/audio_bluetooth_auto_play_action_title" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

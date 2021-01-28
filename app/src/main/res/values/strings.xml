@@ -170,6 +170,11 @@
 
     <!-- Settings Activity -->
     <string name="settings_title">Settings</string>
+
+    <string name="restart_dialog_title">Restart app</string>
+    <string name="restart_dialog_desc">App needs to restart for changes to take effect</string>
+    <string name="restart_dialog_positive_btn_title">Restart</string>
+    <string name="restart_dialog_negative_btn_title">Do it later</string>
     <!-- Category -->
     <string name="general">General</string>
     <string name="general_desc">Configure basic settings</string>
@@ -190,11 +195,7 @@
     <string name="about_desc">App version, social links</string>
 
     <!-- General Section -->
-    <string name="general_category_loader_section_title">Loader</string>
-    <string name="restart_dialog_title">Restart app</string>
-    <string name="restart_dialog_desc">App needs to restart for changes to take effect</string>
-    <string name="restart_dialog_positive_btn_title">Restart</string>
-    <string name="restart_dialog_negative_btn_title">Do it later</string>
+    <string name="general_category_loader">Loader</string>
     <string name="ignored_folder_title">Select ignored folders</string>
     <string name="ignored_folder_desc">Add or remove folders to exclude tracks from showing in library</string>
     <string name="ignored_folder_picker_title">Select folders</string>
@@ -205,6 +206,7 @@
     <string name="duration_filter_title">Filter duration</string>
     <string name="duration_filter_desc">Filters track based on track duration. Tracks with duration greater than this appears in the library</string>
     <string name="duration_filter_unit">sec</string>
+    <string name="general_category_others">Others</string>
     <string name="remember_last_played_option_title">Remember last track</string>
     <string name="remember_last_played_option_text">Last played track will be remembered and will be shown, on app relaunch</string>
     <string name="playlist_section_selector">Edit playlist section</string>
@@ -222,13 +224,15 @@
     <string name="laf_category_enable_auto_mode_text">Sets light and preferred dark theme based on time of the day</string>
 
     <string name="laf_category_colors">Colors</string>
+    <string name="laf_accents_desaturated_title">Desaturated colors</string>
+    <string name="laf_accents_desaturated_desc">Makes color desaturated when dark theme is applied</string>
     <string name="laf_category_select_color">Pick accent color</string>
     <string name="laf_category_select_color_desc">Select accent colors for the app</string>
 
     <string name="laf_accents_picker_title">Select accent color</string>
 
-    <string name="laf_accents_picker_desaturated_title">Desaturated colors</string>
-    <string name="laf_accents_picker_accent_desaturated_desc">Makes color desaturated when dark theme is applied</string>
+    <string name="custom">Custom</string>
+    <string name="custom_accent_title">Adjust custom color</string>
 
     <string name="dark_theme_name_gray">Just Gray</string>
     <string name="dark_theme_name_kinda_dark">Signature dark scheme</string>
@@ -237,26 +241,23 @@
     <string name="select_dark_theme">Set preferred dark theme</string>
     <string name="set">Set</string>
 
-    <string name="custom">Custom</string>
-    <string name="custom_accent_title">Adjust custom color</string>
-
 
     <!-- Now playing settings -->
-    <string name="now_playing_album_style_section_title">Style</string>
-    <string name="now_playing_screen_style_desc">Choose now playing screen style</string>
-    <string name="now_playing_screen_style_title">Select now playing style</string>
-    <string name="now_playing_screen_style_modern">Modern</string>
-    <string name="now_playing_screen_style_stylish">Stylish</string>
-    <string name="now_playing_screen_style_edge">Edge to edge</string>
-    <string name="now_playing_cover_corner_radius_title">Corner radius</string>
-    <string name="now_playing_cover_corner_radius_changer_title">Adjust corner radius</string>
-    <string name="now_playing_cover_corner_radius_desc">Select album cover corner radius</string>
-    <string name="now_playing_cover_corner_radius_tl">Top left</string>
-    <string name="now_playing_cover_corner_radius_tr">Top right</string>
-    <string name="now_playing_cover_corner_radius_bl">Bottom left</string>
-    <string name="now_playing_cover_corner_radius_br">Bottom right</string>
-    <string name="now_playing_cover_corner_radius_unit">dp</string>
-    <string name="np_settings_section_controls">Controls</string>
+    <string name="np_category_style">Style</string>
+    <string name="np_screen_style_title">Select now playing style</string>
+    <string name="np_screen_style_desc">Choose now playing screen style</string>
+    <string name="np_screen_style_modern">Modern</string>
+    <string name="np_screen_style_stylish">Stylish</string>
+    <string name="np_screen_style_edge">Edge to edge</string>
+    <string name="np_cover_corner_radius_title">Corner radius</string>
+    <string name="np_cover_corner_radius_changer_title">Adjust corner radius</string>
+    <string name="np_cover_corner_radius_desc">Select album cover corner radius</string>
+    <string name="np_cover_corner_radius_tl">Top left</string>
+    <string name="np_cover_corner_radius_tr">Top right</string>
+    <string name="np_cover_corner_radius_bl">Bottom left</string>
+    <string name="np_cover_corner_radius_br">Bottom right</string>
+    <string name="np_cover_corner_radius_unit">dp</string>
+    <string name="np_category_controls">Controls</string>
     <string name="np_enable_seek_buttons_title">Enable seek buttons</string>
     <string name="np_enable_seek_buttons_desc">Replaces skip buttons with seek buttons in Now playing screen</string>
     <string name="np_seek_duration_title">Change seek duration</string>
@@ -327,10 +328,10 @@
 
     <string name="audio_category_auto_play">Auto play</string>
 
-    <string name="audio_category_toggle_bluetooth_title">Bluetooth auto play</string>
-    <string name="audio_category_toggle_bluetooth_text">Starts playing music when a bluetooth device connects</string>
-    <string name="audio_category_select_bluetooth_action_title">Select bluetooth auto play action</string>
-    <string name="audio_category_select_bluetooth_action_text">Choose which playlist to play when a bluetooth device connects</string>
+    <string name="audio_bluetooth_auto_play_title">Bluetooth auto play</string>
+    <string name="audio_bluetooth_auto_play_text">Starts playing music when a bluetooth device connects</string>
+    <string name="audio_bluetooth_auto_play_action_title">Select bluetooth auto play action</string>
+    <string name="audio_bluetooth_auto_play_action_text">Choose which playlist to play when a bluetooth device connects</string>
 
     <string name="audio_detection_channel_name">Audio Device Detection</string>
 

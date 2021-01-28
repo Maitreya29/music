@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:gravity="start"
-        android:text="@string/now_playing_screen_style_title"
+        android:text="@string/np_screen_style_title"
         android:textAppearance="@style/Appearance.Text.Subtitle1" />
 
     <RadioGroup
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:paddingStart="32dp"
             android:paddingEnd="0dp"
-            android:text="@string/now_playing_screen_style_modern"
+            android:text="@string/np_screen_style_modern"
             android:textAppearance="@style/Appearance.Text.Subtitle2"
             android:textColor="?android:attr/textColorPrimary" />
 
@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:paddingStart="32dp"
             android:paddingEnd="0dp"
-            android:text="@string/now_playing_screen_style_stylish"
+            android:text="@string/np_screen_style_stylish"
             android:textAppearance="@style/Appearance.Text.Subtitle2"
             android:textColor="?android:attr/textColorPrimary" />
 
@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:paddingStart="32dp"
             android:paddingEnd="0dp"
-            android:text="@string/now_playing_screen_style_edge"
+            android:text="@string/np_screen_style_edge"
             android:textAppearance="@style/Appearance.Text.Subtitle2"
             android:textColor="?android:attr/textColorPrimary" />
     </RadioGroup>

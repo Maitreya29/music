@@ -154,9 +154,6 @@
 
     <string name="laf_accents_picker_title">Seleccione el color del acento</string>
 
-    <string name="laf_accents_picker_desaturated_title">Colores desaturados</string>
-    <string name="laf_accents_picker_accent_desaturated_desc">Hace que el color se desate cuando se aplica el tema de la oscuridad</string>
-
     <string name="dark_theme_name_gray">Sólo gris</string>
     <string name="dark_theme_name_kinda_dark">Esquema oscuro característico</string>
     <string name="dark_theme_name_pure_black">Luces apagadas</string>
@@ -166,22 +163,8 @@
 
 
     <!-- Now playing settings -->
-    <string name="now_playing_album_style_section_title">Estilo</string>
-    <string name="now_playing_screen_style_desc">Elija ahora el estilo de pantalla de juego</string>
     <!--    <string name="now_playing_album_decoration_title">Activar superposición de gradientes</string>-->
     <!--    <string name="now_playing_album_decoration_desc">Añade una capa desvanecedora arriba de la tarjeta del álbum</string>-->
-    <string name="now_playing_screen_style_title">Seleccione ahora el estilo de juego</string>
-    <string name="now_playing_screen_style_modern">Moderno</string>
-    <string name="now_playing_screen_style_stylish">Estilo</string>
-    <string name="now_playing_screen_style_edge">Borde a borde</string>
-    <string name="now_playing_cover_corner_radius_title">Radio de la esquina</string>
-    <string name="now_playing_cover_corner_radius_changer_title">Ajustar el radio de la esquina</string>
-    <string name="now_playing_cover_corner_radius_desc">Seleccione el radio de la esquina de la portada</string>
-    <string name="now_playing_cover_corner_radius_tl">Arriba a la izquierda</string>
-    <string name="now_playing_cover_corner_radius_tr">Arriba a la derecha</string>
-    <string name="now_playing_cover_corner_radius_bl">Abajo a la izquierda</string>
-    <string name="now_playing_cover_corner_radius_br">Abajo a la derecha</string>
-    <string name="now_playing_cover_corner_radius_unit">dp</string>
 
     <!-- Contributors -->
     <string name="lead_developer_title">Desarrolladores líder</string>

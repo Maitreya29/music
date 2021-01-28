@@ -66,7 +66,7 @@ public class AudioDeviceService extends Service {
             createNotificationChannel();
 
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setContentTitle(getString(R.string.audio_category_toggle_bluetooth_title))
+                .setContentTitle(getString(R.string.audio_bluetooth_auto_play_title))
                 .setOngoing(true)
                 .setSmallIcon(R.drawable.ic_notification)
                 .build();

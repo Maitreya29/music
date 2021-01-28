@@ -187,7 +187,6 @@
 
 
     <!-- General Section -->
-    <string name="general_category_loader_section_title">Lader</string>
     <string name="restart_dialog_title">App Neustart</string>
     <string name="restart_dialog_desc">Die App muss neu gestartet werden, damit die Änderungen wirksam werden</string>
     <string name="restart_dialog_positive_btn_title">Neustart</string>
@@ -218,8 +217,6 @@
     <string name="laf_category_select_color">Wähle eine Akzentfarbe</string>
     <string name="laf_category_select_color_desc">Wähle eine Akzentfarbe für die App</string>
     <string name="laf_accents_picker_title">Wähle eine Akzentfarbe</string>
-    <string name="laf_accents_picker_desaturated_title">Entsättigte Farben</string>
-    <string name="laf_accents_picker_accent_desaturated_desc">Entsättigt Farben, wenn das dunkle Theme aktiv ist</string>
     <string name="dark_theme_name_gray">Einfach Grau</string>
     <string name="dark_theme_name_kinda_dark">Standard dunkles Farbschema</string>
     <string name="dark_theme_name_pure_black">Finsterniss</string>
@@ -230,20 +227,6 @@
 
 
     <!-- Now playing settings -->
-    <string name="now_playing_album_style_section_title">Stil</string>
-    <string name="now_playing_screen_style_desc">Wähle den \"Jetzt am Spielen\" Stil</string>
-    <string name="now_playing_screen_style_title">\"Jetzt am Spielen\" Stil</string>
-    <string name="now_playing_screen_style_modern">Modern</string>
-    <string name="now_playing_screen_style_stylish">Stylish</string>
-    <string name="now_playing_screen_style_edge">Rand zu Rand</string>
-    <string name="now_playing_cover_corner_radius_title">Randradius</string>
-    <string name="now_playing_cover_corner_radius_changer_title">Stell den Randradius ein</string>
-    <string name="now_playing_cover_corner_radius_desc">Wähle den Albumbild Randradius</string>
-    <string name="now_playing_cover_corner_radius_tl">Oben links</string>
-    <string name="now_playing_cover_corner_radius_tr">Oben rechts</string>
-    <string name="now_playing_cover_corner_radius_bl">Unten links</string>
-    <string name="now_playing_cover_corner_radius_br">Unten rechts</string>
-    <string name="now_playing_cover_corner_radius_unit">dp</string>
 
 
     <!-- Contributors -->
@@ -299,10 +282,6 @@
     <string name="audio">Audio</string>
     <string name="audio_desc">Ändere Audio Einstellungen</string>
     <string name="audio_category_auto_play">Automatisch abspielen</string>
-    <string name="audio_category_toggle_bluetooth_title">Bluetooth-Auto-Wiedergabe</string>
-    <string name="audio_category_toggle_bluetooth_text">Startet Musik beim Verbinden mit Bluetooth-Gerät</string>
-    <string name="audio_category_select_bluetooth_action_title">Wähle eine Bluetooth Abspielaktion</string>
-    <string name="audio_category_select_bluetooth_action_text">Wähl aus, was für Musik bei Verbindung eines Bluetooth-Gerätes abgespielt wird</string>
     <string name="audio_detection_channel_name">Audio-Geräteerkennung</string>
     <string name="select_bluetooth_action">Wähle die bevorzugte Bluetooth-Aktion</string>
     <string name="radio_btn_shuffle">Spiel vermischte Musik</string>
