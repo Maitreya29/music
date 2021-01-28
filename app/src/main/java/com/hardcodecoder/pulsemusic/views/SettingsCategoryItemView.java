@@ -21,6 +21,10 @@ import com.hardcodecoder.pulsemusic.utils.AppSettings;
 
 public class SettingsCategoryItemView extends FrameLayout {
 
+    private final MaterialTextView mTitle;
+    private final MaterialTextView mText;
+    private ImageView mIcon;
+
     public SettingsCategoryItemView(@NonNull Context context) {
         this(context, null, 0);
     }
@@ -32,18 +36,18 @@ public class SettingsCategoryItemView extends FrameLayout {
     public SettingsCategoryItemView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         View view = View.inflate(context, R.layout.settings_category_list_item, this);
-        MaterialTextView title = view.findViewById(R.id.settings_list_item_title);
-        MaterialTextView text = view.findViewById(R.id.settings_list_item_text);
+        mTitle = view.findViewById(R.id.settings_list_item_title);
+        mText = view.findViewById(R.id.settings_list_item_text);
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.SettingsCategoryItemView);
 
-        if (title.getTypeface() != null && typedArray.hasValue(R.styleable.SettingsCategoryItemView_android_textStyle)) {
-            title.setTypeface(title.getTypeface(), typedArray.getInteger(R.styleable.SettingsCategoryItemView_android_textStyle, Typeface.NORMAL));
+        if (mTitle.getTypeface() != null && typedArray.hasValue(R.styleable.SettingsCategoryItemView_android_textStyle)) {
+            mTitle.setTypeface(mTitle.getTypeface(), typedArray.getInteger(R.styleable.SettingsCategoryItemView_android_textStyle, Typeface.NORMAL));
         }
 
         if (typedArray.hasValue(R.styleable.SettingsCategoryItemView_settingItemIcon)) {
-            ImageView icon = view.findViewById(R.id.settings_list_item_icon);
-            icon.setImageDrawable(typedArray.getDrawable(R.styleable.SettingsCategoryItemView_settingItemIcon));
+            mIcon = view.findViewById(R.id.settings_list_item_icon);
+            mIcon.setImageDrawable(typedArray.getDrawable(R.styleable.SettingsCategoryItemView_settingItemIcon));
 
             int iconColor = typedArray.getColor(R.styleable.SettingsCategoryItemView_settingItemIconColor, Color.BLUE);
             int iconBackgroundColor = typedArray.getColor(R.styleable.SettingsCategoryItemView_settingItemIconBackgroundColor, iconColor);
@@ -57,13 +61,21 @@ public class SettingsCategoryItemView extends FrameLayout {
             } else
                 iconBackgroundColor = ColorUtil.changeColorAlphaTo20(iconBackgroundColor);
 
-            icon.setBackgroundTintList(ColorStateList.valueOf(iconBackgroundColor));
-            icon.setImageTintList(ColorStateList.valueOf(iconColor));
+            mIcon.setBackgroundTintList(ColorStateList.valueOf(iconBackgroundColor));
+            mIcon.setImageTintList(ColorStateList.valueOf(iconColor));
         }
 
-        title.setText(typedArray.getText(R.styleable.SettingsCategoryItemView_settingItemTitle));
-        text.setText(typedArray.getText(R.styleable.SettingsCategoryItemView_settingItemText));
+        mTitle.setText(typedArray.getText(R.styleable.SettingsCategoryItemView_settingItemTitle));
+        mText.setText(typedArray.getText(R.styleable.SettingsCategoryItemView_settingItemText));
 
         typedArray.recycle();
+    }
+
+    @Override
+    public void setEnabled(boolean enabled) {
+        mTitle.setEnabled(enabled);
+        mText.setEnabled(enabled);
+        if (null != mIcon) mIcon.setEnabled(enabled);
+        super.setEnabled(enabled);
     }
 }
