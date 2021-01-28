@@ -28,7 +28,9 @@ public class EdgeNowPlayingScreen extends BaseNowPlayingScreen {
     private AppCompatSeekBar mProgressSeekBar;
     private ImageView mFavoriteBtn;
     private ImageView mRepeatBtn;
+    private ImageView mTrackControl1;
     private FloatingActionButton mPlayPauseBtn;
+    private ImageView mTrackControl2;
     private MaterialTextView mTitle;
     private MaterialTextView mStartTime;
     private MaterialTextView mEndTime;
@@ -67,8 +69,8 @@ public class EdgeNowPlayingScreen extends BaseNowPlayingScreen {
         mStartTime = view.findViewById(R.id.edge_nps_start_time);
         mEndTime = view.findViewById(R.id.edge_nps_end_time);
         mRepeatBtn = view.findViewById(R.id.edge_nps_repeat_btn);
-        ImageView skipPrev = view.findViewById(R.id.edge_nps_prev_btn);
-        ImageView skipNext = view.findViewById(R.id.edge_nps_next_btn);
+        mTrackControl1 = view.findViewById(R.id.edge_nps_track_controls_1);
+        mTrackControl2 = view.findViewById(R.id.edge_nps_track_controls_2);
         mPlayPauseBtn = view.findViewById(R.id.edge_nps_play_pause_btn);
         mFavoriteBtn = view.findViewById(R.id.edge_nps_favourite_btn);
         mUpNext = view.findViewById(R.id.edge_nps_up_next);
@@ -80,7 +82,7 @@ public class EdgeNowPlayingScreen extends BaseNowPlayingScreen {
 
         setGotToCurrentQueueCLickListener(mUpNext);
         setUpSeekBarControls(mProgressSeekBar);
-        setUpSkipControls(skipPrev, skipNext);
+        setUpTrackControls(mTrackControl1, mTrackControl2);
         setDefaultTintToPlayBtn(mPlayPauseBtn);
         applySeekBarTint();
     }
@@ -127,5 +129,10 @@ public class EdgeNowPlayingScreen extends BaseNowPlayingScreen {
     @Override
     protected void onUpNextItemChanged(String upNextTitle) {
         mUpNext.setText(upNextTitle);
+    }
+
+    @Override
+    protected void onTrackControlButtonsChanged(boolean isSeekButtonEnabled) {
+        setUpTrackControls(mTrackControl1, mTrackControl2);
     }
 }

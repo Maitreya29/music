@@ -242,13 +242,24 @@ public class AppSettings {
     }
 
     public static void setSeekButtonDuration(@NonNull Context context, @NonNull String key, int duration) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.NOW_PLAYING_SEEK_DURATION_KEY, Context.MODE_PRIVATE).edit();
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.NOW_PLAYING_CONTROLS, Context.MODE_PRIVATE).edit();
         editor.putInt(key, duration);
         editor.apply();
     }
 
     public static int getSeekButtonDuration(@NonNull Context context, @NonNull String key) {
-        return context.getSharedPreferences(Preferences.NOW_PLAYING_SEEK_DURATION_KEY, Context.MODE_PRIVATE)
+        return context.getSharedPreferences(Preferences.NOW_PLAYING_CONTROLS, Context.MODE_PRIVATE)
                 .getInt(key, Preferences.NOW_PLAYING_SEEK_DURATION_DEF);
+    }
+
+    public static void setSeekButtonsEnabled(@NonNull Context context, boolean enable) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.NOW_PLAYING_CONTROLS, Context.MODE_PRIVATE).edit();
+        editor.putBoolean(Preferences.NOW_PLAYING_CONTROLS_SEEK_ENABLED, enable);
+        editor.apply();
+    }
+
+    public static boolean isSeekButtonsEnabled(@NonNull Context context) {
+        return context.getSharedPreferences(Preferences.NOW_PLAYING_CONTROLS, Context.MODE_PRIVATE)
+                .getBoolean(Preferences.NOW_PLAYING_CONTROLS_SEEK_ENABLED, Preferences.NOW_PLAYING_CONTROLS_SEEK_ENABLED_DEF);
     }
 }

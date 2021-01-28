@@ -24,7 +24,9 @@ public class ModernNowPlayingScreen extends BaseNowPlayingScreen {
     private Slider mProgressSlider;
     private ImageView mFavoriteBtn;
     private ImageView mRepeatBtn;
+    private ImageView mTrackControl1;
     private FloatingActionButton mPlayPauseBtn;
+    private ImageView mTrackControl2;
     private MaterialTextView mTitle;
     private MaterialTextView mStartTime;
     private MaterialTextView mEndTime;
@@ -59,9 +61,9 @@ public class ModernNowPlayingScreen extends BaseNowPlayingScreen {
         mStartTime = view.findViewById(R.id.modern_nps_start_time);
         mEndTime = view.findViewById(R.id.modern_nps_end_time);
         mRepeatBtn = view.findViewById(R.id.modern_nps_repeat_btn);
-        ImageView skipPrev = view.findViewById(R.id.modern_nps_prev_btn);
+        mTrackControl1 = view.findViewById(R.id.modern_nps_track_controls_1);
         mPlayPauseBtn = view.findViewById(R.id.modern_nps_play_pause_btn);
-        ImageView skipNext = view.findViewById(R.id.modern_nps_next_btn);
+        mTrackControl2 = view.findViewById(R.id.modern_nps_track_controls_2);
         mFavoriteBtn = view.findViewById(R.id.modern_nps_fav_btn);
         mUpNext = view.findViewById(R.id.modern_nps_up_next);
 
@@ -72,7 +74,7 @@ public class ModernNowPlayingScreen extends BaseNowPlayingScreen {
 
         setGotToCurrentQueueCLickListener(mUpNext);
         setUpSliderControls(mProgressSlider);
-        setUpSkipControls(skipPrev, skipNext);
+        setUpTrackControls(mTrackControl1, mTrackControl2);
         setDefaultTintToPlayBtn(mPlayPauseBtn);
 
         /*TranslateAnimation translateAnimation = new TranslateAnimation(
@@ -142,5 +144,10 @@ public class ModernNowPlayingScreen extends BaseNowPlayingScreen {
     @Override
     protected void onUpNextItemChanged(String upNextTitle) {
         mUpNext.setText(upNextTitle);
+    }
+
+    @Override
+    protected void onTrackControlButtonsChanged(boolean isSeekButtonEnabled) {
+        setUpTrackControls(mTrackControl1, mTrackControl2);
     }
 }

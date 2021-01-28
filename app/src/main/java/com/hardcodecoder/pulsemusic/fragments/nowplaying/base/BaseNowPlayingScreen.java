@@ -157,20 +157,28 @@ public abstract class BaseNowPlayingScreen extends Fragment
         mForwardSeekDuration = 1000 * AppSettings.getSeekButtonDuration(requireContext(), Preferences.NOW_PLAYING_SEEK_DURATION_FORWARD);
         mBackwardsSeekDuration = 1000 * AppSettings.getSeekButtonDuration(requireContext(), Preferences.NOW_PLAYING_SEEK_DURATION_BACKWARD);
 
-        requireActivity().getSharedPreferences(Preferences.NOW_PLAYING_SEEK_DURATION_KEY, Context.MODE_PRIVATE)
+        requireActivity().getSharedPreferences(Preferences.NOW_PLAYING_CONTROLS, Context.MODE_PRIVATE)
                 .registerOnSharedPreferenceChangeListener(this);
     }
 
     @Override
     public void onSharedPreferenceChanged(@NonNull SharedPreferences sharedPreferences, @NonNull String key) {
-        if (key.equals(Preferences.NOW_PLAYING_SEEK_DURATION_FORWARD)) {
-            mForwardSeekDuration = 1000 * sharedPreferences.getInt(
-                    Preferences.NOW_PLAYING_SEEK_DURATION_FORWARD,
-                    Preferences.NOW_PLAYING_SEEK_DURATION_DEF);
-        } else if (key.equals(Preferences.NOW_PLAYING_SEEK_DURATION_BACKWARD)) {
-            mBackwardsSeekDuration = 1000 * sharedPreferences.getInt(
-                    Preferences.NOW_PLAYING_SEEK_DURATION_BACKWARD,
-                    Preferences.NOW_PLAYING_SEEK_DURATION_DEF);
+        switch (key) {
+            case Preferences.NOW_PLAYING_SEEK_DURATION_FORWARD:
+                mForwardSeekDuration = 1000 * sharedPreferences.getInt(
+                        Preferences.NOW_PLAYING_SEEK_DURATION_FORWARD,
+                        Preferences.NOW_PLAYING_SEEK_DURATION_DEF);
+                break;
+            case Preferences.NOW_PLAYING_SEEK_DURATION_BACKWARD:
+                mBackwardsSeekDuration = 1000 * sharedPreferences.getInt(
+                        Preferences.NOW_PLAYING_SEEK_DURATION_BACKWARD,
+                        Preferences.NOW_PLAYING_SEEK_DURATION_DEF);
+                break;
+            case Preferences.NOW_PLAYING_CONTROLS_SEEK_ENABLED:
+                onTrackControlButtonsChanged(sharedPreferences.getBoolean(
+                        Preferences.NOW_PLAYING_CONTROLS_SEEK_ENABLED,
+                        Preferences.NOW_PLAYING_CONTROLS_SEEK_ENABLED_DEF));
+                break;
         }
     }
 
@@ -299,9 +307,35 @@ public abstract class BaseNowPlayingScreen extends Fragment
         slider.setValueTo(mCurrentTrackDuration);
     }
 
+    protected void setUpTrackControls(@NonNull ImageView trackControls1, @NonNull ImageView trackControls2) {
+        if (isSeekButtonsEnabled()) {
+            trackControls1.setImageResource(R.drawable.ic_fast_forward);
+            trackControls1.setRotation(180);
+            trackControls2.setImageResource(R.drawable.ic_fast_forward);
+            setUpSeekControls(trackControls1, trackControls2);
+        } else {
+            trackControls1.setImageResource(R.drawable.ic_round_skip_previous);
+            trackControls1.setRotation(0);
+            trackControls2.setImageResource(R.drawable.ic_round_skip_next);
+            setUpSkipControls(trackControls1, trackControls2);
+        }
+    }
+
+    protected void onTrackControlButtonsChanged(boolean isSeekButtonEnabled) {
+    }
+
+    protected boolean isSeekButtonsEnabled() {
+        return AppSettings.isSeekButtonsEnabled(requireContext());
+    }
+
     protected void setUpSkipControls(@NonNull ImageView skipPrev, @NonNull ImageView skipNext) {
-        skipPrev.setOnClickListener(v -> seekTo(mCurrentStreamingPosition - mBackwardsSeekDuration));
-        skipNext.setOnClickListener(v -> seekTo(mCurrentStreamingPosition + mForwardSeekDuration));
+        skipPrev.setOnClickListener(v -> mRemote.skipToPreviousTrack());
+        skipNext.setOnClickListener(v -> mRemote.skipToNextTrack());
+    }
+
+    protected void setUpSeekControls(@NonNull ImageView seekBackward, @NonNull ImageView seekForward) {
+        seekBackward.setOnClickListener(v -> seekTo(mCurrentStreamingPosition - mBackwardsSeekDuration));
+        seekForward.setOnClickListener(v -> seekTo(mCurrentStreamingPosition + mForwardSeekDuration));
     }
 
     protected void toggleRepeatMode() {
@@ -419,7 +453,7 @@ public abstract class BaseNowPlayingScreen extends Fragment
         if (null != mUpdateHelper)
             mUpdateHelper.destroy();
         if (null != getActivity()) {
-            requireActivity().getSharedPreferences(Preferences.NOW_PLAYING_SEEK_DURATION_KEY, Context.MODE_PRIVATE)
+            requireActivity().getSharedPreferences(Preferences.NOW_PLAYING_CONTROLS, Context.MODE_PRIVATE)
                     .unregisterOnSharedPreferenceChangeListener(this);
             if (null != mServiceConnection) getActivity().unbindService(mServiceConnection);
         }

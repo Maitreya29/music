@@ -24,7 +24,9 @@ public class StylishNowPlayingScreen extends BaseNowPlayingScreen {
     private Slider mProgressSlider;
     private ImageView mFavoriteBtn;
     private ImageView mRepeatBtn;
+    private ImageView mTrackControl1;
     private FloatingActionButton mPlayPauseBtn;
+    private ImageView mTrackControl2;
     private MaterialTextView mTitle;
     private MaterialTextView mSubTitle;
     private MaterialTextView mStartTime;
@@ -58,8 +60,8 @@ public class StylishNowPlayingScreen extends BaseNowPlayingScreen {
         mProgressSlider = view.findViewById(R.id.stylish_nps_slider);
         mStartTime = view.findViewById(R.id.stylish_nps_start_time);
         mEndTime = view.findViewById(R.id.stylish_nps_end_time);
-        ImageView skipPrev = view.findViewById(R.id.stylish_nps_prev_btn);
-        ImageView skipNext = view.findViewById(R.id.stylish_nps_next_btn);
+        mTrackControl1 = view.findViewById(R.id.stylish_nps_track_controls_1);
+        mTrackControl2 = view.findViewById(R.id.stylish_nps_track_controls_2);
         mRepeatBtn = view.findViewById(R.id.stylish_nps_repeat_btn);
         mPlayPauseBtn = view.findViewById(R.id.stylish_nps_play_pause_btn);
         mFavoriteBtn = view.findViewById(R.id.stylish_nps_favourite_btn);
@@ -72,7 +74,7 @@ public class StylishNowPlayingScreen extends BaseNowPlayingScreen {
 
         setGotToCurrentQueueCLickListener(mUpNext);
         setUpSliderControls(mProgressSlider);
-        setUpSkipControls(skipPrev, skipNext);
+        setUpTrackControls(mTrackControl1, mTrackControl2);
         setDefaultTintToPlayBtn(mPlayPauseBtn);
     }
 
@@ -112,5 +114,10 @@ public class StylishNowPlayingScreen extends BaseNowPlayingScreen {
     @Override
     protected void onUpNextItemChanged(String upNextTitle) {
         mUpNext.setText(upNextTitle);
+    }
+
+    @Override
+    protected void onTrackControlButtonsChanged(boolean isSeekButtonEnabled) {
+        setUpTrackControls(mTrackControl1, mTrackControl2);
     }
 }

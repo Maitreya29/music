@@ -109,15 +109,14 @@
         tools:ignore="contentDescription" />
 
     <ImageView
-        android:id="@+id/edge_nps_prev_btn"
+        android:id="@+id/edge_nps_track_controls_1"
         style="@style/ButtonStyle36"
-        android:rotation="180"
-        android:src="@drawable/ic_fast_forward"
         app:layout_constraintBottom_toBottomOf="@id/edge_nps_play_pause_btn"
         app:layout_constraintEnd_toStartOf="@+id/edge_nps_play_pause_btn"
         app:layout_constraintStart_toEndOf="@id/edge_nps_repeat_btn"
         app:layout_constraintTop_toTopOf="@id/edge_nps_play_pause_btn"
-        tools:ignore="contentDescription" />
+        tools:ignore="contentDescription"
+        tools:src="@drawable/ic_round_skip_previous" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/edge_nps_play_pause_btn"
@@ -128,22 +127,22 @@
         android:contentDescription="@string/fab_play_pause_desc"
         android:src="@drawable/anim_play_pause_selector"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/edge_nps_next_btn"
-        app:layout_constraintStart_toEndOf="@+id/edge_nps_prev_btn"
+        app:layout_constraintEnd_toStartOf="@+id/edge_nps_track_controls_2"
+        app:layout_constraintStart_toEndOf="@+id/edge_nps_track_controls_1"
         app:layout_constraintTop_toBottomOf="@id/edge_nps_sub_title"
         app:layout_constraintVertical_bias="0.2"
         app:tint="?attr/colorOnPrimary"
         tools:src="@drawable/ic_round_play" />
 
     <ImageView
-        android:id="@+id/edge_nps_next_btn"
+        android:id="@+id/edge_nps_track_controls_2"
         style="@style/ButtonStyle36"
-        android:src="@drawable/ic_fast_forward"
         app:layout_constraintBottom_toBottomOf="@id/edge_nps_play_pause_btn"
         app:layout_constraintEnd_toStartOf="@id/edge_nps_favourite_btn"
         app:layout_constraintStart_toEndOf="@+id/edge_nps_play_pause_btn"
         app:layout_constraintTop_toTopOf="@id/edge_nps_play_pause_btn"
-        tools:ignore="contentDescription" />
+        tools:ignore="contentDescription"
+        tools:src="@drawable/ic_round_skip_next" />
 
     <ImageView
         android:id="@+id/edge_nps_favourite_btn"

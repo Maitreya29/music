@@ -13,6 +13,9 @@ import com.hardcodecoder.pulsemusic.dialog.CornerRadiusChangeDialogFragment;
 import com.hardcodecoder.pulsemusic.dialog.NowPlayingStyleChooser;
 import com.hardcodecoder.pulsemusic.dialog.SeekDurationSelector;
 import com.hardcodecoder.pulsemusic.fragments.settings.base.SettingsBaseFragment;
+import com.hardcodecoder.pulsemusic.utils.AppSettings;
+import com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView;
+import com.hardcodecoder.pulsemusic.views.SettingsToggleableItem;
 
 public class SettingsNowPlayingFragment extends SettingsBaseFragment {
 
@@ -53,9 +56,21 @@ public class SettingsNowPlayingFragment extends SettingsBaseFragment {
             dialog.show(requireFragmentManager(), CornerRadiusChangeDialogFragment.TAG);
         });
 
-        view.findViewById(R.id.now_playing_seek_duration_selector).setOnClickListener(v -> {
-            SeekDurationSelector seekDurationSelector = SeekDurationSelector.getInstance();
-            seekDurationSelector.show(requireFragmentManager(), SeekDurationSelector.TAG);
+        SettingsToggleableItem seekButtonsEnabler = view.findViewById(R.id.np_enable_seek_buttons);
+        SettingsCategoryItemView seekDurationSelector = view.findViewById(R.id.now_playing_seek_duration_selector);
+
+        final boolean seekEnabled = AppSettings.isSeekButtonsEnabled(requireContext());
+        seekButtonsEnabler.setSwitchChecked(seekEnabled);
+        seekDurationSelector.setEnabled(seekEnabled);
+
+        seekButtonsEnabler.setOnSwitchCheckedChangedListener((buttonView, isChecked) -> {
+            seekDurationSelector.setEnabled(isChecked);
+            AppSettings.setSeekButtonsEnabled(requireContext(), isChecked);
+        });
+
+        seekDurationSelector.setOnClickListener(v -> {
+            SeekDurationSelector seekDurationSelectorDialog = SeekDurationSelector.getInstance();
+            seekDurationSelectorDialog.show(requireFragmentManager(), SeekDurationSelector.TAG);
         });
     }
 }

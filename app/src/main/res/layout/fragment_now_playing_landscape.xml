@@ -112,15 +112,14 @@
         tools:ignore="contentDescription" />
 
     <ImageButton
-        android:id="@+id/fragment_nps_land_prev_btn"
+        android:id="@+id/land_nps_track_controls_1"
         style="@style/ButtonStyle36"
-        android:rotation="180"
-        android:src="@drawable/ic_fast_forward"
         app:layout_constraintBottom_toBottomOf="@id/fragment_nps_land_play_pause_btn"
         app:layout_constraintEnd_toStartOf="@+id/fragment_nps_land_play_pause_btn"
         app:layout_constraintStart_toEndOf="@+id/fragment_nps_land_repeat_btn"
         app:layout_constraintTop_toTopOf="@id/fragment_nps_land_play_pause_btn"
-        tools:ignore="contentDescription" />
+        tools:ignore="contentDescription"
+        tools:src="@drawable/ic_round_skip_previous" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fragment_nps_land_play_pause_btn"
@@ -132,22 +131,22 @@
         android:contentDescription="@string/fab_play_pause_desc"
         android:src="@drawable/anim_play_pause_selector"
         app:layout_constraintBottom_toTopOf="@id/fragment_nps_land_close_btn"
-        app:layout_constraintEnd_toStartOf="@id/fragment_nps_land_next_btn"
-        app:layout_constraintStart_toEndOf="@id/fragment_nps_land_prev_btn"
+        app:layout_constraintEnd_toStartOf="@id/land_nps_track_controls_2"
+        app:layout_constraintStart_toEndOf="@id/land_nps_track_controls_1"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.86"
         app:tint="?attr/colorOnPrimary"
         tools:src="@drawable/ic_round_play" />
 
     <ImageButton
-        android:id="@+id/fragment_nps_land_next_btn"
+        android:id="@+id/land_nps_track_controls_2"
         style="@style/ButtonStyle36"
-        android:src="@drawable/ic_fast_forward"
         app:layout_constraintBottom_toBottomOf="@id/fragment_nps_land_play_pause_btn"
         app:layout_constraintEnd_toStartOf="@id/fragment_nps_land_favourite_btn"
         app:layout_constraintStart_toEndOf="@id/fragment_nps_land_play_pause_btn"
         app:layout_constraintTop_toTopOf="@id/fragment_nps_land_play_pause_btn"
-        tools:ignore="contentDescription" />
+        tools:ignore="contentDescription"
+        tools:src="@drawable/ic_round_skip_next" />
 
     <ImageButton
         android:id="@+id/fragment_nps_land_favourite_btn"
