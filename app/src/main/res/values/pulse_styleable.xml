@@ -56,4 +56,11 @@
             <enum name="outlined" value="2" />
         </attr>
     </declare-styleable>
+
+    <declare-styleable name="ButtonShortcut">
+        <attr name="shortcutIcon" format="reference" />
+        <attr name="shortcutIconColor" format="color|reference" />
+        <attr name="shortcutTitle" format="string" />
+        <attr name="colorsDesaturatedInDarkMode" format="boolean" />
+    </declare-styleable>
 </resources>

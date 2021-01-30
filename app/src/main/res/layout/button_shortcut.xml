@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ImageView
+        android:id="@+id/shortcut_icon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_gravity="center_vertical"
+        android:contentDescription="@string/icon_desc"
+        tools:src="@drawable/ic_favorite" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/shortcut_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="16dp"
+        android:textAppearance="@style/Appearance.Text.Subtitle1"
+        tools:text="Favorite" />
+</merge>
