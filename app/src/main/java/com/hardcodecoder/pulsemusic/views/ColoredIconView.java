@@ -6,6 +6,7 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.util.AttributeSet;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.content.ContextCompat;
@@ -13,7 +14,6 @@ import androidx.core.content.ContextCompat;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.themes.ColorUtil;
 import com.hardcodecoder.pulsemusic.themes.ThemeManagerUtils;
-import com.hardcodecoder.pulsemusic.utils.AppSettings;
 
 public class ColoredIconView extends AppCompatImageView {
 
@@ -22,7 +22,7 @@ public class ColoredIconView extends AppCompatImageView {
     }
 
     public ColoredIconView(Context context, AttributeSet attrs) {
-        super(context, attrs);
+        this(context, attrs, 0);
         initialize(context, attrs);
     }
 
@@ -31,7 +31,7 @@ public class ColoredIconView extends AppCompatImageView {
         initialize(context, attrs);
     }
 
-    private void initialize(Context context, @Nullable AttributeSet attributeSet) {
+    private void initialize(@NonNull Context context, @Nullable AttributeSet attributeSet) {
         TypedArray typedArray = context.obtainStyledAttributes(attributeSet, R.styleable.ColoredIconView);
         setBackground(ContextCompat.getDrawable(context, R.drawable.plain_circle));
         int paddingPixels = context.getResources().getDimensionPixelSize(R.dimen.icon_padding);
@@ -41,7 +41,7 @@ public class ColoredIconView extends AppCompatImageView {
         int iconColor = typedArray.getColor(R.styleable.ColoredIconView_iconColor, Color.BLUE);
         int iconBackgroundColor = typedArray.getColor(R.styleable.ColoredIconView_iconBackgroundColor, iconColor);
 
-        boolean desaturated = ThemeManagerUtils.isDarkModeEnabled() && AppSettings.getAccentDesaturatedColor(context)
+        boolean desaturated = ThemeManagerUtils.isAccentsDesaturated()
                 && typedArray.getBoolean(R.styleable.ColoredIconView_desaturatedColorInDarkMode, true);
 
         if (desaturated) {

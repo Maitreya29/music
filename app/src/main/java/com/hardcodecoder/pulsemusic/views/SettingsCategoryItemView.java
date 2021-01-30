@@ -7,8 +7,8 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,9 +17,9 @@ import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.themes.ColorUtil;
 import com.hardcodecoder.pulsemusic.themes.ThemeManagerUtils;
-import com.hardcodecoder.pulsemusic.utils.AppSettings;
+import com.hardcodecoder.pulsemusic.utils.DimensionsUtil;
 
-public class SettingsCategoryItemView extends FrameLayout {
+public class SettingsCategoryItemView extends RelativeLayout {
 
     private final MaterialTextView mTitle;
     private final MaterialTextView mText;
@@ -35,6 +35,21 @@ public class SettingsCategoryItemView extends FrameLayout {
 
     public SettingsCategoryItemView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+
+        // Update this root layout dimensions
+        LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+        final int marginHorizontal = DimensionsUtil.getDimensionPixelSize(getContext(), 2);
+        params.setMarginStart(marginHorizontal);
+        params.setMarginEnd(marginHorizontal);
+        setLayoutParams(params);
+
+        final int paddingDef = DimensionsUtil.getDimensionPixelSize(context, 16);
+        setPadding(DimensionsUtil.getDimensionPixelSize(context, 8), paddingDef, paddingDef, paddingDef);
+
+        TypedArray array = context.obtainStyledAttributes(ThemeManagerUtils.getThemeToApply(), new int[]{android.R.attr.selectableItemBackground});
+        setBackground(array.getDrawable(0));
+        array.recycle();
+
         View view = View.inflate(context, R.layout.settings_category_list_item, this);
         mTitle = view.findViewById(R.id.settings_list_item_title);
         mText = view.findViewById(R.id.settings_list_item_text);
@@ -52,7 +67,7 @@ public class SettingsCategoryItemView extends FrameLayout {
             int iconColor = typedArray.getColor(R.styleable.SettingsCategoryItemView_settingItemIconColor, Color.BLUE);
             int iconBackgroundColor = typedArray.getColor(R.styleable.SettingsCategoryItemView_settingItemIconBackgroundColor, iconColor);
 
-            boolean desaturated = ThemeManagerUtils.isDarkModeEnabled() && AppSettings.getAccentDesaturatedColor(context)
+            boolean desaturated = ThemeManagerUtils.isAccentsDesaturated()
                     && typedArray.getBoolean(R.styleable.SettingsCategoryItemView_settingItemDesaturatedColorsInDarkMode, true);
 
             if (desaturated) {

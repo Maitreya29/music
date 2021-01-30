@@ -18,7 +18,6 @@ import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.themes.ColorUtil;
 import com.hardcodecoder.pulsemusic.themes.ThemeManagerUtils;
-import com.hardcodecoder.pulsemusic.utils.AppSettings;
 import com.hardcodecoder.pulsemusic.utils.DimensionsUtil;
 
 public class ButtonShortcut extends LinearLayout {
@@ -55,7 +54,7 @@ public class ButtonShortcut extends LinearLayout {
             int iconColor = typedArray.getColor(R.styleable.ButtonShortcut_shortcutIconColor, 0);
             int backgroundTint = iconColor;
 
-            boolean desaturated = ThemeManagerUtils.isDarkModeEnabled() && AppSettings.getAccentDesaturatedColor(context)
+            boolean desaturated = ThemeManagerUtils.isAccentsDesaturated()
                     && typedArray.getBoolean(R.styleable.ButtonShortcut_colorsDesaturatedInDarkMode, true);
 
             if (desaturated) {

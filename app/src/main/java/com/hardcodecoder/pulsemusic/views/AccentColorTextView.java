@@ -17,15 +17,15 @@ public class AccentColorTextView extends MaterialTextView {
 
     public AccentColorTextView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        init();
     }
 
     public AccentColorTextView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        init();
     }
 
-    @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
+    private void init() {
         setTextColor(ThemeColors.getCurrentColorPrimary());
     }
 }
