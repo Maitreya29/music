@@ -80,7 +80,7 @@ public class PlaylistFragment extends PulseFragment implements PlaylistCardListe
 
     @Override
     public String getFragmentTitle(@NonNull Context context) {
-        if (null == mFragmentTitle) mFragmentTitle = context.getString(R.string.playlist_nav);
+        if (null == mFragmentTitle) mFragmentTitle = context.getString(R.string.playlist);
         return mFragmentTitle;
     }
 

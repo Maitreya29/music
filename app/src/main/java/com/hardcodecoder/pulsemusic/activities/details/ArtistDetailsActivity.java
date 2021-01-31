@@ -127,7 +127,7 @@ public class ArtistDetailsActivity extends BaseDetailsActivity {
         if (list == null || list.isEmpty()) return;
 
         MaterialTextView sub = findViewById(R.id.details_activity_title_sub);
-        sub.setText(String.format(Locale.getDefault(), "%s %d %s", getString(R.string.num_artist_tracks), list.size(), getString(R.string.album)));
+        sub.setText(String.format(Locale.getDefault(), "%s %d %s", getString(R.string.num_artist_tracks), list.size(), getString(R.string.albums_suffix)));
 
         RecyclerView rv = (RecyclerView) ((ViewStub) findViewById(R.id.stub_details_activity_rv)).inflate();
         int padding = DimensionsUtil.getDimensionPixelSize(this, 16f);

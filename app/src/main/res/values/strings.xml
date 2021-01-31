@@ -17,7 +17,7 @@
     <string name="library">Library</string>
     <string name="albums">Albums</string>
     <string name="artist">Artist</string>
-    <string name="playlist_nav">Playlist</string>
+    <string name="playlist">Playlist</string>
 
 
     <!-- Home Fragment -->
@@ -150,7 +150,7 @@
     <string name="num_artist_tracks">Artist has ●</string>
     <string name="num_album_tracks">Album contains ●</string>
     <string name="tracks">tracks</string>
-    <string name="album">albums</string>
+    <string name="albums_suffix">albums</string>
 
 
     <!-- Song info dialog -->

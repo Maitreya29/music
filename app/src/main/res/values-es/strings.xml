@@ -14,7 +14,7 @@
     <string name="library">Biblioteca</string>
     <string name="albums">Álbumes</string>
     <string name="artist">Artista</string>
-    <string name="playlist_nav">Lista de reproducción</string>
+    <string name="playlist">Lista de reproducción</string>
 
 
     <!-- Home Fragment -->
