@@ -1,5 +1,6 @@
 package com.hardcodecoder.pulsemusic.fragments.main;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.FileObserver;
@@ -29,7 +30,7 @@ import com.hardcodecoder.pulsemusic.activities.playlist.CurrentQueuePlaylist;
 import com.hardcodecoder.pulsemusic.activities.playlist.CustomizablePlaylist;
 import com.hardcodecoder.pulsemusic.adapters.main.PlaylistsAdapter;
 import com.hardcodecoder.pulsemusic.dialog.base.RoundedCustomBottomSheet;
-import com.hardcodecoder.pulsemusic.fragments.main.base.SmoothTransactionFragments;
+import com.hardcodecoder.pulsemusic.fragments.main.base.PulseFragment;
 import com.hardcodecoder.pulsemusic.helper.RecyclerViewGestureHelper;
 import com.hardcodecoder.pulsemusic.helper.UIHelper;
 import com.hardcodecoder.pulsemusic.interfaces.ItemGestureCallback;
@@ -39,11 +40,13 @@ import com.hardcodecoder.pulsemusic.providers.ProviderManager;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlaylistFragment extends SmoothTransactionFragments implements PlaylistCardListener, ItemGestureCallback<String> {
+public class PlaylistFragment extends PulseFragment implements PlaylistCardListener, ItemGestureCallback<String> {
 
+    public static final String TAG = "Playlist";
     private FileObserver mObserver;
     private PlaylistsAdapter mAdapter;
     private List<String> mPlaylistNames;
+    private String mFragmentTitle = null;
 
     @NonNull
     public static PlaylistFragment getInstance() {
@@ -73,6 +76,12 @@ public class PlaylistFragment extends SmoothTransactionFragments implements Play
             }
         };
         mObserver.startWatching();
+    }
+
+    @Override
+    public String getFragmentTitle(@NonNull Context context) {
+        if (null == mFragmentTitle) mFragmentTitle = context.getString(R.string.playlist_nav);
+        return mFragmentTitle;
     }
 
     @Override

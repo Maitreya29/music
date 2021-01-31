@@ -17,8 +17,6 @@ import android.view.View;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.appbar.AppBarLayout;
@@ -31,11 +29,13 @@ import com.hardcodecoder.pulsemusic.fragments.main.ArtistFragment;
 import com.hardcodecoder.pulsemusic.fragments.main.HomeFragment;
 import com.hardcodecoder.pulsemusic.fragments.main.LibraryFragment;
 import com.hardcodecoder.pulsemusic.fragments.main.PlaylistFragment;
+import com.hardcodecoder.pulsemusic.fragments.main.base.PulseFragment;
 import com.hardcodecoder.pulsemusic.helper.DataModelHelper;
 import com.hardcodecoder.pulsemusic.loaders.LoaderHelper;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.playback.PlaybackManager;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
+import com.hardcodecoder.pulsemusic.views.PulseToolbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,11 +44,6 @@ public class MainContentActivity extends DraggableNowPlayingSheetActivity {
 
     public static final String TAG = "MainActivity";
     public static final String URI_DATA = "TrackData";
-    private static final String HOME = "HomeFragment";
-    private static final String LIBRARY = "LibraryFragment";
-    private static final String ALBUMS = "AlbumsFragment";
-    private static final String PLAYLIST_CARDS = "PlaylistCardFragment";
-    private static final String ARTIST = "ArtistFragment";
     private static final String ACTIVE = "ActiveFragment";
     private final MediaController.Callback mCallback = new MediaController.Callback() {
         @Override
@@ -62,13 +57,14 @@ public class MainContentActivity extends DraggableNowPlayingSheetActivity {
                 updateDraggableSheet(false);
         }
     };
-    private Fragment homeFrag = null;
-    private Fragment libraryFrag = null;
-    private Fragment artistFrag = null;
-    private Fragment albumsFrag = null;
-    private Fragment activeFrag = null;
-    private Fragment playlistCardFrag = null;
+    private PulseFragment homeFrag = null;
+    private PulseFragment libraryFrag = null;
+    private PulseFragment artistFrag = null;
+    private PulseFragment albumsFrag = null;
+    private PulseFragment activeFrag = null;
+    private PulseFragment playlistCardFrag = null;
     private AppBarLayout mAppBar;
+    private PulseToolbar mPulseToolbar;
     private MediaController mController;
     private final ServiceConnection serviceConnection = new ServiceConnection() {
         @Override
@@ -100,16 +96,16 @@ public class MainContentActivity extends DraggableNowPlayingSheetActivity {
     public void onNavigationItemSelected(@NonNull MenuItem menuItem) {
         final int id = menuItem.getItemId();
         if (id == R.id.nav_home) {
-            if (activeFrag != homeFrag) switchFragment(homeFrag, HOME);
+            if (activeFrag != homeFrag) switchFragment(homeFrag, HomeFragment.TAG);
         } else if (id == R.id.nav_library) {
-            if (activeFrag != libraryFrag) switchFragment(libraryFrag, LIBRARY);
+            if (activeFrag != libraryFrag) switchFragment(libraryFrag, LibraryFragment.TAG);
         } else if (id == R.id.nav_album) {
-            if (activeFrag != albumsFrag) switchFragment(albumsFrag, ALBUMS);
+            if (activeFrag != albumsFrag) switchFragment(albumsFrag, AlbumsFragment.TAG);
         } else if (id == R.id.nav_artist) {
-            if (activeFrag != artistFrag) switchFragment(artistFrag, ARTIST);
+            if (activeFrag != artistFrag) switchFragment(artistFrag, ArtistFragment.TAG);
         } else if (id == R.id.nav_playlist) {
             if (activeFrag != playlistCardFrag)
-                switchFragment(playlistCardFrag, PLAYLIST_CARDS);
+                switchFragment(playlistCardFrag, PlaylistFragment.TAG);
         }
     }
 
@@ -120,51 +116,54 @@ public class MainContentActivity extends DraggableNowPlayingSheetActivity {
 
     private void setUpToolbar() {
         mAppBar = findViewById(R.id.main_app_bar);
-        Toolbar toolbar = findViewById(R.id.main_toolbar);
-        setSupportActionBar(toolbar);
-        toolbar.setNavigationOnClickListener(v -> {
+        mPulseToolbar = mAppBar.findViewById(R.id.pulse_toolbar);
+        mPulseToolbar.setNavigationIcon(R.drawable.ic_menu);
+        mPulseToolbar.setOptionsIcon(R.drawable.ic_search);
+
+        mPulseToolbar.setNavigationIconOnClickListener(v -> {
             HomeBottomSheetFragment homeBottomSheetFragment = HomeBottomSheetFragment.getInstance();
             homeBottomSheetFragment.show(getSupportFragmentManager(), HomeBottomSheetFragment.TAG);
         });
-        toolbar.setOnClickListener(v -> startActivity(new Intent(this, SearchActivity.class)));
+
+        mPulseToolbar.setOptionIconOnClickListener(v -> startActivity(new Intent(this, SearchActivity.class)));
     }
 
     private void setUpMainContents(Bundle savedInstanceState) {
-        if (savedInstanceState == null) switchFragment(homeFrag, HOME);
-        else switchFragment(activeFrag, savedInstanceState.getString(ACTIVE, HOME));
+        if (savedInstanceState == null) switchFragment(homeFrag, HomeFragment.TAG);
+        else switchFragment(activeFrag, savedInstanceState.getString(ACTIVE, HomeFragment.TAG));
     }
 
-    private void switchFragment(@Nullable Fragment switchTo, String tag) {
+    private void switchFragment(@Nullable PulseFragment switchTo, @NonNull String tag) {
         FragmentManager fm = getSupportFragmentManager();
         if (null == switchTo) {
             switch (tag) {
-                case HOME:
+                case HomeFragment.TAG:
                     homeFrag = HomeFragment.getInstance();
                     switchTo = homeFrag;
                     break;
 
-                case LIBRARY:
+                case LibraryFragment.TAG:
                     libraryFrag = LibraryFragment.getInstance();
                     switchTo = libraryFrag;
                     break;
 
-                case ALBUMS:
+                case AlbumsFragment.TAG:
                     albumsFrag = AlbumsFragment.getInstance();
                     switchTo = albumsFrag;
                     break;
 
-                case ARTIST:
+                case ArtistFragment.TAG:
                     artistFrag = ArtistFragment.getInstance();
                     switchTo = artistFrag;
                     break;
 
-                case PLAYLIST_CARDS:
+                case PlaylistFragment.TAG:
                     playlistCardFrag = PlaylistFragment.getInstance();
                     switchTo = playlistCardFrag;
                     break;
 
                 default:
-                    Log.e(TAG, "SwitchTo fragment is not a member of defined fragments");
+                    Log.e(TAG, "SwitchTo fragment is not a member of Pulse fragments");
             }
             if (switchTo != null && activeFrag != null) {
                 fm.beginTransaction()
@@ -187,7 +186,10 @@ public class MainContentActivity extends DraggableNowPlayingSheetActivity {
                     .show(switchTo)
                     .commit();
         activeFrag = switchTo;
-        mAppBar.setExpanded(true);
+        mAppBar.post(() -> {
+            mAppBar.setExpanded(true);
+            mPulseToolbar.setTitle(activeFrag.getFragmentTitle(this), true);
+        });
     }
 
     public void onControllerReady() {

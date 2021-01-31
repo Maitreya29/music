@@ -5,7 +5,7 @@ import android.content.res.Configuration;
 import androidx.annotation.MenuRes;
 import androidx.annotation.NonNull;
 
-public abstract class PMBGridFragment extends SmoothTransactionFragments {
+public abstract class PMBGridFragment extends PulseFragment {
 
     private int mCurrentOrientation;
     private int mCurrentSpanCount;

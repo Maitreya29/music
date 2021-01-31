@@ -1,6 +1,7 @@
 package com.hardcodecoder.pulsemusic.fragments.main;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -27,7 +28,7 @@ import com.hardcodecoder.pulsemusic.activities.playlist.RecentActivity;
 import com.hardcodecoder.pulsemusic.adapters.main.HomeSectionAdapter;
 import com.hardcodecoder.pulsemusic.adapters.main.TopAlbumsAdapter;
 import com.hardcodecoder.pulsemusic.adapters.main.TopArtistsAdapter;
-import com.hardcodecoder.pulsemusic.fragments.main.base.SmoothTransactionFragments;
+import com.hardcodecoder.pulsemusic.fragments.main.base.PulseFragment;
 import com.hardcodecoder.pulsemusic.helper.DataModelHelper;
 import com.hardcodecoder.pulsemusic.helper.UIHelper;
 import com.hardcodecoder.pulsemusic.interfaces.SimpleItemClickListener;
@@ -42,11 +43,13 @@ import com.hardcodecoder.pulsemusic.utils.NavigationUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeFragment extends SmoothTransactionFragments {
+public class HomeFragment extends PulseFragment {
 
+    public static final String TAG = "Home";
     private static final int PICK_MUSIC = 1600;
     private final PulseController mPulseController = PulseController.getInstance();
     private final PulseController.PulseRemote mRemote = mPulseController.getRemote();
+    private String mFragmentTitle = null;
 
     @NonNull
     public static HomeFragment getInstance() {
@@ -114,6 +117,12 @@ public class HomeFragment extends SmoothTransactionFragments {
                     intent.putExtra(PMS.PLAY_KEY, PMS.PLAY_SHUFFLE);
                     requireActivity().startService(intent);
                 });
+    }
+
+    @Override
+    public String getFragmentTitle(@NonNull Context context) {
+        if (null == mFragmentTitle) mFragmentTitle = context.getString(R.string.home);
+        return mFragmentTitle;
     }
 
     private void loadTopAlbums(@NonNull View view, @Nullable List<TopAlbumModel> list) {

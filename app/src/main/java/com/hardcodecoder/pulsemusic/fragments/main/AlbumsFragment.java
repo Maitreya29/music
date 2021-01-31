@@ -1,5 +1,6 @@
 package com.hardcodecoder.pulsemusic.fragments.main;
 
+import android.content.Context;
 import android.content.res.Configuration;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,9 +30,11 @@ import java.util.List;
 
 public class AlbumsFragment extends CardGridFragment implements SimpleTransitionClickListener, GridAdapterCallback {
 
+    public static final String TAG = "Albums";
     private GridLayoutManager mLayoutManager;
     private AlbumsAdapter mAdapter;
     private ALBUMS mSortOrder;
+    private String mFragmentTitle = null;
     private int mFirstVisibleItemPosition;
 
     @NonNull
@@ -50,6 +53,12 @@ public class AlbumsFragment extends CardGridFragment implements SimpleTransition
                         noTracksText.setText(getString(R.string.tracks_not_found));
                     } else loadAlbumsList(view, list);
                 });
+    }
+
+    @Override
+    public String getFragmentTitle(@NonNull Context context) {
+        if (null == mFragmentTitle) mFragmentTitle = context.getString(R.string.albums);
+        return mFragmentTitle;
     }
 
     @Override

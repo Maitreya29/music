@@ -15,17 +15,12 @@
         android:background="?attr/windowBackgroundColor"
         app:liftOnScroll="true">
 
-        <com.hardcodecoder.pulsemusic.views.CustomToolbar
-            android:id="@+id/main_toolbar"
+        <com.hardcodecoder.pulsemusic.views.PulseToolbar
+            android:id="@+id/pulse_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:contentInsetStart="0dp"
-            app:contentInsetStartWithNavigation="0dp"
-            app:layout_scrollFlags="scroll|enterAlways|snapMargins"
-            app:navigationIcon="@drawable/ic_menu"
-            app:title="@string/searchHint"
-            app:titleTextAppearance="@style/TextAppearanceSearch"
-            app:titleTextColor="?android:attr/textColorSecondary" />
+            android:layout_height="56dp"
+            app:layout_scrollFlags="scroll|enterAlways|snapMargins" />
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <FrameLayout

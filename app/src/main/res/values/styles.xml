@@ -61,10 +61,6 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="TextAppearanceSearch" parent="Appearance.Text.Body1">
-        <item name="android:textSize">17sp</item>
-    </style>
-
     <style name="ItemTitle" parent="Base.ItemTitle">
         <item name="android:textStyle">bold</item>
     </style>

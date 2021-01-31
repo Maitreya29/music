@@ -1,5 +1,6 @@
 package com.hardcodecoder.pulsemusic.fragments.main;
 
+import android.content.Context;
 import android.content.res.Configuration;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,9 +31,11 @@ import java.util.List;
 
 public class LibraryFragment extends ListGridFragment implements SimpleItemClickListener {
 
+    public static final String TAG = "Library";
     private GridLayoutManager mLayoutManager;
     private TracksAdapter mAdapter;
     private SortOrder mSortOrder;
+    private String mFragmentTitle = null;
     private int mFirstVisibleItemPosition;
 
     @NonNull
@@ -54,6 +57,12 @@ public class LibraryFragment extends ListGridFragment implements SimpleItemClick
                 view.post(() -> loadLibrary(view, libraryTracks));
             });
         }
+    }
+
+    @Override
+    public String getFragmentTitle(@NonNull Context context) {
+        if (null == mFragmentTitle) mFragmentTitle = context.getString(R.string.library);
+        return mFragmentTitle;
     }
 
     @Override
