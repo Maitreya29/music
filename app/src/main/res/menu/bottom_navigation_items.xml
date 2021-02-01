@@ -3,26 +3,26 @@
     <item
         android:id="@+id/nav_home"
         android:icon="@drawable/ic_home"
-        android:title="@string/home" />
+        android:title="@string/nav_home" />
 
     <item
         android:id="@+id/nav_library"
         android:icon="@drawable/ic_audio"
-        android:title="@string/library" />
+        android:title="@string/nav_library" />
 
     <item
         android:id="@+id/nav_album"
         android:icon="@drawable/ic_album"
-        android:title="@string/albums" />
+        android:title="@string/nav_albums" />
 
     <item
         android:id="@+id/nav_artist"
         android:icon="@drawable/ic_artist"
-        android:title="@string/artist" />
+        android:title="@string/nav_artists" />
 
     <item
         android:id="@+id/nav_playlist"
         android:icon="@drawable/ic_playlist"
-        android:title="@string/playlist" />
+        android:title="@string/nav_playlist" />
 
 </menu>

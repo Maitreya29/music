@@ -188,7 +188,7 @@ public class MediaNotificationManager {
         if (mNotificationManager.getNotificationChannel(CHANNEL_ID) == null) {
             NotificationChannel notificationChannel = new NotificationChannel(
                     CHANNEL_ID,
-                    mContext.getString(R.string.channel_name),
+                    mContext.getString(R.string.notification_playback_channel_name),
                     NotificationManager.IMPORTANCE_DEFAULT);
             notificationChannel.setDescription("no sound");
             notificationChannel.enableVibration(false);

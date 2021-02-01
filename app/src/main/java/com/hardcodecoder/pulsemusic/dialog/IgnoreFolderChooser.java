@@ -94,7 +94,7 @@ public class IgnoreFolderChooser extends RoundedCustomBottomSheetFragment {
                     ProviderManager.getIgnoredListProvider().removeFromIgnoreList(foldersList.get(position));
                     mAdapter.deleteItem(position);
                     mHasChanged = true;
-                    Toast.makeText(requireContext(), getString(R.string.ignored_folder_picker_remove_success), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), getString(R.string.toast_removed_folder_from_ignored_list), Toast.LENGTH_SHORT).show();
                 });
         recyclerView.setAdapter(mAdapter);
     }
@@ -110,12 +110,12 @@ public class IgnoreFolderChooser extends RoundedCustomBottomSheetFragment {
 
     private void handleSelectedFolders(Intent data) {
         if (null == data || null == data.getData()) {
-            Toast.makeText(requireContext(), getString(R.string.ignored_folder_picker_add_failed), Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), getString(R.string.toast_failed_to_add_folder), Toast.LENGTH_SHORT).show();
             return;
         }
         String completePath = getPath(data);
         if (null == completePath) {
-            Toast.makeText(requireContext(), getString(R.string.ignored_folder_picker_add_failed), Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), getString(R.string.toast_failed_to_add_folder), Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -127,7 +127,7 @@ public class IgnoreFolderChooser extends RoundedCustomBottomSheetFragment {
             mAdapter.addItem(completePath);
         }
         mHasChanged = true;
-        Toast.makeText(requireContext(), getString(R.string.ignored_folder_picker_add_success), Toast.LENGTH_SHORT).show();
+        Toast.makeText(requireContext(), getString(R.string.toast_folder_added_to_ignored_list), Toast.LENGTH_SHORT).show();
         ProviderManager.getIgnoredListProvider().addToIgnoreList(completePath);
     }
 
@@ -153,7 +153,7 @@ public class IgnoreFolderChooser extends RoundedCustomBottomSheetFragment {
 
     private void handleSelectedFoldersQ(Intent data) {
         if (null == data) {
-            Toast.makeText(requireContext(), getString(R.string.ignored_folder_picker_add_failed), Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), getString(R.string.toast_failed_to_add_folder), Toast.LENGTH_SHORT).show();
             return;
         }
         List<String> ignoredFoldersLList = data.getStringArrayListExtra(MediaFolderChooserActivity.RESULT_SELECTED_FOLDERS);
@@ -164,7 +164,7 @@ public class IgnoreFolderChooser extends RoundedCustomBottomSheetFragment {
             mAdapter.addItems(ignoredFoldersLList);
         }
         mHasChanged = true;
-        Toast.makeText(requireContext(), getString(R.string.ignored_folder_picker_add_success), Toast.LENGTH_SHORT).show();
+        Toast.makeText(requireContext(), getString(R.string.toast_folder_added_to_ignored_list), Toast.LENGTH_SHORT).show();
         ProviderManager.getIgnoredListProvider().addToIgnoreList(ignoredFoldersLList);
     }
 

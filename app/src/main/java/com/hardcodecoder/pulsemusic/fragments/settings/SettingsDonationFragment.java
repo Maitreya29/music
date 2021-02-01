@@ -51,7 +51,7 @@ public class SettingsDonationFragment extends SettingsBaseFragment {
 
     @Override
     public int getToolbarTitleForFragment() {
-        return R.string.donations;
+        return R.string.support_development;
     }
 
     private void openLink(String link) {

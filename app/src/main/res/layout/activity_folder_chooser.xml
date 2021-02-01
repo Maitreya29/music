@@ -28,7 +28,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:clickable="true"
-        android:contentDescription="@string/fab_done_dec"
+        android:contentDescription="@string/desc_confirm_btn"
         android:focusable="true"
         android:src="@drawable/ic_done_all_white"
         app:layout_anchorGravity="bottom"

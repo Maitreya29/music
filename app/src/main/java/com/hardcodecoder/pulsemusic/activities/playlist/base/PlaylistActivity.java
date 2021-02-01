@@ -118,7 +118,7 @@ public abstract class PlaylistActivity extends ControllerActivity {
         mTotalPlaylistDuration = duration;
         String text = "● "
                 + size + "\t"
-                + getString(R.string.tracks)
+                + getString(R.string.suffix_tracks)
                 + " ● "
                 + DateUtils.formatElapsedTime(mTotalPlaylistDuration / 1000);
         mPlaylistInfo.setText(text);
@@ -188,7 +188,7 @@ public abstract class PlaylistActivity extends ControllerActivity {
     }
 
     protected SpannableString getEmptyPlaylistText() {
-        String text = getString(R.string.no_playlist_tracks_found);
+        String text = getString(R.string.message_empty_playlist);
         SpannableString spannableString = new SpannableString(text);
         int lineEnd = text.indexOf("\n");
         spannableString.setSpan(new ForegroundColorSpan(ThemeColors.getCurrentPrimaryTextColor()),
@@ -214,7 +214,7 @@ public abstract class PlaylistActivity extends ControllerActivity {
         Collections.shuffle(playListToPlay);
         mPulseController.setPlaylist(playListToPlay);
         mRemote.play();
-        Toast.makeText(this, getString(R.string.playlist_shuffled_success_toast), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.toast_playlist_shuffle_success), Toast.LENGTH_SHORT).show();
     }
 
     protected void openTrackPicker() {

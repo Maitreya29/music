@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:gravity="start"
-        android:text="@string/custom_accent_title"
+        android:text="@string/select_custom_accent"
         android:textAppearance="@style/Appearance.Text.Subtitle1" />
 
     <LinearLayout
@@ -28,7 +28,7 @@
             android:id="@+id/red_label"
             android:layout_width="16dp"
             android:layout_height="wrap_content"
-            android:text="@string/r_channel_label"
+            android:text="@string/color_channel_r"
             android:textAppearance="@style/Appearance.Text.Body1"
             android:textColor="@android:color/holo_red_light" />
 
@@ -50,7 +50,7 @@
             android:id="@+id/green_label"
             android:layout_width="16dp"
             android:layout_height="wrap_content"
-            android:text="@string/g_channel_label"
+            android:text="@string/color_channel_g"
             android:textAppearance="@style/Appearance.Text.Body1"
             android:textColor="@color/md_green_A700" />
 
@@ -75,7 +75,7 @@
             android:id="@+id/blue_label"
             android:layout_width="16dp"
             android:layout_height="wrap_content"
-            android:text="@string/b_channel_label"
+            android:text="@string/color_channel_b"
             android:textAppearance="@style/Appearance.Text.Body1"
             android:textColor="@color/md_blue_A400" />
 
@@ -96,7 +96,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="16dp"
-        android:hint="@string/hex_color_hint"
+        android:hint="@string/hint_hex_color"
         android:theme="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
         app:prefixText="#">
 

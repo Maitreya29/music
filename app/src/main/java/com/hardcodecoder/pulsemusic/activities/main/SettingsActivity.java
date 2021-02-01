@@ -39,7 +39,7 @@ public class SettingsActivity extends ControllerActivity implements SettingsFrag
 
         //Setting up toolbar
         mToolbar = findViewById(R.id.material_toolbar);
-        setToolbarTitle(R.string.settings_title);
+        setToolbarTitle(R.string.settings);
         setSupportActionBar(mToolbar);
         mToolbar.setNavigationOnClickListener(v -> onBackPressed());
 
@@ -92,13 +92,13 @@ public class SettingsActivity extends ControllerActivity implements SettingsFrag
         MaterialButton negativeBtn = layout.findViewById(R.id.alert_dialog_negative_btn);
         MaterialButton positiveBtn = layout.findViewById(R.id.alert_dialog_positive_btn);
 
-        title.setText(R.string.restart_dialog_title);
-        msg.setText(R.string.restart_dialog_desc);
+        title.setText(R.string.restart_app);
+        msg.setText(R.string.restart_app_dialog_desc);
 
         mRestartDialog = new MaterialAlertDialogBuilder(this)
                 .setView(layout).create();
 
-        positiveBtn.setText(R.string.restart_dialog_positive_btn_title);
+        positiveBtn.setText(R.string.restart);
         positiveBtn.setOnClickListener(positive -> {
             Intent restartIntent = getPackageManager().getLaunchIntentForPackage(getPackageName());
             if (null != restartIntent) {
@@ -113,7 +113,7 @@ public class SettingsActivity extends ControllerActivity implements SettingsFrag
             }
         });
 
-        negativeBtn.setText(R.string.restart_dialog_negative_btn_title);
+        negativeBtn.setText(R.string.do_it_later);
         negativeBtn.setOnClickListener(negative -> mRestartDialog.dismiss());
         mRestartDialog.show();
     }
@@ -123,7 +123,7 @@ public class SettingsActivity extends ControllerActivity implements SettingsFrag
         if (mFragmentManager.getBackStackEntryCount() == 0) {
             super.onBackPressed();
         } else {
-            mToolbar.setTitle(R.string.settings_title);
+            mToolbar.setTitle(R.string.settings);
             mFragmentManager.popBackStack();
         }
     }

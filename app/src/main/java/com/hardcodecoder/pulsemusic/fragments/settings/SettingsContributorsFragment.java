@@ -45,10 +45,10 @@ public class SettingsContributorsFragment extends SettingsBaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        view.findViewById(R.id.github_logo).setOnClickListener(v -> openLink(R.string.github_link));
-        view.findViewById(R.id.facebook_logo).setOnClickListener(v -> openLink(R.string.facebook_link));
-        view.findViewById(R.id.twitter_logo).setOnClickListener(v -> openLink(R.string.twitter_link));
-        view.findViewById(R.id.telegram_logo).setOnClickListener(v -> openLink(R.string.telegram_link));
+        view.findViewById(R.id.github_logo).setOnClickListener(v -> openLink(R.string.url_github));
+        view.findViewById(R.id.facebook_logo).setOnClickListener(v -> openLink(R.string.url_facebook));
+        view.findViewById(R.id.twitter_logo).setOnClickListener(v -> openLink(R.string.url_twitter));
+        view.findViewById(R.id.telegram_logo).setOnClickListener(v -> openLink(R.string.url_telegram));
 
         GlideApp.with(view)
                 .load(R.drawable.def_avatar)

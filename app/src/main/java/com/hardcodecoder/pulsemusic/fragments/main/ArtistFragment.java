@@ -58,7 +58,7 @@ public class ArtistFragment extends CardGridFragment implements SimpleTransition
 
     @Override
     public String getFragmentTitle(@NonNull Context context) {
-        if (null == mFragmentTitle) mFragmentTitle = context.getString(R.string.artist);
+        if (null == mFragmentTitle) mFragmentTitle = context.getString(R.string.nav_artists);
         return mFragmentTitle;
     }
 

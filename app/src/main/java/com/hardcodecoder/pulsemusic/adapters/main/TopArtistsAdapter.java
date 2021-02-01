@@ -16,7 +16,6 @@ import com.hardcodecoder.pulsemusic.themes.TintHelper;
 import com.hardcodecoder.pulsemusic.utils.ImageUtil;
 
 import java.util.List;
-import java.util.Locale;
 
 public class TopArtistsAdapter extends EfficientRecyclerViewAdapter<TopArtistModel, TopArtistsAdapter.HomeSectionArtistsItemHolder> {
 
@@ -60,10 +59,7 @@ public class TopArtistsAdapter extends EfficientRecyclerViewAdapter<TopArtistMod
         public void bindData(@NonNull TopArtistModel data) {
             mArtistArt.setTransitionName("shared_transition_artist_iv_" + getAdapterPosition());
             mArtistTitle.setText(data.getArtistName());
-            mPlayCount.setText(String.format(Locale.getDefault(), "%s %d",
-                    itemView.getResources().getString(R.string.tracks_plays),
-                    data.getNumOfPlays()));
-
+            mPlayCount.setText(itemView.getResources().getString(R.string.played_n_times, data.getNumOfPlays()));
         }
 
         @Override

@@ -56,7 +56,7 @@ public class PlaylistSectionSelector extends RoundedCustomBottomSheetFragment {
 
         MaterialTextView rediscoverTitle = view.findViewById(R.id.playlist_rediscover);
         String rediscoverText = getString(R.string.rediscover);
-        String rediscoverDesc = getString(R.string.rediscover_desc);
+        String rediscoverDesc = getString(R.string.rediscover_section_desc);
 
         SpannableString spannableString = new SpannableString(rediscoverText + "\n" + rediscoverDesc);
         spannableString.setSpan(

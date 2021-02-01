@@ -126,8 +126,8 @@ public abstract class BaseNowPlayingScreen extends Fragment
         mQueueManager = mPulseController.getQueueManager();
         mRemote = mPulseController.getRemote();
 
-        mUpNextTitle = getString(R.string.playlist_up_next_title) + " " + getString(R.string.bullet) + " ";
-        mArtistTitle = getString(R.string.artist) + " " + getString(R.string.bullet) + " ";
+        mUpNextTitle = getString(R.string.coming_up_next) + " " + getString(R.string.bullet) + " ";
+        mArtistTitle = getString(R.string.nav_artists) + " " + getString(R.string.bullet) + " ";
 
         onInitializeViews(view);
 
@@ -347,14 +347,14 @@ public abstract class BaseNowPlayingScreen extends Fragment
     protected void toggleFavorite() {
         if (mCurrentItemFavorite) {
             ProviderManager.getFavoritesProvider().removeFromFavorite(mQueueManager.getActiveQueueItem());
-            Toast.makeText(requireContext(), getString(R.string.removed_from_fav), Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), getString(R.string.toast_removed_from_favorites), Toast.LENGTH_SHORT).show();
         } else {
             MusicModel md = mQueueManager.getActiveQueueItem();
             if (md.getId() < 0)
-                Toast.makeText(requireContext(), getString(R.string.cannot_add_to_fav), Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), getString(R.string.toast_cannot_add_to_favorites), Toast.LENGTH_SHORT).show();
             else {
                 ProviderManager.getFavoritesProvider().addToFavorites(md);
-                Toast.makeText(requireContext(), getString(R.string.added_to_fav), Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), getString(R.string.toast_added_to_favorites), Toast.LENGTH_SHORT).show();
             }
         }
         updateFavoriteItem();
@@ -411,7 +411,7 @@ public abstract class BaseNowPlayingScreen extends Fragment
         String upNextText;
         if (null != nextItem)
             upNextText = mUpNextTitle + nextItem.getTrackName();
-        else upNextText = getString(R.string.up_next_title_none);
+        else upNextText = getString(R.string.playlist_completed);
         return upNextText;
     }
 

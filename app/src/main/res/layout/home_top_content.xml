@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:shortcutIcon="@drawable/ic_favorite"
         app:shortcutIconColor="@color/md_red_A400"
-        app:shortcutTitle="@string/home_favorites" />
+        app:shortcutTitle="@string/favorites" />
 
     <com.hardcodecoder.pulsemusic.views.ButtonShortcut
         android:id="@+id/ic_recent"
@@ -29,7 +29,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:shortcutIcon="@drawable/ic_history"
         app:shortcutIconColor="@color/md_yellow_A400"
-        app:shortcutTitle="@string/home_history" />
+        app:shortcutTitle="@string/recent" />
 
     <com.hardcodecoder.pulsemusic.views.ButtonShortcut
         android:id="@+id/ic_folder"
@@ -41,7 +41,7 @@
         app:layout_constraintTop_toBottomOf="@id/ic_favorite"
         app:shortcutIcon="@drawable/ic_folder"
         app:shortcutIconColor="@color/md_blue_A400"
-        app:shortcutTitle="@string/home_select_track" />
+        app:shortcutTitle="@string/track_picker" />
 
     <com.hardcodecoder.pulsemusic.views.ButtonShortcut
         android:id="@+id/ic_shuffle"
@@ -54,5 +54,5 @@
         app:layout_constraintTop_toBottomOf="@id/ic_recent"
         app:shortcutIcon="@drawable/ic_shuffle"
         app:shortcutIconColor="@color/md_green_A700"
-        app:shortcutTitle="@string/home_shuffle" />
+        app:shortcutTitle="@string/shuffle" />
 </androidx.constraintlayout.widget.ConstraintLayout>

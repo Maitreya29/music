@@ -1,64 +1,77 @@
 <resources>
     <string name="app_name">Pulse Music</string>
 
-    <string name="channel_name">Pulse Music Notification</string>
+    <string name="notification_playback_channel_name">Music Notification</string>
+    <string name="notification_audio_channel_name">Audio Device Detection</string>
 
-    <string name="iv_content_desc">Album art image</string>
-    <string name="iv_btn_close_description">Close button</string>
-    <string name="iv_btn_action_description">Action button</string>
-    <string name="icon_desc">Icon button</string>
-    <string name="fab_done_dec">Confirm selection</string>
-    <string name="fab_play_pause_desc">Media play and pause button</string>
     <string name="bullet" translatable="false">●</string>
 
+    <!-- Content description **-->
+    <string name="desc_album_art">Album art image</string>
+    <string name="desc_close_btn">Close button</string>
+    <string name="desc_action_btn">Action button</string>
+    <string name="desc_icon_button">Icon button</string>
+    <string name="desc_confirm_btn">Confirm selection</string>
+    <string name="desc_play_pause_btn">Media play and pause button</string>
 
-    <!-- Bottom Nav bar -->
-    <string name="home">Home</string>
-    <string name="library">Library</string>
-    <string name="albums">Albums</string>
-    <string name="artist">Artist</string>
-    <string name="playlist">Playlist</string>
+
+    <!-- General strings -->
+    <string name="equalizer">Equalizer</string>
+    <string name="shuffle">Shuffle</string>
+    <string name="tracks_not_found">No tracks found</string>
+    <string name="unknown">Unknown</string>3105
+
+    <!-- Dialogs -->
+    <string name="question_enter_your_name">Enter your name</string>
+    <string name="toast_enter_your_name">Please enter your name</string>
+    <string name="edit_playlist_title">Edit playlist title</string>
+    <string name="hint_create_playlist">Enter playlist\'s name</string>
+    <string name="add_track_to">Add track to\.\.\.</string>
+    <string name="message_no_playlist_found">No playlist found\nClick on add button to create playlist</string>
+    <string name="toast_added_to_playlist">Track added to playlist</string>
+    <string name="toast_add_to_playlist_failed">Error adding track to playlist</string>
+    <string name="yes">Yes</string>
+    <string name="set">Set</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+
+
+    <!-- Navigation section titles -->
+    <string name="nav_home">Home</string>
+    <string name="nav_library">Library</string>
+    <string name="nav_albums">Albums</string>
+    <string name="nav_artists">Artists</string>
+    <string name="nav_playlist">Playlist</string>
 
 
     <!-- Home Fragment -->
-    <string name="home_favorites">Favorites</string>
-    <string name="home_history">History</string>
-    <string name="home_select_track">Track picker</string>
-    <string name="home_shuffle">Shuffle</string>
-    <string name="random">For you</string>
+    <string name="track_picker">Track picker</string>
+    <string name="for_you">For you</string>
     <string name="rediscover">Rediscover</string>
     <string name="new_in_library">New in store</string>
     <string name="top_artist">Top artists</string>
     <string name="top_albums">Top albums</string>
-    <string name="tracks_plays">No of plays:</string>
-    <string name="tracks_not_found">No tracks found</string>
+    <string name="played_n_times" formatted="true">Played %d times</string>
+    <string name="toast_selected_track_load_failed">Cannot play selected track, load failed</string>
 
-    <!-- Select tracks default's-->
-    <string name="def_track_title">Unknown</string>
-    <string name="selected_track_load_failed_toast">Cannot play selected track, load failed</string>
 
-    <!-- Home drawer contents -->
-    <string name="drawer_welcome_message">Welcome,</string>
+    <!-- Home menu contents -->
+    <string name="welcome">Welcome,</string>
     <string name="def_user_name">User</string>
-    <string name="drawer_settings_option">Settings</string>
-    <string name="drawer_equalizer_option">Equalizer</string>
-    <string name="app_info">App info</string>
-    <string name="note">Made with \u2665 in India</string>
+    <string name="footer_message">Made with \u2665 in India</string>
     <string name="select_image">Select image</string>
-    <string name="error_select_image_toast">Error selecting image</string>
+    <string name="toast_select_image_error">Error selecting image</string>
 
 
     <!-- Playlist fragment -->
-    <string name="playlist_current_queue">Playing queue</string>
+    <string name="playlist_play_queue">Playing queue</string>
     <string name="playlist_delete_dialog_title">Are you sure you want to delete this playlist?</string>
-    <string name="yes">Yes</string>
-    <string name="no">Cancel</string>
-    <string name="playlist_deleted_toast">Playlist deleted</string>
+    <string name="toast_playlist_deleted_success">Successfully deleted playlist</string>
     <string name="cannot_delete_default_playlist">Cannot remove default playlist</string>
 
 
     <!-- Toolbar Options menu -->
-    <string name="sort_order">Sort order</string>
+    <string name="title_sort_order">Sort order</string>
     <string name="alphabet_asc">A to Z</string>
     <string name="alphabet_desc">Z to A</string>
     <string name="duration_asc">Duration ↑</string>
@@ -71,230 +84,233 @@
     <string name="album_track_number_desc">Track number desc</string>
     <string name="album_artist_asc">Album artist asc</string>
     <string name="album_artist_desc">Album artist desc</string>
-    <string name="album_first_year_asc">Album year asc</string>
-    <string name="album_first_year_desc">Album year desc</string>
-    <string name="add_playlist">Add playlist</string>
-    <string name="equalizer_error">Default equalizer not found</string>
-    <string name="grid_count">Grid count</string>
-    <string name="grid_count_land">Grid count (landscape)</string>
+    <string name="album_year_asc">Album year asc</string>
+    <string name="album_year_desc">Album year desc</string>
+    <string name="create_playlist">Create playlist</string>
+    <string name="toast_equalizer_not_found">Cannot find equalizer</string>
+    <string name="column_count">Column count</string>
+    <string name="column_count_land">Column count (landscape)</string>
     <string name="one">One</string>
     <string name="two">Two</string>
     <string name="three">Three</string>
     <string name="four">Four</string>
     <string name="five">Five</string>
     <string name="six">Six</string>
-    <string name="clear_duplicates">Remove duplicates</string>
+    <string name="remove_duplicates">Remove duplicates</string>
 
 
     <!-- Options menu for list items -->
     <string name="play_next">Play Next</string>
-    <string name="play_next_toast">Track added and will be played next</string>
+    <string name="toast_added_to_play_next">Track added and will be played next</string>
     <string name="add_to_queue">Add to queue</string>
-    <string name="add_to_queue_toast">Track added to playing queue</string>
+    <string name="toast_added_to_queue">Track added to playing queue</string>
     <string name="add_to_playlist">Add to playlist</string>
     <string name="go_to_album">Go to album</string>
     <string name="go_to_artist">Go to artist</string>
-    <string name="info">Song info</string>
-
-
-    <!-- Bottom sheet dialog -->
-    <string name="enter_name">Enter your name</string>
-    <string name="enter_name_toast">Please enter your name</string>
-    <string name="create_playlist">Create playlist</string>
-    <string name="edit_playlist">Edit playlist title</string>
-    <string name="create_playlist_hint">Enter playlist\'s name</string>
-    <string name="create">Okay</string>
-    <string name="cancel">Cancel</string>
-    <string name="atp_title">Add track to\.\.\.</string>
-    <string name="atp_no_user_playlist_found">No playlist found\nClick on add button to create</string>
-    <string name="atp_track_added_toast">Successfully added track to playlist</string>
-    <string name="atp_track_add_error_toast">Error adding track to playlist</string>
+    <string name="track_info">Track info</string>
 
 
     <!-- Playlist tracks Activity -->
-    <string name="no_playlist_tracks_found">This playlist is empty\nYou can add tracks using the add button</string>
-    <string name="item_removed">Song removed from queue !!!</string>
-    <string name="snack_bar_action_undo">Undo</string>
-    <string name="playlist_play">Play</string>
-    <string name="playlist_add_more">Add</string>
-    <string name="playlist_clear_all">Clear all</string>
-    <string name="playlist_shuffled_success_toast">Playlist shuffled successfully</string>
-    <string name="playlist_up_next_title">Up next</string>
-    <string name="playlist_current_queue_list_title">Current queue</string>
+    <string name="message_empty_playlist">This playlist is empty\nYou can add tracks using the add button</string>
+    <string name="track_removed_from_queue">Track removed from queue !!!</string>
+    <string name="undo">Undo</string>
+    <string name="play">Play</string>
+    <string name="add">Add</string>
+    <string name="clear_all">Clear all</string>
+    <string name="toast_playlist_shuffle_success">Playlist shuffled successfully</string>
+    <string name="coming_up_next">Up next</string>
+    <string name="current_queue">Current queue</string>
 
 
     <!-- Favorites Playlist Activity-->
-    <string name="favorites_playlist_title">Your favorites</string>
-    <string name="no_favorites_tracks">Your favorites is empty\nAdd some tracks to favorites\n\n\u2665</string>
+    <string name="favorites">Favorites</string>
+    <string name="your_favorites">Your favorites</string>
+    <string name="message_empty_favorites">Your favorites is empty\nAdd some tracks to favorites\n\n\u2665</string>
 
 
     <!-- Recent Activity-->
-    <string name="history_playlist_title">Recently played</string>
-    <string name="no_history_tracks">No records found\n\u2639</string>
+    <string name="recent">Recent</string>
+    <string name="recent_playlist_title">Recently played</string>
+    <string name="message_empty_recent">No tracks found\n\u2639</string>
 
 
     <!-- Now Playing Activity -->
     <string name="now_playing">Now Playing</string>
-    <string name="added_to_fav">Track added to favorites</string>
-    <string name="removed_from_fav">Track removed from favorites</string>
-    <string name="cannot_add_to_fav">Track cannot be added to favorites</string>
-    <string name="up_next_title_none">Playlist completed</string>
+    <string name="toast_added_to_favorites">Track added to favorites</string>
+    <string name="toast_cannot_add_to_favorites">Track cannot be added to favorites</string>
+    <string name="toast_removed_from_favorites">Track removed from favorites</string>
+    <string name="playlist_completed">Playlist completed</string>
 
 
     <!-- Media Folder Chooser Activity -->
-    <string name="folder_chooser_toolbar_title">Select folders</string>
-    <string name="folder_chooser_empty_folders_list">No media folders found in storage\n\u2639</string>
+    <string name="select_folders">Select folders</string>
+    <string name="message_empty_folders_list">No media folders found in storage\n\u2639</string>
 
 
     <!-- Details Activity -->
-    <string name="num_artist_tracks">Artist has ●</string>
-    <string name="num_album_tracks">Album contains ●</string>
-    <string name="tracks">tracks</string>
-    <string name="albums_suffix">albums</string>
+    <string name="artist_tracks_count">Artist has ● %d albums</string>
+    <string name="album_tracks_count">Album contains ● %d tracks</string>
+    <string name="suffix_tracks">tracks</string>
+    <string name="suffix_albums">albums</string>
 
 
     <!-- Song info dialog -->
-    <string name="head_title">Track</string>
-    <string name="head_file_size">File size</string>
-    <string name="head_file_type">File type</string>
-    <string name="head_bitrate">Bit rate</string>
-    <string name="head_sample_rate">Sample rate</string>
-    <string name="head_channel_count">Number of channels</string>
-    <string name="okay">OK</string>
+    <string name="track">Track</string>
+    <string name="file_size">File size</string>
+    <string name="file_type">File type</string>
+    <string name="bitrate">Bit rate</string>
+    <string name="sample_rate">Sample rate</string>
+    <string name="channel_count">Number of channels</string>
 
 
     <!-- Search Activity -->
-    <string name="searchHint">Search for artist, songs or albums\.\.\.</string>
-    <string name="search_null">No results found</string>
+    <string name="hint_search">Search for artist, songs or albums\.\.\.</string>
+    <string name="message_empty_search_result">Nothing to show</string>
 
 
     <!-- Settings Activity -->
-    <string name="settings_title">Settings</string>
+    <string name="settings">Settings</string>
+    <string name="restart_app">Restart app</string>
+    <string name="restart_app_dialog_desc">Pulse Music needs to restart for changes to take effect</string>
+    <string name="restart">Restart</string>
+    <string name="do_it_later">Do it later</string>
 
-    <string name="restart_dialog_title">Restart app</string>
-    <string name="restart_dialog_desc">App needs to restart for changes to take effect</string>
-    <string name="restart_dialog_positive_btn_title">Restart</string>
-    <string name="restart_dialog_negative_btn_title">Do it later</string>
+
     <!-- Category -->
     <string name="general">General</string>
     <string name="general_desc">Configure basic settings</string>
 
-    <string name="look_and_feel">Look and feel</string>
-    <string name="look_and_feel_desc">Change theme and stuff</string>
+    <string name="theme">Theme</string>
+    <string name="theme_desc">Change the look and feel of the app</string>
 
     <string name="now_playing_title">Now playing</string>
     <string name="now_playing_desc">Customize now playing screen</string>
 
+    <string name="audio">Audio</string>
+    <string name="audio_desc">Change audio settings</string>
+
     <string name="contributors">Contributors</string>
     <string name="contributors_desc">Meet the developers</string>
 
-    <string name="donations">Support development</string>
-    <string name="donations_desc">Donate a small amount to support the developers</string>
+    <string name="support_development">Support development</string>
+    <string name="support_development_desc">Donate a small amount to support the developers</string>
 
     <string name="about">About</string>
-    <string name="about_desc">App version, social links</string>
+    <string name="about_desc">Everything about this app</string>
+
 
     <!-- General Section -->
-    <string name="general_category_loader">Loader</string>
+    <string name="category_loader">Loader</string>
     <string name="ignored_folder_title">Select ignored folders</string>
     <string name="ignored_folder_desc">Add or remove folders to exclude tracks from showing in library</string>
     <string name="ignored_folder_picker_title">Select folders</string>
     <string name="ignored_folder_picker_empty_text">Ignored list is empty</string>
-    <string name="ignored_folder_picker_add_success">Folder added to ignored list</string>
-    <string name="ignored_folder_picker_add_failed">Failed to add folder to ignored list</string>
-    <string name="ignored_folder_picker_remove_success">Folder removed from ignored list</string>
-    <string name="duration_filter_title">Filter duration</string>
-    <string name="duration_filter_desc">Filters track based on track duration. Tracks with duration greater than this appears in the library</string>
+    <string name="toast_folder_added_to_ignored_list">Successfully added folder to ignored list</string>
+    <string name="toast_failed_to_add_folder">Failed to add folder to ignored list</string>
+    <string name="toast_removed_folder_from_ignored_list">Folder removed from ignored list</string>
+    <string name="duration_filter_title">Duration filter</string>
+    <string name="duration_filter_desc">Filter tracks based on track duration</string>
     <string name="duration_filter_unit">sec</string>
-    <string name="general_category_others">Others</string>
-    <string name="remember_last_played_option_title">Remember last track</string>
-    <string name="remember_last_played_option_text">Last played track will be remembered and will be shown, on app relaunch</string>
-    <string name="playlist_section_selector">Edit playlist section</string>
-    <string name="playlist_section_selector_desc">Select which playlist\'s to show in the home screen</string>
-    <string name="playlist_section_toggle_title">Toggle playlist section</string>
-    <string name="rediscover_desc">Note: This section is dynamic and may not be shown always, even if enabled</string>
+    <string name="category_others">Others</string>
+    <string name="remember_last_track_title">Remember last track</string>
+    <string name="remember_last_track_desc">Last played track will be remembered and shown next time you open the app</string>
+    <string name="edit_playlist_sections_title">Edit playlist section</string>
+    <string name="edit_playlist_section_desc">Select which playlist\'s to show in the home screen</string>
+    <string name="playlist_section_selector_title">Toggle playlist section</string>
+    <string name="rediscover_section_desc">Note: This section is dynamic and may not be shown always, even if enabled</string>
 
-    <!-- Look and feel section -->
-    <string name="laf_category_theme">Theme</string>
-    <string name="laf_category_select_dark_theme">Select dark theme</string>
-    <string name="laf_category_select_dark_theme_desc">Choose which dark color scheme to apply when dark mode is turned on</string>
-    <string name="laf_category_enable_dark_mode_title">Turn on dark mode</string>
-    <string name="laf_category_enable_dark_mode_text">Instantly enables preferred dark theme</string>
-    <string name="laf_category_enable_auto_mode_title">Automatically set theme</string>
-    <string name="laf_category_enable_auto_mode_text">Sets light and preferred dark theme based on time of the day</string>
+    <!-- Theme section -->
+    <string name="category_theme">Theme</string>
+    <string name="select_dark_theme">Select dark theme</string>
+    <string name="select_dark_theme_desc">Choose dark theme to apply when dark mode is turned on</string>
+    <string name="enable_dark_mode">Turn on dark mode</string>
+    <string name="enable_dark_mode_desc">Instantly enables preferred dark theme</string>
+    <string name="enable_auto_mode">Automatically set theme</string>
+    <string name="enable_auto_mode_desc">Sets light and preferred dark theme based on time of the day</string>
 
-    <string name="laf_category_colors">Colors</string>
-    <string name="laf_accents_desaturated_title">Desaturated colors</string>
-    <string name="laf_accents_desaturated_desc">Makes color desaturated when dark theme is applied</string>
-    <string name="laf_category_select_color">Pick accent color</string>
-    <string name="laf_category_select_color_desc">Select accent colors for the app</string>
-
-    <string name="laf_accents_picker_title">Select accent color</string>
-
+    <string name="category_colors">Colors</string>
+    <string name="desaturated_accents">Desaturated colors</string>
+    <string name="desaturated_accents_desc">Make accent color desaturated when dark theme is applied</string>
+    <string name="pick_accent_color">Pick accent color</string>
+    <string name="pick_accent_color_desc">Select accent colors to apply</string>
+    <string name="accents_color_picker_title">Select accent color</string>
     <string name="custom">Custom</string>
-    <string name="custom_accent_title">Adjust custom color</string>
+    <string name="select_custom_accent">Select custom color</string>
 
-    <string name="dark_theme_name_gray">Just Gray</string>
-    <string name="dark_theme_name_kinda_dark">Signature dark scheme</string>
-    <string name="dark_theme_name_pure_black">Lights out</string>
+    <string name="dark_theme_gray">Just Gray</string>
+    <string name="dark_theme_signature">Signature dark</string>
+    <string name="dark_theme_lights_out">Lights out</string>
 
-    <string name="select_dark_theme">Set preferred dark theme</string>
-    <string name="set">Set</string>
+    <string name="select_dark_theme_style">Set preferred dark theme</string>
 
 
     <!-- Now playing settings -->
-    <string name="np_category_style">Style</string>
-    <string name="np_screen_style_title">Select now playing style</string>
-    <string name="np_screen_style_desc">Choose now playing screen style</string>
-    <string name="np_screen_style_modern">Modern</string>
-    <string name="np_screen_style_stylish">Stylish</string>
-    <string name="np_screen_style_edge">Edge to edge</string>
-    <string name="np_cover_corner_radius_title">Corner radius</string>
-    <string name="np_cover_corner_radius_changer_title">Adjust corner radius</string>
-    <string name="np_cover_corner_radius_desc">Select album cover corner radius</string>
-    <string name="np_cover_corner_radius_tl">Top left</string>
-    <string name="np_cover_corner_radius_tr">Top right</string>
-    <string name="np_cover_corner_radius_bl">Bottom left</string>
-    <string name="np_cover_corner_radius_br">Bottom right</string>
-    <string name="np_cover_corner_radius_unit">dp</string>
-    <string name="np_category_controls">Controls</string>
-    <string name="np_enable_seek_buttons_title">Enable seek buttons</string>
-    <string name="np_enable_seek_buttons_desc">Replaces skip buttons with seek buttons in Now playing screen</string>
-    <string name="np_seek_duration_title">Change seek duration</string>
-    <string name="np_seek_duration_desc">Change the duration of seek buttons</string>
-    <string name="np_seek_duration_selector_title">Seek duration</string>
-    <string name="np_seek_duration_selector_forward">Forward seek</string>
-    <string name="np_seek_duration_selector_backward">Backward seek</string>
+    <string name="category_style">Style</string>
+    <string name="select_np_style">Select now playing style</string>
+    <string name="select_np_style_desc">Choose now playing screen style</string>
+    <string name="style_modern">Modern</string>
+    <string name="style_stylish">Stylish</string>
+    <string name="style_edge">Edge to edge</string>
+    <string name="corner_radius">Corner radius</string>
+    <string name="corner_radius_desc">Select album cover corner radius</string>
+    <string name="corner_radius_selector_title">Adjust corner radius</string>
+    <string name="corner_radius_unit">dp</string>
+    <string name="top_left">Top left</string>
+    <string name="top_right">Top right</string>
+    <string name="bottom_left">Bottom left</string>
+    <string name="bottom_right">Bottom right</string>
+    <string name="category_controls">Controls</string>
+    <string name="enable_seek_buttons">Enable seek buttons</string>
+    <string name="enable_seek_buttons_desc">Replaces skip buttons with seek buttons in Now playing screen</string>
+    <string name="change_seek_duration">Change seek duration</string>
+    <string name="change_seek_duration_desc">Change the duration of seek buttons</string>
+    <string name="seek_duration_selector_title">Select seek duration</string>
+    <string name="forward_seek">Forward seek</string>
+    <string name="reverse_seek">Reverse seek</string>
+
+
+    <!-- Audio settings -->
+    <string name="category_auto_play">Auto play</string>
+    <string name="bluetooth_auto_play">Bluetooth auto play</string>
+    <string name="bluetooth_auto_play_desc">Starts playing music when a bluetooth device connects</string>
+    <string name="bluetooth_auto_play_action">Select bluetooth auto play action</string>
+    <string name="bluetooth_auto_play_action_desc">Choose which playlist to play when a bluetooth device connects</string>
+    <string name="select_bluetooth_action">Set preferred bluetooth action</string>
+    <string name="play_shuffle">Play shuffled tracks</string>
+    <string name="play_new_in_store">Play \"New in store\" playlist</string>
+    <string name="play_for_you">Play \"For you\" playlist</string>
+
 
     <!-- Contributors -->
-    <string name="lead_developer_title">Lead developers</string>
+    <string name="lead_developer">Lead developers</string>
     <string name="lead_developer_1" translatable="false">Ashutosh P.</string>
-    <string name="lead_developer_user_name" translatable="false">\@HardcodeCoder</string>
+    <string name="lead_developer_1_user_name" translatable="false">\@HardcodeCoder</string>
+    <string name="url_github" translatable="false">https://github.com/HardcodeCoder</string>
+    <string name="url_source_code" translatable="false">https://github.com/HardcodeCoder/PulseMusic</string>
+    <string name="url_facebook" translatable="false">https://www.facebook.com/ashutosh.patoa.5</string>
+    <string name="url_twitter" translatable="false">https://www.twitter.com/hardcodecoder</string>
+    <string name="url_telegram" translatable="false">https://t.me/HardcodeCoder</string>
+
 
     <!-- Donations -->
-    <string name="donation_category_head">Contribute</string>
-    <string name="donation_title">Enjoying Pulse Music?</string>
-    <string name="donation_text">Please consider making a small donation to support the development</string>
-    <string name="bmc_title">Buy me a Coffee</string>
-    <string name="pp_title">PayPal</string>
+    <string name="category_contribute">Contribute</string>
+    <string name="donation_card_title">Enjoying Pulse Music?</string>
+    <string name="donation_card_text">It takes a lot of time and effort to deliver quality products, that too for free\nPlease consider making a small donation to support the development</string>
+    <string name="buy_me_coffee">Buy me a Coffee</string>
+    <string name="pay_pal">PayPal</string>
 
 
     <!-- About -->
-    <string name="about_app_version">App version</string>
-    <string name="about_app_release_date">Build date</string>
-    <string name="about_app_release_build_type">Build type</string>
-    <string name="about_app_build_code">Build code</string>
-    <string name="about_check_source_code">Source on github</string>
+    <string name="category_app_info">App info</string>
+    <string name="app_version">App version</string>
+    <string name="build_date">Build date</string>
+    <string name="build_type">Build type</string>
+    <string name="build_code">Build code</string>
+    <string name="category_social_links">Social links</string>
+    <string name="source_on_github">Source on github</string>
 
-    <!-- Profile Links -->
-    <string name="social_links">Social links</string>
-    <string name="github_link" translatable="false">https://github.com/HardcodeCoder</string>
-    <string name="source_code_link" translatable="false">https://github.com/HardcodeCoder/PulseMusic</string>
-    <string name="facebook_link" translatable="false">https://www.facebook.com/ashutosh.patoa.5</string>
-    <string name="twitter_link" translatable="false">https://www.twitter.com/hardcodecoder</string>
-    <string name="telegram_link" translatable="false">https://t.me/HardcodeCoder</string>
 
-    <!-- Accents -->
+    <!-- Accents **-->
     <string name="exodus_fruit">Exodus fruit</string>
     <string name="electron_blue">Electron blue</string>
     <string name="mint_leaf">Mint leaf</string>
@@ -304,39 +320,23 @@
     <string name="sunkist">Sunkist</string>
     <string name="blue_pink">Blue pink</string>
 
+
     <!-- Custom accents dialog -->
-    <string name="hex_color_hint">Hex color</string>
-    <string name="hex_color_error">Invalid color</string>
-    <string name="r_channel_label">R</string>
-    <string name="g_channel_label">G</string>
-    <string name="b_channel_label">B</string>
+    <string name="hint_hex_color">Hex color</string>
+    <string name="invalid_color">Invalid color</string>
+    <string name="color_channel_r">R</string>
+    <string name="color_channel_g">G</string>
+    <string name="color_channel_b">B</string>
     <string name="apply">Apply</string>
     <string name="presets">Presets</string>
 
     <!-- App shortcuts -->
-    <string name="shortcut_shuffle_label">Shuffle</string>
-    <string name="shortcut_shuffle_label_long">Shuffled</string>
+    <string name="shortcut_shuffle">Shuffle</string>
+    <string name="shortcut_shuffle_desc">Shuffle your library</string> <!-- Max length = 25 characters including spaces-->
 
-    <string name="shortcut_latest_label">Latest tracks</string>
-    <string name="shortcut_latest_label_long">Latest tracks</string>
+    <string name="shortcut_latest">Latest tracks</string>
+    <string name="shortcut_latest_desc">Latest tracks playlist</string> <!-- Max length = 25 characters including spaces-->
 
     <string name="shortcut_suggested_label">For you</string>
-    <string name="shortcut_suggested_label_long">For you</string>
-
-    <string name="audio">Audio</string>
-    <string name="audio_desc">Change audio settings</string>
-
-    <string name="audio_category_auto_play">Auto play</string>
-
-    <string name="audio_bluetooth_auto_play_title">Bluetooth auto play</string>
-    <string name="audio_bluetooth_auto_play_text">Starts playing music when a bluetooth device connects</string>
-    <string name="audio_bluetooth_auto_play_action_title">Select bluetooth auto play action</string>
-    <string name="audio_bluetooth_auto_play_action_text">Choose which playlist to play when a bluetooth device connects</string>
-
-    <string name="audio_detection_channel_name">Audio Device Detection</string>
-
-    <string name="select_bluetooth_action">Set preferred bluetooth action</string>
-    <string name="radio_btn_shuffle">Play shuffled tracks</string>
-    <string name="radio_btn_latest">Play latest tracks</string>
-    <string name="radio_btn_suggested">Play suggested tracks</string>
+    <string name="shortcut_suggested_label_long">For you playlist</string> <!-- Max length = 25 characters including spaces-->
 </resources>

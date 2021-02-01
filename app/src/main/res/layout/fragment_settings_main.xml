@@ -27,8 +27,8 @@
             android:textStyle="normal"
             app:settingItemIcon="@drawable/ic_theme_palette"
             app:settingItemIconColor="@color/md_red_A400"
-            app:settingItemText="@string/look_and_feel_desc"
-            app:settingItemTitle="@string/look_and_feel" />
+            app:settingItemText="@string/theme_desc"
+            app:settingItemTitle="@string/theme" />
 
         <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
             android:id="@+id/nowPlayingSettings"
@@ -67,8 +67,8 @@
             android:textStyle="normal"
             app:settingItemIcon="@drawable/ic_donation"
             app:settingItemIconColor="@color/md_yellow_A400"
-            app:settingItemText="@string/donations_desc"
-            app:settingItemTitle="@string/donations" />
+            app:settingItemText="@string/support_development_desc"
+            app:settingItemTitle="@string/support_development" />
 
         <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
             android:id="@+id/aboutSettings"

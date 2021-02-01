@@ -29,10 +29,10 @@ public abstract class StandardPlaylist extends PlaylistActivity implements Simpl
         setPlaylistDynamicFabButton(R.drawable.ic_shuffle, v ->
                 shuffleTrackAndPlay(null == mAdapter ? null : mAdapter.getDataList()));
 
-        setPlaylistDynamicButton1(getString(R.string.playlist_play), R.drawable.ic_round_play, v ->
+        setPlaylistDynamicButton1(getString(R.string.play), R.drawable.ic_round_play, v ->
                 onItemClick(0));
 
-        setPlaylistDynamicButton2(getString(R.string.playlist_clear_all), R.drawable.ic_clear_all, v ->
+        setPlaylistDynamicButton2(getString(R.string.clear_all), R.drawable.ic_clear_all, v ->
                 v.postDelayed(this::clearAllTracks, 200));
     }
 

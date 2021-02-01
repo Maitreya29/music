@@ -27,7 +27,7 @@
     <ImageView
         android:id="@+id/bottom_dialog_picker_add_btn"
         style="@style/ButtonStyle24"
-        android:contentDescription="@string/iv_btn_action_description"
+        android:contentDescription="@string/desc_action_btn"
         android:src="@drawable/ic_playlist_add"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

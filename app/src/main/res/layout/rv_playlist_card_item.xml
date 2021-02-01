@@ -9,7 +9,7 @@
 
     <ImageView
         style="@style/ButtonStyle24"
-        android:contentDescription="@string/iv_content_desc"
+        android:contentDescription="@string/desc_album_art"
         android:src="@drawable/ic_playlist"
         app:tint="?attr/colorControlNormal" />
 
@@ -19,14 +19,14 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_weight="1"
-        android:text="@string/playlist_current_queue"
+        android:text="@string/playlist_play_queue"
         android:textAppearance="@style/Appearance.Text.Body1" />
 
     <ImageView
         android:id="@+id/edit_btn"
         style="@style/ButtonStyle24"
         android:layout_marginEnd="16dp"
-        android:contentDescription="@string/iv_btn_action_description"
+        android:contentDescription="@string/desc_action_btn"
         android:src="@drawable/ic_edit"
         android:visibility="visible" />
 </LinearLayout>

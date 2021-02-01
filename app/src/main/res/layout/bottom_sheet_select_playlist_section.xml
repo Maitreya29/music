@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:text="@string/playlist_section_toggle_title"
+        android:text="@string/playlist_section_selector_title"
         android:textAppearance="@style/Appearance.Text.Headline6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -38,7 +38,7 @@
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/playlist_for_you"
         style="@style/ToggleItemText"
-        android:text="@string/random"
+        android:text="@string/for_you"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/playlist_top_albums" />

@@ -13,7 +13,7 @@
     <com.hardcodecoder.pulsemusic.views.AccentColorTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/app_info"
+        android:text="@string/category_app_info"
         android:textAppearance="@style/Appearance.Text.Overline" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="4dp"
-        android:text="@string/about_app_version"
+        android:text="@string/app_version"
         android:textAppearance="@style/Appearance.Text.Subtitle1" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="4dp"
-        android:text="@string/about_app_release_date"
+        android:text="@string/build_date"
         android:textAppearance="@style/Appearance.Text.Subtitle1" />
 
 
@@ -54,7 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="4dp"
-        android:text="@string/about_app_build_code"
+        android:text="@string/build_code"
         android:textAppearance="@style/Appearance.Text.Subtitle1" />
 
 
@@ -71,7 +71,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="4dp"
-        android:text="@string/about_app_release_build_type"
+        android:text="@string/build_type"
         android:textAppearance="@style/Appearance.Text.Subtitle1" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -86,7 +86,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="@string/social_links"
+        android:text="@string/category_social_links"
         android:textAppearance="@style/Appearance.Text.Overline" />
 
     <com.google.android.material.card.MaterialCardView
@@ -107,7 +107,7 @@
             <ImageView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:contentDescription="@string/iv_content_desc"
+                android:contentDescription="@string/desc_album_art"
                 android:src="@drawable/ic_github"
                 app:tint="?attr/colorOnSurface" />
 
@@ -115,7 +115,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@string/about_check_source_code"
+                android:text="@string/source_on_github"
                 android:textAppearance="@style/Appearance.Text.Subtitle2" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

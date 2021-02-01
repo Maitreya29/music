@@ -15,7 +15,7 @@ public class RecentActivity extends StandardPlaylist {
     @Override
     protected void loadContent() {
         LoaderHelper.loadRecentTracks(this::setUpContent);
-        setPlaylistTitle(getString(R.string.history_playlist_title));
+        setPlaylistTitle(getString(R.string.recent_playlist_title));
     }
 
     @Override
@@ -25,7 +25,7 @@ public class RecentActivity extends StandardPlaylist {
 
     @Override
     protected SpannableString getEmptyPlaylistText() {
-        String text = getString(R.string.no_history_tracks);
+        String text = getString(R.string.message_empty_recent);
         SpannableString spannableString = new SpannableString(text);
         int len = text.length();
         spannableString.setSpan(new AbsoluteSizeSpan(

@@ -90,7 +90,7 @@ public class CustomAccentChooserDialogFragment extends RoundedCustomBottomSheetF
             public void afterTextChanged(Editable s) {
                 if (/*!s.toString().startsWith("#") ||*/ s.length() < 6) {
                     // Don't try to parse color if incomplete hex code is passed
-                    hexCodeLayout.setError(getString(R.string.hex_color_error));
+                    hexCodeLayout.setError(getString(R.string.invalid_color));
                     return;
                 }
                 hexCodeLayout.setError(null);
@@ -105,7 +105,7 @@ public class CustomAccentChooserDialogFragment extends RoundedCustomBottomSheetF
                     mColorPreview.getDrawable().setTint(mSelectedColor);
                 } catch (NumberFormatException e) {
                     e.printStackTrace();
-                    hexCodeLayout.setError(getString(R.string.hex_color_error));
+                    hexCodeLayout.setError(getString(R.string.invalid_color));
                 }
             }
         });

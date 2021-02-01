@@ -28,7 +28,7 @@ public class SettingsMainFragment extends SettingsBaseFragment {
 
     @Override
     public int getToolbarTitleForFragment() {
-        return R.string.settings_title;
+        return R.string.settings;
     }
 
     @Nullable

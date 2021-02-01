@@ -10,14 +10,14 @@
     <com.hardcodecoder.pulsemusic.views.AccentColorTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/np_seek_duration_selector_title"
+        android:text="@string/seek_duration_selector_title"
         android:textAppearance="@style/Appearance.Text.Subtitle1" />
 
     <com.google.android.material.textview.MaterialTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="@string/np_seek_duration_selector_forward"
+        android:text="@string/forward_seek"
         android:textAppearance="@style/Appearance.Text.Subtitle2" />
 
     <com.hardcodecoder.pulsemusic.views.ValueSlider
@@ -34,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/np_seek_duration_selector_backward"
+        android:text="@string/reverse_seek"
         android:textAppearance="@style/Appearance.Text.Subtitle2" />
 
     <com.hardcodecoder.pulsemusic.views.ValueSlider
@@ -53,6 +53,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:layout_marginTop="8dp"
-        android:text="@string/okay"
+        android:text="@string/set"
         app:accentButtonStyle="text" />
 </LinearLayout>

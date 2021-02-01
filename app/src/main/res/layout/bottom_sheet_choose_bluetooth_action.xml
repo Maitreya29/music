@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:paddingStart="32dp"
             android:paddingEnd="0dp"
-            android:text="@string/radio_btn_shuffle"
+            android:text="@string/play_shuffle"
             android:textAppearance="@style/Appearance.Text.Subtitle2" />
 
         <com.hardcodecoder.pulsemusic.views.AccentColorRadioButton
@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:paddingStart="32dp"
             android:paddingEnd="0dp"
-            android:text="@string/radio_btn_suggested"
+            android:text="@string/play_for_you"
             android:textAppearance="@style/Appearance.Text.Subtitle2" />
 
         <com.hardcodecoder.pulsemusic.views.AccentColorRadioButton
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:paddingStart="32dp"
             android:paddingEnd="0dp"
-            android:text="@string/radio_btn_latest"
+            android:text="@string/play_new_in_store"
             android:textAppearance="@style/Appearance.Text.Subtitle2" />
     </RadioGroup>
 

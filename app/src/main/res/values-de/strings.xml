@@ -1,63 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Pulse Music</string>
-    <string name="channel_name">Pulse Music Benachrichtigung</string>
-    <string name="iv_content_desc">Albumcover</string>
-    <string name="iv_btn_close_description">Schließen Button</string>
-    <string name="iv_btn_action_description">Aktionsbutton</string>
-    <string name="icon_desc">Icon Button</string>
-    <string name="fab_done_dec">Auswahl bestätigen</string>
-    <string name="fab_play_pause_desc">Medien-Wiedergabe- und Pause-Taste</string>
+    <string name="notification_playback_channel_name">Pulse Music Benachrichtigung</string>
+    <string name="desc_album_art">Albumcover</string>
+    <string name="desc_close_btn">Schließen Button</string>
+    <string name="desc_action_btn">Aktionsbutton</string>
+    <string name="desc_icon_button">Icon Button</string>
+    <string name="desc_confirm_btn">Auswahl bestätigen</string>
+    <string name="desc_play_pause_btn">Medien-Wiedergabe- und Pause-Taste</string>
 
 
     <!-- Bottom Nav bar -->
-    <string name="home">Home</string>
-    <string name="library">Bibliothek</string>
-    <string name="albums">Alben</string>
-    <string name="artist">Künstler</string>
-    <string name="playlist">Playlist</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_library">Bibliothek</string>
+    <string name="nav_albums">Alben</string>
+    <string name="nav_artists">Künstler</string>
+    <string name="nav_playlist">Playlist</string>
 
 
     <!-- Home Fragment -->
-    <string name="home_favorites">Favoriten</string>
-    <string name="home_history">Verlauf</string>
-    <string name="home_select_track">Titelauswahl</string>
-    <string name="home_shuffle">Mischen</string>
-    <string name="random">Für dich</string>
+    <string name="favorites">Favoriten</string>
+    <string name="recent">Verlauf</string>
+    <string name="track_picker">Titelauswahl</string>
+    <string name="shuffle">Mischen</string>
+    <string name="for_you">Für dich</string>
     <string name="new_in_library">Neu in der Bibliothek</string>
     <string name="top_artist">Top Künstler</string>
     <string name="top_albums">Top Alben</string>
-    <string name="tracks_plays">Wie oft abgespielt:</string>
     <string name="tracks_not_found">Keine Titel gefunden</string>
 
 
     <!-- Select tracks default's-->
-    <string name="def_track_title">Unbekannt</string>
-    <string name="selected_track_load_failed_toast">Ausgewählten Titel kann nicht wiedergegeben werden, Laden fehlgeschlagen</string>
+    <string name="unknown">Unbekannt</string>
+    <string name="toast_selected_track_load_failed">Ausgewählten Titel kann nicht wiedergegeben werden, Laden fehlgeschlagen</string>
 
 
     <!-- Home drawer contents -->
-    <string name="drawer_welcome_message">Willkommen,</string>
+    <string name="welcome">Willkommen,</string>
     <string name="def_user_name">Benutzer</string>
-    <string name="drawer_settings_option">Einstellungen</string>
-    <string name="drawer_equalizer_option">Equalizer</string>
-    <string name="app_info">App info</string>
-    <string name="note">Mit \u2665 in Indien gemacht</string>
+    <string name="settings">Einstellungen</string>
+    <string name="equalizer">Equalizer</string>
+    <string name="category_app_info">App info</string>
+    <string name="footer_message">Mit \u2665 in Indien gemacht</string>
     <string name="select_image">Wähle ein Bild</string>
-    <string name="error_select_image_toast">Fehler bei der Bildauswahl</string>
+    <string name="toast_select_image_error">Fehler bei der Bildauswahl</string>
 
 
     <!-- Playlist fragment -->
-    <string name="playlist_current_queue">Wiedergabeliste</string>
+    <string name="playlist_play_queue">Wiedergabeliste</string>
     <string name="playlist_delete_dialog_title">Möchtest du diese Playlist wirklich löschen?</string>
     <string name="yes">Ja</string>
-    <string name="no">Abbrechen</string>
-    <string name="playlist_deleted_toast">Playlist gelöscht</string>
+    <string name="cancel">Abbrechen</string>
+    <string name="toast_playlist_deleted_success">Playlist gelöscht</string>
     <string name="cannot_delete_default_playlist">Standardplaylist kann nicht entfernt werden</string>
 
 
     <!-- Toolbar Options menu -->
-    <string name="sort_order">Sortierreihenfolge</string>
+    <string name="title_sort_order">Sortierreihenfolge</string>
     <string name="alphabet_asc">A bis Z</string>
     <string name="alphabet_desc">Z bis A</string>
     <string name="duration_asc">Länge ↑</string>
@@ -70,185 +69,179 @@
     <string name="album_track_number_desc">Tracknummer absteigend</string>
     <string name="album_artist_asc">Album Interpret aufsteigend</string>
     <string name="album_artist_desc">Album Interpret absteigend</string>
-    <string name="album_first_year_asc">Album-Jahr aufsteigend</string>
-    <string name="album_first_year_desc">Album-Jahr absteigend</string>
-    <string name="add_playlist">Playlist hinzufügen</string>
-    <string name="equalizer_error">Standard Equalizer nicht gefunden</string>
-    <string name="grid_count">Anzahl Spalten</string>
-    <string name="grid_count_land">Anzahl Spalten (Landschaft)</string>
+    <string name="album_year_asc">Album-Jahr aufsteigend</string>
+    <string name="album_year_desc">Album-Jahr absteigend</string>
+    <string name="toast_equalizer_not_found">Standard Equalizer nicht gefunden</string>
+    <string name="column_count">Anzahl Spalten</string>
+    <string name="column_count_land">Anzahl Spalten (Landschaft)</string>
     <string name="one">Eins</string>
     <string name="two">Zwei</string>
     <string name="three">Drei</string>
     <string name="four">Vier</string>
     <string name="five">Fünf</string>
     <string name="six">Sechs</string>
-    <string name="clear_duplicates">Duplikate entfernen</string>
+    <string name="remove_duplicates">Duplikate entfernen</string>
 
 
     <!-- Options menu for list items -->
     <string name="play_next">Als Nächstes abspielen</string>
-    <string name="play_next_toast">Titel wurde hinzugefügt und wird als Nächstes abgespielt</string>
+    <string name="toast_added_to_play_next">Titel wurde hinzugefügt und wird als Nächstes abgespielt</string>
     <string name="add_to_queue">Zur Wiedergabeliste hinzufügen</string>
-    <string name="add_to_queue_toast">Titel zur aktuellen Wiedergabeliste hinzugefügt</string>
+    <string name="toast_added_to_queue">Titel zur aktuellen Wiedergabeliste hinzugefügt</string>
     <string name="add_to_playlist">Zu einer Playlist hinzufügen</string>
     <string name="go_to_album">Gehe zum Album</string>
     <string name="go_to_artist">Gehe zu Interpret</string>
-    <string name="info">Titel Informationen</string>
+    <string name="track_info">Titel Informationen</string>
 
 
     <!-- Bottom sheet dialog -->
-    <string name="enter_name">Gib deinen Namen ein</string>
-    <string name="enter_name_toast">Bitte gib deinen Namen ein</string>
+    <string name="question_enter_your_name">Gib deinen Namen ein</string>
+    <string name="toast_enter_your_name">Bitte gib deinen Namen ein</string>
     <string name="create_playlist">Playlist erstellen</string>
-    <string name="edit_playlist">Playlisttitel bearbeiten</string>
-    <string name="create_playlist_hint">Gib den Namen der Playlist ein</string>
-    <string name="create">Okay</string>
-    <string name="cancel">Abbrechen</string>
-    <string name="atp_title">Titel hinzufügen zu\.\.\.</string>
-    <string name="atp_no_user_playlist_found">Keine Playlist gefunden\nKlicke auf den Hinzufügen-Button um eine zu erstellen</string>
-    <string name="atp_track_added_toast">Titel erfolgreich zur Playlist hinzugefügt</string>
-    <string name="atp_track_add_error_toast">Fehler beim Hinzufügen des Titels zur Playlist</string>
+    <string name="edit_playlist_title">Playlisttitel bearbeiten</string>
+    <string name="hint_create_playlist">Gib den Namen der Playlist ein</string>
+    <string name="confirm">Okay</string>
+    <string name="add_track_to">Titel hinzufügen zu\.\.\.</string>
+    <string name="message_no_playlist_found">Keine Playlist gefunden\nKlicke auf den Hinzufügen-Button um eine zu erstellen</string>
+    <string name="toast_added_to_playlist">Titel erfolgreich zur Playlist hinzugefügt</string>
+    <string name="toast_add_to_playlist_failed">Fehler beim Hinzufügen des Titels zur Playlist</string>
 
 
     <!-- Playlist tracks Activity -->
-    <string name="no_playlist_tracks_found">Diese Playlist ist leer\nSie können mit "Hinzufügen" Titel hinzufügen</string>
-    <string name="item_removed">Titel von der Playlist entfernt !!!</string>
-    <string name="snack_bar_action_undo">Rückgängig machen</string>
-    <string name="playlist_play">Abspielen</string>
-    <string name="playlist_add_more">Hinzufügen</string>
-    <string name="playlist_clear_all">Alles löschen</string>
-    <string name="playlist_shuffled_success_toast">Playlist erfolgreich gemischt</string>
-    <string name="playlist_up_next_title">Als nächstes</string>
-    <string name="playlist_current_queue_list_title">Aktuelle Warteschlange</string>
+    <string name="message_empty_playlist">Diese Playlist ist leer\nSie können mit "Hinzufügen" Titel hinzufügen</string>
+    <string name="track_removed_from_queue">Titel von der Playlist entfernt !!!</string>
+    <string name="undo">Rückgängig machen</string>
+    <string name="play">Abspielen</string>
+    <string name="add">Hinzufügen</string>
+    <string name="clear_all">Alles löschen</string>
+    <string name="toast_playlist_shuffle_success">Playlist erfolgreich gemischt</string>
+    <string name="coming_up_next">Als nächstes</string>
+    <string name="current_queue">Aktuelle Warteschlange</string>
 
 
     <!-- Favorites Playlist Activity-->
-    <string name="favorites_playlist_title">Deine Favoriten</string>
-    <string name="no_favorites_tracks">Keine Titel gefunden.\nFüge welche zu deinen Favoriten dazu\n\n\u2665</string>
+    <string name="your_favorites">Deine Favoriten</string>
+    <string name="message_empty_favorites">Keine Titel gefunden.\nFüge welche zu deinen Favoriten dazu\n\n\u2665</string>
 
 
     <!-- Recent Activity-->
-    <string name="history_playlist_title">Zuletzt gespielt</string>
-    <string name="no_history_tracks">Keine Einträge gefunden\n\u2639</string>
+    <string name="recent_playlist_title">Zuletzt gespielt</string>
+    <string name="message_empty_recent">Keine Einträge gefunden\n\u2639</string>
 
 
     <!-- Now Playing Activity -->
     <string name="now_playing">Jetzt am Spielen</string>
-    <string name="added_to_fav">Titel zu den Favoriten hinzugefügt</string>
-    <string name="removed_from_fav">Titel von den Favoriten entfernt</string>
-    <string name="cannot_add_to_fav">Track kann nicht zu Favoriten hinzugefügt werden</string>
-    <string name="up_next_title_none">Playlist abgeschlossen</string>
+    <string name="toast_added_to_favorites">Titel zu den Favoriten hinzugefügt</string>
+    <string name="toast_removed_from_favorites">Titel von den Favoriten entfernt</string>
+    <string name="toast_cannot_add_to_favorites">Track kann nicht zu Favoriten hinzugefügt werden</string>
+    <string name="playlist_completed">Playlist abgeschlossen</string>
 
 
     <!-- Media Folder Chooser Activity -->
-    <string name="folder_chooser_toolbar_title">Ordner auswählen</string>
-    <string name="folder_chooser_empty_folders_list">Keine Medienordner im Speicher gefunden\n\u2639</string>
+    <string name="select_folders">Ordner auswählen</string>
+    <string name="message_empty_folders_list">Keine Medienordner im Speicher gefunden\n\u2639</string>
 
 
     <!-- Details Activity -->
-    <string name="num_artist_tracks">Interpret hat ●</string>
-    <string name="num_album_tracks">Album enthält ●</string>
-    <string name="tracks">Titel</string>
-    <string name="albums_suffix">alben</string>
+    <string name="suffix_tracks">Titel</string>
+    <string name="suffix_albums">alben</string>
 
 
     <!-- Song info dialog -->
-    <string name="head_title">Titel</string>
-    <string name="head_file_size">Dateigröße</string>
-    <string name="head_file_type">Dateityp</string>
-    <string name="head_bitrate">Bitrate</string>
-    <string name="head_sample_rate">Abtastrate</string>
-    <string name="head_channel_count">Anzahl der Kanäle</string>
-    <string name="okay">OK</string>
+    <string name="track">Titel</string>
+    <string name="file_size">Dateigröße</string>
+    <string name="file_type">Dateityp</string>
+    <string name="bitrate">Bitrate</string>
+    <string name="sample_rate">Abtastrate</string>
+    <string name="channel_count">Anzahl der Kanäle</string>
 
 
     <!-- Search Activity -->
-    <string name="searchHint">Suche nach Künstlern, Liedern oder Alben\.\.\.</string>
-    <string name="search_null">Keine Ergebnisse gefunden</string>
+    <string name="hint_search">Suche nach Künstlern, Liedern oder Alben\.\.\.</string>
+    <string name="message_empty_search_result">Keine Ergebnisse gefunden</string>
 
 
     <!-- Settings Activity -->
-    <string name="settings_title">Einstellungen</string>
 
 
     <!-- Category -->
     <string name="general">Allgemein</string>
     <string name="general_desc">Grundeinstellungen konfigurieren</string>
-    <string name="look_and_feel">Erscheinungsbild</string>
-    <string name="look_and_feel_desc">Ändere das Theme und Weiteres</string>
+    <string name="theme">Erscheinungsbild</string>
+    <string name="theme_desc">Ändere das Theme und Weiteres</string>
     <string name="now_playing_title">Jetzt am Spielen</string>
     <string name="now_playing_desc">Passe \"Jetzt am Spielen\" an</string>
     <string name="contributors">Mitgewirkte</string>
     <string name="contributors_desc">Lerne die Entwickler kennen</string>
-    <string name="donations">Unterstütze die Entwicklung</string>
-    <string name="donations_desc">Spende etwas, um die Entwickler zu unterstützen</string>
+    <string name="support_development">Unterstütze die Entwicklung</string>
+    <string name="support_development_desc">Spende etwas, um die Entwickler zu unterstützen</string>
     <string name="about">Über</string>
     <string name="about_desc">App Version, Soziale Links</string>
 
 
     <!-- General Section -->
-    <string name="restart_dialog_title">App Neustart</string>
-    <string name="restart_dialog_desc">Die App muss neu gestartet werden, damit die Änderungen wirksam werden</string>
-    <string name="restart_dialog_positive_btn_title">Neustart</string>
-    <string name="restart_dialog_negative_btn_title">Später erledigen</string>
+    <string name="restart_app">App Neustart</string>
+    <string name="restart_app_dialog_desc">Die App muss neu gestartet werden, damit die Änderungen wirksam werden</string>
+    <string name="restart">Neustart</string>
+    <string name="do_it_later">Später erledigen</string>
     <string name="ignored_folder_title">Ignorierte Ordner auswählen</string>
     <string name="ignored_folder_desc">Ordner hinzufügen oder entfernen, um Titel von der Anzeige in der Bibliothek auszuschließen</string>
     <string name="ignored_folder_picker_title">Ordner auswählen</string>
     <string name="ignored_folder_picker_empty_text">Ignorierte Liste ist leer</string>
-    <string name="ignored_folder_picker_add_success">Ordner zur Ignorierliste hinzugefügt</string>
-    <string name="ignored_folder_picker_add_failed">Ordner zur ignorierten Liste konnte nicht hinzugefügt werden</string>
-    <string name="ignored_folder_picker_remove_success">Ordner von ignorierter Liste gelöscht</string>
+    <string name="toast_folder_added_to_ignored_list">Ordner zur Ignorierliste hinzugefügt</string>
+    <string name="toast_failed_to_add_folder">Ordner zur ignorierten Liste konnte nicht hinzugefügt werden</string>
+    <string name="toast_removed_folder_from_ignored_list">Ordner von ignorierter Liste gelöscht</string>
     <string name="duration_filter_title">Filterdauer</string>
     <string name="duration_filter_desc">Filter-Track basierend auf der Länge der Spuren. Tracks mit einer Länge größer als dies in der Bibliothek angezeigt wird</string>
     <string name="duration_filter_unit">sek</string>
-    <string name="remember_last_played_option_title">Letzten Titel merken</string>
-    <string name="remember_last_played_option_text">Zuletzt gespielter Titel wird gespeichert und beim Neustart der App angezeigt</string>
+    <string name="remember_last_track_title">Letzten Titel merken</string>
+    <string name="remember_last_track_desc">Zuletzt gespielter Titel wird gespeichert und beim Neustart der App angezeigt</string>
 
 
     <!-- Look and feel section -->
-    <string name="laf_category_theme">Theme</string>
-    <string name="laf_category_select_dark_theme">Wähle das Dunkle Theme aus</string>
-    <string name="laf_category_select_dark_theme_desc">Wähle, welches dunkle Farbschema angewandt wird, wenn der dunkle Modus aktiv ist</string>
-    <string name="laf_category_enable_dark_mode_title">Aktivier den dunklen Modus</string>
-    <string name="laf_category_enable_dark_mode_text">Aktivier das bevorzugte dunkle Theme direkt</string>
-    <string name="laf_category_enable_auto_mode_title">Ändere das Theme automatisch</string>
-    <string name="laf_category_enable_auto_mode_text">Ändere das helle und bevorzugte dunkle Theme basierend auf der Tageszeit</string>
-    <string name="laf_category_colors">Farben</string>
-    <string name="laf_category_select_color">Wähle eine Akzentfarbe</string>
-    <string name="laf_category_select_color_desc">Wähle eine Akzentfarbe für die App</string>
-    <string name="laf_accents_picker_title">Wähle eine Akzentfarbe</string>
-    <string name="dark_theme_name_gray">Einfach Grau</string>
-    <string name="dark_theme_name_kinda_dark">Standard dunkles Farbschema</string>
-    <string name="dark_theme_name_pure_black">Finsterniss</string>
-    <string name="select_dark_theme">Ändere das bevorzugte dunkle Theme</string>
+    <string name="category_theme">Theme</string>
+    <string name="select_dark_theme">Wähle das Dunkle Theme aus</string>
+    <string name="select_dark_theme_desc">Wähle, welches dunkle Farbschema angewandt wird, wenn der dunkle Modus aktiv ist</string>
+    <string name="enable_dark_mode">Aktivier den dunklen Modus</string>
+    <string name="enable_dark_mode_desc">Aktivier das bevorzugte dunkle Theme direkt</string>
+    <string name="enable_auto_mode">Ändere das Theme automatisch</string>
+    <string name="enable_auto_mode_desc">Ändere das helle und bevorzugte dunkle Theme basierend auf der Tageszeit</string>
+    <string name="category_colors">Farben</string>
+    <string name="pick_accent_color">Wähle eine Akzentfarbe</string>
+    <string name="pick_accent_color_desc">Wähle eine Akzentfarbe für die App</string>
+    <string name="accents_color_picker_title">Wähle eine Akzentfarbe</string>
+    <string name="dark_theme_gray">Einfach Grau</string>
+    <string name="dark_theme_signature">Standard dunkles Farbschema</string>
+    <string name="dark_theme_lights_out">Finsterniss</string>
+    <string name="select_dark_theme_style">Ändere das bevorzugte dunkle Theme</string>
     <string name="set">Setze</string>
     <string name="custom">Benutzerdefiniert</string>
-    <string name="custom_accent_title">Benutzerdefinierte Farbe anpassen</string>
+    <string name="select_custom_accent">Benutzerdefinierte Farbe anpassen</string>
 
 
     <!-- Now playing settings -->
 
 
     <!-- Contributors -->
-    <string name="lead_developer_title">Führender Entwickler</string>
+    <string name="lead_developer">Führender Entwickler</string>
     <!-- Donations -->
-    <string name="donation_category_head">Unterstütze</string>
-    <string name="donation_title">Gefällt dir Pulse Music?</string>
-    <string name="donation_text">Bitte erwägen Sie eine kleine Spende zur Unterstützung der Entwicklung</string>
-    <string name="bmc_title">Kauf mir einen Kaffee</string>
-    <string name="pp_title">PayPal</string>
+    <string name="category_contribute">Unterstütze</string>
+    <string name="donation_card_title">Gefällt dir Pulse Music?</string>
+    <string name="donation_card_text">Bitte erwägen Sie eine kleine Spende zur Unterstützung der Entwicklung</string>
+    <string name="buy_me_coffee">Kauf mir einen Kaffee</string>
+    <string name="pay_pal">PayPal</string>
 
 
     <!-- About -->
-    <string name="about_app_version">App Version</string>
-    <string name="about_app_release_date">Build Datum</string>
-    <string name="about_app_release_build_type">Build Typ</string>
-    <string name="about_app_build_code">Build Code</string>
-    <string name="about_check_source_code">Quelle auf Github</string>
+    <string name="app_version">App Version</string>
+    <string name="build_date">Build Datum</string>
+    <string name="build_type">Build Typ</string>
+    <string name="build_code">Build Code</string>
+    <string name="source_on_github">Quelle auf Github</string>
 
 
     <!-- Profile Links -->
-    <string name="social_links">Soziale Links</string>
+    <string name="category_social_links">Soziale Links</string>
 
 
     <!-- Accents -->
@@ -263,28 +256,28 @@
 
 
     <!-- Custom accents dialog -->
-    <string name="hex_color_hint">Hex-Farbcode</string>
-    <string name="hex_color_error">Ungültige Farbe</string>
-    <string name="r_channel_label">R</string>
-    <string name="g_channel_label">G</string>
-    <string name="b_channel_label">B</string>
+    <string name="hint_hex_color">Hex-Farbcode</string>
+    <string name="invalid_color">Ungültige Farbe</string>
+    <string name="color_channel_r">R</string>
+    <string name="color_channel_g">G</string>
+    <string name="color_channel_b">B</string>
     <string name="apply">Anwenden</string>
     <string name="presets">Voreinstellungen</string>
 
 
     <!-- App shortcuts -->
-    <string name="shortcut_shuffle_label">Mischen</string>
-    <string name="shortcut_shuffle_label_long">Gemischt</string>
-    <string name="shortcut_latest_label">Letzten Titel</string>
-    <string name="shortcut_latest_label_long">Letzten Titel</string>
+    <string name="shortcut_shuffle">Mischen</string>
+    <string name="shortcut_shuffle_desc">Gemischt</string>
+    <string name="shortcut_latest">Letzten Titel</string>
+    <string name="shortcut_latest_desc">Letzten Titel</string>
     <string name="shortcut_suggested_label">Für dich</string>
     <string name="shortcut_suggested_label_long">Für dich</string>
     <string name="audio">Audio</string>
     <string name="audio_desc">Ändere Audio Einstellungen</string>
-    <string name="audio_category_auto_play">Automatisch abspielen</string>
-    <string name="audio_detection_channel_name">Audio-Geräteerkennung</string>
+    <string name="category_auto_play">Automatisch abspielen</string>
+    <string name="notification_audio_channel_name">Audio-Geräteerkennung</string>
     <string name="select_bluetooth_action">Wähle die bevorzugte Bluetooth-Aktion</string>
-    <string name="radio_btn_shuffle">Spiel vermischte Musik</string>
-    <string name="radio_btn_latest">Neueste Titel abspielen</string>
-    <string name="radio_btn_suggested">Spiel vorgeschlagene Musik</string>
+    <string name="play_shuffle">Spiel vermischte Musik</string>
+    <string name="play_new_in_store">Neueste Titel abspielen</string>
+    <string name="play_for_you">Spiel vorgeschlagene Musik</string>
 </resources>

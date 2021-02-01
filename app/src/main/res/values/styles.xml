@@ -16,7 +16,7 @@
         <item name="android:scaleType">fitXY</item>
         <item name="android:focusable">true</item>
         <item name="android:clickable">true</item>
-        <item name="android:contentDescription">@string/icon_desc</item>
+        <item name="android:contentDescription">@string/desc_icon_button</item>
         <item name="tint">?attr/colorControlNormal</item>
     </style>
 

@@ -66,7 +66,7 @@ public class AudioDeviceService extends Service {
             createNotificationChannel();
 
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setContentTitle(getString(R.string.audio_bluetooth_auto_play_title))
+                .setContentTitle(getString(R.string.bluetooth_auto_play))
                 .setOngoing(true)
                 .setSmallIcon(R.drawable.ic_notification)
                 .build();
@@ -81,7 +81,7 @@ public class AudioDeviceService extends Service {
         if (mNotificationManager.getNotificationChannel(CHANNEL_ID) == null) {
             NotificationChannel notificationChannel = new NotificationChannel(
                     CHANNEL_ID,
-                    getApplicationContext().getString(R.string.audio_detection_channel_name),
+                    getApplicationContext().getString(R.string.notification_audio_channel_name),
                     NotificationManager.IMPORTANCE_NONE);
             notificationChannel.setDescription("no sound");
             notificationChannel.enableVibration(false);

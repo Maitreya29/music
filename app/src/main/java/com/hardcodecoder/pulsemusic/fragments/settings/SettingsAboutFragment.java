@@ -58,7 +58,7 @@ public class SettingsAboutFragment extends SettingsBaseFragment {
 
         view.findViewById(R.id.about_card_github_link).setOnClickListener(v -> {
             Intent i = new Intent(Intent.ACTION_VIEW);
-            i.setData(Uri.parse(getString(R.string.source_code_link)));
+            i.setData(Uri.parse(getString(R.string.url_source_code)));
             startActivity(i);
         });
     }

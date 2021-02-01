@@ -124,7 +124,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
         android:layout_marginEnd="18dp"
-        android:contentDescription="@string/fab_play_pause_desc"
+        android:contentDescription="@string/desc_play_pause_btn"
         android:src="@drawable/anim_play_pause_selector"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/edge_nps_track_controls_2"
@@ -175,7 +175,7 @@
     <ImageView
         android:id="@+id/edge_nps_close_btn"
         style="@style/ButtonStyle36"
-        android:contentDescription="@string/iv_content_desc"
+        android:contentDescription="@string/desc_album_art"
         android:src="@drawable/ic_down_arrow"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/edge_nps_favourite_btn"

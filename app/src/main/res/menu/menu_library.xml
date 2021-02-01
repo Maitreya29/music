@@ -5,7 +5,7 @@
     <item
         android:icon="@drawable/ic_sort"
         android:orderInCategory="1"
-        android:title="@string/sort_order"
+        android:title="@string/title_sort_order"
         app:iconTint="?attr/colorControlNormal"
         app:showAsAction="never">
         <menu>
@@ -43,7 +43,7 @@
     <item
         android:icon="@drawable/ic_columns"
         android:orderInCategory="2"
-        android:title="@string/grid_count"
+        android:title="@string/column_count"
         app:iconTint="?attr/colorControlNormal"
         app:showAsAction="never">
         <menu>

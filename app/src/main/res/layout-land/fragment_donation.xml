@@ -10,7 +10,7 @@
         android:id="@+id/contribute_head"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/donation_category_head"
+        android:text="@string/category_contribute"
         android:textAppearance="@style/Appearance.Text.Overline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,7 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/donation_title"
+                android:text="@string/donation_card_title"
                 android:textAppearance="@style/Appearance.Text.Headline6" />
 
             <com.google.android.material.textview.MaterialTextView
@@ -51,14 +51,14 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="32dp"
                 android:gravity="center"
-                android:text="@string/donation_text"
+                android:text="@string/donation_card_text"
                 android:textAppearance="@style/Appearance.Text.Body2" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/bmc_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/bmc_title"
+                android:text="@string/buy_me_coffee"
                 app:icon="@drawable/ic_bmc_new_btn_logo"
                 app:iconPadding="12dp"
                 app:iconSize="18dp"
@@ -69,7 +69,7 @@
                 android:id="@+id/pp_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/pp_title"
+                android:text="@string/pay_pal"
                 app:icon="@drawable/ic_paypal"
                 app:iconPadding="12dp"
                 app:iconSize="18dp"

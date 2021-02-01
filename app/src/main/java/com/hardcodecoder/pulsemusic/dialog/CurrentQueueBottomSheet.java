@@ -122,8 +122,8 @@ public class CurrentQueueBottomSheet extends RoundedCustomBottomSheetFragment im
     @Override
     public void onItemDismissed(@NonNull MusicModel dismissedItem, int itemPosition) {
         mPulseController.removeItemFromQueue(itemPosition);
-        Snackbar sb = Snackbar.make(rootView, R.string.item_removed, Snackbar.LENGTH_SHORT);
-        sb.setAction(getString(R.string.snack_bar_action_undo), v -> {
+        Snackbar sb = Snackbar.make(rootView, R.string.track_removed_from_queue, Snackbar.LENGTH_SHORT);
+        sb.setAction(getString(R.string.undo), v -> {
             mAdapter.restoreItem();
             mPulseController.addToQueue(dismissedItem, itemPosition);
             if (mQueueManager.getActiveIndex() == itemPosition)
@@ -169,7 +169,7 @@ public class CurrentQueueBottomSheet extends RoundedCustomBottomSheetFragment im
     private void updateUpNextCard() {
         MusicModel data = mQueueManager.getNextQueueItem();
         if (null == data) {
-            String completed = getString(R.string.up_next_title_none);
+            String completed = getString(R.string.playlist_completed);
             mUpNextTrackAlbumArt.loadAlbumArt(null, -1);
             mUpNextTrackTitle.setText(completed);
             mUpNextTrackArtist.setText(completed);

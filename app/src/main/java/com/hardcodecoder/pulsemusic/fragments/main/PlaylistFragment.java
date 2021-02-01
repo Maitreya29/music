@@ -63,7 +63,7 @@ public class PlaylistFragment extends PulseFragment implements PlaylistCardListe
     @Override
     public void setUpContent(@NonNull View view) {
         mPlaylistNames = new ArrayList<>();
-        mPlaylistNames.add(getString(R.string.playlist_current_queue));
+        mPlaylistNames.add(getString(R.string.playlist_play_queue));
         ProviderManager.getPlaylistProvider().getAllPlaylistItem(result -> {
             if (null != result) mPlaylistNames.addAll(result);
             loadPlaylistCards(view);
@@ -80,7 +80,7 @@ public class PlaylistFragment extends PulseFragment implements PlaylistCardListe
 
     @Override
     public String getFragmentTitle(@NonNull Context context) {
-        if (null == mFragmentTitle) mFragmentTitle = context.getString(R.string.playlist);
+        if (null == mFragmentTitle) mFragmentTitle = context.getString(R.string.nav_playlist);
         return mFragmentTitle;
     }
 
@@ -126,9 +126,9 @@ public class PlaylistFragment extends PulseFragment implements PlaylistCardListe
                     .setMessage(getString(R.string.playlist_delete_dialog_title))
                     .setPositiveButton(getString(R.string.yes), (dialog, which) -> {
                         ProviderManager.getPlaylistProvider().deletePlaylistItem(mPlaylistNames.get(itemPosition));
-                        Toast.makeText(requireContext(), getString(R.string.playlist_deleted_toast), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(requireContext(), getString(R.string.toast_playlist_deleted_success), Toast.LENGTH_SHORT).show();
                         mAdapter.removePlaylist(itemPosition);
-                    }).setNegativeButton(getString(R.string.no), (dialog, which) -> mAdapter.notifyItemChanged(itemPosition));
+                    }).setNegativeButton(getString(R.string.cancel), (dialog, which) -> mAdapter.notifyItemChanged(itemPosition));
             alertDialog.create().show();
         }
     }
@@ -163,10 +163,10 @@ public class PlaylistFragment extends PulseFragment implements PlaylistCardListe
         sheetDialog.show();
 
         TextView header = layout.findViewById(R.id.header);
-        header.setText(getResources().getString(R.string.edit_playlist));
+        header.setText(getResources().getString(R.string.edit_playlist_title));
 
         TextInputLayout til = layout.findViewById(R.id.edit_text_container);
-        til.setHint(getResources().getString(R.string.create_playlist_hint));
+        til.setHint(getResources().getString(R.string.hint_create_playlist));
 
         TextInputEditText et = layout.findViewById(R.id.text_input_field);
 
@@ -175,7 +175,7 @@ public class PlaylistFragment extends PulseFragment implements PlaylistCardListe
             if (et.getText() != null) {
                 String text = et.getText().toString().trim();
                 if (text.length() == 0 || text.charAt(0) == ' ') {
-                    Toast.makeText(requireContext(), getString(R.string.create_playlist_hint), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), getString(R.string.hint_create_playlist), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 String oldName = mPlaylistNames.remove(pos);
@@ -185,7 +185,7 @@ public class PlaylistFragment extends PulseFragment implements PlaylistCardListe
                     mAdapter.notifyItemChanged(pos);
                 }
             } else {
-                Toast.makeText(requireContext(), getString(R.string.create_playlist_hint), Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), getString(R.string.hint_create_playlist), Toast.LENGTH_SHORT).show();
                 return;
             }
             if (sheetDialog.isShowing())

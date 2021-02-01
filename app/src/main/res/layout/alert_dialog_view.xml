@@ -18,7 +18,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/bmc_title" />
+        tools:text="@string/buy_me_coffee" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/alert_dialog_message"

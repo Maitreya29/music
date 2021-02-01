@@ -7,7 +7,7 @@
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_gravity="center_vertical"
-        android:contentDescription="@string/icon_desc"
+        android:contentDescription="@string/desc_icon_button"
         tools:src="@drawable/ic_favorite" />
 
     <com.google.android.material.textview.MaterialTextView

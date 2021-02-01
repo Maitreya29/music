@@ -32,7 +32,7 @@ public class SettingsThemeFragment extends SettingsBaseFragment {
 
     @Override
     public int getToolbarTitleForFragment() {
-        return R.string.look_and_feel;
+        return R.string.theme;
     }
 
     @Nullable

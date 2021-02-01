@@ -18,7 +18,7 @@
         android:layout_height="172dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:contentDescription="@string/iv_content_desc"
+        android:contentDescription="@string/desc_album_art"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

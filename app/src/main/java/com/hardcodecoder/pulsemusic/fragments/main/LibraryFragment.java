@@ -61,7 +61,7 @@ public class LibraryFragment extends ListGridFragment implements SimpleItemClick
 
     @Override
     public String getFragmentTitle(@NonNull Context context) {
-        if (null == mFragmentTitle) mFragmentTitle = context.getString(R.string.library);
+        if (null == mFragmentTitle) mFragmentTitle = context.getString(R.string.nav_library);
         return mFragmentTitle;
     }
 

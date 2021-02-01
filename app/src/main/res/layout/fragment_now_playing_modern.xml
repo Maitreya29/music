@@ -57,7 +57,7 @@
         android:singleLine="true"
         android:textAppearance="@style/ItemSub"
         app:layout_constraintTop_toBottomOf="@+id/modern_nps_title"
-        tools:text="@string/artist" />
+        tools:text="@string/nav_artists" />
 
     <include
         android:id="@+id/modern_nps_slider"
@@ -117,7 +117,7 @@
         android:layout_marginStart="18dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="18dp"
-        android:contentDescription="@string/fab_play_pause_desc"
+        android:contentDescription="@string/desc_play_pause_btn"
         android:src="@drawable/anim_play_pause_selector"
         app:layout_constraintBottom_toTopOf="@id/modern_nps_close_btn"
         app:layout_constraintEnd_toStartOf="@+id/modern_nps_track_controls_2"
@@ -168,7 +168,7 @@
     <ImageView
         android:id="@+id/modern_nps_close_btn"
         style="@style/ButtonStyle36"
-        android:contentDescription="@string/iv_content_desc"
+        android:contentDescription="@string/desc_album_art"
         android:src="@drawable/ic_down_arrow"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/modern_nps_fav_btn"

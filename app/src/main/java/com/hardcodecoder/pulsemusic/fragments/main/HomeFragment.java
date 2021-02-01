@@ -121,7 +121,7 @@ public class HomeFragment extends PulseFragment {
 
     @Override
     public String getFragmentTitle(@NonNull Context context) {
-        if (null == mFragmentTitle) mFragmentTitle = context.getString(R.string.home);
+        if (null == mFragmentTitle) mFragmentTitle = context.getString(R.string.nav_home);
         return mFragmentTitle;
     }
 
@@ -147,7 +147,7 @@ public class HomeFragment extends PulseFragment {
         if (list == null || list.isEmpty()) return;
         view.postOnAnimation(() -> {
             MaterialTextView suggestionsTitle = (MaterialTextView) ((ViewStub) view.findViewById(R.id.stub_suggestions_title)).inflate();
-            suggestionsTitle.setText(getString(R.string.random));
+            suggestionsTitle.setText(getString(R.string.for_you));
             RecyclerView rv = (RecyclerView) ((ViewStub) view.findViewById(R.id.stub_suggested_list)).inflate();
             rv.setLayoutManager(new LinearLayoutManager(rv.getContext(), LinearLayoutManager.HORIZONTAL, false));
             rv.setHasFixedSize(true);
@@ -247,7 +247,7 @@ public class HomeFragment extends PulseFragment {
                 mPulseController.setPlaylist(singlePickedItemList, 0);
                 mRemote.play();
             } else
-                Toast.makeText(requireContext(), getString(R.string.selected_track_load_failed_toast), Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), getString(R.string.toast_selected_track_load_failed), Toast.LENGTH_SHORT).show();
         }
     }
 }

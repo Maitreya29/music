@@ -57,7 +57,7 @@ public class AlbumsFragment extends CardGridFragment implements SimpleTransition
 
     @Override
     public String getFragmentTitle(@NonNull Context context) {
-        if (null == mFragmentTitle) mFragmentTitle = context.getString(R.string.albums);
+        if (null == mFragmentTitle) mFragmentTitle = context.getString(R.string.nav_albums);
         return mFragmentTitle;
     }
 

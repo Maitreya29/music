@@ -48,7 +48,7 @@ public class UIHelper {
         header.setText(context.getString(R.string.create_playlist));
 
         TextInputLayout til = layout.findViewById(R.id.edit_text_container);
-        til.setHint(context.getString(R.string.create_playlist_hint));
+        til.setHint(context.getString(R.string.hint_create_playlist));
 
         TextInputEditText et = layout.findViewById(R.id.text_input_field);
 
@@ -56,14 +56,14 @@ public class UIHelper {
             if (et.getText() != null) {
                 String text = et.getText().toString().trim();
                 if (text.length() == 0 || text.charAt(0) == ' ') {
-                    Toast.makeText(context, context.getString(R.string.create_playlist_hint), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, context.getString(R.string.hint_create_playlist), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 String playlistName = et.getText().toString();
                 ProviderManager.getPlaylistProvider().addPlaylistItem(playlistName);
                 callback.onPlaylistCreated(playlistName);
             } else {
-                Toast.makeText(context, context.getString(R.string.create_playlist_hint), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, context.getString(R.string.hint_create_playlist), Toast.LENGTH_SHORT).show();
                 return;
             }
             dismiss(sheetDialog);
@@ -95,14 +95,14 @@ public class UIHelper {
                     final StyleSpan styleSpan = new StyleSpan(Typeface.BOLD);
                     displayTextView.setText(infoModel.getDisplayName());
                     displayTextView.setSelected(true);
-                    setInfo(trackTitle, context.getString(R.string.head_title), musicModel.getTrackName(), styleSpan);
-                    setInfo(trackAlbum, context.getString(R.string.albums), musicModel.getAlbum(), styleSpan);
-                    setInfo(trackArtist, context.getString(R.string.artist), musicModel.getArtist(), styleSpan);
-                    setInfo(trackFileSize, context.getString(R.string.head_file_size), DataUtils.getFormattedFileSize(infoModel.getFileSize()), styleSpan);
-                    setInfo(trackFileType, context.getString(R.string.head_file_type), infoModel.getFileType(), styleSpan);
-                    setInfo(trackBitRate, context.getString(R.string.head_bitrate), DataUtils.getFormattedBitRate(infoModel.getBitRate()), styleSpan);
-                    setInfo(trackSampleRate, context.getString(R.string.head_sample_rate), DataUtils.getFormattedSampleRate(infoModel.getSampleRate()), styleSpan);
-                    setInfo(trackChannelCount, context.getString(R.string.head_channel_count), String.valueOf(infoModel.getChannelCount()), styleSpan);
+                    setInfo(trackTitle, context.getString(R.string.track), musicModel.getTrackName(), styleSpan);
+                    setInfo(trackAlbum, context.getString(R.string.nav_albums), musicModel.getAlbum(), styleSpan);
+                    setInfo(trackArtist, context.getString(R.string.nav_artists), musicModel.getArtist(), styleSpan);
+                    setInfo(trackFileSize, context.getString(R.string.file_size), DataUtils.getFormattedFileSize(infoModel.getFileSize()), styleSpan);
+                    setInfo(trackFileType, context.getString(R.string.file_type), infoModel.getFileType(), styleSpan);
+                    setInfo(trackBitRate, context.getString(R.string.bitrate), DataUtils.getFormattedBitRate(infoModel.getBitRate()), styleSpan);
+                    setInfo(trackSampleRate, context.getString(R.string.sample_rate), DataUtils.getFormattedSampleRate(infoModel.getSampleRate()), styleSpan);
+                    setInfo(trackChannelCount, context.getString(R.string.channel_count), String.valueOf(infoModel.getChannelCount()), styleSpan);
                     bottomSheetDialog.show();
                 });
             }
@@ -142,13 +142,13 @@ public class UIHelper {
 
         view.findViewById(R.id.track_play_next).setOnClickListener(v -> {
             PulseController.getInstance().playNext(data);
-            Toast.makeText(v.getContext(), activity.getString(R.string.play_next_toast), Toast.LENGTH_SHORT).show();
+            Toast.makeText(v.getContext(), activity.getString(R.string.toast_added_to_play_next), Toast.LENGTH_SHORT).show();
             dismiss(bottomSheetDialog);
         });
 
         view.findViewById(R.id.add_to_queue).setOnClickListener(v -> {
             PulseController.getInstance().addToQueue(data);
-            Toast.makeText(v.getContext(), activity.getString(R.string.add_to_queue_toast), Toast.LENGTH_SHORT).show();
+            Toast.makeText(v.getContext(), activity.getString(R.string.toast_added_to_queue), Toast.LENGTH_SHORT).show();
             dismiss(bottomSheetDialog);
         });
 

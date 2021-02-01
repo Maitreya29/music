@@ -17,7 +17,7 @@ public class FavoritesActivity extends StandardPlaylist {
     @Override
     protected void loadContent() {
         ProviderManager.getFavoritesProvider().getFavoriteTracks(this::setUpContent);
-        setPlaylistTitle(getString(R.string.favorites_playlist_title));
+        setPlaylistTitle(getString(R.string.your_favorites));
     }
 
     @Override
@@ -27,7 +27,7 @@ public class FavoritesActivity extends StandardPlaylist {
 
     @Override
     protected SpannableString getEmptyPlaylistText() {
-        String text = getString(R.string.no_favorites_tracks);
+        String text = getString(R.string.message_empty_favorites);
         int len = text.length();
         SpannableString spannableString = new SpannableString(text);
         int lineEnd = text.indexOf("\n");

@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="48dp"
-        android:contentDescription="@string/iv_content_desc"
+        android:contentDescription="@string/desc_album_art"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_artist_art"
         app:layout_constraintDimensionRatio="1:1"

@@ -30,7 +30,7 @@ public class CurrentQueuePlaylist extends PlaylistActivity implements PlaylistIt
     protected void loadContent() {
         mQueueManager = mPulseController.getQueueManager();
         setUpContent(mQueueManager.getQueue());
-        setPlaylistTitle(getString(R.string.playlist_current_queue));
+        setPlaylistTitle(getString(R.string.playlist_play_queue));
     }
 
     @Override
@@ -55,10 +55,10 @@ public class CurrentQueuePlaylist extends PlaylistActivity implements PlaylistIt
             }
         });
 
-        setPlaylistDynamicButton1(getString(R.string.playlist_play), R.drawable.ic_round_play, v ->
+        setPlaylistDynamicButton1(getString(R.string.play), R.drawable.ic_round_play, v ->
                 onItemClick(0));
 
-        setPlaylistDynamicButton2(getString(R.string.playlist_add_more), R.drawable.ic_playlist_add, v ->
+        setPlaylistDynamicButton2(getString(R.string.add), R.drawable.ic_playlist_add, v ->
                 openTrackPicker());
     }
 
@@ -82,8 +82,8 @@ public class CurrentQueuePlaylist extends PlaylistActivity implements PlaylistIt
     @Override
     public void onItemDismissed(@NonNull MusicModel dismissedItem, int itemPosition) {
         mPulseController.removeItemFromQueue(itemPosition);
-        Snackbar sb = Snackbar.make(findViewById(R.id.playlist_layout_root), R.string.item_removed, Snackbar.LENGTH_SHORT);
-        sb.setAction(getString(R.string.snack_bar_action_undo), v -> {
+        Snackbar sb = Snackbar.make(findViewById(R.id.playlist_layout_root), R.string.track_removed_from_queue, Snackbar.LENGTH_SHORT);
+        sb.setAction(getString(R.string.undo), v -> {
             mAdapter.restoreItem();
             mPulseController.addToQueue(dismissedItem, itemPosition);
             if (mQueueManager.getActiveIndex() == itemPosition)

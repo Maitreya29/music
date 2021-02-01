@@ -13,7 +13,7 @@ import com.hardcodecoder.pulsemusic.shortcuts.ShortcutsLauncher;
 @RequiresApi(api = Build.VERSION_CODES.N_MR1)
 public class ShuffleShortcutType extends BaseShortcutType {
 
-    private Context mContext;
+    private final Context mContext;
 
     public ShuffleShortcutType(Context context) {
         super(context);
@@ -29,8 +29,8 @@ public class ShuffleShortcutType extends BaseShortcutType {
     @Override
     public ShortcutInfo getShortcutInfo() {
         return new ShortcutInfo.Builder(mContext, getId())
-                .setShortLabel(mContext.getString(R.string.shortcut_shuffle_label))
-                .setLongLabel(mContext.getString(R.string.shortcut_shuffle_label_long))
+                .setShortLabel(mContext.getString(R.string.shortcut_shuffle))
+                .setLongLabel(mContext.getString(R.string.shortcut_shuffle_desc))
                 .setIcon(ShortcutIconGenerator.getThemedIcon(mContext, R.drawable.ic_app_shortcut_shuffle))
                 .setIntent(getShortcutIntent(ShortcutsLauncher.SHORTCUT_TYPE_SHUFFLE))
                 .build();

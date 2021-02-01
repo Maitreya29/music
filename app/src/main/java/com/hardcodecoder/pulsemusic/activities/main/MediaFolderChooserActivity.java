@@ -39,7 +39,7 @@ public class MediaFolderChooserActivity extends ThemeActivity implements ItemSel
         setContentView(R.layout.activity_folder_chooser);
 
         CustomToolbar toolbar = findViewById(R.id.material_toolbar);
-        toolbar.setTitle(R.string.folder_chooser_toolbar_title);
+        toolbar.setTitle(R.string.select_folders);
         toolbar.setNavigationIcon(R.drawable.ic_close);
         toolbar.setNavigationOnClickListener(v -> finish());
 
@@ -63,7 +63,7 @@ public class MediaFolderChooserActivity extends ThemeActivity implements ItemSel
     private void loadData(@Nullable List<Folder> foldersList) {
         if (foldersList == null || foldersList.isEmpty()) {
             MaterialTextView tv = (MaterialTextView) ((ViewStub) findViewById(R.id.stub_no_data_found)).inflate();
-            String text = getString(R.string.folder_chooser_empty_folders_list);
+            String text = getString(R.string.message_empty_folders_list);
             int len = text.length();
             SpannableStringBuilder stringBuilder = new SpannableStringBuilder(text);
             stringBuilder.setSpan(new AbsoluteSizeSpan(getResources().getDimensionPixelSize(R.dimen.spannable_text_absolute_size_span)),

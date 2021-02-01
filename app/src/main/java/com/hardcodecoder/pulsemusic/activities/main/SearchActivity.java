@@ -39,7 +39,7 @@ public class SearchActivity extends ControllerActivity implements SimpleItemClic
         findViewById(R.id.search_activity_close_btn).setOnClickListener(v -> onBackPressed());
 
         noResultsText = (MaterialTextView) ((ViewStub) findViewById(R.id.stub_no_result_found)).inflate();
-        noResultsText.setText(getString(R.string.search_null));
+        noResultsText.setText(getString(R.string.message_empty_search_result));
         setRecyclerView();
         setUpSearchUi();
     }

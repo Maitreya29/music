@@ -10,7 +10,7 @@
 
     <ImageView
         style="@style/ButtonStyle24"
-        android:contentDescription="@string/iv_content_desc"
+        android:contentDescription="@string/desc_album_art"
         android:src="@drawable/ic_folder" />
 
     <com.google.android.material.textview.MaterialTextView

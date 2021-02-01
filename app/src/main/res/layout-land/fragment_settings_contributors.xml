@@ -12,7 +12,7 @@
         android:id="@+id/developer_head"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/lead_developer_title"
+        android:text="@string/lead_developer"
         android:textAppearance="@style/Appearance.Text.Overline" />
 
     <com.google.android.material.card.MaterialCardView
@@ -37,7 +37,7 @@
                 android:id="@+id/lead_developer_profile_icon"
                 android:layout_width="72dp"
                 android:layout_height="72dp"
-                android:contentDescription="@string/iv_content_desc"
+                android:contentDescription="@string/desc_album_art"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -61,7 +61,7 @@
                 android:gravity="center"
                 android:paddingTop="0dp"
                 android:paddingBottom="32dp"
-                android:text="@string/lead_developer_user_name"
+                android:text="@string/lead_developer_1_user_name"
                 android:textAppearance="@style/Appearance.Text.Subtitle2"
                 android:textColor="?android:attr/textColorSecondary"
                 app:layout_constraintTop_toBottomOf="@id/lead_developer_name" />

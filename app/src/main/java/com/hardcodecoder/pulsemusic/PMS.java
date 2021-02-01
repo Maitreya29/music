@@ -184,7 +184,7 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
             PulseController.getInstance().setPlaylist(playlist);
             mMediaSession.getController().getTransportControls().play();
         } else
-            Toast.makeText(this, getString(R.string.no_playlist_tracks_found), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.message_empty_playlist), Toast.LENGTH_SHORT).show();
     }
 
     @Nullable

@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:gravity="start"
-        android:text="@string/laf_accents_picker_title"
+        android:text="@string/accents_color_picker_title"
         android:textAppearance="@style/Appearance.Text.Subtitle1" />
 
     <androidx.recyclerview.widget.RecyclerView

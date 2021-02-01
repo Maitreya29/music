@@ -69,7 +69,7 @@ public class DataModelHelper {
         if (null == data) return null;
         MediaMetadataRetriever mmr = new MediaMetadataRetriever();
         mmr.setDataSource(context, data);
-        String defText = context.getString(R.string.def_track_title);
+        String defText = context.getString(R.string.unknown);
         String title;
         String album;
         String artist;

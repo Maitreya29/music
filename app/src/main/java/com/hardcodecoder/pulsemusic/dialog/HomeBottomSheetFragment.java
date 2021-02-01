@@ -69,7 +69,7 @@ public class HomeBottomSheetFragment extends RoundedCustomBottomSheetFragment {
                 startActivityForResult(intent, REQUEST_CODE_OPEN_EQUALIZER);
                 view.postOnAnimation(this::dismiss);
             } else
-                Toast.makeText(requireContext(), getString(R.string.equalizer_error), Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), getString(R.string.toast_equalizer_not_found), Toast.LENGTH_SHORT).show();
         });
     }
 
@@ -105,8 +105,8 @@ public class HomeBottomSheetFragment extends RoundedCustomBottomSheetFragment {
         sheetDialog.setContentView(layout);
         sheetDialog.show();
 
-        ((MaterialTextView) layout.findViewById(R.id.header)).setText(getResources().getString(R.string.enter_name));
-        ((TextInputLayout) layout.findViewById(R.id.edit_text_container)).setHint(getResources().getString(R.string.enter_name));
+        ((MaterialTextView) layout.findViewById(R.id.header)).setText(getResources().getString(R.string.question_enter_your_name));
+        ((TextInputLayout) layout.findViewById(R.id.edit_text_container)).setHint(getResources().getString(R.string.question_enter_your_name));
         TextInputEditText et = layout.findViewById(R.id.text_input_field);
 
         layout.findViewById(R.id.confirm_btn).setOnClickListener(v -> {
@@ -116,7 +116,7 @@ public class HomeBottomSheetFragment extends RoundedCustomBottomSheetFragment {
                 if (sheetDialog.isShowing()) sheetDialog.dismiss();
                 updateUserName(name);
             } else
-                Toast.makeText(requireContext(), getString(R.string.enter_name_toast), Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), getString(R.string.toast_enter_your_name), Toast.LENGTH_SHORT).show();
         });
 
         layout.findViewById(R.id.cancel_btn).setOnClickListener(v -> {
@@ -129,7 +129,7 @@ public class HomeBottomSheetFragment extends RoundedCustomBottomSheetFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK && requestCode == PICK_AVATAR) {
             if (null == data || data.getData() == null) {
-                Toast.makeText(requireContext(), getString(R.string.error_select_image_toast), Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), getString(R.string.toast_select_image_error), Toast.LENGTH_SHORT).show();
                 return;
             }
             UserInfo.saveUserProfilePic(requireContext(), data.getData(), this::loadProfilePic);

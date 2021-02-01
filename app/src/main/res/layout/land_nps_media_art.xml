@@ -4,6 +4,6 @@
     android:id="@+id/nps_media_art_image_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:contentDescription="@string/iv_content_desc"
+    android:contentDescription="@string/desc_album_art"
     android:scaleType="centerCrop"
     tools:src="@tools:sample/backgrounds/scenic" />

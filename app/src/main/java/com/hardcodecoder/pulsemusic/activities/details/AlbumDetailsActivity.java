@@ -34,7 +34,6 @@ import com.hardcodecoder.pulsemusic.utils.AppSettings;
 import com.hardcodecoder.pulsemusic.views.MediaArtImageView;
 
 import java.util.List;
-import java.util.Locale;
 
 public class AlbumDetailsActivity extends BaseDetailsActivity {
 
@@ -168,7 +167,7 @@ public class AlbumDetailsActivity extends BaseDetailsActivity {
         if (null == list || list.isEmpty()) return;
 
         MaterialTextView sub = findViewById(R.id.details_activity_title_sub);
-        sub.setText(String.format(Locale.getDefault(), "%s %d %s", getString(R.string.num_album_tracks), list.size(), getString(R.string.tracks)));
+        sub.setText(getString(R.string.album_tracks_count, list.size()));
 
         RecyclerView rv = (RecyclerView) ((ViewStub) findViewById(R.id.stub_details_activity_rv)).inflate();
         rv.setHasFixedSize(true);
