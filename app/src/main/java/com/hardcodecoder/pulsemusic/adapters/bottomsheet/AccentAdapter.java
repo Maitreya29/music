@@ -61,11 +61,12 @@ public class AccentAdapter extends RecyclerView.Adapter<AccentAdapter.AccentAdap
             });
         }
 
-        void setData(AccentsModel accentsModel, int selectedAccentId) {
+        void setData(@NonNull AccentsModel accentsModel, int selectedAccentId) {
             if (accentsModel.getId() == selectedAccentId)
                 markCurrentItemSelected();
             mColorView.setBackgroundColor(accentsModel.getColor());
             mTitle.setText(accentsModel.getTitle());
+            mTitle.setTextColor(accentsModel.getColor());
         }
 
         private void markCurrentItemSelected() {

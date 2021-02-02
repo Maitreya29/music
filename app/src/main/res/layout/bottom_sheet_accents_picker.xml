@@ -22,11 +22,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/title"
         android:layout_marginTop="32dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="16dp"
         android:clipToPadding="false"
         android:overScrollMode="never"
         android:paddingStart="24dp"
-        android:paddingEnd="0dp" />
+        android:paddingEnd="16dp" />
 
     <com.hardcodecoder.pulsemusic.views.AccentColorMaterialButton
         android:id="@+id/choose_accents_custom_btn"
