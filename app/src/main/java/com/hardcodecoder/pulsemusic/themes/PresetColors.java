@@ -12,33 +12,33 @@ import com.hardcodecoder.pulsemusic.model.AccentsModel;
 public class PresetColors {
 
     // Pulse music accent color
-    public static final int EXODUS_FRUIT = Color.parseColor("#6c5ce7");
-    private static final int ELECTRON_BLUE = Color.parseColor("#0984e3");
-    private static final int MINT_LEAF = Color.parseColor("#00b894");
-    private static final int CHI_GONG = Color.parseColor("#d63031");
-    private static final int SEI_BAR = Color.parseColor("#594031");
+    public static final int SLATE_BLUE = Color.parseColor("#6c5ce7");
+    private static final int AZURE_RADIANCE = Color.parseColor("#0984e3");
+    private static final int PERSIAN_MINT = Color.parseColor("#00b894");
+    private static final int VALENCIA = Color.parseColor("#d63031");
+    private static final int MILLBROOK = Color.parseColor("#594031");
     private static final int CORAL = Color.parseColor("#FF7F50");
     private static final int SUNKIST = Color.parseColor("#f2994a");
-    private static final int BLUE_PINK = Color.parseColor("#5F78FF");
+    private static final int CORNFLOUR_BLUE = Color.parseColor("#5F78FF");
 
     public static int getPresetAccentColorById(int accentId) {
         switch (accentId) {
-            case Preferences.ACCENT_ELECTRON_BLUE:
-                return PresetColors.ELECTRON_BLUE;
-            case Preferences.ACCENT_MINT_LEAF:
-                return PresetColors.MINT_LEAF;
-            case Preferences.ACCENT_CHI_GONG:
-                return PresetColors.CHI_GONG;
-            case Preferences.ACCENT_SEI_BAR:
-                return PresetColors.SEI_BAR;
+            case Preferences.ACCENT_AZURE_RADIANCE:
+                return PresetColors.AZURE_RADIANCE;
+            case Preferences.ACCENT_PERSIAN_MINT:
+                return PresetColors.PERSIAN_MINT;
+            case Preferences.ACCENT_VALENCIA:
+                return PresetColors.VALENCIA;
+            case Preferences.ACCENT_MILLBROOK:
+                return PresetColors.MILLBROOK;
             case Preferences.ACCENT_CORAL:
                 return PresetColors.CORAL;
             case Preferences.ACCENT_SUNKIST:
                 return PresetColors.SUNKIST;
-            case Preferences.ACCENT_BLUE_PINK:
-                return PresetColors.BLUE_PINK;
+            case Preferences.ACCENT_CORNFLOUR_BLUE:
+                return PresetColors.CORNFLOUR_BLUE;
             default:
-                return PresetColors.EXODUS_FRUIT;
+                return PresetColors.SLATE_BLUE;
         }
     }
 
@@ -46,29 +46,29 @@ public class PresetColors {
     public static AccentsModel[] getPresetColorsModel(@NonNull Context context) {
         AccentsModel[] accentsModels = new AccentsModel[8];
         accentsModels[0] = new AccentsModel(
-                Preferences.ACCENT_EXODUS_FRUIT,
+                Preferences.ACCENT_SLATE_BLUE,
                 context.getString(R.string.exodus_fruit),
-                EXODUS_FRUIT);
+                SLATE_BLUE);
 
         accentsModels[1] = new AccentsModel(
-                Preferences.ACCENT_ELECTRON_BLUE,
+                Preferences.ACCENT_AZURE_RADIANCE,
                 context.getString(R.string.electron_blue),
-                ELECTRON_BLUE);
+                AZURE_RADIANCE);
 
         accentsModels[2] = new AccentsModel(
-                Preferences.ACCENT_MINT_LEAF,
+                Preferences.ACCENT_PERSIAN_MINT,
                 context.getString(R.string.mint_leaf),
-                MINT_LEAF);
+                PERSIAN_MINT);
 
         accentsModels[3] = new AccentsModel(
-                Preferences.ACCENT_CHI_GONG,
+                Preferences.ACCENT_VALENCIA,
                 context.getString(R.string.chi_gong),
-                CHI_GONG);
+                VALENCIA);
 
         accentsModels[4] = new AccentsModel(
-                Preferences.ACCENT_SEI_BAR,
+                Preferences.ACCENT_MILLBROOK,
                 context.getString(R.string.sei_bar),
-                SEI_BAR);
+                MILLBROOK);
 
         accentsModels[5] = new AccentsModel(
                 Preferences.ACCENT_CORAL,
@@ -81,9 +81,9 @@ public class PresetColors {
                 SUNKIST);
 
         accentsModels[7] = new AccentsModel(
-                Preferences.ACCENT_BLUE_PINK,
+                Preferences.ACCENT_CORNFLOUR_BLUE,
                 context.getString(R.string.blue_pink),
-                BLUE_PINK);
+                CORNFLOUR_BLUE);
 
         return accentsModels;
     }

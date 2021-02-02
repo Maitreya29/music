@@ -59,14 +59,14 @@ public class Preferences {
     public static final String ACCENTS_COLOR_CUSTOM_KEY = "AccentsColorCustom";
     public static final String ACCENTS_COLOR_DESATURATED_KEY = "AccentsColorDesaturated";
 
-    public static final short ACCENT_EXODUS_FRUIT = 700;
-    public static final short ACCENT_ELECTRON_BLUE = 701;
-    public static final short ACCENT_MINT_LEAF = 702;
-    public static final short ACCENT_CHI_GONG = 703;
-    public static final short ACCENT_SEI_BAR = 704;
+    public static final short ACCENT_SLATE_BLUE = 700;
+    public static final short ACCENT_AZURE_RADIANCE = 701;
+    public static final short ACCENT_PERSIAN_MINT = 702;
+    public static final short ACCENT_VALENCIA = 703;
+    public static final short ACCENT_MILLBROOK = 704;
     public static final short ACCENT_CORAL = 705;
     public static final short ACCENT_SUNKIST = 706;
-    public static final short ACCENT_BLUE_PINK = 707;
+    public static final short ACCENT_CORNFLOUR_BLUE = 707;
 
     // In range 5000 - 5100
     public static final String NOW_PLAYING_SCREEN_STYLE_KEY = "NowPlayingScreenStyleKey";

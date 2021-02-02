@@ -6,7 +6,7 @@
 
     <string name="bullet" translatable="false">●</string>
 
-    <!-- Content description **-->
+    <!-- Content description -->
     <string name="desc_album_art">Album art image</string>
     <string name="desc_close_btn">Close button</string>
     <string name="desc_action_btn">Action button</string>
@@ -310,15 +310,18 @@
     <string name="source_on_github">Source on github</string>
 
 
-    <!-- Accents **-->
-    <string name="exodus_fruit">Exodus fruit</string>
-    <string name="electron_blue">Electron blue</string>
-    <string name="mint_leaf">Mint leaf</string>
-    <string name="chi_gong">Chi gong</string>
-    <string name="sei_bar">Sei bar</string>
+    <!-- Accents -->
+    <!-- For translators: If the color words does not make much sense in your language,
+    you can try substituting a similar description of the color. But keep it short
+    -->
+    <string name="exodus_fruit">Slate Blue</string>
+    <string name="electron_blue">Azure Radiance</string>
+    <string name="mint_leaf">Persian Mint</string>
+    <string name="chi_gong">Valencia</string>
+    <string name="sei_bar">Millbrook</string>
     <string name="coral">Coral</string>
     <string name="sunkist">Sunkist</string>
-    <string name="blue_pink">Blue pink</string>
+    <string name="blue_pink">Cornflower Blue</string>
 
 
     <!-- Custom accents dialog -->
@@ -331,12 +334,12 @@
     <string name="presets">Presets</string>
 
     <!-- App shortcuts -->
-    <string name="shortcut_shuffle">Shuffle</string>
-    <string name="shortcut_shuffle_desc">Shuffle your library</string> <!-- Max length = 25 characters including spaces-->
+    <string name="shortcut_shuffle">Shuffle</string> <!-- Max length = 10 characters including spaces-->
+    <string name="shortcut_shuffle_desc">Shuffle</string> <!-- Max length = 25 characters including spaces-->
 
-    <string name="shortcut_latest">Latest tracks</string>
-    <string name="shortcut_latest_desc">Latest tracks playlist</string> <!-- Max length = 25 characters including spaces-->
+    <string name="shortcut_latest">Latest tracks</string> <!-- Max length = 10 characters including spaces-->
+    <string name="shortcut_latest_desc">Latest tracks</string> <!-- Max length = 25 characters including spaces-->
 
-    <string name="shortcut_suggested_label">For you</string>
-    <string name="shortcut_suggested_label_long">For you playlist</string> <!-- Max length = 25 characters including spaces-->
+    <string name="shortcut_suggested_label">For you</string> <!-- Max length = 10 characters including spaces-->
+    <string name="shortcut_suggested_label_long">For you</string> <!-- Max length = 25 characters including spaces-->
 </resources>

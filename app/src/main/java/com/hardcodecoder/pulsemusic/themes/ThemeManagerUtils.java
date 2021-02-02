@@ -15,7 +15,7 @@ public class ThemeManagerUtils {
     private static boolean mDarkMode = false;
     private static int mThemeId = Preferences.LIGHT_THEME;
     private static int mPresetsAccentsId;
-    private static int mStoredAccentColor = PresetColors.EXODUS_FRUIT;
+    private static int mStoredAccentColor = PresetColors.SLATE_BLUE;
     private static boolean mUsingPresetColors = true;
     private static boolean mDesaturatedAccents = false;
     private static boolean mInitialized = false;

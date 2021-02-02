@@ -97,7 +97,7 @@ public class AppSettings {
 
     public static int getSelectedAccentId(@NonNull Context context) {
         return context.getSharedPreferences(Preferences.PULSE_THEMES_PREFS, Context.MODE_PRIVATE)
-                .getInt(Preferences.ACCENTS_COLOR_PRESET_KEY, Preferences.ACCENT_EXODUS_FRUIT);
+                .getInt(Preferences.ACCENTS_COLOR_PRESET_KEY, Preferences.ACCENT_SLATE_BLUE);
     }
 
     public static void saveCustomAccentColor(@NonNull Context context, @ColorInt int color) {
@@ -109,7 +109,7 @@ public class AppSettings {
 
     public static int getCustomAccentColor(@NonNull Context context) {
         return context.getSharedPreferences(Preferences.PULSE_THEMES_PREFS, Context.MODE_PRIVATE)
-                .getInt(Preferences.ACCENTS_COLOR_CUSTOM_KEY, PresetColors.EXODUS_FRUIT);
+                .getInt(Preferences.ACCENTS_COLOR_CUSTOM_KEY, PresetColors.SLATE_BLUE);
     }
 
     public static boolean getPresetAccentModeEnabled(@NonNull Context context) {
