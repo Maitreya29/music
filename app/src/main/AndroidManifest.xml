@@ -60,7 +60,7 @@
             android:name=".activities.main.MainContentActivity"
             android:clearTaskOnLaunch="true"
             android:configChanges="orientation|screenSize"
-            android:launchMode="singleTop" />
+            android:launchMode="singleTask" />
 
         <activity
             android:name=".activities.main.SearchActivity"

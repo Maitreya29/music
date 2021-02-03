@@ -15,7 +15,6 @@ import androidx.core.content.ContextCompat;
 
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.activities.base.ThemeActivity;
-import com.hardcodecoder.pulsemusic.loaders.LoaderHelper;
 import com.hardcodecoder.pulsemusic.providers.ProviderManager;
 import com.hardcodecoder.pulsemusic.themes.TintHelper;
 
@@ -35,7 +34,7 @@ public class SplashActivity extends ThemeActivity {
 
     private void getPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-            startMusicLoader();
+            startHomeActivity();
         } else {
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_CODE);
@@ -47,7 +46,7 @@ public class SplashActivity extends ThemeActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == REQUEST_CODE) {
             if (grantResults.length >= 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                startMusicLoader();
+                startHomeActivity();
             } else {
                 // Permission was not granted
                 Toast.makeText(this, getString(R.string.toast_requires_storage_access), Toast.LENGTH_LONG).show();
@@ -64,13 +63,5 @@ public class SplashActivity extends ThemeActivity {
             startActivity(intent);
             finish();
         }, 400);
-    }
-
-    private void startMusicLoader() {
-        LoaderHelper.loadAllTracks(this, result ->
-                ProviderManager.getHistoryProvider().deleteObsoleteHistoryFiles(success ->
-                        ProviderManager.getHistoryProvider().deleteHistoryFiles(
-                                100,
-                                completed -> startHomeActivity())));
     }
 }

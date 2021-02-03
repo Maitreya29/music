@@ -36,7 +36,8 @@ public class LoaderHelper {
 
         TaskRunner.executeAsync(libraryLoader, result -> {
             LoaderCache.setAllTracksList(result);
-            callback.onComplete(LoaderCache.getAllTracksList());
+            ProviderManager.getHistoryProvider().deleteObsoleteHistoryFiles(success ->
+                callback.onComplete(LoaderCache.getAllTracksList()));
         });
     }
 

@@ -20,6 +20,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.appbar.AppBarLayout;
+import com.hardcodecoder.pulsemusic.BuildConfig;
 import com.hardcodecoder.pulsemusic.PMS;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.activities.base.DraggableNowPlayingSheetActivity;
@@ -35,6 +36,7 @@ import com.hardcodecoder.pulsemusic.loaders.LoaderHelper;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.playback.PlaybackManager;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
+import com.hardcodecoder.pulsemusic.utils.LogUtils;
 import com.hardcodecoder.pulsemusic.views.PulseToolbar;
 
 import java.util.ArrayList;
@@ -89,7 +91,32 @@ public class MainContentActivity extends DraggableNowPlayingSheetActivity {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         connectToMediaService();
         setUpToolbar();
-        setUpMainContents(savedInstanceState);
+        LoaderHelper.loadAllTracks(this, result -> setUpMainContents(savedInstanceState));
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        handleIntent(intent);
+    }
+
+    private void handleIntent(@NonNull Intent intent) {
+        try{
+            String path = intent.getStringExtra(URI_DATA);
+            if (null != path) {
+                Uri data = Uri.parse(path);
+                MusicModel md = DataModelHelper.buildMusicModelFrom(this, data);
+                if (null != md) {
+                    List<MusicModel> singlePickedItemList = new ArrayList<>();
+                    singlePickedItemList.add(md);
+                    mPulseController.setPlaylist(singlePickedItemList, 0);
+                    mRemote.play();
+                }
+            }
+        } catch (Exception e) {
+            if (BuildConfig.DEBUG) e.printStackTrace();
+            else LogUtils.logException(e);
+        }
     }
 
     @Override
@@ -203,18 +230,7 @@ public class MainContentActivity extends DraggableNowPlayingSheetActivity {
                 mController.getTransportControls().sendCustomAction(PlaybackManager.ACTION_LOAD_LAST_TRACK, bundle);
             });
         }
-
-        String path = getIntent().getStringExtra(URI_DATA);
-        if (null != path) {
-            Uri data = Uri.parse(path);
-            MusicModel md = DataModelHelper.buildMusicModelFrom(this, data);
-            if (null != md) {
-                List<MusicModel> singlePickedItemList = new ArrayList<>();
-                singlePickedItemList.add(md);
-                mPulseController.setPlaylist(singlePickedItemList, 0);
-                mRemote.play();
-            }
-        }
+        handleIntent(getIntent());
     }
 
     @Override
