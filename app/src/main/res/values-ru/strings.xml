@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Translated by MelianMiko | https://github.com/melianmiko -->
+
+    <!-- Content description -->
+    <string name="desc_album_art">Обложка альбома</string>
+    <string name="desc_close_btn">Закрыть</string>
+    <string name="desc_action_btn">Конпка действия</string>
+    <string name="desc_icon_button">Конпка с иконкой</string>
+    <string name="desc_confirm_btn">Подтвердить</string>
+    <string name="desc_play_pause_btn">Кнопка паузы\воспроизведения</string>
+
+    <!-- General strings -->
+    <string name="equalizer">Эквалайзер</string>
+    <string name="shuffle">Перемешать</string>
+    <string name="tracks_not_found">Музыка не найдена</string>
+    <string name="unknown">Неизвестно</string>
+
+    <!-- Dialogs -->
+    <string name="question_enter_your_name">Введите ваше имя</string>
+    <string name="toast_enter_your_name">Введите ваше имя</string>
+    <string name="edit_playlist_title">Изменить название плейлиста</string>
+    <string name="hint_create_playlist">Введите название плейлиста</string>
+    <string name="add_track_to">Добавить в\.\.\.</string>
+    <string name="message_no_playlist_found">Плейлисты не найдены\nНажмите кнопку "Добавить", чтобы создать новый</string>
+    <string name="toast_added_to_playlist">Трек добавлен в плейлист</string>
+    <string name="toast_add_to_playlist_failed">Не удалось добавить трек</string>
+    <string name="yes">Да</string>
+    <string name="set">Применить</string>
+    <string name="confirm">Подтвердить</string>
+    <string name="cancel">Отмена</string>
+
+
+    <!-- Navigation section titles -->
+    <string name="nav_home">Главная</string>
+    <string name="nav_library">Треки</string>
+    <string name="nav_albums">Альбомы</string>
+    <string name="nav_artists">Исполнители</string>
+    <string name="nav_playlist">Плейлисты</string>
+
+
+    <!-- Home Fragment -->
+    <string name="track_picker">Открыть…</string>
+    <string name="for_you">Для вас</string>
+    <string name="rediscover">Откройте для себя заново</string>
+    <string name="new_in_library">Недавно добавлено</string>
+    <string name="top_artist">Топ исполнителей</string>
+    <string name="top_albums">Топ альбомов</string>
+    <string name="played_n_times" formatted="true">Прослушано %d ращ</string>
+    <string name="toast_selected_track_load_failed">Не удалось вопроизвести, ошибка загрузки</string>
+
+
+    <!-- Home menu contents -->
+    <string name="welcome">Привет,</string>
+    <string name="def_user_name">Пользователь</string>
+    <string name="footer_message">Сделано с \u2665 в Индии</string>
+    <string name="select_image">Выберите изображение</string>
+    <string name="toast_select_image_error">Ошибка применения изображения</string>
+
+
+    <!-- Playlist fragment -->
+    <string name="playlist_play_queue">Очередь воспроизведения</string>
+    <string name="playlist_delete_dialog_title">Удалить выбранный плейлист?</string>
+    <string name="toast_playlist_deleted_success">Плейлист удалён успешно</string>
+    <string name="cannot_delete_default_playlist">Не удалось удалить плейлист</string>
+
+
+    <!-- Toolbar Options menu -->
+    <string name="title_sort_order">Сортировать по\.\.\.</string>
+    <string name="alphabet_asc">От А до Я</string>
+    <string name="alphabet_desc">От Я до А</string>
+    <string name="duration_asc">Продолжительность ↑</string>
+    <string name="duration_desc">Продолжительность ↓</string>
+    <string name="date_added_asc">Дата добавления (старее</string>
+    <string name="date_added_desc">Дата добавления (новее)</string>
+    <string name="date_modified_asc">Дата изменения (старее)</string>
+    <string name="date_modified_desc">Дата изменения (новее)</string>
+    <string name="album_track_number_asc">От первого в альбоме</string>
+    <string name="album_track_number_desc">От последнего в альбоме</string>
+    <string name="album_artist_asc">Исполнитель (от А до Я)</string>
+    <string name="album_artist_desc">Исполнитель (от Я до А)</string>
+    <string name="album_year_asc">Год (от старых)</string>
+    <string name="album_year_desc">Гот (от новых)</string>
+    <string name="create_playlist">Создать плейлист</string>
+    <string name="toast_equalizer_not_found">Эквалайзер не найдет</string>
+    <string name="column_count">Количество столбцов</string>
+    <string name="column_count_land">Количество столбцов (альбомная ориентация)</string>
+    <string name="one">Один</string>
+    <string name="two">Два</string>
+    <string name="three">Три</string>
+    <string name="four">Четыре</string>
+    <string name="five">Пять</string>
+    <string name="six">Шесть</string>
+    <string name="remove_duplicates">Удалить дубликаты</string>
+
+
+    <!-- Options menu for list items -->
+    <string name="play_next">Воспроизвести следующим</string>
+    <string name="toast_added_to_play_next">Трек добавлен в очередь после текущего</string>
+    <string name="add_to_queue">Добавить в очередь</string>
+    <string name="toast_added_to_queue">Трек добавлен в конец очереди</string>
+    <string name="add_to_playlist">Добавить в плейлист</string>
+    <string name="go_to_album">К альбому</string>
+    <string name="go_to_artist">К исполнителю</string>
+    <string name="track_info">Информация о треке</string>
+
+
+    <!-- Playlist tracks Activity -->
+    <string name="message_empty_playlist">Плейлист пуст</string>
+    <string name="track_removed_from_queue">Трек удалён</string>
+    <string name="undo">Отменить</string>
+    <string name="play">Играть</string>
+    <string name="add">Добавить</string>
+    <string name="clear_all">Очистить</string>
+    <string name="toast_playlist_shuffle_success">Плейлист перемешан успешно</string>
+    <string name="coming_up_next">Далее</string>
+    <string name="current_queue">Далее…</string>
+
+
+    <!-- Favorites Playlist Activity-->
+    <string name="favorites">Избранное</string>
+    <string name="your_favorites">Ваше любимое</string>
+    <string name="message_empty_favorites">У вас нет избранных треков\nДобавьте их сюда, нажав \u2665</string>
+
+
+    <!-- Recent Activity-->
+    <string name="recent">Недавние</string>
+    <string name="recent_playlist_title">Недавно прослушанное</string>
+    <string name="message_empty_recent">Вы ничего ещё не слушали\n\u2639</string>
+
+
+    <!-- Now Playing Activity -->
+    <string name="now_playing">Сейчас проигрывается</string>
+    <string name="toast_added_to_favorites">Добавлено в избранное</string>
+    <string name="toast_cannot_add_to_favorites">Трек не может быть добавлен в избранное</string>
+    <string name="toast_removed_from_favorites">Трек удалён из избранного</string>
+    <string name="playlist_completed">Плейлист закончился</string>
+
+
+    <!-- Media Folder Chooser Activity -->
+    <string name="select_folders">Выбрать папки</string>
+    <string name="message_empty_folders_list">Папки с музыкой не найдены\n\u2639</string>
+
+
+    <!-- Details Activity -->
+    <!-- We can't use "This artist has..." becouse of russian numerals cases -->
+    <string name="artist_tracks_count">Альбомы: ● %d</string>
+    <string name="album_tracks_count">Треков: ●</string>
+    <string name="suffix_tracks">треков</string>
+    <string name="suffix_albums">альбомов</string>
+
+
+    <!-- Song info dialog -->
+    <string name="track">Название</string>
+    <string name="file_size">Размер файла</string>
+    <string name="file_type">Тип файла</string>
+    <string name="bitrate">Битрейт</string>
+    <string name="sample_rate">Частота дискретизации</string>
+    <string name="channel_count">Количество каналов</string>
+
+
+    <!-- Search Activity -->
+    <string name="hint_search">Поиск музыки\.\.\.</string>
+    <string name="message_empty_search_result">Ничего не найдено</string>
+
+
+    <!-- Settings Activity -->
+    <string name="settings">Настройки</string>
+    <string name="restart_app">Перезапустить приложение</string>
+    <string name="restart_app_dialog_desc">Для применения изменений нужно перезапустить приложение</string>
+    <string name="restart">Применить</string>
+    <string name="do_it_later">Позже</string>
+
+
+    <!-- Category -->
+    <!-- Descriptions replaced with example settings, this would be more informative -->
+    <string name="general">Основное</string>
+    <string name="general_desc">Папки, фильтр файлов</string>
+
+    <string name="theme">Внешний вид</string>
+    <string name="theme_desc">Тёмная тема, выбор цвета</string>
+
+    <string name="now_playing_title">Экран проигрывателя</string>
+    <string name="now_playing_desc">Стиль, углы</string>
+
+    <string name="audio">Настройки воспроизведения</string>
+    <string name="audio_desc">Авто-воспроизведение</string>
+
+    <string name="contributors">Команда разработки</string>
+    <string name="contributors_desc">Разработчики, переводчики</string>
+
+    <string name="support_development">Сказать спасибо</string>
+    <string name="support_development_desc">Поддержать проект материально</string>
+
+    <string name="about">О приложении</string>
+    <string name="about_desc">Версия, дата сборки, ссылки</string>
+
+
+    <!-- General Section -->
+    <string name="category_loader">Фильтр музыки</string>
+    <string name="ignored_folder_title">Исключить папки</string>
+    <string name="ignored_folder_desc">Выбрать папки, файлы из которых не будут отображаться в приложении</string>
+    <string name="ignored_folder_picker_title">Выбрать папки</string>
+    <string name="ignored_folder_picker_empty_text">Список пуст</string>
+    <string name="toast_folder_added_to_ignored_list">Папка добавлена в исключения</string>
+    <string name="toast_failed_to_add_folder">Не удалось добавить папку в исключения</string>
+    <string name="toast_removed_folder_from_ignored_list">Папка удалена из исключений</string>
+    <string name="duration_filter_title">Фильтр по продолжительности</string>
+    <string name="duration_filter_desc">Не показывать треки, длинной менее:</string>
+    <string name="duration_filter_unit">сек</string>
+    <string name="category_others">Прочее</string>
+    <string name="remember_last_track_title">Запоминать последний проигранный трек</string>
+    <string name="remember_last_track_desc">Последний воспроизведённый файл будет сохранён при выходе из приложения</string>
+    <string name="edit_playlist_sections_title">Выбрать плейлисты</string>
+    <string name="edit_playlist_section_desc">Выберите, какие списки воспроизведения будут отображаться на главной странице</string>
+    <string name="playlist_section_selector_title">Показывать плейлисты на главной</string>
+    <string name="rediscover_section_desc">Примечание: этот раздел динамический, и может не отображаться, даже если настройка включена</string>
+
+    <!-- Theme section -->
+    <string name="category_theme">Тема офорления</string>
+    <string name="select_dark_theme">Стиль тёмной темы</string>
+    <string name="select_dark_theme_desc">Какой вариант тёмной темы использовать</string>
+    <string name="enable_dark_mode">Включить тёмную тему</string>
+    <string name="enable_dark_mode_desc">Всегда использовать тёмную тему</string>
+    <string name="enable_auto_mode">Включать только вечером</string>
+    <string name="enable_auto_mode_desc">Тёмная тема не будет использоваться днём</string>
+
+    <string name="category_colors">Цвета</string>
+    <string name="desaturated_accents">Менее насыщенные цвета</string>
+    <string name="desaturated_accents_desc">Сделать цвет более светлым, если используется тёмная тема</string>
+    <string name="pick_accent_color">Выбрать цвет акцента</string>
+    <string name="pick_accent_color_desc">Выберите его на свой вкус</string>
+    <string name="accents_color_picker_title">Дополнительный цвет</string>
+    <string name="custom">Другой</string>
+    <string name="select_custom_accent">Выбрать свой цвет</string>
+
+    <string name="dark_theme_gray">Просто серый</string>
+    <string name="dark_theme_signature">Цветной</string>
+    <string name="dark_theme_lights_out">Полностью чёрный</string>
+
+    <string name="select_dark_theme_style">Выбрать тёмную тему</string>
+
+
+    <!-- Now playing settings -->
+    <string name="category_style">Стиль экрана</string>
+    <string name="select_np_style">Выбрать стиль оформления проигрывателя</string>
+    <string name="select_np_style_desc">Стиль экрана воспроизведения</string>
+    <string name="style_modern">Современный</string>
+    <string name="style_stylish">Стильный</string>
+    <string name="style_edge">От края до края</string>
+    <string name="corner_radius">Радиус скругления</string>
+    <string name="corner_radius_desc">Настроить скругление экрана проигрывателя</string>
+    <string name="corner_radius_selector_title">Настроить радиус</string>
+    <string name="corner_radius_unit">dp</string>
+    <string name="top_left">Верхний левый</string>
+    <string name="top_right">Верхний правый</string>
+    <string name="bottom_left">Нижний левый</string>
+    <string name="bottom_right">Нижний правый</string>
+    <string name="category_controls">Управление</string>
+    <string name="enable_seek_buttons">Кнопки перемотки</string>
+    <string name="enable_seek_buttons_desc">Заменить кнопки переключения кнопками перемотки</string>
+    <string name="change_seek_duration">Время перемотки</string>
+    <string name="change_seek_duration_desc">Насколько перематывать при нажатии</string>
+    <string name="seek_duration_selector_title">Время перемотки</string>
+    <string name="forward_seek">Перемотка вперёд</string>
+    <string name="reverse_seek">Перемотка назад</string>
+
+
+    <!-- Audio settings -->
+    <string name="category_auto_play">Автозапуск</string>
+    <string name="bluetooth_auto_play">При Bluetooth-подключении</string>
+    <string name="bluetooth_auto_play_desc">Запускать проигрывание при подключении устройства</string>
+    <string name="bluetooth_auto_play_action">Что проигрывать при Bluetooth-подключении</string>
+    <string name="bluetooth_auto_play_action_desc">Какой именно плейлист воспроизводить</string>
+    <string name="select_bluetooth_action">Что проигрывать</string>
+    <string name="play_shuffle">Все треки вперемешку</string>
+    <string name="play_new_in_store">Недавно добавленные</string>
+    <string name="play_for_you">Плейлист \"Для тебя\"</string>
+
+
+    <!-- Contributors -->
+    <string name="lead_developer">Основные разработчики</string>
+
+    <!-- Donations -->
+    <string name="category_contribute">Поддержать</string>
+    <string name="donation_card_title">Нравится Pulse Music?</string>
+    <string name="donation_card_text">На создание приложения уходит много времени, а вы получаете его совершенно бесплатно. Если вам нравится то, что я делаю, вы можете поддержать меня материално</string>
+    <string name="buy_me_coffee">Купить чашечку кофе</string>
+
+    <!-- About -->
+    <string name="category_app_info">О приложении</string>
+    <string name="app_version">Версия</string>
+    <string name="build_date">Дата сборки</string>
+    <string name="build_type">Тип сборки</string>
+    <string name="build_code">Номер сборки</string>
+    <string name="category_social_links">Ссылки</string>
+    <string name="source_on_github">Исходный код (GitHub)</string>
+
+
+    <!-- Accents -->
+    <!-- For translators: If the color words does not make much sense in your language,
+    you can try substituting a similar description of the color. But keep it short
+    -->
+    <string name="exodus_fruit">Фиолетовый</string>
+    <string name="electron_blue">Лазурный</string>
+    <string name="mint_leaf">Мятный</string>
+    <string name="chi_gong">Красный</string>
+    <string name="sei_bar">Коричневый</string>
+    <string name="coral">Кораловый</string>
+    <string name="sunkist">Жёлтый</string>
+    <string name="blue_pink">Синий</string>
+
+
+    <!-- Custom accents dialog -->
+    <string name="hint_hex_color">HEX</string>
+    <string name="invalid_color">Неверный цвет</string>
+    <string name="apply">Применить</string>
+    <string name="presets">Палитра</string>
+
+    <!-- App shortcuts -->
+    <string name="shortcut_shuffle">Перемешать</string> <!-- Max length = 10 characters including spaces-->
+    <string name="shortcut_shuffle_desc">Перемешать</string> <!-- Max length = 25 characters including spaces-->
+
+    <string name="shortcut_latest">Последние</string> <!-- Max length = 10 characters including spaces-->
+    <string name="shortcut_latest_desc">Последние</string> <!-- Max length = 25 characters including spaces-->
+
+    <string name="shortcut_suggested_label">Для вас</string> <!-- Max length = 10 characters including spaces-->
+    <string name="shortcut_suggested_label_long">Для вас</string>
+    <string name="app_name">Pulse Music</string>
+    <string name="notification_playback_channel_name">Уведомление плеера</string>
+    <string name="notification_audio_channel_name">Авто-обнаружение устройств</string>
+    <string name="pay_pal">PayPal</string>
+    <string name="color_channel_r">R</string>
+    <string name="color_channel_g">G</string>
+    <string name="color_channel_b">B</string> <!-- Max length = 25 characters including spaces-->
+</resources>
