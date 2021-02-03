@@ -50,7 +50,7 @@ public class SplashActivity extends ThemeActivity {
                 startMusicLoader();
             } else {
                 // Permission was not granted
-                Toast.makeText(this, "App needs to access device storage to work", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, getString(R.string.toast_requires_storage_access), Toast.LENGTH_LONG).show();
                 new Handler().postDelayed(this::finish, 1500);
             }
         }

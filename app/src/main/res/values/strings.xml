@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Pulse Music</string>
+    <string name="toast_requires_storage_access">App needs to access device storage to work</string>
 
     <string name="notification_playback_channel_name">Music Notification</string>
     <string name="notification_audio_channel_name">Audio Device Detection</string>
@@ -151,7 +152,6 @@
     <string name="artist_tracks_count">Artist has ● %d albums</string>
     <string name="album_tracks_count">Album contains ● %d tracks</string>
     <string name="suffix_tracks">tracks</string>
-    <string name="suffix_albums">albums</string>
 
 
     <!-- Song info dialog -->

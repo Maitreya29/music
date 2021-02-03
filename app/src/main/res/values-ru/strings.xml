@@ -2,6 +2,11 @@
 <resources>
     <!-- Translated by MelianMiko | https://github.com/melianmiko -->
 
+    <string name="app_name">Pulse Music</string>
+
+    <string name="notification_playback_channel_name">Уведомление плеера</string>
+    <string name="notification_audio_channel_name">Авто-обнаружение устройств</string>
+
     <!-- Content description -->
     <string name="desc_album_art">Обложка альбома</string>
     <string name="desc_close_btn">Закрыть</string>
@@ -147,7 +152,6 @@
     <string name="artist_tracks_count">Альбомы: ● %d</string>
     <string name="album_tracks_count">Треков: ●</string>
     <string name="suffix_tracks">треков</string>
-    <string name="suffix_albums">альбомов</string>
 
 
     <!-- Song info dialog -->
@@ -286,6 +290,7 @@
     <string name="donation_card_title">Нравится Pulse Music?</string>
     <string name="donation_card_text">На создание приложения уходит много времени, а вы получаете его совершенно бесплатно. Если вам нравится то, что я делаю, вы можете поддержать меня материално</string>
     <string name="buy_me_coffee">Купить чашечку кофе</string>
+    <string name="pay_pal">PayPal</string>
 
     <!-- About -->
     <string name="category_app_info">О приложении</string>
@@ -314,6 +319,9 @@
     <!-- Custom accents dialog -->
     <string name="hint_hex_color">HEX</string>
     <string name="invalid_color">Неверный цвет</string>
+    <string name="color_channel_r">R</string>
+    <string name="color_channel_g">G</string>
+    <string name="color_channel_b">B</string>
     <string name="apply">Применить</string>
     <string name="presets">Палитра</string>
 
@@ -325,12 +333,5 @@
     <string name="shortcut_latest_desc">Последние</string> <!-- Max length = 25 characters including spaces-->
 
     <string name="shortcut_suggested_label">Для вас</string> <!-- Max length = 10 characters including spaces-->
-    <string name="shortcut_suggested_label_long">Для вас</string>
-    <string name="app_name">Pulse Music</string>
-    <string name="notification_playback_channel_name">Уведомление плеера</string>
-    <string name="notification_audio_channel_name">Авто-обнаружение устройств</string>
-    <string name="pay_pal">PayPal</string>
-    <string name="color_channel_r">R</string>
-    <string name="color_channel_g">G</string>
-    <string name="color_channel_b">B</string> <!-- Max length = 25 characters including spaces-->
+    <string name="shortcut_suggested_label_long">Для вас</string> <!-- Max length = 25 characters including spaces-->
 </resources>
