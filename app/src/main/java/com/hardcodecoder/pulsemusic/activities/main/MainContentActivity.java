@@ -145,14 +145,15 @@ public class MainContentActivity extends DraggableNowPlayingSheetActivity {
         mAppBar = findViewById(R.id.main_app_bar);
         mPulseToolbar = mAppBar.findViewById(R.id.pulse_toolbar);
         mPulseToolbar.setNavigationIcon(R.drawable.ic_menu);
-        mPulseToolbar.setOptionsIcon(R.drawable.ic_search);
+        mPulseToolbar.setVisibleOptionIcon(R.drawable.ic_search);
 
         mPulseToolbar.setNavigationIconOnClickListener(v -> {
             HomeBottomSheetFragment homeBottomSheetFragment = HomeBottomSheetFragment.getInstance();
             homeBottomSheetFragment.show(getSupportFragmentManager(), HomeBottomSheetFragment.TAG);
         });
 
-        mPulseToolbar.setOptionIconOnClickListener(v -> startActivity(new Intent(this, SearchActivity.class)));
+        mPulseToolbar.setVisibleOptionIconOnClickListener(v ->
+                startActivity(new Intent(this, SearchActivity.class)));
     }
 
     private void setUpMainContents(Bundle savedInstanceState) {

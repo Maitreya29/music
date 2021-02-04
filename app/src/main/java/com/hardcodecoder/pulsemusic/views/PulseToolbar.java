@@ -8,25 +8,25 @@ import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.util.AttributeSet;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.themes.ThemeColors;
 import com.hardcodecoder.pulsemusic.utils.DimensionsUtil;
 
-public class PulseToolbar extends LinearLayout {
+public class PulseToolbar extends ConstraintLayout {
 
     private final ImageView mNavigationIcon;
     private final MaterialTextView mTitle;
-    private final ImageView mOptionsIcons;
+    private final ImageView mVisibleOptionIcon;
+    private final ImageView mOptionsIcon;
 
     public PulseToolbar(Context context) {
         this(context, null, 0);
@@ -42,13 +42,11 @@ public class PulseToolbar extends LinearLayout {
         LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, DimensionsUtil.getDimensionPixelSize(context, 56));
         setLayoutParams(params);
 
-        setGravity(Gravity.CENTER_VERTICAL);
-        setOrientation(LinearLayout.HORIZONTAL);
-
         View contents = View.inflate(context, R.layout.pulse_toolbar, this);
         mNavigationIcon = contents.findViewById(R.id.pt_navigation);
         mTitle = contents.findViewById(R.id.pt_title);
-        mOptionsIcons = contents.findViewById(R.id.pt_option);
+        mVisibleOptionIcon = contents.findViewById(R.id.pt_option_always_visible);
+        mOptionsIcon = contents.findViewById(R.id.pt_options);
     }
 
     public void setTitle(@Nullable String title, boolean accentFirstLetter) {
@@ -81,15 +79,27 @@ public class PulseToolbar extends LinearLayout {
         mNavigationIcon.setOnClickListener(listener);
     }
 
-    public void setOptionsIcon(@DrawableRes int drawableRes) {
-        mOptionsIcons.setImageResource(drawableRes);
+    public void setVisibleOptionIcon(@DrawableRes int drawableRes) {
+        mVisibleOptionIcon.setImageResource(drawableRes);
     }
 
-    public void setOptionsIcon(@Nullable Drawable drawable) {
-        mOptionsIcons.setImageDrawable(drawable);
+    public void setVisibleOptionIcon(@Nullable Drawable drawable) {
+        mVisibleOptionIcon.setImageDrawable(drawable);
     }
 
-    public void setOptionIconOnClickListener(@Nullable OnClickListener listener) {
-        mOptionsIcons.setOnClickListener(listener);
+    public void setVisibleOptionIconOnClickListener(@Nullable OnClickListener listener) {
+        mVisibleOptionIcon.setOnClickListener(listener);
+    }
+
+    public void setOptionsContextIcon(@DrawableRes int drawableRes) {
+        mOptionsIcon.setImageResource(drawableRes);
+    }
+
+    public void setOptionsContextIcon(@Nullable Drawable drawable) {
+        mOptionsIcon.setImageDrawable(drawable);
+    }
+
+    public void setOptionsContextIconOnClickListener(@Nullable OnClickListener listener) {
+        mOptionsIcon.setOnClickListener(listener);
     }
 }
