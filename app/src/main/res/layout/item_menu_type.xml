@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:layout_marginTop="8dp"
+    android:background="?attr/selectableItemBackground"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp">
+
+    <ImageView
+        android:id="@+id/menu_group_icon"
+        style="@style/ButtonStyle24"
+        android:layout_gravity="center_vertical"
+        android:contentDescription="@string/desc_icon"
+        tools:src="@drawable/ic_sort" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/menu_group_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="64dp"
+        android:layout_marginEnd="16dp"
+        android:maxLines="1"
+        android:textAppearance="@style/Appearance.Text.Subtitle1"
+        tools:text="@string/sort_order_title" />
+</FrameLayout>

@@ -14,6 +14,7 @@
     <string name="desc_icon_button">Icon button</string>
     <string name="desc_confirm_btn">Confirm selection</string>
     <string name="desc_play_pause_btn">Media play and pause button</string>
+    <string name="desc_icon">Icon</string>
 
 
     <!-- General strings -->
@@ -72,25 +73,34 @@
 
 
     <!-- Toolbar Options menu -->
-    <string name="title_sort_order">Sort order</string>
+    <string name="context_menu_title">Options</string>
+    <string name="toast_invalid_options_group">Invalid menu selected</string>
+    <string name="sort_order_title">Sort</string>
+    <string name="sort_category_title">Title</string>
     <string name="alphabet_asc">A to Z</string>
     <string name="alphabet_desc">Z to A</string>
+    <string name="sort_category_duration">Duration</string>
     <string name="duration_asc">Duration ↑</string>
     <string name="duration_desc">Duration ↓</string>
+    <string name="sort_category_date">Date</string>
     <string name="date_added_asc">Date added (oldest first)</string>
     <string name="date_added_desc">Date added (newest first)</string>
     <string name="date_modified_asc">Date modified (oldest first)</string>
     <string name="date_modified_desc">Date modified (newest first)</string>
+    <string name="sort_category_track_number">Track number</string>
     <string name="album_track_number_asc">Track number asc</string>
     <string name="album_track_number_desc">Track number desc</string>
+    <string name="sort_category_artist">Artist</string>
     <string name="album_artist_asc">Album artist asc</string>
     <string name="album_artist_desc">Album artist desc</string>
-    <string name="album_year_asc">Album year asc</string>
-    <string name="album_year_desc">Album year desc</string>
+    <string name="sort_category_year">Year</string>
+    <string name="album_year_asc">Album year (oldest first)</string>
+    <string name="album_year_desc">Album year (newest first)</string>
     <string name="create_playlist">Create playlist</string>
     <string name="toast_equalizer_not_found">Cannot find equalizer</string>
-    <string name="column_count">Column count</string>
-    <string name="column_count_land">Column count (landscape)</string>
+    <string name="column_title">Columns</string>
+    <string name="column_title_land">Column (landscape)</string>
+    <string name="column_category_count">Count</string>
     <string name="one">One</string>
     <string name="two">Two</string>
     <string name="three">Three</string>

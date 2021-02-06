@@ -71,7 +71,7 @@
 
 
     <!-- Toolbar Options menu -->
-    <string name="title_sort_order">Сортировать по\.\.\.</string>
+    <string name="sort_order_title">Сортировать по\.\.\.</string>
     <string name="alphabet_asc">От А до Я</string>
     <string name="alphabet_desc">От Я до А</string>
     <string name="duration_asc">Продолжительность ↑</string>
@@ -88,8 +88,8 @@
     <string name="album_year_desc">Гот (от новых)</string>
     <string name="create_playlist">Создать плейлист</string>
     <string name="toast_equalizer_not_found">Эквалайзер не найдет</string>
-    <string name="column_count">Количество столбцов</string>
-    <string name="column_count_land">Количество столбцов (альбомная ориентация)</string>
+    <string name="column_title">Количество столбцов</string>
+    <string name="column_title_land">Количество столбцов (альбомная ориентация)</string>
     <string name="one">Один</string>
     <string name="two">Два</string>
     <string name="three">Три</string>

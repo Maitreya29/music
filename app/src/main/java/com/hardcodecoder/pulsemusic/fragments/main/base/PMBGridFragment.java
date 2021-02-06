@@ -2,7 +2,6 @@ package com.hardcodecoder.pulsemusic.fragments.main.base;
 
 import android.content.res.Configuration;
 
-import androidx.annotation.MenuRes;
 import androidx.annotation.NonNull;
 
 public abstract class PMBGridFragment extends PulseFragment {
@@ -55,20 +54,14 @@ public abstract class PMBGridFragment extends PulseFragment {
     }
 
     protected void updateGridSpanCount(int id, int spanCount) {
-        saveNewSpanCount(id, spanCount);
         onLayoutSpanCountChanged(id, spanCount);
     }
-
-    @MenuRes
-    public abstract int getMenuRes(int screenOrientation);
 
     public abstract int getSortOrder();
 
     public abstract int getPortraitModeSpanCount();
 
     public abstract int getLandscapeModeSpanCount();
-
-    public abstract void saveNewSpanCount(int configId, int spanCount);
 
     public abstract void onSortOrderChanged(int newSortOrder);
 

@@ -101,7 +101,7 @@ public class MainContentActivity extends DraggableNowPlayingSheetActivity {
     }
 
     private void handleIntent(@NonNull Intent intent) {
-        try{
+        try {
             String path = intent.getStringExtra(URI_DATA);
             if (null != path) {
                 Uri data = Uri.parse(path);
@@ -146,6 +146,7 @@ public class MainContentActivity extends DraggableNowPlayingSheetActivity {
         mPulseToolbar = mAppBar.findViewById(R.id.pulse_toolbar);
         mPulseToolbar.setNavigationIcon(R.drawable.ic_menu);
         mPulseToolbar.setVisibleOptionIcon(R.drawable.ic_search);
+        mPulseToolbar.setOptionsContextIcon(R.drawable.ic_options);
 
         mPulseToolbar.setNavigationIconOnClickListener(v -> {
             HomeBottomSheetFragment homeBottomSheetFragment = HomeBottomSheetFragment.getInstance();
@@ -154,6 +155,9 @@ public class MainContentActivity extends DraggableNowPlayingSheetActivity {
 
         mPulseToolbar.setVisibleOptionIconOnClickListener(v ->
                 startActivity(new Intent(this, SearchActivity.class)));
+        mPulseToolbar.setOptionsContextIconOnClickListener(v -> {
+            if (null != activeFrag) activeFrag.showOptionsMenu();
+        });
     }
 
     private void setUpMainContents(Bundle savedInstanceState) {
@@ -217,6 +221,7 @@ public class MainContentActivity extends DraggableNowPlayingSheetActivity {
         mAppBar.post(() -> {
             mAppBar.setExpanded(true);
             mPulseToolbar.setTitle(activeFrag.getFragmentTitle(this), true);
+            mPulseToolbar.showOptions(activeFrag.hasToolbarContextMenu());
         });
     }
 

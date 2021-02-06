@@ -2,8 +2,6 @@ package com.hardcodecoder.pulsemusic.fragments.main;
 
 import android.content.Context;
 import android.content.res.Configuration;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewStub;
 import android.view.animation.AnimationUtils;
@@ -17,7 +15,9 @@ import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.Preferences;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.adapters.main.ArtistAdapter;
+import com.hardcodecoder.pulsemusic.dialog.ToolbarContextMenuDialog;
 import com.hardcodecoder.pulsemusic.fragments.main.base.CardGridFragment;
+import com.hardcodecoder.pulsemusic.fragments.main.base.PulseFragment;
 import com.hardcodecoder.pulsemusic.interfaces.GridAdapterCallback;
 import com.hardcodecoder.pulsemusic.interfaces.SimpleTransitionClickListener;
 import com.hardcodecoder.pulsemusic.loaders.LoaderHelper;
@@ -25,10 +25,12 @@ import com.hardcodecoder.pulsemusic.loaders.SortOrder.ARTIST;
 import com.hardcodecoder.pulsemusic.model.ArtistModel;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 import com.hardcodecoder.pulsemusic.utils.NavigationUtil;
+import com.hardcodecoder.pulsemusic.utils.ToolbarMenuBuilder;
 
 import java.util.List;
 
-public class ArtistFragment extends CardGridFragment implements SimpleTransitionClickListener, GridAdapterCallback {
+public class ArtistFragment extends CardGridFragment
+        implements SimpleTransitionClickListener, GridAdapterCallback, PulseFragment.OptionsMenuListener {
 
     public static final String TAG = "Artists";
     private RecyclerView mRecyclerView;
@@ -63,83 +65,27 @@ public class ArtistFragment extends CardGridFragment implements SimpleTransition
     }
 
     @Override
-    public void onPrepareOptionsMenu(@NonNull Menu menu) {
-        MenuItem sortItem = null;
-        final int sortOrder = getCurrentSortOrder();
-
-        if (sortOrder == Preferences.SORT_ORDER_ASC)
-            sortItem = menu.findItem(R.id.menu_action_sort_artist_title_asc);
-        else if (sortOrder == Preferences.SORT_ORDER_DESC)
-            sortItem = menu.findItem(R.id.menu_action_sort_artist_title_desc);
-
-
-        MenuItem spanItem = null;
-        final int spanCount = getCurrentSpanCount();
-
-        if (spanCount == 2)
-            spanItem = menu.findItem(R.id.artist_two);
-        else if (spanCount == 3)
-            spanItem = menu.findItem(R.id.artist_three);
-        else if (spanCount == 4)
-            spanItem = menu.findItem(R.id.artist_four);
-        else if (spanCount == 5)
-            spanItem = menu.findItem(R.id.artist_five);
-        else if (spanCount == 6)
-            spanItem = menu.findItem(R.id.artist_six);
-
-        if (sortItem != null)
-            sortItem.setChecked(true);
-        if (spanItem != null)
-            spanItem.setChecked(true);
+    public void showOptionsMenu() {
+        ToolbarContextMenuDialog toolbarMenuDialog = ToolbarMenuBuilder.buildDefaultOptionsMenu(
+                requireActivity(),
+                this,
+                Preferences.SORT_ORDER_GROUP_ARTISTS,
+                Preferences.COLUMN_COUNT_GROUP_ARTISTS);
+        toolbarMenuDialog.show(requireFragmentManager(), ToolbarContextMenuDialog.TAG);
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        final int groupId = item.getGroupId();
-        if (groupId == R.id.group_artist_sort) {
-            final int id = item.getItemId();
-            int sortOrder;
-
-            if (id == R.id.menu_action_sort_artist_title_desc)
-                sortOrder = Preferences.SORT_ORDER_DESC;
-            else sortOrder = Preferences.SORT_ORDER_ASC;
-
-            changeSortOrder(sortOrder);
-
-        } else if (groupId == R.id.group_artist_grid) {
-            final int id = item.getItemId();
-            int spanCount;
-
-            if (id == R.id.artist_two)
-                spanCount = 2;
-            else if (id == R.id.artist_three)
-                spanCount = 3;
-            else if (id == R.id.artist_four)
-                spanCount = 4;
-            else if (id == R.id.artist_five)
-                spanCount = 5;
-            else if (id == R.id.artist_six)
-                spanCount = 6;
-            else spanCount = 2;
-
-            updateGridSpanCount(getCurrentOrientation(), spanCount);
-        }
-
-        item.setChecked(true);
-        return true;
+    public void onItemSelected(int groupId, int selectedItemId) {
+        if (groupId == Preferences.SORT_ORDER_GROUP_ARTISTS)
+            changeSortOrder(selectedItemId);
+        else if (groupId == Preferences.COLUMN_COUNT_GROUP_ARTISTS)
+            updateGridSpanCount(getCurrentOrientation(), selectedItemId);
     }
 
     private ARTIST resolveSortOrder(int sortOrder) {
         if (sortOrder == Preferences.SORT_ORDER_ASC)
             return ARTIST.TITLE_ASC;
         return ARTIST.TITLE_DESC;
-    }
-
-    @Override
-    public int getMenuRes(int screenOrientation) {
-        if (screenOrientation == Configuration.ORIENTATION_LANDSCAPE)
-            return R.menu.menu_artist_land;
-        return R.menu.menu_artist;
     }
 
     @Override
@@ -179,15 +125,11 @@ public class ArtistFragment extends CardGridFragment implements SimpleTransition
     }
 
     @Override
-    public void saveNewSpanCount(int configId, int spanCount) {
-        if (configId == Configuration.ORIENTATION_PORTRAIT)
-            AppSettings.savePortraitModeGridSpanCount(requireContext(), Preferences.ARTIST_SPAN_COUNT_PORTRAIT_KEY, spanCount);
-        else if (configId == Configuration.ORIENTATION_LANDSCAPE)
-            AppSettings.saveLandscapeModeGridSpanCount(requireContext(), Preferences.ARTIST_SPAN_COUNT_LANDSCAPE_KEY, spanCount);
-    }
-
-    @Override
     public void onLayoutSpanCountChanged(int currentOrientation, int spanCount) {
+        if (currentOrientation == Configuration.ORIENTATION_PORTRAIT)
+            AppSettings.savePortraitModeGridSpanCount(requireContext(), Preferences.ARTIST_SPAN_COUNT_PORTRAIT_KEY, spanCount);
+        else if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE)
+            AppSettings.saveLandscapeModeGridSpanCount(requireContext(), Preferences.ARTIST_SPAN_COUNT_LANDSCAPE_KEY, spanCount);
         if (mLayoutManager == null) return;
         mFirstVisibleItemPosition = mLayoutManager.findFirstVisibleItemPosition();
         mAdapter.updateSpanCount(currentOrientation, spanCount);

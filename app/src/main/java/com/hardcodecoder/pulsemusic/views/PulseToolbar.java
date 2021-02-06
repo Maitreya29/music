@@ -102,4 +102,8 @@ public class PulseToolbar extends ConstraintLayout {
     public void setOptionsContextIconOnClickListener(@Nullable OnClickListener listener) {
         mOptionsIcon.setOnClickListener(listener);
     }
+
+    public void showOptions(boolean show) {
+        mOptionsIcon.setVisibility(show ? VISIBLE : GONE);
+    }
 }

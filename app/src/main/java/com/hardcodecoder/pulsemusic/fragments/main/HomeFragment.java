@@ -59,6 +59,7 @@ public class HomeFragment extends PulseFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        setHasContextMenu(false);
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 

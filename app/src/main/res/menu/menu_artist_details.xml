@@ -5,7 +5,7 @@
     <item
         android:icon="@drawable/ic_sort"
         android:orderInCategory="1"
-        android:title="@string/title_sort_order"
+        android:title="@string/sort_order_title"
         app:iconTint="?attr/colorControlNormal"
         app:showAsAction="ifRoom">
         <menu>

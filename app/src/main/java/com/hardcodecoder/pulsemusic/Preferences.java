@@ -9,7 +9,15 @@ public class Preferences {
     public static final String SORT_ORDER_ALBUM_DETAILS_KEY = "AlbumDetailsSortOrder";
     public static final String SORT_ORDER_ARTIST_DETAILS_KEY = "ArtistDetailsSortOrder";
     public static final String SORT_ORDER_ARTIST_KEY = "ArtistsSortOrder";
-    // In range 3000 - 3100
+
+    public static final int MENU_GROUP_TYPE_SORT = 2500;
+    public static final short SORT_ORDER_GROUP_LIBRARY = 2501;
+    public static final short SORT_ORDER_GROUP_ALBUMS = 2502;
+    public static final short SORT_ORDER_GROUP_ARTISTS = 2503;
+    public static final short SORT_ORDER_GROUP_ALBUMS_DETAILS = 2504;
+    public static final short SORT_ORDER_GROUP_ARTISTS_DETAILS = 2505;
+
+    // Short order id's (In range 3000 - 3100)
     public static final int SORT_ORDER_ASC = 3000;
     public static final int SORT_ORDER_DESC = 3001;
     public static final int SORT_ORDER_DURATION_ASC = 3002;
@@ -41,6 +49,19 @@ public class Preferences {
 
     public static final int SPAN_COUNT_PORTRAIT_DEF_VALUE = 2;
     public static final int SPAN_COUNT_LANDSCAPE_DEF_VALUE = 4;
+
+    public static final int MENU_GROUP_TYPE_COLUMN_COUNT = 3500;
+    public static final short COLUMN_COUNT_GROUP_LIBRARY = 3501;
+    public static final short COLUMN_COUNT_GROUP_ALBUMS = 3502;
+    public static final short COLUMN_COUNT_GROUP_ARTISTS = 3503;
+
+    public static final String COLUMN_COUNT = "ColumnCount";
+    public static final short COLUMN_COUNT_ONE = 1;
+    public static final short COLUMN_COUNT_TWO = 2;
+    public static final short COLUMN_COUNT_THREE = 3;
+    public static final short COLUMN_COUNT_FOUR = 4;
+    public static final short COLUMN_COUNT_FIVE = 5;
+    public static final short COLUMN_COUNT_SIX = 6;
 
     public static final String PULSE_THEMES_PREFS = "PulseThemes";
 
