@@ -46,7 +46,7 @@ public class ToolbarMenuBuilder {
 
     @NonNull
     public static MenuDetailsDialog buildSortOrderDialog(@NonNull Context context, int groupId, @NonNull OptionsMenuListener listener) {
-        MenuDetailsDialog itemsDialog = new MenuDetailsDialog(context.getString(R.string.sort_order_title), groupId, listener);
+        MenuDetailsDialog itemsDialog = new MenuDetailsDialog(context.getString(R.string.sort_by_title), groupId, listener);
 
         // Sort by name
         MenuItem nameItem1 = new MenuItem(Preferences.SORT_ORDER_ASC,

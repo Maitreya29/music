@@ -77,6 +77,7 @@
     <string name="context_menu_title">Options</string>
     <string name="toast_invalid_options_group">Invalid menu selected</string>
     <string name="sort_order_title">Sort</string>
+    <string name="sort_by_title">Sort by</string>
     <string name="sort_category_title">Title</string>
     <string name="alphabet_asc">A to Z</string>
     <string name="alphabet_desc">Z to A</string>
