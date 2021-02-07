@@ -5,12 +5,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.hardcodecoder.pulsemusic.views.MarqueeTitleToolbar
-        android:id="@+id/details_activity_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+    <ImageView
+        android:id="@+id/details_activity_close_btn"
+        style="@style/ButtonStyle24"
+        android:layout_marginStart="4dp"
+        android:contentDescription="@string/desc_close_btn"
+        android:src="@drawable/ic_close"
+        app:layout_constraintBottom_toBottomOf="@id/details_activity_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/details_activity_title" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/details_activity_title"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:ellipsize="marquee"
+        android:fadingEdge="horizontal"
+        android:focusable="true"
+        android:gravity="center"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:paddingStart="72dp"
+        android:paddingEnd="72dp"
+        android:requiresFadingEdge="horizontal"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
+        android:textAppearance="@style/Appearance.Text.Body1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:title="@tools:sample/full_names" />
+        tools:text="@tools:sample/full_names" />
+
+    <ImageView
+        android:id="@+id/details_activity_options_btn"
+        style="@style/ButtonStyle24"
+        android:layout_marginEnd="4dp"
+        android:contentDescription="@string/desc_options_btn"
+        android:src="@drawable/ic_options"
+        app:layout_constraintBottom_toBottomOf="@id/details_activity_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/details_activity_title" />
 
     <com.hardcodecoder.pulsemusic.views.MediaArtImageView
         android:id="@+id/details_activity_art"
@@ -22,7 +55,7 @@
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/details_activity_toolbar"
+        app:layout_constraintTop_toBottomOf="@id/details_activity_title"
         app:radius="@dimen/rounding_radius_8dp"
         tools:src="@tools:sample/avatars" />
 

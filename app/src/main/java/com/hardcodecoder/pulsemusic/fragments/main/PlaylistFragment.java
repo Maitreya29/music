@@ -5,9 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.FileObserver;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
@@ -25,10 +22,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.hardcodecoder.pulsemusic.Preferences;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.activities.playlist.CurrentQueuePlaylist;
 import com.hardcodecoder.pulsemusic.activities.playlist.CustomizablePlaylist;
 import com.hardcodecoder.pulsemusic.adapters.main.PlaylistsAdapter;
+import com.hardcodecoder.pulsemusic.dialog.ToolbarContextMenuDialog;
 import com.hardcodecoder.pulsemusic.dialog.base.RoundedCustomBottomSheet;
 import com.hardcodecoder.pulsemusic.fragments.main.base.PulseFragment;
 import com.hardcodecoder.pulsemusic.helper.RecyclerViewGestureHelper;
@@ -56,7 +55,6 @@ public class PlaylistFragment extends PulseFragment implements PlaylistCardListe
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        setHasOptionsMenu(true);
         return inflater.inflate(R.layout.fragment_playlist_cards, container, false);
     }
 
@@ -85,19 +83,17 @@ public class PlaylistFragment extends PulseFragment implements PlaylistCardListe
     }
 
     @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_playlist, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.menu_action_add_playlist) {
-            UIHelper.buildCreatePlaylistDialog(requireContext(), playlistName -> {
-                // File observer monitors creation of new playlists
-                // No need to call PlaylistAdapter#addPlaylist();
-            });
-        }
-        return true;
+    public void showOptionsMenu() {
+        ToolbarContextMenuDialog.Builder builder = new ToolbarContextMenuDialog.Builder();
+        builder.addGroup(Preferences.MENU_GROUP_TYPE_CREATE_PLAYLIST, getString(R.string.create_playlist), R.drawable.ic_playlist_add);
+        builder.setMenuSelectedListener(groupItem ->
+                UIHelper.buildCreatePlaylistDialog(requireContext(), playlistName -> {
+                    // File observer monitors creation of new playlists
+                    // No need to call PlaylistAdapter#addPlaylist();
+                })
+        );
+        ToolbarContextMenuDialog contextMenuDialog = builder.build();
+        contextMenuDialog.show(requireFragmentManager(), ToolbarContextMenuDialog.TAG);
     }
 
     @Override

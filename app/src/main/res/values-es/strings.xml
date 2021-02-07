@@ -54,7 +54,6 @@
     <string name="alphabet_desc">Z-A</string>
     <string name="toast_equalizer_not_found">No se encontró el ecualizador por defecto</string>
     <string name="column_title">Cantidad de cuadrículas</string>
-    <string name="column_title_land">Cantidad de cuadrículas (paisaje)</string>
     <string name="one">Uno</string>
     <string name="two">Dos</string>
     <string name="three">Tres</string>

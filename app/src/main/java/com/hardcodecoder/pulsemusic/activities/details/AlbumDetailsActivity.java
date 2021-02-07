@@ -1,14 +1,10 @@
 package com.hardcodecoder.pulsemusic.activities.details;
 
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.ViewStub;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,6 +19,8 @@ import com.hardcodecoder.pulsemusic.Preferences;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.activities.details.base.BaseDetailsActivity;
 import com.hardcodecoder.pulsemusic.adapters.main.TracksAdapter;
+import com.hardcodecoder.pulsemusic.dialog.MenuDetailsDialog;
+import com.hardcodecoder.pulsemusic.dialog.ToolbarContextMenuDialog;
 import com.hardcodecoder.pulsemusic.helper.MediaArtHelper;
 import com.hardcodecoder.pulsemusic.helper.UIHelper;
 import com.hardcodecoder.pulsemusic.interfaces.SimpleItemClickListener;
@@ -31,6 +29,7 @@ import com.hardcodecoder.pulsemusic.loaders.SortOrder;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.themes.ThemeColors;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
+import com.hardcodecoder.pulsemusic.utils.ToolbarMenuBuilder;
 import com.hardcodecoder.pulsemusic.views.MediaArtImageView;
 
 import java.util.List;
@@ -45,74 +44,36 @@ public class AlbumDetailsActivity extends BaseDetailsActivity {
     private Long mAlbumId;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_details);
-        setUpTransitions();
-
-        String mAlbumTitle = getIntent().getStringExtra(KEY_ALBUM_TITLE);
+    public void onViewCreated() {
+        String albumTitle = getIntent().getStringExtra(KEY_ALBUM_TITLE);
         mAlbumId = getIntent().getLongExtra(KEY_ALBUM_ID, 0);
 
-        setUpToolbar(findViewById(R.id.details_activity_toolbar), mAlbumTitle == null ? "" : mAlbumTitle);
+        setUpToolbar(albumTitle == null ? "" : albumTitle, v -> showOptionsMenu());
 
         loadImage();
 
-        mSortOrder = resolveSortOrder(getCurrentSortOrder());
+        int sortOrder = AppSettings.getSortOrder(this, Preferences.SORT_ORDER_ALBUM_DETAILS_KEY);
+        setCurrentSortOrder(sortOrder);
+        mSortOrder = resolveSortOrder(sortOrder);
+
         LoaderHelper.loadAlbumTracks(mAlbumId, mSortOrder, this::loadItems);
     }
 
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        MenuItem sortItem = null;
-        final int sortOrder = getCurrentSortOrder();
-
-        if (sortOrder == Preferences.SORT_ORDER_ASC)
-            sortItem = menu.findItem(R.id.menu_action_sort_album_title_asc);
-        else if (sortOrder == Preferences.SORT_ORDER_DESC)
-            sortItem = menu.findItem(R.id.menu_action_sort_album_title_desc);
-        else if (sortOrder == Preferences.SORT_ORDER_ALBUM_TRACK_NUMBER_ASC)
-            sortItem = menu.findItem(R.id.menu_action_sort_track_num_asc);
-        else if (sortOrder == Preferences.SORT_ORDER_ALBUM_TRACK_NUMBER_DESC)
-            sortItem = menu.findItem(R.id.menu_action_sort_track_num_desc);
-
-        if (sortItem != null)
-            sortItem.setChecked(true);
-        return super.onPrepareOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        final int groupId = item.getGroupId();
-        if (groupId == R.id.group_album_sort) {
-            final int id = item.getItemId();
-            int sortOrder;
-
-            if (id == R.id.menu_action_sort_album_title_asc)
-                sortOrder = Preferences.SORT_ORDER_ASC;
-            else if (id == R.id.menu_action_sort_album_title_desc)
-                sortOrder = Preferences.SORT_ORDER_DESC;
-            else if (id == R.id.menu_action_sort_track_num_asc)
-                sortOrder = Preferences.SORT_ORDER_ALBUM_TRACK_NUMBER_ASC;
-            else if (id == R.id.menu_action_sort_track_num_desc)
-                sortOrder = Preferences.SORT_ORDER_ALBUM_TRACK_NUMBER_DESC;
-            else
-                sortOrder = Preferences.SORT_ORDER_ASC;
-
-            onChangeSortOrder(sortOrder);
-        }
-
-        item.setChecked(true);
-        return true;
-    }
-
-    @Override
-    public int getSortOrder() {
-        return AppSettings.getSortOrder(this, Preferences.SORT_ORDER_ALBUM_DETAILS_KEY);
-    }
-
-    @Override
-    public int getMenuId() {
-        return R.menu.menu_album_details;
+    private void showOptionsMenu() {
+        ToolbarContextMenuDialog.Builder builder = new ToolbarContextMenuDialog.Builder();
+        builder.addGroup(Preferences.MENU_GROUP_TYPE_SORT, getString(R.string.sort_order_title), R.drawable.ic_sort);
+        builder.setMenuSelectedListener(groupItem -> {
+            MenuDetailsDialog detailsDialog = ToolbarMenuBuilder.buildSortOrderDialog(
+                    this,
+                    Preferences.SORT_ORDER_GROUP_ALBUMS_DETAILS,
+                    (groupId, selectedItemId) -> {
+                        if (groupId == Preferences.SORT_ORDER_GROUP_ALBUMS_DETAILS)
+                            onChangeSortOrder(selectedItemId);
+                    });
+            detailsDialog.show(getSupportFragmentManager(), MenuDetailsDialog.TAG);
+        });
+        ToolbarContextMenuDialog contextMenuDialog = builder.build();
+        contextMenuDialog.show(getSupportFragmentManager(), ToolbarContextMenuDialog.TAG);
     }
 
     @Override

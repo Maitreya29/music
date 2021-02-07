@@ -15,6 +15,7 @@
     <string name="desc_confirm_btn">Confirm selection</string>
     <string name="desc_play_pause_btn">Media play and pause button</string>
     <string name="desc_icon">Icon</string>
+    <string name="desc_options_btn">Context menu button</string>
 
 
     <!-- General strings -->
@@ -99,7 +100,6 @@
     <string name="create_playlist">Create playlist</string>
     <string name="toast_equalizer_not_found">Cannot find equalizer</string>
     <string name="column_title">Columns</string>
-    <string name="column_title_land">Column (landscape)</string>
     <string name="column_category_count">Count</string>
     <string name="one">One</string>
     <string name="two">Two</string>

@@ -89,7 +89,6 @@
     <string name="create_playlist">Создать плейлист</string>
     <string name="toast_equalizer_not_found">Эквалайзер не найдет</string>
     <string name="column_title">Количество столбцов</string>
-    <string name="column_title_land">Количество столбцов (альбомная ориентация)</string>
     <string name="one">Один</string>
     <string name="two">Два</string>
     <string name="three">Три</string>
@@ -150,7 +149,7 @@
     <!-- Details Activity -->
     <!-- We can't use "This artist has..." becouse of russian numerals cases -->
     <string name="artist_tracks_count">Альбомы: ● %d</string>
-    <string name="album_tracks_count">Треков: ●</string>
+    <string name="album_tracks_count">Треков: ● %d</string>
     <string name="suffix_tracks">треков</string>
 
 

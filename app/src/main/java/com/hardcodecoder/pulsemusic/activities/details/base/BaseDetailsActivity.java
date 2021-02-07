@@ -2,15 +2,15 @@ package com.hardcodecoder.pulsemusic.activities.details.base;
 
 import android.os.Bundle;
 import android.transition.Fade;
-import android.view.Menu;
+import android.view.View;
+import android.widget.ImageView;
 
-import androidx.annotation.MenuRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.activities.base.ControllerActivity;
-import com.hardcodecoder.pulsemusic.views.MarqueeTitleToolbar;
 
 public abstract class BaseDetailsActivity extends ControllerActivity {
 
@@ -19,21 +19,27 @@ public abstract class BaseDetailsActivity extends ControllerActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        super.onCreate(null); // We don't want to restore any fragments/ dialogs/ bottom sheet
         supportPostponeEnterTransition();
-        mCurrentSortOrder = getSortOrder();
+        setContentView(R.layout.activity_details);
+        setUpTransitions();
+        onViewCreated();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(getMenuId(), menu);
-        return true;
+    protected void setCurrentSortOrder(int sortOrder) {
+        mCurrentSortOrder = sortOrder;
     }
 
-    protected void setUpToolbar(@NonNull MarqueeTitleToolbar toolbar, @NonNull String title) {
-        toolbar.setTitle(title);
-        setSupportActionBar(toolbar.getToolbar());
-        toolbar.setNavigationOnClickListener(v -> finishAfterTransition());
+    protected void setUpToolbar(@NonNull String title, @Nullable View.OnClickListener listener) {
+        ImageView closeBtn = findViewById(R.id.details_activity_close_btn);
+        closeBtn.setOnClickListener(v -> finishAfterTransition());
+
+        MaterialTextView headerTitle = findViewById(R.id.details_activity_title);
+        headerTitle.setText(title);
+        headerTitle.setSelected(true);
+
+        ImageView optionsBtn = findViewById(R.id.details_activity_options_btn);
+        optionsBtn.setOnClickListener(listener);
     }
 
     protected void setUpTransitions() {
@@ -45,10 +51,6 @@ public abstract class BaseDetailsActivity extends ControllerActivity {
         getWindow().setEnterTransition(enterFade);
     }
 
-    protected int getCurrentSortOrder() {
-        return mCurrentSortOrder;
-    }
-
     protected void onChangeSortOrder(int newSortOrder) {
         if (mCurrentSortOrder != newSortOrder) {
             mCurrentSortOrder = newSortOrder;
@@ -56,10 +58,7 @@ public abstract class BaseDetailsActivity extends ControllerActivity {
         }
     }
 
-    public abstract int getSortOrder();
-
-    @MenuRes
-    public abstract int getMenuId();
+    public abstract void onViewCreated();
 
     public abstract void onSortOrderChanged(int newSortOrder);
 }

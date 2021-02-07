@@ -73,7 +73,6 @@
     <string name="album_year_desc">Album-Jahr absteigend</string>
     <string name="toast_equalizer_not_found">Standard Equalizer nicht gefunden</string>
     <string name="column_title">Anzahl Spalten</string>
-    <string name="column_title_land">Anzahl Spalten (Landschaft)</string>
     <string name="one">Eins</string>
     <string name="two">Zwei</string>
     <string name="three">Drei</string>

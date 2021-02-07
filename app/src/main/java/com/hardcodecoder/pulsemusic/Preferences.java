@@ -63,6 +63,8 @@ public class Preferences {
     public static final short COLUMN_COUNT_FIVE = 5;
     public static final short COLUMN_COUNT_SIX = 6;
 
+    public static final int MENU_GROUP_TYPE_CREATE_PLAYLIST = 4000;
+
     public static final String PULSE_THEMES_PREFS = "PulseThemes";
 
     public static final String UI_MODE_AUTO_KEY = "AutoThemeEnabled";
