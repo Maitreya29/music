@@ -29,12 +29,12 @@ import java.util.List;
 
 public class ArtistAdapter extends EfficientRecyclerViewAdapter<ArtistModel, ArtistAdapter.ArtistItemHolder> {
 
+    private static final int VIEW_TYPE_SMALL = R.layout.rv_grid_item_artist_small;
+    private static final int VIEW_TYPE_NORMAL = R.layout.rv_grid_item_artist;
     private final LayoutInflater mInflater;
     private final SimpleTransitionClickListener mListener;
     private final GridAdapterCallback mCallback;
-    private int mOrientation;
-    private int mCurrentSpanCount;
-    private int mLayoutId;
+    private boolean mNeedUseSmallLayout = false;
 
     public ArtistAdapter(@NonNull LayoutInflater inflater,
                          @NonNull List<ArtistModel> artistList,
@@ -46,9 +46,7 @@ public class ArtistAdapter extends EfficientRecyclerViewAdapter<ArtistModel, Art
         mInflater = inflater;
         mListener = listener;
         mCallback = callback;
-        mOrientation = orientation;
-        mCurrentSpanCount = spanCount;
-        mLayoutId = getLayoutId();
+        updateColumnCount(orientation, spanCount);
     }
 
     public void updateSortOrder(SortOrder.ARTIST sortOrder) {
@@ -65,23 +63,14 @@ public class ArtistAdapter extends EfficientRecyclerViewAdapter<ArtistModel, Art
             });
             handler.post(() -> {
                 diffResult.dispatchUpdatesTo(ArtistAdapter.this);
-                mCallback.onSortUpdateComplete();
+                if (null != mCallback) mCallback.onSortUpdateComplete();
             });
         });
     }
 
-    public void updateSpanCount(int orientation, int newSpanCount) {
-        mOrientation = orientation;
-        mCurrentSpanCount = newSpanCount;
-        mLayoutId = getLayoutId();
-    }
-
-    private int getLayoutId() {
-        if (mOrientation == Configuration.ORIENTATION_PORTRAIT && mCurrentSpanCount >= 3 ||
-                mOrientation == Configuration.ORIENTATION_LANDSCAPE && mCurrentSpanCount >= 5) {
-            return R.layout.rv_grid_item_artist_small;
-        }
-        return R.layout.rv_grid_item_artist;
+    public void updateColumnCount(int orientation, int newSpanCount) {
+        mNeedUseSmallLayout = (orientation == Configuration.ORIENTATION_PORTRAIT && newSpanCount > 2) ||
+                (orientation == Configuration.ORIENTATION_LANDSCAPE && newSpanCount > 4);
     }
 
     @Override
@@ -92,7 +81,12 @@ public class ArtistAdapter extends EfficientRecyclerViewAdapter<ArtistModel, Art
     @NonNull
     @Override
     public ArtistItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ArtistItemHolder(mInflater.inflate(mLayoutId, parent, false), mListener);
+        return new ArtistItemHolder(mInflater.inflate(viewType, parent, false), mListener);
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return mNeedUseSmallLayout ? VIEW_TYPE_SMALL : VIEW_TYPE_NORMAL;
     }
 
     static class ArtistItemHolder extends EfficientRecyclerViewAdapter.SmartViewHolder<ArtistModel> {

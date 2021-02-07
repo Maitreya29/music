@@ -131,11 +131,8 @@ public class ArtistFragment extends CardGridFragment
         else if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE)
             AppSettings.saveLandscapeModeGridSpanCount(requireContext(), Preferences.ARTIST_SPAN_COUNT_LANDSCAPE_KEY, spanCount);
         if (mLayoutManager == null) return;
-        mFirstVisibleItemPosition = mLayoutManager.findFirstVisibleItemPosition();
-        mAdapter.updateSpanCount(currentOrientation, spanCount);
-        mRecyclerView.setAdapter(mAdapter);
+        mAdapter.updateColumnCount(currentOrientation, spanCount);
         mLayoutManager.setSpanCount(spanCount);
-        mLayoutManager.scrollToPosition(mFirstVisibleItemPosition);
     }
 
     @Override
