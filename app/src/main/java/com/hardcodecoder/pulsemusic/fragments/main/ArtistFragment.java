@@ -79,7 +79,7 @@ public class ArtistFragment extends CardGridFragment
         if (groupId == Preferences.SORT_ORDER_GROUP_ARTISTS)
             changeSortOrder(selectedItemId);
         else if (groupId == Preferences.COLUMN_COUNT_GROUP_ARTISTS)
-            updateGridSpanCount(getCurrentOrientation(), selectedItemId);
+            changeColumnCount(getCurrentOrientation(), selectedItemId);
     }
 
     private ARTIST resolveSortOrder(int sortOrder) {
@@ -91,7 +91,7 @@ public class ArtistFragment extends CardGridFragment
     @Override
     public int getSortOrder() {
         if (null == getContext())
-            return super.getSortOrder();
+            return Preferences.SORT_ORDER_ASC;
         return AppSettings.getSortOrder(getContext(), Preferences.SORT_ORDER_ARTIST_KEY);
     }
 
@@ -105,31 +105,31 @@ public class ArtistFragment extends CardGridFragment
     }
 
     @Override
-    public int getPortraitModeSpanCount() {
+    public int getPortraitModeColumnCount() {
         if (null == getContext())
-            return super.getPortraitModeSpanCount();
-        return AppSettings.getPortraitModeGridSpanCount(
+            return Preferences.COLUMN_COUNT_TWO;
+        return AppSettings.getPortraitModeColumnCount(
                 getContext(),
-                Preferences.ARTIST_SPAN_COUNT_PORTRAIT_KEY,
-                Preferences.SPAN_COUNT_PORTRAIT_DEF_VALUE);
+                Preferences.COLUMN_COUNT_ARTISTS_PORTRAIT_KEY,
+                Preferences.COLUMN_COUNT_TWO);
     }
 
     @Override
-    public int getLandscapeModeSpanCount() {
+    public int getLandscapeModeColumnCount() {
         if (null == getContext())
-            return super.getLandscapeModeSpanCount();
-        return AppSettings.getLandscapeModeGridSpanCount(
+            return Preferences.COLUMN_COUNT_FOUR;
+        return AppSettings.getLandscapeModeColumnCount(
                 getContext(),
-                Preferences.ARTIST_SPAN_COUNT_LANDSCAPE_KEY,
-                Preferences.SPAN_COUNT_LANDSCAPE_DEF_VALUE);
+                Preferences.COLUMN_COUNT_ARTISTS_LANDSCAPE_KEY,
+                Preferences.COLUMN_COUNT_FOUR);
     }
 
     @Override
     public void onLayoutSpanCountChanged(int currentOrientation, int spanCount) {
         if (currentOrientation == Configuration.ORIENTATION_PORTRAIT)
-            AppSettings.savePortraitModeGridSpanCount(requireContext(), Preferences.ARTIST_SPAN_COUNT_PORTRAIT_KEY, spanCount);
+            AppSettings.savePortraitModeColumnCount(requireContext(), Preferences.COLUMN_COUNT_ARTISTS_PORTRAIT_KEY, spanCount);
         else if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE)
-            AppSettings.saveLandscapeModeGridSpanCount(requireContext(), Preferences.ARTIST_SPAN_COUNT_LANDSCAPE_KEY, spanCount);
+            AppSettings.saveLandscapeModeColumnCount(requireContext(), Preferences.COLUMN_COUNT_ARTISTS_LANDSCAPE_KEY, spanCount);
         if (mLayoutManager == null) return;
         mAdapter.updateColumnCount(currentOrientation, spanCount);
         mLayoutManager.setSpanCount(spanCount);
@@ -148,7 +148,7 @@ public class ArtistFragment extends CardGridFragment
     private void loadArtistsList(@NonNull View view, @NonNull List<ArtistModel> list) {
         view.postOnAnimation(() -> {
             mRecyclerView = (RecyclerView) ((ViewStub) view.findViewById(R.id.stub_grid_rv)).inflate();
-            mLayoutManager = new GridLayoutManager(mRecyclerView.getContext(), getCurrentSpanCount());
+            mLayoutManager = new GridLayoutManager(mRecyclerView.getContext(), getCurrentColumnCount());
             mRecyclerView.setLayoutManager(mLayoutManager);
             mRecyclerView.setHasFixedSize(true);
             mAdapter = new ArtistAdapter(
@@ -157,7 +157,7 @@ public class ArtistFragment extends CardGridFragment
                     this,
                     this,
                     getCurrentOrientation(),
-                    getCurrentSpanCount());
+                    getCurrentColumnCount());
 
             LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(mRecyclerView.getContext(), R.anim.item_enter_slide_up);
             mRecyclerView.setLayoutAnimation(controller);

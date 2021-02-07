@@ -22,25 +22,25 @@ public class AppSettings {
         editor.apply();
     }
 
-    public static void savePortraitModeGridSpanCount(@NonNull Context context, String prefId, int count) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.SPAN_COUNT, Context.MODE_PRIVATE).edit();
+    public static void savePortraitModeColumnCount(@NonNull Context context, String prefId, int count) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.COLUMN_COUNT, Context.MODE_PRIVATE).edit();
         editor.putInt(prefId, count);
         editor.apply();
     }
 
-    public static int getPortraitModeGridSpanCount(@NonNull Context context, String prefId, int defValut) {
-        return context.getSharedPreferences(Preferences.SPAN_COUNT, Context.MODE_PRIVATE)
-                .getInt(prefId, defValut);
+    public static int getPortraitModeColumnCount(@NonNull Context context, String prefId, int defValue) {
+        return context.getSharedPreferences(Preferences.COLUMN_COUNT, Context.MODE_PRIVATE)
+                .getInt(prefId, defValue);
     }
 
-    public static void saveLandscapeModeGridSpanCount(@NonNull Context context, String prefId, int count) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.SPAN_COUNT, Context.MODE_PRIVATE).edit();
+    public static void saveLandscapeModeColumnCount(@NonNull Context context, String prefId, int count) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.COLUMN_COUNT, Context.MODE_PRIVATE).edit();
         editor.putInt(prefId, count);
         editor.apply();
     }
 
-    public static int getLandscapeModeGridSpanCount(@NonNull Context context, String prefId, int defValue) {
-        return context.getSharedPreferences(Preferences.SPAN_COUNT, Context.MODE_PRIVATE)
+    public static int getLandscapeModeColumnCount(@NonNull Context context, String prefId, int defValue) {
+        return context.getSharedPreferences(Preferences.COLUMN_COUNT, Context.MODE_PRIVATE)
                 .getInt(prefId, defValue);
     }
 

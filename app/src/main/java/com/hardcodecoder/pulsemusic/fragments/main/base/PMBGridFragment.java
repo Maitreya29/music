@@ -13,7 +13,7 @@ public abstract class PMBGridFragment extends PulseFragment {
     void initialize() {
         mCurrentOrientation = getResources().getConfiguration().orientation;
         mCurrentSpanCount = mCurrentOrientation == Configuration.ORIENTATION_PORTRAIT ?
-                getPortraitModeSpanCount() : getLandscapeModeSpanCount();
+                getPortraitModeColumnCount() : getLandscapeModeColumnCount();
         mCurrentSortOrder = getSortOrder();
     }
 
@@ -24,9 +24,9 @@ public abstract class PMBGridFragment extends PulseFragment {
         if (newOrientation != mCurrentOrientation) {
             mCurrentOrientation = newOrientation;
             if (newOrientation == Configuration.ORIENTATION_LANDSCAPE)
-                mCurrentSpanCount = getLandscapeModeSpanCount();
+                mCurrentSpanCount = getLandscapeModeColumnCount();
             else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT)
-                mCurrentSpanCount = getPortraitModeSpanCount();
+                mCurrentSpanCount = getPortraitModeColumnCount();
 
             onLayoutSpanCountChanged(mCurrentOrientation, mCurrentSpanCount);
         }
@@ -42,7 +42,7 @@ public abstract class PMBGridFragment extends PulseFragment {
         return mCurrentSortOrder;
     }
 
-    protected int getCurrentSpanCount() {
+    protected int getCurrentColumnCount() {
         return mCurrentSpanCount;
     }
 
@@ -53,15 +53,15 @@ public abstract class PMBGridFragment extends PulseFragment {
         }
     }
 
-    protected void updateGridSpanCount(int id, int spanCount) {
+    protected void changeColumnCount(int id, int spanCount) {
         onLayoutSpanCountChanged(id, spanCount);
     }
 
     public abstract int getSortOrder();
 
-    public abstract int getPortraitModeSpanCount();
+    public abstract int getPortraitModeColumnCount();
 
-    public abstract int getLandscapeModeSpanCount();
+    public abstract int getLandscapeModeColumnCount();
 
     public abstract void onSortOrderChanged(int newSortOrder);
 

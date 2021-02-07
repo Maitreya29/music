@@ -78,7 +78,7 @@ public class AlbumsFragment extends CardGridFragment
         if (groupId == Preferences.SORT_ORDER_GROUP_ALBUMS)
             changeSortOrder(selectedItemId);
         else if (groupId == Preferences.COLUMN_COUNT_GROUP_ALBUMS)
-            updateGridSpanCount(getCurrentOrientation(), selectedItemId);
+            changeColumnCount(getCurrentOrientation(), selectedItemId);
     }
 
     private ALBUMS resolveSortOrder(int sortOrder) {
@@ -102,7 +102,7 @@ public class AlbumsFragment extends CardGridFragment
     @Override
     public int getSortOrder() {
         if (null == getContext())
-            return super.getSortOrder();
+            return Preferences.SORT_ORDER_ASC;
         return AppSettings.getSortOrder(getContext(), Preferences.SORT_ORDER_ALBUMS_KEY);
     }
 
@@ -116,31 +116,31 @@ public class AlbumsFragment extends CardGridFragment
     }
 
     @Override
-    public int getPortraitModeSpanCount() {
+    public int getPortraitModeColumnCount() {
         if (null == getContext())
-            return super.getPortraitModeSpanCount();
-        return AppSettings.getPortraitModeGridSpanCount(
+            return Preferences.COLUMN_COUNT_TWO;
+        return AppSettings.getPortraitModeColumnCount(
                 getContext(),
-                Preferences.ALBUMS_SPAN_COUNT_PORTRAIT_KEY,
-                Preferences.SPAN_COUNT_PORTRAIT_DEF_VALUE);
+                Preferences.COLUMN_COUNT_ALBUMS_PORTRAIT_KEY,
+                Preferences.COLUMN_COUNT_TWO);
     }
 
     @Override
-    public int getLandscapeModeSpanCount() {
+    public int getLandscapeModeColumnCount() {
         if (null == getContext())
-            return super.getLandscapeModeSpanCount();
-        return AppSettings.getLandscapeModeGridSpanCount(
+            return Preferences.COLUMN_COUNT_FOUR;
+        return AppSettings.getLandscapeModeColumnCount(
                 getContext(),
-                Preferences.ALBUMS_SPAN_COUNT_LANDSCAPE_KEY,
-                Preferences.SPAN_COUNT_LANDSCAPE_DEF_VALUE);
+                Preferences.COLUMN_COUNT_ALBUMS_LANDSCAPE_KEY,
+                Preferences.COLUMN_COUNT_FOUR);
     }
 
     @Override
     public void onLayoutSpanCountChanged(int currentOrientation, int spanCount) {
         if (currentOrientation == Configuration.ORIENTATION_PORTRAIT)
-            AppSettings.savePortraitModeGridSpanCount(requireContext(), Preferences.ALBUMS_SPAN_COUNT_PORTRAIT_KEY, spanCount);
+            AppSettings.savePortraitModeColumnCount(requireContext(), Preferences.COLUMN_COUNT_ALBUMS_PORTRAIT_KEY, spanCount);
         else if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE)
-            AppSettings.saveLandscapeModeGridSpanCount(requireContext(), Preferences.ALBUMS_SPAN_COUNT_LANDSCAPE_KEY, spanCount);
+            AppSettings.saveLandscapeModeColumnCount(requireContext(), Preferences.COLUMN_COUNT_ALBUMS_LANDSCAPE_KEY, spanCount);
         if (mLayoutManager == null) return;
         mLayoutManager.setSpanCount(spanCount);
     }
@@ -159,7 +159,7 @@ public class AlbumsFragment extends CardGridFragment
     private void loadAlbumsList(@NonNull View view, @NonNull List<AlbumModel> list) {
         view.postOnAnimation(() -> {
             RecyclerView rv = (RecyclerView) ((ViewStub) view.findViewById(R.id.stub_grid_rv)).inflate();
-            mLayoutManager = new GridLayoutManager(rv.getContext(), getCurrentSpanCount());
+            mLayoutManager = new GridLayoutManager(rv.getContext(), getCurrentColumnCount());
             rv.setLayoutManager(mLayoutManager);
             rv.setHasFixedSize(true);
 

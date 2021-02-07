@@ -3,6 +3,8 @@ package com.hardcodecoder.pulsemusic;
 public class Preferences {
 
     public static final String FIRST_RUN = "FirstRun";
+
+    /* Constants for maintaining sort order in all possible places */
     public static final String SORT_ORDER_PREFS_KEY = "SortOrder";
     public static final String SORT_ORDER_LIBRARY_KEY = "LibrarySortOrder";
     public static final String SORT_ORDER_ALBUMS_KEY = "AlbumsSortOrder";
@@ -10,6 +12,7 @@ public class Preferences {
     public static final String SORT_ORDER_ARTIST_DETAILS_KEY = "ArtistDetailsSortOrder";
     public static final String SORT_ORDER_ARTIST_KEY = "ArtistsSortOrder";
 
+    // Id's to identify the sort by menu to show for a given screen
     public static final int MENU_GROUP_TYPE_SORT = 2500;
     public static final short SORT_ORDER_GROUP_LIBRARY = 2501;
     public static final short SORT_ORDER_GROUP_ALBUMS = 2502;
@@ -33,29 +36,22 @@ public class Preferences {
     public static final int SORT_ORDER_ALBUM_FIRST_YEAR_ASC = 3012;
     public static final int SORT_ORDER_ALBUM_FIRST_YEAR_DESC = 3013;
 
-    public static final String SPAN_COUNT = "GridSpanCount";
+    /* Constants for maintaining column count in all possible places */
+    public static final String COLUMN_COUNT = "ColumnCount";
+    public static final String COLUMN_COUNT_LIBRARY_PORTRAIT_KEY = "ColumnCountLibraryPortrait";
+    public static final String COLUMN_COUNT_LIBRARY_LANDSCAPE_KEY = "ColumnCountLibraryLandscape";
+    public static final String COLUMN_COUNT_ALBUMS_PORTRAIT_KEY = "ColumnCountAlbumsPortrait";
+    public static final String COLUMN_COUNT_ALBUMS_LANDSCAPE_KEY = "ColumnCountAlbumsLandscape";
+    public static final String COLUMN_COUNT_ARTISTS_PORTRAIT_KEY = "ColumnCountArtistsPortrait";
+    public static final String COLUMN_COUNT_ARTISTS_LANDSCAPE_KEY = "ColumnCountArtistsLandscape";
 
-    public static final String LIBRARY_SPAN_COUNT_PORTRAIT_KEY = "LibraryPortraitGridCount";
-    public static final String LIBRARY_SPAN_COUNT_LANDSCAPE_KEY = "LibraryLandscapeGridCount";
-
-    public static final int SPAN_COUNT_LIBRARY_PORTRAIT_DEF_VALUE = 1;
-    public static final int SPAN_COUNT_LIBRARY_LANDSCAPE_DEF_VALUE = 2;
-
-    public static final String ALBUMS_SPAN_COUNT_PORTRAIT_KEY = "AlbumsPortraitGridCount";
-    public static final String ALBUMS_SPAN_COUNT_LANDSCAPE_KEY = "AlbumsLandscapeGridCount";
-
-    public static final String ARTIST_SPAN_COUNT_PORTRAIT_KEY = "ArtistsPortraitGridCount";
-    public static final String ARTIST_SPAN_COUNT_LANDSCAPE_KEY = "ArtistsLandscapeGridCount";
-
-    public static final int SPAN_COUNT_PORTRAIT_DEF_VALUE = 2;
-    public static final int SPAN_COUNT_LANDSCAPE_DEF_VALUE = 4;
-
+    // Id's to identify the column count menu to show for a given screen
     public static final int MENU_GROUP_TYPE_COLUMN_COUNT = 3500;
     public static final short COLUMN_COUNT_GROUP_LIBRARY = 3501;
     public static final short COLUMN_COUNT_GROUP_ALBUMS = 3502;
     public static final short COLUMN_COUNT_GROUP_ARTISTS = 3503;
 
-    public static final String COLUMN_COUNT = "ColumnCount";
+    // Column count number (1-6 is currently used, 6 being the max columns supported)
     public static final short COLUMN_COUNT_ONE = 1;
     public static final short COLUMN_COUNT_TWO = 2;
     public static final short COLUMN_COUNT_THREE = 3;
@@ -65,8 +61,9 @@ public class Preferences {
 
     public static final int MENU_GROUP_TYPE_CREATE_PLAYLIST = 4000;
 
-    public static final String PULSE_THEMES_PREFS = "PulseThemes";
 
+    /* Constants for maintaining themes and accents */
+    public static final String PULSE_THEMES_PREFS = "PulseThemes";
     public static final String UI_MODE_AUTO_KEY = "AutoThemeEnabled";
     public static final String UI_THEME_DARK_KEY = "DarkModeEnabled";
 

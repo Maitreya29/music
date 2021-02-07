@@ -75,7 +75,7 @@ public class LibraryFragment extends ListGridFragment implements SimpleItemClick
         if (groupId == Preferences.SORT_ORDER_GROUP_LIBRARY)
             changeSortOrder(selectedItemId);
         else if (groupId == Preferences.COLUMN_COUNT_GROUP_LIBRARY)
-            updateGridSpanCount(getCurrentOrientation(), selectedItemId);
+            changeColumnCount(getCurrentOrientation(), selectedItemId);
     }
 
     @Override
@@ -138,31 +138,31 @@ public class LibraryFragment extends ListGridFragment implements SimpleItemClick
     }
 
     @Override
-    public int getPortraitModeSpanCount() {
+    public int getPortraitModeColumnCount() {
         if (null == getContext())
-            return Preferences.SPAN_COUNT_LIBRARY_PORTRAIT_DEF_VALUE;
-        return AppSettings.getPortraitModeGridSpanCount(
+            return Preferences.COLUMN_COUNT_ONE;
+        return AppSettings.getPortraitModeColumnCount(
                 getContext(),
-                Preferences.LIBRARY_SPAN_COUNT_PORTRAIT_KEY,
-                Preferences.SPAN_COUNT_LIBRARY_PORTRAIT_DEF_VALUE);
+                Preferences.COLUMN_COUNT_LIBRARY_PORTRAIT_KEY,
+                Preferences.COLUMN_COUNT_ONE);
     }
 
     @Override
-    public int getLandscapeModeSpanCount() {
+    public int getLandscapeModeColumnCount() {
         if (null == getContext())
-            return Preferences.SPAN_COUNT_LIBRARY_LANDSCAPE_DEF_VALUE;
-        return AppSettings.getLandscapeModeGridSpanCount(
+            return Preferences.COLUMN_COUNT_TWO;
+        return AppSettings.getLandscapeModeColumnCount(
                 getContext(),
-                Preferences.LIBRARY_SPAN_COUNT_LANDSCAPE_KEY,
-                Preferences.SPAN_COUNT_LIBRARY_LANDSCAPE_DEF_VALUE);
+                Preferences.COLUMN_COUNT_LIBRARY_LANDSCAPE_KEY,
+                Preferences.COLUMN_COUNT_TWO);
     }
 
     @Override
     public void onLayoutSpanCountChanged(int currentOrientation, int spanCount) {
         if (currentOrientation == Configuration.ORIENTATION_PORTRAIT)
-            AppSettings.savePortraitModeGridSpanCount(requireContext(), Preferences.LIBRARY_SPAN_COUNT_PORTRAIT_KEY, spanCount);
+            AppSettings.savePortraitModeColumnCount(requireContext(), Preferences.COLUMN_COUNT_LIBRARY_PORTRAIT_KEY, spanCount);
         else if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE)
-            AppSettings.saveLandscapeModeGridSpanCount(requireContext(), Preferences.LIBRARY_SPAN_COUNT_LANDSCAPE_KEY, spanCount);
+            AppSettings.saveLandscapeModeColumnCount(requireContext(), Preferences.COLUMN_COUNT_LIBRARY_LANDSCAPE_KEY, spanCount);
         if (null == mLayoutManager) return;
         mLayoutManager.setSpanCount(spanCount);
     }
@@ -170,7 +170,7 @@ public class LibraryFragment extends ListGridFragment implements SimpleItemClick
     private void loadLibrary(@NonNull View view, @NonNull List<MusicModel> list) {
         view.postOnAnimation(() -> {
             RecyclerView recyclerView = (RecyclerView) ((ViewStub) view.findViewById(R.id.stub_library_fragment_rv)).inflate();
-            mLayoutManager = new GridLayoutManager(recyclerView.getContext(), getCurrentSpanCount());
+            mLayoutManager = new GridLayoutManager(recyclerView.getContext(), getCurrentColumnCount());
             recyclerView.setLayoutManager(mLayoutManager);
             recyclerView.setHasFixedSize(true);
 
