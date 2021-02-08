@@ -257,6 +257,14 @@ public abstract class DraggableNowPlayingSheetActivity extends ControllerActivit
             collapseBottomSheet();
             updateMainContentBottomPadding(mPaddingBottomWhenPeeking);
         } else {
+            if (null == mBehaviour) {
+                // We need to hide bottom sheet before it's initialized
+                // Maybe because user started playlist from somewhere else
+                // and then stopped the playback causing to hide it before it's initialized
+                // Simply drop everything (Don't initialize so we don't have to hide)
+                mPendingInitializeBottomSheet = false;
+                return;
+            }
             if (mBehaviour.getState() == BottomSheetBehavior.STATE_HIDDEN) return;
             mBehaviour.setState(BottomSheetBehavior.STATE_HIDDEN);
             updateMainContentBottomPadding(mPaddingBottomDefault);
