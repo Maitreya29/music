@@ -71,7 +71,10 @@ public class CustomizablePlaylist extends PlaylistActivity implements PlaylistIt
                     getPlaylistTitle(),
                     mAdapter.getDataList(),
                     result -> {
-                        if (null != result) mAdapter.updatePlaylist(result);
+                        if (null != result) {
+                            mAdapter.updatePlaylist(result);
+                            updateTracksInfo(result.size(), calculatePlaylistDuration(result));
+                        }
                     });
             return true;
         }
