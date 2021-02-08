@@ -106,6 +106,12 @@ public class CustomizablePlaylistAdapter extends EfficientRecyclerViewAdapter<Mu
         notifyItemInserted(deletedIndex);
     }
 
+    public void clearAll() {
+        int size = mPlaylistTracks.size();
+        mPlaylistTracks.clear();
+        notifyItemRangeRemoved(0, size);
+    }
+
     static class PlaylistTrackItemHolder extends EfficientRecyclerViewAdapter.SmartViewHolder<MusicModel>
             implements ItemTouchHelperViewHolder {
 

@@ -12,6 +12,7 @@
         android:id="@+id/stub_playlist_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:inflatedId="@+id/playlist_rv"
         android:layout="@layout/recycler_view_vertical"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
 

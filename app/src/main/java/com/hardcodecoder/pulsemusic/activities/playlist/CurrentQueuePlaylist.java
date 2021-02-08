@@ -2,6 +2,8 @@ package com.hardcodecoder.pulsemusic.activities.playlist;
 
 import android.media.session.MediaController;
 import android.media.session.PlaybackState;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -31,6 +33,19 @@ public class CurrentQueuePlaylist extends PlaylistActivity implements PlaylistIt
         mQueueManager = mPulseController.getQueueManager();
         setUpContent(mQueueManager.getQueue());
         setPlaylistTitle(getString(R.string.playlist_play_queue));
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_current_queue, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.menu_action_clear_all)
+            onClearQueue();
+        return true;
     }
 
     @Override
@@ -104,6 +119,17 @@ public class CurrentQueuePlaylist extends PlaylistActivity implements PlaylistIt
         }
         updateTracksInfo(mAdapter.getItemCount(),
                 getTotalPlaylistDuration() - dismissedItem.getTrackDuration());
+    }
+
+    private void onClearQueue() {
+        if (null == mAdapter) return;
+        mAdapter.clearAll();
+
+        showEmptyListUI(true);
+        mAdapter = null;
+
+        mRemote.stop();
+        mPulseController.getQueueManager().resetQueue();
     }
 
     @Override

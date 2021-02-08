@@ -91,7 +91,10 @@ public abstract class PlaylistActivity extends ControllerActivity {
         showEmptyListUI(isListEmpty);
         if (isListEmpty) return;
 
-        final RecyclerView recyclerView = (RecyclerView) ((ViewStub) findViewById(R.id.stub_playlist_rv)).inflate();
+        final ViewStub recyclerStub = findViewById(R.id.stub_playlist_rv);
+        RecyclerView recyclerView;
+        if (recyclerStub != null) recyclerView = (RecyclerView) (recyclerStub).inflate();
+        else recyclerView = findViewById(R.id.playlist_rv);
         recyclerView.setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
 
         loadRecyclerList(recyclerView, list);
