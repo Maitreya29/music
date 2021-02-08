@@ -121,18 +121,17 @@ public class ToolbarMenuBuilder {
         MenuDetailsDialog menuDialog = new MenuDetailsDialog(context.getString(R.string.column_title), groupId, listener);
 
         if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            MenuItem one = new MenuItem(Preferences.COLUMN_COUNT_ONE, context.getString(R.string.one));
             MenuItem two = new MenuItem(Preferences.COLUMN_COUNT_TWO, context.getString(R.string.two));
 
             if (groupId == Preferences.COLUMN_COUNT_GROUP_LIBRARY) {
-                MenuItem one = new MenuItem(Preferences.COLUMN_COUNT_ONE, context.getString(R.string.one));
-
                 menuDialog.addCategory(context.getString(R.string.column_category_count), new MenuItem[]{one, two});
             } else if (groupId == Preferences.COLUMN_COUNT_GROUP_ALBUMS || groupId == Preferences.COLUMN_COUNT_GROUP_ARTISTS) {
                 MenuItem three = new MenuItem(Preferences.COLUMN_COUNT_THREE, context.getString(R.string.three));
                 MenuItem four = new MenuItem(Preferences.COLUMN_COUNT_FOUR, context.getString(R.string.four));
 
                 menuDialog.addCategory(context.getString(R.string.column_category_count),
-                        new MenuItem[]{two, three, four});
+                        new MenuItem[]{one, two, three, four});
             }
         } else if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
             MenuItem four = new MenuItem(Preferences.COLUMN_COUNT_FOUR, context.getString(R.string.four));
