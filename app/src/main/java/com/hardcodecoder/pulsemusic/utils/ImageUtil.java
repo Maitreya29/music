@@ -16,7 +16,7 @@ import com.hardcodecoder.pulsemusic.themes.TintHelper;
 
 public class ImageUtil {
 
-    public static Drawable generateTintedDefaultAlbumArt(Context context, @ColorInt int color) {
+    public static Drawable generateTintedDefaultAlbumArt(@NonNull Context context, @ColorInt int color) {
         Drawable drawable = ContextCompat.getDrawable(context, R.drawable.ic_audio_48dp);
         if (drawable != null) {
             drawable.mutate();
@@ -26,7 +26,7 @@ public class ImageUtil {
     }
 
     @NonNull
-    public static Drawable getAccentTintedSelectedItemBackground(Context context) {
+    public static Drawable getAccentTintedSelectedItemBackground(@NonNull Context context) {
         GradientDrawable drawable = new GradientDrawable(
                 GradientDrawable.Orientation.LEFT_RIGHT,
                 new int[]{
@@ -43,6 +43,22 @@ public class ImageUtil {
                 ContextCompat.getDrawable(context, R.drawable.shape_rounded_rectangle),
                 ThemeColors.getCurrentColorBackgroundHighlight(),
                 false);
+    }
+
+    @NonNull
+    public static Drawable getSelectedItemDrawable(@NonNull Context context) {
+        Drawable drawable = getRoundedRectangle(DimensionsUtil.getDimension(context, 8));
+        drawable.mutate();
+        drawable.setTint(ColorUtil.changeAlphaComponentTo(ThemeColors.getCurrentColorPrimary(), 0.26f));
+        return drawable;
+    }
+
+    @NonNull
+    public static Drawable getRoundedRectangle(float radius) {
+        GradientDrawable drawable = new GradientDrawable();
+        drawable.setShape(GradientDrawable.RECTANGLE);
+        drawable.setCornerRadius(radius);
+        return drawable;
     }
 
     public static int calculateInSampleSize(@NonNull BitmapFactory.Options options, int reqWidth, int reqHeight) {

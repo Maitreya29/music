@@ -24,11 +24,12 @@ public class ToolbarMenuBuilder {
         ToolbarContextMenuDialog.Builder builder = new ToolbarContextMenuDialog.Builder();
         builder.setMenuSelectedListener(groupItem -> {
             MenuDetailsDialog menuDialog = null;
+            final int groupType = groupItem.getType();
 
-            if (groupItem.getType() == Preferences.MENU_GROUP_TYPE_SORT)
+            if (groupType == Preferences.MENU_GROUP_TYPE_SORT)
                 menuDialog = buildSortOrderDialog(activity, sortOrderId, listener);
 
-            else if (groupItem.getType() == Preferences.MENU_GROUP_TYPE_COLUMN_COUNT)
+            else if (groupType == Preferences.MENU_GROUP_TYPE_COLUMN_COUNT)
                 menuDialog = buildColumnCountDialog(activity, columnCountId, listener);
 
             if (null != menuDialog)

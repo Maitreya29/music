@@ -15,6 +15,7 @@ import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.Preferences;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.adapters.main.AlbumsAdapter;
+import com.hardcodecoder.pulsemusic.dialog.MenuDetailsDialog;
 import com.hardcodecoder.pulsemusic.dialog.ToolbarContextMenuDialog;
 import com.hardcodecoder.pulsemusic.fragments.main.base.CardGridFragment;
 import com.hardcodecoder.pulsemusic.interfaces.GridAdapterCallback;
@@ -71,6 +72,14 @@ public class AlbumsFragment extends CardGridFragment
                 Preferences.SORT_ORDER_GROUP_ALBUMS,
                 Preferences.COLUMN_COUNT_GROUP_ALBUMS);
         toolbarMenuDialog.show(requireFragmentManager(), ToolbarContextMenuDialog.TAG);
+    }
+
+    @Override
+    public void onMenuDetailsDialogCreated(int groupId, @NonNull MenuDetailsDialog detailsDialog) {
+        if (groupId == Preferences.SORT_ORDER_GROUP_ALBUMS)
+            detailsDialog.setSelectedItemId(getCurrentSortOrder());
+        else if (groupId == Preferences.COLUMN_COUNT_GROUP_ALBUMS)
+            detailsDialog.setSelectedItemId(getCurrentColumnCount());
     }
 
     @Override

@@ -17,6 +17,7 @@ import com.hardcodecoder.pulsemusic.dialog.base.RoundedCustomBottomSheetFragment
 import com.hardcodecoder.pulsemusic.interfaces.OptionsMenuListener;
 import com.hardcodecoder.pulsemusic.model.MenuCategory;
 import com.hardcodecoder.pulsemusic.model.MenuItem;
+import com.hardcodecoder.pulsemusic.utils.ImageUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,7 @@ public class MenuDetailsDialog extends RoundedCustomBottomSheetFragment {
     private final OptionsMenuListener mListener;
     private final String mDialogTitle;
     private final int mGroupId;
+    private int mSelectedItemId = -1;
     private int mOrientation;
 
     public MenuDetailsDialog(@NonNull String dialogTitle, int groupId, @NonNull OptionsMenuListener listener) {
@@ -40,6 +42,10 @@ public class MenuDetailsDialog extends RoundedCustomBottomSheetFragment {
         mCategoryList.add(new MenuCategory(categoryTitle, items));
     }
 
+    public void setSelectedItemId(int id) {
+        mSelectedItemId = id;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -48,6 +54,7 @@ public class MenuDetailsDialog extends RoundedCustomBottomSheetFragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        mListener.onMenuDetailsDialogCreated(mGroupId, this);
         mOrientation = getResources().getConfiguration().orientation;
         MaterialTextView dialogTitle = view.findViewById(R.id.context_menu_title);
         dialogTitle.setText(mDialogTitle);
@@ -66,6 +73,9 @@ public class MenuDetailsDialog extends RoundedCustomBottomSheetFragment {
             for (final MenuItem item : menuCategory.getItems()) {
                 View itemView = inflater.inflate(R.layout.item_menu_options, menuRoot, false);
                 menuRoot.addView(itemView);
+                if (item.getId() == mSelectedItemId) {
+                    itemView.setBackground(ImageUtil.getSelectedItemDrawable(context));
+                }
 
                 MaterialTextView textView = itemView.findViewById(R.id.category_menu_item);
                 textView.setId(item.getId());

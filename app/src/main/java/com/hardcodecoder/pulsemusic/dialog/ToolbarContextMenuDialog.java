@@ -24,10 +24,10 @@ public class ToolbarContextMenuDialog extends RoundedCustomBottomSheetFragment {
 
     public static final String TAG = ToolbarContextMenuDialog.class.getSimpleName();
     private final List<MenuType> mGroupItemList;
-    private final OnSelectMenuGroup mGroupSelectedListener;
+    private final OnMenuSelectedListener mGroupSelectedListener;
 
     public ToolbarContextMenuDialog(@NonNull List<MenuType> groupItemList,
-                                    @NonNull OnSelectMenuGroup menuGroupListener) {
+                                    @NonNull OnMenuSelectedListener menuGroupListener) {
         mGroupItemList = groupItemList;
         mGroupSelectedListener = menuGroupListener;
     }
@@ -53,7 +53,7 @@ public class ToolbarContextMenuDialog extends RoundedCustomBottomSheetFragment {
             View item = inflater.inflate(R.layout.item_menu_type, root, false);
             root.addView(item);
             item.setOnClickListener(v -> {
-                mGroupSelectedListener.onSelected(menuType);
+                mGroupSelectedListener.onMenuSelected(menuType);
                 dismiss();
             });
 
@@ -65,17 +65,17 @@ public class ToolbarContextMenuDialog extends RoundedCustomBottomSheetFragment {
         }
     }
 
-    public interface OnSelectMenuGroup {
+    public interface OnMenuSelectedListener {
 
-        void onSelected(@NonNull MenuType groupItem);
+        void onMenuSelected(@NonNull MenuType groupItem);
     }
 
     public static class Builder {
 
         private final List<MenuType> mGroupList = new ArrayList<>();
-        private OnSelectMenuGroup mGroupSelectedListener;
+        private OnMenuSelectedListener mGroupSelectedListener;
 
-        public void setMenuSelectedListener(@NonNull OnSelectMenuGroup menuGroupListener) {
+        public void setMenuSelectedListener(@NonNull OnMenuSelectedListener menuGroupListener) {
             mGroupSelectedListener = menuGroupListener;
         }
 

@@ -15,6 +15,7 @@ import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.Preferences;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.adapters.main.ArtistAdapter;
+import com.hardcodecoder.pulsemusic.dialog.MenuDetailsDialog;
 import com.hardcodecoder.pulsemusic.dialog.ToolbarContextMenuDialog;
 import com.hardcodecoder.pulsemusic.fragments.main.base.CardGridFragment;
 import com.hardcodecoder.pulsemusic.interfaces.GridAdapterCallback;
@@ -72,6 +73,14 @@ public class ArtistFragment extends CardGridFragment
                 Preferences.SORT_ORDER_GROUP_ARTISTS,
                 Preferences.COLUMN_COUNT_GROUP_ARTISTS);
         toolbarMenuDialog.show(requireFragmentManager(), ToolbarContextMenuDialog.TAG);
+    }
+
+    @Override
+    public void onMenuDetailsDialogCreated(int groupId, @NonNull MenuDetailsDialog detailsDialog) {
+        if (groupId == Preferences.SORT_ORDER_GROUP_ARTISTS)
+            detailsDialog.setSelectedItemId(getCurrentSortOrder());
+        else if (groupId == Preferences.COLUMN_COUNT_GROUP_ARTISTS)
+            detailsDialog.setSelectedItemId(getCurrentColumnCount());
     }
 
     @Override

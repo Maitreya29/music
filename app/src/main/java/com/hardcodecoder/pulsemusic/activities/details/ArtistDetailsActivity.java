@@ -4,6 +4,7 @@ import android.view.ViewStub;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,6 +16,7 @@ import com.hardcodecoder.pulsemusic.activities.details.base.BaseDetailsActivity;
 import com.hardcodecoder.pulsemusic.adapters.main.AlbumsAdapter;
 import com.hardcodecoder.pulsemusic.dialog.MenuDetailsDialog;
 import com.hardcodecoder.pulsemusic.dialog.ToolbarContextMenuDialog;
+import com.hardcodecoder.pulsemusic.interfaces.OptionsMenuListener;
 import com.hardcodecoder.pulsemusic.loaders.LoaderHelper;
 import com.hardcodecoder.pulsemusic.loaders.SortOrder;
 import com.hardcodecoder.pulsemusic.model.AlbumModel;
@@ -28,7 +30,7 @@ import com.hardcodecoder.pulsemusic.views.MediaArtImageView;
 
 import java.util.List;
 
-public class ArtistDetailsActivity extends BaseDetailsActivity {
+public class ArtistDetailsActivity extends BaseDetailsActivity implements OptionsMenuListener {
 
     public static final String KEY_ARTIST_TITLE = "AlbumTitle";
     private AlbumsAdapter mAdapter;
@@ -57,14 +59,23 @@ public class ArtistDetailsActivity extends BaseDetailsActivity {
             MenuDetailsDialog detailsDialog = ToolbarMenuBuilder.buildSortOrderDialog(
                     this,
                     Preferences.SORT_ORDER_GROUP_ARTISTS_DETAILS,
-                    (groupId, selectedItemId) -> {
-                        if (groupId == Preferences.SORT_ORDER_GROUP_ARTISTS_DETAILS)
-                            onChangeSortOrder(selectedItemId);
-                    });
+                    this);
             detailsDialog.show(getSupportFragmentManager(), MenuDetailsDialog.TAG);
         });
         ToolbarContextMenuDialog contextMenuDialog = builder.build();
         contextMenuDialog.show(getSupportFragmentManager(), ToolbarContextMenuDialog.TAG);
+    }
+
+    @Override
+    public void onMenuDetailsDialogCreated(int groupId, @NonNull MenuDetailsDialog detailsDialog) {
+        if (groupId == Preferences.SORT_ORDER_GROUP_ARTISTS_DETAILS)
+            detailsDialog.setSelectedItemId(getCurrentSortOrder());
+    }
+
+    @Override
+    public void onItemSelected(int groupId, int selectedItemId) {
+        if (groupId == Preferences.SORT_ORDER_GROUP_ARTISTS_DETAILS)
+            onChangeSortOrder(selectedItemId);
     }
 
     @Override

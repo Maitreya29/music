@@ -15,6 +15,7 @@ import com.hardcodecoder.pulsemusic.PulseController;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.TaskRunner;
 import com.hardcodecoder.pulsemusic.adapters.main.TracksAdapter;
+import com.hardcodecoder.pulsemusic.dialog.MenuDetailsDialog;
 import com.hardcodecoder.pulsemusic.dialog.ToolbarContextMenuDialog;
 import com.hardcodecoder.pulsemusic.fragments.main.base.ListGridFragment;
 import com.hardcodecoder.pulsemusic.helper.UIHelper;
@@ -68,6 +69,14 @@ public class LibraryFragment extends ListGridFragment implements SimpleItemClick
                 Preferences.SORT_ORDER_GROUP_LIBRARY,
                 Preferences.COLUMN_COUNT_GROUP_LIBRARY);
         toolbarMenuDialog.show(requireFragmentManager(), ToolbarContextMenuDialog.TAG);
+    }
+
+    @Override
+    public void onMenuDetailsDialogCreated(int groupId, @NonNull MenuDetailsDialog detailsDialog) {
+        if (groupId == Preferences.SORT_ORDER_GROUP_LIBRARY)
+            detailsDialog.setSelectedItemId(getCurrentSortOrder());
+        else if (groupId == Preferences.COLUMN_COUNT_GROUP_LIBRARY)
+            detailsDialog.setSelectedItemId(getCurrentColumnCount());
     }
 
     @Override

@@ -26,6 +26,10 @@ public abstract class BaseDetailsActivity extends ControllerActivity {
         onViewCreated();
     }
 
+    protected int getCurrentSortOrder() {
+        return mCurrentSortOrder;
+    }
+
     protected void setCurrentSortOrder(int sortOrder) {
         mCurrentSortOrder = sortOrder;
     }
