@@ -11,7 +11,7 @@ import com.hardcodecoder.pulsemusic.Preferences;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.dialog.MenuDetailsDialog;
 import com.hardcodecoder.pulsemusic.dialog.ToolbarContextMenuDialog;
-import com.hardcodecoder.pulsemusic.fragments.main.base.PulseFragment.OptionsMenuListener;
+import com.hardcodecoder.pulsemusic.interfaces.OptionsMenuListener;
 import com.hardcodecoder.pulsemusic.model.MenuItem;
 
 public class ToolbarMenuBuilder {

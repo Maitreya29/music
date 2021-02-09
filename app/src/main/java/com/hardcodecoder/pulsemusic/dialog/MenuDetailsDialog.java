@@ -14,7 +14,7 @@ import androidx.annotation.Nullable;
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.dialog.base.RoundedCustomBottomSheetFragment;
-import com.hardcodecoder.pulsemusic.fragments.main.base.PulseFragment.OptionsMenuListener;
+import com.hardcodecoder.pulsemusic.interfaces.OptionsMenuListener;
 import com.hardcodecoder.pulsemusic.model.MenuCategory;
 import com.hardcodecoder.pulsemusic.model.MenuItem;
 

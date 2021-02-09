@@ -31,9 +31,4 @@ public abstract class PulseFragment extends Fragment {
     public abstract String getFragmentTitle(@NonNull Context context);
 
     public abstract void setUpContent(@NonNull View view);
-
-    public interface OptionsMenuListener {
-
-        void onItemSelected(int groupId, int selectedItemId);
-    }
 }

@@ -17,8 +17,8 @@ import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.adapters.main.AlbumsAdapter;
 import com.hardcodecoder.pulsemusic.dialog.ToolbarContextMenuDialog;
 import com.hardcodecoder.pulsemusic.fragments.main.base.CardGridFragment;
-import com.hardcodecoder.pulsemusic.fragments.main.base.PulseFragment;
 import com.hardcodecoder.pulsemusic.interfaces.GridAdapterCallback;
+import com.hardcodecoder.pulsemusic.interfaces.OptionsMenuListener;
 import com.hardcodecoder.pulsemusic.interfaces.SimpleTransitionClickListener;
 import com.hardcodecoder.pulsemusic.loaders.LoaderHelper;
 import com.hardcodecoder.pulsemusic.loaders.SortOrder.ALBUMS;
@@ -30,7 +30,7 @@ import com.hardcodecoder.pulsemusic.utils.ToolbarMenuBuilder;
 import java.util.List;
 
 public class AlbumsFragment extends CardGridFragment
-        implements SimpleTransitionClickListener, GridAdapterCallback, PulseFragment.OptionsMenuListener {
+        implements SimpleTransitionClickListener, GridAdapterCallback, OptionsMenuListener {
 
     public static final String TAG = "Albums";
     private GridLayoutManager mLayoutManager;
