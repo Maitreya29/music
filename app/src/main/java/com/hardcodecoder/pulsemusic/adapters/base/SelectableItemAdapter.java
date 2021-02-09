@@ -114,7 +114,7 @@ public abstract class SelectableItemAdapter<T, SIH extends SelectableItemAdapter
         @CallSuper
         @Override
         public void onItemSelected() {
-            itemView.setBackground(ImageUtil.getAccentTintedSelectedItemBackground(itemView.getContext()));
+            itemView.setBackground(ImageUtil.getSelectedItemDrawable(itemView.getContext()));
             mItemSelected = true;
         }
 

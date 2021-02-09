@@ -6,7 +6,8 @@
     android:layout_height="72dp"
     android:background="?attr/selectableItemBackground"
     android:paddingStart="22dp"
-    android:paddingEnd="24dp">
+    android:paddingEnd="24dp"
+    android:layout_marginTop="8dp">
 
     <com.hardcodecoder.pulsemusic.views.MediaArtImageView
         android:id="@+id/list_item_album_art"

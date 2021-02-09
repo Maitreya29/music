@@ -150,7 +150,7 @@ public class CustomizablePlaylistAdapter extends EfficientRecyclerViewAdapter<Mu
 
         @Override
         public void onItemSelected() {
-            itemView.setBackground(ImageUtil.getAccentTintedSelectedItemBackground(itemView.getContext()));
+            itemView.setBackground(ImageUtil.getSelectedItemDrawable(itemView.getContext()));
         }
 
         @Override

@@ -93,7 +93,7 @@ public class PlaylistsAdapter extends EfficientRecyclerViewAdapter<String, Playl
 
         @Override
         public void onItemSelected() {
-            itemView.setBackground(ImageUtil.getAccentTintedSelectedItemBackground(itemView.getContext()));
+            itemView.setBackground(ImageUtil.getSelectedItemDrawable(itemView.getContext()));
         }
 
         @Override

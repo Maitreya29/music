@@ -3,10 +3,10 @@ package com.hardcodecoder.pulsemusic.utils;
 import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import com.hardcodecoder.pulsemusic.R;
@@ -25,40 +25,30 @@ public class ImageUtil {
         return drawable;
     }
 
-    @NonNull
-    public static Drawable getAccentTintedSelectedItemBackground(@NonNull Context context) {
-        GradientDrawable drawable = new GradientDrawable(
-                GradientDrawable.Orientation.LEFT_RIGHT,
-                new int[]{
-                        android.R.color.transparent,
-                        ColorUtil.generatePrimaryTintedColorOverlay()});
-        drawable.setCornerRadius(DimensionsUtil.getDimension(context, 8));
-        drawable.setGradientCenter(34, 0);
-        return drawable;
-    }
-
-    @NonNull
+    @Nullable
     public static Drawable getHighlightedItemBackground(@NonNull Context context) {
+        Drawable drawable = getRoundedRectangle(context);
+        if (null == drawable) return null;
         return TintHelper.setTintTo(
-                ContextCompat.getDrawable(context, R.drawable.shape_rounded_rectangle),
+                drawable,
                 ThemeColors.getCurrentColorBackgroundHighlight(),
                 false);
     }
 
-    @NonNull
+    @Nullable
     public static Drawable getSelectedItemDrawable(@NonNull Context context) {
-        Drawable drawable = getRoundedRectangle(DimensionsUtil.getDimension(context, 8));
-        drawable.mutate();
-        drawable.setTint(ColorUtil.changeAlphaComponentTo(ThemeColors.getCurrentColorPrimary(), 0.26f));
-        return drawable;
+        Drawable drawable = getRoundedRectangle(context);
+        if (null == drawable)
+            return null;
+        return TintHelper.setTintTo(
+                drawable,
+                ColorUtil.changeAlphaComponentTo(ThemeColors.getCurrentColorPrimary(), 0.26f),
+                false);
     }
 
-    @NonNull
-    public static Drawable getRoundedRectangle(float radius) {
-        GradientDrawable drawable = new GradientDrawable();
-        drawable.setShape(GradientDrawable.RECTANGLE);
-        drawable.setCornerRadius(radius);
-        return drawable;
+    @Nullable
+    public static Drawable getRoundedRectangle(@NonNull Context context) {
+        return ContextCompat.getDrawable(context, R.drawable.shape_rounded_rectangle);
     }
 
     public static int calculateInSampleSize(@NonNull BitmapFactory.Options options, int reqWidth, int reqHeight) {
