@@ -14,9 +14,47 @@
     <img src="https://img.shields.io/github/v/release/hardcodecoder/pulsemusic?color=%235F78FF" />
   </a>
   <a href="https://github.com/HardcodeCoder/pulsemusic/releases">
-    <img src="https://img.shields.io/github/downloads/hardcodecoder/pulsemusic/total?color=blue" />
+    <img src="https://img.shields.io/github/downloads/hardcodecoder/pulsemusic/total?color=blue"/>
   </a>
 </p>
+
+<p align="center">
+  <a href="https://f-droid.org/packages/com.hardcodecoder.pulsemusic">
+    <img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.svg"
+    alt="Get it on F-Droid"
+    height="80">
+  </a>
+
+  <a href="https://github.com/HardcodeCoder/PulseMusic/releases/">
+    <img src="https://raw.githubusercontent.com/flocke/andOTP/master/assets/badges/get-it-on-github.svg"
+    alt="Get it on Github"
+    height="80">
+  </a>
+</p>
+
+
+<h2 align="center">Support development</h2>
+<h4 align="center">Enjoying Pulse Music?</h4>
+<p align="center">Please consider donating a small amount to support the development. It requires a lot of effort and time to develop an application, and that too keeping it open source and completely free.
+</p>
+<p align="center">
+    <a href="https://paypal.me/HardcodeCoder">
+    <img src="https://www.paypalobjects.com/webstatic/en_AU/i/buttons/btn_paywith_primary_l.png" alt="Pay with PayPal" width="200" height="51"  />
+  </a>
+
+  <a href="https://www.buymeacoffee.com/hardcodecoder">
+    <img src="https://cdn.buymeacoffee.com/buttons/v2/default-blue.png" alt="Buy Me A Coffee" height="51" width="200" >
+  </a>
+</p>
+
+## Contribution
+**Help us make Pulse Music even better**
+
+**Submit your changes/modifications/features via pull request.**
+
+**Looking to translate this app to your own language? Submit your translations on [Crowdin](https://crwd.in/pulse-music)**
+
+
 
 ## Screenshots
 | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/1.png" width="200"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/2.png" width="200"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/3.png" width="200"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/7.png" width="200"/> |
@@ -24,7 +62,7 @@
 | Home | Library | Playlist |Details page |
 
 ### Now playing screen
-| <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/4.png" width="200"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/5.png" width="200"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/6.png" width="200"/> | 
+| <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/4.png" width="200"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/5.png" width="200"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/6.png" width="200"/> |
 |:---:|:---:|:---:|
 | Modern | Stylish | Edge to edge |
 
@@ -79,31 +117,5 @@ With 3 different dark themes and several curated accents to choose from, customi
 - All your favorite tracks in one place.
 - Option to change now playing screen album cover corner radius.
 
-## Support development
-**Enjoying Pulse Music?**
-
-Please consider donating a small amount to support the development.
-
-It requires a lot of effort and time to develop an application, and that too keeping it open source and completely free.
-<p>
-  <a href="https://www.buymeacoffee.com/HardcodeCoder">
-    <img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174">
-  </a>
-    <a href="https://paypal.me/HardcodeCoder">
-      <img src="https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-200px.png" alt="PayPal" height="41" width="174">
-  </a>
-</p>
-
-## Contribution
-**Help us make Pulse Music even better**
-
-**Submit your changes/modifications/features via pull request.**
-
-**Looking to translate this app to your own language? Submit your translations on [Crowdin](https://crwd.in/pulse-music)**
-
-## Releases
-[<img alt="Get it on Github" height="70" src="https://raw.githubusercontent.com/flocke/andOTP/master/assets/badges/get-it-on-github.png">](https://github.com/HardcodeCoder/PulseMusic/releases/)
-### Latest release: [Here](https://github.com/HardcodeCoder/PulseMusic/releases/latest/)
 
 IMPORTANT : *Please mention the steps to reproduce the bug while reporting. Providing logs will be really helpful*
-
