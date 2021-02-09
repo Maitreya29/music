@@ -25,9 +25,11 @@ import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.TaskRunner;
 import com.hardcodecoder.pulsemusic.activities.base.ControllerActivity;
 import com.hardcodecoder.pulsemusic.activities.main.TrackPickerActivity;
+import com.hardcodecoder.pulsemusic.helper.MediaArtHelper;
 import com.hardcodecoder.pulsemusic.loaders.MediaArtCollageLoader;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.themes.ThemeColors;
+import com.hardcodecoder.pulsemusic.themes.ThemeManagerUtils;
 import com.hardcodecoder.pulsemusic.utils.DimensionsUtil;
 import com.hardcodecoder.pulsemusic.views.AccentColorMaterialButton;
 import com.hardcodecoder.pulsemusic.views.CustomToolbar;
@@ -113,8 +115,17 @@ public abstract class PlaylistActivity extends ControllerActivity {
         TaskRunner.executeAsync(new MediaArtCollageLoader(this, list), result -> {
             MediaArtImageView playlistArt = findViewById(R.id.playlist_media_art);
             if (null != result) playlistArt.setImageBitmap(result);
-            else playlistArt.loadAlbumArt(null, -1);
+            else loadDefaultPlaylistArt(playlistArt);
         });
+    }
+
+    private void loadDefaultPlaylistArt(@NonNull MediaArtImageView imageView) {
+        int color;
+        if (ThemeManagerUtils.isDarkModeEnabled())
+            color = ThemeColors.getCurrentColorWindowBackground();
+        else color = ThemeColors.getCurrentColorBackgroundHighlight();
+        imageView.setBackgroundColor(color);
+        imageView.setImageDrawable(MediaArtHelper.getDefaultAlbumArt(this, -1));
     }
 
     protected void updateTracksInfo(int size, long duration) {
@@ -138,7 +149,7 @@ public abstract class PlaylistActivity extends ControllerActivity {
 
             // Set playlist art
             MediaArtImageView playlistArt = findViewById(R.id.playlist_media_art);
-            playlistArt.loadAlbumArt(null, -1);
+            loadDefaultPlaylistArt(playlistArt);
 
             // Disable appbar scrolling
             AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) mCollapsingToolbarLayout.getLayoutParams();
