@@ -23,8 +23,7 @@
         tools:targetApi="Q">
 
         <activity
-            android:name=".activities.main.SplashActivity"
-            android:launchMode="singleTask">
+            android:name=".activities.main.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -58,7 +57,6 @@
 
         <activity
             android:name=".activities.main.MainContentActivity"
-            android:clearTaskOnLaunch="true"
             android:configChanges="orientation|screenSize"
             android:launchMode="singleTask" />
 
@@ -100,7 +98,6 @@
             android:exported="false"
             android:foregroundServiceType="mediaPlayback">
             <intent-filter>
-                <action android:name="android.media.browse.MediaBrowserService" />
                 <action android:name="android.intent.action.MEDIA_BUTTON" />
             </intent-filter>
         </service>
