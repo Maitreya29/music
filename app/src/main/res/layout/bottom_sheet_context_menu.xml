@@ -1,27 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:overScrollMode="never"
     android:paddingTop="24dp"
     android:paddingBottom="32dp">
 
-    <LinearLayout
-        android:id="@+id/context_menu_root"
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/context_menu_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:gravity="center"
+        android:textAppearance="@style/Appearance.Text.Headline6"
+        tools:text="@string/context_menu_title" />
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp">
+        android:overScrollMode="never">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/context_menu_title"
+        <LinearLayout
+            android:id="@+id/context_menu_root"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:gravity="center"
-            android:textAppearance="@style/Appearance.Text.Headline6"
-            tools:text="@string/context_menu_title" />
-    </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+            android:orientation="vertical"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp">
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

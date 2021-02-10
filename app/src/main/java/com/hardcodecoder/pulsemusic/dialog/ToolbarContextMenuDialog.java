@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.annotation.DrawableRes;
@@ -57,10 +56,12 @@ public class ToolbarContextMenuDialog extends RoundedCustomBottomSheetFragment {
                 dismiss();
             });
 
-            ImageView icon = item.findViewById(R.id.menu_group_icon);
-            icon.setImageResource(menuType.getIconId());
-
-            MaterialTextView textView = item.findViewById(R.id.menu_group_title);
+            MaterialTextView textView = item.findViewById(R.id.menu_type_title);
+            textView.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                    menuType.getIconId(),
+                    0,
+                    0,
+                    0);
             textView.setText(menuType.getTitle());
         }
     }
