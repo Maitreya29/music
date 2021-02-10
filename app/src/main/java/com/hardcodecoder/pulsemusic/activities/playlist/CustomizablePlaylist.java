@@ -83,7 +83,8 @@ public class CustomizablePlaylist extends PlaylistActivity implements PlaylistIt
 
     @Override
     public void onItemClick(int position) {
-        if (mAdapter != null) setTrackAndPlay(mAdapter.getDataList(), position);
+        if (mAdapter == null || mAdapter.getItemCount() == 0) return;
+        setTrackAndPlay(mAdapter.getDataList(), position);
     }
 
     @Override

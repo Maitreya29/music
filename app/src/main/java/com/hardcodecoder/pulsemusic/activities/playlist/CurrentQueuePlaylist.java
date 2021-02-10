@@ -79,7 +79,7 @@ public class CurrentQueuePlaylist extends PlaylistActivity implements PlaylistIt
 
     @Override
     public void onItemClick(int position) {
-        if (null == mAdapter) return;
+        if (null == mAdapter || mAdapter.getItemCount() == 0) return;
         mQueueManager.setActiveIndex(position);
         mRemote.play();
     }
