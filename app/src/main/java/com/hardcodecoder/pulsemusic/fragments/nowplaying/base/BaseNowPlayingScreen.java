@@ -275,8 +275,7 @@ public abstract class BaseNowPlayingScreen extends Fragment
             @Override
             public void onStopTrackingTouch(@NonNull Slider slider) {
                 // Pass progress in milli seconds
-                mRemote.seekTo((long) slider.getValue() * 1000);
-                onProgressValueChanged((int) slider.getValue());
+                seekTo((long) slider.getValue() * 1000);
             }
         });
         progressSlider.setLabelFormatter(value -> DateUtils.formatElapsedTime((long) value));
@@ -296,8 +295,7 @@ public abstract class BaseNowPlayingScreen extends Fragment
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 // Pass progress in milli seconds
-                mRemote.seekTo((long) seekBar.getProgress() * 1000);
-                onProgressValueChanged(seekBar.getProgress());
+                seekTo((long) seekBar.getProgress() * 1000);
             }
         });
     }
