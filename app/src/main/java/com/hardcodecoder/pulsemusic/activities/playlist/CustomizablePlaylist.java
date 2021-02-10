@@ -18,6 +18,7 @@ import com.hardcodecoder.pulsemusic.interfaces.PlaylistItemListener;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.providers.ProviderManager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CustomizablePlaylist extends PlaylistActivity implements PlaylistItemListener, ItemGestureCallback<MusicModel> {
@@ -59,26 +60,40 @@ public class CustomizablePlaylist extends PlaylistActivity implements PlaylistIt
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_advance_playllist, menu);
+        getMenuInflater().inflate(R.menu.playlist_options, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.menu_action_clear_duplicates) {
-            if (null == mAdapter || getPlaylistTitle() == null) return false;
-            ProviderManager.getPlaylistProvider().deleteAllDuplicatesInPlaylist(
-                    getPlaylistTitle(),
-                    mAdapter.getDataList(),
-                    result -> {
-                        if (null != result) {
-                            mAdapter.updatePlaylist(result);
-                            updateTracksInfo(result.size(), calculatePlaylistDuration(result));
-                        }
-                    });
-            return true;
-        }
-        return false;
+        final int id = item.getItemId();
+        if (id == R.id.menu_action_clear_duplicates) removeDuplicates();
+        else if (id == R.id.menu_action_clear_all) clearPlaylist();
+        return true;
+    }
+
+    private void removeDuplicates() {
+        if (null == mAdapter || mAdapter.getItemCount() == 0 || getPlaylistTitle() == null) return;
+        ProviderManager.getPlaylistProvider().deleteAllDuplicatesInPlaylist(
+                getPlaylistTitle(),
+                mAdapter.getDataList(),
+                result -> {
+                    if (null != result) {
+                        mAdapter.updatePlaylist(result);
+                        updateTracksInfo(result.size(), calculatePlaylistDuration(result));
+                    }
+                });
+    }
+
+    private void clearPlaylist() {
+        if (null == mAdapter) return;
+        mAdapter.clearAll();
+
+        showEmptyListUI(true);
+        mAdapter = null;
+
+        if (null != getPlaylistTitle())
+            ProviderManager.getPlaylistProvider().updatePlaylistTracks(getPlaylistTitle(), new ArrayList<>());
     }
 
     @Override

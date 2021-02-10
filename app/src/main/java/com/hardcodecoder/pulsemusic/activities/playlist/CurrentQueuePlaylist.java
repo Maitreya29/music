@@ -37,7 +37,13 @@ public class CurrentQueuePlaylist extends PlaylistActivity implements PlaylistIt
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_current_queue, menu);
+        getMenuInflater().inflate(R.menu.playlist_options, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(@NonNull Menu menu) {
+        menu.removeItem(R.id.menu_action_clear_duplicates);
         return true;
     }
 
