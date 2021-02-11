@@ -158,7 +158,7 @@ public class AlbumDetailsActivity extends BaseDetailsActivity implements Options
 
                     @Override
                     public void onOptionsClick(int position) {
-                        UIHelper.showMenuForAlbumDetails(AlbumDetailsActivity.this, getSupportFragmentManager(), list.get(position));
+                        UIHelper.showMenuForAlbumDetails(AlbumDetailsActivity.this, list.get(position));
                     }
                 },
                 null,

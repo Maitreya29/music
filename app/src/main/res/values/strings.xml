@@ -14,7 +14,6 @@
     <string name="desc_icon_button">Icon button</string>
     <string name="desc_confirm_btn">Confirm selection</string>
     <string name="desc_play_pause_btn">Media play and pause button</string>
-    <string name="desc_icon">Icon</string>
     <string name="desc_options_btn">Context menu button</string>
 
 
@@ -117,6 +116,10 @@
     <string name="add_to_queue">Add to queue</string>
     <string name="toast_added_to_queue">Track added to playing queue</string>
     <string name="add_to_playlist">Add to playlist</string>
+    <string name="add_to_favorite">Add to favorite</string>
+    <string name="remove_from_favorite">Remove from favorite</string>
+    <string name="share">Share</string>
+    <string name="share_intent">Share track using</string>
     <string name="go_to_album">Go to album</string>
     <string name="go_to_artist">Go to artist</string>
     <string name="track_info">Track info</string>

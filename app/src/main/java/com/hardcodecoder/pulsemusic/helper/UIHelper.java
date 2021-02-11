@@ -1,6 +1,5 @@
 package com.hardcodecoder.pulsemusic.helper;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -12,31 +11,36 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textview.MaterialTextView;
-import com.hardcodecoder.pulsemusic.PulseController;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.dialog.AddToPlaylistDialog;
+import com.hardcodecoder.pulsemusic.dialog.TracksContentMenuDialog;
 import com.hardcodecoder.pulsemusic.dialog.base.RoundedCustomBottomSheet;
 import com.hardcodecoder.pulsemusic.interfaces.CreatePlaylist;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.providers.ProviderManager;
 import com.hardcodecoder.pulsemusic.utils.DataUtils;
-import com.hardcodecoder.pulsemusic.utils.NavigationUtil;
-import com.hardcodecoder.pulsemusic.views.MediaArtImageView;
 
 public class UIHelper {
 
-    public static void showMenuForLibraryTracks(@NonNull Activity activity, @NonNull FragmentManager fragmentManager, @NonNull MusicModel data) {
-        buildAndShowOptionsMenu(activity, fragmentManager, data, true);
+    public static void showMenuForLibraryTracks(@NonNull FragmentActivity activity, @NonNull MusicModel data) {
+        TracksContentMenuDialog tracksContentDialog = new TracksContentMenuDialog(data);
+        tracksContentDialog.setShowGoToAlbums(true);
+        tracksContentDialog.setShowGoToArtists(true);
+        tracksContentDialog.show(activity.getSupportFragmentManager(), TracksContentMenuDialog.TAG);
     }
 
-    public static void showMenuForAlbumDetails(@NonNull Activity activity, @NonNull FragmentManager fragmentManager, @NonNull MusicModel data) {
-        buildAndShowOptionsMenu(activity, fragmentManager, data, false);
+    public static void showMenuForAlbumDetails(@NonNull FragmentActivity activity, @NonNull MusicModel data) {
+        TracksContentMenuDialog tracksContentDialog = new TracksContentMenuDialog(data);
+        tracksContentDialog.setShowGoToAlbums(false);
+        tracksContentDialog.setShowGoToArtists(true);
+        tracksContentDialog.show(activity.getSupportFragmentManager(), TracksContentMenuDialog.TAG);
     }
 
     public static void buildCreatePlaylistDialog(@NonNull Context context, @NonNull CreatePlaylist callback) {
@@ -122,58 +126,6 @@ public class UIHelper {
         b.putSerializable(AddToPlaylistDialog.MUSIC_MODEL_KEY, itemToAdd);
         dialog.setArguments(b);
         dialog.show(fragmentManager, AddToPlaylistDialog.TAG);
-    }
-
-    private static void buildAndShowOptionsMenu(@NonNull Activity activity,
-                                                @NonNull FragmentManager fragmentManager,
-                                                @NonNull final MusicModel data,
-                                                boolean showGoToAlbums) {
-        View view = View.inflate(activity, R.layout.library_item_menu, null);
-        BottomSheetDialog bottomSheetDialog = new RoundedCustomBottomSheet(activity, RoundedCustomBottomSheet::setDefaultBehaviour);
-        MediaArtImageView trackAlbumArt = view.findViewById(R.id.track_album_art);
-        trackAlbumArt.setTransitionName("song_info_transition_" + data.getId());
-        MaterialTextView trackTitle = view.findViewById(R.id.track_title);
-        MaterialTextView trackSubTitle = view.findViewById(R.id.track_sub_title);
-
-        trackAlbumArt.loadAlbumArt(data.getAlbumArtUrl(), data.getAlbumId());
-        trackTitle.setText(data.getTrackName());
-        trackTitle.setSelected(true);
-        trackSubTitle.setText(data.getArtist());
-
-        view.findViewById(R.id.track_play_next).setOnClickListener(v -> {
-            PulseController.getInstance().playNext(data);
-            Toast.makeText(v.getContext(), activity.getString(R.string.toast_added_to_play_next), Toast.LENGTH_SHORT).show();
-            dismiss(bottomSheetDialog);
-        });
-
-        view.findViewById(R.id.add_to_queue).setOnClickListener(v -> {
-            PulseController.getInstance().addToQueue(data);
-            Toast.makeText(v.getContext(), activity.getString(R.string.toast_added_to_queue), Toast.LENGTH_SHORT).show();
-            dismiss(bottomSheetDialog);
-        });
-
-        view.findViewById(R.id.song_info).setOnClickListener(v -> {
-            buildSongInfoDialog(activity, data);
-            dismiss(bottomSheetDialog);
-        });
-
-        if (showGoToAlbums) {
-            MaterialTextView goToAlbumsOption = view.findViewById(R.id.go_to_album);
-            goToAlbumsOption.setVisibility(View.VISIBLE);
-            goToAlbumsOption.setOnClickListener(v ->
-                    NavigationUtil.goToAlbum(activity, trackAlbumArt, data.getAlbum(), data.getAlbumId(), data.getAlbumArtUrl()));
-        }
-
-        view.findViewById(R.id.go_to_artist).setOnClickListener(v ->
-                NavigationUtil.goToArtist(activity, data.getArtist()));
-
-        view.findViewById(R.id.add_to_playlist).setOnClickListener(v -> {
-            openAddToPlaylistDialog(fragmentManager, data);
-            dismiss(bottomSheetDialog);
-        });
-
-        bottomSheetDialog.setContentView(view);
-        bottomSheetDialog.show();
     }
 
     private static void dismiss(@NonNull BottomSheetDialog dialog) {

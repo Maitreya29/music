@@ -102,7 +102,7 @@ public class LibraryFragment extends ListGridFragment implements SimpleItemClick
 
     @Override
     public void onOptionsClick(int position) {
-        UIHelper.showMenuForLibraryTracks(requireActivity(), requireFragmentManager(), mAdapter.getDataList().get(position));
+        UIHelper.showMenuForLibraryTracks(requireActivity(), mAdapter.getDataList().get(position));
     }
 
     public void onSortUpdateComplete() {

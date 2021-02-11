@@ -108,7 +108,7 @@ public class SearchActivity extends ControllerActivity implements SimpleItemClic
     @Override
     public void onOptionsClick(int position) {
         if (null == mAdapter) return;
-        UIHelper.showMenuForLibraryTracks(this, getSupportFragmentManager(), mAdapter.getDataList().get(position));
+        UIHelper.showMenuForLibraryTracks(this, mAdapter.getDataList().get(position));
     }
 
     @Override

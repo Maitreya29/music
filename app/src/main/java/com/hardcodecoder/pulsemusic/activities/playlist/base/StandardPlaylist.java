@@ -55,7 +55,7 @@ public abstract class StandardPlaylist extends PlaylistActivity implements Simpl
 
     @Override
     public void onOptionsClick(int position) {
-        UIHelper.showMenuForLibraryTracks(this, getSupportFragmentManager(), mAdapter.getDataList().get(position));
+        UIHelper.showMenuForLibraryTracks(this, mAdapter.getDataList().get(position));
     }
 
     protected abstract void onTracksCleared();

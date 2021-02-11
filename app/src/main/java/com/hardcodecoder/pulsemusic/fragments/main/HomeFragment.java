@@ -161,7 +161,7 @@ public class HomeFragment extends PulseFragment {
 
                 @Override
                 public void onOptionsClick(int position) {
-                    UIHelper.showMenuForLibraryTracks(requireActivity(), requireFragmentManager(), list.get(position));
+                    UIHelper.showMenuForLibraryTracks(requireActivity(), list.get(position));
                 }
             });
             rv.setAdapter(adapter);
@@ -185,7 +185,7 @@ public class HomeFragment extends PulseFragment {
 
                 @Override
                 public void onOptionsClick(int position) {
-                    UIHelper.showMenuForLibraryTracks(requireActivity(), requireFragmentManager(), list.get(position));
+                    UIHelper.showMenuForLibraryTracks(requireActivity(), list.get(position));
                 }
             });
             rv.setAdapter(adapter);
@@ -209,7 +209,7 @@ public class HomeFragment extends PulseFragment {
 
                 @Override
                 public void onOptionsClick(int position) {
-                    UIHelper.showMenuForLibraryTracks(requireActivity(), requireFragmentManager(), list.get(position));
+                    UIHelper.showMenuForLibraryTracks(requireActivity(), list.get(position));
                 }
             });
             rv.setAdapter(adapter);
