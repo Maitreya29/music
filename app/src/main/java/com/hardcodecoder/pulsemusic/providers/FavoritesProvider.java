@@ -11,6 +11,7 @@ import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.utils.StorageUtil;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -20,6 +21,7 @@ public class FavoritesProvider {
     private final Handler mHandler;
     private final String mFavoritesFilePath;
     private Set<Integer> mFavoritesSet;
+    private List<FavoritesProviderCallback> mCallbacks = null;
 
     public FavoritesProvider(String baseDir, Handler handler) {
         mHandler = handler;
@@ -31,11 +33,17 @@ public class FavoritesProvider {
         if (musicModel.getId() < 0) return;
         TaskRunner.executeAsync(() -> {
             loadFavorites();
-            if (mFavoritesSet.add(musicModel.getId()))
+            if (mFavoritesSet.add(musicModel.getId())) {
                 StorageUtil.writeStringToFile(
                         new File(mFavoritesFilePath),
                         musicModel.getId() + System.lineSeparator(),
                         true);
+
+                if (null != mCallbacks) {
+                    for (FavoritesProviderCallback callback : mCallbacks)
+                        mHandler.post(() -> callback.onFavoriteAdded(musicModel));
+                }
+            }
         });
     }
 
@@ -69,6 +77,10 @@ public class FavoritesProvider {
                 if (trackIds != null) {
                     trackIds.remove(id);
                     StorageUtil.writePlaylistIdsToFile(file, trackIds, false);
+                    if (null != mCallbacks) {
+                        for (FavoritesProviderCallback callback : mCallbacks)
+                            mHandler.post(() -> callback.onFavoriteRemoved(musicModel));
+                    }
                 }
             }
         });
@@ -78,7 +90,21 @@ public class FavoritesProvider {
         TaskRunner.executeAsync(() -> {
             StorageUtil.deleteFile(new File(mFavoritesFilePath));
             if (null != mFavoritesSet) mFavoritesSet.clear();
+            if (null != mCallbacks) {
+                for (FavoritesProviderCallback callback : mCallbacks)
+                    mHandler.post(callback::onFavoritesCleared);
+            }
         });
+    }
+
+    public void addCallback(@NonNull FavoritesProviderCallback callback) {
+        if (null == mCallbacks) mCallbacks = new ArrayList<>();
+        mCallbacks.add(callback);
+    }
+
+    public void removeCallback(@NonNull FavoritesProviderCallback callback) {
+        if (null == mCallbacks) return;
+        mCallbacks.remove(callback);
     }
 
     private synchronized void loadFavorites() {
@@ -90,5 +116,13 @@ public class FavoritesProvider {
         mFavoritesSet = new HashSet<>();
         if (null != favoriteRecords)
             mFavoritesSet.addAll(favoriteRecords);
+    }
+
+    public interface FavoritesProviderCallback {
+        void onFavoriteAdded(@NonNull MusicModel item);
+
+        void onFavoriteRemoved(@NonNull MusicModel item);
+
+        void onFavoritesCleared();
     }
 }
