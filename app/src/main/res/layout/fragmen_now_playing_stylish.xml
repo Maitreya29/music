@@ -41,6 +41,16 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="@tools:sample/lorem/random" />
 
+    <ImageView
+        android:id="@+id/stylish_nps_options_btn"
+        style="@style/ButtonStyle24"
+        android:layout_marginEnd="4dp"
+        android:contentDescription="@string/desc_options_btn"
+        android:src="@drawable/ic_options"
+        app:layout_constraintBottom_toBottomOf="@id/stylish_nps_up_next"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/stylish_nps_title" />
+
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/stylish_nps_album_container"
         android:layout_width="match_parent"

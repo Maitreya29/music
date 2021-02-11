@@ -72,40 +72,11 @@ public class ModernNowPlayingScreen extends BaseNowPlayingScreen {
         mPlayPauseBtn.setOnClickListener(v -> togglePlayPause());
         mFavoriteBtn.setOnClickListener(v -> toggleFavorite());
 
+        setShowOptionsClickMenuListener(view.findViewById(R.id.modern_nps_options_btn));
         setGotToCurrentQueueCLickListener(mUpNext);
         setUpSliderControls(mProgressSlider);
         setUpTrackControls(mTrackControl1, mTrackControl2);
         setDefaultTintToPlayBtn(mPlayPauseBtn);
-
-        /*TranslateAnimation translateAnimation = new TranslateAnimation(
-                Animation.ABSOLUTE, 0,
-                Animation.ABSOLUTE, 0,
-                Animation.RELATIVE_TO_PARENT, 0.3f,
-                Animation.RELATIVE_TO_PARENT, 0);
-
-        translateAnimation.setDuration(500);
-        translateAnimation.setInterpolator(new DecelerateInterpolator(1.1f));
-
-        AlphaAnimation alphaAnimation = new AlphaAnimation(0, 1);
-        alphaAnimation.setInterpolator(new DecelerateInterpolator(1.1f));
-        alphaAnimation.setDuration(800);
-
-        AnimationSet set = new AnimationSet(false);
-        set.addAnimation(alphaAnimation);
-        set.addAnimation(translateAnimation);
-
-        pager.startAnimation(set);
-        mTitle.startAnimation(set);
-        mSubTitle.startAnimation(set);
-        mProgressSlider.startAnimation(set);
-        mStartTime.startAnimation(set);
-        mEndTime.startAnimation(set);
-        mRepeatBtn.startAnimation(set);
-        skipPrev.startAnimation(set);
-        mPlayPauseBtn.startAnimation(set);
-        skipNext.startAnimation(set);
-        mFavoriteBtn.startAnimation(set);
-        mUpNext.startAnimation(set);*/
     }
 
     @Override

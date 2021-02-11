@@ -72,6 +72,7 @@ public class StylishNowPlayingScreen extends BaseNowPlayingScreen {
         mPlayPauseBtn.setOnClickListener(v -> togglePlayPause());
         mFavoriteBtn.setOnClickListener(v -> toggleFavorite());
 
+        setShowOptionsClickMenuListener(view.findViewById(R.id.stylish_nps_options_btn));
         setGotToCurrentQueueCLickListener(mUpNext);
         setUpSliderControls(mProgressSlider);
         setUpTrackControls(mTrackControl1, mTrackControl2);

@@ -173,6 +173,17 @@
         tools:text="@tools:sample/lorem/random" />
 
     <ImageView
+        android:id="@+id/edge_nps_options_btn"
+        style="@style/ButtonStyle24"
+        android:layout_marginStart="4dp"
+        android:contentDescription="@string/desc_options_btn"
+        android:src="@drawable/ic_options"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edge_nps_favourite_btn"
+        app:layout_constraintVertical_bias="0.8" />
+
+    <ImageView
         android:id="@+id/edge_nps_close_btn"
         style="@style/ButtonStyle36"
         android:contentDescription="@string/desc_album_art"

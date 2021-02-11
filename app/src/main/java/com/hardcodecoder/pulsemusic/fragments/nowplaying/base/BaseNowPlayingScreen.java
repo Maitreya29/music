@@ -36,7 +36,9 @@ import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.activities.base.DraggableNowPlayingSheetActivity;
 import com.hardcodecoder.pulsemusic.dialog.CurrentQueueBottomSheet;
 import com.hardcodecoder.pulsemusic.helper.MediaProgressUpdateHelper;
+import com.hardcodecoder.pulsemusic.helper.UIHelper;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
+import com.hardcodecoder.pulsemusic.providers.FavoritesProvider;
 import com.hardcodecoder.pulsemusic.providers.ProviderManager;
 import com.hardcodecoder.pulsemusic.themes.ThemeColors;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
@@ -45,6 +47,7 @@ import java.util.List;
 
 public abstract class BaseNowPlayingScreen extends Fragment
         implements MediaProgressUpdateHelper.Callback,
+        FavoritesProvider.FavoritesProviderCallback,
         SharedPreferences.OnSharedPreferenceChangeListener {
 
     private final boolean mRequiresStatusBarPadding;
@@ -159,6 +162,8 @@ public abstract class BaseNowPlayingScreen extends Fragment
 
         requireActivity().getSharedPreferences(Preferences.NOW_PLAYING_CONTROLS, Context.MODE_PRIVATE)
                 .registerOnSharedPreferenceChangeListener(this);
+
+        ProviderManager.getFavoritesProvider().addCallback(this);
     }
 
     @Override
@@ -205,6 +210,25 @@ public abstract class BaseNowPlayingScreen extends Fragment
     public void onProgressValueChanged(long progress) {
         mCurrentStreamingPosition = progress;
         onProgressUpdated((int) mCurrentStreamingPosition / 1000);
+    }
+
+    @Override
+    public void onFavoriteAdded(@NonNull MusicModel item) {
+        if (item.getId() == mQueueManager.getActiveQueueItem().getId()) {
+            onFavoriteStateChanged(mCurrentItemFavorite = true);
+        }
+    }
+
+    @Override
+    public void onFavoriteRemoved(@NonNull MusicModel item) {
+        if (item.getId() == mQueueManager.getActiveQueueItem().getId()) {
+            onFavoriteStateChanged(mCurrentItemFavorite = false);
+        }
+    }
+
+    @Override
+    public void onFavoritesCleared() {
+        onFavoriteStateChanged(mCurrentItemFavorite = false);
     }
 
     protected void setUpPagerAlbumArt(@NonNull ViewPager2 pager, @LayoutRes int redId, ShapeAppearanceModel model) {
@@ -391,6 +415,11 @@ public abstract class BaseNowPlayingScreen extends Fragment
         });
     }
 
+    protected void setShowOptionsClickMenuListener(@NonNull View view) {
+        view.setOnClickListener(v ->
+                UIHelper.showMenuForLibraryTracks(requireActivity(), mQueueManager.getActiveQueueItem()));
+    }
+
     protected void onUpNextItemChanged(String upNextTitle) {
     }
 
@@ -456,6 +485,7 @@ public abstract class BaseNowPlayingScreen extends Fragment
             if (null != mServiceConnection) getActivity().unbindService(mServiceConnection);
         }
         mPulseController.unregisterCallback(mControllerCallback);
+        ProviderManager.getFavoritesProvider().removeCallback(this);
         super.onDestroy();
     }
 

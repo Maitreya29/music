@@ -80,6 +80,7 @@ public class EdgeNowPlayingScreen extends BaseNowPlayingScreen {
         mPlayPauseBtn.setOnClickListener(v -> togglePlayPause());
         mFavoriteBtn.setOnClickListener(v -> toggleFavorite());
 
+        setShowOptionsClickMenuListener(view.findViewById(R.id.edge_nps_options_btn));
         setGotToCurrentQueueCLickListener(mUpNext);
         setUpSeekBarControls(mProgressSeekBar);
         setUpTrackControls(mTrackControl1, mTrackControl2);

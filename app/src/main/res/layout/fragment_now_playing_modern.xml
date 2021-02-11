@@ -19,6 +19,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/modern_nps_options_btn"
+        style="@style/ButtonStyle24"
+        android:layout_marginEnd="4dp"
+        android:contentDescription="@string/desc_options_btn"
+        android:src="@drawable/ic_options"
+        app:layout_constraintBottom_toBottomOf="@id/modern_nps_head"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/modern_nps_head" />
+
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/modern_nps_album_container"
         android:layout_width="match_parent"
