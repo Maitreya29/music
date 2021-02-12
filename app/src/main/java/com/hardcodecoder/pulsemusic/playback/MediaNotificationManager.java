@@ -43,7 +43,7 @@ public class MediaNotificationManager {
     private PendingIntent mPreviousIntent;
     private PendingIntent mNextIntent;
     private PendingIntent mStopIntent;
-    private PendingIntent pi;
+    private PendingIntent mOpenNowPlaying;
     private MediaController mController;
     private MediaController.TransportControls mTransportControls;
     private final BroadcastReceiver controlsReceiver = new BroadcastReceiver() {
@@ -153,7 +153,9 @@ public class MediaNotificationManager {
         mNextIntent = PendingIntent.getBroadcast(mContext, REQUEST_CODE, new Intent(ACTION_NEXT).setPackage(pkg), PendingIntent.FLAG_CANCEL_CURRENT);
         mPreviousIntent = PendingIntent.getBroadcast(mContext, REQUEST_CODE, new Intent(ACTION_PREV).setPackage(pkg), PendingIntent.FLAG_CANCEL_CURRENT);
         if (mNotificationManager != null) mNotificationManager.cancelAll();
-        pi = PendingIntent.getActivity(mContext, REQUEST_CODE, new Intent(mContext, MainContentActivity.class), PendingIntent.FLAG_UPDATE_CURRENT);
+        Intent intent = new Intent(mContext, MainContentActivity.class);
+        intent.setAction(MainContentActivity.ACTION_OPEN_NOW_PLAYING);
+        mOpenNowPlaying = PendingIntent.getActivity(mContext, REQUEST_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         mInitialised = true;
     }
 
@@ -213,7 +215,7 @@ public class MediaNotificationManager {
                     .addAction(setButton(), "Play Pause Button", getActionIntent())
                     .addAction(R.drawable.ic_round_skip_next_noti, "Skip Next", mNextIntent)
                     .addAction(R.drawable.ic_close_noti, "Stop Self", mStopIntent)
-                    .setContentIntent(pi)
+                    .setContentIntent(mOpenNowPlaying)
                     .setOnlyAlertOnce(true)
                     .setAutoCancel(false)
                     .setDeleteIntent(mStopIntent)

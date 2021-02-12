@@ -46,7 +46,8 @@ import java.util.List;
 public class MainContentActivity extends DraggableNowPlayingSheetActivity {
 
     public static final String TAG = MainContentActivity.class.getSimpleName();
-    public static final String URI_DATA = "TrackData";
+    public static final String ACTION_OPEN_NOW_PLAYING = "com.hardcodecoder.pulsemusic.activities.main.MainContentActivity.ActionOpenNPS";
+    public static final String TRACK_URI = "TrackUri";
     private static final String ACTIVE = "ActiveFragment";
     private final MediaController.Callback mCallback = new MediaController.Callback() {
         @Override
@@ -104,9 +105,12 @@ public class MainContentActivity extends DraggableNowPlayingSheetActivity {
     }
 
     private void handleIntent(@NonNull Intent intent) {
-        try {
-            String path = intent.getStringExtra(URI_DATA);
-            if (null != path) {
+        if (intent.getAction() != null && intent.getAction().equals(ACTION_OPEN_NOW_PLAYING)) {
+            expandBottomSheet();
+        } else if (intent.hasExtra(TRACK_URI)) {
+            try {
+                String path = intent.getStringExtra(TRACK_URI);
+                if (null == path) return;
                 Uri data = Uri.parse(path);
                 MusicModel md = DataModelHelper.buildMusicModelFrom(this, data);
                 if (null != md) {
@@ -115,10 +119,10 @@ public class MainContentActivity extends DraggableNowPlayingSheetActivity {
                     mPulseController.setPlaylist(singlePickedItemList, 0);
                     mRemote.play();
                 }
+            } catch (Exception e) {
+                if (BuildConfig.DEBUG) e.printStackTrace();
+                else LogUtils.logException(TAG, "Handling intent", e);
             }
-        } catch (Exception e) {
-            if (BuildConfig.DEBUG) e.printStackTrace();
-            else LogUtils.logException(TAG, "Handling intent", e);
         }
     }
 
