@@ -45,7 +45,7 @@ import java.util.List;
 
 public class MainContentActivity extends DraggableNowPlayingSheetActivity {
 
-    public static final String TAG = "MainActivity";
+    public static final String TAG = MainContentActivity.class.getSimpleName();
     public static final String URI_DATA = "TrackData";
     private static final String ACTIVE = "ActiveFragment";
     private final MediaController.Callback mCallback = new MediaController.Callback() {
@@ -118,7 +118,7 @@ public class MainContentActivity extends DraggableNowPlayingSheetActivity {
             }
         } catch (Exception e) {
             if (BuildConfig.DEBUG) e.printStackTrace();
-            else LogUtils.logException(e);
+            else LogUtils.logException(TAG, "Handling intent", e);
         }
     }
 

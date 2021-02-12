@@ -12,16 +12,19 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.hardcodecoder.pulsemusic.BuildConfig;
 import com.hardcodecoder.pulsemusic.PulseController;
 import com.hardcodecoder.pulsemusic.helper.MediaArtHelper;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.providers.ProviderManager;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
+import com.hardcodecoder.pulsemusic.utils.LogUtils;
 
 import java.io.InputStream;
 
 public class PlaybackManager implements Playback.Callback {
 
+    private static final String TAG = PlaybackManager.class.getSimpleName();
     public static final String ACTION_LOAD_LAST_TRACK = "LoadLastTrack";
     public static final String TRACK_ITEM = "TrackItem";
     public static final String PLAYBACK_POSITION = "PlaybackPosition";
@@ -36,40 +39,75 @@ public class PlaybackManager implements Playback.Callback {
     private final MediaSession.Callback mMediaSessionCallback = new MediaSession.Callback() {
         @Override
         public void onPlay() {
-            handlePlayRequest();
-            mManualPause = false;
+            try {
+                handlePlayRequest();
+                mManualPause = false;
+            } catch (Exception e) {
+                if (BuildConfig.DEBUG) e.printStackTrace();
+                else LogUtils.logException(TAG, "onPlay()", e);
+            }
         }
 
         @Override
         public void onPause() {
-            handlePauseRequest();
-            mManualPause = true;
+            try {
+                handlePauseRequest();
+                mManualPause = true;
+            } catch (Exception e) {
+                if (BuildConfig.DEBUG) e.printStackTrace();
+                else LogUtils.logException(TAG, "onPause()", e);
+            }
         }
 
         @Override
         public void onSkipToNext() {
-            handleSkipRequest(ACTION_PLAY_NEXT, true);
+            try {
+                handleSkipRequest(ACTION_PLAY_NEXT, true);
+            } catch (Exception e) {
+                if (BuildConfig.DEBUG) e.printStackTrace();
+                else LogUtils.logException(TAG, "onSkipToNext()", e);
+            }
         }
 
         @Override
         public void onSkipToPrevious() {
-            handleSkipRequest(ACTION_PLAY_PREV, true);
+            try {
+                handleSkipRequest(ACTION_PLAY_PREV, true);
+            } catch (Exception e) {
+                if (BuildConfig.DEBUG) e.printStackTrace();
+                else LogUtils.logException(TAG, "onSkipToPrevious()", e);
+            }
         }
 
         @Override
         public void onStop() {
-            handleStopRequest();
+            try {
+                handleStopRequest();
+            } catch (Exception e) {
+                if (BuildConfig.DEBUG) e.printStackTrace();
+                else LogUtils.logException(TAG, "onStop()", e);
+            }
         }
 
         @Override
         public void onSeekTo(long pos) {
-            mPlayback.onSeekTo((int) pos);
+            try {
+                mPlayback.onSeekTo((int) pos);
+            } catch (Exception e) {
+                if (BuildConfig.DEBUG) e.printStackTrace();
+                else LogUtils.logException(TAG, "onSekTo()" + pos, e);
+            }
         }
 
         @Override
         public void onCustomAction(@NonNull String action, @Nullable Bundle extras) {
-            if (action.equals(ACTION_LOAD_LAST_TRACK) && extras != null)
-                handleLoadLastTrack(extras);
+            try {
+                if (action.equals(ACTION_LOAD_LAST_TRACK) && extras != null)
+                    handleLoadLastTrack(extras);
+            } catch (Exception e) {
+                if (BuildConfig.DEBUG) e.printStackTrace();
+                else LogUtils.logException(TAG, "onCustomAction()", e);
+            }
         }
     };
 
@@ -131,7 +169,7 @@ public class PlaybackManager implements Playback.Callback {
         }
     }
 
-    private Bitmap loadAlbumArt(String path, int albumId) {
+    private Bitmap loadAlbumArt(@NonNull String path, int albumId) {
         // We know that manually selected tracks have negative album id
         if (albumId < 0)
             return MediaArtHelper.getDefaultAlbumArtBitmap(mContext, albumId);

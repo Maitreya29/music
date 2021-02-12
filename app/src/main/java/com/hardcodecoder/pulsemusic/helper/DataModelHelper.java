@@ -37,7 +37,7 @@ public class DataModelHelper {
     private static int mPickedTrackId = -2;
 
     @Nullable
-    public static List<MusicModel> getModelObjectFromId(List<Integer> idList) {
+    public static List<MusicModel> getModelObjectFromId(@Nullable List<Integer> idList) {
         List<MusicModel> masterList = LoaderCache.getAllTracksList();
         if (null == masterList || null == idList || idList.isEmpty()) return null;
 
@@ -86,7 +86,7 @@ public class DataModelHelper {
             mmr.release();
         } catch (Exception e) {
             if (BuildConfig.DEBUG) e.printStackTrace();
-            else LogUtils.logException(e);
+            else LogUtils.logException("DataModelHelper", "at buildMusicModelFrom()", e);
             return null;
         }
         return new MusicModel(
@@ -103,7 +103,7 @@ public class DataModelHelper {
                 duration);
     }
 
-    static void getTrackInfo(Context context, MusicModel musicModel, TaskRunner.Callback<TrackFileModel> callback) {
+    static void getTrackInfo(@NonNull Context context, @NonNull MusicModel musicModel, @NonNull TaskRunner.Callback<TrackFileModel> callback) {
         TaskRunner.executeAsync(() -> {
             Uri uri = Uri.parse(musicModel.getTrackPath());
             Cursor cursor = context
@@ -116,7 +116,8 @@ public class DataModelHelper {
                     mediaExtractor.setDataSource(context, uri, null);
                 } catch (IOException e) {
                     if (BuildConfig.DEBUG) e.printStackTrace();
-                    else LogUtils.logException(e);
+                    else
+                        LogUtils.logException("DataModelHelper", "at getTrackInfo#settingDataSource", e);
                 }
 
                 int nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
@@ -136,7 +137,8 @@ public class DataModelHelper {
                     channelCount = mediaFormat.getInteger(MediaFormat.KEY_CHANNEL_COUNT);
                 } catch (NullPointerException e) {
                     if (BuildConfig.DEBUG) e.printStackTrace();
-                    else LogUtils.logException(e);
+                    else
+                        LogUtils.logException("DataModelHelper", "at getTrackInfo#extractingInfo", e);
                 }
                 cursor.close();
                 TrackFileModel trackFileModel = new TrackFileModel(displayName, mimeType, fileSize, bitRate, sampleRate, channelCount);

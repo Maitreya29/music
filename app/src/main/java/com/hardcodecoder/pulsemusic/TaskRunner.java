@@ -3,6 +3,7 @@ package com.hardcodecoder.pulsemusic;
 import android.os.Handler;
 import android.os.Looper;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.hardcodecoder.pulsemusic.utils.LogUtils;
@@ -22,7 +23,7 @@ public class TaskRunner {
     private TaskRunner() {
     }
 
-    public static <V> void executeAsync(Callable<V> callable, Callback<V> callback) {
+    public static <V> void executeAsync(@NonNull Callable<V> callable, @NonNull Callback<V> callback) {
         CUSTOM_THREAD_POOL_EXECUTOR.execute(() -> {
             try {
                 final V result = callable.call();
@@ -30,7 +31,7 @@ public class TaskRunner {
             } catch (Exception e) {
                 if (BuildConfig.DEBUG) e.printStackTrace();
                 else // We log critical exceptions
-                    LogUtils.logException(e);
+                    LogUtils.logException(callable.getClass().getCanonicalName(), "at TaskRunner.executeAsync(): callable", e);
 
                 // Callback is necessary to trigger
                 // any fallback event that happen if load fails
@@ -39,7 +40,7 @@ public class TaskRunner {
         });
     }
 
-    public static void executeAsync(Runnable runnable) {
+    public static void executeAsync(@NonNull Runnable runnable) {
         CUSTOM_THREAD_POOL_EXECUTOR.execute(runnable);
     }
 
