@@ -135,6 +135,8 @@ public abstract class DraggableNowPlayingSheetActivity extends ControllerActivit
                         break;
                     case BottomSheetBehavior.STATE_COLLAPSED:
                         mExpandedFrame.setVisibility(View.GONE);
+                        if (mPeekingFrame.getVisibility() != View.VISIBLE)
+                            mPeekingFrame.setVisibility(View.VISIBLE);
                         updateBottomBarElevation(true);
                         if (mDefaultSystemUiVisibility != -1) setLightStatusBarIcons(false);
                         break;
