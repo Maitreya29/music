@@ -22,8 +22,7 @@
         android:theme="@style/ActivityThemeDark"
         tools:targetApi="Q">
 
-        <activity
-            android:name=".activities.main.SplashActivity">
+        <activity android:name=".activities.main.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -99,6 +98,17 @@
             android:foregroundServiceType="mediaPlayback">
             <intent-filter>
                 <action android:name="android.intent.action.MEDIA_BUTTON" />
+            </intent-filter>
+        </service>
+
+        <service
+            android:name=".PulseTileService"
+            android:icon="@drawable/ic_round_play"
+            android:label="@string/play"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
         </service>
     </application>
