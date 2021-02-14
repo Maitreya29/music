@@ -43,15 +43,15 @@ public class ShortcutsLauncher extends Activity {
             switch (shortcutType) {
                 case SHORTCUT_TYPE_SHUFFLE:
                     AppShortcutsManager.reportShortcutUsed(this, ShuffleShortcutType.getId());
-                    startServiceWithAction(PMS.PLAY_SHUFFLE);
+                    startServiceWithAction(PMS.DEFAULT_ACTION_PLAY_SHUFFLE);
                     break;
                 case SHORTCUT_TYPE_LATEST:
                     AppShortcutsManager.reportShortcutUsed(this, LatestShortcutType.getId());
-                    startServiceWithAction(PMS.PLAY_LATEST);
+                    startServiceWithAction(PMS.DEFAULT_ACTION_PLAY_LATEST);
                     break;
                 case SHORTCUT_TYPE_SUGGESTED:
                     AppShortcutsManager.reportShortcutUsed(this, SuggestedShortcutType.getId());
-                    startServiceWithAction(PMS.PLAY_SUGGESTED);
+                    startServiceWithAction(PMS.DEFAULT_ACTION_PLAY_SUGGESTED);
                     break;
                 default:
                     Log.e(TAG, "Unknown shortcut");
@@ -62,7 +62,8 @@ public class ShortcutsLauncher extends Activity {
 
     private void startServiceWithAction(int playCode) {
         Intent intent = new Intent(this, PMS.class);
-        intent.putExtra(PMS.PLAY_KEY, playCode);
+        intent.setAction(PMS.ACTION_DEFAULT_PLAY);
+        intent.putExtra(PMS.KEY_DEFAULT_PLAY, playCode);
         startService(intent);
     }
 

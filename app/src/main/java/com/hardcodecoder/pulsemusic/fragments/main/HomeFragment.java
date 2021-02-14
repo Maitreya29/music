@@ -115,7 +115,8 @@ public class HomeFragment extends PulseFragment {
         view.findViewById(R.id.ic_shuffle)
                 .setOnClickListener(v -> {
                     Intent intent = new Intent(requireActivity(), PMS.class);
-                    intent.putExtra(PMS.PLAY_KEY, PMS.PLAY_SHUFFLE);
+                    intent.setAction(PMS.ACTION_DEFAULT_PLAY);
+                    intent.putExtra(PMS.KEY_DEFAULT_PLAY, PMS.DEFAULT_ACTION_PLAY_SHUFFLE);
                     requireActivity().startService(intent);
                 });
     }

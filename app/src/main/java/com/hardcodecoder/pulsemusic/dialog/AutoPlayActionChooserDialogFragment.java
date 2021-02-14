@@ -37,13 +37,13 @@ public class AutoPlayActionChooserDialogFragment extends RoundedCustomBottomShee
         int currentAction = AppSettings.getBluetoothDeviceDetectionAction(requireContext());
 
         switch (currentAction) {
-            case Preferences.DEVICE_ACTION_PLAY_SHUFFLE:
+            case Preferences.ACTION_PLAY_SHUFFLE:
                 ((RadioButton) radioGroup.findViewById(R.id.radio_btn_shuffle)).setChecked(true);
                 break;
-            case Preferences.DEVICE_ACTION_PLAY_SUGGESTED:
+            case Preferences.ACTION_PLAY_SUGGESTED:
                 ((RadioButton) radioGroup.findViewById(R.id.radio_btn_suggested)).setChecked(true);
                 break;
-            case Preferences.DEVICE_ACTION_PLAY_LATEST:
+            case Preferences.ACTION_PLAY_LATEST:
                 ((RadioButton) radioGroup.findViewById(R.id.radio_btn_latest)).setChecked(true);
                 break;
         }
@@ -53,12 +53,13 @@ public class AutoPlayActionChooserDialogFragment extends RoundedCustomBottomShee
         view.findViewById(R.id.choose_bluetooth_action_set_btn).setOnClickListener(v1 -> {
             if (mOptionChanged) {
                 final int id = radioGroup.getCheckedRadioButtonId();
-                if (id == R.id.radio_btn_shuffle)
-                    AppSettings.saveBluetoothDeviceDetectionAction(requireContext(), Preferences.DEVICE_ACTION_PLAY_SHUFFLE);
-                else if (id == R.id.radio_btn_suggested)
-                    AppSettings.saveBluetoothDeviceDetectionAction(requireContext(), Preferences.DEVICE_ACTION_PLAY_SUGGESTED);
+                int action;
+                if (id == R.id.radio_btn_suggested)
+                    action = Preferences.ACTION_PLAY_SUGGESTED;
                 else if (id == R.id.radio_btn_latest)
-                    AppSettings.saveBluetoothDeviceDetectionAction(requireContext(), Preferences.DEVICE_ACTION_PLAY_LATEST);
+                    action = Preferences.ACTION_PLAY_LATEST;
+                else action = Preferences.ACTION_PLAY_SHUFFLE;
+                AppSettings.saveBluetoothDeviceDetectionAction(requireContext(), action);
             }
             dismiss();
         });

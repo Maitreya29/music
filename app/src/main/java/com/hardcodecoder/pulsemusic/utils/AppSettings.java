@@ -158,7 +158,7 @@ public class AppSettings {
 
     public static int getBluetoothDeviceDetectionAction(@NonNull Context context) {
         return context.getSharedPreferences(Preferences.AUDIO_DEVICE_AUTO_PLAY, Context.MODE_PRIVATE)
-                .getInt(Preferences.BLUETOOTH_DEVICE_ACTION_KEY, Preferences.DEVICE_ACTION_PLAY_SHUFFLE);
+                .getInt(Preferences.BLUETOOTH_DEVICE_ACTION_KEY, Preferences.ACTION_PLAY_SHUFFLE);
     }
 
     public static void saveNowPlayingAlbumCoverCornerRadius(@NonNull Context context, int tl, int tr, int bl, int br) {

@@ -9,6 +9,7 @@ import android.graphics.drawable.LayerDrawable;
 import android.os.Build;
 
 import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 
@@ -17,7 +18,7 @@ import com.hardcodecoder.pulsemusic.R;
 @RequiresApi(Build.VERSION_CODES.N_MR1)
 public class ShortcutIconGenerator {
 
-    public static Icon getThemedIcon(Context context, @DrawableRes int drawableRes) {
+    public static Icon getThemedIcon(@NonNull Context context, @DrawableRes int drawableRes) {
         Drawable background = ContextCompat.getDrawable(context, R.drawable.ic_app_shortcut_background);
         Drawable foreground = ContextCompat.getDrawable(context, drawableRes);
         if (null != background)
@@ -29,7 +30,7 @@ public class ShortcutIconGenerator {
         return Icon.createWithBitmap(createBitmap(layerDrawable));
     }
 
-    private static Bitmap createBitmap(Drawable drawable) {
+    private static Bitmap createBitmap(@NonNull Drawable drawable) {
         int width = drawable.getIntrinsicWidth();
         int height = drawable.getIntrinsicHeight();
         Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);

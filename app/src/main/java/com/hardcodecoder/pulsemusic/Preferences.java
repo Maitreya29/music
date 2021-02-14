@@ -113,9 +113,9 @@ public class Preferences {
     public static final String BLUETOOTH_DEVICE_DETECTION_KEY = "BluetoothDetectionEnabled";
     public static final String BLUETOOTH_DEVICE_ACTION_KEY = "BluetoothDeviceAction";
 
-    public static final short DEVICE_ACTION_PLAY_SHUFFLE = 6000;
-    public static final short DEVICE_ACTION_PLAY_SUGGESTED = 6001;
-    public static final short DEVICE_ACTION_PLAY_LATEST = 6002;
+    public static final short ACTION_PLAY_SHUFFLE = 6000;
+    public static final short ACTION_PLAY_SUGGESTED = 6001;
+    public static final short ACTION_PLAY_LATEST = 6002;
 
     public static final String APP_SHORTCUT_THEME = "AppShortCutThemeMode";
     public static final String APP_SHORTCUT_THEME_MODE = "DarkThemeInUse";

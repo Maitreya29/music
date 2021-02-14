@@ -61,7 +61,8 @@ public class PulseTileService extends TileService implements PulseController.Con
         if (null != mController) state = mController.getPlaybackState();
         if (null == mController || null == state || state.getState() == PlaybackState.STATE_STOPPED) {
             Intent intent = new Intent(this, PMS.class);
-            intent.putExtra(PMS.PLAY_KEY, PMS.PLAY_CONTINUE);
+            intent.setAction(PMS.ACTION_PLAY_CONTINUE);
+            intent.putExtra(PMS.KEY_PLAY_CONTINUE, PMS.DEFAULT_ACTION_PLAY_SHUFFLE);
             ContextCompat.startForegroundService(this, intent);
         } else {
             PulseController.PulseRemote remote = PulseController.getInstance().getRemote();

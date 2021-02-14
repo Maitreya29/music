@@ -31,7 +31,6 @@ import com.hardcodecoder.pulsemusic.playback.LocalPlayback;
 import com.hardcodecoder.pulsemusic.playback.MediaNotificationManager;
 import com.hardcodecoder.pulsemusic.playback.PlaybackManager;
 import com.hardcodecoder.pulsemusic.providers.ProviderManager;
-import com.hardcodecoder.pulsemusic.utils.AppSettings;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -39,12 +38,13 @@ import java.util.List;
 
 public class PMS extends Service implements PlaybackManager.PlaybackServiceCallback, MediaNotificationManager.NotificationCallback {
 
-    public static final String PLAY_KEY = "play_key";
-    public static final int PLAY_SHUFFLE = 100;
-    public static final int PLAY_LATEST = 101;
-    public static final int PLAY_SUGGESTED = 102;
-    public static final int PLAY_CONTINUE = 103;
-
+    public static final String ACTION_DEFAULT_PLAY = "com.hardcodecoder.pulsemusic.PMS.ACTION_DEFAULT_PLAY";
+    public static final String ACTION_PLAY_CONTINUE = "com.hardcodecoder.pulsemusic.PMS.ACTION_PLAY_CONTINUE";
+    public static final String KEY_DEFAULT_PLAY = "com.hardcodecoder.pulsemusic.PMS.KEY_DEFAULT_PLAY";
+    public static final String KEY_PLAY_CONTINUE = "com.hardcodecoder.pulsemusic.PMS.KEY_BLUETOOTH_AUTO_PLAY";
+    public static final int DEFAULT_ACTION_PLAY_SHUFFLE = 100;
+    public static final int DEFAULT_ACTION_PLAY_LATEST = 101;
+    public static final int DEFAULT_ACTION_PLAY_SUGGESTED = 102;
     private static final String TAG = "PMS";
     private final IBinder mBinder = new ServiceBinder();
     private MediaSession mMediaSession = null;
@@ -103,46 +103,47 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
     public int onStartCommand(Intent intent, int flags, int startId) {
         MediaButtonReceiver.handleIntent(MediaSessionCompat.fromMediaSession(this, mMediaSession), intent);
         isServiceRunning = true;
-        mWorkerHandler.post(() -> handleStartCommand(intent));
+        mWorkerHandler.post(() -> handleIntent(intent));
         return START_NOT_STICKY;
     }
 
-    private void handleStartCommand(Intent intent) {
-        int startCode;
-        if (null != intent && (startCode = intent.getIntExtra(PLAY_KEY, -1)) != -1) {
-            switch (startCode) {
-                case PLAY_SHUFFLE:
-                    playShuffle();
-                    break;
-                case PLAY_LATEST:
-                    playLatest();
-                    break;
-                case PLAY_SUGGESTED:
-                    playSuggested();
-                    break;
-                case PLAY_CONTINUE:
-                    PlaybackState state = mMediaSession.getController().getPlaybackState();
-                    if (state != null) {
-                        if (state.getState() == PlaybackState.STATE_PAUSED || state.getState() == PlaybackState.STATE_STOPPED)
-                            mMediaSession.getController().getTransportControls().play();
-                    } else {
-                        int currentAction = AppSettings.getBluetoothDeviceDetectionAction(getApplicationContext());
-                        switch (currentAction) {
-                            case Preferences.DEVICE_ACTION_PLAY_LATEST:
-                                playLatest();
-                                break;
-                            case Preferences.DEVICE_ACTION_PLAY_SUGGESTED:
-                                playSuggested();
-                                break;
-                            case Preferences.DEVICE_ACTION_PLAY_SHUFFLE:
-                            default:
-                                playShuffle();
-                        }
+    private void handleIntent(@Nullable Intent intent) {
+        String actionCode;
+        if (null == intent || (actionCode = intent.getAction()) == null) return;
+        switch (actionCode) {
+            case ACTION_PLAY_CONTINUE:
+                PlaybackState state = mMediaSession.getController().getPlaybackState();
+                if (null == state) {
+                    if (intent.hasExtra(KEY_PLAY_CONTINUE)) {
+                        int playContinueAction = intent.getIntExtra(KEY_PLAY_CONTINUE, DEFAULT_ACTION_PLAY_SHUFFLE);
+                        handleDefaultActions(playContinueAction);
                     }
-                    break;
-                default:
-                    Log.e(TAG, "Unknown start command");
-            }
+                } else if (state.getState() == PlaybackState.STATE_PAUSED || state.getState() == PlaybackState.STATE_STOPPED) {
+                    mMediaSession.getController().getTransportControls().play();
+                }
+                break;
+            case ACTION_DEFAULT_PLAY:
+                if (intent.hasExtra(KEY_DEFAULT_PLAY)) {
+                    int playContinueAction = intent.getIntExtra(KEY_DEFAULT_PLAY, DEFAULT_ACTION_PLAY_SHUFFLE);
+                    handleDefaultActions(playContinueAction);
+                }
+                break;
+            default:
+                Log.e(TAG, "Unknown action");
+        }
+    }
+
+    private void handleDefaultActions(int action) {
+        switch (action) {
+            case DEFAULT_ACTION_PLAY_SHUFFLE:
+                playShuffle();
+                break;
+            case DEFAULT_ACTION_PLAY_LATEST:
+                playLatest();
+                break;
+            case DEFAULT_ACTION_PLAY_SUGGESTED:
+                playSuggested();
+                break;
         }
     }
 
