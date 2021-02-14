@@ -22,6 +22,7 @@ public class PulseController {
     private final List<Callback> mCallbacksList = new ArrayList<>();
     private final QueueManager mQueueManager = new QueueManager();
     private final PulseRemote mRemote = new PulseRemote();
+    private List<ConnectionCallback> mConnectionCallbacks;
     private MediaController mMediaController;
 
     public static PulseController getInstance() {
@@ -39,6 +40,21 @@ public class PulseController {
     public void setController(@NonNull MediaController mediaController) {
         mMediaController = mediaController;
         mRemote.setTransportControls(mediaController.getTransportControls());
+        if (null != mConnectionCallbacks) {
+            for (ConnectionCallback connectionCallback : mConnectionCallbacks)
+                mMainHandler.post(() -> connectionCallback.onControllerReady(mediaController));
+        }
+    }
+
+    public void addConnectionCallback(@NonNull ConnectionCallback callback) {
+        if (null == mConnectionCallbacks) mConnectionCallbacks = new ArrayList<>();
+        mConnectionCallbacks.add(callback);
+    }
+
+    public void removeConnectionCallback(@NonNull ConnectionCallback callback) {
+        if (null == mConnectionCallbacks) return;
+        mConnectionCallbacks.remove(callback);
+        if (mConnectionCallbacks.size() == 0) mConnectionCallbacks = null;
     }
 
     public void registerCallback(@NonNull Callback callback) {
@@ -103,6 +119,10 @@ public class PulseController {
     @NonNull
     public QueueManager getQueueManager() {
         return mQueueManager;
+    }
+
+    public interface ConnectionCallback {
+        void onControllerReady(@NonNull MediaController controller);
     }
 
     public static class PulseRemote {
