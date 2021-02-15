@@ -202,32 +202,32 @@ public class AppSettings {
                 .getInt(Preferences.FILTER_DURATION, 30); // By default filter duration is 30 sec
     }
 
-    public static void setRememberLastTrack(@NonNull Context context, boolean enabled) {
+    public static void setRememberPlaylist(@NonNull Context context, boolean enabled) {
         SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, Context.MODE_PRIVATE).edit();
-        editor.putBoolean(Preferences.REMEMBER_LAST_TRACK, enabled);
+        editor.putBoolean(Preferences.REMEMBER_PREVIOUS_PLAYLIST, enabled);
         editor.apply();
     }
 
-    public static boolean isRememberLastTrack(@NonNull Context context) {
+    public static boolean rememberPlaylistEnabled(@NonNull Context context) {
         return context.getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, Context.MODE_PRIVATE)
-                .getBoolean(Preferences.REMEMBER_LAST_TRACK, false); // By default do not remember last track
+                .getBoolean(Preferences.REMEMBER_PREVIOUS_PLAYLIST, false); // By default do not remember last track
     }
 
-    public static void saveTrackAndPosition(@NonNull Context context, int trackId, long position) {
+    public static void savePlaylistTrackAndPosition(@NonNull Context context, int trackIndex, int position) {
         SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, Context.MODE_PRIVATE).edit();
-        editor.putInt(Preferences.LAST_TRACK_ID, trackId);
-        editor.putLong(Preferences.LAST_TRACK_POSITION, position);
+        editor.putInt(Preferences.PREVIOUS_PLAYLIST_TRACK_INDEX, trackIndex);
+        editor.putInt(Preferences.PREVIOUS_PLAYLIST_TRACK_POSITION, position);
         editor.apply();
     }
 
-    public static int getLastTrackId(@NonNull Context context) {
+    public static int getLastTrackIndex(@NonNull Context context) {
         return context.getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, Context.MODE_PRIVATE)
-                .getInt(Preferences.LAST_TRACK_ID, -1);
+                .getInt(Preferences.PREVIOUS_PLAYLIST_TRACK_INDEX, -1);
     }
 
-    public static long getLastTrackPosition(@NonNull Context context) {
+    public static int getLastTrackPosition(@NonNull Context context) {
         return context.getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, Context.MODE_PRIVATE)
-                .getLong(Preferences.LAST_TRACK_POSITION, 0); // By default do not remember last track
+                .getInt(Preferences.PREVIOUS_PLAYLIST_TRACK_POSITION, 0);
     }
 
     public static boolean isPlaylistSectionEnabled(@NonNull Context context, @NonNull String playlistSection) {

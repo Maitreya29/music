@@ -226,8 +226,8 @@
     <string name="duration_filter_desc">Filter tracks based on track duration</string>
     <string name="duration_filter_unit">sec</string>
     <string name="category_others">Others</string>
-    <string name="remember_last_track_title">Remember last track</string>
-    <string name="remember_last_track_desc">Last played track will be remembered and shown next time you open the app</string>
+    <string name="remember_playlist_title">Remember playlist</string>
+    <string name="remember_playlist_desc">Playlist will be remembered, enables you to continue where you left</string>
     <string name="edit_playlist_sections_title">Edit playlist section</string>
     <string name="edit_playlist_section_desc">Select which playlist\'s to show in the home screen</string>
     <string name="playlist_section_selector_title">Toggle playlist section</string>

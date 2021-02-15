@@ -6,6 +6,7 @@ import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.media.MediaMetadata;
 import android.media.audiofx.AudioEffect;
 import android.media.session.MediaController;
@@ -51,6 +52,7 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
     private MediaNotificationManager mNotificationManager = null;
     private HandlerThread mServiceThread = null;
     private Handler mWorkerHandler = null;
+    private SharedPreferences.OnSharedPreferenceChangeListener sharedPreferenceChangeListener;
     private boolean isServiceRunning = false;
     private boolean isReceiverRegistered = false;
 
@@ -65,13 +67,19 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
     }
 
     private void runOnServiceThread() {
+        final boolean rememberPlaylist = getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, MODE_PRIVATE)
+                .getBoolean(Preferences.REMEMBER_PREVIOUS_PLAYLIST, false);
+
         LocalPlayback playback = new LocalPlayback(this, mWorkerHandler);
-        PlaybackManager mPlaybackManager = new PlaybackManager(this.getApplicationContext(), playback, this);
+        PlaybackManager playbackManager = new PlaybackManager(this.getApplicationContext(), playback, this);
+        playbackManager.setRememberPlaylist(rememberPlaylist);
 
         mMediaSession = new MediaSession(this.getApplicationContext(), TAG);
-        mMediaSession.setCallback(mPlaybackManager.getSessionCallbacks(), mWorkerHandler);
+        mMediaSession.setCallback(playbackManager.getSessionCallbacks(), mWorkerHandler);
         mMediaSession.setFlags(MediaSession.FLAG_HANDLES_MEDIA_BUTTONS | MediaSession.FLAG_HANDLES_TRANSPORT_CONTROLS);
-        PulseController.getInstance().setController(mMediaSession.getController());
+        PulseController pulseController = PulseController.getInstance();
+        pulseController.setController(mMediaSession.getController());
+        pulseController.setRememberPlaylist(rememberPlaylist);
 
         Intent mediaButtonIntent = new Intent(Intent.ACTION_MEDIA_BUTTON);
         mediaButtonIntent.setClass(getApplicationContext(), MediaButtonReceiver.class);
@@ -85,6 +93,16 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
         intent.putExtra(AudioEffect.EXTRA_PACKAGE_NAME, getPackageName());
         intent.putExtra(AudioEffect.EXTRA_CONTENT_TYPE, AudioEffect.CONTENT_TYPE_MUSIC);
         sendBroadcast(intent);
+
+        sharedPreferenceChangeListener = (sharedPreferences, key) -> {
+            if (key.equals(Preferences.REMEMBER_PREVIOUS_PLAYLIST)) {
+                boolean remember = sharedPreferences.getBoolean(Preferences.REMEMBER_PREVIOUS_PLAYLIST, false);
+                playbackManager.setRememberPlaylist(remember);
+                pulseController.setRememberPlaylist(remember);
+            }
+        };
+        getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, MODE_PRIVATE)
+                .registerOnSharedPreferenceChangeListener(sharedPreferenceChangeListener);
     }
 
     /* Never use START_STICKY here
@@ -180,7 +198,7 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
         playPlaylist(listToShuffle);
     }
 
-    private void playPlaylist(List<MusicModel> playlist) {
+    private void playPlaylist(@Nullable List<MusicModel> playlist) {
         if (null != playlist && playlist.size() > 0) {
             PulseController.getInstance().setPlaylist(playlist);
             mMediaSession.getController().getTransportControls().play();
@@ -205,6 +223,9 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
 
     @Override
     public void onDestroy() {
+        if (null != sharedPreferenceChangeListener)
+            getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, MODE_PRIVATE)
+                    .unregisterOnSharedPreferenceChangeListener(sharedPreferenceChangeListener);
         if (isReceiverRegistered)
             mNotificationManager.unregisterControlsReceiver();
         if (mMediaSession != null)

@@ -212,8 +212,6 @@
     <string name="duration_filter_desc">Не показывать треки, длинной менее:</string>
     <string name="duration_filter_unit">сек</string>
     <string name="category_others">Прочее</string>
-    <string name="remember_last_track_title">Запоминать последний проигранный трек</string>
-    <string name="remember_last_track_desc">Последний воспроизведённый файл будет сохранён при выходе из приложения</string>
     <string name="edit_playlist_sections_title">Выбрать плейлисты</string>
     <string name="edit_playlist_section_desc">Выберите, какие списки воспроизведения будут отображаться на главной странице</string>
     <string name="playlist_section_selector_title">Показывать плейлисты на главной</string>

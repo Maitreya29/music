@@ -21,21 +21,21 @@ import com.hardcodecoder.pulsemusic.utils.AppSettings;
 import com.hardcodecoder.pulsemusic.utils.LogUtils;
 
 import java.io.InputStream;
+import java.util.List;
 
 public class PlaybackManager implements Playback.Callback {
 
-    private static final String TAG = PlaybackManager.class.getSimpleName();
-    public static final String ACTION_LOAD_LAST_TRACK = "LoadLastTrack";
-    public static final String TRACK_ITEM = "TrackItem";
-    public static final String PLAYBACK_POSITION = "PlaybackPosition";
+    public static final String ACTION_LOAD_LAST_PLAYLIST = "LoadLastPlayist";
     public static final short ACTION_PLAY_NEXT = 1;
     public static final short ACTION_PLAY_PREV = -1;
+    private static final String TAG = PlaybackManager.class.getSimpleName();
     private final PlaybackState.Builder mStateBuilder = new PlaybackState.Builder();
     private final Playback mPlayback;
     private final PlaybackServiceCallback mServiceCallback;
     private final PulseController.QueueManager mQueueManager;
     private final Context mContext;
     private boolean mManualPause;
+    private boolean mRememberPlaylist;
     private final MediaSession.Callback mMediaSessionCallback = new MediaSession.Callback() {
         @Override
         public void onPlay() {
@@ -102,8 +102,8 @@ public class PlaybackManager implements Playback.Callback {
         @Override
         public void onCustomAction(@NonNull String action, @Nullable Bundle extras) {
             try {
-                if (action.equals(ACTION_LOAD_LAST_TRACK) && extras != null)
-                    handleLoadLastTrack(extras);
+                if (action.equals(ACTION_LOAD_LAST_PLAYLIST))
+                    handleLoadLastTrack();
             } catch (Exception e) {
                 if (BuildConfig.DEBUG) e.printStackTrace();
                 else LogUtils.logException(TAG, "onCustomAction()", e);
@@ -117,6 +117,10 @@ public class PlaybackManager implements Playback.Callback {
         mServiceCallback = serviceCallback;
         mPlayback.setCallback(this);
         mQueueManager = PulseController.getInstance().getQueueManager();
+    }
+
+    public void setRememberPlaylist(boolean remember) {
+        mRememberPlaylist = remember;
     }
 
     public MediaSession.Callback getSessionCallbacks() {
@@ -147,13 +151,12 @@ public class PlaybackManager implements Playback.Callback {
         else handlePauseRequest();
     }
 
-    private void handleLoadLastTrack(@NonNull Bundle bundle) {
-        final MusicModel trackItem = (MusicModel) bundle.getSerializable(TRACK_ITEM);
-        if (trackItem == null) return;
-        final int resumePosition = bundle.getInt(PLAYBACK_POSITION);
-        PulseController.getInstance().getQueueManager().resetQueue();
-        PulseController.getInstance().addToQueue(trackItem);
-        mQueueManager.setActiveIndex(0);
+    private void handleLoadLastTrack() {
+        List<MusicModel> previousPlaylist = ProviderManager.getPreviousPlaylistProvider().getPlaylist();
+        if (previousPlaylist == null || previousPlaylist.isEmpty()) return;
+        final int index = AppSettings.getLastTrackIndex(mContext);
+        final int resumePosition = AppSettings.getLastTrackPosition(mContext);
+        PulseController.getInstance().setPlaylist(previousPlaylist, index);
         mPlayback.onPlay(resumePosition, false);
     }
 
@@ -232,10 +235,12 @@ public class PlaybackManager implements Playback.Callback {
         final int trackId = mPlayback.getActiveMediaId();
         final long position = mPlayback.getCurrentStreamingPosition();
         if (trackId >= 0 && position > 0) {
-            // Remember last played track even if option is disabled in the settings
-            // We will only display last track if settings is enabled
-            // Store current duration and track id
-            AppSettings.saveTrackAndPosition(mContext, mPlayback.getActiveMediaId(), mPlayback.getCurrentStreamingPosition());
+            if (mRememberPlaylist) {
+                AppSettings.savePlaylistTrackAndPosition(
+                        mContext,
+                        mQueueManager.getActiveIndex(),
+                        (int) mPlayback.getCurrentStreamingPosition());
+            }
         }
     }
 

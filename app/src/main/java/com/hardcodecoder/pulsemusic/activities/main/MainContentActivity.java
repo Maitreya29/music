@@ -237,11 +237,10 @@ public class MainContentActivity extends DraggableNowPlayingSheetActivity {
         if (mController.getPlaybackState() != null && mController.getPlaybackState().getState() != PlaybackState.STATE_STOPPED)
             updateDraggableSheet(true);
 
-        if (mController.getPlaybackState() == null && AppSettings.isRememberLastTrack(this)) {
-            LoaderHelper.loadLastPlayedTrackBundled(this, bundle -> {
-                if (null == bundle) return;
-                mController.getTransportControls().sendCustomAction(PlaybackManager.ACTION_LOAD_LAST_TRACK, bundle);
-            });
+        if (mController.getPlaybackState() == null && AppSettings.rememberPlaylistEnabled(this)) {
+            mController.getTransportControls().sendCustomAction(
+                    PlaybackManager.ACTION_LOAD_LAST_PLAYLIST,
+                    null);
         }
         handleIntent(getIntent());
     }
@@ -249,7 +248,7 @@ public class MainContentActivity extends DraggableNowPlayingSheetActivity {
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString(ACTIVE, activeFrag.getTag());
+        if (null != activeFrag) outState.putString(ACTIVE, activeFrag.getTag());
     }
 
     @Override

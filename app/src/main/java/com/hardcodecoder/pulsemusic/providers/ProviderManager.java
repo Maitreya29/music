@@ -13,6 +13,7 @@ public class ProviderManager {
     private static FavoritesProvider mFavoritesProvider = null;
     private static PlaylistProvider mPlaylistProvider = null;
     private static IgnoreListProvider mIgnoredListProvider = null;
+    private static PreviousPlaylistProvider mPreviousPlaylistProvider = null;
     private static String mBaseFilesDir;
 
     public static void init(@NonNull Context context) {
@@ -45,5 +46,12 @@ public class ProviderManager {
         if (null == mIgnoredListProvider)
             mIgnoredListProvider = new IgnoreListProvider(mBaseFilesDir, sHandler);
         return mIgnoredListProvider;
+    }
+
+    @NonNull
+    public static PreviousPlaylistProvider getPreviousPlaylistProvider() {
+        if (null == mPreviousPlaylistProvider)
+            mPreviousPlaylistProvider = new PreviousPlaylistProvider(mBaseFilesDir, sHandler);
+        return mPreviousPlaylistProvider;
     }
 }

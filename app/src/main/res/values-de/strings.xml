@@ -192,8 +192,6 @@
     <string name="duration_filter_title">Filterdauer</string>
     <string name="duration_filter_desc">Filter-Track basierend auf der Länge der Spuren. Tracks mit einer Länge größer als dies in der Bibliothek angezeigt wird</string>
     <string name="duration_filter_unit">sek</string>
-    <string name="remember_last_track_title">Letzten Titel merken</string>
-    <string name="remember_last_track_desc">Zuletzt gespielter Titel wird gespeichert und beim Neustart der App angezeigt</string>
 
 
     <!-- Look and feel section -->

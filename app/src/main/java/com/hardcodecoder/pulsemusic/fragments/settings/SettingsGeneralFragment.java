@@ -59,11 +59,11 @@ public class SettingsGeneralFragment extends SettingsBaseFragment {
         mCurrentFilterDuration = AppSettings.getFilterDuration(requireContext());
         mDurationFilter.setSliderValue(mCurrentFilterDuration);
 
-        boolean remember = AppSettings.isRememberLastTrack(requireContext());
-        SettingsToggleableItem rememberOption = view.findViewById(R.id.remember_last_song_option);
+        boolean remember = AppSettings.rememberPlaylistEnabled(requireContext());
+        SettingsToggleableItem rememberOption = view.findViewById(R.id.remember_playlist_option);
         rememberOption.setSwitchChecked(remember);
         rememberOption.setOnSwitchCheckedChangedListener((buttonView, isChecked) ->
-                AppSettings.setRememberLastTrack(requireContext(), isChecked));
+                AppSettings.setRememberPlaylist(requireContext(), isChecked));
 
         SettingsCategoryItemView editPlaylist = view.findViewById(R.id.home_section_playlist_selector);
         editPlaylist.setOnClickListener(v -> {

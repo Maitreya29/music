@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.playback.PlaybackManager;
+import com.hardcodecoder.pulsemusic.providers.ProviderManager;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,6 +25,7 @@ public class PulseController {
     private final PulseRemote mRemote = new PulseRemote();
     private List<ConnectionCallback> mConnectionCallbacks;
     private MediaController mMediaController;
+    private boolean mRememberPlaylist = false;
 
     public static PulseController getInstance() {
         return sInstance;
@@ -44,6 +46,10 @@ public class PulseController {
             for (ConnectionCallback connectionCallback : mConnectionCallbacks)
                 mMainHandler.post(() -> connectionCallback.onControllerReady(mediaController));
         }
+    }
+
+    public void setRememberPlaylist(boolean remember) {
+        mRememberPlaylist = remember;
     }
 
     public void addConnectionCallback(@NonNull ConnectionCallback callback) {
@@ -79,6 +85,8 @@ public class PulseController {
         mQueueManager.setQueue(playlist, startIndex);
         for (Callback callback : mCallbacksList)
             mMainHandler.post(() -> callback.onTrackListChanged(playlist));
+        if (mRememberPlaylist)
+            ProviderManager.getPreviousPlaylistProvider().savePlaylist(playlist);
     }
 
     public void playNext(@NonNull MusicModel item) {

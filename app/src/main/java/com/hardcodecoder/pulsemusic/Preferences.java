@@ -122,9 +122,10 @@ public class Preferences {
 
     public static final String GENERAL_SETTINGS_PREF = "GeneralSettings";
     public static final String FILTER_DURATION = "FilteredDuration";
-    public static final String REMEMBER_LAST_TRACK = "RememberLastTrack";
-    public static final String LAST_TRACK_ID = "LastTrackId";
-    public static final String LAST_TRACK_POSITION = "LastTrackPosition";
+    public static final String REMEMBER_PREVIOUS_PLAYLIST = "RememberPreviousPlaylist";
+    public static final String PREVIOUS_PLAYLIST_TRACK_INDEX = "PlaylistTrackIndex";
+    public static final String PREVIOUS_PLAYLIST_TRACK_POSITION = "PlaylistTrackPosition";
+
 
     public static final String HOME_PLAYLIST_SECTIONS = "HomePlaylistSections";
     public static final String HOME_PLAYLIST_TOP_ALBUMS = "HomePlaylistTopAlbums";

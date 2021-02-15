@@ -3,7 +3,6 @@ package com.hardcodecoder.pulsemusic.loaders;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.os.Build;
-import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -37,7 +36,7 @@ public class LoaderHelper {
         TaskRunner.executeAsync(libraryLoader, result -> {
             LoaderCache.setAllTracksList(result);
             ProviderManager.getHistoryProvider().deleteObsoleteHistoryFiles(success ->
-                callback.onComplete(LoaderCache.getAllTracksList()));
+                    callback.onComplete(LoaderCache.getAllTracksList()));
         });
     }
 
@@ -90,10 +89,6 @@ public class LoaderHelper {
                                         @NonNull SortOrder.ALBUMS sortOrder,
                                         @NonNull Callback<List<AlbumModel>> callback) {
         TaskRunner.executeAsync(new ArtistAlbumsLoader(contentResolver, artistTitle, sortOrder), callback);
-    }
-
-    public static void loadLastPlayedTrackBundled(@NonNull Context context, @NonNull Callback<Bundle> callback) {
-        TaskRunner.executeAsync(new LastTrackLoader(context), callback);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.Q)

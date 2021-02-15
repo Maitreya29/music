@@ -60,11 +60,11 @@
             android:textAppearance="@style/Appearance.Text.Overline" />
 
         <com.hardcodecoder.pulsemusic.views.SettingsToggleableItem
-            android:id="@+id/remember_last_song_option"
+            android:id="@+id/remember_playlist_option"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:settingToggleableItemText="@string/remember_last_track_desc"
-            app:settingToggleableItemTitle="@string/remember_last_track_title" />
+            app:settingToggleableItemText="@string/remember_playlist_desc"
+            app:settingToggleableItemTitle="@string/remember_playlist_title" />
 
         <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
             android:id="@+id/home_section_playlist_selector"
