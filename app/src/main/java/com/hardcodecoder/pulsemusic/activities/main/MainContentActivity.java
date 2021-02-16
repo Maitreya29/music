@@ -104,13 +104,14 @@ public class MainContentActivity extends DraggableNowPlayingSheetActivity {
         handleIntent(intent);
     }
 
-    private void handleIntent(@NonNull Intent intent) {
+    private boolean handleIntent(@NonNull Intent intent) {
         if (intent.getAction() != null && intent.getAction().equals(ACTION_OPEN_NOW_PLAYING)) {
             expandBottomSheet();
+            return true;
         } else if (intent.hasExtra(TRACK_URI)) {
             try {
                 String path = intent.getStringExtra(TRACK_URI);
-                if (null == path) return;
+                if (null == path) return false;
                 Uri data = Uri.parse(path);
                 MusicModel md = DataModelHelper.buildMusicModelFrom(this, data);
                 if (null != md) {
@@ -118,12 +119,14 @@ public class MainContentActivity extends DraggableNowPlayingSheetActivity {
                     singlePickedItemList.add(md);
                     mPulseController.setPlaylist(singlePickedItemList, 0);
                     mRemote.play();
+                    return true;
                 }
             } catch (Exception e) {
                 if (BuildConfig.DEBUG) e.printStackTrace();
                 else LogUtils.logException(TAG, "Handling intent", e);
             }
         }
+        return false;
     }
 
     @Override
@@ -234,15 +237,16 @@ public class MainContentActivity extends DraggableNowPlayingSheetActivity {
 
     public void onControllerReady() {
         mController.registerCallback(mCallback);
+        if (handleIntent(getIntent())) return;
+
         if (mController.getPlaybackState() != null && mController.getPlaybackState().getState() != PlaybackState.STATE_STOPPED)
             updateDraggableSheet(true);
 
-        if (mController.getPlaybackState() == null && AppSettings.rememberPlaylistEnabled(this)) {
+        else if (mController.getPlaybackState() == null && AppSettings.rememberPlaylistEnabled(this)) {
             mController.getTransportControls().sendCustomAction(
                     PlaybackManager.ACTION_LOAD_LAST_PLAYLIST,
                     null);
         }
-        handleIntent(getIntent());
     }
 
     @Override
