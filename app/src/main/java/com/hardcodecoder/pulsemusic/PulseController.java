@@ -48,8 +48,14 @@ public class PulseController {
         }
     }
 
-    public void setRememberPlaylist(boolean remember) {
+    public void setRememberPlaylist(boolean remember, boolean saveNow) {
         mRememberPlaylist = remember;
+        if (mRememberPlaylist && saveNow) {
+            if (mQueueManager.getQueue().isEmpty())
+                ProviderManager.getPreviousPlaylistProvider().deletePlaylist();
+            else
+                ProviderManager.getPreviousPlaylistProvider().savePlaylist(mQueueManager.getQueue());
+        }
     }
 
     public void addConnectionCallback(@NonNull ConnectionCallback callback) {

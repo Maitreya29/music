@@ -71,15 +71,15 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
                 .getBoolean(Preferences.REMEMBER_PREVIOUS_PLAYLIST, false);
 
         LocalPlayback playback = new LocalPlayback(this, mWorkerHandler);
-        PlaybackManager playbackManager = new PlaybackManager(this.getApplicationContext(), playback, this);
+        PlaybackManager playbackManager = new PlaybackManager(getApplicationContext(), playback, this);
         playbackManager.setRememberPlaylist(rememberPlaylist);
 
-        mMediaSession = new MediaSession(this.getApplicationContext(), TAG);
+        mMediaSession = new MediaSession(getApplicationContext(), TAG);
         mMediaSession.setCallback(playbackManager.getSessionCallbacks(), mWorkerHandler);
         mMediaSession.setFlags(MediaSession.FLAG_HANDLES_MEDIA_BUTTONS | MediaSession.FLAG_HANDLES_TRANSPORT_CONTROLS);
         PulseController pulseController = PulseController.getInstance();
         pulseController.setController(mMediaSession.getController());
-        pulseController.setRememberPlaylist(rememberPlaylist);
+        pulseController.setRememberPlaylist(rememberPlaylist, false);
 
         Intent mediaButtonIntent = new Intent(Intent.ACTION_MEDIA_BUTTON);
         mediaButtonIntent.setClass(getApplicationContext(), MediaButtonReceiver.class);
@@ -98,7 +98,7 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
             if (key.equals(Preferences.REMEMBER_PREVIOUS_PLAYLIST)) {
                 boolean remember = sharedPreferences.getBoolean(Preferences.REMEMBER_PREVIOUS_PLAYLIST, false);
                 playbackManager.setRememberPlaylist(remember);
-                pulseController.setRememberPlaylist(remember);
+                pulseController.setRememberPlaylist(remember, true);
             }
         };
         getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, MODE_PRIVATE)

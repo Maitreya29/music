@@ -47,4 +47,9 @@ public class PreviousPlaylistProvider {
             mHandler.post(() -> callback.onComplete(playlist));
         });
     }
+
+    public void deletePlaylist() {
+        TaskRunner.executeAsync(() ->
+                StorageUtil.deleteFile(new File(mPreviousPlaylistFilePath)));
+    }
 }
