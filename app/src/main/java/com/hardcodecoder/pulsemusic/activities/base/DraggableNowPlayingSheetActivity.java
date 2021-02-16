@@ -121,7 +121,9 @@ public abstract class DraggableNowPlayingSheetActivity extends ControllerActivit
             createExpandedFragment(false);
             getSharedPreferences(Preferences.NOW_PLAYING_SCREEN_STYLE_KEY, Context.MODE_PRIVATE)
                     .registerOnSharedPreferenceChangeListener(this);
-            mExpandedFrame.setVisibility(View.GONE);
+            // ViewPager2 need to initialize once before it can be set to View.GONE
+            // Setting View.GONE here causes ViewPager2 to not correctly update active album art
+            mExpandedFrame.setVisibility(View.INVISIBLE);
         }
 
         final float bottomNavBarHeight = DimensionsUtil.getDimension(this, 56);
