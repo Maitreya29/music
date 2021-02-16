@@ -129,8 +129,8 @@ public class LocalPlayback implements
     }
 
     private void play(int startPosition) {
+        if (startPosition > 0 && startPosition < mp.getDuration()) mp.seekTo(startPosition);
         if (mStartPlaybackWhenReady) {
-            if (startPosition > 0 && startPosition < mp.getDuration()) mp.seekTo(startPosition);
             if (mCurrentState == AudioManager.AUDIOFOCUS_GAIN || tryGetAudioFocus()) {
                 mp.start();
                 mPlaybackState = PlaybackState.STATE_PLAYING;
