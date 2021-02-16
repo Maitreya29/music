@@ -243,9 +243,11 @@ public class MainContentActivity extends DraggableNowPlayingSheetActivity {
             updateDraggableSheet(true);
 
         else if (mController.getPlaybackState() == null && AppSettings.rememberPlaylistEnabled(this)) {
+            Bundle extras = new Bundle();
+            extras.putBoolean(PlaybackManager.START_PLAYBACK, false);
             mController.getTransportControls().sendCustomAction(
                     PlaybackManager.ACTION_LOAD_LAST_PLAYLIST,
-                    null);
+                    extras);
         }
     }
 

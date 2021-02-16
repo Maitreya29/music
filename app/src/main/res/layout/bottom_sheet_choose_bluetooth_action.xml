@@ -49,6 +49,15 @@
             android:paddingEnd="0dp"
             android:text="@string/play_new_in_store"
             android:textAppearance="@style/Appearance.Text.Subtitle2" />
+
+        <com.hardcodecoder.pulsemusic.views.AccentColorRadioButton
+            android:id="@+id/radio_btn_continue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="32dp"
+            android:paddingEnd="0dp"
+            android:text="@string/play_continue_playlist"
+            android:textAppearance="@style/Appearance.Text.Subtitle2" />
     </RadioGroup>
 
     <com.hardcodecoder.pulsemusic.views.AccentColorMaterialButton

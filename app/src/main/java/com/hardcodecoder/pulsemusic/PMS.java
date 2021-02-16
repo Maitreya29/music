@@ -13,6 +13,7 @@ import android.media.session.MediaController;
 import android.media.session.MediaSession;
 import android.media.session.PlaybackState;
 import android.os.Binder;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
@@ -43,9 +44,11 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
     public static final String ACTION_PLAY_CONTINUE = "com.hardcodecoder.pulsemusic.PMS.ACTION_PLAY_CONTINUE";
     public static final String KEY_DEFAULT_PLAY = "com.hardcodecoder.pulsemusic.PMS.KEY_DEFAULT_PLAY";
     public static final String KEY_PLAY_CONTINUE = "com.hardcodecoder.pulsemusic.PMS.KEY_BLUETOOTH_AUTO_PLAY";
+    public static final int DEFAULT_ACTION_PLAY_NONE = -1;
     public static final int DEFAULT_ACTION_PLAY_SHUFFLE = 100;
     public static final int DEFAULT_ACTION_PLAY_LATEST = 101;
     public static final int DEFAULT_ACTION_PLAY_SUGGESTED = 102;
+    public static final int DEFAULT_ACTION_CONTINUE_PLAYLIST = 103;
     private static final String TAG = "PMS";
     private final IBinder mBinder = new ServiceBinder();
     private MediaSession mMediaSession = null;
@@ -133,7 +136,7 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
                 PlaybackState state = mMediaSession.getController().getPlaybackState();
                 if (null == state) {
                     if (intent.hasExtra(KEY_PLAY_CONTINUE)) {
-                        int playContinueAction = intent.getIntExtra(KEY_PLAY_CONTINUE, DEFAULT_ACTION_PLAY_SHUFFLE);
+                        int playContinueAction = intent.getIntExtra(KEY_PLAY_CONTINUE, DEFAULT_ACTION_PLAY_NONE);
                         handleDefaultActions(playContinueAction);
                     }
                 } else if (state.getState() == PlaybackState.STATE_PAUSED || state.getState() == PlaybackState.STATE_STOPPED) {
@@ -142,8 +145,8 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
                 break;
             case ACTION_DEFAULT_PLAY:
                 if (intent.hasExtra(KEY_DEFAULT_PLAY)) {
-                    int playContinueAction = intent.getIntExtra(KEY_DEFAULT_PLAY, DEFAULT_ACTION_PLAY_SHUFFLE);
-                    handleDefaultActions(playContinueAction);
+                    int defaultPlayAction = intent.getIntExtra(KEY_DEFAULT_PLAY, DEFAULT_ACTION_PLAY_NONE);
+                    handleDefaultActions(defaultPlayAction);
                 }
                 break;
             default:
@@ -161,6 +164,9 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
                 break;
             case DEFAULT_ACTION_PLAY_SUGGESTED:
                 playSuggested();
+                break;
+            case DEFAULT_ACTION_CONTINUE_PLAYLIST:
+                playContinuePlaylist();
                 break;
         }
     }
@@ -190,6 +196,15 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
         } else {
             shuffleTracks(LoaderCache.getAllTracksList());
         }
+    }
+
+    private void playContinuePlaylist() {
+        MediaController controller = mMediaSession.getController();
+        Bundle extras = new Bundle();
+        extras.putBoolean(PlaybackManager.START_PLAYBACK, true);
+        controller.getTransportControls().sendCustomAction(
+                PlaybackManager.ACTION_LOAD_LAST_PLAYLIST,
+                extras);
     }
 
     private void shuffleTracks(@NonNull List<MusicModel> tracks) {

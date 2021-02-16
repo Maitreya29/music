@@ -38,9 +38,16 @@ public class BluetoothBroadcastReceiver extends BroadcastReceiver {
                     case Preferences.ACTION_PLAY_SUGGESTED:
                         pmsAction = PMS.DEFAULT_ACTION_PLAY_SUGGESTED;
                         break;
+                    case Preferences.ACTION_PLAY_CONTINUE:
+                        if (AppSettings.rememberPlaylistEnabled(context))
+                            pmsAction = PMS.DEFAULT_ACTION_CONTINUE_PLAYLIST;
+                        else pmsAction = -1;
+                        break;
                     case Preferences.ACTION_PLAY_SHUFFLE:
-                    default:
                         pmsAction = PMS.DEFAULT_ACTION_PLAY_SHUFFLE;
+                        break;
+                    default:
+                        pmsAction = PMS.DEFAULT_ACTION_PLAY_NONE;
                 }
                 Intent intent = new Intent(context.getApplicationContext(), PMS.class);
                 intent.setAction(PMS.ACTION_PLAY_CONTINUE);

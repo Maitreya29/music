@@ -36,6 +36,9 @@ public class AutoPlayActionChooserDialogFragment extends RoundedCustomBottomShee
         RadioGroup radioGroup = view.findViewById(R.id.radio_button_group);
         int currentAction = AppSettings.getBluetoothDeviceDetectionAction(requireContext());
 
+        boolean continueWhereYouLeftEnabled = AppSettings.rememberPlaylistEnabled(requireContext());
+        view.findViewById(R.id.radio_btn_continue).setEnabled(continueWhereYouLeftEnabled);
+
         switch (currentAction) {
             case Preferences.ACTION_PLAY_SHUFFLE:
                 ((RadioButton) radioGroup.findViewById(R.id.radio_btn_shuffle)).setChecked(true);
@@ -46,6 +49,9 @@ public class AutoPlayActionChooserDialogFragment extends RoundedCustomBottomShee
             case Preferences.ACTION_PLAY_LATEST:
                 ((RadioButton) radioGroup.findViewById(R.id.radio_btn_latest)).setChecked(true);
                 break;
+            case Preferences.ACTION_PLAY_CONTINUE:
+                ((RadioButton) radioGroup.findViewById(R.id.radio_btn_continue)).setChecked(true);
+                break;
         }
 
         radioGroup.setOnCheckedChangeListener((group, checkedId) -> mOptionChanged = true);
@@ -54,11 +60,14 @@ public class AutoPlayActionChooserDialogFragment extends RoundedCustomBottomShee
             if (mOptionChanged) {
                 final int id = radioGroup.getCheckedRadioButtonId();
                 int action;
-                if (id == R.id.radio_btn_suggested)
+                if (id == R.id.radio_btn_shuffle)
+                    action = Preferences.ACTION_PLAY_SHUFFLE;
+                else if (id == R.id.radio_btn_suggested)
                     action = Preferences.ACTION_PLAY_SUGGESTED;
                 else if (id == R.id.radio_btn_latest)
                     action = Preferences.ACTION_PLAY_LATEST;
-                else action = Preferences.ACTION_PLAY_SHUFFLE;
+                else
+                    action = Preferences.ACTION_PLAY_CONTINUE;
                 AppSettings.saveBluetoothDeviceDetectionAction(requireContext(), action);
             }
             dismiss();

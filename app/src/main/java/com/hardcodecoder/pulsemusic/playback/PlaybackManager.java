@@ -26,6 +26,7 @@ import java.util.List;
 public class PlaybackManager implements Playback.Callback {
 
     public static final String ACTION_LOAD_LAST_PLAYLIST = "LoadLastPlayist";
+    public static final String START_PLAYBACK = "STartPlayback";
     public static final short ACTION_PLAY_NEXT = 1;
     public static final short ACTION_PLAY_PREV = -1;
     private static final String TAG = PlaybackManager.class.getSimpleName();
@@ -102,8 +103,8 @@ public class PlaybackManager implements Playback.Callback {
         @Override
         public void onCustomAction(@NonNull String action, @Nullable Bundle extras) {
             try {
-                if (action.equals(ACTION_LOAD_LAST_PLAYLIST))
-                    handleLoadLastTrack();
+                if (null != extras && action.equals(ACTION_LOAD_LAST_PLAYLIST))
+                    handleLoadLastTrack(extras);
             } catch (Exception e) {
                 if (BuildConfig.DEBUG) e.printStackTrace();
                 else LogUtils.logException(TAG, "onCustomAction()", e);
@@ -151,13 +152,14 @@ public class PlaybackManager implements Playback.Callback {
         else handlePauseRequest();
     }
 
-    private void handleLoadLastTrack() {
+    private void handleLoadLastTrack(@NonNull Bundle bundle) {
         List<MusicModel> previousPlaylist = ProviderManager.getPreviousPlaylistProvider().getPlaylist();
         if (previousPlaylist == null || previousPlaylist.isEmpty()) return;
         final int index = AppSettings.getLastTrackIndex(mContext);
         final int resumePosition = AppSettings.getLastTrackPosition(mContext);
         PulseController.getInstance().setPlaylist(previousPlaylist, index);
-        mPlayback.onPlay(resumePosition, false);
+        final boolean startPlayback = bundle.getBoolean(START_PLAYBACK, false);
+        mPlayback.onPlay(resumePosition, startPlayback);
     }
 
     private void updatePlaybackState(int currentState) {

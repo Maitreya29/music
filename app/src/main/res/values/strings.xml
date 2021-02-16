@@ -293,6 +293,7 @@
     <string name="play_shuffle">Play shuffled tracks</string>
     <string name="play_new_in_store">Play \"New in store\" playlist</string>
     <string name="play_for_you">Play \"For you\" playlist</string>
+    <string name="play_continue_playlist">Continue where you left \n(Depends on \"Remember playlist\" option)</string>
 
 
     <!-- Contributors -->
