@@ -21,7 +21,6 @@ import android.support.v4.media.session.MediaSessionCompat;
 import android.util.Log;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.media.session.MediaButtonReceiver;
@@ -137,7 +136,7 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
                 if (null == state) {
                     if (intent.hasExtra(KEY_PLAY_CONTINUE)) {
                         int playContinueAction = intent.getIntExtra(KEY_PLAY_CONTINUE, DEFAULT_ACTION_PLAY_NONE);
-                        handleDefaultActions(playContinueAction);
+                        loadAction(playContinueAction);
                     }
                 } else if (state.getState() == PlaybackState.STATE_PAUSED || state.getState() == PlaybackState.STATE_STOPPED) {
                     mMediaSession.getController().getTransportControls().play();
@@ -146,12 +145,22 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
             case ACTION_DEFAULT_PLAY:
                 if (intent.hasExtra(KEY_DEFAULT_PLAY)) {
                     int defaultPlayAction = intent.getIntExtra(KEY_DEFAULT_PLAY, DEFAULT_ACTION_PLAY_NONE);
-                    handleDefaultActions(defaultPlayAction);
+                    loadAction(defaultPlayAction);
                 }
                 break;
             default:
                 Log.e(TAG, "Unknown action");
         }
+    }
+
+    private void loadAction(int action) {
+        if (null == LoaderCache.getAllTracksList()) {
+            LoaderHelper.loadAllTracks(this, result -> {
+                if (null != result)
+                    mWorkerHandler.post(() -> handleDefaultActions(action));
+                else Toast.makeText(this, getString(R.string.message_empty_recent), Toast.LENGTH_SHORT).show();
+            });
+        } else handleDefaultActions(action);
     }
 
     private void handleDefaultActions(int action) {
@@ -172,30 +181,19 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
     }
 
     private void playLatest() {
-        if (LoaderCache.getAllTracksList() == null) {
-            LoaderHelper.loadAllTracks(this, result -> LoaderHelper.loadLatestTracks(this::playPlaylist));
-        } else {
-            LoaderHelper.loadLatestTracks(this::playPlaylist);
-        }
+        LoaderHelper.loadLatestTracks(this::playPlaylist);
     }
 
     private void playSuggested() {
-        if (LoaderCache.getAllTracksList() == null) {
-            LoaderHelper.loadAllTracks(this, result -> LoaderHelper.loadSuggestionsList(this::playPlaylist));
-        } else {
-            LoaderHelper.loadSuggestionsList(this::playPlaylist);
-        }
+        LoaderHelper.loadSuggestionsList(this::playPlaylist);
     }
 
     private void playShuffle() {
-        if (LoaderCache.getAllTracksList() == null) {
-            LoaderHelper.loadAllTracks(this, result -> {
-                if (result != null) shuffleTracks(result);
-                else playPlaylist(null);
-            });
-        } else {
-            shuffleTracks(LoaderCache.getAllTracksList());
-        }
+        List<MusicModel> master = LoaderCache.getAllTracksList();
+        if (null == master) return;
+        List<MusicModel> listToShuffle = new ArrayList<>(master);
+        Collections.shuffle(listToShuffle);
+        playPlaylist(listToShuffle);
     }
 
     private void playContinuePlaylist() {
@@ -207,18 +205,12 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
                 extras);
     }
 
-    private void shuffleTracks(@NonNull List<MusicModel> tracks) {
-        List<MusicModel> listToShuffle = new ArrayList<>(tracks);
-        Collections.shuffle(listToShuffle);
-        playPlaylist(listToShuffle);
-    }
-
     private void playPlaylist(@Nullable List<MusicModel> playlist) {
-        if (null != playlist && playlist.size() > 0) {
+        if (null != playlist && !playlist.isEmpty()) {
             PulseController.getInstance().setPlaylist(playlist);
             mMediaSession.getController().getTransportControls().play();
         } else
-            Toast.makeText(this, getString(R.string.message_empty_playlist), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.message_empty_recent), Toast.LENGTH_SHORT).show();
     }
 
     @Nullable
