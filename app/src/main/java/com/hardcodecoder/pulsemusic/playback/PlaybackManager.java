@@ -227,13 +227,14 @@ public class PlaybackManager implements Playback.Callback {
 
     private void saveTrackAndPosition() {
         final int trackId = mPlayback.getActiveMediaId();
-        final long position = mPlayback.getCurrentStreamingPosition();
-        if (trackId >= 0 && position > 0) {
+        final int trackIndex = mQueueManager.getActiveIndex();
+        final int position = (int) mPlayback.getCurrentStreamingPosition();
+        if (trackId >= 0 && trackIndex >= 0 && position > 0) {
             if (mRememberPlaylist) {
                 AppSettings.savePlaylistTrackAndPosition(
                         mContext,
-                        mQueueManager.getActiveIndex(),
-                        (int) mPlayback.getCurrentStreamingPosition());
+                        trackIndex,
+                        position);
             }
         }
     }

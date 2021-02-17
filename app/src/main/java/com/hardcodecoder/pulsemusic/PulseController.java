@@ -226,7 +226,6 @@ public class PulseController {
 
         public void resetQueue() {
             mActiveQueue.clear();
-            mActiveIndex = -1;
             mRepeatCurrentTrack = false;
         }
 
