@@ -106,6 +106,7 @@ public class MainContentActivity extends DraggableNowPlayingSheetActivity {
 
     private boolean handleIntent(@NonNull Intent intent) {
         if (intent.getAction() != null && intent.getAction().equals(ACTION_OPEN_NOW_PLAYING)) {
+            updateDraggableSheet(true);
             expandBottomSheet();
             return true;
         } else if (intent.hasExtra(TRACK_URI)) {
