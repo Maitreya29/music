@@ -44,10 +44,10 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
     public static final String KEY_DEFAULT_PLAY = "com.hardcodecoder.pulsemusic.PMS.KEY_DEFAULT_PLAY";
     public static final String KEY_PLAY_CONTINUE = "com.hardcodecoder.pulsemusic.PMS.KEY_BLUETOOTH_AUTO_PLAY";
     public static final int DEFAULT_ACTION_PLAY_NONE = -1;
-    public static final int DEFAULT_ACTION_PLAY_SHUFFLE = 100;
-    public static final int DEFAULT_ACTION_PLAY_LATEST = 101;
-    public static final int DEFAULT_ACTION_PLAY_SUGGESTED = 102;
-    public static final int DEFAULT_ACTION_CONTINUE_PLAYLIST = 103;
+    public static final int DEFAULT_ACTION_PLAY_SHUFFLE = Preferences.ACTION_PLAY_SHUFFLE;
+    public static final int DEFAULT_ACTION_PLAY_LATEST = Preferences.ACTION_PLAY_LATEST;
+    public static final int DEFAULT_ACTION_PLAY_SUGGESTED = Preferences.ACTION_PLAY_SUGGESTED;
+    public static final int DEFAULT_ACTION_CONTINUE_PLAYLIST = Preferences.ACTION_PLAY_CONTINUE;
     private static final String TAG = "PMS";
     private final IBinder mBinder = new ServiceBinder();
     private MediaSession mMediaSession = null;
@@ -158,7 +158,8 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
             LoaderHelper.loadAllTracks(this, result -> {
                 if (null != result)
                     mWorkerHandler.post(() -> handleDefaultActions(action));
-                else Toast.makeText(this, getString(R.string.message_empty_recent), Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(this, getString(R.string.message_empty_recent), Toast.LENGTH_SHORT).show();
             });
         } else handleDefaultActions(action);
     }

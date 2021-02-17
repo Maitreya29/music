@@ -60,10 +60,10 @@ public class ShortcutsLauncher extends Activity {
         finish();
     }
 
-    private void startServiceWithAction(int playCode) {
+    private void startServiceWithAction(int action) {
         Intent intent = new Intent(this, PMS.class);
         intent.setAction(PMS.ACTION_DEFAULT_PLAY);
-        intent.putExtra(PMS.KEY_DEFAULT_PLAY, playCode);
+        intent.putExtra(PMS.KEY_DEFAULT_PLAY, action);
         startService(intent);
     }
 

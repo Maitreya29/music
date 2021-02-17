@@ -30,29 +30,12 @@ public class BluetoothBroadcastReceiver extends BroadcastReceiver {
             // so we delay playback by 5 sec
             new Handler().postDelayed(() -> {
                 int bluetoothAction = AppSettings.getAutoPlayAction(context, Preferences.BLUETOOTH_DEVICE_ACTION_KEY);
-                int pmsAction;
-                switch (bluetoothAction) {
-                    case Preferences.ACTION_PLAY_LATEST:
-                        pmsAction = PMS.DEFAULT_ACTION_PLAY_LATEST;
-                        break;
-                    case Preferences.ACTION_PLAY_SUGGESTED:
-                        pmsAction = PMS.DEFAULT_ACTION_PLAY_SUGGESTED;
-                        break;
-                    case Preferences.ACTION_PLAY_CONTINUE:
-                        if (AppSettings.rememberPlaylistEnabled(context))
-                            pmsAction = PMS.DEFAULT_ACTION_CONTINUE_PLAYLIST;
-                        else pmsAction = -1;
-                        break;
-                    case Preferences.ACTION_PLAY_SHUFFLE:
-                        pmsAction = PMS.DEFAULT_ACTION_PLAY_SHUFFLE;
-                        break;
-                    default:
-                        pmsAction = PMS.DEFAULT_ACTION_PLAY_NONE;
-                }
+                if (bluetoothAction == Preferences.ACTION_PLAY_CONTINUE && !AppSettings.rememberPlaylistEnabled(context))
+                    return;
                 Intent intent = new Intent(context.getApplicationContext(), PMS.class);
                 intent.setAction(PMS.ACTION_PLAY_CONTINUE);
-                intent.putExtra(PMS.KEY_PLAY_CONTINUE, pmsAction);
-                if (pmsAction != -1) ContextCompat.startForegroundService(context, intent);
+                intent.putExtra(PMS.KEY_PLAY_CONTINUE, bluetoothAction);
+                ContextCompat.startForegroundService(context, intent);
             }, 5000);
         }
     }

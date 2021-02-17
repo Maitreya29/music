@@ -70,29 +70,12 @@ public class PulseTileService extends TileService implements PulseController.Con
         if (null != mController) state = mController.getPlaybackState();
         if (null == mController || null == state || state.getState() == PlaybackState.STATE_STOPPED) {
             final int action = AppSettings.getAutoPlayAction(this, Preferences.QS_TILE_ACTION_KEY);
-            int pmsAction;
-            switch (action) {
-                case Preferences.ACTION_PLAY_LATEST:
-                    pmsAction = PMS.DEFAULT_ACTION_PLAY_LATEST;
-                    break;
-                case Preferences.ACTION_PLAY_SUGGESTED:
-                    pmsAction = PMS.DEFAULT_ACTION_PLAY_SUGGESTED;
-                    break;
-                case Preferences.ACTION_PLAY_CONTINUE:
-                    if (AppSettings.rememberPlaylistEnabled(this))
-                        pmsAction = PMS.DEFAULT_ACTION_CONTINUE_PLAYLIST;
-                    else pmsAction = -1;
-                    break;
-                case Preferences.ACTION_PLAY_SHUFFLE:
-                    pmsAction = PMS.DEFAULT_ACTION_PLAY_SHUFFLE;
-                    break;
-                default:
-                    pmsAction = PMS.DEFAULT_ACTION_PLAY_NONE;
-            }
+            if (action == Preferences.ACTION_PLAY_CONTINUE && !AppSettings.rememberPlaylistEnabled(this))
+                return;
             Intent intent = new Intent(this, PMS.class);
             intent.setAction(PMS.ACTION_PLAY_CONTINUE);
-            intent.putExtra(PMS.KEY_PLAY_CONTINUE, pmsAction);
-            if (pmsAction != -1) ContextCompat.startForegroundService(this, intent);
+            intent.putExtra(PMS.KEY_PLAY_CONTINUE, action);
+            ContextCompat.startForegroundService(this, intent);
         } else {
             PulseController.PulseRemote remote = PulseController.getInstance().getRemote();
             if (state.getState() == PlaybackState.STATE_PLAYING) remote.pause();
