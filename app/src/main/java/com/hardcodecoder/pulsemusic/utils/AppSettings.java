@@ -2,6 +2,7 @@ package com.hardcodecoder.pulsemusic.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
@@ -214,6 +215,7 @@ public class AppSettings {
     }
 
     public static void savePlaylistTrackAndPosition(@NonNull Context context, int trackIndex, int position) {
+        Log.e("APPSettings", "Track index = " + trackIndex);
         SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, Context.MODE_PRIVATE).edit();
         editor.putInt(Preferences.PREVIOUS_PLAYLIST_TRACK_INDEX, trackIndex);
         editor.putInt(Preferences.PREVIOUS_PLAYLIST_TRACK_POSITION, position);

@@ -24,9 +24,11 @@ import com.hardcodecoder.pulsemusic.activities.main.MediaFolderChooserActivity;
 import com.hardcodecoder.pulsemusic.adapters.bottomsheet.IgnoredFoldersAdapter;
 import com.hardcodecoder.pulsemusic.dialog.base.RoundedCustomBottomSheetFragment;
 import com.hardcodecoder.pulsemusic.providers.ProviderManager;
+import com.hardcodecoder.pulsemusic.utils.LogUtils;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class IgnoreFolderChooser extends RoundedCustomBottomSheetFragment {
@@ -148,6 +150,8 @@ public class IgnoreFolderChooser extends RoundedCustomBottomSheetFragment {
                     // paths[1] can be null if user selected root directory
                     + (paths.length == 1 ? "" : paths[1] + File.separator);
         }
+        String logText = "Received path: " + folder.getPath() + "\nPaths: " + Arrays.toString(paths) + "\nCompletePath: " + completePath;
+        LogUtils.logInfo("if", TAG, logText);
         return completePath;
     }
 

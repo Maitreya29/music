@@ -12,7 +12,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.hardcodecoder.pulsemusic.BuildConfig;
 import com.hardcodecoder.pulsemusic.PulseController;
 import com.hardcodecoder.pulsemusic.helper.MediaArtHelper;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
@@ -44,8 +43,7 @@ public class PlaybackManager implements Playback.Callback {
                 handlePlayRequest();
                 mManualPause = false;
             } catch (Exception e) {
-                if (BuildConfig.DEBUG) e.printStackTrace();
-                else LogUtils.logException(TAG, "onPlay()", e);
+                LogUtils.logException(TAG, "onPlay()", e);
             }
         }
 
@@ -55,8 +53,7 @@ public class PlaybackManager implements Playback.Callback {
                 handlePauseRequest();
                 mManualPause = true;
             } catch (Exception e) {
-                if (BuildConfig.DEBUG) e.printStackTrace();
-                else LogUtils.logException(TAG, "onPause()", e);
+                LogUtils.logException(TAG, "onPause()", e);
             }
         }
 
@@ -65,8 +62,7 @@ public class PlaybackManager implements Playback.Callback {
             try {
                 handleSkipRequest(ACTION_PLAY_NEXT, true);
             } catch (Exception e) {
-                if (BuildConfig.DEBUG) e.printStackTrace();
-                else LogUtils.logException(TAG, "onSkipToNext()", e);
+                LogUtils.logException(TAG, "onSkipToNext()", e);
             }
         }
 
@@ -75,8 +71,7 @@ public class PlaybackManager implements Playback.Callback {
             try {
                 handleSkipRequest(ACTION_PLAY_PREV, true);
             } catch (Exception e) {
-                if (BuildConfig.DEBUG) e.printStackTrace();
-                else LogUtils.logException(TAG, "onSkipToPrevious()", e);
+                LogUtils.logException(TAG, "onSkipToPrevious()", e);
             }
         }
 
@@ -85,8 +80,7 @@ public class PlaybackManager implements Playback.Callback {
             try {
                 handleStopRequest();
             } catch (Exception e) {
-                if (BuildConfig.DEBUG) e.printStackTrace();
-                else LogUtils.logException(TAG, "onStop()", e);
+                LogUtils.logException(TAG, "onStop()", e);
             }
         }
 
@@ -95,8 +89,7 @@ public class PlaybackManager implements Playback.Callback {
             try {
                 mPlayback.onSeekTo((int) pos);
             } catch (Exception e) {
-                if (BuildConfig.DEBUG) e.printStackTrace();
-                else LogUtils.logException(TAG, "onSekTo()" + pos, e);
+                LogUtils.logException(TAG, "onSekTo()" + pos, e);
             }
         }
 
@@ -106,8 +99,7 @@ public class PlaybackManager implements Playback.Callback {
                 if (null != extras && action.equals(ACTION_LOAD_LAST_PLAYLIST))
                     handleLoadLastTrack(extras);
             } catch (Exception e) {
-                if (BuildConfig.DEBUG) e.printStackTrace();
-                else LogUtils.logException(TAG, "onCustomAction()", e);
+                LogUtils.logException(TAG, "onCustomAction()", e);
             }
         }
     };

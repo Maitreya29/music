@@ -20,7 +20,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.appbar.AppBarLayout;
-import com.hardcodecoder.pulsemusic.BuildConfig;
 import com.hardcodecoder.pulsemusic.PMS;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.activities.base.DraggableNowPlayingSheetActivity;
@@ -123,8 +122,7 @@ public class MainContentActivity extends DraggableNowPlayingSheetActivity {
                     return true;
                 }
             } catch (Exception e) {
-                if (BuildConfig.DEBUG) e.printStackTrace();
-                else LogUtils.logException(TAG, "Handling intent", e);
+                LogUtils.logException(TAG, "Handling intent", e);
             }
         }
         return false;

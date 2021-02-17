@@ -11,7 +11,6 @@ import android.provider.OpenableColumns;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.hardcodecoder.pulsemusic.BuildConfig;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.TaskRunner;
 import com.hardcodecoder.pulsemusic.loaders.LoaderCache;
@@ -85,8 +84,7 @@ public class DataModelHelper {
             duration = Integer.parseInt(mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION));
             mmr.release();
         } catch (Exception e) {
-            if (BuildConfig.DEBUG) e.printStackTrace();
-            else LogUtils.logException("DataModelHelper", "at buildMusicModelFrom()", e);
+            LogUtils.logException("DataModelHelper", "at buildMusicModelFrom()", e);
             return null;
         }
         return new MusicModel(
@@ -115,9 +113,7 @@ public class DataModelHelper {
                 try {
                     mediaExtractor.setDataSource(context, uri, null);
                 } catch (IOException e) {
-                    if (BuildConfig.DEBUG) e.printStackTrace();
-                    else
-                        LogUtils.logException("DataModelHelper", "at getTrackInfo#settingDataSource", e);
+                    LogUtils.logException("DataModelHelper", "at getTrackInfo#settingDataSource", e);
                 }
 
                 int nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
@@ -136,9 +132,7 @@ public class DataModelHelper {
                     sampleRate = mediaFormat.getInteger(MediaFormat.KEY_SAMPLE_RATE);
                     channelCount = mediaFormat.getInteger(MediaFormat.KEY_CHANNEL_COUNT);
                 } catch (NullPointerException e) {
-                    if (BuildConfig.DEBUG) e.printStackTrace();
-                    else
-                        LogUtils.logException("DataModelHelper", "at getTrackInfo#extractingInfo", e);
+                    LogUtils.logException("DataModelHelper", "at getTrackInfo#extractingInfo", e);
                 }
                 cursor.close();
                 TrackFileModel trackFileModel = new TrackFileModel(displayName, mimeType, fileSize, bitRate, sampleRate, channelCount);

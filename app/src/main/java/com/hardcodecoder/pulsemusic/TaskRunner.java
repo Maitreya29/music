@@ -29,9 +29,7 @@ public class TaskRunner {
                 final V result = callable.call();
                 handler.post(() -> callback.onComplete(result));
             } catch (Exception e) {
-                if (BuildConfig.DEBUG) e.printStackTrace();
-                else // We log critical exceptions
-                    LogUtils.logException(callable.getClass().getCanonicalName(), "at TaskRunner.executeAsync(): callable", e);
+                LogUtils.logException(callable.getClass().getCanonicalName(), "at: executeAsync(): callable", e);
 
                 // Callback is necessary to trigger
                 // any fallback event that happen if load fails
@@ -41,7 +39,11 @@ public class TaskRunner {
     }
 
     public static void executeAsync(@NonNull Runnable runnable) {
-        CUSTOM_THREAD_POOL_EXECUTOR.execute(runnable);
+        try {
+            CUSTOM_THREAD_POOL_EXECUTOR.execute(runnable);
+        } catch (Exception e) {
+            LogUtils.logException(TaskRunner.class.getSimpleName(), "at: executeAsync(): callable", e);
+        }
     }
 
     public interface Callback<V> {
