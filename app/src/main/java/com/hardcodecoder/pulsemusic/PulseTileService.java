@@ -14,10 +14,13 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 
+import com.hardcodecoder.pulsemusic.utils.AppSettings;
+
 @RequiresApi(api = Build.VERSION_CODES.N)
 public class PulseTileService extends TileService implements PulseController.ConnectionCallback {
 
     public static final String TAG = PulseTileService.class.getSimpleName();
+    private MediaController mController;
     private final MediaController.Callback mCallback = new MediaController.Callback() {
         @Override
         public void onPlaybackStateChanged(@Nullable PlaybackState state) {
@@ -28,8 +31,14 @@ public class PulseTileService extends TileService implements PulseController.Con
         public void onMetadataChanged(@Nullable MediaMetadata metadata) {
             updateTileData(metadata);
         }
+
+        @Override
+        public void onSessionDestroyed() {
+            mController = null;
+            updateTileData(null);
+            updateTileState(null);
+        }
     };
-    private MediaController mController;
 
     @Override
     public void onStartListening() {
@@ -60,10 +69,30 @@ public class PulseTileService extends TileService implements PulseController.Con
         PlaybackState state = null;
         if (null != mController) state = mController.getPlaybackState();
         if (null == mController || null == state || state.getState() == PlaybackState.STATE_STOPPED) {
+            final int action = AppSettings.getAutoPlayAction(this, Preferences.QS_TILE_ACTION_KEY);
+            int pmsAction;
+            switch (action) {
+                case Preferences.ACTION_PLAY_LATEST:
+                    pmsAction = PMS.DEFAULT_ACTION_PLAY_LATEST;
+                    break;
+                case Preferences.ACTION_PLAY_SUGGESTED:
+                    pmsAction = PMS.DEFAULT_ACTION_PLAY_SUGGESTED;
+                    break;
+                case Preferences.ACTION_PLAY_CONTINUE:
+                    if (AppSettings.rememberPlaylistEnabled(this))
+                        pmsAction = PMS.DEFAULT_ACTION_CONTINUE_PLAYLIST;
+                    else pmsAction = -1;
+                    break;
+                case Preferences.ACTION_PLAY_SHUFFLE:
+                    pmsAction = PMS.DEFAULT_ACTION_PLAY_SHUFFLE;
+                    break;
+                default:
+                    pmsAction = PMS.DEFAULT_ACTION_PLAY_NONE;
+            }
             Intent intent = new Intent(this, PMS.class);
             intent.setAction(PMS.ACTION_PLAY_CONTINUE);
-            intent.putExtra(PMS.KEY_PLAY_CONTINUE, PMS.DEFAULT_ACTION_PLAY_SHUFFLE);
-            ContextCompat.startForegroundService(this, intent);
+            intent.putExtra(PMS.KEY_PLAY_CONTINUE, pmsAction);
+            if (pmsAction != -1) ContextCompat.startForegroundService(this, intent);
         } else {
             PulseController.PulseRemote remote = PulseController.getInstance().getRemote();
             if (state.getState() == PlaybackState.STATE_PLAYING) remote.pause();

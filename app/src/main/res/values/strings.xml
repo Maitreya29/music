@@ -290,6 +290,9 @@
     <string name="bluetooth_auto_play_action">Select bluetooth auto play action</string>
     <string name="bluetooth_auto_play_action_desc">Choose which playlist to play when a bluetooth device connects</string>
     <string name="select_bluetooth_action">Set preferred bluetooth action</string>
+    <string name="tile_auto_play">Select tile action</string>
+    <string name="tile_auto_play_desc">Choose which playlist to play using QS tile</string>
+    <string name="select_tile_action">Set preferred QS tile action</string>
     <string name="play_shuffle">Play shuffled tracks</string>
     <string name="play_new_in_store">Play \"New in store\" playlist</string>
     <string name="play_for_you">Play \"For you\" playlist</string>

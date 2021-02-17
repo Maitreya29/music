@@ -10,8 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.hardcodecoder.pulsemusic.AudioDeviceService;
+import com.hardcodecoder.pulsemusic.Preferences;
 import com.hardcodecoder.pulsemusic.R;
-import com.hardcodecoder.pulsemusic.dialog.AutoPlayActionChooserDialogFragment;
+import com.hardcodecoder.pulsemusic.dialog.AutoPlayActionChooser;
 import com.hardcodecoder.pulsemusic.fragments.settings.base.SettingsBaseFragment;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 import com.hardcodecoder.pulsemusic.views.SettingsToggleableItem;
@@ -57,8 +58,19 @@ public class SettingsAudioFragment extends SettingsBaseFragment {
         });
 
         view.findViewById(R.id.audio_device_bluetooth_action_picker).setOnClickListener(v -> {
-            AutoPlayActionChooserDialogFragment dialog = AutoPlayActionChooserDialogFragment.getInstance();
-            dialog.show(getFragmentManager(), AutoPlayActionChooserDialogFragment.TAG);
+            AutoPlayActionChooser dialog = new AutoPlayActionChooser(
+                    getString(R.string.select_bluetooth_action),
+                    action -> AppSettings.saveAutoPlayAction(requireContext(), Preferences.BLUETOOTH_DEVICE_ACTION_KEY, action),
+                    AppSettings.getAutoPlayAction(requireContext(), Preferences.BLUETOOTH_DEVICE_ACTION_KEY));
+            dialog.show(requireFragmentManager(), AutoPlayActionChooser.TAG);
+        });
+
+        view.findViewById(R.id.qs_tile_action_picker).setOnClickListener(v -> {
+            AutoPlayActionChooser dialog = new AutoPlayActionChooser(
+                    getString(R.string.select_tile_action),
+                    action -> AppSettings.saveAutoPlayAction(requireContext(), Preferences.QS_TILE_ACTION_KEY, action),
+                    AppSettings.getAutoPlayAction(requireContext(), Preferences.QS_TILE_ACTION_KEY));
+            dialog.show(requireFragmentManager(), AutoPlayActionChooser.TAG);
         });
     }
 }

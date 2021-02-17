@@ -112,6 +112,7 @@ public class Preferences {
     public static final String AUDIO_DEVICE_AUTO_PLAY = "AudioDeviceAutoPlay";
     public static final String BLUETOOTH_DEVICE_DETECTION_KEY = "BluetoothDetectionEnabled";
     public static final String BLUETOOTH_DEVICE_ACTION_KEY = "BluetoothDeviceAction";
+    public static final String QS_TILE_ACTION_KEY = "QSTileAction";
 
     public static final short ACTION_PLAY_SHUFFLE = 6000;
     public static final short ACTION_PLAY_SUGGESTED = 6001;

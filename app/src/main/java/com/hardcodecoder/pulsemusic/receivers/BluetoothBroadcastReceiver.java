@@ -29,7 +29,7 @@ public class BluetoothBroadcastReceiver extends BroadcastReceiver {
             // as some devices are able to play audio only after a few seconds
             // so we delay playback by 5 sec
             new Handler().postDelayed(() -> {
-                int bluetoothAction = AppSettings.getBluetoothDeviceDetectionAction(context);
+                int bluetoothAction = AppSettings.getAutoPlayAction(context, Preferences.BLUETOOTH_DEVICE_ACTION_KEY);
                 int pmsAction;
                 switch (bluetoothAction) {
                     case Preferences.ACTION_PLAY_LATEST:
@@ -52,7 +52,7 @@ public class BluetoothBroadcastReceiver extends BroadcastReceiver {
                 Intent intent = new Intent(context.getApplicationContext(), PMS.class);
                 intent.setAction(PMS.ACTION_PLAY_CONTINUE);
                 intent.putExtra(PMS.KEY_PLAY_CONTINUE, pmsAction);
-                ContextCompat.startForegroundService(context, intent);
+                if (pmsAction != -1) ContextCompat.startForegroundService(context, intent);
             }, 5000);
         }
     }

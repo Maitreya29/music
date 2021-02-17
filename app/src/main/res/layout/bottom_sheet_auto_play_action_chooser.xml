@@ -6,7 +6,7 @@
     android:padding="24dp">
 
     <com.hardcodecoder.pulsemusic.views.AccentColorTextView
-        android:id="@+id/title"
+        android:id="@+id/auto_play_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -18,7 +18,7 @@
         android:id="@+id/radio_button_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/title"
+        android:layout_below="@id/auto_play_title"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"
         android:orientation="vertical">
@@ -61,16 +61,16 @@
     </RadioGroup>
 
     <com.hardcodecoder.pulsemusic.views.AccentColorMaterialButton
-        android:id="@+id/choose_bluetooth_action_cancel_btn"
+        android:id="@+id/cancel_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/radio_button_group"
-        android:layout_toStartOf="@id/choose_bluetooth_action_set_btn"
+        android:layout_toStartOf="@id/set_btn"
         android:text="@string/cancel"
         app:accentButtonStyle="text" />
 
     <com.hardcodecoder.pulsemusic.views.AccentColorMaterialButton
-        android:id="@+id/choose_bluetooth_action_set_btn"
+        android:id="@+id/set_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/radio_button_group"

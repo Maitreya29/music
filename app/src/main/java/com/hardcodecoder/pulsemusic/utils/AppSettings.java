@@ -150,15 +150,15 @@ public class AppSettings {
                 .getBoolean(Preferences.BLUETOOTH_DEVICE_DETECTION_KEY, false);
     }
 
-    public static void saveBluetoothDeviceDetectionAction(@NonNull Context context, int action) {
+    public static void saveAutoPlayAction(@NonNull Context context, @NonNull String key, int action) {
         SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.AUDIO_DEVICE_AUTO_PLAY, Context.MODE_PRIVATE).edit();
-        editor.putInt(Preferences.BLUETOOTH_DEVICE_ACTION_KEY, action);
+        editor.putInt(key, action);
         editor.apply();
     }
 
-    public static int getBluetoothDeviceDetectionAction(@NonNull Context context) {
+    public static int getAutoPlayAction(@NonNull Context context, @NonNull String key) {
         return context.getSharedPreferences(Preferences.AUDIO_DEVICE_AUTO_PLAY, Context.MODE_PRIVATE)
-                .getInt(Preferences.BLUETOOTH_DEVICE_ACTION_KEY, Preferences.ACTION_PLAY_SHUFFLE);
+                .getInt(key, Preferences.ACTION_PLAY_SHUFFLE);
     }
 
     public static void saveNowPlayingAlbumCoverCornerRadius(@NonNull Context context, int tl, int tr, int bl, int br) {

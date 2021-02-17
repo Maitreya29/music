@@ -10,36 +10,43 @@ import android.widget.RadioGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.Preferences;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.dialog.base.RoundedCustomBottomSheetFragment;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 
-public class AutoPlayActionChooserDialogFragment extends RoundedCustomBottomSheetFragment {
+public class AutoPlayActionChooser extends RoundedCustomBottomSheetFragment {
 
-    public static final String TAG = "AutoPlayActionChooserDialogFragment";
+    public static final String TAG = AutoPlayActionChooser.class.getSimpleName();
+    private final String mDialogTitle;
+    private final DialogActionListener mListener;
+    private final int mActiveOption;
     private boolean mOptionChanged = false;
 
-    @NonNull
-    public static AutoPlayActionChooserDialogFragment getInstance() {
-        return new AutoPlayActionChooserDialogFragment();
+    public AutoPlayActionChooser(@NonNull String dialogTitle, @NonNull DialogActionListener listener, int activeOption) {
+        mDialogTitle = dialogTitle;
+        mListener = listener;
+        mActiveOption = activeOption;
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.bottom_sheet_choose_bluetooth_action, container, false);
+        return inflater.inflate(R.layout.bottom_sheet_auto_play_action_chooser, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        MaterialTextView textView = view.findViewById(R.id.auto_play_title);
+        textView.setText(mDialogTitle);
+
         RadioGroup radioGroup = view.findViewById(R.id.radio_button_group);
-        int currentAction = AppSettings.getBluetoothDeviceDetectionAction(requireContext());
 
         boolean continueWhereYouLeftEnabled = AppSettings.rememberPlaylistEnabled(requireContext());
         view.findViewById(R.id.radio_btn_continue).setEnabled(continueWhereYouLeftEnabled);
 
-        switch (currentAction) {
+        switch (mActiveOption) {
             case Preferences.ACTION_PLAY_SHUFFLE:
                 ((RadioButton) radioGroup.findViewById(R.id.radio_btn_shuffle)).setChecked(true);
                 break;
@@ -56,23 +63,28 @@ public class AutoPlayActionChooserDialogFragment extends RoundedCustomBottomShee
 
         radioGroup.setOnCheckedChangeListener((group, checkedId) -> mOptionChanged = true);
 
-        view.findViewById(R.id.choose_bluetooth_action_set_btn).setOnClickListener(v1 -> {
+        view.findViewById(R.id.set_btn).setOnClickListener(v1 -> {
             if (mOptionChanged) {
                 final int id = radioGroup.getCheckedRadioButtonId();
                 int action;
-                if (id == R.id.radio_btn_shuffle)
-                    action = Preferences.ACTION_PLAY_SHUFFLE;
-                else if (id == R.id.radio_btn_suggested)
+                if (id == R.id.radio_btn_suggested)
                     action = Preferences.ACTION_PLAY_SUGGESTED;
                 else if (id == R.id.radio_btn_latest)
                     action = Preferences.ACTION_PLAY_LATEST;
-                else
+                else if (id == R.id.radio_btn_continue)
                     action = Preferences.ACTION_PLAY_CONTINUE;
-                AppSettings.saveBluetoothDeviceDetectionAction(requireContext(), action);
+                else
+                    action = Preferences.ACTION_PLAY_SHUFFLE;
+
+                mListener.onActionSelected(action);
             }
             dismiss();
         });
 
-        view.findViewById(R.id.choose_bluetooth_action_cancel_btn).setOnClickListener(v -> dismiss());
+        view.findViewById(R.id.cancel_btn).setOnClickListener(v -> dismiss());
+    }
+
+    public interface DialogActionListener {
+        void onActionSelected(int action);
     }
 }
