@@ -25,7 +25,7 @@ public class StorageUtil {
             for (int i = 0; i < lines; i++)
                 linesArray[i] = reader.readLine();
         } catch (Exception e) {
-            LogUtils.logException("IO", TAG, "at: readLinesFromFile()", e);
+            LogUtils.logException("IO", TAG, "at: readLinesFromFile(): " + file.getAbsolutePath(), e);
         }
         return linesArray;
     }
@@ -39,7 +39,7 @@ public class StorageUtil {
             while ((line = reader.readLine()) != null)
                 linesList.add(line);
         } catch (Exception e) {
-            LogUtils.logException("IO", TAG, "at: List<String> readLinesFromFile()", e);
+            LogUtils.logException("IO", TAG, "at: List<String> readLinesFromFile(): " + file.getAbsolutePath(), e);
         }
         return linesList;
     }
@@ -49,7 +49,7 @@ public class StorageUtil {
             fos.write(data.getBytes());
             fos.flush();
         } catch (IOException e) {
-            LogUtils.logException("IO", TAG, "at: writeStringToFile()", e);
+            LogUtils.logException("IO", TAG, "at: writeStringToFile(): " + file.getAbsolutePath(), e);
         }
     }
 
@@ -61,7 +61,7 @@ public class StorageUtil {
             while (input.hasNextInt())
                 idList.add(input.nextInt());
         } catch (Exception e) {
-            LogUtils.logException("IO", TAG, "at: readPlaylistIdsFromFile()", e);
+            LogUtils.logException("IO", TAG, "at: readPlaylistIdsFromFile(): " + file.getAbsolutePath(), e);
         }
         return idList;
     }
@@ -78,7 +78,7 @@ public class StorageUtil {
         try {
             return file.createNewFile();
         } catch (IOException e) {
-            LogUtils.logException("IO", TAG, "at: createFile()", e);
+            LogUtils.logException("IO", TAG, "at: createFile(): " + file.getAbsolutePath(), e);
         }
         return false;
     }
