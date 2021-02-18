@@ -21,7 +21,12 @@
     <declare-styleable name="ColoredIconView">
         <attr name="icon" format="reference" />
         <attr name="iconColor" format="reference" />
-        <attr name="iconBackgroundColor" format="reference" />
+        <attr name="iconPadding" format="dimension" />
+        <attr name="iconBackgroundShape" format="enum">
+            <enum name="circle" value="0" />
+            <enum name="rectangle" value="1" />
+        </attr>
+        <attr name="backgroundColorAlpha" format="float" />
         <attr name="desaturatedColorInDarkMode" format="boolean" />
     </declare-styleable>
 

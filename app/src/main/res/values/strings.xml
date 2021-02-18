@@ -303,11 +303,9 @@
     <string name="lead_developer">Lead developers</string>
     <string name="lead_developer_1" translatable="false">Ashutosh P.</string>
     <string name="lead_developer_1_user_name" translatable="false">\@HardcodeCoder</string>
-    <string name="url_github" translatable="false">https://github.com/HardcodeCoder</string>
-    <string name="url_source_code" translatable="false">https://github.com/HardcodeCoder/PulseMusic</string>
-    <string name="url_facebook" translatable="false">https://www.facebook.com/ashutosh.patoa.5</string>
-    <string name="url_twitter" translatable="false">https://www.twitter.com/hardcodecoder</string>
-    <string name="url_telegram" translatable="false">https://t.me/HardcodeCoder</string>
+    <string name="github">Github</string>
+    <string name="twitter">Twitter</string>
+    <string name="telegram">Telegram</string>
 
 
     <!-- Donations -->
@@ -325,7 +323,6 @@
     <string name="build_type">Build type</string>
     <string name="build_code">Build code</string>
     <string name="category_social_links">Social links</string>
-    <string name="source_on_github">Source on github</string>
 
 
     <!-- Accents -->

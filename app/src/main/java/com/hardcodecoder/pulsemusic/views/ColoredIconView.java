@@ -33,25 +33,32 @@ public class ColoredIconView extends AppCompatImageView {
 
     private void initialize(@NonNull Context context, @Nullable AttributeSet attributeSet) {
         TypedArray typedArray = context.obtainStyledAttributes(attributeSet, R.styleable.ColoredIconView);
-        setBackground(ContextCompat.getDrawable(context, R.drawable.plain_circle));
-        int paddingPixels = context.getResources().getDimensionPixelSize(R.dimen.icon_padding);
+
+        if (typedArray.getInt(R.styleable.ColoredIconView_iconBackgroundShape, 0) == 0)
+            setBackground(ContextCompat.getDrawable(context, R.drawable.plain_circle));
+        else setBackground(ContextCompat.getDrawable(context, R.drawable.shape_rounded_rectangle));
+
+        int paddingPixels = typedArray.getDimensionPixelSize(R.styleable.ColoredIconView_iconPadding, context.getResources().getDimensionPixelSize(R.dimen.icon_padding));
         setPadding(paddingPixels, paddingPixels, paddingPixels, paddingPixels);
+
         setImageResource(typedArray.getResourceId(R.styleable.ColoredIconView_icon, R.drawable.def_colored_icon_view_icon));
 
         int iconColor = typedArray.getColor(R.styleable.ColoredIconView_iconColor, Color.BLUE);
-        int iconBackgroundColor = typedArray.getColor(R.styleable.ColoredIconView_iconBackgroundColor, iconColor);
+        int backgroundColor = iconColor;
 
         boolean desaturated = ThemeManagerUtils.isAccentsDesaturated()
                 && typedArray.getBoolean(R.styleable.ColoredIconView_desaturatedColorInDarkMode, true);
 
         if (desaturated) {
             iconColor = context.getResources().getColor(R.color.darkColorBackground);
-            iconBackgroundColor = ColorUtil.mixColors(iconBackgroundColor, Color.WHITE, 0.4f);
-        } else
-            iconBackgroundColor = ColorUtil.changeColorAlphaTo20(iconBackgroundColor);
+            backgroundColor = ColorUtil.mixColors(backgroundColor, Color.WHITE, 0.4f);
+        } else {
+            float alpha = typedArray.getFloat(R.styleable.ColoredIconView_backgroundColorAlpha, 0.2f);
+            backgroundColor = ColorUtil.changeAlphaComponentTo(backgroundColor, alpha);
+        }
 
         setImageTintList(ColorStateList.valueOf(iconColor));
-        setBackgroundTintList(ColorStateList.valueOf(iconBackgroundColor));
+        setBackgroundTintList(ColorStateList.valueOf(backgroundColor));
 
         typedArray.recycle();
     }

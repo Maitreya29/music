@@ -1,29 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginStart="32dp"
-    android:gravity="center"
-    android:orientation="vertical">
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:paddingStart="72dp"
+    android:paddingEnd="32dp"
+    android:paddingBottom="16dp">
 
     <com.hardcodecoder.pulsemusic.views.AccentColorTextView
         android:id="@+id/developer_head"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/lead_developer"
-        android:textAppearance="@style/Appearance.Text.Overline" />
+        android:textAppearance="@style/Appearance.Text.Overline"
+        app:layout_constraintStart_toStartOf="@id/dev_card"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/lead_developer_card"
+        android:id="@+id/dev_card"
+        android:layout_width="196dp"
+        android:layout_height="196dp"
+        app:cardCornerRadius="@dimen/rounding_radius_8dp"
+        app:cardElevation="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/developer_head"
+        app:layout_constraintVertical_bias="0.2">
+
+        <ImageView
+            android:id="@+id/lead_developer_avatar"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="32dp"
+            android:contentDescription="@string/desc_album_art"
+            tools:src="@tools:sample/avatars" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/lead_developer_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="42dp"
+            android:gravity="center"
+            android:text="@string/lead_developer_1"
+            android:textAppearance="@style/Appearance.Text.Headline6" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/lead_developer_user_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:paddingBottom="24dp"
+            android:text="@string/lead_developer_1_user_name"
+            android:textAppearance="@style/Appearance.Text.Subtitle2"
+            android:textColor="?android:attr/textColorSecondary" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.hardcodecoder.pulsemusic.views.AccentColorTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/category_social_links"
+        android:textAppearance="@style/Appearance.Text.Overline"
+        app:layout_constraintStart_toStartOf="@id/developer_social_links_card"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/developer_social_links_card"
         android:layout_width="400dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
         app:cardBackgroundColor="?attr/colorSurface"
         app:cardCornerRadius="@dimen/rounding_radius_8dp"
         app:cardElevation="4dp"
-        app:cardUseCompatPadding="false">
+        app:cardUseCompatPadding="false"
+        app:layout_constraintStart_toEndOf="@id/dev_card"
+        app:layout_constraintTop_toTopOf="@id/dev_card">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -33,49 +92,6 @@
             android:paddingTop="32dp"
             android:paddingBottom="32dp">
 
-            <ImageView
-                android:id="@+id/lead_developer_profile_icon"
-                android:layout_width="72dp"
-                android:layout_height="72dp"
-                android:contentDescription="@string/desc_album_art"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:src="@tools:sample/avatars" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/lead_developer_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:gravity="center"
-                android:text="@string/lead_developer_1"
-                android:textAppearance="@style/Appearance.Text.Headline6"
-                app:layout_constraintTop_toBottomOf="@id/lead_developer_profile_icon" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/lead_developer_user_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:gravity="center"
-                android:paddingTop="0dp"
-                android:paddingBottom="32dp"
-                android:text="@string/lead_developer_1_user_name"
-                android:textAppearance="@style/Appearance.Text.Subtitle2"
-                android:textColor="?android:attr/textColorSecondary"
-                app:layout_constraintTop_toBottomOf="@id/lead_developer_name" />
-
-            <com.hardcodecoder.pulsemusic.views.ColoredIconView
-                android:id="@+id/facebook_logo"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                app:icon="@drawable/ic_facebook"
-                app:iconColor="@color/md_blue_A400"
-                app:layout_constraintEnd_toStartOf="@id/github_logo"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/lead_developer_user_name" />
-
             <com.hardcodecoder.pulsemusic.views.ColoredIconView
                 android:id="@+id/github_logo"
                 android:layout_width="48dp"
@@ -83,8 +99,19 @@
                 app:icon="@drawable/ic_github"
                 app:iconColor="@color/md_deep_purple_A200"
                 app:layout_constraintEnd_toStartOf="@id/twitter_logo"
-                app:layout_constraintStart_toEndOf="@id/facebook_logo"
-                app:layout_constraintTop_toBottomOf="@id/lead_developer_user_name" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/github"
+                android:textAppearance="@style/Appearance.Text.Subtitle2"
+                android:textColor="?android:attr/textColorPrimary"
+                app:layout_constraintEnd_toEndOf="@id/github_logo"
+                app:layout_constraintStart_toStartOf="@id/github_logo"
+                app:layout_constraintTop_toBottomOf="@id/github_logo" />
 
             <com.hardcodecoder.pulsemusic.views.ColoredIconView
                 android:id="@+id/twitter_logo"
@@ -94,7 +121,18 @@
                 app:iconColor="@color/md_teal_A400"
                 app:layout_constraintEnd_toStartOf="@id/telegram_logo"
                 app:layout_constraintStart_toEndOf="@id/github_logo"
-                app:layout_constraintTop_toBottomOf="@id/lead_developer_user_name" />
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/twitter"
+                android:textAppearance="@style/Appearance.Text.Subtitle2"
+                android:textColor="?android:attr/textColorPrimary"
+                app:layout_constraintEnd_toEndOf="@id/twitter_logo"
+                app:layout_constraintStart_toStartOf="@id/twitter_logo"
+                app:layout_constraintTop_toBottomOf="@id/twitter_logo" />
 
             <com.hardcodecoder.pulsemusic.views.ColoredIconView
                 android:id="@+id/telegram_logo"
@@ -104,8 +142,18 @@
                 app:iconColor="@color/md_yellow_A400"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/twitter_logo"
-                app:layout_constraintTop_toBottomOf="@id/lead_developer_user_name" />
+                app:layout_constraintTop_toTopOf="parent" />
 
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/telegram"
+                android:textAppearance="@style/Appearance.Text.Subtitle2"
+                android:textColor="?android:attr/textColorPrimary"
+                app:layout_constraintEnd_toEndOf="@id/telegram_logo"
+                app:layout_constraintStart_toStartOf="@id/telegram_logo"
+                app:layout_constraintTop_toBottomOf="@id/telegram_logo" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,7 +10,6 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 
 import com.hardcodecoder.pulsemusic.GlideApp;
 import com.hardcodecoder.pulsemusic.R;
@@ -45,20 +44,19 @@ public class SettingsContributorsFragment extends SettingsBaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        view.findViewById(R.id.github_logo).setOnClickListener(v -> openLink(R.string.url_github));
-        view.findViewById(R.id.facebook_logo).setOnClickListener(v -> openLink(R.string.url_facebook));
-        view.findViewById(R.id.twitter_logo).setOnClickListener(v -> openLink(R.string.url_twitter));
-        view.findViewById(R.id.telegram_logo).setOnClickListener(v -> openLink(R.string.url_telegram));
+        view.findViewById(R.id.github_logo).setOnClickListener(v -> openLink("https://github.com/HardcodeCoder"));
+        view.findViewById(R.id.twitter_logo).setOnClickListener(v -> openLink("https://www.twitter.com/hardcodecoder"));
+        view.findViewById(R.id.telegram_logo).setOnClickListener(v -> openLink("https://t.me/HardcodeCoder"));
 
         GlideApp.with(view)
                 .load(R.drawable.def_avatar)
                 .circleCrop()
-                .into((ImageView) view.findViewById(R.id.lead_developer_profile_icon));
+                .into((ImageView) view.findViewById(R.id.lead_developer_avatar));
     }
 
-    private void openLink(@StringRes int linkId) {
+    private void openLink(@NonNull String url) {
         Intent i = new Intent(Intent.ACTION_VIEW);
-        i.setData(Uri.parse(getString(linkId)));
+        i.setData(Uri.parse(url));
         startActivity(i);
     }
 }

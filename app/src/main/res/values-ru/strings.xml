@@ -296,7 +296,6 @@
     <string name="build_type">Тип сборки</string>
     <string name="build_code">Номер сборки</string>
     <string name="category_social_links">Ссылки</string>
-    <string name="source_on_github">Исходный код (GitHub)</string>
 
 
     <!-- Accents -->

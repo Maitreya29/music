@@ -162,7 +162,6 @@
     <string name="build_date">Fecha de compilación</string>
     <string name="build_type">Tipo de compilación</string>
     <string name="build_code">Código de compilación</string>
-    <string name="source_on_github">Fuente en github</string>
 
     <!-- Profile Links -->
     <string name="category_social_links">Enlaces sociales</string>

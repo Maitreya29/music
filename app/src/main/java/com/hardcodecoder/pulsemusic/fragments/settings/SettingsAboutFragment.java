@@ -44,10 +44,10 @@ public class SettingsAboutFragment extends SettingsBaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        MaterialTextView tempTextView = view.findViewById(R.id.about_app_version);
+        MaterialTextView tempTextView = view.findViewById(R.id.app_version);
         tempTextView.setText(BuildConfig.VERSION_NAME);
 
-        tempTextView = view.findViewById(R.id.about_app_release_date);
+        tempTextView = view.findViewById(R.id.app_release_date);
         tempTextView.setText(BuildConfig.BUILD_DATE);
 
         tempTextView = view.findViewById(R.id.about_app_build_code);
@@ -56,10 +56,17 @@ public class SettingsAboutFragment extends SettingsBaseFragment {
         tempTextView = view.findViewById(R.id.about_app_build_type);
         tempTextView.setText(BuildConfig.BUILD_TYPE);
 
-        view.findViewById(R.id.about_card_github_link).setOnClickListener(v -> {
-            Intent i = new Intent(Intent.ACTION_VIEW);
-            i.setData(Uri.parse(getString(R.string.url_source_code)));
-            startActivity(i);
+        view.findViewById(R.id.app_link_twitter).setOnClickListener(v -> openLink("https://www.twitter.com/hardcodecoder"));
+
+        view.findViewById(R.id.app_link_telegram).setOnClickListener(v -> {
         });
+
+        view.findViewById(R.id.app_link_github).setOnClickListener(v -> openLink("https://github.com/HardcodeCoder/PulseMusic"));
+    }
+
+    private void openLink(@NonNull String url) {
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        startActivity(i);
     }
 }
