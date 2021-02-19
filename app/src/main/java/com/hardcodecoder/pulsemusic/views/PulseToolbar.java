@@ -10,23 +10,23 @@ import android.text.style.StyleSpan;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.themes.ThemeColors;
 import com.hardcodecoder.pulsemusic.utils.DimensionsUtil;
 
-public class PulseToolbar extends ConstraintLayout {
+public class PulseToolbar extends RelativeLayout {
 
     private final ImageView mNavigationIcon;
     private final MaterialTextView mTitle;
-    private final ImageView mVisibleOptionIcon;
-    private final ImageView mOptionsIcon;
+    private final ImageView mQuickActionIcon;
+    private final ImageView mOverflowIcon;
 
     public PulseToolbar(Context context) {
         this(context, null, 0);
@@ -45,8 +45,8 @@ public class PulseToolbar extends ConstraintLayout {
         View contents = View.inflate(context, R.layout.pulse_toolbar, this);
         mNavigationIcon = contents.findViewById(R.id.pt_navigation);
         mTitle = contents.findViewById(R.id.pt_title);
-        mVisibleOptionIcon = contents.findViewById(R.id.pt_option_always_visible);
-        mOptionsIcon = contents.findViewById(R.id.pt_options);
+        mQuickActionIcon = contents.findViewById(R.id.pt_option_always_visible);
+        mOverflowIcon = contents.findViewById(R.id.pt_options);
     }
 
     public void setTitle(@Nullable String title, boolean accentFirstLetter) {
@@ -79,31 +79,31 @@ public class PulseToolbar extends ConstraintLayout {
         mNavigationIcon.setOnClickListener(listener);
     }
 
-    public void setVisibleOptionIcon(@DrawableRes int drawableRes) {
-        mVisibleOptionIcon.setImageResource(drawableRes);
+    public void setQuickActionIcon(@DrawableRes int drawableRes) {
+        mQuickActionIcon.setImageResource(drawableRes);
     }
 
-    public void setVisibleOptionIcon(@Nullable Drawable drawable) {
-        mVisibleOptionIcon.setImageDrawable(drawable);
+    public void setQuickActionIcon(@Nullable Drawable drawable) {
+        mQuickActionIcon.setImageDrawable(drawable);
     }
 
-    public void setVisibleOptionIconOnClickListener(@Nullable OnClickListener listener) {
-        mVisibleOptionIcon.setOnClickListener(listener);
+    public void setQuickActionIconOnClickListener(@Nullable OnClickListener listener) {
+        mQuickActionIcon.setOnClickListener(listener);
     }
 
-    public void setOptionsContextIcon(@DrawableRes int drawableRes) {
-        mOptionsIcon.setImageResource(drawableRes);
+    public void setOverflowIcon(@DrawableRes int drawableRes) {
+        mOverflowIcon.setImageResource(drawableRes);
     }
 
-    public void setOptionsContextIcon(@Nullable Drawable drawable) {
-        mOptionsIcon.setImageDrawable(drawable);
+    public void setOverflowIcon(@Nullable Drawable drawable) {
+        mOverflowIcon.setImageDrawable(drawable);
     }
 
-    public void setOptionsContextIconOnClickListener(@Nullable OnClickListener listener) {
-        mOptionsIcon.setOnClickListener(listener);
+    public void setOverflowIconOnClickListener(@Nullable OnClickListener listener) {
+        mOverflowIcon.setOnClickListener(listener);
     }
 
-    public void showOptions(boolean show) {
-        mOptionsIcon.setVisibility(show ? VISIBLE : GONE);
+    public void showOverflowIcon(boolean show) {
+        mOverflowIcon.setVisibility(show ? VISIBLE : GONE);
     }
 }

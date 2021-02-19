@@ -154,17 +154,17 @@ public class MainContentActivity extends DraggableNowPlayingSheetActivity {
         mAppBar = findViewById(R.id.main_app_bar);
         mPulseToolbar = mAppBar.findViewById(R.id.pulse_toolbar);
         mPulseToolbar.setNavigationIcon(R.drawable.ic_menu);
-        mPulseToolbar.setVisibleOptionIcon(R.drawable.ic_search);
-        mPulseToolbar.setOptionsContextIcon(R.drawable.ic_options);
+        mPulseToolbar.setQuickActionIcon(R.drawable.ic_search);
+        mPulseToolbar.setOverflowIcon(R.drawable.ic_options);
 
         mPulseToolbar.setNavigationIconOnClickListener(v -> {
             HomeBottomSheetFragment homeBottomSheetFragment = HomeBottomSheetFragment.getInstance();
             homeBottomSheetFragment.show(getSupportFragmentManager(), HomeBottomSheetFragment.TAG);
         });
 
-        mPulseToolbar.setVisibleOptionIconOnClickListener(v ->
+        mPulseToolbar.setQuickActionIconOnClickListener(v ->
                 startActivity(new Intent(this, SearchActivity.class)));
-        mPulseToolbar.setOptionsContextIconOnClickListener(v -> {
+        mPulseToolbar.setOverflowIconOnClickListener(v -> {
             if (null != activeFrag) activeFrag.showOptionsMenu();
         });
     }
@@ -230,7 +230,7 @@ public class MainContentActivity extends DraggableNowPlayingSheetActivity {
         mAppBar.post(() -> {
             mAppBar.setExpanded(true);
             mPulseToolbar.setTitle(activeFrag.getFragmentTitle(this), true);
-            mPulseToolbar.showOptions(activeFrag.hasToolbarContextMenu());
+            mPulseToolbar.showOverflowIcon(activeFrag.hasToolbarContextMenu());
         });
     }
 
