@@ -1,83 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:overScrollMode="never">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
+        android:id="@+id/generalSettings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="normal"
+        app:settingItemIcon="@drawable/ic_settings"
+        app:settingItemIconColor="@color/md_teal_A400"
+        app:settingItemText="@string/general_desc"
+        app:settingItemTitle="@string/general" />
+
+    <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
+        android:id="@+id/themeSettings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="normal"
+        app:settingItemIcon="@drawable/ic_theme_palette"
+        app:settingItemIconColor="@color/md_red_A400"
+        app:settingItemText="@string/theme_desc"
+        app:settingItemTitle="@string/theme" />
+
+    <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
+        android:id="@+id/nowPlayingSettings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="normal"
+        app:settingItemIcon="@drawable/ic_play_circle"
+        app:settingItemIconColor="@color/md_blue_A400"
+        app:settingItemText="@string/now_playing_desc"
+        app:settingItemTitle="@string/now_playing_title" />
+
+    <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
+        android:id="@+id/audioSettings"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:textStyle="normal"
+        app:settingItemIcon="@drawable/ic_audio"
+        app:settingItemIconColor="@color/md_deep_orange_500"
+        app:settingItemText="@string/audio_desc"
+        app:settingItemTitle="@string/audio" />
 
-        <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
-            android:id="@+id/generalSettings"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="normal"
-            app:settingItemIcon="@drawable/ic_settings"
-            app:settingItemIconColor="@color/md_teal_A400"
-            app:settingItemText="@string/general_desc"
-            app:settingItemTitle="@string/general" />
+    <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
+        android:id="@+id/contributorsSettings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="normal"
+        app:settingItemIcon="@drawable/ic_people"
+        app:settingItemIconColor="@color/md_green_A700"
+        app:settingItemText="@string/contributors_desc"
+        app:settingItemTitle="@string/contributors" />
 
-        <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
-            android:id="@+id/themeSettings"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="normal"
-            app:settingItemIcon="@drawable/ic_theme_palette"
-            app:settingItemIconColor="@color/md_red_A400"
-            app:settingItemText="@string/theme_desc"
-            app:settingItemTitle="@string/theme" />
+    <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
+        android:id="@+id/donationSettings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="normal"
+        app:settingItemIcon="@drawable/ic_donation"
+        app:settingItemIconColor="@color/md_yellow_A400"
+        app:settingItemText="@string/support_development_desc"
+        app:settingItemTitle="@string/support_development" />
 
-        <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
-            android:id="@+id/nowPlayingSettings"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="normal"
-            app:settingItemIcon="@drawable/ic_play_circle"
-            app:settingItemIconColor="@color/md_blue_A400"
-            app:settingItemText="@string/now_playing_desc"
-            app:settingItemTitle="@string/now_playing_title" />
-
-        <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
-            android:id="@+id/audioSettings"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textStyle="normal"
-            app:settingItemIcon="@drawable/ic_audio"
-            app:settingItemIconColor="@color/md_deep_orange_500"
-            app:settingItemText="@string/audio_desc"
-            app:settingItemTitle="@string/audio" />
-
-        <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
-            android:id="@+id/contributorsSettings"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="normal"
-            app:settingItemIcon="@drawable/ic_people"
-            app:settingItemIconColor="@color/md_green_A700"
-            app:settingItemText="@string/contributors_desc"
-            app:settingItemTitle="@string/contributors" />
-
-        <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
-            android:id="@+id/donationSettings"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="normal"
-            app:settingItemIcon="@drawable/ic_donation"
-            app:settingItemIconColor="@color/md_yellow_A400"
-            app:settingItemText="@string/support_development_desc"
-            app:settingItemTitle="@string/support_development" />
-
-        <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
-            android:id="@+id/aboutSettings"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="normal"
-            app:settingItemIcon="@drawable/ic_info"
-            app:settingItemIconColor="@color/md_deep_purple_A200"
-            app:settingItemText="@string/about_desc"
-            app:settingItemTitle="@string/about" />
-    </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+    <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
+        android:id="@+id/aboutSettings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="normal"
+        app:settingItemIcon="@drawable/ic_info"
+        app:settingItemIconColor="@color/md_deep_purple_A200"
+        app:settingItemText="@string/about_desc"
+        app:settingItemTitle="@string/about" />
+</LinearLayout>

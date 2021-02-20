@@ -9,7 +9,6 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.button.MaterialButton;
@@ -22,10 +21,11 @@ import com.hardcodecoder.pulsemusic.fragments.settings.SettingsMainFragment;
 import com.hardcodecoder.pulsemusic.fragments.settings.base.SettingsBaseFragment;
 import com.hardcodecoder.pulsemusic.interfaces.SettingsFragmentsListener;
 import com.hardcodecoder.pulsemusic.shortcuts.AppShortcutsManager;
+import com.hardcodecoder.pulsemusic.views.PulseToolbar;
 
 public class SettingsActivity extends ControllerActivity implements SettingsFragmentsListener {
 
-    private Toolbar mToolbar;
+    private PulseToolbar mPulseToolbar;
     private FragmentManager mFragmentManager;
     private AlertDialog mRestartDialog;
     private SharedPreferences.OnSharedPreferenceChangeListener mAccentsChangedListener;
@@ -37,11 +37,9 @@ public class SettingsActivity extends ControllerActivity implements SettingsFrag
 
         mFragmentManager = getSupportFragmentManager();
 
-        //Setting up toolbar
-        mToolbar = findViewById(R.id.material_toolbar);
+        mPulseToolbar = findViewById(R.id.settings_toolbar);
         setToolbarTitle(R.string.settings);
-        setSupportActionBar(mToolbar);
-        mToolbar.setNavigationOnClickListener(v -> onBackPressed());
+        mPulseToolbar.setNavigationIconOnClickListener(v -> onBackPressed());
 
         if (null == savedInstanceState) {
             //Set up the main fragment when activity is first created
@@ -75,7 +73,7 @@ public class SettingsActivity extends ControllerActivity implements SettingsFrag
 
     @Override
     public void setToolbarTitle(@StringRes int titleId) {
-        mToolbar.setTitle(titleId);
+        mPulseToolbar.setTitle(getString(titleId));
     }
 
     @Override
@@ -123,7 +121,7 @@ public class SettingsActivity extends ControllerActivity implements SettingsFrag
         if (mFragmentManager.getBackStackEntryCount() == 0) {
             super.onBackPressed();
         } else {
-            mToolbar.setTitle(R.string.settings);
+            mPulseToolbar.setTitle(getString(R.string.settings));
             mFragmentManager.popBackStack();
         }
     }

@@ -1,75 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:overScrollMode="never">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="16dp"
+    android:paddingBottom="0dp">
 
-    <LinearLayout
+    <com.hardcodecoder.pulsemusic.views.AccentColorTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:text="@string/category_theme"
+        android:textAppearance="@style/Appearance.Text.Overline" />
+
+    <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
+        android:id="@+id/laf_select_dark_theme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingTop="16dp"
-        android:paddingBottom="0dp">
+        android:textStyle="normal"
+        app:settingItemDesaturatedColorsInDarkMode="false"
+        app:settingItemIcon="@drawable/ic_theme_palette"
+        app:settingItemIconBackgroundColor="?attr/windowBackgroundColor"
+        app:settingItemIconColor="?attr/colorControlNormal"
+        app:settingItemText="@string/select_dark_theme_desc"
+        app:settingItemTitle="@string/select_dark_theme" />
 
-        <com.hardcodecoder.pulsemusic.views.AccentColorTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="72dp"
-            android:text="@string/category_theme"
-            android:textAppearance="@style/Appearance.Text.Overline" />
+    <com.hardcodecoder.pulsemusic.views.SettingsToggleableItem
+        android:id="@+id/laf_enable_dark_mode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:settingToggleableItemText="@string/enable_dark_mode_desc"
+        app:settingToggleableItemTitle="@string/enable_dark_mode" />
 
-        <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
-            android:id="@+id/laf_select_dark_theme"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="normal"
-            app:settingItemDesaturatedColorsInDarkMode="false"
-            app:settingItemIcon="@drawable/ic_theme_palette"
-            app:settingItemIconBackgroundColor="?attr/windowBackgroundColor"
-            app:settingItemIconColor="?attr/colorControlNormal"
-            app:settingItemText="@string/select_dark_theme_desc"
-            app:settingItemTitle="@string/select_dark_theme" />
+    <com.hardcodecoder.pulsemusic.views.SettingsToggleableItem
+        android:id="@+id/laf_enable_auto_mode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:settingToggleableItemText="@string/enable_auto_mode_desc"
+        app:settingToggleableItemTitle="@string/enable_auto_mode" />
 
-        <com.hardcodecoder.pulsemusic.views.SettingsToggleableItem
-            android:id="@+id/laf_enable_dark_mode"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:settingToggleableItemText="@string/enable_dark_mode_desc"
-            app:settingToggleableItemTitle="@string/enable_dark_mode" />
+    <com.hardcodecoder.pulsemusic.views.AccentColorTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/category_colors"
+        android:textAppearance="@style/Appearance.Text.Overline" />
 
-        <com.hardcodecoder.pulsemusic.views.SettingsToggleableItem
-            android:id="@+id/laf_enable_auto_mode"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:settingToggleableItemText="@string/enable_auto_mode_desc"
-            app:settingToggleableItemTitle="@string/enable_auto_mode" />
+    <com.hardcodecoder.pulsemusic.views.SettingsToggleableItem
+        android:id="@+id/laf_enable_desaturated"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:settingToggleableItemText="@string/desaturated_accents_desc"
+        app:settingToggleableItemTitle="@string/desaturated_accents" />
 
-        <com.hardcodecoder.pulsemusic.views.AccentColorTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="72dp"
-            android:layout_marginTop="32dp"
-            android:text="@string/category_colors"
-            android:textAppearance="@style/Appearance.Text.Overline" />
-
-        <com.hardcodecoder.pulsemusic.views.SettingsToggleableItem
-            android:id="@+id/laf_enable_desaturated"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:settingToggleableItemText="@string/desaturated_accents_desc"
-            app:settingToggleableItemTitle="@string/desaturated_accents" />
-
-        <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
-            android:id="@+id/laf_select_accent_color"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="normal"
-            app:settingItemDesaturatedColorsInDarkMode="false"
-            app:settingItemIcon="@drawable/ic_dropper"
-            app:settingItemIconBackgroundColor="?attr/windowBackgroundColor"
-            app:settingItemIconColor="?attr/colorControlNormal"
-            app:settingItemText="@string/pick_accent_color_desc"
-            app:settingItemTitle="@string/pick_accent_color" />
-    </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+    <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
+        android:id="@+id/laf_select_accent_color"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="normal"
+        app:settingItemDesaturatedColorsInDarkMode="false"
+        app:settingItemIcon="@drawable/ic_dropper"
+        app:settingItemIconBackgroundColor="?attr/windowBackgroundColor"
+        app:settingItemIconColor="?attr/colorControlNormal"
+        app:settingItemText="@string/pick_accent_color_desc"
+        app:settingItemTitle="@string/pick_accent_color" />
+</LinearLayout>

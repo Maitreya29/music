@@ -1,53 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:overScrollMode="never">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="16dp"
+    android:paddingBottom="0dp">
 
-    <LinearLayout
+    <com.hardcodecoder.pulsemusic.views.AccentColorTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:text="@string/category_auto_play"
+        android:textAppearance="@style/Appearance.Text.Overline" />
+
+    <com.hardcodecoder.pulsemusic.views.SettingsToggleableItem
+        android:id="@+id/audio_device_bluetooth_toggle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingTop="16dp"
-        android:paddingBottom="0dp">
+        app:settingToggleableItemText="@string/bluetooth_auto_play_desc"
+        app:settingToggleableItemTitle="@string/bluetooth_auto_play" />
 
-        <com.hardcodecoder.pulsemusic.views.AccentColorTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="72dp"
-            android:text="@string/category_auto_play"
-            android:textAppearance="@style/Appearance.Text.Overline" />
+    <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
+        android:id="@+id/audio_device_bluetooth_action_picker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="normal"
+        app:settingItemDesaturatedColorsInDarkMode="false"
+        app:settingItemIcon="@drawable/ic_play_circle"
+        app:settingItemIconBackgroundColor="?windowBackgroundColor"
+        app:settingItemIconColor="?attr/colorControlNormal"
+        app:settingItemText="@string/bluetooth_auto_play_action_desc"
+        app:settingItemTitle="@string/bluetooth_auto_play_action" />
 
-        <com.hardcodecoder.pulsemusic.views.SettingsToggleableItem
-            android:id="@+id/audio_device_bluetooth_toggle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:settingToggleableItemText="@string/bluetooth_auto_play_desc"
-            app:settingToggleableItemTitle="@string/bluetooth_auto_play" />
-
-        <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
-            android:id="@+id/audio_device_bluetooth_action_picker"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="normal"
-            app:settingItemDesaturatedColorsInDarkMode="false"
-            app:settingItemIcon="@drawable/ic_play_circle"
-            app:settingItemIconBackgroundColor="?windowBackgroundColor"
-            app:settingItemIconColor="?attr/colorControlNormal"
-            app:settingItemText="@string/bluetooth_auto_play_action_desc"
-            app:settingItemTitle="@string/bluetooth_auto_play_action" />
-
-        <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
-            android:id="@+id/qs_tile_action_picker"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="normal"
-            app:settingItemDesaturatedColorsInDarkMode="false"
-            app:settingItemIcon="@drawable/ic_play_circle"
-            app:settingItemIconBackgroundColor="?windowBackgroundColor"
-            app:settingItemIconColor="?attr/colorControlNormal"
-            app:settingItemText="@string/tile_auto_play_desc"
-            app:settingItemTitle="@string/tile_auto_play" />
-    </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+    <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
+        android:id="@+id/qs_tile_action_picker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="normal"
+        app:settingItemDesaturatedColorsInDarkMode="false"
+        app:settingItemIcon="@drawable/ic_play_circle"
+        app:settingItemIconBackgroundColor="?windowBackgroundColor"
+        app:settingItemIconColor="?attr/colorControlNormal"
+        app:settingItemText="@string/tile_auto_play_desc"
+        app:settingItemTitle="@string/tile_auto_play" />
+</LinearLayout>
