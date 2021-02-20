@@ -19,9 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="normal"
-        app:settingItemDesaturatedColorsInDarkMode="false"
         app:settingItemIcon="@drawable/ic_now_playing_style"
-        app:settingItemIconBackgroundColor="?attr/windowBackgroundColor"
         app:settingItemIconColor="?attr/colorControlNormal"
         app:settingItemText="@string/select_np_style_desc"
         app:settingItemTitle="@string/select_np_style" />
@@ -32,9 +30,7 @@
         android:layout_height="wrap_content"
         android:paddingStart="0dp"
         android:textStyle="normal"
-        app:settingItemDesaturatedColorsInDarkMode="false"
         app:settingItemIcon="@drawable/ic_rounded_corner"
-        app:settingItemIconBackgroundColor="?attr/windowBackgroundColor"
         app:settingItemIconColor="?attr/colorControlNormal"
         app:settingItemText="@string/corner_radius_desc"
         app:settingItemTitle="@string/corner_radius" />
@@ -60,9 +56,7 @@
         android:layout_height="wrap_content"
         android:paddingStart="0dp"
         android:textStyle="normal"
-        app:settingItemDesaturatedColorsInDarkMode="false"
         app:settingItemIcon="@drawable/ic_fast_forward"
-        app:settingItemIconBackgroundColor="?attr/windowBackgroundColor"
         app:settingItemIconColor="?attr/colorControlNormal"
         app:settingItemText="@string/change_seek_duration_desc"
         app:settingItemTitle="@string/change_seek_duration" />

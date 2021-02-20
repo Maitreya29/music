@@ -18,9 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="normal"
-        app:settingItemDesaturatedColorsInDarkMode="false"
         app:settingItemIcon="@drawable/ic_folder_add"
-        app:settingItemIconBackgroundColor="?windowBackgroundColor"
         app:settingItemIconColor="?attr/colorControlNormal"
         app:settingItemText="@string/ignored_folder_desc"
         app:settingItemTitle="@string/ignored_folder_title" />
@@ -30,9 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="normal"
-        app:settingItemDesaturatedColorsInDarkMode="false"
         app:settingItemIcon="@drawable/ic_filter"
-        app:settingItemIconBackgroundColor="?windowBackgroundColor"
         app:settingItemIconColor="?attr/colorControlNormal"
         app:settingItemText="@string/duration_filter_desc"
         app:settingItemTitle="@string/duration_filter_title" />
@@ -67,9 +63,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="normal"
-        app:settingItemDesaturatedColorsInDarkMode="false"
         app:settingItemIcon="@drawable/ic_featured_playlist"
-        app:settingItemIconBackgroundColor="?windowBackgroundColor"
         app:settingItemIconColor="?attr/colorControlNormal"
         app:settingItemText="@string/edit_playlist_section_desc"
         app:settingItemTitle="@string/edit_playlist_sections_title" />

@@ -6,6 +6,7 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -16,6 +17,7 @@ import androidx.annotation.Nullable;
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.themes.ColorUtil;
+import com.hardcodecoder.pulsemusic.themes.ThemeColors;
 import com.hardcodecoder.pulsemusic.themes.ThemeManagerUtils;
 import com.hardcodecoder.pulsemusic.utils.DimensionsUtil;
 
@@ -36,19 +38,12 @@ public class SettingsCategoryItemView extends RelativeLayout {
     public SettingsCategoryItemView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-        // Update this root layout dimensions
-        LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-        final int marginHorizontal = DimensionsUtil.getDimensionPixelSize(getContext(), 2);
-        params.setMarginStart(marginHorizontal);
-        params.setMarginEnd(marginHorizontal);
-        setLayoutParams(params);
-
-        final int paddingDef = DimensionsUtil.getDimensionPixelSize(context, 16);
+        final int paddingDef = DimensionsUtil.getDimensionPixelSize(context, 12);
         setPadding(DimensionsUtil.getDimensionPixelSize(context, 8), paddingDef, paddingDef, paddingDef);
 
-        TypedArray array = context.obtainStyledAttributes(ThemeManagerUtils.getThemeToApply(), new int[]{android.R.attr.selectableItemBackground});
-        setBackground(array.getDrawable(0));
-        array.recycle();
+        TypedValue outValue = new TypedValue();
+        context.getTheme().resolveAttribute(android.R.attr.selectableItemBackground, outValue, true);
+        setBackgroundResource(outValue.resourceId);
 
         View view = View.inflate(context, R.layout.settings_category_list_item, this);
         mTitle = view.findViewById(R.id.settings_list_item_title);
@@ -64,17 +59,22 @@ public class SettingsCategoryItemView extends RelativeLayout {
             mIcon = view.findViewById(R.id.settings_list_item_icon);
             mIcon.setImageDrawable(typedArray.getDrawable(R.styleable.SettingsCategoryItemView_settingItemIcon));
 
-            int iconColor = typedArray.getColor(R.styleable.SettingsCategoryItemView_settingItemIconColor, Color.BLUE);
-            int iconBackgroundColor = typedArray.getColor(R.styleable.SettingsCategoryItemView_settingItemIconBackgroundColor, iconColor);
+            int iconColor = typedArray.getColor(R.styleable.SettingsCategoryItemView_settingItemIconColor,
+                    ThemeColors.getCurrentColorControlNormal());
 
-            boolean desaturated = ThemeManagerUtils.isAccentsDesaturated()
-                    && typedArray.getBoolean(R.styleable.SettingsCategoryItemView_settingItemDesaturatedColorsInDarkMode, true);
+            boolean isColoredIcon = typedArray.getBoolean(R.styleable.SettingsCategoryItemView_settingItemColoredIcon, false);
+            int iconBackgroundColor = isColoredIcon ? iconColor : ThemeColors.getCurrentColorBackgroundHighlight();
 
-            if (desaturated) {
-                iconColor = context.getResources().getColor(R.color.darkColorBackground);
-                iconBackgroundColor = ColorUtil.mixColors(iconBackgroundColor, Color.WHITE, 0.4f);
-            } else
-                iconBackgroundColor = ColorUtil.changeColorAlphaTo20(iconBackgroundColor);
+            if (isColoredIcon) {
+                boolean desaturated = ThemeManagerUtils.isAccentsDesaturated();
+                if (desaturated) {
+                    iconColor = context.getResources().getColor(R.color.darkColorBackground);
+                    iconBackgroundColor = ColorUtil.mixColors(iconBackgroundColor, Color.WHITE, 0.4f);
+                } else {
+                    iconBackgroundColor = ColorUtil.changeAlphaComponentTo(iconBackgroundColor,
+                            typedArray.getFloat(R.styleable.SettingsCategoryItemView_settingItemBackgroundAlpha, 0.2f));
+                }
+            }
 
             mIcon.setBackgroundTintList(ColorStateList.valueOf(iconBackgroundColor));
             mIcon.setImageTintList(ColorStateList.valueOf(iconColor));

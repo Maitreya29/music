@@ -9,14 +9,14 @@
     </declare-styleable>
 
     <declare-styleable name="SettingsCategoryItemView">
-        <attr name="settingItemIconBackgroundColor" format="reference" />
         <attr name="settingItemIcon" format="reference" />
         <attr name="settingItemIconColor" format="reference" />
+        <attr name="settingItemBackgroundAlpha" format="float" />
         <attr name="settingItemTitle" format="string" />
         <attr name="settingItemText" format="string" />
         <attr name="android:textAppearance" />
         <attr name="android:textStyle" />
-        <attr name="settingItemDesaturatedColorsInDarkMode" format="boolean" />
+        <attr name="settingItemColoredIcon" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="SettingsToggleableItem">

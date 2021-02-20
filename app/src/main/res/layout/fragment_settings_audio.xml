@@ -26,9 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="normal"
-        app:settingItemDesaturatedColorsInDarkMode="false"
         app:settingItemIcon="@drawable/ic_play_circle"
-        app:settingItemIconBackgroundColor="?windowBackgroundColor"
         app:settingItemIconColor="?attr/colorControlNormal"
         app:settingItemText="@string/bluetooth_auto_play_action_desc"
         app:settingItemTitle="@string/bluetooth_auto_play_action" />
@@ -38,9 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="normal"
-        app:settingItemDesaturatedColorsInDarkMode="false"
         app:settingItemIcon="@drawable/ic_play_circle"
-        app:settingItemIconBackgroundColor="?windowBackgroundColor"
         app:settingItemIconColor="?attr/colorControlNormal"
         app:settingItemText="@string/tile_auto_play_desc"
         app:settingItemTitle="@string/tile_auto_play" />
