@@ -3,8 +3,8 @@
 
     <ImageView
         android:id="@+id/settings_list_item_icon"
-        android:layout_width="@dimen/colored_icon_width"
-        android:layout_height="@dimen/colored_icon_height"
+        android:layout_width="@dimen/colored_icon_side"
+        android:layout_height="@dimen/colored_icon_side"
         android:layout_centerVertical="true"
         android:background="@drawable/plain_circle"
         android:padding="@dimen/colored_icon_padding"

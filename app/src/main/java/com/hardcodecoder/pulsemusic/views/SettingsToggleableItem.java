@@ -1,18 +1,23 @@
 package com.hardcodecoder.pulsemusic.views;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
-import com.hardcodecoder.pulsemusic.themes.ThemeManagerUtils;
+import com.hardcodecoder.pulsemusic.themes.ThemeColors;
 import com.hardcodecoder.pulsemusic.utils.DimensionsUtil;
 
 public class SettingsToggleableItem extends RelativeLayout {
@@ -20,6 +25,7 @@ public class SettingsToggleableItem extends RelativeLayout {
     private final MaterialTextView mTitle;
     private final MaterialTextView mText;
     private final SwitchCompat mSwitchButton;
+    private ImageView mIcon;
 
     public SettingsToggleableItem(@NonNull Context context) {
         this(context, null, 0);
@@ -32,19 +38,12 @@ public class SettingsToggleableItem extends RelativeLayout {
     public SettingsToggleableItem(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-        // Update this root layout dimensions
-        LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-        final int marginHorizontal = DimensionsUtil.getDimensionPixelSize(getContext(), 2);
-        params.setMarginStart(marginHorizontal);
-        params.setMarginEnd(marginHorizontal);
-        setLayoutParams(params);
-
         final int paddingDef = DimensionsUtil.getDimensionPixelSize(context, 16);
-        setPadding(DimensionsUtil.getDimensionPixelSize(context, 70), paddingDef, paddingDef, paddingDef);
+        setPadding(DimensionsUtil.getDimensionPixelSize(context, 8), paddingDef, paddingDef, paddingDef);
 
-        TypedArray array = context.obtainStyledAttributes(ThemeManagerUtils.getThemeToApply(), new int[]{android.R.attr.selectableItemBackground});
-        setBackground(array.getDrawable(0));
-        array.recycle();
+        TypedValue outValue = new TypedValue();
+        context.getTheme().resolveAttribute(android.R.attr.selectableItemBackground, outValue, true);
+        setBackgroundResource(outValue.resourceId);
 
         View view = View.inflate(context, R.layout.settings_toggleable_item_layout, this);
         mTitle = view.findViewById(R.id.setting_toggleable_item_title);
@@ -57,10 +56,36 @@ public class SettingsToggleableItem extends RelativeLayout {
         mTitle.setText(typedArray.getText(R.styleable.SettingsToggleableItem_settingToggleableItemTitle));
         mText.setText(typedArray.getText(R.styleable.SettingsToggleableItem_settingToggleableItemText));
 
+        if (typedArray.hasValue(R.styleable.SettingsToggleableItem_settingToggleableItemIcon)) {
+            inflateIcon(typedArray.getDrawable(R.styleable.SettingsToggleableItem_settingToggleableItemIcon));
+            int iconColor = ThemeColors.getCurrentColorControlNormal();
+            int iconBackgroundColor = ThemeColors.getCurrentColorBackgroundHighlight();
+            mIcon.setBackgroundTintList(ColorStateList.valueOf(iconBackgroundColor));
+            mIcon.setImageTintList(ColorStateList.valueOf(iconColor));
+        }
+
         typedArray.recycle();
 
         // Added onClick listener to toggle switch state
         setOnClickListener(v -> mSwitchButton.setChecked(!mSwitchButton.isChecked()));
+    }
+
+    private void inflateIcon(@Nullable Drawable icon) {
+        Context context = getContext();
+        mIcon = new ImageView(context);
+        mIcon.setId(View.generateViewId());
+        int side = context.getResources().getDimensionPixelSize(R.dimen.colored_icon_side);
+        LayoutParams params = new LayoutParams(side, side);
+        params.addRule(ALIGN_PARENT_START);
+        params.addRule(CENTER_VERTICAL);
+        mIcon.setLayoutParams(params);
+
+        int padding = context.getResources().getDimensionPixelSize(R.dimen.colored_icon_padding);
+        mIcon.setPadding(padding, padding, padding, padding);
+        mIcon.setBackground(ContextCompat.getDrawable(context, R.drawable.plain_circle));
+        mIcon.setImageDrawable(icon);
+
+        addView(mIcon);
     }
 
     @Override

@@ -6,11 +6,9 @@
         android:id="@+id/setting_toggleable_item_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
+        android:layout_marginStart="62dp"
         android:layout_marginEnd="16dp"
-        android:ellipsize="marquee"
-        android:requiresFadingEdge="horizontal"
-        android:singleLine="true"
+        android:maxLines="1"
         android:textAppearance="@style/Appearance.Text.Body1"
         tools:text="@tools:sample/full_names" />
 
@@ -19,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/setting_toggleable_item_title"
-        android:layout_alignParentStart="true"
+        android:layout_alignStart="@id/setting_toggleable_item_title"
         android:layout_marginTop="2dp"
         android:layout_marginEnd="16dp"
         android:layout_toStartOf="@id/setting_toggleable_item_switch"
