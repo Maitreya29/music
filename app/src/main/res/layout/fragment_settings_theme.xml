@@ -28,6 +28,7 @@
         android:id="@+id/laf_enable_dark_mode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:settingToggleableItemIcon="@drawable/ic_dark_mode"
         app:settingToggleableItemText="@string/enable_dark_mode_desc"
         app:settingToggleableItemTitle="@string/enable_dark_mode" />
 
@@ -35,6 +36,7 @@
         android:id="@+id/laf_enable_auto_mode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:settingToggleableItemIcon="@drawable/ic_light"
         app:settingToggleableItemText="@string/enable_auto_mode_desc"
         app:settingToggleableItemTitle="@string/enable_auto_mode" />
 
@@ -50,6 +52,7 @@
         android:id="@+id/laf_enable_desaturated"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:settingToggleableItemIcon="@drawable/ic_invert_colors"
         app:settingToggleableItemText="@string/desaturated_accents_desc"
         app:settingToggleableItemTitle="@string/desaturated_accents" />
 

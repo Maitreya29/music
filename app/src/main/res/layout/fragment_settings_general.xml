@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="normal"
-        app:settingItemIcon="@drawable/ic_folder_add"
+        app:settingItemIcon="@drawable/ic_rule_folder"
         app:settingItemIconColor="?attr/colorControlNormal"
         app:settingItemText="@string/ignored_folder_desc"
         app:settingItemTitle="@string/ignored_folder_title" />
@@ -55,6 +55,7 @@
         android:id="@+id/remember_playlist_option"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:settingToggleableItemIcon="@drawable/ic_save"
         app:settingToggleableItemText="@string/remember_playlist_desc"
         app:settingToggleableItemTitle="@string/remember_playlist_title" />
 
@@ -63,7 +64,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="normal"
-        app:settingItemIcon="@drawable/ic_featured_playlist"
+        app:settingItemIcon="@drawable/ic_category"
         app:settingItemIconColor="?attr/colorControlNormal"
         app:settingItemText="@string/edit_playlist_section_desc"
         app:settingItemTitle="@string/edit_playlist_sections_title" />

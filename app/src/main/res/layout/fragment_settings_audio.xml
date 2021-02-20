@@ -18,6 +18,7 @@
         android:id="@+id/audio_device_bluetooth_toggle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:settingToggleableItemIcon="@drawable/ic_bluetooth_connected"
         app:settingToggleableItemText="@string/bluetooth_auto_play_desc"
         app:settingToggleableItemTitle="@string/bluetooth_auto_play" />
 
