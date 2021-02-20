@@ -153,9 +153,6 @@ public class MainContentActivity extends DraggableNowPlayingSheetActivity {
     private void setUpToolbar() {
         mAppBar = findViewById(R.id.main_app_bar);
         mPulseToolbar = mAppBar.findViewById(R.id.pulse_toolbar);
-        mPulseToolbar.setNavigationIcon(R.drawable.ic_menu);
-        mPulseToolbar.setQuickActionIcon(R.drawable.ic_search);
-        mPulseToolbar.setOverflowIcon(R.drawable.ic_options);
 
         mPulseToolbar.setNavigationIconOnClickListener(v -> {
             HomeBottomSheetFragment homeBottomSheetFragment = HomeBottomSheetFragment.getInstance();
@@ -164,6 +161,7 @@ public class MainContentActivity extends DraggableNowPlayingSheetActivity {
 
         mPulseToolbar.setQuickActionIconOnClickListener(v ->
                 startActivity(new Intent(this, SearchActivity.class)));
+
         mPulseToolbar.setOverflowIconOnClickListener(v -> {
             if (null != activeFrag) activeFrag.showOptionsMenu();
         });
@@ -229,7 +227,7 @@ public class MainContentActivity extends DraggableNowPlayingSheetActivity {
         activeFrag = switchTo;
         mAppBar.post(() -> {
             mAppBar.setExpanded(true);
-            mPulseToolbar.setTitle(activeFrag.getFragmentTitle(this), true);
+            mPulseToolbar.setTitle(activeFrag.getFragmentTitle(this));
             mPulseToolbar.showOverflowIcon(activeFrag.hasToolbarContextMenu());
         });
     }

@@ -19,7 +19,11 @@
             android:id="@+id/pulse_toolbar"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            app:layout_scrollFlags="scroll|enterAlways|snapMargins" />
+            app:layout_scrollFlags="scroll|enterAlways|snapMargins"
+            app:toolbarAccentTitle="true"
+            app:toolbarNavigationIcon="@drawable/ic_menu"
+            app:toolbarOverflowIcon="@drawable/ic_options"
+            app:toolbarQuickActionIcon="@drawable/ic_search" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

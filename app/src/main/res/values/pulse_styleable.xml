@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <declare-styleable name="PulseToolbar">
+        <attr name="toolbarNavigationIcon" format="reference" />
+        <attr name="toolbarQuickActionIcon" format="reference" />
+        <attr name="toolbarOverflowIcon" format="reference" />
+        <attr name="toolbarTitle" format="reference" />
+        <attr name="toolbarAccentTitle" format="boolean" />
+    </declare-styleable>
+
     <declare-styleable name="SettingsCategoryItemView">
         <attr name="settingItemIconBackgroundColor" format="reference" />
         <attr name="settingItemIcon" format="reference" />
