@@ -31,7 +31,6 @@ import java.io.File;
 public class HomeBottomSheetFragment extends RoundedCustomBottomSheetFragment {
 
     public static final String TAG = "HomeBottomSheetFragment";
-    private static final int REQUEST_CODE_OPEN_EQUALIZER = 599;
     private static final int PICK_AVATAR = 1500;
     private ImageView mUserPic;
     private MaterialTextView mUserName;
@@ -65,8 +64,9 @@ public class HomeBottomSheetFragment extends RoundedCustomBottomSheetFragment {
 
         view.findViewById(R.id.drawer_option_equalizer).setOnClickListener(v -> {
             final Intent intent = new Intent(AudioEffect.ACTION_DISPLAY_AUDIO_EFFECT_CONTROL_PANEL);
-            if ((intent.resolveActivity(requireContext().getPackageManager()) != null)) {
-                startActivityForResult(intent, REQUEST_CODE_OPEN_EQUALIZER);
+            final Intent chooser = Intent.createChooser(intent, getString(R.string.select_equalizer));
+            if ((chooser.resolveActivity(requireContext().getPackageManager()) != null)) {
+                startActivity(chooser);
                 view.postOnAnimation(this::dismiss);
             } else
                 Toast.makeText(requireContext(), getString(R.string.toast_equalizer_not_found), Toast.LENGTH_SHORT).show();

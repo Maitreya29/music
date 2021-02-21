@@ -19,6 +19,7 @@
 
     <!-- General strings -->
     <string name="equalizer">Equalizer</string>
+    <string name="select_equalizer">Select Equalizer</string>
     <string name="shuffle">Shuffle</string>
     <string name="tracks_not_found">No tracks found</string>
     <string name="unknown">Unknown</string>3105
