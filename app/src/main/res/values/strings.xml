@@ -312,8 +312,11 @@
     <string name="category_contribute">Contribute</string>
     <string name="donation_card_title">Enjoying Pulse Music?</string>
     <string name="donation_card_text">It takes a lot of time and effort to deliver quality products, that too for free\nPlease consider making a small donation to support the development</string>
+    <string name="donate_options_title">Donate using</string>
     <string name="buy_me_coffee">Buy me a Coffee</string>
     <string name="pay_pal">PayPal</string>
+    <string name="upi">UPI (For Indian users only)</string>
+    <string name="toast_upi_not_found">No UPI app found, please install one to continue</string>
 
 
     <!-- About -->

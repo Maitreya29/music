@@ -24,54 +24,146 @@
         app:cardBackgroundColor="?attr/colorSurface"
         app:cardCornerRadius="@dimen/rounding_radius_8dp"
         app:cardElevation="4dp"
-        app:cardUseCompatPadding="false">
+        app:cardUseCompatPadding="false"
+        app:contentPadding="16dp">
 
-        <LinearLayout
+        <com.google.android.material.textview.MaterialTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="100dp"
-            android:orientation="vertical"
+            android:layout_gravity="top"
+            android:gravity="center"
+            android:maxLines="2"
+            android:text="@string/donation_card_title"
+            android:textAppearance="@style/Appearance.Text.Headline6" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="48dp"
+            android:gravity="center"
+            android:text="@string/donation_card_text"
+            android:textAppearance="@style/Appearance.Text.Body2" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        app:cardBackgroundColor="?attr/colorSurface"
+        app:cardCornerRadius="@dimen/rounding_radius_8dp"
+        app:cardElevation="4dp"
+        app:cardUseCompatPadding="false">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:padding="16dp">
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/donate_head"
-                android:layout_width="match_parent"
+                android:id="@+id/donate_options_title"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/donation_card_title"
-                android:textAppearance="@style/Appearance.Text.Headline6" />
+                android:text="@string/donate_options_title"
+                android:textAppearance="@style/Appearance.Text.Body1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/donate_subhead"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/pay_pal_frame"
+                android:layout_width="0dp"
+                android:layout_height="136dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="32dp"
-                android:gravity="center"
-                android:text="@string/donation_card_text"
-                android:textAppearance="@style/Appearance.Text.Body2" />
+                app:cardCornerRadius="@dimen/rounding_radius_8dp"
+                app:layout_constraintEnd_toStartOf="@id/bmc_frame"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/donate_options_title">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/bmc_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/buy_me_coffee"
-                app:icon="@drawable/ic_bmc_new_btn_logo"
-                app:iconPadding="12dp"
-                app:iconSize="18dp"
-                app:iconTint="@android:color/transparent"
-                app:iconTintMode="add" />
+                <com.hardcodecoder.pulsemusic.views.ColoredIconView
+                    android:id="@+id/pay_pal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="-24dp"
+                    app:icon="@drawable/ic_paypal"
+                    app:iconBackgroundShape="rectangle"
+                    app:iconColor="@color/md_blue_A400"
+                    app:iconPadding="48dp"
+                    app:layout_constraintTop_toBottomOf="@id/donate_options_title" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/pp_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/pay_pal"
-                app:icon="@drawable/ic_paypal"
-                app:iconPadding="12dp"
-                app:iconSize="18dp"
-                app:iconTint="@android:color/transparent"
-                app:iconTintMode="add" />
-        </LinearLayout>
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:layout_marginBottom="16dp"
+                    android:text="@string/pay_pal"
+                    android:textAppearance="@style/Appearance.Text.Subtitle2"
+                    android:textColor="@color/darkColorBackground" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/bmc_frame"
+                android:layout_width="0dp"
+                android:layout_height="136dp"
+                android:layout_marginStart="16dp"
+                app:cardCornerRadius="@dimen/rounding_radius_8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/pay_pal_frame"
+                app:layout_constraintTop_toTopOf="@id/pay_pal_frame">
+
+                <com.hardcodecoder.pulsemusic.views.ColoredIconView
+                    android:id="@+id/bmc"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="-24dp"
+                    app:icon="@drawable/ic_coffee_cup"
+                    app:iconBackgroundShape="rectangle"
+                    app:iconColor="@color/md_yellow_A400"
+                    app:iconPadding="48dp"
+                    app:layout_constraintTop_toBottomOf="@id/donate_options_title" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:layout_marginBottom="16dp"
+                    android:text="@string/buy_me_coffee"
+                    android:textAppearance="@style/Appearance.Text.Subtitle2"
+                    android:textColor="@color/darkColorBackground" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/upi_frame"
+                android:layout_width="0dp"
+                android:layout_height="136dp"
+                android:layout_marginTop="16dp"
+                app:cardCornerRadius="@dimen/rounding_radius_8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/pay_pal_frame">
+
+                <com.hardcodecoder.pulsemusic.views.ColoredIconView
+                    android:id="@+id/upi"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="-24dp"
+                    app:icon="@drawable/ic_upi"
+                    app:iconBackgroundShape="rectangle"
+                    app:iconColor="@color/md_green_A700"
+                    app:iconPadding="48dp"
+                    app:layout_constraintTop_toBottomOf="@id/donate_options_title" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:layout_marginBottom="16dp"
+                    android:text="@string/upi"
+                    android:textAppearance="@style/Appearance.Text.Subtitle2"
+                    android:textColor="@color/darkColorBackground" />
+            </com.google.android.material.card.MaterialCardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </LinearLayout>
