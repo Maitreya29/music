@@ -58,8 +58,7 @@ public class SettingsAboutFragment extends SettingsBaseFragment {
 
         view.findViewById(R.id.app_link_twitter).setOnClickListener(v -> openLink("https://www.twitter.com/hardcodecoder"));
 
-        view.findViewById(R.id.app_link_telegram).setOnClickListener(v -> {
-        });
+        view.findViewById(R.id.app_link_telegram).setOnClickListener(v -> openLink("https://t.me/PulseMusicDiscussion"));
 
         view.findViewById(R.id.app_link_github).setOnClickListener(v -> openLink("https://github.com/HardcodeCoder/PulseMusic"));
     }
