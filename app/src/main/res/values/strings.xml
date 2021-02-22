@@ -167,6 +167,7 @@
     <string name="artist_tracks_count">Artist has ● %d albums</string>
     <string name="album_tracks_count">Album contains ● %d tracks</string>
     <string name="suffix_tracks">tracks</string>
+    <string name="track_number_info">Disc/Track: %d/%d</string>
 
 
     <!-- Song info dialog -->

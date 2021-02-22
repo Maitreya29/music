@@ -19,7 +19,7 @@ import com.hardcodecoder.pulsemusic.GlideApp;
 import com.hardcodecoder.pulsemusic.Preferences;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.activities.details.base.BaseDetailsActivity;
-import com.hardcodecoder.pulsemusic.adapters.main.TracksAdapter;
+import com.hardcodecoder.pulsemusic.adapters.details.AlbumTracksAdapter;
 import com.hardcodecoder.pulsemusic.dialog.MenuDetailsDialog;
 import com.hardcodecoder.pulsemusic.dialog.ToolbarContextMenuDialog;
 import com.hardcodecoder.pulsemusic.helper.MediaArtHelper;
@@ -41,9 +41,9 @@ public class AlbumDetailsActivity extends BaseDetailsActivity implements Options
     public static final String KEY_ALBUM_TITLE = "AlbumTitle";
     public static final String KEY_ALBUM_ID = "AlbumId";
     public static final String KEY_ALBUM_ART_URL = "AlbumArtUrl";
-    private TracksAdapter mAdapter;
+    private AlbumTracksAdapter mAdapter;
     private SortOrder mSortOrder;
-    private Long mAlbumId;
+    private long mAlbumId;
 
     @Override
     public void onViewCreated() {
@@ -146,7 +146,7 @@ public class AlbumDetailsActivity extends BaseDetailsActivity implements Options
         rv.setHorizontalFadingEdgeEnabled(true);
         rv.setLayoutManager(new LinearLayoutManager(rv.getContext(), RecyclerView.VERTICAL, false));
 
-        mAdapter = new TracksAdapter(
+        mAdapter = new AlbumTracksAdapter(
                 getLayoutInflater(),
                 list,
                 new SimpleItemClickListener() {
@@ -161,9 +161,7 @@ public class AlbumDetailsActivity extends BaseDetailsActivity implements Options
                         UIHelper.showMenuForAlbumDetails(AlbumDetailsActivity.this, list.get(position));
                     }
                 },
-                null,
-                mSortOrder,
-                true);
+                mSortOrder);
 
         LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(this, R.anim.item_falls_down_animation);
         rv.setLayoutAnimation(controller);

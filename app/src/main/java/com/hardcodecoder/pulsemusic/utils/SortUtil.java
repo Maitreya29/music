@@ -41,23 +41,16 @@ public class SortUtil {
                 break;
             case TRACK_NUMBER_ASC:
                 Collections.sort(list, (o1, o2) -> {
-                    int[] discTrack1 = getDiscTrackNumber(o1.getTrackNumber());
-                    int[] discTrack2 = getDiscTrackNumber(o2.getTrackNumber());
-
-                    int disc = Integer.compare(discTrack1[0], discTrack2[0]);
-
-                    if (disc == 0) return Integer.compare(discTrack1[1], discTrack2[1]);
+                    int disc = Integer.compare(o1.getDiscNumber(), o2.getDiscNumber());
+                    if (disc == 0) return Integer.compare(o1.getTrackNumber(), o2.getTrackNumber());
                     return disc;
                 });
                 break;
             case TRACK_NUMBER_DESC:
                 Collections.sort(list, (o1, o2) -> {
-                    int[] discTrack1 = getDiscTrackNumber(o1.getTrackNumber());
-                    int[] discTrack2 = getDiscTrackNumber(o2.getTrackNumber());
+                    int disc = Integer.compare(o2.getDiscNumber(), o1.getDiscNumber());
 
-                    int disc = Integer.compare(discTrack2[0], discTrack1[0]);
-
-                    if (disc == 0) return Integer.compare(discTrack2[1], discTrack1[1]);
+                    if (disc == 0) return Integer.compare(o2.getTrackNumber(), o1.getTrackNumber());
                     return disc;
                 });
                 break;
@@ -66,20 +59,6 @@ public class SortUtil {
                 Collections.sort(list, (o1, o2) -> o1.getTrackName().compareToIgnoreCase(o2.getTrackName()));
                 break;
         }
-    }
-
-    @NonNull
-    private static int[] getDiscTrackNumber(int track) {
-        String trackString = String.valueOf(track);
-        int[] discTrackNumber = new int[]{0, track}; // Disc number, track number
-        if (trackString.length() == 4) {
-            // For multi-disc sets, track will be 1xxx for tracks on the first disc,
-            // 2xxx for tracks on the second disc, etc.
-            discTrackNumber[0] = Character.getNumericValue(trackString.charAt(0));
-            // Track number is the number xxx
-            discTrackNumber[1] = Integer.parseInt(trackString.substring(1));
-        }
-        return discTrackNumber;
     }
 
     public static void sortArtistList(@NonNull List<ArtistModel> list, @Nullable ARTIST sortOrder) {

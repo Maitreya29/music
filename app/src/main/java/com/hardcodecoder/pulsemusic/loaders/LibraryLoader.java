@@ -69,7 +69,7 @@ public class LibraryLoader implements Callable<List<MusicModel>> {
                 String album = cursor.getString(2);
                 int albumId = cursor.getInt(3);
                 String artist = cursor.getString(4);
-                int trackNum = cursor.getInt(5);
+                int[] discTrackNumber = MediaStoreHelper.getDiscTrackNumber(cursor.getInt(5));
                 long dateAdded = cursor.getLong(6);
                 long dateModified = cursor.getLong(7);
                 int duration = cursor.getInt(8);
@@ -87,7 +87,8 @@ public class LibraryLoader implements Callable<List<MusicModel>> {
                         albumArt,
                         dateAdded,
                         dateModified,
-                        trackNum,
+                        discTrackNumber[0],
+                        discTrackNumber[1],
                         duration));
             } while (cursor.moveToNext());
             cursor.close();

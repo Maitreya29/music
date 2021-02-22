@@ -1,5 +1,6 @@
 package com.hardcodecoder.pulsemusic.loaders;
 
+import android.annotation.SuppressLint;
 import android.content.ContentUris;
 import android.content.Context;
 import android.database.Cursor;
@@ -28,6 +29,7 @@ public class LibraryLoaderQ implements Callable<List<MusicModel>> {
     private final String mSortOrder;
     private final String mSelection;
     private final String[] mSelectionArgs;
+    private final boolean mIsAndroidQ;
 
     public LibraryLoaderQ(@NonNull Context context, @Nullable SortOrder sortOrder) {
         this(context, sortOrder, null, null);
@@ -38,23 +40,14 @@ public class LibraryLoaderQ implements Callable<List<MusicModel>> {
         mSortOrder = MediaStoreHelper.getSortOrderFor(sortOrder);
         mSelection = selection;
         mSelectionArgs = selectionArgs;
+        mIsAndroidQ = Build.VERSION.SDK_INT == Build.VERSION_CODES.Q;
     }
 
     @Override
     public List<MusicModel> call() {
         List<MusicModel> libraryList = null;
         final Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
-        final String[] cursor_cols = {
-                MediaStore.Audio.Media._ID,             // 0
-                MediaStore.Audio.Media.TITLE,           // 1
-                MediaStore.Audio.Media.ALBUM,           // 2
-                MediaStore.Audio.Media.ALBUM_ID,        // 3
-                MediaStore.Audio.Media.ARTIST,          // 4
-                MediaStore.Audio.Media.TRACK,           // 5
-                MediaStore.Audio.Media.DATE_ADDED,      // 6
-                MediaStore.Audio.Media.DATE_MODIFIED,   // 7
-                MediaStore.Audio.AudioColumns.DURATION, // 8
-        };
+        final String[] cursor_cols = getCursorColumns();
 
         final Cursor cursor = mContext.getContentResolver().query(
                 uri,
@@ -73,14 +66,34 @@ public class LibraryLoaderQ implements Callable<List<MusicModel>> {
                 // If exclude set contains this _id we will not include this in out list
                 if (excludeSet != null && excludeSet.contains(_id)) continue;
 
-                String songName = cursor.getString(1);
-                String album = cursor.getString(2);
-                int albumId = cursor.getInt(3);
-                String artist = cursor.getString(4);
-                int trackNum = cursor.getInt(5);
-                long dateAdded = cursor.getLong(6);
-                long dateModified = cursor.getLong(7);
-                int duration = cursor.getInt(8);
+                String songName;
+                String album;
+                String artist;
+                long dateAdded;
+                long dateModified;
+                int[] discTrackNumber;
+                int albumId;
+                int duration;
+
+                if (mIsAndroidQ) {
+                    songName = cursor.getString(1);
+                    album = cursor.getString(2);
+                    albumId = cursor.getInt(3);
+                    artist = cursor.getString(4);
+                    discTrackNumber = MediaStoreHelper.getDiscTrackNumber(cursor.getInt(5));
+                    dateAdded = cursor.getLong(6);
+                    dateModified = cursor.getLong(7);
+                    duration = cursor.getInt(8);
+                } else {
+                    songName = cursor.getString(1);
+                    album = cursor.getString(2);
+                    albumId = cursor.getInt(3);
+                    artist = cursor.getString(4);
+                    discTrackNumber = new int[]{cursor.getInt(5), cursor.getInt(6)};
+                    dateAdded = cursor.getLong(7);
+                    dateModified = cursor.getLong(8);
+                    duration = cursor.getInt(9);
+                }
 
                 String songPath = ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, _id).toString();
                 String albumArt = ContentUris.withAppendedId(sArtworkUri, albumId).toString();
@@ -95,12 +108,44 @@ public class LibraryLoaderQ implements Callable<List<MusicModel>> {
                         albumArt,
                         dateAdded,
                         dateModified,
-                        trackNum,
+                        discTrackNumber[0],
+                        discTrackNumber[1],
                         duration));
             } while (cursor.moveToNext());
             cursor.close();
         }
         return libraryList;
+    }
+
+    @SuppressLint("InlinedApi")
+    @NonNull
+    private String[] getCursorColumns() {
+        if (mIsAndroidQ) {
+            return new String[]{
+                    MediaStore.Audio.Media._ID,             // 0
+                    MediaStore.Audio.Media.TITLE,           // 1
+                    MediaStore.Audio.Media.ALBUM,           // 2
+                    MediaStore.Audio.Media.ALBUM_ID,        // 3
+                    MediaStore.Audio.Media.ARTIST,          // 4
+                    MediaStore.Audio.Media.TRACK,           // 5
+                    MediaStore.Audio.Media.DATE_ADDED,      // 6
+                    MediaStore.Audio.Media.DATE_MODIFIED,   // 7
+                    MediaStore.Audio.AudioColumns.DURATION, // 8
+            };
+        } else {
+            return new String[]{
+                    MediaStore.Audio.Media._ID,             // 0
+                    MediaStore.Audio.Media.TITLE,           // 1
+                    MediaStore.Audio.Media.ALBUM,           // 2
+                    MediaStore.Audio.Media.ALBUM_ID,        // 3
+                    MediaStore.Audio.Media.ARTIST,          // 4
+                    MediaStore.Audio.Media.DISC_NUMBER,     // 5
+                    MediaStore.Audio.Media.CD_TRACK_NUMBER, // 6
+                    MediaStore.Audio.Media.DATE_ADDED,      // 7
+                    MediaStore.Audio.Media.DATE_MODIFIED,   // 8
+                    MediaStore.Audio.AudioColumns.DURATION, // 9
+            };
+        }
     }
 
     @NonNull

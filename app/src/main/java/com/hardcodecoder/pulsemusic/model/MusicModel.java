@@ -18,11 +18,12 @@ public class MusicModel implements Serializable {
     private final long mDateModified;
     private final int mId;
     private final int mAlbumId;
+    private final int mDiscNumber;
     private final int mTrackNumber;
     // Duration in milli seconds
     private final int mTrackDuration;
 
-    public MusicModel(int mId,
+    public MusicModel(int id,
                       @NonNull String trackName,
                       @NonNull String album,
                       int albumId,
@@ -31,19 +32,21 @@ public class MusicModel implements Serializable {
                       @Nullable String albumArtUrl,
                       long dateAdded,
                       long dateModified,
+                      int discNumber,
                       int trackNumber,
                       int trackDuration) {
-        this.mId = mId;
-        this.mTrackName = trackName;
-        this.mTrackPath = trackPath;
-        this.mAlbum = album;
-        this.mArtist = artist;
-        this.mAlbumArtUrl = albumArtUrl;
-        this.mAlbumId = albumId;
-        this.mDateAdded = dateAdded;
-        this.mDateModified = dateModified;
-        this.mTrackNumber = trackNumber;
-        this.mTrackDuration = trackDuration;
+        mId = id;
+        mTrackName = trackName;
+        mTrackPath = trackPath;
+        mAlbum = album;
+        mArtist = artist;
+        mAlbumArtUrl = albumArtUrl;
+        mAlbumId = albumId;
+        mDateAdded = dateAdded;
+        mDateModified = dateModified;
+        mDiscNumber = discNumber;
+        mTrackNumber = trackNumber;
+        mTrackDuration = trackDuration;
     }
 
     public int getId() {
@@ -72,6 +75,10 @@ public class MusicModel implements Serializable {
 
     public int getAlbumId() {
         return mAlbumId;
+    }
+
+    public int getDiscNumber() {
+        return mDiscNumber;
     }
 
     public int getTrackNumber() {

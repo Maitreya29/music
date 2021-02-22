@@ -74,6 +74,7 @@ public class DataModelHelper {
         String artist;
         String dateAdded;
         long dateModified;
+        int[] discTrackNumber = new int[2];
         int duration;
         try {
             title = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE);
@@ -82,6 +83,8 @@ public class DataModelHelper {
             dateAdded = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DATE);
             dateModified = null == dateAdded ? 0 : Long.parseLong(dateAdded);
             duration = Integer.parseInt(mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION));
+            discTrackNumber[0] = getNumber(mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DISC_NUMBER));
+            discTrackNumber[1] = getNumber(mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_CD_TRACK_NUMBER));
             mmr.release();
         } catch (Exception e) {
             LogUtils.logException("DataModelHelper", "at buildMusicModelFrom()", e);
@@ -97,7 +100,8 @@ public class DataModelHelper {
                 "",
                 dateModified,
                 dateModified,
-                0,
+                discTrackNumber[0],
+                discTrackNumber[1],
                 duration);
     }
 
@@ -139,5 +143,14 @@ public class DataModelHelper {
                 callback.onComplete(trackFileModel);
             }
         });
+    }
+
+    private static int getNumber(@Nullable String str) {
+        if (null == str || str.length() == 0) return 1;
+        if (str.contains("/"))
+            return Integer.parseInt(str.substring(0, str.indexOf("/")));
+        else if (str.matches("[0-9]+"))
+            return Integer.parseInt(str);
+        return 1;
     }
 }
