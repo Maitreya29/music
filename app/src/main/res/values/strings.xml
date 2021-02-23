@@ -5,8 +5,6 @@
     <string name="notification_playback_channel_name">Music Notification</string>
     <string name="notification_audio_channel_name">Audio Device Detection</string>
 
-    <string name="bullet" translatable="false">●</string>
-
     <!-- Content description -->
     <string name="desc_album_art">Album art image</string>
     <string name="desc_close_btn">Close button</string>

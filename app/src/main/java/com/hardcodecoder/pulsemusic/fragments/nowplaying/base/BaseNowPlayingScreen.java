@@ -129,8 +129,8 @@ public abstract class BaseNowPlayingScreen extends Fragment
         mQueueManager = mPulseController.getQueueManager();
         mRemote = mPulseController.getRemote();
 
-        mUpNextTitle = getString(R.string.coming_up_next) + " " + getString(R.string.bullet) + " ";
-        mArtistTitle = getString(R.string.nav_artists) + " " + getString(R.string.bullet) + " ";
+        mUpNextTitle = getString(R.string.coming_up_next) + " ● ";
+        mArtistTitle = getString(R.string.nav_artists) + " ● ";
 
         onInitializeViews(view);
 
