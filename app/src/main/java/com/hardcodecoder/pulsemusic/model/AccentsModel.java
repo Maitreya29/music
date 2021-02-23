@@ -1,24 +1,26 @@
 package com.hardcodecoder.pulsemusic.model;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
 
 public class AccentsModel {
 
-    private String mTitle;
-    private int mAccentId;
+    private final String mTitle;
+    private final int mAccentId;
     @ColorInt
-    private int mColor;
+    private final int mColor;
 
-    public AccentsModel(int id, String title, int color) {
-        this.mAccentId = id;
-        this.mTitle = title;
-        this.mColor = color;
+    public AccentsModel(int id, @NonNull String title, int color) {
+        mAccentId = id;
+        mTitle = title;
+        mColor = color;
     }
 
     public int getId() {
         return mAccentId;
     }
 
+    @NonNull
     public String getTitle() {
         return mTitle;
     }

@@ -1,17 +1,19 @@
 package com.hardcodecoder.pulsemusic.model;
 
+import androidx.annotation.NonNull;
+
 public class ArtistModel {
 
-    private int mArtistId;
-    private int mNumOfAlbums;
-    private int mNumOfTracks;
-    private String mArtistName;
+    private final int mArtistId;
+    private final int mNumOfAlbums;
+    private final int mNumOfTracks;
+    private final String mArtistName;
 
-    public ArtistModel(int artistId, String artistName, int numOfAlbums, int numOfTracks) {
-        this.mArtistId = artistId;
-        this.mNumOfAlbums = numOfAlbums;
-        this.mNumOfTracks = numOfTracks;
-        this.mArtistName = artistName;
+    public ArtistModel(int artistId, @NonNull String artistName, int numOfAlbums, int numOfTracks) {
+        mArtistId = artistId;
+        mNumOfAlbums = numOfAlbums;
+        mNumOfTracks = numOfTracks;
+        mArtistName = artistName;
     }
 
     public int getArtistId() {
@@ -26,6 +28,7 @@ public class ArtistModel {
         return mNumOfTracks;
     }
 
+    @NonNull
     public String getArtistName() {
         return mArtistName;
     }

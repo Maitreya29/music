@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.pm.ShortcutInfo;
 import android.os.Build;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
 import com.hardcodecoder.pulsemusic.R;
@@ -13,13 +14,14 @@ import com.hardcodecoder.pulsemusic.shortcuts.ShortcutsLauncher;
 @RequiresApi(api = Build.VERSION_CODES.N_MR1)
 public class SuggestedShortcutType extends BaseShortcutType {
 
-    private Context mContext;
+    private final Context mContext;
 
     public SuggestedShortcutType(Context context) {
         super(context);
         mContext = context;
     }
 
+    @NonNull
     public static String getId() {
         return ID_PREFIX.concat("suggested");
     }

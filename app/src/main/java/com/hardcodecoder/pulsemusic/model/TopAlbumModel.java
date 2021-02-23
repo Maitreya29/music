@@ -1,32 +1,36 @@
 package com.hardcodecoder.pulsemusic.model;
 
+import androidx.annotation.NonNull;
+
 public class TopAlbumModel {
 
-    private String albumName;
-    private String albumArt;
-    private int albumId;
-    private int playCount;
+    private final String mAlbumName;
+    private final String mAlbumArt;
+    private final int mAlbumId;
+    private final int mPlayCount;
 
-    public TopAlbumModel(String albumName, String albumArt, int albumId, int playCount) {
-        this.albumName = albumName;
-        this.albumArt = albumArt;
-        this.albumId = albumId;
-        this.playCount = playCount;
-    }
-
-    public String getAlbumName() {
-        return albumName;
-    }
-
-    public String getAlbumArt() {
-        return albumArt;
+    public TopAlbumModel(@NonNull String albumName, @NonNull String albumArt, int albumId, int playCount) {
+        mAlbumName = albumName;
+        mAlbumArt = albumArt;
+        mAlbumId = albumId;
+        mPlayCount = playCount;
     }
 
     public int getAlbumId() {
-        return albumId;
+        return mAlbumId;
+    }
+
+    @NonNull
+    public String getAlbumName() {
+        return mAlbumName;
+    }
+
+    @NonNull
+    public String getAlbumArt() {
+        return mAlbumArt;
     }
 
     public int getPlayCount() {
-        return playCount;
+        return mPlayCount;
     }
 }

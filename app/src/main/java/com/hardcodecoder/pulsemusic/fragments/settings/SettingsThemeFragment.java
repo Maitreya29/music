@@ -61,14 +61,14 @@ public class SettingsThemeFragment extends SettingsBaseFragment {
 
         view.findViewById(R.id.laf_select_accent_color).setOnClickListener(v -> {
             AccentsChooserDialogFragment dialogFragment = AccentsChooserDialogFragment.getInstance();
-            dialogFragment.show(getFragmentManager(), AccentsChooserDialogFragment.TAG);
+            dialogFragment.show(requireFragmentManager(), AccentsChooserDialogFragment.TAG);
         });
     }
 
     private void updateThemeSection(@NonNull View view) {
         view.findViewById(R.id.laf_select_dark_theme).setOnClickListener(v -> {
             ThemeChooserBottomSheetDialogFragment dialog = ThemeChooserBottomSheetDialogFragment.getInstance();
-            dialog.show(getFragmentManager(), ThemeChooserBottomSheetDialogFragment.TAG);
+            dialog.show(requireFragmentManager(), ThemeChooserBottomSheetDialogFragment.TAG);
         });
 
         // Get custom views

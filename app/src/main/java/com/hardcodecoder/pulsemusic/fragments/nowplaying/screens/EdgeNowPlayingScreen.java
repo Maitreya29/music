@@ -133,7 +133,7 @@ public class EdgeNowPlayingScreen extends BaseNowPlayingScreen {
     }
 
     @Override
-    protected void onTrackControlButtonsChanged(boolean isSeekButtonEnabled) {
+    protected void onTrackControlButtonsChanged() {
         setUpTrackControls(mTrackControl1, mTrackControl2);
     }
 }

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.ShortcutInfo;
 import android.os.Build;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
 import com.hardcodecoder.pulsemusic.shortcuts.ShortcutsLauncher;
@@ -13,16 +14,18 @@ import com.hardcodecoder.pulsemusic.shortcuts.ShortcutsLauncher;
 public abstract class BaseShortcutType {
 
     static final String ID_PREFIX = "com.hardcodecoder.pulsemusic.shortcuts.types.id.";
-    private Context mContext;
+    private final Context mContext;
 
     BaseShortcutType(Context context) {
         mContext = context;
     }
 
+    @NonNull
     public static String getId() {
         return ID_PREFIX.concat("invalid");
     }
 
+    @NonNull
     Intent getShortcutIntent(int shortcutType) {
         Intent intent = new Intent(mContext, ShortcutsLauncher.class);
         intent.setAction(Intent.ACTION_VIEW);

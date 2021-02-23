@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
 
 import com.hardcodecoder.pulsemusic.MediaArtCache;
 import com.hardcodecoder.pulsemusic.R;
@@ -17,8 +18,8 @@ public class MediaArtHelper {
 
     private static TypedArray mMediaArtColors;
 
-    public static Drawable getDefaultAlbumArt(Context context, long albumId) {
-        // -1 represents the primary color tinted album art
+    public static Drawable getDefaultAlbumArt(@NonNull Context context, long albumId) {
+        // albumId = -1 represents album art tinted with the primary color
         // So, we need not convert it into positive int
         if (albumId != -1) albumId = Math.abs(albumId);
 
@@ -29,7 +30,7 @@ public class MediaArtHelper {
         return drawable;
     }
 
-    public static Bitmap getDefaultAlbumArtBitmap(Context context, long albumId) {
+    public static Bitmap getDefaultAlbumArtBitmap(@NonNull Context context, long albumId) {
         // -1 represents the primary color tinted album art
         // So, we need not convert it into positive int
         if (albumId != -1) albumId = Math.abs(albumId);
@@ -43,7 +44,7 @@ public class MediaArtHelper {
     }
 
     @ColorInt
-    private static int getTintColor(Context context, long albumId) {
+    private static int getTintColor(@NonNull Context context, long albumId) {
         if (albumId == -1) return ThemeColors.getCurrentColorPrimary();
         if (null == mMediaArtColors)
             mMediaArtColors = context.getResources().obtainTypedArray(R.array.album_art_colors);

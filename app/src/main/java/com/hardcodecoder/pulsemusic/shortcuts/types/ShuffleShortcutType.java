@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.pm.ShortcutInfo;
 import android.os.Build;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
 import com.hardcodecoder.pulsemusic.R;
@@ -20,7 +21,7 @@ public class ShuffleShortcutType extends BaseShortcutType {
         mContext = context;
     }
 
-
+    @NonNull
     public static String getId() {
         return ID_PREFIX.concat("shuffle");
     }

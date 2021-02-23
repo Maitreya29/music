@@ -37,14 +37,14 @@ public class TopArtistsLoader implements Callable<List<TopArtistModel>> {
             if (count == 0) {
                 HistoryRecord h1 = modelMap.get(o1.getArtistName());
                 HistoryRecord h2 = modelMap.get(o2.getArtistName());
+                if (null == h1 || null == h2) return 0;
                 return Long.compare(h2.getLastModified(), h1.getLastModified());
             }
             return count;
         });
 
         // Limit to 20 TopAlbums
-        if (topArtistList != null)
-            topArtistList = topArtistList.subList(0, Math.min(topArtistList.size(), 20));
+        topArtistList = topArtistList.subList(0, Math.min(topArtistList.size(), 20));
         return topArtistList;
     }
 }

@@ -64,8 +64,11 @@ public class ButtonShortcut extends LinearLayout {
                 backgroundTint = ColorUtil.changeColorAlphaTo20(backgroundTint);
 
             Drawable background = ContextCompat.getDrawable(context, R.drawable.shape_rounded_rectangle);
-            background.mutate();
-            background.setTint(backgroundTint);
+
+            if (background != null) {
+                background.mutate();
+                background.setTint(backgroundTint);
+            }
 
             setBackground(background);
             icon.setImageTintList(ColorStateList.valueOf(iconColor));

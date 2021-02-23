@@ -1,25 +1,34 @@
 package com.hardcodecoder.pulsemusic.model;
 
+import androidx.annotation.NonNull;
+
 public class AlbumModel {
 
-    private String mAlbumName;
-    private String mAlbumArtist;
-    private String mAlbumArt;
-    private int mAlbumId;
-    private int mSongsCount;
-    private int mFirstYear;
-    private int mLastYear;
+    private final String mAlbumName;
+    private final String mAlbumArtist;
+    private final String mAlbumArt;
+    private final int mAlbumId;
+    private final int mSongsCount;
+    private final int mFirstYear;
+    private final int mLastYear;
 
-    public AlbumModel(String albumName, int albumId, String albumArtist, int songsCount, int firstYear, int lastYear, String albumArt) {
-        this.mAlbumName = albumName;
-        this.mAlbumId = albumId;
-        this.mAlbumArtist = albumArtist;
-        this.mSongsCount = songsCount;
-        this.mFirstYear = firstYear;
-        this.mLastYear = lastYear;
-        this.mAlbumArt = albumArt;
+    public AlbumModel(@NonNull String albumName,
+                      int albumId,
+                      @NonNull String albumArtist,
+                      int songsCount,
+                      int firstYear,
+                      int lastYear,
+                      @NonNull String albumArt) {
+        mAlbumName = albumName;
+        mAlbumId = albumId;
+        mAlbumArtist = albumArtist;
+        mSongsCount = songsCount;
+        mFirstYear = firstYear;
+        mLastYear = lastYear;
+        mAlbumArt = albumArt;
     }
 
+    @NonNull
     public String getAlbumName() {
         return mAlbumName;
     }
@@ -28,6 +37,7 @@ public class AlbumModel {
         return mAlbumId;
     }
 
+    @NonNull
     public String getAlbumArtist() {
         return mAlbumArtist;
     }
@@ -44,6 +54,7 @@ public class AlbumModel {
         return mLastYear;
     }
 
+    @NonNull
     public String getAlbumArt() {
         return mAlbumArt;
     }

@@ -1,27 +1,31 @@
 package com.hardcodecoder.pulsemusic.model;
 
+import androidx.annotation.NonNull;
+
 public class TrackFileModel {
 
-    private String mDisplayName;
-    private String mFileType;
-    private long mFileSize;
-    private int mBitRate;
-    private int mSampleRate;
-    private int mChannelCount;
+    private final String mDisplayName;
+    private final String mFileType;
+    private final long mFileSize;
+    private final int mBitRate;
+    private final int mSampleRate;
+    private final int mChannelCount;
 
-    public TrackFileModel(String mDisplayName, String mFileType, long mFileSize, int mBitRate, int mSampleRate, int mChannelCount) {
-        this.mDisplayName = mDisplayName;
-        this.mFileType = mFileType;
-        this.mFileSize = mFileSize;
-        this.mBitRate = mBitRate;
-        this.mSampleRate = mSampleRate;
-        this.mChannelCount = mChannelCount;
+    public TrackFileModel(@NonNull String displayName, @NonNull String fileType, long fileSize, int bitRate, int sampleRate, int channelCount) {
+        mDisplayName = displayName;
+        mFileType = fileType;
+        mFileSize = fileSize;
+        mBitRate = bitRate;
+        mSampleRate = sampleRate;
+        mChannelCount = channelCount;
     }
 
+    @NonNull
     public String getDisplayName() {
         return mDisplayName;
     }
 
+    @NonNull
     public String getFileType() {
         return mFileType;
     }

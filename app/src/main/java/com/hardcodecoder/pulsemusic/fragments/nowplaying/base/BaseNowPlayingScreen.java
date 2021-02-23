@@ -180,9 +180,7 @@ public abstract class BaseNowPlayingScreen extends Fragment
                         Preferences.NOW_PLAYING_SEEK_DURATION_DEF);
                 break;
             case Preferences.NOW_PLAYING_CONTROLS_SEEK_ENABLED:
-                onTrackControlButtonsChanged(sharedPreferences.getBoolean(
-                        Preferences.NOW_PLAYING_CONTROLS_SEEK_ENABLED,
-                        Preferences.NOW_PLAYING_CONTROLS_SEEK_ENABLED_DEF));
+                onTrackControlButtonsChanged();
                 break;
         }
     }
@@ -343,7 +341,7 @@ public abstract class BaseNowPlayingScreen extends Fragment
         }
     }
 
-    protected void onTrackControlButtonsChanged(boolean isSeekButtonEnabled) {
+    protected void onTrackControlButtonsChanged() {
     }
 
     protected boolean isSeekButtonsEnabled() {
