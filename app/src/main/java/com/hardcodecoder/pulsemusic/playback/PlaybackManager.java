@@ -24,7 +24,7 @@ import java.util.List;
 
 public class PlaybackManager implements Playback.Callback {
 
-    public static final String ACTION_LOAD_LAST_PLAYLIST = "LoadLastPlayist";
+    public static final String ACTION_LOAD_LAST_PLAYLIST = "LoadLastPlaylist";
     public static final String START_PLAYBACK = "STartPlayback";
     public static final short ACTION_PLAY_NEXT = 1;
     public static final short ACTION_PLAY_PREV = -1;
@@ -221,7 +221,7 @@ public class PlaybackManager implements Playback.Callback {
         // Do not save any media that was picked by user
         // All data might not available to work with such tracks when building
         // HistoryRecords and or TopAlbums/TopArtist
-        if (trackItem.getAlbumId() >= 0)
+        if (trackItem.getId() >= 0)
             ProviderManager.getHistoryProvider().addToHistory(trackItem);
     }
 
