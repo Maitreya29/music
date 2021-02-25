@@ -138,7 +138,8 @@ public class HistoryProvider {
     }
 
     @SuppressLint("DefaultLocale")
-    private String getWriteableHistoryRecord(MusicModel md, short playCount) {
+    @NonNull
+    private String getWriteableHistoryRecord(@NonNull MusicModel md, short playCount) {
         StringBuilder builder = new StringBuilder();
         String lineSeparator = System.lineSeparator();
         return builder
@@ -149,13 +150,14 @@ public class HistoryProvider {
                 .append(playCount).toString();
     }
 
+    @NonNull
     private HistoryRecord getHistoryRecord(File file) {
         String[] lines = StorageUtil.readLinesFromFile(file, 5);
         return new HistoryRecord(
                 lines[0],
                 lines[1],
                 lines[2],
-                Integer.parseInt(lines[3]),
+                Long.parseLong(lines[3]),
                 Short.parseShort(lines[4]),
                 file.lastModified());
     }

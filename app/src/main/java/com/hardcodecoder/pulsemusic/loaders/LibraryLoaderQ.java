@@ -6,7 +6,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
-import android.provider.MediaStore;
+import android.provider.MediaStore.Audio.Media;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -46,7 +46,7 @@ public class LibraryLoaderQ implements Callable<List<MusicModel>> {
     @Override
     public List<MusicModel> call() {
         List<MusicModel> libraryList = null;
-        final Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+        final Uri uri = Media.EXTERNAL_CONTENT_URI;
         final String[] cursor_cols = getCursorColumns();
 
         final Cursor cursor = mContext.getContentResolver().query(
@@ -61,33 +61,34 @@ public class LibraryLoaderQ implements Callable<List<MusicModel>> {
             libraryList = new ArrayList<>();
             final Uri sArtworkUri = Uri.parse("content://media/external/audio/albumart");
             do {
-                int _id = cursor.getInt(0);
+                int id = cursor.getInt(0);
 
-                // If exclude set contains this _id we will not include this in out list
-                if (excludeSet != null && excludeSet.contains(_id)) continue;
+                // If exclude set contains this id, we will not include this in out list
+                if (excludeSet != null && excludeSet.contains(id)) continue;
 
                 String songName;
                 String album;
                 String artist;
+                long albumId;
                 long dateAdded;
                 long dateModified;
                 int[] discTrackNumber;
-                int albumId;
                 int duration;
 
                 if (mIsAndroidQ) {
                     songName = cursor.getString(1);
                     album = cursor.getString(2);
-                    albumId = cursor.getInt(3);
+                    albumId = cursor.getLong(3);
                     artist = cursor.getString(4);
-                    discTrackNumber = MediaStoreHelper.getDiscTrackNumber(cursor.getInt(5));
+                    int track = cursor.getInt(5);
+                    discTrackNumber = new int[]{track / 1000 /*Disc number*/, track % 1000 /*Track number*/};
                     dateAdded = cursor.getLong(6);
                     dateModified = cursor.getLong(7);
                     duration = cursor.getInt(8);
                 } else {
                     songName = cursor.getString(1);
                     album = cursor.getString(2);
-                    albumId = cursor.getInt(3);
+                    albumId = cursor.getLong(3);
                     artist = cursor.getString(4);
                     discTrackNumber = new int[]{cursor.getInt(5), cursor.getInt(6)};
                     dateAdded = cursor.getLong(7);
@@ -95,17 +96,17 @@ public class LibraryLoaderQ implements Callable<List<MusicModel>> {
                     duration = cursor.getInt(9);
                 }
 
-                String songPath = ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, _id).toString();
-                String albumArt = ContentUris.withAppendedId(sArtworkUri, albumId).toString();
+                String trackUri = ContentUris.withAppendedId(Media.EXTERNAL_CONTENT_URI, id).toString();
+                String albumArtUri = ContentUris.withAppendedId(sArtworkUri, albumId).toString();
 
                 libraryList.add(new MusicModel(
-                        _id,
+                        id,
                         songName,
                         album == null ? "" : album,
                         albumId,
                         artist == null ? "" : artist,
-                        songPath,
-                        albumArt,
+                        trackUri,
+                        albumArtUri,
                         dateAdded,
                         dateModified,
                         discTrackNumber[0],
@@ -122,28 +123,28 @@ public class LibraryLoaderQ implements Callable<List<MusicModel>> {
     private String[] getCursorColumns() {
         if (mIsAndroidQ) {
             return new String[]{
-                    MediaStore.Audio.Media._ID,             // 0
-                    MediaStore.Audio.Media.TITLE,           // 1
-                    MediaStore.Audio.Media.ALBUM,           // 2
-                    MediaStore.Audio.Media.ALBUM_ID,        // 3
-                    MediaStore.Audio.Media.ARTIST,          // 4
-                    MediaStore.Audio.Media.TRACK,           // 5
-                    MediaStore.Audio.Media.DATE_ADDED,      // 6
-                    MediaStore.Audio.Media.DATE_MODIFIED,   // 7
-                    MediaStore.Audio.AudioColumns.DURATION, // 8
+                    Media._ID,             // 0
+                    Media.TITLE,           // 1
+                    Media.ALBUM,           // 2
+                    Media.ALBUM_ID,        // 3
+                    Media.ARTIST,          // 4
+                    Media.TRACK,           // 5
+                    Media.DATE_ADDED,      // 6
+                    Media.DATE_MODIFIED,   // 7
+                    Media.DURATION,        // 8
             };
         } else {
             return new String[]{
-                    MediaStore.Audio.Media._ID,             // 0
-                    MediaStore.Audio.Media.TITLE,           // 1
-                    MediaStore.Audio.Media.ALBUM,           // 2
-                    MediaStore.Audio.Media.ALBUM_ID,        // 3
-                    MediaStore.Audio.Media.ARTIST,          // 4
-                    MediaStore.Audio.Media.DISC_NUMBER,     // 5
-                    MediaStore.Audio.Media.CD_TRACK_NUMBER, // 6
-                    MediaStore.Audio.Media.DATE_ADDED,      // 7
-                    MediaStore.Audio.Media.DATE_MODIFIED,   // 8
-                    MediaStore.Audio.AudioColumns.DURATION, // 9
+                    Media._ID,             // 0
+                    Media.TITLE,           // 1
+                    Media.ALBUM,           // 2
+                    Media.ALBUM_ID,        // 3
+                    Media.ARTIST,          // 4
+                    Media.DISC_NUMBER,     // 5
+                    Media.CD_TRACK_NUMBER, // 6
+                    Media.DATE_ADDED,      // 7
+                    Media.DATE_MODIFIED,   // 8
+                    Media.DURATION,        // 9
             };
         }
     }
@@ -152,7 +153,7 @@ public class LibraryLoaderQ implements Callable<List<MusicModel>> {
     private String getInclusionSelection() {
         // Append duration filter
         return (mSelection == null || mSelection.trim().equals("") ? "" : mSelection + " AND ")
-                + MediaStore.Audio.Media.DURATION + " >= ?";
+                + Media.DURATION + " >= ?";
     }
 
     @NonNull
@@ -182,8 +183,8 @@ public class LibraryLoaderQ implements Callable<List<MusicModel>> {
         if (ignoredFoldersList != null && ignoredListSize > 0)
             excludeSelectionArgs = getExcludeSelectionARgs(ignoredFoldersList);
 
-        final Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
-        final String[] cursor_cols = {MediaStore.Audio.Media._ID};
+        final Uri uri = Media.EXTERNAL_CONTENT_URI;
+        final String[] cursor_cols = {Media._ID};
         final Cursor cursor = mContext.getContentResolver().query(
                 uri,
                 cursor_cols,
@@ -209,17 +210,17 @@ public class LibraryLoaderQ implements Callable<List<MusicModel>> {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder
                 .append("((")
-                .append(MediaStore.Audio.Media.VOLUME_NAME).append(" LIKE ?")
+                .append(Media.VOLUME_NAME).append(" LIKE ?")
                 .append(" AND ")
-                .append(MediaStore.Audio.Media.RELATIVE_PATH).append(" LIKE ?")
+                .append(Media.RELATIVE_PATH).append(" LIKE ?")
                 .append(")");
         for (int i = 0; i < ignoredListSize - 1; i++) {
             stringBuilder
                     .append(" OR ")
                     .append("(")
-                    .append(MediaStore.Audio.Media.VOLUME_NAME).append(" LIKE ?")
+                    .append(Media.VOLUME_NAME).append(" LIKE ?")
                     .append(" AND ")
-                    .append(MediaStore.Audio.Media.RELATIVE_PATH).append(" LIKE ?")
+                    .append(Media.RELATIVE_PATH).append(" LIKE ?")
                     .append(")");
         }
         return stringBuilder.append(")").toString();

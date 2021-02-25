@@ -6,17 +6,17 @@ public class TopAlbumModel {
 
     private final String mAlbumName;
     private final String mAlbumArt;
-    private final int mAlbumId;
+    private final long mAlbumId;
     private final int mPlayCount;
 
-    public TopAlbumModel(@NonNull String albumName, @NonNull String albumArt, int albumId, int playCount) {
+    public TopAlbumModel(@NonNull String albumName, @NonNull String albumArt, long albumId, int playCount) {
         mAlbumName = albumName;
         mAlbumArt = albumArt;
         mAlbumId = albumId;
         mPlayCount = playCount;
     }
 
-    public int getAlbumId() {
+    public long getAlbumId() {
         return mAlbumId;
     }
 

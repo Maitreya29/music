@@ -1,15 +1,22 @@
 package com.hardcodecoder.pulsemusic.model;
 
+import androidx.annotation.NonNull;
+
 public class HistoryRecord {
 
     private final String mTitle;
     private final String mAlbum;
     private final String mArtist;
-    private final int mAlbumId;
+    private final long mAlbumId;
     private final long mLastModified;
     private final short mPlayCount;
 
-    public HistoryRecord(String title, String album, String artist, int albumId, short playCount, long lastModified) {
+    public HistoryRecord(@NonNull String title,
+                         @NonNull String album,
+                         @NonNull String artist,
+                         long albumId,
+                         short playCount,
+                         long lastModified) {
         mTitle = title;
         mAlbum = album;
         mArtist = artist;
@@ -18,19 +25,22 @@ public class HistoryRecord {
         mLastModified = lastModified;
     }
 
+    @NonNull
     public String getTitle() {
         return mTitle;
     }
 
+    @NonNull
     public String getAlbum() {
         return mAlbum;
     }
 
+    @NonNull
     public String getArtist() {
         return mArtist;
     }
 
-    public int getAlbumId() {
+    public long getAlbumId() {
         return mAlbumId;
     }
 

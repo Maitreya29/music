@@ -3,10 +3,7 @@ package com.hardcodecoder.pulsemusic.loaders;
 import android.annotation.SuppressLint;
 import android.provider.MediaStore;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
-import com.hardcodecoder.pulsemusic.utils.LogUtils;
 
 public class MediaStoreHelper {
 
@@ -78,23 +75,5 @@ public class MediaStoreHelper {
             default:
                 return null;
         }
-    }
-
-    @NonNull
-    public static int[] getDiscTrackNumber(int track) {
-        String trackString = String.valueOf(track);
-        int[] discTrackNumber = new int[]{1, track}; // Disc number, track number
-        if (trackString.length() == 4) {
-            try {
-                // For multi-disc sets, track will be 1xxx for tracks on the first disc,
-                // 2xxx for tracks on the second disc, etc.
-                discTrackNumber[0] = Character.getNumericValue(trackString.charAt(0));
-                // Track number is the number xxx
-                discTrackNumber[1] = Integer.parseInt(trackString.substring(1));
-            } catch (Exception e) {
-                LogUtils.logException("TrackNumber", "MediaStoreHelper", "at: getDiscTrackNumber(" + track + ")", e);
-            }
-        }
-        return discTrackNumber;
     }
 }

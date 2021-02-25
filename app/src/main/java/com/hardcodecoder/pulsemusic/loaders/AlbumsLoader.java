@@ -4,7 +4,7 @@ import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.database.Cursor;
 import android.net.Uri;
-import android.provider.MediaStore;
+import android.provider.MediaStore.Audio.Albums;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,7 +29,10 @@ public class AlbumsLoader implements Callable<List<AlbumModel>> {
         this(contentResolver, sortOrder, null, null);
     }
 
-    AlbumsLoader(@NonNull ContentResolver contentResolver, @Nullable SortOrder.ALBUMS sortOrder, @Nullable String selection, @Nullable String[] args) {
+    AlbumsLoader(@NonNull ContentResolver contentResolver,
+                 @Nullable SortOrder.ALBUMS sortOrder,
+                 @Nullable String selection,
+                 @Nullable String[] args) {
         mContentResolver = contentResolver;
         mSortOrder = MediaStoreHelper.getSortOrderFor(sortOrder);
         mSelection = selection;
@@ -38,61 +41,66 @@ public class AlbumsLoader implements Callable<List<AlbumModel>> {
 
     @Override
     public List<AlbumModel> call() {
-        String[] col = {MediaStore.Audio.Albums._ID,
-                MediaStore.Audio.Albums.ALBUM,
-                MediaStore.Audio.Albums.ARTIST,
-                MediaStore.Audio.Albums.NUMBER_OF_SONGS,
-                MediaStore.Audio.Albums.FIRST_YEAR,
-                MediaStore.Audio.Albums.LAST_YEAR};
+        String[] col = getColumns();
 
         final Cursor cursor = mContentResolver.query(
-                MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI,
+                Albums.EXTERNAL_CONTENT_URI,
                 col,
                 mSelection,
                 mArgs,
                 mSortOrder);
 
-        List<AlbumModel> sanitizedAlbumsList = null;
+        List<AlbumModel> albumsList = null;
 
         if (cursor != null && cursor.moveToFirst()) {
-            int albumIdColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Albums._ID);
-            int albumColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Albums.ALBUM);
-            int albumArtistColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Albums.ARTIST);
-            int songCountColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Albums.NUMBER_OF_SONGS);
-            int albumFirstYearColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Albums.FIRST_YEAR);
-            int albumLastYearColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Albums.LAST_YEAR);
 
             final Uri sArtworkUri = Uri.parse("content://media/external/audio/albumart");
-
-            List<AlbumModel> albumsList = new ArrayList<>();
-            do {
-                String album = cursor.getString(albumColumnIndex);
-                if (null != album) {
-                    int albumId = cursor.getInt(albumIdColumnIndex);
-                    int num = cursor.getInt(songCountColumnIndex);
-                    int firstYear = cursor.getInt(albumFirstYearColumnIndex);
-                    int lastYear = cursor.getInt(albumLastYearColumnIndex);
-                    String albumArtist = cursor.getString(albumArtistColumnIndex);
-                    String albumArt = ContentUris.withAppendedId(sArtworkUri, albumId).toString();
-                    albumsList.add(new AlbumModel(album, albumId, albumArtist, num, firstYear, lastYear, albumArt));
-                }
-            } while (cursor.moveToNext());
-            cursor.close();
-
             // Make sure no album is returned that is present in the ignored folders list
-            if (null != LoaderCache.getAllTracksList()) {
-                Set<Integer> albumsSet = new HashSet<>();
+            Set<Long> albumIdsToAccept = new HashSet<>();
+            List<MusicModel> master = LoaderCache.getAllTracksList();
+            if (master != null) {
                 for (MusicModel md : LoaderCache.getAllTracksList()) {
-                    albumsSet.add(md.getAlbumId());
-                }
-
-                sanitizedAlbumsList = new ArrayList<>();
-                for (AlbumModel am : albumsList) {
-                    if (albumsSet.contains(am.getAlbumId()))
-                        sanitizedAlbumsList.add(am);
+                    albumIdsToAccept.add(md.getAlbumId());
                 }
             }
+
+            albumsList = new ArrayList<>();
+            do {
+                long albumId = cursor.getLong(0);
+                String album = cursor.getString(1);
+                if (null == album || !albumIdsToAccept.contains(albumId)) continue;
+
+                String albumArtist = cursor.getString(2);
+                int numTracks = cursor.getInt(3);
+                int firstYear = cursor.getInt(4);
+                int lastYear = cursor.getInt(5);
+
+                String albumArt = ContentUris.withAppendedId(sArtworkUri, albumId).toString();
+
+                albumsList.add(new AlbumModel(
+                        album,
+                        albumId,
+                        albumArtist == null ? "" : albumArtist,
+                        numTracks,
+                        firstYear,
+                        lastYear,
+                        albumArt));
+
+            } while (cursor.moveToNext());
+            cursor.close();
         }
-        return sanitizedAlbumsList;
+        return albumsList;
+    }
+
+    @NonNull
+    private String[] getColumns() {
+        return new String[]{
+                Albums._ID,                 // 0
+                Albums.ALBUM,               // 1
+                Albums.ARTIST,              // 2
+                Albums.NUMBER_OF_SONGS,     // 3
+                Albums.FIRST_YEAR,          // 4
+                Albums.LAST_YEAR,           // 5
+        };
     }
 }

@@ -19,11 +19,11 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textview.MaterialTextView;
-import com.hardcodecoder.pulsemusic.GlideApp;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.activities.main.SettingsActivity;
 import com.hardcodecoder.pulsemusic.dialog.base.RoundedCustomBottomSheet;
 import com.hardcodecoder.pulsemusic.dialog.base.RoundedCustomBottomSheetFragment;
+import com.hardcodecoder.pulsemusic.glide.GlideApp;
 import com.hardcodecoder.pulsemusic.utils.UserInfo;
 
 import java.io.File;

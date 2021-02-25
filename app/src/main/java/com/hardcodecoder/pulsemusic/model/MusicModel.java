@@ -12,12 +12,12 @@ public class MusicModel implements Serializable {
     private final String mAlbum;
     private final String mArtist;
     private final String mAlbumArtUrl;
+    private final long mAlbumId;
     // Unix Time: Elapsed seconds since 1 January 1970
     private final long mDateAdded;
     // Unix Time: Elapsed seconds since 1 January 1970
     private final long mDateModified;
     private final int mId;
-    private final int mAlbumId;
     private final int mDiscNumber;
     private final int mTrackNumber;
     // Duration in milli seconds
@@ -26,7 +26,7 @@ public class MusicModel implements Serializable {
     public MusicModel(int id,
                       @NonNull String trackName,
                       @NonNull String album,
-                      int albumId,
+                      long albumId,
                       @NonNull String artist,
                       @NonNull String trackPath,
                       @Nullable String albumArtUrl,
@@ -73,7 +73,7 @@ public class MusicModel implements Serializable {
         return mAlbumArtUrl;
     }
 
-    public int getAlbumId() {
+    public long getAlbumId() {
         return mAlbumId;
     }
 

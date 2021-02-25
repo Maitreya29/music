@@ -6,7 +6,7 @@ import android.content.ContentUris;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
-import android.provider.MediaStore;
+import android.provider.MediaStore.Audio.Media;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -40,17 +40,17 @@ public class LibraryLoader implements Callable<List<MusicModel>> {
     @Override
     public List<MusicModel> call() {
         List<MusicModel> libraryList = null;
-        final Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+        final Uri uri = Media.EXTERNAL_CONTENT_URI;
         final String[] cursor_cols = {
-                MediaStore.Audio.Media._ID,             // 0
-                MediaStore.Audio.Media.TITLE,           // 1
-                MediaStore.Audio.Media.ALBUM,           // 2
-                MediaStore.Audio.Media.ALBUM_ID,        // 3
-                MediaStore.Audio.Media.ARTIST,          // 4
-                MediaStore.Audio.Media.TRACK,           // 5
-                MediaStore.Audio.Media.DATE_ADDED,      // 6
-                MediaStore.Audio.Media.DATE_MODIFIED,   // 7
-                MediaStore.Audio.AudioColumns.DURATION, // 8
+                Media._ID,             // 0
+                Media.TITLE,           // 1
+                Media.ALBUM,           // 2
+                Media.ALBUM_ID,        // 3
+                Media.ARTIST,          // 4
+                Media.TRACK,           // 5
+                Media.DATE_ADDED,      // 6
+                Media.DATE_MODIFIED,   // 7
+                Media.DURATION,        // 8
         };
 
         final Cursor cursor = mContentResolver.query(
@@ -64,31 +64,32 @@ public class LibraryLoader implements Callable<List<MusicModel>> {
             libraryList = new ArrayList<>();
             final Uri sArtworkUri = Uri.parse("content://media/external/audio/albumart");
             do {
-                int _id = cursor.getInt(0);
+                int id = cursor.getInt(0);
                 String songName = cursor.getString(1);
                 String album = cursor.getString(2);
-                int albumId = cursor.getInt(3);
+                long albumId = cursor.getLong(3);
                 String artist = cursor.getString(4);
-                int[] discTrackNumber = MediaStoreHelper.getDiscTrackNumber(cursor.getInt(5));
+                int track = cursor.getInt(5);
                 long dateAdded = cursor.getLong(6);
                 long dateModified = cursor.getLong(7);
                 int duration = cursor.getInt(8);
 
-                String songPath = ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, _id).toString();
+
+                String trackUri = ContentUris.withAppendedId(Media.EXTERNAL_CONTENT_URI, id).toString();
                 String albumArt = ContentUris.withAppendedId(sArtworkUri, albumId).toString();
 
                 libraryList.add(new MusicModel(
-                        _id,
+                        id,
                         songName,
                         album == null ? "" : album,
                         albumId,
                         artist == null ? "" : artist,
-                        songPath,
+                        trackUri,
                         albumArt,
                         dateAdded,
                         dateModified,
-                        discTrackNumber[0],
-                        discTrackNumber[1],
+                        track / 1000,
+                        track % 1000,
                         duration));
             } while (cursor.moveToNext());
             cursor.close();
@@ -102,7 +103,7 @@ public class LibraryLoader implements Callable<List<MusicModel>> {
                 selection == null || selection.trim().equals("") ? "" : selection + " AND ");
 
         // Append duration filter
-        completeSelection.append(MediaStore.Audio.Media.DURATION).append(" >= ?");
+        completeSelection.append(Media.DURATION).append(" >= ?");
 
         // Append ignored folders selection
         List<String> ignoredFoldersList = ProviderManager.getIgnoredListProvider().getIgnoredList();
@@ -138,7 +139,7 @@ public class LibraryLoader implements Callable<List<MusicModel>> {
     private String getIgnoreFolderSelection(int size) {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < size; i++) {
-            builder.append(" AND ").append(MediaStore.Audio.AudioColumns.DATA).append(" NOT LIKE ?");
+            builder.append(" AND ").append(Media.DATA).append(" NOT LIKE ?");
         }
         return builder.toString();
     }

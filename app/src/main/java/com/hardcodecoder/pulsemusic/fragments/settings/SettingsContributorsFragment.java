@@ -11,9 +11,9 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.hardcodecoder.pulsemusic.GlideApp;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.fragments.settings.base.SettingsBaseFragment;
+import com.hardcodecoder.pulsemusic.glide.GlideApp;
 
 public class SettingsContributorsFragment extends SettingsBaseFragment {
 

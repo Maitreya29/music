@@ -7,13 +7,13 @@ public class AlbumModel {
     private final String mAlbumName;
     private final String mAlbumArtist;
     private final String mAlbumArt;
-    private final int mAlbumId;
+    private final long mAlbumId;
     private final int mSongsCount;
     private final int mFirstYear;
     private final int mLastYear;
 
     public AlbumModel(@NonNull String albumName,
-                      int albumId,
+                      long albumId,
                       @NonNull String albumArtist,
                       int songsCount,
                       int firstYear,
@@ -33,7 +33,7 @@ public class AlbumModel {
         return mAlbumName;
     }
 
-    public int getAlbumId() {
+    public long getAlbumId() {
         return mAlbumId;
     }
 

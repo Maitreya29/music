@@ -1,6 +1,7 @@
 package com.hardcodecoder.pulsemusic.adapters.main;
 
 import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +56,7 @@ public class AlbumsAdapter extends EfficientRecyclerViewAdapter<AlbumModel, Albu
 
     public void updateSortOrder(SortOrder.ALBUMS sortOrder) {
         mSortOrder = sortOrder;
-        final Handler handler = new Handler();
+        final Handler handler = new Handler(Looper.getMainLooper());
         TaskRunner.executeAsync(() -> {
             List<AlbumModel> currentDataList = getDataList();
             List<AlbumModel> oldSortedTracks = new ArrayList<>(currentDataList);

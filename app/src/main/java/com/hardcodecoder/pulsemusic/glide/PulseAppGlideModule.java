@@ -1,4 +1,4 @@
-package com.hardcodecoder.pulsemusic;
+package com.hardcodecoder.pulsemusic.glide;
 
 import android.content.Context;
 import android.util.Log;
@@ -10,9 +10,10 @@ import com.bumptech.glide.annotation.GlideModule;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.module.AppGlideModule;
 import com.bumptech.glide.request.RequestOptions;
+import com.hardcodecoder.pulsemusic.BuildConfig;
 
 @GlideModule
-public final class MyAppGlideModule extends AppGlideModule {
+public final class PulseAppGlideModule extends AppGlideModule {
 
     @Override
     public void applyOptions(@NonNull Context context, @NonNull GlideBuilder builder) {

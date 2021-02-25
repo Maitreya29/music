@@ -13,8 +13,8 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.shape.CornerFamily;
-import com.hardcodecoder.pulsemusic.GlideApp;
 import com.hardcodecoder.pulsemusic.R;
+import com.hardcodecoder.pulsemusic.glide.GlideApp;
 import com.hardcodecoder.pulsemusic.helper.MediaArtHelper;
 import com.hardcodecoder.pulsemusic.themes.ThemeColors;
 
@@ -76,7 +76,7 @@ public class MediaArtImageView extends ShapeableImageView {
      *                    If this is -1 and load from {@param albumArtUrl} fails or is null,
      *                    fallback image wil be tinted with ThemeColor#getCurrentColorPrimary
      */
-    public void loadAlbumArt(@Nullable final String albumArtUrl, final int albumId) {
+    public void loadAlbumArt(@Nullable final String albumArtUrl, final long albumId) {
         target = GlideApp
                 .with(this)
                 .load(albumArtUrl)
