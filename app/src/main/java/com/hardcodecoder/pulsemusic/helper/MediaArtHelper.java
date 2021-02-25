@@ -5,18 +5,32 @@ import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 
 import com.hardcodecoder.pulsemusic.MediaArtCache;
 import com.hardcodecoder.pulsemusic.R;
+import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.themes.ThemeColors;
 import com.hardcodecoder.pulsemusic.utils.ImageUtil;
 
 public class MediaArtHelper {
 
     private static TypedArray mMediaArtColors;
+
+    public static Bitmap getAlbumArt(@NonNull Context context, @NonNull MusicModel data) {
+        // We know that manually selected tracks have negative track id's
+        if (data.getId() < 0)
+            return getDefaultAlbumArtBitmap(context, data.getAlbumId());
+        try {
+            Uri uri = Uri.parse(data.getAlbumArtUrl());
+            return ImageUtil.getScaledBitmap(context.getContentResolver().openInputStream(uri), 512, 512);
+        } catch (Exception e) {
+            return getDefaultAlbumArtBitmap(context, data.getAlbumId());
+        }
+    }
 
     public static Drawable getDefaultAlbumArt(@NonNull Context context, long albumId) {
         // albumId = -1 represents album art tinted with the primary color

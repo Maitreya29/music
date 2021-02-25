@@ -1,6 +1,7 @@
 package com.hardcodecoder.pulsemusic.utils;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 
@@ -13,6 +14,9 @@ import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.themes.ColorUtil;
 import com.hardcodecoder.pulsemusic.themes.ThemeColors;
 import com.hardcodecoder.pulsemusic.themes.TintHelper;
+
+import java.io.BufferedInputStream;
+import java.io.InputStream;
 
 public class ImageUtil {
 
@@ -49,6 +53,37 @@ public class ImageUtil {
     @Nullable
     public static Drawable getRoundedRectangle(@NonNull Context context) {
         return ContextCompat.getDrawable(context, R.drawable.shape_rounded_rectangle);
+    }
+
+    @Nullable
+    public static Bitmap getScaledBitmap(@NonNull final InputStream stream, int width, int height) {
+        try {
+            if (null == stream) {
+                return null;
+            }
+
+            BufferedInputStream bufferedInputStream = new BufferedInputStream(stream);
+            bufferedInputStream.mark(Integer.MAX_VALUE);
+
+            // First decode with inJustDecodeBounds=true to check dimensions
+            final BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inJustDecodeBounds = true;
+            BitmapFactory.decodeStream(bufferedInputStream, null, options);
+
+            // Calculate inSampleSize
+            options.inSampleSize = calculateInSampleSize(options, width, height);
+
+            // Decode bitmap with inSampleSize set
+            options.inJustDecodeBounds = false;
+            bufferedInputStream.reset();
+            return Bitmap.createScaledBitmap(
+                    BitmapFactory.decodeStream(bufferedInputStream, null, options),
+                    width,
+                    height, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public static int calculateInSampleSize(@NonNull BitmapFactory.Options options, int reqWidth, int reqHeight) {

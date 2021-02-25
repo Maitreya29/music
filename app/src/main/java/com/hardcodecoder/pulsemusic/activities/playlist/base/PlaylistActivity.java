@@ -26,7 +26,7 @@ import com.hardcodecoder.pulsemusic.TaskRunner;
 import com.hardcodecoder.pulsemusic.activities.base.ControllerActivity;
 import com.hardcodecoder.pulsemusic.activities.main.TrackPickerActivity;
 import com.hardcodecoder.pulsemusic.helper.MediaArtHelper;
-import com.hardcodecoder.pulsemusic.loaders.MediaArtCollageLoader;
+import com.hardcodecoder.pulsemusic.loaders.PlaylistArtLoader;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.themes.ThemeColors;
 import com.hardcodecoder.pulsemusic.themes.ThemeManagerUtils;
@@ -112,7 +112,7 @@ public abstract class PlaylistActivity extends ControllerActivity {
     }
 
     private void loadPlaylistMediaArt(@NonNull List<MusicModel> list) {
-        TaskRunner.executeAsync(new MediaArtCollageLoader(this, list), result -> {
+        TaskRunner.executeAsync(new PlaylistArtLoader(this, list), result -> {
             MediaArtImageView playlistArt = findViewById(R.id.playlist_media_art);
             if (null != result) playlistArt.setImageBitmap(result);
             else loadDefaultPlaylistArt(playlistArt);

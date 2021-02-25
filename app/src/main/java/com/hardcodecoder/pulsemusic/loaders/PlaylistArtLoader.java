@@ -1,8 +1,8 @@
 package com.hardcodecoder.pulsemusic.loaders;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.net.Uri;
@@ -13,17 +13,17 @@ import androidx.annotation.Nullable;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.utils.ImageUtil;
 
-import java.io.InputStream;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Callable;
 
-public class MediaArtCollageLoader implements Callable<Bitmap> {
+public class PlaylistArtLoader implements Callable<Bitmap> {
 
     private final Context mContext;
     private final List<MusicModel> mList;
 
-    public MediaArtCollageLoader(@NonNull Context context, @Nullable List<MusicModel> list) {
+    public PlaylistArtLoader(@NonNull Context context, @Nullable List<MusicModel> list) {
         mContext = context;
         mList = list;
     }
@@ -33,9 +33,9 @@ public class MediaArtCollageLoader implements Callable<Bitmap> {
         if (null == mList || mList.isEmpty()) return null;
         if (mList.size() < 4) {
             for (int i = 0; i < mList.size(); i++) {
-                String albumArtUrl = mList.get(i).getAlbumArtUrl();
-                if (albumArtUrl == null || albumArtUrl.trim().isEmpty()) continue;
-                Bitmap bm = decodeSampledBitmapFromUri(Uri.parse(albumArtUrl), 512, 512);
+                String albumArtUri = mList.get(i).getAlbumArtUrl();
+                if (albumArtUri == null || albumArtUri.trim().isEmpty()) continue;
+                Bitmap bm = decodeSampledBitmapFromUri(albumArtUri, 512, 512);
                 if (null != bm) return bm;
             }
             return null;
@@ -57,18 +57,17 @@ public class MediaArtCollageLoader implements Callable<Bitmap> {
             // Add loaded index to used indices array
             usedIndices[index] = index;
 
-            String albumArtUrl = mList.get(index).getAlbumArtUrl();
+            String albumArtUri = mList.get(index).getAlbumArtUrl();
             // Calculate gap from remaining length
             int gap = (len - index) / (4 - count);
 
-            if (albumArtUrl == null || albumArtUrl.trim().isEmpty()) {
+            if (albumArtUri == null || albumArtUri.trim().isEmpty()) {
                 // fetch new index to load in next iteration
                 index = index + gap > len ? getUnusedIndex(usedIndices) : index + gap;
                 continue;
             }
 
-            Uri uri = Uri.parse(albumArtUrl);
-            Bitmap bm = decodeSampledBitmapFromUri(uri, 256, 256);
+            Bitmap bm = decodeSampledBitmapFromUri(albumArtUri, 256, 256);
 
             if (null != bm) {
                 // We have a bitmap, add to array
@@ -107,27 +106,13 @@ public class MediaArtCollageLoader implements Callable<Bitmap> {
         return -1;
     }
 
+    @SuppressLint("NewApi")
     @Nullable
-    private Bitmap decodeSampledBitmapFromUri(@NonNull Uri uri, int reqWidth, int reqHeight) {
+    private Bitmap decodeSampledBitmapFromUri(@NonNull String uriString, int reqWidth, int reqHeight) {
         try {
-            InputStream stream = mContext.getContentResolver().openInputStream(uri);
-            if (null == stream) {
-                return null;
-            }
-
-            // First decode with inJustDecodeBounds=true to check dimensions
-            final BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inJustDecodeBounds = true;
-            BitmapFactory.decodeStream(stream, null, options);
-
-            // Calculate inSampleSize
-            options.inSampleSize = ImageUtil.calculateInSampleSize(options, reqWidth, reqHeight);
-
-            // Decode bitmap with inSampleSize set
-            options.inJustDecodeBounds = false;
-            stream = mContext.getContentResolver().openInputStream(uri);
-            return Bitmap.createScaledBitmap(BitmapFactory.decodeStream(stream, null, options), reqWidth, reqHeight, true);
-        } catch (Exception e) {
+            Uri uri = Uri.parse(uriString);
+            return ImageUtil.getScaledBitmap(mContext.getContentResolver().openInputStream(uri), reqWidth, reqHeight);
+        } catch (IOException e) {
             e.printStackTrace();
             return null;
         }

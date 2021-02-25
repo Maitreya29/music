@@ -1,12 +1,9 @@
 package com.hardcodecoder.pulsemusic.playback;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.media.MediaMetadata;
 import android.media.session.MediaSession;
 import android.media.session.PlaybackState;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,7 +16,6 @@ import com.hardcodecoder.pulsemusic.providers.ProviderManager;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 import com.hardcodecoder.pulsemusic.utils.LogUtils;
 
-import java.io.InputStream;
 import java.util.List;
 
 public class PlaybackManager implements Playback.Callback {
@@ -166,19 +162,6 @@ public class PlaybackManager implements Playback.Callback {
         }
     }
 
-    private Bitmap loadAlbumArt(@NonNull String path, int albumId) {
-        // We know that manually selected tracks have negative album id
-        if (albumId < 0)
-            return MediaArtHelper.getDefaultAlbumArtBitmap(mContext, albumId);
-        try {
-            Uri uri = Uri.parse(path);
-            InputStream is = mContext.getContentResolver().openInputStream(uri);
-            return BitmapFactory.decodeStream(is);
-        } catch (Exception e) {
-            return MediaArtHelper.getDefaultAlbumArtBitmap(mContext, albumId);
-        }
-    }
-
     private long getActions(int state) {
         long actions;
         if (state == PlaybackState.STATE_PLAYING) {
@@ -215,7 +198,7 @@ public class PlaybackManager implements Playback.Callback {
             metadataBuilder.putString(MediaMetadata.METADATA_KEY_TITLE, trackItem.getTrackName());
             metadataBuilder.putString(MediaMetadata.METADATA_KEY_ARTIST, trackItem.getArtist());
             metadataBuilder.putString(MediaMetadata.METADATA_KEY_ALBUM, trackItem.getAlbum());
-            metadataBuilder.putBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART, loadAlbumArt(trackItem.getAlbumArtUrl(), trackItem.getAlbumId()));
+            metadataBuilder.putBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART, MediaArtHelper.getAlbumArt(mContext, trackItem));
             mServiceCallback.onMetaDataChanged(metadataBuilder.build());
         }
         // Do not save any media that was picked by user
