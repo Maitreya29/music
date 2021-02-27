@@ -34,6 +34,8 @@ public class PulseTileService extends TileService implements PulseController.Con
 
         @Override
         public void onSessionDestroyed() {
+            if (null != mController)
+                mController.unregisterCallback(mCallback);
             mController = null;
             updateTileData(null);
             updateTileState(null);

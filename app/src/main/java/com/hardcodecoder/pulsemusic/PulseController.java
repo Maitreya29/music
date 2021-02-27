@@ -125,6 +125,17 @@ public class PulseController {
             mMainHandler.post(() -> callback.onTrackItemRemoved(position));
     }
 
+    public void resetController() {
+        if (null != mMediaController) {
+            for (Callback callback : mCallbacksList)
+                mMediaController.unregisterCallback(callback);
+            mMediaController = null;
+        }
+        mCallbacksList.clear();
+        if (null != mConnectionCallbacks) mConnectionCallbacks.clear();
+        mQueueManager.resetQueue();
+    }
+
     @NonNull
     public PulseRemote getRemote() {
         return mRemote;
@@ -287,6 +298,12 @@ public class PulseController {
         }
 
         public void onTrackItemMoved(int from, int to) {
+        }
+
+        @Override
+        public void onSessionDestroyed() {
+            super.onSessionDestroyed();
+            PulseController.getInstance().resetController();
         }
     }
 }
