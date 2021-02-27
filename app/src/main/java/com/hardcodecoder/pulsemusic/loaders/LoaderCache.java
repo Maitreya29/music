@@ -79,5 +79,7 @@ public class LoaderCache {
         mSuggestions = null;
         if (mLatestTracks != null) mLatestTracks.clear();
         mLatestTracks = null;
+        if (null != mRediscoverList) mRediscoverList.clear();
+        mRediscoverList = null;
     }
 }
