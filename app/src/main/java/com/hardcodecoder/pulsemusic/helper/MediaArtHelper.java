@@ -62,6 +62,6 @@ public class MediaArtHelper {
         if (albumId == -1) return ThemeColors.getCurrentColorPrimary();
         if (null == mMediaArtColors)
             mMediaArtColors = context.getResources().obtainTypedArray(R.array.album_art_colors);
-        return mMediaArtColors.getColor((int) albumId % mMediaArtColors.length(), 0xFF0000);
+        return mMediaArtColors.getColor((int) (albumId % mMediaArtColors.length()), 0xFF0000);
     }
 }

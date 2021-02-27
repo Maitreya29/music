@@ -14,13 +14,13 @@ public class MediaArtCache {
 
     public static void addDrawableIfNotPresent(@NonNull Drawable drawable, long albumId) {
         //Since 0th index is reserved
-        int index = (int) albumId % 7;
+        int index = (int) (albumId % 7);
         mMediaArtDefaultDrawables[index + 1] = drawable;
     }
 
     public static Drawable getMediaArtDrawable(long albumId) {
         //Since 0th index is reserved
-        int index = (int) albumId % 7;
+        int index = (int) (albumId % 7);
         return mMediaArtDefaultDrawables[index + 1];
     }
 
