@@ -22,7 +22,7 @@
         android:layout_marginEnd="16dp"
         android:layout_toStartOf="@id/setting_toggleable_item_switch"
         android:maxLines="4"
-        android:textAppearance="@style/ItemSub"
+        android:textAppearance="@style/Appearance.Text.Body2"
         android:textColor="?android:attr/textColorSecondary"
         tools:text="@tools:sample/lorem/random" />
 

@@ -29,7 +29,7 @@
         android:layout_marginTop="2dp"
         android:layout_toEndOf="@id/settings_list_item_icon"
         android:maxLines="4"
-        android:textAppearance="@style/ItemSub"
+        android:textAppearance="@style/Appearance.Text.Body2"
         android:textColor="?android:attr/textColorSecondary"
         tools:text="@tools:sample/lorem/random" />
 </merge>
