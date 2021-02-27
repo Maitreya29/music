@@ -51,16 +51,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:clipChildren="false"
-        android:clipToPadding="false"
         app:cardBackgroundColor="?attr/colorSurface"
-        app:cardCornerRadius="@dimen/rounding_radius_8dp"
-        app:cardElevation="4dp"
-        app:cardUseCompatPadding="false">
+        app:cardCornerRadius="@dimen/rounding_radius_8dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:clipToPadding="false"
             android:padding="16dp">
 
             <com.google.android.material.textview.MaterialTextView
@@ -78,6 +75,7 @@
                 android:layout_height="136dp"
                 android:layout_marginTop="16dp"
                 app:cardCornerRadius="@dimen/rounding_radius_8dp"
+                app:cardElevation="4dp"
                 app:layout_constraintEnd_toStartOf="@id/bmc_frame"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/donate_options_title">
@@ -109,6 +107,7 @@
                 android:layout_height="136dp"
                 android:layout_marginStart="16dp"
                 app:cardCornerRadius="@dimen/rounding_radius_8dp"
+                app:cardElevation="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/pay_pal_frame"
                 app:layout_constraintTop_toTopOf="@id/pay_pal_frame">
@@ -140,6 +139,7 @@
                 android:layout_height="136dp"
                 android:layout_marginTop="16dp"
                 app:cardCornerRadius="@dimen/rounding_radius_8dp"
+                app:cardElevation="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/pay_pal_frame">

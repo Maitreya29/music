@@ -24,8 +24,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        app:cardElevation="4dp"
         app:contentPadding="16dp"
-        app:layout_constraintStart_toStartOf="@id/category_title"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/category_title"
         app:layout_constraintWidth_max="300dp">
 
@@ -43,7 +44,7 @@
             android:id="@+id/donate_sub_head"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="48dp"
             android:gravity="center"
             android:text="@string/donation_card_text"
@@ -55,15 +56,17 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:clipChildren="false"
         android:clipToPadding="false"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toEndOf="@id/donation_options_1"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_max="460dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:clipToPadding="false"
             android:padding="16dp">
 
             <com.google.android.material.textview.MaterialTextView
@@ -72,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/donate_options_title"
                 android:textAppearance="@style/Appearance.Text.Body1"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@id/pay_pal_frame"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.card.MaterialCardView
@@ -80,6 +83,8 @@
                 android:layout_width="0dp"
                 android:layout_height="136dp"
                 android:layout_marginTop="16dp"
+                app:cardCornerRadius="@dimen/rounding_radius_8dp"
+                app:cardElevation="4dp"
                 app:layout_constraintEnd_toStartOf="@id/bmc_frame"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/donate_options_title"
@@ -110,6 +115,8 @@
                 android:id="@+id/bmc_frame"
                 android:layout_width="0dp"
                 android:layout_height="136dp"
+                app:cardCornerRadius="@dimen/rounding_radius_8dp"
+                app:cardElevation="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/pay_pal_frame"
                 app:layout_constraintTop_toTopOf="@id/pay_pal_frame"
@@ -141,13 +148,15 @@
                 android:layout_width="0dp"
                 android:layout_height="136dp"
                 android:layout_marginTop="16dp"
+                app:cardCornerRadius="@dimen/rounding_radius_8dp"
+                app:cardElevation="4dp"
                 app:layout_constraintEnd_toEndOf="@id/bmc_frame"
                 app:layout_constraintStart_toStartOf="@id/pay_pal_frame"
                 app:layout_constraintTop_toBottomOf="@id/pay_pal_frame">
 
                 <com.hardcodecoder.pulsemusic.views.ColoredIconView
                     android:id="@+id/upi"
-                    android:layout_width="436dp"
+                    android:layout_width="match_parent"
                     android:layout_height="160dp"
                     android:layout_marginTop="-24dp"
                     app:icon="@drawable/ic_upi"
