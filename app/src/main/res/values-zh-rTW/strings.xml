@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Pulse 音樂播放器</string>
+    <!-- Content description -->
+    <!-- General strings -->
+    <string name="tracks_not_found">未找到音樂</string>
+    <!-- Dialogs -->
+    <string name="yes">是</string>
+    <string name="set">設定</string>
+    <string name="cancel">取消</string>
+    <!-- Navigation section titles -->
+    <!-- Home Fragment -->
+    <string name="for_you">為您推薦</string>
+    <string name="new_in_library">新音樂</string>
+    <string name="top_artist">熱門演出者</string>
+    <string name="top_albums">熱門專輯</string>
+    <!-- Home menu contents -->
+    <string name="def_user_name">使用者</string>
+    <string name="select_image">選擇圖片</string>
+    <!-- Playlist fragment -->
+    <string name="playlist_delete_dialog_title">確定要刪除這個播放列表嗎？</string>
+    <string name="cannot_delete_default_playlist">無法移除預設播放清單</string>
+    <!-- Toolbar Options menu -->
+    <string name="alphabet_asc">字母順序A至Z</string>
+    <string name="alphabet_desc">字母順序Z至A</string>
+    <string name="duration_asc">長度 ↑</string>
+    <string name="duration_desc">長度 ↓</string>
+    <string name="date_added_asc">新增日期(由舊到新)</string>
+    <string name="date_added_desc">新增日期(由新到舊)</string>
+    <string name="date_modified_asc">變更日期(由舊到新)</string>
+    <string name="date_modified_desc">變更日期(由新到舊)</string>
+    <string name="album_track_number_asc">曲目編號升序</string>
+    <string name="album_track_number_desc">曲目編號降序</string>
+    <string name="album_artist_asc">專輯演出者名稱升序</string>
+    <string name="album_artist_desc">專輯演出者名稱降序</string>
+    <string name="create_playlist">建立播放清單</string>
+    <string name="one">一</string>
+    <string name="two">2</string>
+    <string name="three">3</string>
+    <string name="four">4</string>
+    <string name="five">5</string>
+    <string name="six">6</string>
+    <!-- Options menu for list items -->
+    <string name="play_next">播放下一首</string>
+    <string name="add_to_queue">加入佇列</string>
+    <string name="add_to_playlist">加入播放清單</string>
+    <string name="go_to_album">跳轉至專輯</string>
+    <string name="go_to_artist">跳轉至演出者</string>
+    <!-- Playlist tracks Activity -->
+    <!-- Favorites Playlist Activity-->
+    <!-- Recent Activity-->
+    <!-- Now Playing Activity -->
+    <string name="now_playing">現正播放</string>
+    <!-- Media Folder Chooser Activity -->
+    <string name="select_folders">選擇資料夾</string>
+    <!-- Details Activity -->
+    <!-- Song info dialog -->
+    <!-- Search Activity -->
+    <!-- Settings Activity -->
+    <!-- Category -->
+    <string name="general">一般</string>
+    <string name="general_desc">配置基礎設定</string>
+    <string name="now_playing_title">現正播放</string>
+    <string name="now_playing_desc">自訂現正播放螢幕</string>
+    <string name="audio">音訊</string>
+    <string name="audio_desc">變更音訊設定</string>
+    <string name="contributors">貢獻者</string>
+    <string name="contributors_desc">聯絡開發者</string>
+    <string name="about">關於</string>
+    <!-- General Section -->
+    <string name="ignored_folder_title">選擇忽略資料夾</string>
+    <string name="ignored_folder_desc">新增或移除資料夾以排除顯示在音樂庫中的歌曲</string>
+    <string name="ignored_folder_picker_title">選擇資料夾</string>
+    <string name="ignored_folder_picker_empty_text">忽略清單為空</string>
+    <string name="duration_filter_unit">秒</string>
+    <!-- Theme section -->
+    <string name="custom">自訂</string>
+    <!-- Now playing settings -->
+    <!-- Audio settings -->
+    <string name="select_bluetooth_action">設定偏好的藍牙動作</string>
+    <!-- Contributors -->
+    <!-- Donations -->
+    <!-- About -->
+    <!-- Accents -->
+    <!-- For translators: If the color words does not make much sense in your language,
+    you can try substituting a similar description of the color. But keep it short
+    -->
+    <string name="coral">珊瑚</string>
+    <string name="sunkist">香吉士</string>
+    <!-- Custom accents dialog -->
+    <string name="apply">套用</string>
+    <string name="presets">預設</string>
+    <!-- App shortcuts -->
+    <!-- Max length = 10 characters including spaces-->
+    <!-- Max length = 25 characters including spaces-->
+    <!-- Max length = 10 characters including spaces-->
+    <!-- Max length = 25 characters including spaces-->
+    <string name="shortcut_suggested_label">為您推薦</string>
+    <!-- Max length = 10 characters including spaces-->
+    <string name="shortcut_suggested_label_long">為您推薦</string>
+    <!-- Max length = 25 characters including spaces-->
+</resources>

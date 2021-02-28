@@ -27,7 +27,7 @@
     <string name="edit_playlist_title">Изменить название плейлиста</string>
     <string name="hint_create_playlist">Введите название плейлиста</string>
     <string name="add_track_to">Добавить в\.\.\.</string>
-    <string name="message_no_playlist_found">Плейлисты не найдены\nНажмите кнопку "Добавить", чтобы создать новый</string>
+    <string name="message_no_playlist_found">Плейлисты не найдены\nНажмите кнопку \"Добавить\", чтобы создать новый</string>
     <string name="toast_added_to_playlist">Трек добавлен в плейлист</string>
     <string name="toast_add_to_playlist_failed">Не удалось добавить трек</string>
     <string name="yes">Да</string>
@@ -322,12 +322,18 @@
     <string name="presets">Палитра</string>
 
     <!-- App shortcuts -->
-    <string name="shortcut_shuffle">Перемешать</string> <!-- Max length = 10 characters including spaces-->
-    <string name="shortcut_shuffle_desc">Перемешать</string> <!-- Max length = 25 characters including spaces-->
+    <!-- Max length = 10 characters including spaces-->
+    <string name="shortcut_shuffle">Перемешать</string>
+    <!-- Max length = 25 characters including spaces-->
+    <string name="shortcut_shuffle_desc">Перемешать</string>
 
-    <string name="shortcut_latest">Последние</string> <!-- Max length = 10 characters including spaces-->
-    <string name="shortcut_latest_desc">Последние</string> <!-- Max length = 25 characters including spaces-->
+    <!-- Max length = 10 characters including spaces-->
+    <string name="shortcut_latest">Последние</string>
+    <!-- Max length = 25 characters including spaces-->
+    <string name="shortcut_latest_desc">Последние</string>
 
-    <string name="shortcut_suggested_label">Для вас</string> <!-- Max length = 10 characters including spaces-->
-    <string name="shortcut_suggested_label_long">Для вас</string> <!-- Max length = 25 characters including spaces-->
+    <!-- Max length = 10 characters including spaces-->
+    <string name="shortcut_suggested_label">Для вас</string>
+    <!-- Max length = 25 characters including spaces-->
+    <string name="shortcut_suggested_label_long">Для вас</string>
 </resources>

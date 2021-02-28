@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Pulse Music</string>
+    <string name="toast_requires_storage_access">O aplicativo precisa acessar o armazenamento do dispositivo para funcionar</string>
+    <string name="notification_playback_channel_name">Notificação da música</string>
+    <string name="notification_audio_channel_name">Detecção de dispositivo de áudio</string>
+    <!-- Content description -->
+    <string name="desc_album_art">Imagem da arte do álbum</string>
+    <string name="desc_close_btn">Botão fechar</string>
+    <string name="desc_action_btn">Botão de ação</string>
+    <string name="desc_icon_button">Botão de ícone</string>
+    <string name="desc_confirm_btn">Confirmar seleção</string>
+    <string name="desc_play_pause_btn">Botão de reprodução e pausa de mídia</string>
+    <string name="desc_options_btn">Botão do menu de contexto</string>
+    <!-- General strings -->
+    <string name="equalizer">Equalizador</string>
+    <string name="shuffle">Shuffle</string>
+    <string name="tracks_not_found">Nenhuma faixa encontrada</string>
+    <string name="unknown">Desconhecido</string>
+    <!-- Dialogs -->
+    <string name="question_enter_your_name">Digite seu nome</string>
+    <string name="toast_enter_your_name">Por favor, insira seu nome</string>
+    <string name="edit_playlist_title">Editar o título da lista de reprodução</string>
+    <string name="hint_create_playlist">Insira o nome da lista de reprodução</string>
+    <string name="add_track_to">Adicionar trilha a\.\.\.</string>
+    <string name="message_no_playlist_found">Nenhuma lista de reprodução encontrada\nClique no botão Adicionar para criar lista de reprodução</string>
+    <string name="toast_added_to_playlist">Faixa adicionada à lista de reprodução</string>
+    <string name="toast_add_to_playlist_failed">Erro ao adicionar faixa à lista de reprodução</string>
+    <string name="yes">Sim</string>
+    <string name="set">Definir</string>
+    <string name="confirm">Confirme</string>
+    <string name="cancel">Cancelar</string>
+    <!-- Navigation section titles -->
+    <string name="nav_home">Início</string>
+    <string name="nav_library">Biblioteca</string>
+    <string name="nav_albums">Álbuns</string>
+    <string name="nav_artists">Artistas</string>
+    <string name="nav_playlist">Lista de reprodução</string>
+    <!-- Home Fragment -->
+    <string name="track_picker">Seletor de trilha</string>
+    <string name="for_you">Para você</string>
+    <string name="rediscover">Redescobrir</string>
+    <string name="new_in_library">Novo na loja</string>
+    <string name="top_artist">Artistas Populares</string>
+    <string name="top_albums">Álbuns mais populares</string>
+    <string name="played_n_times" formatted="true">Reproduziu%dtempo</string>
+    <string name="toast_selected_track_load_failed">Não é possível reproduzir a faixa selecionada, o carregamento falhou</string>
+    <!-- Home menu contents -->
+    <string name="welcome">Bem Vindo,</string>
+    <string name="def_user_name">Usuário</string>
+    <string name="footer_message">Feito com \u2665 na Índia</string>
+    <string name="select_image">Selecionar imagem</string>
+    <string name="toast_select_image_error">Erro ao selecionar imagem</string>
+    <!-- Playlist fragment -->
+    <string name="playlist_play_queue">Fila de jogo</string>
+    <string name="playlist_delete_dialog_title">Tem certeza que deseja excluir esta lista de reprodução?</string>
+    <string name="toast_playlist_deleted_success">Lista de reprodução excluída com sucesso</string>
+    <string name="cannot_delete_default_playlist">Não é possível remover a lista de reprodução padrão</string>
+    <!-- Toolbar Options menu -->
+    <string name="context_menu_title">Opções</string>
+    <string name="toast_invalid_options_group">Menu inválido selecionado</string>
+    <string name="sort_order_title">Organizar</string>
+    <string name="sort_by_title">Ordenar por</string>
+    <string name="sort_category_title">Título</string>
+    <string name="alphabet_asc">A até Z</string>
+    <string name="alphabet_desc">Z até A</string>
+    <string name="sort_category_duration">Duração</string>
+    <string name="duration_asc">Duração ↑</string>
+    <string name="duration_desc">Duração ↓</string>
+    <string name="sort_category_date">Encontro</string>
+    <string name="date_added_asc">Data adicionada (mais antigo primeiro)</string>
+    <string name="date_added_desc">Data adicionada (mais recente primeiro)</string>
+    <string name="date_modified_asc">Data modificada (mais antigo primeiro)</string>
+    <string name="date_modified_desc">Data modificada (mais recente primeiro)</string>
+    <string name="sort_category_track_number">Número de rastreio</string>
+    <string name="album_track_number_asc">Número da faixa asc</string>
+    <string name="album_track_number_desc">Número da faixa desc</string>
+    <string name="sort_category_artist">Artista</string>
+    <string name="album_artist_asc">Artista do álbum</string>
+    <string name="album_artist_desc">Artista do álbum</string>
+    <string name="sort_category_year">Ano</string>
+    <string name="album_year_asc">Ano do álbum (mais antigo primeiro)</string>
+    <string name="album_year_desc">Ano do álbum (o mais recente primeiro)</string>
+    <string name="create_playlist">Criar lista de reprodução</string>
+    <string name="toast_equalizer_not_found">Não consigo encontrar o equalizador</string>
+    <string name="column_title">Colunas</string>
+    <string name="column_category_count">Contagem</string>
+    <string name="one">Um</string>
+    <string name="two">Dois</string>
+    <string name="three">Três</string>
+    <string name="four">Quatro</string>
+    <string name="five">Cinco</string>
+    <string name="six">Seis</string>
+    <string name="remove_duplicates">Remover duplicados</string>
+    <!-- Options menu for list items -->
+    <string name="play_next">Reproduzir próxima</string>
+    <string name="toast_added_to_play_next">Faixa adicionada e será reproduzida a seguir</string>
+    <string name="add_to_queue">Adicionar à fila</string>
+    <string name="toast_added_to_queue">Faixa adicionada à fila de reprodução</string>
+    <string name="add_to_playlist">Adicionar à lista de reprodução</string>
+    <string name="go_to_album">Ir para o álbum</string>
+    <string name="go_to_artist">Ir para o artista</string>
+    <string name="track_info">Informações da faixa</string>
+    <!-- Playlist tracks Activity -->
+    <string name="message_empty_playlist">Esta lista de reprodução está vazia\nVocê pode adicionar faixas usando o botão adicionar</string>
+    <string name="track_removed_from_queue">Faixa removida da fila!!!</string>
+    <string name="undo">Desfazer</string>
+    <string name="play">Reproduzir</string>
+    <string name="add">Adicionar</string>
+    <string name="clear_all">Limpar tudo</string>
+    <string name="toast_playlist_shuffle_success">Lista de reprodução embaralhada com sucesso</string>
+    <string name="coming_up_next">A seguir</string>
+    <string name="current_queue">Fila atual</string>
+    <!-- Favorites Playlist Activity-->
+    <string name="favorites">Favoritos</string>
+    <string name="your_favorites">Seus favoritos</string>
+    <string name="message_empty_favorites">Seus favoritos estão vazios\nAdicione algumas faixas aos favoritos\n\n\u2665</string>
+    <!-- Recent Activity-->
+    <string name="recent">Recente</string>
+    <string name="recent_playlist_title">Reproduzidas recentemente</string>
+    <string name="message_empty_recent">Nenhuma faixa encontrada\n\u2639</string>
+    <!-- Now Playing Activity -->
+    <string name="now_playing">Reproduzindo agora</string>
+    <string name="toast_added_to_favorites">Faixa adicionada aos favoritos</string>
+    <!-- Media Folder Chooser Activity -->
+    <string name="select_folders">Selecionar pastas</string>
+    <!-- Details Activity -->
+    <!-- Song info dialog -->
+    <!-- Search Activity -->
+    <!-- Settings Activity -->
+    <!-- Category -->
+    <string name="general">Geral</string>
+    <string name="general_desc">Definir configurações básicas</string>
+    <string name="now_playing_title">Reproduzindo agora</string>
+    <string name="now_playing_desc">Personalizar tela de reprodução</string>
+    <string name="audio">Áudio</string>
+    <string name="audio_desc">Alterar as configurações de áudio</string>
+    <string name="contributors">Colaboradores</string>
+    <string name="contributors_desc">Conheça os desenvolvedores</string>
+    <string name="about">Sobre</string>
+    <!-- General Section -->
+    <string name="ignored_folder_title">Selecionar pastas ignoradas</string>
+    <string name="ignored_folder_desc">Adicionar ou remover pastas para excluir faixas de serem exibidas na biblioteca</string>
+    <string name="ignored_folder_picker_title">Selecionar pastas</string>
+    <string name="ignored_folder_picker_empty_text">A lista ignorada está vazia</string>
+    <string name="toast_removed_folder_from_ignored_list">Pasta removida da lista de ignorados</string>
+    <string name="duration_filter_title">Filtro de duração</string>
+    <string name="duration_filter_desc">Filtrar trilhas com base na duração da trilha</string>
+    <string name="duration_filter_unit">segundos</string>
+    <!-- Theme section -->
+    <string name="custom">Personalizado</string>
+    <!-- Now playing settings -->
+    <!-- Audio settings -->
+    <string name="select_bluetooth_action">Definir ação Bluetooth preferida</string>
+    <!-- Contributors -->
+    <!-- Donations -->
+    <!-- About -->
+    <!-- Accents -->
+    <!-- For translators: If the color words does not make much sense in your language,
+    you can try substituting a similar description of the color. But keep it short
+    -->
+    <string name="coral">Coral</string>
+    <string name="sunkist">Sunkist</string>
+    <!-- Custom accents dialog -->
+    <string name="apply">Aplicar</string>
+    <string name="presets">Modelos</string>
+    <!-- App shortcuts -->
+    <string name="shortcut_shuffle">Shuffle</string>
+    <!-- Max length = 10 characters including spaces-->
+    <string name="shortcut_shuffle_desc">Shuffle</string>
+    <!-- Max length = 25 characters including spaces-->
+    <!-- Max length = 10 characters including spaces-->
+    <!-- Max length = 25 characters including spaces-->
+    <string name="shortcut_suggested_label">Para você</string>
+    <!-- Max length = 10 characters including spaces-->
+    <string name="shortcut_suggested_label_long">Para você</string>
+    <!-- Max length = 25 characters including spaces-->
+</resources>

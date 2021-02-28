@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Pulse Music</string>
+    <string name="toast_requires_storage_access">L\'application a besoin d\'accéder au stockage de l\'appareil pour fonctionner</string>
+    <string name="notification_playback_channel_name">Notification</string>
+    <string name="notification_audio_channel_name">Détection de périphérique audio</string>
+    <!-- Content description -->
+    <string name="desc_confirm_btn">Confirmer la sélection</string>
+    <!-- General strings -->
+    <string name="equalizer">Égaliseur</string>
+    <!-- Dialogs -->
+    <string name="hint_create_playlist">Saisir le nom de la playlist</string>
+    <string name="confirm">Confirmer</string>
+    <string name="cancel">Annuler</string>
+    <!-- Navigation section titles -->
+    <string name="nav_home">Accueil</string>
+    <string name="nav_playlist">Playlist</string>
+    <!-- Home Fragment -->
+    <string name="for_you">Pour toi</string>
+    <!-- Home menu contents -->
+    <string name="select_image">Sélectionner une image</string>
+    <!-- Playlist fragment -->
+    <string name="playlist_play_queue">Liste de lecture</string>
+    <string name="playlist_delete_dialog_title">Êtes-vous sûr de vouloir supprimer cette playlist ?</string>
+    <!-- Toolbar Options menu -->
+    <!-- Options menu for list items -->
+    <!-- Playlist tracks Activity -->
+    <!-- Favorites Playlist Activity-->
+    <!-- Recent Activity-->
+    <!-- Now Playing Activity -->
+    <!-- Media Folder Chooser Activity -->
+    <!-- Details Activity -->
+    <!-- Song info dialog -->
+    <!-- Search Activity -->
+    <!-- Settings Activity -->
+    <!-- Category -->
+    <!-- General Section -->
+    <!-- Theme section -->
+    <!-- Now playing settings -->
+    <!-- Audio settings -->
+    <!-- Contributors -->
+    <!-- Donations -->
+    <!-- About -->
+    <!-- Accents -->
+    <!-- For translators: If the color words does not make much sense in your language,
+    you can try substituting a similar description of the color. But keep it short
+    -->
+    <!-- Custom accents dialog -->
+    <!-- App shortcuts -->
+    <!-- Max length = 10 characters including spaces-->
+    <!-- Max length = 25 characters including spaces-->
+    <!-- Max length = 10 characters including spaces-->
+    <!-- Max length = 25 characters including spaces-->
+    <!-- Max length = 10 characters including spaces-->
+    <!-- Max length = 25 characters including spaces-->
+</resources>

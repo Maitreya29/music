@@ -352,12 +352,18 @@
     <string name="presets">Presets</string>
 
     <!-- App shortcuts -->
-    <string name="shortcut_shuffle">Shuffle</string> <!-- Max length = 10 characters including spaces-->
-    <string name="shortcut_shuffle_desc">Shuffle</string> <!-- Max length = 25 characters including spaces-->
+    <!-- Max length = 10 characters including spaces-->
+    <string name="shortcut_shuffle">Shuffle</string>
+    <!-- Max length = 25 characters including spaces-->
+    <string name="shortcut_shuffle_desc">Shuffle</string>
 
-    <string name="shortcut_latest">Latest tracks</string> <!-- Max length = 10 characters including spaces-->
-    <string name="shortcut_latest_desc">Latest tracks</string> <!-- Max length = 25 characters including spaces-->
+    <!-- Max length = 10 characters including spaces-->
+    <string name="shortcut_latest">Latest tracks</string>
+    <!-- Max length = 25 characters including spaces-->
+    <string name="shortcut_latest_desc">Latest tracks</string>
 
-    <string name="shortcut_suggested_label">For you</string> <!-- Max length = 10 characters including spaces-->
-    <string name="shortcut_suggested_label_long">For you</string> <!-- Max length = 25 characters including spaces-->
+    <!-- Max length = 10 characters including spaces-->
+    <string name="shortcut_suggested_label">For you</string>
+    <!-- Max length = 25 characters including spaces-->
+    <string name="shortcut_suggested_label_long">For you</string>
 </resources>
