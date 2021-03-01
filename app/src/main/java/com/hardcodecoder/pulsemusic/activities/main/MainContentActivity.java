@@ -20,6 +20,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.appbar.AppBarLayout;
+import com.hardcodecoder.pulsemusic.MediaArtCache;
 import com.hardcodecoder.pulsemusic.PMS;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.activities.base.DraggableNowPlayingSheetActivity;
@@ -258,6 +259,8 @@ public class MainContentActivity extends DraggableNowPlayingSheetActivity {
     protected void onDestroy() {
         if (null != serviceConnection) unbindService(serviceConnection);
         if (null != mController) mController.unregisterCallback(mCallback);
+        // This is our root activity, clear ui related caches when ui is not visible
+        MediaArtCache.flushCache();
         super.onDestroy();
     }
 }
