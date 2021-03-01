@@ -27,6 +27,7 @@ public class PulseController {
     private MediaController mMediaController;
     private boolean mRememberPlaylist = false;
 
+    @NonNull
     public static PulseController getInstance() {
         return sInstance;
     }
@@ -125,7 +126,7 @@ public class PulseController {
             mMainHandler.post(() -> callback.onTrackItemRemoved(position));
     }
 
-    public void resetController() {
+    public void releaseController() {
         if (null != mMediaController) {
             for (Callback callback : mCallbacksList)
                 mMediaController.unregisterCallback(callback);
@@ -298,12 +299,6 @@ public class PulseController {
         }
 
         public void onTrackItemMoved(int from, int to) {
-        }
-
-        @Override
-        public void onSessionDestroyed() {
-            super.onSessionDestroyed();
-            PulseController.getInstance().resetController();
         }
     }
 }

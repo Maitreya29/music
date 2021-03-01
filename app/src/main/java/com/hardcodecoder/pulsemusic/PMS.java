@@ -87,7 +87,7 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
         mediaButtonIntent.setClass(getApplicationContext(), MediaButtonReceiver.class);
         PendingIntent mbrIntent = PendingIntent.getBroadcast(this, 0, mediaButtonIntent, 0);
         mMediaSession.setMediaButtonReceiver(mbrIntent);
-        mNotificationManager = new MediaNotificationManager(this, this);
+        mNotificationManager = new MediaNotificationManager(this, mMediaSession.getController(), this);
 
         // Start audio fx
         final Intent intent = new Intent(AudioEffect.ACTION_OPEN_AUDIO_EFFECT_CONTROL_SESSION);
@@ -222,15 +222,14 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
 
     @Override
     public void onTaskRemoved(Intent rootIntent) {
-        if (mMediaSession != null && !mMediaSession.isActive()) {
-            PulseController.getInstance().getQueueManager().resetQueue();
-            stopSelf();
-        }
+        if (mMediaSession != null && !mMediaSession.isActive()) stopSelf();
         super.onTaskRemoved(rootIntent);
     }
 
     @Override
     public void onDestroy() {
+        LoaderCache.clearCache();
+        PulseController.getInstance().releaseController();
         if (null != sharedPreferenceChangeListener)
             getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, MODE_PRIVATE)
                     .unregisterOnSharedPreferenceChangeListener(sharedPreferenceChangeListener);

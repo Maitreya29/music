@@ -14,8 +14,8 @@ import android.media.session.MediaSession;
 import android.media.session.PlaybackState;
 import android.os.Build;
 import android.support.v4.media.session.MediaSessionCompat;
-import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
@@ -25,7 +25,7 @@ import com.hardcodecoder.pulsemusic.activities.main.MainContentActivity;
 
 public class MediaNotificationManager {
 
-    public static final String TAG = "MediaNotificationMan";
+    public static final String TAG = MediaNotificationManager.class.getSimpleName();
     private static final String ACTION_PAUSE = "com.hardcodeCoder.playback.pause";
     private static final String ACTION_PLAY = "com.hardcodeCoder.playback.play";
     private static final String ACTION_PREV = "com.hardcodeCoder.playback.prev";
@@ -34,21 +34,14 @@ public class MediaNotificationManager {
     private static final String CHANNEL_ID = "com.hardcodecoder.pulsemusic.MUSIC_CHANNEL_ID";
     private static final int NOTIFICATION_ID = 412;
     private static final int REQUEST_CODE = 100;
-
     private final NotificationManager mNotificationManager;
     private final Context mContext;
     private final NotificationCallback mCallback;
-    private PendingIntent mPlayIntent;
-    private PendingIntent mPauseIntent;
-    private PendingIntent mPreviousIntent;
-    private PendingIntent mNextIntent;
-    private PendingIntent mStopIntent;
-    private PendingIntent mOpenNowPlaying;
-    private MediaController mController;
-    private MediaController.TransportControls mTransportControls;
+    private final MediaController mController;
+    private final MediaController.TransportControls mTransportControls;
     private final BroadcastReceiver controlsReceiver = new BroadcastReceiver() {
         @Override
-        public void onReceive(Context context, Intent intent) {
+        public void onReceive(@NonNull Context context, @NonNull Intent intent) {
             final String action = intent.getAction();
             if (action != null && mTransportControls != null) {
                 switch (action) {
@@ -71,11 +64,6 @@ public class MediaNotificationManager {
             }
         }
     };
-    private MediaSession.Token mSessionToken;
-    private boolean mStarted;
-    private boolean mInitialised = false;
-    private PlaybackState mPlaybackState;
-    private MediaMetadata mMetadata;
     private final MediaController.Callback mCb = new MediaController.Callback() {
         @Override
         public void onPlaybackStateChanged(@Nullable PlaybackState state) {
@@ -96,43 +84,25 @@ public class MediaNotificationManager {
                 updateNotification();
             }
         }
-
-        @Override
-        public void onSessionDestroyed() {
-            super.onSessionDestroyed();
-            updateSessionToken();
-            try {
-                updateSessionToken();
-            } catch (Exception e) {
-                Log.e(TAG, "could not connect media controller", e);
-            }
-        }
     };
+    private PendingIntent mPlayIntent;
+    private PendingIntent mPauseIntent;
+    private PendingIntent mPreviousIntent;
+    private PendingIntent mNextIntent;
+    private PendingIntent mStopIntent;
+    private PendingIntent mOpenNowPlaying;
+    private boolean mStarted;
+    private boolean mInitialised = false;
+    private PlaybackState mPlaybackState;
+    private MediaMetadata mMetadata;
 
-    public MediaNotificationManager(Context context, NotificationCallback notificationCallback) {
-        this.mContext = context;
-        this.mCallback = notificationCallback;
-        updateSessionToken();
+    public MediaNotificationManager(@NonNull Context context, @NonNull MediaController controller, @NonNull NotificationCallback notificationCallback) {
+        mContext = context;
+        mController = controller;
+        mTransportControls = controller.getTransportControls();
+        mCallback = notificationCallback;
         mNotificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
         if (null != mNotificationManager) mNotificationManager.cancelAll();
-    }
-
-    private void updateSessionToken() {
-        MediaSession.Token freshToken = mCallback.getMediaSessionToken();
-        if (mSessionToken == null && freshToken != null ||
-                mSessionToken != null && !mSessionToken.equals(freshToken)) {
-            if (mController != null) {
-                mController.unregisterCallback(mCb);
-            }
-            mSessionToken = freshToken;
-            if (mSessionToken != null) {
-                mController = new MediaController(mContext, mSessionToken);
-                mTransportControls = mController.getTransportControls();
-                if (mStarted) {
-                    mController.registerCallback(mCb);
-                }
-            }
-        }
     }
 
     private void updateNotification() {
@@ -199,6 +169,7 @@ public class MediaNotificationManager {
         }
     }
 
+    @Nullable
     private Notification createNotification() {
         if (mMetadata != null) {
             NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(mContext, CHANNEL_ID);
