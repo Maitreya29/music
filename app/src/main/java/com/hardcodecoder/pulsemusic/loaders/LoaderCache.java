@@ -72,7 +72,7 @@ public class LoaderCache {
             mLatestTracks = new ArrayList<>(latestTracks);
     }
 
-    static void releaseCache() {
+    public static void clearCache() {
         if (mAllTracksList != null) mAllTracksList.clear();
         mAllTracksList = null;
         if (mSuggestions != null) mSuggestions.clear();

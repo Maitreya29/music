@@ -26,7 +26,7 @@ public class LoaderHelper {
     public static void loadAllTracks(@NonNull Context context, @NonNull Callback<List<MusicModel>> callback) {
         // Since we are loading the master list
         // Any previous cached tracks must be made invalid
-        LoaderCache.releaseCache();
+        LoaderCache.clearCache();
         Callable<List<MusicModel>> libraryLoader;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
             libraryLoader = new LibraryLoaderQ(context, SortOrder.TITLE_ASC);
