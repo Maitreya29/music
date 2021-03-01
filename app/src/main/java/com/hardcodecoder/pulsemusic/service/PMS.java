@@ -1,4 +1,4 @@
-package com.hardcodecoder.pulsemusic;
+package com.hardcodecoder.pulsemusic.service;
 
 import android.app.Notification;
 import android.app.PendingIntent;
@@ -25,6 +25,9 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.media.session.MediaButtonReceiver;
 
+import com.hardcodecoder.pulsemusic.Preferences;
+import com.hardcodecoder.pulsemusic.PulseController;
+import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.loaders.LoaderCache;
 import com.hardcodecoder.pulsemusic.loaders.LoaderHelper;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
@@ -39,10 +42,10 @@ import java.util.List;
 
 public class PMS extends Service implements PlaybackManager.PlaybackServiceCallback, MediaNotificationManager.NotificationCallback {
 
-    public static final String ACTION_DEFAULT_PLAY = "com.hardcodecoder.pulsemusic.PMS.ACTION_DEFAULT_PLAY";
-    public static final String ACTION_PLAY_CONTINUE = "com.hardcodecoder.pulsemusic.PMS.ACTION_PLAY_CONTINUE";
-    public static final String KEY_DEFAULT_PLAY = "com.hardcodecoder.pulsemusic.PMS.KEY_DEFAULT_PLAY";
-    public static final String KEY_PLAY_CONTINUE = "com.hardcodecoder.pulsemusic.PMS.KEY_BLUETOOTH_AUTO_PLAY";
+    public static final String ACTION_DEFAULT_PLAY = "com.hardcodecoder.pulsemusic.service.PMS.ACTION_DEFAULT_PLAY";
+    public static final String ACTION_PLAY_CONTINUE = "com.hardcodecoder.pulsemusic.service.PMS.ACTION_PLAY_CONTINUE";
+    public static final String KEY_DEFAULT_PLAY = "com.hardcodecoder.pulsemusic.service.PMS.KEY_DEFAULT_PLAY";
+    public static final String KEY_PLAY_CONTINUE = "com.hardcodecoder.pulsemusic.service.PMS.KEY_BLUETOOTH_AUTO_PLAY";
     public static final int DEFAULT_ACTION_PLAY_NONE = -1;
     public static final int DEFAULT_ACTION_PLAY_SHUFFLE = Preferences.ACTION_PLAY_SHUFFLE;
     public static final int DEFAULT_ACTION_PLAY_LATEST = Preferences.ACTION_PLAY_LATEST;

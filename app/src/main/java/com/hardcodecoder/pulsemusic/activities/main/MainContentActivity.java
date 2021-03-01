@@ -21,7 +21,6 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.hardcodecoder.pulsemusic.MediaArtCache;
-import com.hardcodecoder.pulsemusic.PMS;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.activities.base.DraggableNowPlayingSheetActivity;
 import com.hardcodecoder.pulsemusic.dialog.HomeBottomSheetFragment;
@@ -36,6 +35,7 @@ import com.hardcodecoder.pulsemusic.loaders.LoaderCache;
 import com.hardcodecoder.pulsemusic.loaders.LoaderHelper;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.playback.PlaybackManager;
+import com.hardcodecoder.pulsemusic.service.PMS;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 import com.hardcodecoder.pulsemusic.utils.LogUtils;
 import com.hardcodecoder.pulsemusic.views.PulseToolbar;

@@ -1,4 +1,4 @@
-package com.hardcodecoder.pulsemusic;
+package com.hardcodecoder.pulsemusic.service;
 
 import android.content.Intent;
 import android.graphics.drawable.Icon;
@@ -14,6 +14,9 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 
+import com.hardcodecoder.pulsemusic.Preferences;
+import com.hardcodecoder.pulsemusic.PulseController;
+import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 
 @RequiresApi(api = Build.VERSION_CODES.N)

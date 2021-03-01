@@ -115,12 +115,12 @@
         </receiver>
 
         <service
-            android:name=".AudioDeviceService"
+            android:name=".service.AudioDeviceService"
             android:foregroundServiceType="connectedDevice"
             android:process=":bluetooth" />
 
         <service
-            android:name=".PMS"
+            android:name=".service.PMS"
             android:exported="false"
             android:foregroundServiceType="mediaPlayback">
             <intent-filter>
@@ -129,7 +129,7 @@
         </service>
 
         <service
-            android:name=".PulseTileService"
+            android:name=".service.PulseTileService"
             android:icon="@drawable/ic_round_play"
             android:label="@string/play"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">

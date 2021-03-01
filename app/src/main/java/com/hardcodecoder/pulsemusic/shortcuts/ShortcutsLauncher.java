@@ -15,7 +15,7 @@ import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.hardcodecoder.pulsemusic.PMS;
+import com.hardcodecoder.pulsemusic.service.PMS;
 import com.hardcodecoder.pulsemusic.shortcuts.types.LatestShortcutType;
 import com.hardcodecoder.pulsemusic.shortcuts.types.ShuffleShortcutType;
 import com.hardcodecoder.pulsemusic.shortcuts.types.SuggestedShortcutType;

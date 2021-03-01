@@ -1,4 +1,4 @@
-package com.hardcodecoder.pulsemusic;
+package com.hardcodecoder.pulsemusic.service;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
+import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.receivers.BluetoothBroadcastReceiver;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 

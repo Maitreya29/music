@@ -29,7 +29,6 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.shape.CornerFamily;
 import com.google.android.material.shape.ShapeAppearanceModel;
 import com.google.android.material.slider.Slider;
-import com.hardcodecoder.pulsemusic.PMS;
 import com.hardcodecoder.pulsemusic.Preferences;
 import com.hardcodecoder.pulsemusic.PulseController;
 import com.hardcodecoder.pulsemusic.R;
@@ -40,6 +39,7 @@ import com.hardcodecoder.pulsemusic.helper.UIHelper;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.providers.FavoritesProvider;
 import com.hardcodecoder.pulsemusic.providers.ProviderManager;
+import com.hardcodecoder.pulsemusic.service.PMS;
 import com.hardcodecoder.pulsemusic.themes.ThemeColors;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 

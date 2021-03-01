@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 
 import com.google.android.material.textview.MaterialTextView;
-import com.hardcodecoder.pulsemusic.PMS;
 import com.hardcodecoder.pulsemusic.Preferences;
 import com.hardcodecoder.pulsemusic.PulseController;
 import com.hardcodecoder.pulsemusic.R;
@@ -37,6 +36,7 @@ import com.hardcodecoder.pulsemusic.loaders.LoaderHelper;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.model.TopAlbumModel;
 import com.hardcodecoder.pulsemusic.model.TopArtistModel;
+import com.hardcodecoder.pulsemusic.service.PMS;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 import com.hardcodecoder.pulsemusic.utils.NavigationUtil;
 
