@@ -211,20 +211,20 @@ public class MainContentActivity extends DraggableNowPlayingSheetActivity {
                         .add(R.id.main_fragment_content, switchTo, tag)
                         .hide(activeFrag)
                         .show(switchTo)
-                        .commit();
+                        .commitAllowingStateLoss();
             } else if (switchTo != null) {
                 fm.beginTransaction()
                         .setCustomAnimations(R.anim.translate_y_enter, R.anim.translate_y_exit)
                         .add(R.id.main_fragment_content, switchTo, tag)
                         .show(switchTo)
-                        .commit();
+                        .commitAllowingStateLoss();
             }
         } else
             fm.beginTransaction()
                     .setCustomAnimations(R.anim.translate_y_enter, R.anim.translate_y_exit)
                     .hide(activeFrag)
                     .show(switchTo)
-                    .commit();
+                    .commitAllowingStateLoss();
         activeFrag = switchTo;
         mAppBar.post(() -> {
             mAppBar.setExpanded(true);
