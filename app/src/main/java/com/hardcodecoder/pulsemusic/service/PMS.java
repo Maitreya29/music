@@ -63,15 +63,16 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
 
     @Override
     public void onCreate() {
-        super.onCreate();
         ProviderManager.init(this);
         mServiceThread = new HandlerThread("PMS Thread", Thread.NORM_PRIORITY);
         mServiceThread.start();
         mWorkerHandler = new Handler(mServiceThread.getLooper());
-        mWorkerHandler.post(this::runOnServiceThread);
+        // Cannot run this asynchronously on mServiceThread.
+        // MediaSession needs to be initialize before client(s) binds to this service
+        initializeSession();
     }
 
-    private void runOnServiceThread() {
+    private void initializeSession() {
         final boolean rememberPlaylist = getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, MODE_PRIVATE)
                 .getBoolean(Preferences.REMEMBER_PREVIOUS_PLAYLIST, false);
 
