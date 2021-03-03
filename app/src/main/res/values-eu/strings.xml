@@ -132,10 +132,10 @@
     -->
     <!-- Custom accents dialog -->
     <!-- App shortcuts -->
-    <string name="shortcut_shuffle">Ausaz</string>
     <!-- Max length = 10 characters including spaces-->
-    <string name="shortcut_shuffle_desc">Ausaz</string>
+    <string name="shortcut_shuffle">Ausaz</string>
     <!-- Max length = 25 characters including spaces-->
+    <string name="shortcut_shuffle_desc">Ausaz</string>
     <!-- Max length = 10 characters including spaces-->
     <!-- Max length = 25 characters including spaces-->
     <!-- Max length = 10 characters including spaces-->

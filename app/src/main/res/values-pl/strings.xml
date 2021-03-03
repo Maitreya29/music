@@ -269,16 +269,16 @@
     <string name="apply">Zastosuj</string>
     <string name="presets">Domyślne</string>
     <!-- App shortcuts -->
+    <!-- Max length = 10 characters including spaces-->
     <string name="shortcut_shuffle">Losowo</string>
-    <!-- Max length = 10 characters including spaces-->
+    <!-- Max length = 25 characters including spaces-->
     <string name="shortcut_shuffle_desc">Losowo</string>
-    <!-- Max length = 25 characters including spaces-->
+    <!-- Max length = 10 characters including spaces-->
     <string name="shortcut_latest">Najnowsze utwory</string>
-    <!-- Max length = 10 characters including spaces-->
+    <!-- Max length = 25 characters including spaces-->
     <string name="shortcut_latest_desc">Najnowsze utwory</string>
-    <!-- Max length = 25 characters including spaces-->
-    <string name="shortcut_suggested_label">Dla Ciebie</string>
     <!-- Max length = 10 characters including spaces-->
-    <string name="shortcut_suggested_label_long">Dla Ciebie</string>
+    <string name="shortcut_suggested_label">Dla Ciebie</string>
     <!-- Max length = 25 characters including spaces-->
+    <string name="shortcut_suggested_label_long">Dla Ciebie</string>
 </resources>

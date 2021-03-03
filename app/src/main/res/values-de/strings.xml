@@ -4,7 +4,6 @@
     <string name="toast_requires_storage_access">App braucht Zugriff auf den Gerätespeicher, um zu funktionieren</string>
     <string name="notification_playback_channel_name">Pulse Music Benachrichtigung</string>
     <string name="notification_audio_channel_name">Audio-Geräteerkennung</string>
-
     <!-- Content description -->
     <string name="desc_album_art">Albumcover</string>
     <string name="desc_close_btn">Schließen Button</string>
@@ -13,14 +12,11 @@
     <string name="desc_confirm_btn">Auswahl bestätigen</string>
     <string name="desc_play_pause_btn">Medien-Wiedergabe- und Pause-Taste</string>
     <string name="desc_options_btn">Kontextmenü-Schaltfläche</string>
-
     <!-- General strings -->
     <string name="equalizer">Equalizer</string>
     <string name="shuffle">Mischen</string>
     <string name="tracks_not_found">Keine Titel gefunden</string>
     <string name="unknown">Unbekannt</string>
-
-
     <!-- Dialogs -->
     <string name="question_enter_your_name">Gib deinen Namen ein</string>
     <string name="toast_enter_your_name">Bitte gib deinen Namen ein</string>
@@ -34,16 +30,12 @@
     <string name="set">Setze</string>
     <string name="confirm">Okay</string>
     <string name="cancel">Abbrechen</string>
-
-
     <!-- Navigation section titles -->
     <string name="nav_home">Start</string>
     <string name="nav_library">Bibliothek</string>
     <string name="nav_albums">Alben</string>
     <string name="nav_artists">Künstler</string>
     <string name="nav_playlist">Playlist</string>
-
-
     <!-- Home Fragment -->
     <string name="track_picker">Titelauswahl</string>
     <string name="for_you">Für dich</string>
@@ -53,24 +45,17 @@
     <string name="top_albums">Top Alben</string>
     <string name="played_n_times" formatted="true">%d Male abgespielt</string>
     <string name="toast_selected_track_load_failed">Ausgewählten Titel kann nicht wiedergegeben werden, Laden fehlgeschlagen</string>
-
-
     <!-- Home menu contents -->
     <string name="welcome">Willkommen,</string>
     <string name="def_user_name">Benutzer</string>
-    <string name="category_app_info">App info</string>
     <string name="footer_message">Mit \u2665 in Indien gemacht</string>
     <string name="select_image">Wähle ein Bild</string>
     <string name="toast_select_image_error">Fehler bei der Bildauswahl</string>
-
-
     <!-- Playlist fragment -->
     <string name="playlist_play_queue">Wiedergabeliste</string>
     <string name="playlist_delete_dialog_title">Möchtest du diese Playlist wirklich löschen?</string>
     <string name="toast_playlist_deleted_success">Playlist gelöscht</string>
     <string name="cannot_delete_default_playlist">Standardplaylist kann nicht entfernt werden</string>
-
-
     <!-- Toolbar Options menu -->
     <string name="context_menu_title">Einstellungen</string>
     <string name="sort_order_title">Sortierreihenfolge</string>
@@ -105,8 +90,6 @@
     <string name="five">Fünf</string>
     <string name="six">Sechs</string>
     <string name="remove_duplicates">Duplikate entfernen</string>
-
-
     <!-- Options menu for list items -->
     <string name="play_next">Als Nächstes abspielen</string>
     <string name="toast_added_to_play_next">Titel wurde hinzugefügt und wird als Nächstes abgespielt</string>
@@ -116,8 +99,6 @@
     <string name="go_to_album">Gehe zum Album</string>
     <string name="go_to_artist">Gehe zu Interpret</string>
     <string name="track_info">Titel Informationen</string>
-
-
     <!-- Playlist tracks Activity -->
     <string name="message_empty_playlist">Diese Playlist ist leer\nSie können mit \"Hinzufügen\" Titel hinzufügen</string>
     <string name="track_removed_from_queue">Titel von der Playlist entfernt !!!</string>
@@ -128,38 +109,26 @@
     <string name="toast_playlist_shuffle_success">Playlist erfolgreich gemischt</string>
     <string name="coming_up_next">Als nächstes</string>
     <string name="current_queue">Aktuelle Warteschlange</string>
-
-
     <!-- Favorites Playlist Activity-->
     <string name="favorites">Favoriten</string>
     <string name="your_favorites">Deine Favoriten</string>
     <string name="message_empty_favorites">Keine Titel gefunden.\nFüge welche zu deinen Favoriten dazu\n\n\u2665</string>
-
-
     <!-- Recent Activity-->
     <string name="recent">Verlauf</string>
     <string name="recent_playlist_title">Zuletzt gespielt</string>
     <string name="message_empty_recent">Keine Einträge gefunden\n\u2639</string>
-
-
     <!-- Now Playing Activity -->
     <string name="now_playing">Jetzt am Spielen</string>
     <string name="toast_added_to_favorites">Titel zu den Favoriten hinzugefügt</string>
-    <string name="toast_removed_from_favorites">Titel von den Favoriten entfernt</string>
     <string name="toast_cannot_add_to_favorites">Track kann nicht zu Favoriten hinzugefügt werden</string>
+    <string name="toast_removed_from_favorites">Titel von den Favoriten entfernt</string>
     <string name="playlist_completed">Playlist abgeschlossen</string>
-
-
     <!-- Media Folder Chooser Activity -->
     <string name="select_folders">Ordner auswählen</string>
     <string name="message_empty_folders_list">Keine Medienordner im Speicher gefunden\n\u2639</string>
-
-
     <!-- Details Activity -->
     <string name="artist_tracks_count">Künstler hat ● %d Alben</string>
     <string name="suffix_tracks">Titel</string>
-
-
     <!-- Song info dialog -->
     <string name="track">Titel</string>
     <string name="file_size">Dateigröße</string>
@@ -167,21 +136,15 @@
     <string name="bitrate">Bitrate</string>
     <string name="sample_rate">Abtastrate</string>
     <string name="channel_count">Anzahl der Kanäle</string>
-
-
     <!-- Search Activity -->
     <string name="hint_search">Suche nach Künstlern, Liedern oder Alben\.\.\.</string>
     <string name="message_empty_search_result">Keine Ergebnisse gefunden</string>
-
-
     <!-- Settings Activity -->
     <string name="settings">Einstellungen</string>
     <string name="restart_app">App Neustart</string>
     <string name="restart_app_dialog_desc">Die App muss neu gestartet werden, damit die Änderungen wirksam werden</string>
     <string name="restart">Neustart</string>
     <string name="do_it_later">Später erledigen</string>
-
-
     <!-- Category -->
     <string name="general">Allgemein</string>
     <string name="general_desc">Grundeinstellungen konfigurieren</string>
@@ -197,8 +160,6 @@
     <string name="support_development_desc">Spende etwas, um die Entwickler zu unterstützen</string>
     <string name="about">Über</string>
     <string name="about_desc">App Version, Soziale Links</string>
-
-
     <!-- General Section -->
     <string name="category_loader">Ladeprogramm</string>
     <string name="ignored_folder_title">Ignorierte Ordner auswählen</string>
@@ -212,8 +173,6 @@
     <string name="duration_filter_desc">Filter-Track basierend auf der Länge der Spuren. Tracks mit einer Länge größer als dies in der Bibliothek angezeigt wird</string>
     <string name="duration_filter_unit">sek</string>
     <string name="category_others">Andere</string>
-
-
     <!-- Theme section -->
     <string name="category_theme">Erscheinungsbild</string>
     <string name="select_dark_theme">Wähle das Dunkle Theme aus</string>
@@ -226,14 +185,12 @@
     <string name="pick_accent_color">Wähle eine Akzentfarbe</string>
     <string name="pick_accent_color_desc">Wähle eine Akzentfarbe für die App</string>
     <string name="accents_color_picker_title">Wähle eine Akzentfarbe</string>
+    <string name="custom">Benutzerdefiniert</string>
+    <string name="select_custom_accent">Benutzerdefinierte Farbe anpassen</string>
     <string name="dark_theme_gray">Einfach Grau</string>
     <string name="dark_theme_signature">Standard dunkles Farbschema</string>
     <string name="dark_theme_lights_out">Finsterniss</string>
     <string name="select_dark_theme_style">Ändere das bevorzugte dunkle Theme</string>
-    <string name="custom">Benutzerdefiniert</string>
-    <string name="select_custom_accent">Benutzerdefinierte Farbe anpassen</string>
-
-
     <!-- Now playing settings -->
     <!-- Audio settings -->
     <string name="category_auto_play">Automatisch abspielen</string>
@@ -248,20 +205,12 @@
     <string name="donation_card_title">Gefällt dir Pulse Music?</string>
     <string name="donation_card_text">Bitte erwägen Sie eine kleine Spende zur Unterstützung der Entwicklung</string>
     <string name="buy_me_coffee">Kauf mir einen Kaffee</string>
-    <string name="pay_pal">PayPal</string>
-
-
     <!-- About -->
     <string name="app_version">App Version</string>
     <string name="build_date">Build Datum</string>
     <string name="build_type">Build Typ</string>
     <string name="build_code">Build Code</string>
-
-
-    <!-- Profile Links -->
     <string name="category_social_links">Soziale Links</string>
-
-
     <!-- Accents -->
     <!-- For translators: If the color words does not make much sense in your language,
     you can try substituting a similar description of the color. But keep it short
@@ -274,29 +223,20 @@
     <string name="coral">Koralle</string>
     <string name="sunkist">Sunkist</string>
     <string name="blue_pink">Blaues Pink</string>
-
-
     <!-- Custom accents dialog -->
     <string name="hint_hex_color">Hex-Farbcode</string>
     <string name="invalid_color">Ungültige Farbe</string>
-    <string name="color_channel_r">R</string>
-    <string name="color_channel_g">G</string>
-    <string name="color_channel_b">B</string>
     <string name="apply">Anwenden</string>
     <string name="presets">Voreinstellungen</string>
-
-
     <!-- App shortcuts -->
     <!-- Max length = 10 characters including spaces-->
     <string name="shortcut_shuffle">Mischen</string>
     <!-- Max length = 25 characters including spaces-->
     <string name="shortcut_shuffle_desc">Gemischt</string>
-
     <!-- Max length = 10 characters including spaces-->
     <string name="shortcut_latest">Letzten Titel</string>
     <!-- Max length = 25 characters including spaces-->
     <string name="shortcut_latest_desc">Letzten Titel</string>
-
     <!-- Max length = 10 characters including spaces-->
     <string name="shortcut_suggested_label">Für dich</string>
     <!-- Max length = 25 characters including spaces-->

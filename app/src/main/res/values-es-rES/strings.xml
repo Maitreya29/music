@@ -144,16 +144,16 @@
     <string name="blue_pink">Rosa azul</string>
     <!-- Custom accents dialog -->
     <!-- App shortcuts -->
+    <!-- Max length = 10 characters including spaces-->
     <string name="shortcut_shuffle">Mezclar</string>
-    <!-- Max length = 10 characters including spaces-->
+    <!-- Max length = 25 characters including spaces-->
     <string name="shortcut_shuffle_desc">Mezclado</string>
-    <!-- Max length = 25 characters including spaces-->
+    <!-- Max length = 10 characters including spaces-->
     <string name="shortcut_latest">Últimas canciones</string>
-    <!-- Max length = 10 characters including spaces-->
+    <!-- Max length = 25 characters including spaces-->
     <string name="shortcut_latest_desc">Últimas canciones</string>
-    <!-- Max length = 25 characters including spaces-->
-    <string name="shortcut_suggested_label">Para ti</string>
     <!-- Max length = 10 characters including spaces-->
-    <string name="shortcut_suggested_label_long">Para ti</string>
+    <string name="shortcut_suggested_label">Para ti</string>
     <!-- Max length = 25 characters including spaces-->
+    <string name="shortcut_suggested_label_long">Para ti</string>
 </resources>

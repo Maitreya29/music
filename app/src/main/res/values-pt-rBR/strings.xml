@@ -165,14 +165,14 @@
     <string name="apply">Aplicar</string>
     <string name="presets">Modelos</string>
     <!-- App shortcuts -->
+    <!-- Max length = 10 characters including spaces-->
     <string name="shortcut_shuffle">Shuffle</string>
-    <!-- Max length = 10 characters including spaces-->
+    <!-- Max length = 25 characters including spaces-->
     <string name="shortcut_shuffle_desc">Shuffle</string>
-    <!-- Max length = 25 characters including spaces-->
     <!-- Max length = 10 characters including spaces-->
     <!-- Max length = 25 characters including spaces-->
+    <!-- Max length = 10 characters including spaces-->
     <string name="shortcut_suggested_label">Para você</string>
-    <!-- Max length = 10 characters including spaces-->
-    <string name="shortcut_suggested_label_long">Para você</string>
     <!-- Max length = 25 characters including spaces-->
+    <string name="shortcut_suggested_label_long">Para você</string>
 </resources>

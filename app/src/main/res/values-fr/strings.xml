@@ -5,52 +5,283 @@
     <string name="notification_playback_channel_name">Notification</string>
     <string name="notification_audio_channel_name">Détection de périphérique audio</string>
     <!-- Content description -->
+    <string name="desc_album_art">Image de l\'album</string>
+    <string name="desc_close_btn">Fermer</string>
     <string name="desc_confirm_btn">Confirmer la sélection</string>
+    <string name="desc_play_pause_btn">Lecture / Pause</string>
+    <string name="desc_options_btn">Menu</string>
     <!-- General strings -->
     <string name="equalizer">Égaliseur</string>
+    <string name="select_equalizer">Choisir l\'égaliseur</string>
+    <string name="shuffle">Aléatoire</string>
+    <string name="tracks_not_found">Aucun morceau</string>
+    <string name="unknown">Inconnu</string>
     <!-- Dialogs -->
+    <string name="question_enter_your_name">Entrez votre nom</string>
+    <string name="toast_enter_your_name">Veuillez entrer votre nom</string>
+    <string name="edit_playlist_title">Modifier le titre de la playlist</string>
     <string name="hint_create_playlist">Saisir le nom de la playlist</string>
+    <string name="add_track_to">Ajouter un morceau à\.\.\.</string>
+    <string name="message_no_playlist_found">Aucune liste de lecture\nCliquer sur ajouter pour créer une liste de lecture</string>
+    <string name="toast_added_to_playlist">Morceau ajouté à la liste de lecture</string>
+    <string name="toast_add_to_playlist_failed">Erreur lors de l\'ajout de la piste à la liste de lecture</string>
+    <string name="yes">Oui</string>
+    <string name="set">Définir</string>
     <string name="confirm">Confirmer</string>
     <string name="cancel">Annuler</string>
     <!-- Navigation section titles -->
     <string name="nav_home">Accueil</string>
-    <string name="nav_playlist">Playlist</string>
+    <string name="nav_library">Bibliothèque</string>
+    <string name="nav_albums">Albums</string>
+    <string name="nav_artists">Artistes</string>
+    <string name="nav_playlist">Liste de lecture</string>
     <!-- Home Fragment -->
-    <string name="for_you">Pour toi</string>
+    <string name="track_picker">Ouvrir un fichier</string>
+    <string name="for_you">Pour vous</string>
+    <string name="rediscover">Redécouvrir</string>
+    <string name="new_in_library">Nouveaux morceaux</string>
+    <string name="top_artist">Artistes favoris</string>
+    <string name="top_albums">Albums favoris</string>
+    <string name="played_n_times" formatted="true">Lu %d fois</string>
+    <string name="toast_selected_track_load_failed">Impossible de lire le morceau sélectionné, le chargement a échoué</string>
     <!-- Home menu contents -->
+    <string name="welcome">Bienvenue,</string>
+    <string name="def_user_name">Utilisateur</string>
+    <string name="footer_message">Développé avec \u2665 en Inde</string>
     <string name="select_image">Sélectionner une image</string>
+    <string name="toast_select_image_error">Erreur lors de la sélection de l\'image</string>
     <!-- Playlist fragment -->
-    <string name="playlist_play_queue">Liste de lecture</string>
-    <string name="playlist_delete_dialog_title">Êtes-vous sûr de vouloir supprimer cette playlist ?</string>
+    <string name="playlist_play_queue">File de lecture</string>
+    <string name="playlist_delete_dialog_title">Êtes-vous sûr(e) de vouloir supprimer cette playlist ?</string>
+    <string name="toast_playlist_deleted_success">Liste de lecture supprimée avec succès</string>
+    <string name="cannot_delete_default_playlist">Impossible de supprimer la liste de lecture par défaut</string>
     <!-- Toolbar Options menu -->
+    <string name="context_menu_title">Options</string>
+    <string name="toast_invalid_options_group">Menu sélectionné invalide</string>
+    <string name="sort_order_title">Trier</string>
+    <string name="sort_by_title">Trier par</string>
+    <string name="sort_category_title">Titre</string>
+    <string name="alphabet_asc">A à Z</string>
+    <string name="alphabet_desc">Z à A</string>
+    <string name="sort_category_duration">Durée</string>
+    <string name="duration_asc">Durée ↑</string>
+    <string name="duration_desc">Durée ↓</string>
+    <string name="sort_category_date">Date</string>
+    <string name="date_added_asc">Date d\'ajout (plus ancien en premier)</string>
+    <string name="date_added_desc">Date d\'ajout (plus récent en premier)</string>
+    <string name="date_modified_asc">Date de modification (plus ancien en premier)</string>
+    <string name="date_modified_desc">Date de modification (plus récent en premier)</string>
+    <string name="sort_category_track_number">Numéro de morceau</string>
+    <string name="album_track_number_asc">Numéro de morceau ↑</string>
+    <string name="album_track_number_desc">Numéro de morceau ↓</string>
+    <string name="sort_category_artist">Artiste</string>
+    <string name="album_artist_asc">Artiste de l\'album ↑</string>
+    <string name="album_artist_desc">Artiste de l\'album ↓</string>
+    <string name="sort_category_year">Année</string>
+    <string name="album_year_asc">Année de l\'album (plus ancien en premier)</string>
+    <string name="album_year_desc">Année de l\'album (plus récent en premier)</string>
+    <string name="create_playlist">Créer une liste de lecture</string>
+    <string name="toast_equalizer_not_found">Impossible de trouver l\'égaliseur</string>
+    <string name="column_title">Colonnes</string>
+    <string name="column_category_count">Compte</string>
+    <string name="one">Un</string>
+    <string name="two">Deux</string>
+    <string name="three">Trois</string>
+    <string name="four">Quatre</string>
+    <string name="five">Cinq</string>
+    <string name="six">Six</string>
+    <string name="remove_duplicates">Supprimer les doublons</string>
     <!-- Options menu for list items -->
+    <string name="play_next">Lire ensuite</string>
+    <string name="toast_added_to_play_next">Morceau ajouté, sera lu juste après</string>
+    <string name="add_to_queue">Ajouter à la file d\'attente</string>
+    <string name="toast_added_to_queue">Morceau ajouté à la file d\'attente</string>
+    <string name="add_to_playlist">Ajouter à la liste de lecture</string>
+    <string name="add_to_favorite">Ajouter aux favoris</string>
+    <string name="remove_from_favorite">Retirer des favoris</string>
+    <string name="share">Partager</string>
+    <string name="share_intent">Partager la piste par</string>
+    <string name="go_to_album">Aller à l\'album</string>
+    <string name="go_to_artist">Aller à l\'artiste</string>
+    <string name="track_info">Informations du morceau</string>
     <!-- Playlist tracks Activity -->
+    <string name="message_empty_playlist">Cette playlist est vide\nVous pouvez ajouter des pistes en utilisant le bouton ajouter</string>
+    <string name="track_removed_from_queue">Piste retirée de la file d\'attente !!!</string>
+    <string name="undo">Annuler</string>
+    <string name="play">Lire</string>
+    <string name="add">Ajouter</string>
+    <string name="clear_all">Effacer tout</string>
+    <string name="toast_playlist_shuffle_success">Liste de lecture en aléatoire avec succès</string>
+    <string name="coming_up_next">Suivant</string>
+    <string name="current_queue">File d\'attente actuelle</string>
     <!-- Favorites Playlist Activity-->
+    <string name="favorites">Favoris</string>
+    <string name="your_favorites">Vos favoris</string>
+    <string name="message_empty_favorites">Vos favoris sont vides\nAjouter des morceaux aux favoris\n\n\u2665</string>
     <!-- Recent Activity-->
+    <string name="recent">Récent</string>
+    <string name="recent_playlist_title">Lu récemment</string>
+    <string name="message_empty_recent">Aucun morceau trouvé\n\u2639</string>
     <!-- Now Playing Activity -->
+    <string name="now_playing">Lecture en cours</string>
+    <string name="toast_added_to_favorites">Morceau ajouté aux favoris</string>
+    <string name="toast_cannot_add_to_favorites">Le morceau ne peut pas être ajouté aux favoris</string>
+    <string name="toast_removed_from_favorites">Morceau supprimé des favoris</string>
+    <string name="playlist_completed">Liste de lecture terminée</string>
     <!-- Media Folder Chooser Activity -->
+    <string name="select_folders">Sélectionner un ou plusieurs dossier</string>
+    <string name="message_empty_folders_list">Aucun dossier média trouvé dans la mémoire\n\u2639</string>
     <!-- Details Activity -->
+    <string name="artist_tracks_count">L\'artiste a ● %d albums</string>
+    <string name="album_tracks_count">L\'album contient ● %d morceaux</string>
+    <string name="suffix_tracks">morceaux</string>
+    <string name="track_number_info">Disque/Morceau : %d/%d</string>
     <!-- Song info dialog -->
+    <string name="track">Morceau</string>
+    <string name="file_size">Taille du fichier</string>
+    <string name="file_type">Type de fichier</string>
+    <string name="bitrate">Débit</string>
+    <string name="sample_rate">Taux d\'échantillonnage</string>
+    <string name="channel_count">Nombre de canaux</string>
     <!-- Search Activity -->
+    <string name="hint_search">Rechercher un artiste, une chanson ou un album\.\.\.</string>
+    <string name="message_empty_search_result">Rien à afficher</string>
     <!-- Settings Activity -->
+    <string name="settings">Paramètres</string>
+    <string name="restart_app">Redémarrer l\'application</string>
+    <string name="restart_app_dialog_desc">Pulse Music doit redémarrer pour que les changements prennent effet</string>
+    <string name="restart">Redémarrer</string>
+    <string name="do_it_later">Plus tard</string>
     <!-- Category -->
+    <string name="general">Général</string>
+    <string name="general_desc">Configurez les paramètres de base</string>
+    <string name="theme">Thème</string>
+    <string name="theme_desc">Choisissez l\'apparence de l\'application</string>
+    <string name="now_playing_title">Lecture en cours</string>
+    <string name="now_playing_desc">Personnaliser l\'écran de lecture</string>
+    <string name="audio">Audio</string>
+    <string name="audio_desc">Modifiez les paramètres audio</string>
+    <string name="contributors">Contributeurs</string>
+    <string name="contributors_desc">Rencontrez les développeurs</string>
+    <string name="support_development">Soutient au développement</string>
+    <string name="support_development_desc">Donnez un petit montant pour soutenir les développeurs</string>
+    <string name="about">À propos</string>
+    <string name="about_desc">Tout sur cette appli</string>
     <!-- General Section -->
+    <string name="category_loader">Lecture</string>
+    <string name="ignored_folder_title">Choisir les dossiers ignorés</string>
+    <string name="ignored_folder_desc">Ajoutez ou supprimez des dossiers à exclure de l\'affichage dans la bibliothèque</string>
+    <string name="ignored_folder_picker_title">Sélectionner un ou plusieurs dossier</string>
+    <string name="ignored_folder_picker_empty_text">Aucun dossier ignoré</string>
+    <string name="toast_folder_added_to_ignored_list">Dossier ajouté avec succès à la liste ignorée</string>
+    <string name="toast_failed_to_add_folder">Échec de l\'ajout du dossier à la liste ignorée</string>
+    <string name="toast_removed_folder_from_ignored_list">Dossier supprimé de la liste des dossiers ignorés</string>
+    <string name="duration_filter_title">Filtre de durée</string>
+    <string name="duration_filter_desc">Filtrer les pistes audio en fonction de la durée du morceau</string>
+    <string name="duration_filter_unit">s</string>
+    <string name="category_others">Autres</string>
+    <string name="remember_playlist_title">Se souvenir de la liste de lecture</string>
+    <string name="remember_playlist_desc">La liste de lecture sera mémorisée, vous pourrez reprendre où vous vous êtes arrêté</string>
+    <string name="edit_playlist_sections_title">Modifier la liste de lecture</string>
+    <string name="edit_playlist_section_desc">Sélectionnez les listes de lecture à afficher sur l\'écran d\'accueil</string>
+    <string name="playlist_section_selector_title">Afficher/Cacher la section de listes de lecture</string>
+    <string name="rediscover_section_desc">Note : Cette section est dynamique et peut ne pas être toujours affichée, même si elle est activée</string>
     <!-- Theme section -->
+    <string name="category_theme">Thème</string>
+    <string name="select_dark_theme">Thème sombre</string>
+    <string name="select_dark_theme_desc">Choisissez le thème sombre à appliquer lorsque le mode sombre est activé</string>
+    <string name="enable_dark_mode">Activer le mode sombre</string>
+    <string name="enable_dark_mode_desc">Active instantanément le thème sombre sélectionné</string>
+    <string name="enable_auto_mode">Choix du thème automatique</string>
+    <string name="enable_auto_mode_desc">Définit le thème sombre/clair à partir de l\'heure de la journée</string>
+    <string name="category_colors">Couleurs</string>
+    <string name="desaturated_accents">Couleurs désaturées</string>
+    <string name="desaturated_accents_desc">La couleur d\'accentuation est désaturée lorsque le thème sombre est appliqué</string>
+    <string name="pick_accent_color">Couleur d\'accentuation</string>
+    <string name="pick_accent_color_desc">Choisissez la couleur d\'accentuation de l\'appli</string>
+    <string name="accents_color_picker_title">Choisissez une couleur d\'accentuation</string>
+    <string name="custom">Personnalisée</string>
+    <string name="select_custom_accent">Sélectionnez une couleur personnalisée</string>
+    <string name="dark_theme_gray">Gris simple</string>
+    <string name="dark_theme_signature">Noir rétroéclairé</string>
+    <string name="dark_theme_lights_out">Noir</string>
+    <string name="select_dark_theme_style">Choisir le thème sombre</string>
     <!-- Now playing settings -->
+    <string name="category_style">Style</string>
+    <string name="select_np_style">Style de la lecture en cours</string>
+    <string name="select_np_style_desc">Choisir le style de l\'écran de lecture en cours</string>
+    <string name="style_modern">Moderne</string>
+    <string name="style_stylish">Stylisé</string>
+    <string name="style_edge">Jusqu\'au bord</string>
+    <string name="corner_radius">Courbure des angles</string>
+    <string name="corner_radius_desc">Choisissez la courbure des coins de la pochette d\'album</string>
+    <string name="corner_radius_selector_title">Choisissez la courbure des coins</string>
+    <string name="corner_radius_unit">dp</string>
+    <string name="top_left">Haut-Gauche</string>
+    <string name="top_right">Haut-Droit</string>
+    <string name="bottom_left">Bas-Gauche</string>
+    <string name="bottom_right">Bas-Droite</string>
+    <string name="category_controls">Contrôles</string>
     <!-- Audio settings -->
+    <string name="category_auto_play">Lecture automatique</string>
+    <string name="bluetooth_auto_play">Lecture automatique Bluetooth</string>
+    <string name="bluetooth_auto_play_desc">Démarre la lecture de la musique lorsqu\'un périphérique Bluetooth se connecte</string>
+    <string name="bluetooth_auto_play_action">Action de lecture automatique bluetooth</string>
+    <string name="bluetooth_auto_play_action_desc">Choisir la liste de lecture à lancer lorsqu\'un périphérique Bluetooth se connecte</string>
+    <string name="select_bluetooth_action">Définir une action Bluetooth par défaut</string>
+    <string name="play_shuffle">Lire des morceaux aléatoires</string>
+    <string name="play_new_in_store">Lancer la liste de lecture \"Nouveaux morceaux\"</string>
+    <string name="play_for_you">Lire la liste de lecture \"Pour vous\"</string>
+    <string name="play_continue_playlist">Reprendre où vous vous êtes arrêté(e) \n(dépend de l\'option \"Se souvenir de la liste de lecture\")</string>
     <!-- Contributors -->
+    <string name="lead_developer">Développeurs principaux</string>
+    <string name="github">Github</string>
+    <string name="twitter">Twitter</string>
+    <string name="telegram">Telegram</string>
     <!-- Donations -->
+    <string name="category_contribute">Contribuer</string>
+    <string name="donation_card_title">Vous appréciez Pulse Music?</string>
+    <string name="donation_card_text">Beaucoup de temps et d\'efforts sont nécessaires pour fournir des produits de qualité, qui plus est gratuitement\nMerci d\'envisager un petit don pour soutenir le développement</string>
+    <string name="donate_options_title">Faire un don avec</string>
+    <string name="buy_me_coffee">Buy me a Coffee</string>
+    <string name="pay_pal">PayPal</string>
+    <string name="upi">UPI (uniquement pour les utilisateurs indiens)</string>
+    <string name="toast_upi_not_found">Aucune application UPI trouvée, veuillez en installer une pour continuer</string>
     <!-- About -->
+    <string name="category_app_info">Informations sur l\'application</string>
+    <string name="app_version">Version</string>
+    <string name="build_date">Date de compilation</string>
+    <string name="build_type">Type de compilation</string>
+    <string name="build_code">Code de la compilation</string>
+    <string name="category_social_links">Réseaux sociaux</string>
     <!-- Accents -->
     <!-- For translators: If the color words does not make much sense in your language,
     you can try substituting a similar description of the color. But keep it short
     -->
+    <string name="exodus_fruit">Bleu Ardoise</string>
+    <string name="electron_blue">Bleu ciel</string>
+    <string name="coral">Corail</string>
+    <string name="sunkist">Ocre</string>
+    <string name="blue_pink">Bleuet</string>
     <!-- Custom accents dialog -->
+    <string name="hint_hex_color">Code Hex</string>
+    <string name="invalid_color">Couleur invalide</string>
+    <string name="color_channel_r">R</string>
+    <string name="color_channel_g">V</string>
+    <string name="color_channel_b">B</string>
+    <string name="apply">Appliquer</string>
+    <string name="presets">Pré-réglages</string>
     <!-- App shortcuts -->
     <!-- Max length = 10 characters including spaces-->
+    <string name="shortcut_shuffle">Aléatoire</string>
     <!-- Max length = 25 characters including spaces-->
+    <string name="shortcut_shuffle_desc">Aléatoire</string>
     <!-- Max length = 10 characters including spaces-->
+    <string name="shortcut_latest">Morceaux récents</string>
     <!-- Max length = 25 characters including spaces-->
+    <string name="shortcut_latest_desc">+Récents</string>
     <!-- Max length = 10 characters including spaces-->
+    <string name="shortcut_suggested_label">Pour vous</string>
     <!-- Max length = 25 characters including spaces-->
+    <string name="shortcut_suggested_label_long">Pour vous</string>
 </resources>
