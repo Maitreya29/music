@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Handler;
+import android.os.Looper;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,12 +32,13 @@ public class UserInfo {
         editor.apply();
     }
 
+    @NonNull
     public static String getUserName(@NonNull Context context) {
         return context.getSharedPreferences(USER_INFO, Context.MODE_PRIVATE).getString(NAME_KEY, context.getString(R.string.def_user_name));
     }
 
     public static void saveUserProfilePic(@NonNull Context context, @NonNull Uri uri, @Nullable TaskRunner.Callback<File> callback) {
-        Handler handler = new Handler();
+        Handler handler = new Handler(Looper.getMainLooper());
         TaskRunner.executeAsync(() -> {
             File file = new File(context.getFilesDir().getAbsolutePath(), PROFILE_PICTURE);
             try {

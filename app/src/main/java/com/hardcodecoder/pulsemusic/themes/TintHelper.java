@@ -66,7 +66,7 @@ public final class TintHelper {
         materialOutlineButton.setStrokeColor(ThemeColors.getMaterialOutlineColorSelector());
     }
 
-    public static void setAccentTintToCursor(EditText editText) {
+    public static void setAccentTintToCursor(@NonNull EditText editText) {
         if (Build.VERSION.SDK_INT == 28) {
             // Cannot be applied using reflection
             // mDrawableForCursor in Editor class set's the drawable for cursor

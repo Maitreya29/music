@@ -18,7 +18,7 @@ import com.hardcodecoder.pulsemusic.utils.AppSettings;
 public class BluetoothBroadcastReceiver extends BroadcastReceiver {
 
     @Override
-    public void onReceive(@NonNull Context context, Intent eventIntent) {
+    public void onReceive(@NonNull Context context, @NonNull Intent eventIntent) {
         String action = eventIntent.getAction();
         if (BluetoothDevice.ACTION_ACL_CONNECTED.equals(action)) {
             BluetoothDevice bluetoothDevice = eventIntent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);

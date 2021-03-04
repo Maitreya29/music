@@ -20,6 +20,7 @@ import java.io.InputStream;
 
 public class ImageUtil {
 
+    @NonNull
     public static Drawable generateTintedDefaultAlbumArt(@NonNull Context context, @ColorInt int color) {
         Drawable drawable = ContextCompat.getDrawable(context, R.drawable.ic_audio_48dp);
         if (drawable != null) {

@@ -42,7 +42,7 @@ public class TaskRunner {
         try {
             CUSTOM_THREAD_POOL_EXECUTOR.execute(runnable);
         } catch (Exception e) {
-            LogUtils.logException(TaskRunner.class.getSimpleName(), "at: executeAsync(): callable", e);
+            LogUtils.logException(TaskRunner.class.getSimpleName(), "at: executeAsync(): runnable", e);
         }
     }
 

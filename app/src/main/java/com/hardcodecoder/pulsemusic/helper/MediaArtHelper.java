@@ -20,6 +20,7 @@ public class MediaArtHelper {
 
     private static TypedArray mMediaArtColors;
 
+    @NonNull
     public static Bitmap getAlbumArt(@NonNull Context context, @NonNull MusicModel data) {
         // We know that manually selected tracks have negative track id's
         if (data.getId() < 0)
@@ -32,6 +33,7 @@ public class MediaArtHelper {
         }
     }
 
+    @NonNull
     public static Drawable getDefaultAlbumArt(@NonNull Context context, long albumId) {
         // albumId = -1 represents album art tinted with the primary color
         // So, we need not convert it into positive int
@@ -44,6 +46,7 @@ public class MediaArtHelper {
         return drawable;
     }
 
+    @NonNull
     public static Bitmap getDefaultAlbumArtBitmap(@NonNull Context context, long albumId) {
         // -1 represents the primary color tinted album art
         // So, we need not convert it into positive int

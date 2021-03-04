@@ -23,7 +23,7 @@ public class FavoritesProvider {
     private Set<Integer> mFavoritesSet;
     private List<FavoritesProviderCallback> mCallbacks = null;
 
-    public FavoritesProvider(String baseDir, Handler handler) {
+    public FavoritesProvider(@NonNull String baseDir, @NonNull Handler handler) {
         mHandler = handler;
         mFavoritesFilePath = baseDir + File.separator + "favorites.txt";
         StorageUtil.createFile(new File(mFavoritesFilePath));
@@ -47,7 +47,7 @@ public class FavoritesProvider {
         });
     }
 
-    public void isTemFavorite(MusicModel musicModel, Callback<Boolean> callback) {
+    public void isTemFavorite(@NonNull MusicModel musicModel, @NonNull Callback<Boolean> callback) {
         TaskRunner.executeAsync(() -> {
             loadFavorites();
             if (mFavoritesSet.contains(musicModel.getId()))
@@ -56,7 +56,7 @@ public class FavoritesProvider {
         });
     }
 
-    public void getFavoriteTracks(Callback<List<MusicModel>> callback) {
+    public void getFavoriteTracks(@NonNull Callback<List<MusicModel>> callback) {
         TaskRunner.executeAsync(() -> {
             File file = new File(mFavoritesFilePath);
             if (file.exists()) {

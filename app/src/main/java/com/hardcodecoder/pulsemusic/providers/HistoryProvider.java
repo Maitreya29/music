@@ -29,7 +29,7 @@ public class HistoryProvider {
     private final String mHistoryDir;
     private Map<Integer, Short> mHistoryMap = null;
 
-    HistoryProvider(String baseDir, Handler handler) {
+    HistoryProvider(@NonNull String baseDir, @NonNull Handler handler) {
         mHandler = handler;
         mHistoryDir = baseDir + File.separator + "history" + File.separator;
         StorageUtil.createDir(new File(mHistoryDir));
@@ -132,7 +132,7 @@ public class HistoryProvider {
         }
     }
 
-    private void sortHistory(File[] files) {
+    private void sortHistory(@NonNull File[] files) {
         // Sorts in descending order by modified date
         Arrays.sort(files, (f1, f2) -> Long.compare(f2.lastModified(), f1.lastModified()));
     }
@@ -151,7 +151,7 @@ public class HistoryProvider {
     }
 
     @NonNull
-    private HistoryRecord getHistoryRecord(File file) {
+    private HistoryRecord getHistoryRecord(@NonNull File file) {
         String[] lines = StorageUtil.readLinesFromFile(file, 5);
         return new HistoryRecord(
                 lines[0],

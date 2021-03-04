@@ -20,7 +20,7 @@ public class IgnoreListProvider {
     private final Handler mHandler;
     private final String mIgnoredFilePath;
 
-    public IgnoreListProvider(String baseFilesDir, Handler handler) {
+    public IgnoreListProvider(@NonNull String baseFilesDir, @NonNull Handler handler) {
         mHandler = handler;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
             mIgnoredFilePath = baseFilesDir + File.separator + "ignoredList_Q.txt";

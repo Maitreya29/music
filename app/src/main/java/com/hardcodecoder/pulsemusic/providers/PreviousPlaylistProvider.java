@@ -35,6 +35,7 @@ public class PreviousPlaylistProvider {
         });
     }
 
+    @NonNull
     public List<MusicModel> getPlaylist() {
         List<Integer> trackIds = StorageUtil.readPlaylistIdsFromFile(new File(mPreviousPlaylistFilePath));
         return DataModelHelper.getModelObjectFromId(trackIds);

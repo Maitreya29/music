@@ -16,6 +16,7 @@ import com.hardcodecoder.pulsemusic.model.MenuItem;
 
 public class ToolbarMenuBuilder {
 
+    @NonNull
     public static ToolbarContextMenuDialog buildDefaultOptionsMenu(
             @NonNull FragmentActivity activity,
             @NonNull OptionsMenuListener listener,

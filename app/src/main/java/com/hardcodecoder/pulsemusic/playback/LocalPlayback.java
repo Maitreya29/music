@@ -12,6 +12,7 @@ import android.media.session.PlaybackState;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
+import android.os.Looper;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.widget.Toast;
@@ -60,7 +61,7 @@ public class LocalPlayback implements
         mContext = applicationContext;
         mAudioManager = (AudioManager) applicationContext.getSystemService(Context.AUDIO_SERVICE);
         mHandler = handler;
-        if (mHandler == null) mHandler = new Handler();
+        if (mHandler == null) mHandler = new Handler(Looper.myLooper());
         mQueueManager = PulseController.getInstance().getQueueManager();
     }
 

@@ -18,6 +18,7 @@ import com.hardcodecoder.pulsemusic.R;
 @RequiresApi(Build.VERSION_CODES.N_MR1)
 public class ShortcutIconGenerator {
 
+    @NonNull
     public static Icon getThemedIcon(@NonNull Context context, @DrawableRes int drawableRes) {
         Drawable background = ContextCompat.getDrawable(context, R.drawable.ic_app_shortcut_background);
         Drawable foreground = ContextCompat.getDrawable(context, drawableRes);
@@ -30,6 +31,7 @@ public class ShortcutIconGenerator {
         return Icon.createWithBitmap(createBitmap(layerDrawable));
     }
 
+    @NonNull
     private static Bitmap createBitmap(@NonNull Drawable drawable) {
         int width = drawable.getIntrinsicWidth();
         int height = drawable.getIntrinsicHeight();

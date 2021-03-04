@@ -23,7 +23,7 @@ public class PlaylistProvider {
     private final Handler mHandler;
     private final String mPlaylistDirPath;
 
-    public PlaylistProvider(String baseDir, Handler handler) {
+    public PlaylistProvider(@NonNull String baseDir, @NonNull Handler handler) {
         mHandler = handler;
         mPlaylistDirPath = baseDir + File.separator + "playlists" + File.separator;
         StorageUtil.createDir(new File(mPlaylistDirPath));

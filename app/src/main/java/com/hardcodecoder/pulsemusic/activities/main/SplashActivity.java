@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -21,7 +22,7 @@ import com.hardcodecoder.pulsemusic.themes.TintHelper;
 public class SplashActivity extends ThemeActivity {
 
     private static final int REQUEST_CODE = 69;
-    private final Handler mHandler = new Handler();
+    private final Handler mHandler = new Handler(Looper.getMainLooper());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +51,7 @@ public class SplashActivity extends ThemeActivity {
             } else {
                 // Permission was not granted
                 Toast.makeText(this, getString(R.string.toast_requires_storage_access), Toast.LENGTH_LONG).show();
-                new Handler().postDelayed(this::finish, 1500);
+                mHandler.postDelayed(this::finish, 1500);
             }
         }
     }
