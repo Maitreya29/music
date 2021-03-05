@@ -1,0 +1,20 @@
+﻿Pulse Music V4.1.0
+
+Note: For Android 11 devices, please clear data and cache after updating.
+
+- Fixed album art issue on Android 11 (#48).
+- Fixed silent app crash when playback stops while in a playlist (#64).
+- New UI for main contents screen (00faaf6 and 820c175).
+- Added option to toggle various playlists shown in the Home screen (36613e9).
+- Added option to enable seek buttons in Now Playing screen (#36).
+- Added option to enable 1 column in Albums and Artists tab (#63).
+- Added option to clear "Playing Queue" (#53).
+- Added context menu in Now Playing Screen (#58).
+- Added Quick Settings tile with custom actions (#62 and 20f4f5d).
+- Added "Resume option" in Bluetooth auto play (f59ab5a).
+- Enhanced "Remember last track" option, which now remembers the previous playlist and let you resume exactly where you left (3564f1e).
+- Added bottom sheet style toolbar context menu (ebc2ac8).
+- Show Now Playing screen when clicked on Notification (#71).
+- Improvements to sort by Track number for Android 11+ devices (#74).
+- Other bug fixes and misc improvements.
+- Updated translations.
