@@ -232,7 +232,10 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
 
     @Override
     public void onDestroy() {
-        LoaderCache.clearCache();
+        MediaController controller = mMediaSession.getController();
+        if (controller.getPlaybackState() != null && controller.getPlaybackState().getState() != PlaybackState.STATE_NONE) {
+            LoaderCache.clearCache();
+        }
         PulseController.getInstance().releaseController();
         if (null != sharedPreferenceChangeListener)
             getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, MODE_PRIVATE)
