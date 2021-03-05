@@ -111,19 +111,20 @@ public abstract class DraggableNowPlayingSheetActivity extends ControllerActivit
 
         if (null == mPeekingFragment) {
             mPeekingFragment = ControlsFragment.getInstance();
-            getSupportFragmentManager().beginTransaction()
+            getSupportFragmentManager()
+                    .beginTransaction()
                     .replace(R.id.peeking_content_frame, mPeekingFragment, ControlsFragment.TAG)
                     .commit();
             mPeekingFrame.setOnClickListener(v -> expandBottomSheet());
         }
 
         if (null == mExpandedFragment) {
-            createExpandedFragment(false);
-            getSharedPreferences(Preferences.NOW_PLAYING_SCREEN_STYLE_KEY, Context.MODE_PRIVATE)
-                    .registerOnSharedPreferenceChangeListener(this);
             // ViewPager2 need to initialize once before it can be set to View.GONE
             // Setting View.GONE here causes ViewPager2 to not correctly update active album art
             mExpandedFrame.setVisibility(View.INVISIBLE);
+            createExpandedFragment(false);
+            getSharedPreferences(Preferences.NOW_PLAYING_SCREEN_STYLE_KEY, Context.MODE_PRIVATE)
+                    .registerOnSharedPreferenceChangeListener(this);
         }
 
         final float bottomNavBarHeight = DimensionsUtil.getDimension(this, 56);
@@ -202,9 +203,10 @@ public abstract class DraggableNowPlayingSheetActivity extends ControllerActivit
                     tag = ModernNowPlayingScreen.TAG;
             }
         }
-        getSupportFragmentManager().beginTransaction()
+        getSupportFragmentManager()
+                .beginTransaction()
                 .replace(R.id.expanded_content_frame, mExpandedFragment, tag)
-                .commitAllowingStateLoss();
+                .commit();
         mPendingUpdateExpandedFragment = false;
     }
 
@@ -220,6 +222,7 @@ public abstract class DraggableNowPlayingSheetActivity extends ControllerActivit
      *                      else we revert the system ui visibility to account
      *                      for dark and light themes
      */
+    @SuppressWarnings("deprecation")
     private void setLightStatusBarIcons(boolean setLightIcons) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             Window w = getWindow();
@@ -277,11 +280,13 @@ public abstract class DraggableNowPlayingSheetActivity extends ControllerActivit
 
     public void collapseBottomSheet() {
         if (null != mBehaviour) mBehaviour.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        mExpandedFrame.setVisibility(View.GONE);
         mPeekingFrame.setVisibility(View.VISIBLE);
     }
 
     public void expandBottomSheet() {
         if (null != mBehaviour) mBehaviour.setState(BottomSheetBehavior.STATE_EXPANDED);
+        mPeekingFrame.setVisibility(View.GONE);
         mExpandedFrame.setVisibility(View.VISIBLE);
     }
 

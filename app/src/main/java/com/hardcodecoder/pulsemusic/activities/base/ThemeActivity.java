@@ -32,7 +32,6 @@ public class ThemeActivity extends AppCompatActivity {
     protected void onStart() {
         if (mCurrentTheme != ThemeManagerUtils.getThemeToApply() ||
                 mCurrentAccent != ThemeColors.getCurrentColorPrimary()) {
-            supportInvalidateOptionsMenu();
             recreate();
         }
         super.onStart();
