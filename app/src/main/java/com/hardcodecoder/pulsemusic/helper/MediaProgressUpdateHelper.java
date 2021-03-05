@@ -20,13 +20,18 @@ public class MediaProgressUpdateHelper extends Handler {
     private final MediaController.Callback controllerCallback = new MediaController.Callback() {
         @Override
         public void onPlaybackStateChanged(@Nullable PlaybackState state) {
+            if (null == state) {
+                stop();
+                return;
+            }
             mCallback.onPlaybackStateChanged(state);
-            if (state != null && state.getState() == PlaybackState.STATE_PLAYING) start();
+            if (state.getState() == PlaybackState.STATE_PLAYING) start();
             else stop();
         }
 
         @Override
         public void onMetadataChanged(@Nullable MediaMetadata metadata) {
+            if (null == metadata) return;
             mCallback.onMetadataDataChanged(metadata);
         }
     };
@@ -39,15 +44,17 @@ public class MediaProgressUpdateHelper extends Handler {
         mController.registerCallback(controllerCallback);
 
         // Make a callbacks so that the receiver initialises itself with current data
-        post(() -> mCallback.onMetadataDataChanged(mController.getMetadata()));
-        final PlaybackState state = mController.getPlaybackState();
-        post(() -> mCallback.onPlaybackStateChanged(state));
         post(() -> {
-            if (null != state) {
-                mCallback.onProgressValueChanged(state.getPosition());
-                if (state.getState() == PlaybackState.STATE_PLAYING)
-                    start();
-            }
+            if (null == mController.getMetadata()) return;
+            mCallback.onMetadataDataChanged(mController.getMetadata());
+        });
+
+        post(() -> {
+            PlaybackState state = mController.getPlaybackState();
+            if (null == state) return;
+            mCallback.onPlaybackStateChanged(state);
+            mCallback.onProgressValueChanged(state.getPosition());
+            if (state.getState() == PlaybackState.STATE_PLAYING) start();
         });
     }
 
@@ -85,9 +92,9 @@ public class MediaProgressUpdateHelper extends Handler {
     }
 
     public interface Callback {
-        void onMetadataDataChanged(MediaMetadata metadata);
+        void onMetadataDataChanged(@NonNull MediaMetadata metadata);
 
-        void onPlaybackStateChanged(PlaybackState state);
+        void onPlaybackStateChanged(@NonNull PlaybackState state);
 
         void onProgressValueChanged(long progress);
     }

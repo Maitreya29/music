@@ -94,7 +94,7 @@ public class EdgeNowPlayingScreen extends BaseNowPlayingScreen {
     }
 
     @Override
-    public void onMetadataDataChanged(MediaMetadata metadata) {
+    public void onMetadataDataChanged(@NonNull MediaMetadata metadata) {
         super.onMetadataDataChanged(metadata);
         long seconds = getDurationSeconds();
         mProgressSeekBar.setProgress(0);
@@ -106,7 +106,7 @@ public class EdgeNowPlayingScreen extends BaseNowPlayingScreen {
     }
 
     @Override
-    public void onPlaybackStateChanged(PlaybackState state) {
+    public void onPlaybackStateChanged(@NonNull PlaybackState state) {
         super.onPlaybackStateChanged(state);
         togglePlayPauseAnimation(mPlayPauseBtn, state);
     }

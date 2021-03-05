@@ -80,7 +80,7 @@ public class LandscapeModeNowPlayingScreen extends BaseNowPlayingScreen {
     }
 
     @Override
-    public void onMetadataDataChanged(MediaMetadata metadata) {
+    public void onMetadataDataChanged(@NonNull MediaMetadata metadata) {
         super.onMetadataDataChanged(metadata);
         long seconds = getDurationSeconds();
         resetSliderValues(mProgressSlider);
@@ -91,7 +91,7 @@ public class LandscapeModeNowPlayingScreen extends BaseNowPlayingScreen {
     }
 
     @Override
-    public void onPlaybackStateChanged(PlaybackState state) {
+    public void onPlaybackStateChanged(@NonNull PlaybackState state) {
         super.onPlaybackStateChanged(state);
         togglePlayPauseAnimation(mPlayPauseBtn, state);
     }

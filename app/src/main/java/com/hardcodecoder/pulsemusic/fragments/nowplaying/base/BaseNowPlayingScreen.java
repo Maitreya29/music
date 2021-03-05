@@ -106,6 +106,7 @@ public abstract class BaseNowPlayingScreen extends Fragment
         mRequiresStatusBarPadding = requiresStatusBarPadding;
     }
 
+    @SuppressWarnings("deprecation")
     @CallSuper
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -187,7 +188,7 @@ public abstract class BaseNowPlayingScreen extends Fragment
 
     @CallSuper
     @Override
-    public void onMetadataDataChanged(MediaMetadata metadata) {
+    public void onMetadataDataChanged(@NonNull MediaMetadata metadata) {
         if (null != mMediaArtPager)
             mMediaArtPager.setCurrentItem(mQueueManager.getActiveIndex(), mShouldAnimateMediaArt);
         updateFavoriteItem();
@@ -200,7 +201,7 @@ public abstract class BaseNowPlayingScreen extends Fragment
 
     @CallSuper
     @Override
-    public void onPlaybackStateChanged(PlaybackState state) {
+    public void onPlaybackStateChanged(@NonNull PlaybackState state) {
         updateRepeat();
     }
 
