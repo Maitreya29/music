@@ -7,14 +7,17 @@
 <p align="center"> An offline music player with modern UI and useful features</p>
 
 <p align="center">
-  <a href="https://github.com/HardcodeCoder/pulsemusic/blob/master/LICENSE">
+  <a title="License" target="_blank" href="https://github.com/HardcodeCoder/pulsemusic/blob/master/LICENSE">
     <img src="https://img.shields.io/github/license/hardcodecoder/pulsemusic?color=%23079A00" />
   </a>
-  <a href="https://github.com/HardcodeCoder/pulsemusic/releases">
+  <a title="Latest release" target="_blank" href="https://github.com/HardcodeCoder/pulsemusic/releases/latest">
     <img src="https://img.shields.io/github/v/release/hardcodecoder/pulsemusic?color=%235F78FF" />
   </a>
-  <a href="https://github.com/HardcodeCoder/pulsemusic/releases">
+  <a title="Downloads" target="_blank" href="https://github.com/HardcodeCoder/pulsemusic/releases">
     <img src="https://img.shields.io/github/downloads/hardcodecoder/pulsemusic/total?color=blue"/>
+  </a>
+  <a title="Crowdin" target="_blank" href="https://crowdin.com/project/pulse-music">
+    <img src="https://badges.crowdin.net/pulse-music/localized.svg">
   </a>
 </p>
 
@@ -32,6 +35,15 @@
   </a>
 </p>
 
+<h2 align="center">Join us on</h2>
+<p align="center">
+    <a href="https://t.me/PulseMusicDiscussion">
+        <img src="gallery/icons/telegram.svg" alt="Telegram logo" width="48" height="48">
+    </a>
+    <a href="https://twitter.com/hardcodecoder">
+        <img src="gallery/icons/twitter.svg" alt="Twitter logo" width="48" height="48">
+    </a>
+</p>
 
 <h2 align="center">Support development</h2>
 <h4 align="center">Enjoying Pulse Music?</h4>
@@ -57,24 +69,26 @@
 
 
 ## Screenshots
-| <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/1.png" width="200"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/2.png" width="200"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/3.png" width="200"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/7.png" width="200"/> |
+| <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/1.png" width="200"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/2.png" width="200"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/3.png" width="200"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/4.png" width="200"/> |
 |:---:|:---:|:---:|:---:|
-| Home | Library | Playlist |Details page |
+| Home | Library | Albums |  Playlist |
 
 ### Now playing screen
-| <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/4.png" width="200"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/5.png" width="200"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/6.png" width="200"/> |
+| <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/5.png" width="200"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/6.png" width="200"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/7.png" width="200"/> |
 |:---:|:---:|:---:|
 | Modern | Stylish | Edge to edge |
 
 ### Themes
-| <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/10.png" width="200"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/11.png" width="200"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/12.png" width="200"/> |
+| <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/9.png" width="200"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/J.png" width="200"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/K.png" width="200"/> |
 |:---:|:---:|:---:|
-| Just gray | Signature dark | Lights out |
+| Just gray | Lights out | Signature dark |
 
 ### Landscape ready
-| <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/8.png" width="300"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/9.png" width="300"/> |
+| <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/S.png" width="300"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/T.png" width="300"/> |
 |:----:|:----:|
 | Can change column count | Now playing screen |
+
+More screenshots [Here](gallery/README.md)
 
 ### Home
 Rediscover your offline collection with new suggestions based on your music preference
@@ -108,7 +122,11 @@ With 3 different dark themes and several curated accents to choose from, customi
 ## Other features
 - Custom accent support.
 - Bluetooth AutoPlay.
+- Quick Settings tile
+- Launcher shortcuts
+- Toggle playlist section(s)
 - Option to blacklist folders.
+- Customize Now Playing Screen
 - Choose tracks from file explorer and play.
 - Change column count in landscape mode (independent from portrait mode).
 - Add, remove re-oder tracks in current queue as well as user created playlists.
@@ -119,3 +137,9 @@ With 3 different dark themes and several curated accents to choose from, customi
 
 
 IMPORTANT : *Please mention the steps to reproduce the bug while reporting. Providing logs will be really helpful*
+
+#### Icons used in the project and in the app are provided by:
+
+<a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+
+<a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
