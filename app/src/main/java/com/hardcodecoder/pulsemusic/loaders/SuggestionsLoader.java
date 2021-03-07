@@ -12,7 +12,7 @@ public class SuggestionsLoader implements Callable<List<MusicModel>> {
 
     @Override
     public List<MusicModel> call() {
-        List<MusicModel> master = LoaderCache.getAllTracksList();
+        List<MusicModel> master = LoaderManager.getCachedMasterList();
         if (master == null || master.isEmpty()) return null;
 
         List<MusicModel> list = new ArrayList<>(master);
@@ -24,11 +24,6 @@ public class SuggestionsLoader implements Callable<List<MusicModel>> {
         // Find a random start index such that startIndex + minTwentyPercent < listSize
         int startIndex = new Random().nextInt(listSize - minTwentyPercent);
         // sublist the list from startIndex to startIndex + minTwentyPercent
-        final List<MusicModel> suggestionsList = list.subList(startIndex, startIndex + minTwentyPercent);
-        LoaderCache.setSuggestions(suggestionsList);
-        suggestionsList.clear();
-        list.clear();
-
-        return LoaderCache.getSuggestions();
+        return list.subList(startIndex, startIndex + minTwentyPercent);
     }
 }

@@ -16,7 +16,7 @@ public class SearchQueryLoader implements Callable<List<MusicModel>> {
 
     @Override
     public List<MusicModel> call() {
-        final List<MusicModel> searchList = LoaderCache.getAllTracksList();
+        final List<MusicModel> searchList = LoaderManager.getCachedMasterList();
         List<MusicModel> searchResult;
 
         if (searchList == null || searchList.isEmpty()) return null;

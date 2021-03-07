@@ -20,11 +20,13 @@ import com.hardcodecoder.pulsemusic.activities.base.ThemeActivity;
 import com.hardcodecoder.pulsemusic.adapters.main.TracksSelectorAdapter;
 import com.hardcodecoder.pulsemusic.helper.RecyclerViewSelectorHelper;
 import com.hardcodecoder.pulsemusic.interfaces.ItemSelectorListener;
-import com.hardcodecoder.pulsemusic.loaders.LoaderCache;
+import com.hardcodecoder.pulsemusic.loaders.LoaderManager;
 import com.hardcodecoder.pulsemusic.loaders.SearchQueryLoader;
+import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.themes.TintHelper;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 public class TrackPickerActivity extends ThemeActivity implements ItemSelectorListener {
@@ -74,7 +76,7 @@ public class TrackPickerActivity extends ThemeActivity implements ItemSelectorLi
                 if (null == mAdapter) return;
                 if (!mQuery.equalsIgnoreCase(s.toString())) {
                     if (s.toString().isEmpty()) {
-                        mAdapter.updateItems(LoaderCache.getAllTracksList());
+                        mAdapter.updateItems(LoaderManager.getCachedMasterList());
                     } else searchResult(s.toString());
 
                 }
@@ -104,16 +106,17 @@ public class TrackPickerActivity extends ThemeActivity implements ItemSelectorLi
     }
 
     private void displayTracks() {
-        if (null == LoaderCache.getAllTracksList()) {
+        List<MusicModel> masterList = LoaderManager.getCachedMasterList();
+        if (null == masterList || masterList.isEmpty()) {
             MaterialTextView noTracksText = (MaterialTextView) ((ViewStub) findViewById(R.id.stub_no_tracks_found)).inflate();
             noTracksText.setText(getString(R.string.tracks_not_found));
-        } else {
-            RecyclerView recyclerView = (RecyclerView) ((ViewStub) findViewById(R.id.stub_track_picker_rv)).inflate();
-            recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
-            mAdapter = new TracksSelectorAdapter(getLayoutInflater(), LoaderCache.getAllTracksList(), this);
-            recyclerView.setAdapter(mAdapter);
-            mSelectorHelper = new RecyclerViewSelectorHelper(mAdapter);
+            return;
         }
+        RecyclerView recyclerView = (RecyclerView) ((ViewStub) findViewById(R.id.stub_track_picker_rv)).inflate();
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
+        mAdapter = new TracksSelectorAdapter(getLayoutInflater(), masterList, this);
+        recyclerView.setAdapter(mAdapter);
+        mSelectorHelper = new RecyclerViewSelectorHelper(mAdapter);
     }
 
     @Override

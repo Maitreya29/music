@@ -13,7 +13,7 @@ import androidx.annotation.Nullable;
 
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.TaskRunner;
-import com.hardcodecoder.pulsemusic.loaders.LoaderCache;
+import com.hardcodecoder.pulsemusic.loaders.LoaderManager;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.model.TrackFileModel;
 import com.hardcodecoder.pulsemusic.themes.ThemeColors;
@@ -37,12 +37,13 @@ public class DataModelHelper {
 
     @Nullable
     public static List<MusicModel> getModelObjectFromId(@Nullable List<Integer> idList) {
-        List<MusicModel> masterList = LoaderCache.getAllTracksList();
-        if (null == masterList || null == idList || idList.isEmpty()) return null;
+        List<MusicModel> masterList = LoaderManager.getCachedMasterList();
+        if (null == masterList || masterList.isEmpty() || null == idList || idList.isEmpty())
+            return null;
 
         Map<Integer, MusicModel> modelMap = new HashMap<>();
 
-        for (MusicModel musicModel : LoaderCache.getAllTracksList())
+        for (MusicModel musicModel : masterList)
             modelMap.put(musicModel.getId(), musicModel);
 
         List<MusicModel> modelList = new ArrayList<>();
@@ -51,16 +52,6 @@ public class DataModelHelper {
             if (null != md) modelList.add(md);
         }
         return modelList;
-    }
-
-    @Nullable
-    public static MusicModel getModelFromId(int id) {
-        List<MusicModel> masterList = LoaderCache.getAllTracksList();
-        if (null == masterList) return null;
-        for (MusicModel md : masterList) {
-            if (md.getId() == id) return md;
-        }
-        return null;
     }
 
     @Nullable

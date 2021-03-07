@@ -6,7 +6,6 @@ import com.hardcodecoder.pulsemusic.BuildConfig;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.providers.ProviderManager;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -30,13 +29,11 @@ public class RediscoverLoader implements Callable<List<MusicModel>> {
 
     @Override
     public List<MusicModel> call() {
-        List<MusicModel> master = LoaderCache.getAllTracksList();
+        List<MusicModel> master = LoaderManager.getCachedMasterList();
         if (master == null || master.isEmpty()) {
             // Return null if we don't have tracks to work on
             return null;
         }
-
-        master = new ArrayList<>(LoaderCache.getAllTracksList());
 
         List<MusicModel> historyTracks = ProviderManager.getHistoryProvider().getHistoryTracks();
         if (historyTracks == null || historyTracks.isEmpty() || historyTracks.size() <= MIN_COUNT) {
@@ -57,11 +54,6 @@ public class RediscoverLoader implements Callable<List<MusicModel>> {
 
         // Consider 30 or 20% of master#size() whichever is smaller
         final int rediscoverCount = Math.min((int) (0.2 * master.size()), 30);
-        List<MusicModel> rediscover = new ArrayList<>(rediscoverCount);
-
-        rediscover.addAll(master.subList(0, rediscoverCount));
-        LoaderCache.setRediscoverList(rediscover);
-        rediscover.clear();
-        return LoaderCache.getRediscoverList();
+        return master.subList(0, rediscoverCount);
     }
 }

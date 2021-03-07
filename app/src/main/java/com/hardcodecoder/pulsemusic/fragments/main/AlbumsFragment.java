@@ -21,7 +21,7 @@ import com.hardcodecoder.pulsemusic.fragments.main.base.CardGridFragment;
 import com.hardcodecoder.pulsemusic.interfaces.GridAdapterCallback;
 import com.hardcodecoder.pulsemusic.interfaces.OptionsMenuListener;
 import com.hardcodecoder.pulsemusic.interfaces.SimpleTransitionClickListener;
-import com.hardcodecoder.pulsemusic.loaders.LoaderHelper;
+import com.hardcodecoder.pulsemusic.loaders.LoaderManager;
 import com.hardcodecoder.pulsemusic.loaders.SortOrder.ALBUMS;
 import com.hardcodecoder.pulsemusic.model.AlbumModel;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
@@ -48,9 +48,8 @@ public class AlbumsFragment extends CardGridFragment
     @Override
     public void setUpContent(@NonNull View view) {
         mSortOrder = resolveSortOrder(getCurrentSortOrder());
-        LoaderHelper.loadAlbumsList(requireActivity().getContentResolver(),
-                mSortOrder,
-                list -> {
+        LoaderManager.loadAlbumsList(requireActivity().getContentResolver(),
+                mSortOrder, list -> {
                     if (list == null || list.isEmpty()) {
                         MaterialTextView noTracksText = (MaterialTextView) ((ViewStub) view.findViewById(R.id.stub_no_tracks_found)).inflate();
                         noTracksText.setText(getString(R.string.tracks_not_found));

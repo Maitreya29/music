@@ -6,7 +6,7 @@ import android.text.style.AbsoluteSizeSpan;
 
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.activities.playlist.base.StandardPlaylist;
-import com.hardcodecoder.pulsemusic.loaders.LoaderHelper;
+import com.hardcodecoder.pulsemusic.loaders.LoaderManager;
 import com.hardcodecoder.pulsemusic.providers.ProviderManager;
 import com.hardcodecoder.pulsemusic.utils.DimensionsUtil;
 
@@ -14,7 +14,7 @@ public class RecentActivity extends StandardPlaylist {
 
     @Override
     protected void loadContent() {
-        LoaderHelper.loadRecentTracks(this::setUpContent);
+        LoaderManager.loadRecentTracks(this::setUpContent);
         setPlaylistTitle(getString(R.string.recent_playlist_title));
     }
 

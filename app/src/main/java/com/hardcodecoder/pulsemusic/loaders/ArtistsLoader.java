@@ -4,6 +4,9 @@ import android.content.ContentResolver;
 import android.database.Cursor;
 import android.provider.MediaStore;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.hardcodecoder.pulsemusic.model.ArtistModel;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 
@@ -18,8 +21,8 @@ public class ArtistsLoader implements Callable<List<ArtistModel>> {
     private final ContentResolver mContentResolver;
     private final String mSortOrder;
 
-    ArtistsLoader(ContentResolver mContentResolver, SortOrder.ARTIST sortOrder) {
-        this.mContentResolver = mContentResolver;
+    ArtistsLoader(@NonNull ContentResolver contentResolver, @Nullable SortOrder.ARTIST sortOrder) {
+        mContentResolver = contentResolver;
         mSortOrder = MediaStoreHelper.getSortOrderFor(sortOrder);
     }
 
@@ -56,10 +59,11 @@ public class ArtistsLoader implements Callable<List<ArtistModel>> {
             cursor.close();
 
             // Make sure no artist is returned that is present in ignored folders list
-            if (null != LoaderCache.getAllTracksList()) {
+            List<MusicModel> masterList = LoaderManager.getCachedMasterList();
+            if (null != masterList && !masterList.isEmpty()) {
                 sanitizedArtistLList = new ArrayList<>();
                 Set<String> set = new HashSet<>();
-                for (MusicModel md : LoaderCache.getAllTracksList())
+                for (MusicModel md : masterList)
                     set.add(md.getArtist());
 
                 for (ArtistModel am : artistList) {

@@ -31,8 +31,7 @@ import com.hardcodecoder.pulsemusic.fragments.main.LibraryFragment;
 import com.hardcodecoder.pulsemusic.fragments.main.PlaylistFragment;
 import com.hardcodecoder.pulsemusic.fragments.main.base.PulseFragment;
 import com.hardcodecoder.pulsemusic.helper.DataModelHelper;
-import com.hardcodecoder.pulsemusic.loaders.LoaderCache;
-import com.hardcodecoder.pulsemusic.loaders.LoaderHelper;
+import com.hardcodecoder.pulsemusic.loaders.LoaderManager;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.playback.PlaybackManager;
 import com.hardcodecoder.pulsemusic.service.PMS;
@@ -93,8 +92,8 @@ public class MainContentActivity extends DraggableNowPlayingSheetActivity {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         connectToMediaService();
         setUpToolbar();
-        if (null == savedInstanceState || null == LoaderCache.getAllTracksList())
-            LoaderHelper.loadAllTracks(this, result -> setUpMainContents(savedInstanceState));
+        if (null == savedInstanceState || LoaderManager.isMasterListEmpty())
+            LoaderManager.loadMaster(this, success -> setUpMainContents(savedInstanceState));
         else setUpMainContents(savedInstanceState);
     }
 

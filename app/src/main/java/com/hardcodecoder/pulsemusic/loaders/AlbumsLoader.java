@@ -57,12 +57,9 @@ public class AlbumsLoader implements Callable<List<AlbumModel>> {
             final Uri sArtworkUri = Uri.parse("content://media/external/audio/albumart");
             // Make sure no album is returned that is present in the ignored folders list
             Set<Long> albumIdsToAccept = new HashSet<>();
-            List<MusicModel> master = LoaderCache.getAllTracksList();
-            if (master != null) {
-                for (MusicModel md : LoaderCache.getAllTracksList()) {
-                    albumIdsToAccept.add(md.getAlbumId());
-                }
-            }
+            List<MusicModel> master = LoaderManager.getCachedMasterList();
+            if (master != null && !master.isEmpty())
+                for (MusicModel md : master) albumIdsToAccept.add(md.getAlbumId());
 
             albumsList = new ArrayList<>();
             do {

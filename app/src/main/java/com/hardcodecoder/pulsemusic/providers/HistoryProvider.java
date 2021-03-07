@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 import com.hardcodecoder.pulsemusic.TaskRunner;
 import com.hardcodecoder.pulsemusic.TaskRunner.Callback;
 import com.hardcodecoder.pulsemusic.helper.DataModelHelper;
-import com.hardcodecoder.pulsemusic.loaders.LoaderCache;
+import com.hardcodecoder.pulsemusic.loaders.LoaderManager;
 import com.hardcodecoder.pulsemusic.model.HistoryRecord;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.utils.StorageUtil;
@@ -105,7 +105,7 @@ public class HistoryProvider {
         TaskRunner.executeAsync(() -> {
             File[] files = new File(mHistoryDir).listFiles();
             if (null != files && files.length > 0) {
-                List<MusicModel> masterList = LoaderCache.getAllTracksList();
+                List<MusicModel> masterList = LoaderManager.getCachedMasterList();
                 if (null != masterList && !masterList.isEmpty()) {
                     Set<Integer> currentList = new HashSet<>();
                     for (MusicModel md : masterList) currentList.add(md.getId());

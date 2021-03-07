@@ -28,8 +28,7 @@ import androidx.media.session.MediaButtonReceiver;
 import com.hardcodecoder.pulsemusic.Preferences;
 import com.hardcodecoder.pulsemusic.PulseController;
 import com.hardcodecoder.pulsemusic.R;
-import com.hardcodecoder.pulsemusic.loaders.LoaderCache;
-import com.hardcodecoder.pulsemusic.loaders.LoaderHelper;
+import com.hardcodecoder.pulsemusic.loaders.LoaderManager;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.playback.LocalPlayback;
 import com.hardcodecoder.pulsemusic.playback.MediaNotificationManager;
@@ -158,12 +157,11 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
     }
 
     private void loadAction(int action) {
-        if (null == LoaderCache.getAllTracksList()) {
-            LoaderHelper.loadAllTracks(this, result -> {
-                if (null != result)
-                    mWorkerHandler.post(() -> handleDefaultActions(action));
-                else
+        if (LoaderManager.isMasterListEmpty()) {
+            LoaderManager.loadMaster(this, success -> {
+                if (null == success || !success)
                     Toast.makeText(this, getString(R.string.message_empty_recent), Toast.LENGTH_SHORT).show();
+                else mWorkerHandler.post(() -> handleDefaultActions(action));
             });
         } else handleDefaultActions(action);
     }
@@ -186,16 +184,16 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
     }
 
     private void playLatest() {
-        LoaderHelper.loadLatestTracks(this::playPlaylist);
+        LoaderManager.getLatestTracksList(this::playPlaylist);
     }
 
     private void playSuggested() {
-        LoaderHelper.loadSuggestionsList(this::playPlaylist);
+        LoaderManager.getSuggestionsList(this::playPlaylist);
     }
 
     private void playShuffle() {
-        List<MusicModel> master = LoaderCache.getAllTracksList();
-        if (null == master) return;
+        List<MusicModel> master = LoaderManager.getCachedMasterList();
+        if (null == master || master.isEmpty()) return;
         List<MusicModel> listToShuffle = new ArrayList<>(master);
         Collections.shuffle(listToShuffle);
         playPlaylist(listToShuffle);
@@ -234,7 +232,7 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
     public void onDestroy() {
         MediaController controller = mMediaSession.getController();
         if (controller.getPlaybackState() != null && controller.getPlaybackState().getState() != PlaybackState.STATE_NONE) {
-            LoaderCache.clearCache();
+            LoaderManager.clearCache();
         }
         PulseController.getInstance().releaseController();
         if (null != sharedPreferenceChangeListener)

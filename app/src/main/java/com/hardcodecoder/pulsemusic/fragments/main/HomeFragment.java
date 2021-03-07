@@ -31,8 +31,7 @@ import com.hardcodecoder.pulsemusic.fragments.main.base.PulseFragment;
 import com.hardcodecoder.pulsemusic.helper.DataModelHelper;
 import com.hardcodecoder.pulsemusic.helper.UIHelper;
 import com.hardcodecoder.pulsemusic.interfaces.SimpleItemClickListener;
-import com.hardcodecoder.pulsemusic.loaders.LoaderCache;
-import com.hardcodecoder.pulsemusic.loaders.LoaderHelper;
+import com.hardcodecoder.pulsemusic.loaders.LoaderManager;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.model.TopAlbumModel;
 import com.hardcodecoder.pulsemusic.model.TopArtistModel;
@@ -65,7 +64,10 @@ public class HomeFragment extends PulseFragment {
 
     @Override
     public void setUpContent(@NonNull View view) {
-        if (null != LoaderCache.getAllTracksList() && !LoaderCache.getAllTracksList().isEmpty()) {
+        if (LoaderManager.isMasterListEmpty()) {
+            MaterialTextView noTracksText = (MaterialTextView) ((ViewStub) view.findViewById(R.id.stub_no_tracks_found)).inflate();
+            noTracksText.setText(getString(R.string.tracks_not_found));
+        } else {
             TaskRunner.executeAsync(() -> {
                 boolean isTopAlbumsEnabled = AppSettings.isPlaylistSectionEnabled(requireContext(), Preferences.HOME_PLAYLIST_TOP_ALBUMS);
                 boolean isForYouEnabled = AppSettings.isPlaylistSectionEnabled(requireContext(), Preferences.HOME_PLAYLIST_FOR_YOU);
@@ -74,33 +76,29 @@ public class HomeFragment extends PulseFragment {
                 boolean isTopArtistEnabled = AppSettings.isPlaylistSectionEnabled(requireContext(), Preferences.HOME_PLAYLIST_TOP_ARTIST);
 
                 if (isTopAlbumsEnabled)
-                    LoaderHelper.loadTopAlbums(result -> loadTopAlbums(view, result));
+                    LoaderManager.loadTopAlbums(result -> loadTopAlbums(view, result));
 
                 if (isForYouEnabled) {
-                    LoaderHelper.loadSuggestionsList(result -> {
-                        loadSuggestions(view, result);
+                    LoaderManager.getSuggestionsList(suggestionsList -> {
+                        loadSuggestions(view, suggestionsList);
                         if (isRediscoverEnabled) {
                             // We kick start rediscover load after loading suggestions
                             // so that we can use Suggestions as exclusion list
-                            LoaderHelper.loadRediscoverSection(LoaderCache.getSuggestions(),
+                            LoaderManager.getRediscoverList(suggestionsList,
                                     rediscoverList -> loadRediscoverSection(view, rediscoverList));
                         }
                     });
                 } else if (isRediscoverEnabled) {
-                    LoaderHelper.loadRediscoverSection(null,
+                    LoaderManager.getRediscoverList(null,
                             rediscoverList -> loadRediscoverSection(view, rediscoverList));
                 }
 
                 if (isNewInLibraryEnabled)
-                    LoaderHelper.loadLatestTracks(result -> loadLatestTracks(view, result));
+                    LoaderManager.getLatestTracksList(result -> loadLatestTracks(view, result));
 
                 if (isTopArtistEnabled)
-                    LoaderHelper.loadTopArtist(result -> loadTopArtists(view, result));
-
+                    LoaderManager.loadTopArtist(result -> loadTopArtists(view, result));
             });
-        } else {
-            MaterialTextView noTracksText = (MaterialTextView) ((ViewStub) view.findViewById(R.id.stub_no_tracks_found)).inflate();
-            noTracksText.setText(getString(R.string.tracks_not_found));
         }
 
         view.findViewById(R.id.ic_recent)

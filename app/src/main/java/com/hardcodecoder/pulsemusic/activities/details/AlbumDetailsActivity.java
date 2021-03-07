@@ -26,7 +26,7 @@ import com.hardcodecoder.pulsemusic.helper.MediaArtHelper;
 import com.hardcodecoder.pulsemusic.helper.UIHelper;
 import com.hardcodecoder.pulsemusic.interfaces.OptionsMenuListener;
 import com.hardcodecoder.pulsemusic.interfaces.SimpleItemClickListener;
-import com.hardcodecoder.pulsemusic.loaders.LoaderHelper;
+import com.hardcodecoder.pulsemusic.loaders.LoaderManager;
 import com.hardcodecoder.pulsemusic.loaders.SortOrder;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.themes.ThemeColors;
@@ -58,7 +58,7 @@ public class AlbumDetailsActivity extends BaseDetailsActivity implements Options
         setCurrentSortOrder(sortOrder);
         mSortOrder = resolveSortOrder(sortOrder);
 
-        LoaderHelper.loadAlbumTracks(mAlbumId, mSortOrder, this::loadItems);
+        LoaderManager.loadAlbumTracks(mAlbumId, mSortOrder, this::loadItems);
     }
 
     private void showOptionsMenu() {

@@ -19,9 +19,8 @@ public class AlbumTracksLoader implements Callable<List<MusicModel>> {
 
     @Override
     public List<MusicModel> call() {
-        List<MusicModel> masterList = LoaderCache.getAllTracksList();
-        if (masterList == null || masterList.isEmpty())
-            return null;
+        List<MusicModel> masterList = LoaderManager.getCachedMasterList();
+        if (masterList == null || masterList.isEmpty()) return null;
 
         List<MusicModel> albumTracks = new ArrayList<>();
         for (MusicModel md : masterList) {

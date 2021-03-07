@@ -21,7 +21,7 @@ import com.hardcodecoder.pulsemusic.fragments.main.base.ListGridFragment;
 import com.hardcodecoder.pulsemusic.helper.UIHelper;
 import com.hardcodecoder.pulsemusic.interfaces.OptionsMenuListener;
 import com.hardcodecoder.pulsemusic.interfaces.SimpleItemClickListener;
-import com.hardcodecoder.pulsemusic.loaders.LoaderCache;
+import com.hardcodecoder.pulsemusic.loaders.LoaderManager;
 import com.hardcodecoder.pulsemusic.loaders.SortOrder;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
@@ -47,18 +47,18 @@ public class LibraryFragment extends ListGridFragment implements SimpleItemClick
 
     @Override
     public void setUpContent(@NonNull View view) {
-        List<MusicModel> list = LoaderCache.getAllTracksList();
-        if (list == null || list.isEmpty()) {
+        List<MusicModel> masterList = LoaderManager.getCachedMasterList();
+        if (null == masterList || masterList.isEmpty()) {
             MaterialTextView noTracksText = (MaterialTextView) ((ViewStub) view.findViewById(R.id.stub_no_tracks_found)).inflate();
             noTracksText.setText(getString(R.string.tracks_not_found));
-        } else {
-            mSortOrder = resolveSortOrder(getCurrentSortOrder());
-            TaskRunner.executeAsync(() -> {
-                List<MusicModel> libraryTracks = new ArrayList<>(list);
-                SortUtil.sortLibraryList(libraryTracks, mSortOrder);
-                view.post(() -> loadLibrary(view, libraryTracks));
-            });
+            return;
         }
+        mSortOrder = resolveSortOrder(getCurrentSortOrder());
+        TaskRunner.executeAsync(() -> {
+            List<MusicModel> libraryTracks = new ArrayList<>(masterList);
+            SortUtil.sortLibraryList(libraryTracks, mSortOrder);
+            view.post(() -> loadLibrary(view, libraryTracks));
+        });
     }
 
     @Override

@@ -20,7 +20,7 @@ import com.hardcodecoder.pulsemusic.activities.base.ThemeActivity;
 import com.hardcodecoder.pulsemusic.adapters.main.FoldersListAdapter;
 import com.hardcodecoder.pulsemusic.helper.RecyclerViewSelectorHelper;
 import com.hardcodecoder.pulsemusic.interfaces.ItemSelectorListener;
-import com.hardcodecoder.pulsemusic.loaders.LoaderHelper;
+import com.hardcodecoder.pulsemusic.loaders.LoaderManager;
 import com.hardcodecoder.pulsemusic.model.Folder;
 import com.hardcodecoder.pulsemusic.themes.TintHelper;
 import com.hardcodecoder.pulsemusic.views.CustomToolbar;
@@ -44,7 +44,7 @@ public class MediaFolderChooserActivity extends ThemeActivity implements ItemSel
         toolbar.setNavigationOnClickListener(v -> finish());
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
-            LoaderHelper.loadTracksRelativePath(this, this::loadData);
+            LoaderManager.loadTracksRelativePath(this, this::loadData);
         else
             loadData(null);
 
