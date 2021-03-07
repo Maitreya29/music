@@ -82,6 +82,7 @@ public class ArtistDetailsActivity extends BaseDetailsActivity implements Option
     @Override
     public void onSortOrderChanged(int newSortOrder) {
         AppSettings.saveSortOrder(this, Preferences.SORT_ORDER_ARTIST_DETAILS_KEY, newSortOrder);
+        if (null == mAdapter) return;
         mSortOrder = resolveSortOrder(newSortOrder);
         mAdapter.updateSortOrder(mSortOrder);
     }

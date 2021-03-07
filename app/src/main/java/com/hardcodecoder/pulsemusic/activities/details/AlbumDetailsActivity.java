@@ -90,6 +90,7 @@ public class AlbumDetailsActivity extends BaseDetailsActivity implements Options
     @Override
     public void onSortOrderChanged(int newSortOrder) {
         AppSettings.saveSortOrder(this, Preferences.SORT_ORDER_ALBUM_DETAILS_KEY, newSortOrder);
+        if (null == mAdapter) return;
         mSortOrder = resolveSortOrder(newSortOrder);
         mAdapter.updateSortOrder(mSortOrder);
     }
