@@ -224,7 +224,7 @@ public class HomeFragment extends PulseFragment {
             rv.setHasFixedSize(true);
             rv.setLayoutManager(new LinearLayoutManager(rv.getContext(), RecyclerView.HORIZONTAL, false));
             TopArtistsAdapter adapter = new TopArtistsAdapter(getLayoutInflater(), list, (sharedView, position) ->
-                    NavigationUtil.goToArtist(requireActivity(), sharedView, list.get(position).getArtistName()));
+                    NavigationUtil.goToArtist(requireActivity(), sharedView, list.get(position).getArtistName(), -1));
             rv.setAdapter(adapter);
         });
     }

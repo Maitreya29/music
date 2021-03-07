@@ -131,10 +131,11 @@ public class LoaderManager {
     }
 
     public static void loadArtistAlbums(@NonNull ContentResolver contentResolver,
+                                        long artistId,
                                         @NonNull String artistTitle,
                                         @NonNull SortOrder.ALBUMS sortOrder,
                                         @NonNull Callback<List<AlbumModel>> callback) {
-        TaskRunner.executeAsync(new ArtistAlbumsLoader(contentResolver, artistTitle, sortOrder), callback);
+        TaskRunner.executeAsync(new ArtistAlbumsLoader(contentResolver, artistId, artistTitle, sortOrder), callback);
     }
 
     public static void loadRecentTracks(@NonNull Callback<List<MusicModel>> callback) {

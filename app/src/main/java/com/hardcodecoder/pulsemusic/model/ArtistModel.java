@@ -4,19 +4,19 @@ import androidx.annotation.NonNull;
 
 public class ArtistModel {
 
-    private final int mArtistId;
+    private final long mArtistId;
     private final int mNumOfAlbums;
     private final int mNumOfTracks;
     private final String mArtistName;
 
-    public ArtistModel(int artistId, @NonNull String artistName, int numOfAlbums, int numOfTracks) {
+    public ArtistModel(long artistId, @NonNull String artistName, int numOfAlbums, int numOfTracks) {
         mArtistId = artistId;
         mNumOfAlbums = numOfAlbums;
         mNumOfTracks = numOfTracks;
         mArtistName = artistName;
     }
 
-    public int getArtistId() {
+    public long getArtistId() {
         return mArtistId;
     }
 

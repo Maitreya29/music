@@ -150,7 +150,11 @@ public class ArtistFragment extends CardGridFragment
 
     @Override
     public void onItemClick(View sharedView, int position) {
-        NavigationUtil.goToArtist(requireActivity(), sharedView, mAdapter.getDataList().get(position).getArtistName());
+        ArtistModel artistModel = mAdapter.getDataList().get(position);
+        NavigationUtil.goToArtist(requireActivity(),
+                sharedView,
+                artistModel.getArtistName(),
+                mAdapter.getDataList().get(position).getArtistId());
     }
 
     private void loadArtistsList(@NonNull View view, @NonNull List<ArtistModel> list) {

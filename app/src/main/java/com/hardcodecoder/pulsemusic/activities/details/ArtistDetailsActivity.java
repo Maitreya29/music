@@ -32,14 +32,15 @@ import java.util.List;
 
 public class ArtistDetailsActivity extends BaseDetailsActivity implements OptionsMenuListener {
 
-    public static final String KEY_ARTIST_TITLE = "AlbumTitle";
+    public static final String KEY_ARTIST_ID = "ArtistId";
+    public static final String KEY_ARTIST_TITLE = "ArtistTitle";
     private AlbumsAdapter mAdapter;
     private SortOrder.ALBUMS mSortOrder;
 
     @Override
     public void onViewCreated() {
+        long artistId = getIntent().getLongExtra(KEY_ARTIST_ID, -1);
         String artistTitle = getIntent().getStringExtra(KEY_ARTIST_TITLE);
-        artistTitle = artistTitle == null ? "<unknown>" : artistTitle;
 
         setUpToolbar(artistTitle, v -> showOptionsMenu());
 
@@ -49,7 +50,7 @@ public class ArtistDetailsActivity extends BaseDetailsActivity implements Option
         setCurrentSortOrder(sortOrder);
         mSortOrder = resolveSortOrder(sortOrder);
 
-        LoaderManager.loadArtistAlbums(getContentResolver(), artistTitle, mSortOrder, this::loadItems);
+        LoaderManager.loadArtistAlbums(getContentResolver(), artistId, artistTitle, mSortOrder, this::loadItems);
     }
 
     private void showOptionsMenu() {
