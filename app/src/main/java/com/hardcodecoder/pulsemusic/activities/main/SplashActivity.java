@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -14,10 +15,14 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.hardcodecoder.pulsemusic.Preferences;
 import com.hardcodecoder.pulsemusic.R;
+import com.hardcodecoder.pulsemusic.TaskRunner;
 import com.hardcodecoder.pulsemusic.activities.base.ThemeActivity;
 import com.hardcodecoder.pulsemusic.providers.ProviderManager;
+import com.hardcodecoder.pulsemusic.shortcuts.AppShortcutsManager;
 import com.hardcodecoder.pulsemusic.themes.TintHelper;
+import com.hardcodecoder.pulsemusic.utils.AppSettings;
 
 public class SplashActivity extends ThemeActivity {
 
@@ -35,6 +40,7 @@ public class SplashActivity extends ThemeActivity {
 
     private void getPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            doStartUpInitialization();
             startHomeActivity();
         } else {
             ActivityCompat.requestPermissions(this,
@@ -47,6 +53,7 @@ public class SplashActivity extends ThemeActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == REQUEST_CODE) {
             if (grantResults.length >= 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                doStartUpInitialization();
                 startHomeActivity();
             } else {
                 // Permission was not granted
@@ -54,6 +61,23 @@ public class SplashActivity extends ThemeActivity {
                 mHandler.postDelayed(this::finish, 1500);
             }
         }
+    }
+
+    private void doStartUpInitialization() {
+        TaskRunner.executeAsync(() -> {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
+                // Initialize app shortcuts
+                AppShortcutsManager manager = new AppShortcutsManager(getApplicationContext());
+                manager.initDynamicShortcuts(false);
+            }
+
+            if (AppSettings.isFirstRun(this)) {
+                AppSettings.setPlaylistSectionEnabled(this, Preferences.HOME_PLAYLIST_TOP_ALBUMS, true);
+                AppSettings.setPlaylistSectionEnabled(this, Preferences.HOME_PLAYLIST_FOR_YOU, true);
+                AppSettings.setPlaylistSectionEnabled(this, Preferences.HOME_PLAYLIST_NEW_IN_LIBRARY, true);
+                AppSettings.setFirstRun(this, false);
+            }
+        });
     }
 
     private void startHomeActivity() {
