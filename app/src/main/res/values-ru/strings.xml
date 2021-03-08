@@ -15,9 +15,9 @@
     <string name="tracks_not_found">Музыка не найдена</string>
     <string name="unknown">Неизвестно</string>
     <!-- Dialogs -->
-    <string name="question_enter_your_name">Введите ваше имя</string>
+    <string name="enter_your_name">Введите ваше имя</string>
     <string name="toast_enter_your_name">Введите ваше имя</string>
-    <string name="edit_playlist_title">Изменить название плейлиста</string>
+    <string name="edit_user_playlist_name">Изменить название плейлиста</string>
     <string name="hint_create_playlist">Введите название плейлиста</string>
     <string name="add_track_to">Добавить в\.\.\.</string>
     <string name="message_no_playlist_found">Плейлисты не найдены\nНажмите кнопку \"Добавить\", чтобы создать новый</string>
@@ -54,7 +54,7 @@
     <string name="toast_playlist_deleted_success">Плейлист удалён успешно</string>
     <string name="cannot_delete_default_playlist">Не удалось удалить плейлист</string>
     <!-- Toolbar Options menu -->
-    <string name="sort_order_title">Сортировать по\.\.\.</string>
+    <string name="sort_title">Сортировать по\.\.\.</string>
     <string name="alphabet_asc">От А до Я</string>
     <string name="alphabet_desc">От Я до А</string>
     <string name="duration_asc">Продолжительность ↑</string>
@@ -237,14 +237,14 @@
     <!-- For translators: If the color words does not make much sense in your language,
     you can try substituting a similar description of the color. But keep it short
     -->
-    <string name="exodus_fruit">Фиолетовый</string>
-    <string name="electron_blue">Лазурный</string>
-    <string name="mint_leaf">Мятный</string>
-    <string name="chi_gong">Красный</string>
-    <string name="sei_bar">Коричневый</string>
-    <string name="coral">Кораловый</string>
-    <string name="sunkist">Жёлтый</string>
-    <string name="blue_pink">Синий</string>
+    <string name="color_slate_blue">Фиолетовый</string>
+    <string name="color_azure_radiance">Лазурный</string>
+    <string name="color_persian_mint">Мятный</string>
+    <string name="color_valencia">Красный</string>
+    <string name="color_millbrook">Коричневый</string>
+    <string name="color_coral">Кораловый</string>
+    <string name="color_sunkist">Жёлтый</string>
+    <string name="color_cornflower_blue">Синий</string>
     <!-- Custom accents dialog -->
     <string name="hint_hex_color">HEX</string>
     <string name="invalid_color">Неверный цвет</string>

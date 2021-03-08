@@ -18,9 +18,9 @@
     <string name="tracks_not_found">Nie znaleziono żadnych utworów</string>
     <string name="unknown">Nieznane</string>
     <!-- Dialogs -->
-    <string name="question_enter_your_name">Wprowadź swoje imię</string>
+    <string name="enter_your_name">Wprowadź swoje imię</string>
     <string name="toast_enter_your_name">Proszę wprowadzić swoje imię</string>
-    <string name="edit_playlist_title">Edytuj tytuł playlisty</string>
+    <string name="edit_user_playlist_name">Edytuj tytuł playlisty</string>
     <string name="hint_create_playlist">Wpisz nazwę playlisty</string>
     <string name="add_track_to">Dodaj utwór do\.\.\.</string>
     <string name="message_no_playlist_found">Nie znaleziono playlisty\nKliknij przycisk Dodaj aby utworzyć playlistę</string>
@@ -59,7 +59,7 @@
     <!-- Toolbar Options menu -->
     <string name="context_menu_title">Ustawienia</string>
     <string name="toast_invalid_options_group">Wybrano nieprawidłowe menu</string>
-    <string name="sort_order_title">Sortowanie</string>
+    <string name="sort_title">Sortowanie</string>
     <string name="sort_by_title">Sortuj wg</string>
     <string name="sort_category_title">Tytułu</string>
     <string name="alphabet_asc">Od A do Z</string>
@@ -252,14 +252,14 @@
     <!-- For translators: If the color words does not make much sense in your language,
     you can try substituting a similar description of the color. But keep it short
     -->
-    <string name="exodus_fruit">Fioletowy</string>
-    <string name="electron_blue">Lazurowy</string>
-    <string name="mint_leaf">Miętowy</string>
-    <string name="chi_gong">Czerwony</string>
-    <string name="sei_bar">Brązowy</string>
-    <string name="coral">Koralowy</string>
-    <string name="sunkist">Żółty</string>
-    <string name="blue_pink">Niebieski</string>
+    <string name="color_slate_blue">Fioletowy</string>
+    <string name="color_azure_radiance">Lazurowy</string>
+    <string name="color_persian_mint">Miętowy</string>
+    <string name="color_valencia">Czerwony</string>
+    <string name="color_millbrook">Brązowy</string>
+    <string name="color_coral">Koralowy</string>
+    <string name="color_sunkist">Żółty</string>
+    <string name="color_cornflower_blue">Niebieski</string>
     <!-- Custom accents dialog -->
     <string name="hint_hex_color">Kolor szesnastkowo</string>
     <string name="invalid_color">Nieprawidłowy kolor</string>

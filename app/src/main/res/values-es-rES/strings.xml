@@ -11,9 +11,9 @@
     <string name="equalizer">Ecualizador</string>
     <string name="tracks_not_found">Sin canciones encontradas</string>
     <!-- Dialogs -->
-    <string name="question_enter_your_name">Introduce tu nombre</string>
+    <string name="enter_your_name">Introduce tu nombre</string>
     <string name="toast_enter_your_name">Por favor, escribe tu nombre</string>
-    <string name="edit_playlist_title">Editar el título de la lista de reproducción</string>
+    <string name="edit_user_playlist_name">Editar el título de la lista de reproducción</string>
     <string name="hint_create_playlist">Introduzca el nombre de la lista de reproducción</string>
     <string name="add_track_to">Añadir pista a\\.\\.\\.</string>
     <string name="message_no_playlist_found">Sin listas encontradas\nClic en el botón de añadir para crear</string>
@@ -46,7 +46,7 @@
     <string name="toast_playlist_deleted_success">Lista eliminada</string>
     <string name="cannot_delete_default_playlist">No se puede eliminar la lista de reproducción predeterminada</string>
     <!-- Toolbar Options menu -->
-    <string name="sort_order_title">Orden de clasificación</string>
+    <string name="sort_title">Orden de clasificación</string>
     <string name="alphabet_asc">A-Z</string>
     <string name="alphabet_desc">Z-A</string>
     <string name="create_playlist">Crear lista de reproducción</string>
@@ -134,14 +134,14 @@
     <!-- For translators: If the color words does not make much sense in your language,
     you can try substituting a similar description of the color. But keep it short
     -->
-    <string name="exodus_fruit">Fruto del éxodo</string>
-    <string name="electron_blue">Electrón azul</string>
-    <string name="mint_leaf">Hoja de menta</string>
-    <string name="chi_gong">Chi gong</string>
-    <string name="sei_bar">Sei bar</string>
-    <string name="coral">Coral</string>
-    <string name="sunkist">Sunkist</string>
-    <string name="blue_pink">Rosa azul</string>
+    <string name="color_slate_blue">Fruto del éxodo</string>
+    <string name="color_azure_radiance">Electrón azul</string>
+    <string name="color_persian_mint">Hoja de menta</string>
+    <string name="color_valencia">Chi gong</string>
+    <string name="color_millbrook">Sei bar</string>
+    <string name="color_coral">Coral</string>
+    <string name="color_sunkist">Sunkist</string>
+    <string name="color_cornflower_blue">Rosa azul</string>
     <!-- Custom accents dialog -->
     <!-- App shortcuts -->
     <!-- Max length = 10 characters including spaces-->

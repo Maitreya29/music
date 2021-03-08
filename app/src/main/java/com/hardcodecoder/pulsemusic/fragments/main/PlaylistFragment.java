@@ -159,7 +159,7 @@ public class PlaylistFragment extends PulseFragment implements PlaylistCardListe
         sheetDialog.show();
 
         TextView header = layout.findViewById(R.id.header);
-        header.setText(getResources().getString(R.string.edit_playlist_title));
+        header.setText(getResources().getString(R.string.edit_user_playlist_name));
 
         TextInputLayout til = layout.findViewById(R.id.edit_text_container);
         til.setHint(getResources().getString(R.string.hint_create_playlist));

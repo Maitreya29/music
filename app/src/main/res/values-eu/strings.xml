@@ -14,9 +14,9 @@
     <string name="tracks_not_found">Ez da aurkitu kantarik</string>
     <string name="unknown">Ezezaguna</string>
     <!-- Dialogs -->
-    <string name="question_enter_your_name">Idatzi zure izena</string>
+    <string name="enter_your_name">Idatzi zure izena</string>
     <string name="toast_enter_your_name">Idatzi zure izena</string>
-    <string name="edit_playlist_title">Editatu zerrendaren izenburua</string>
+    <string name="edit_user_playlist_name">Editatu zerrendaren izenburua</string>
     <string name="hint_create_playlist">Idatzi zerrendaren izena</string>
     <string name="add_track_to">Gehitu kanta hona:\.\.\.</string>
     <string name="message_no_playlist_found">Ez da zerrendarik aurkitu\nUkitu \"Gehitu botoia\" zerrenda bat sortzeko</string>
@@ -54,7 +54,7 @@
     <string name="cannot_delete_default_playlist">Ezin da kendu zerrenda lehenetsia</string>
     <!-- Toolbar Options menu -->
     <string name="context_menu_title">Aukerak</string>
-    <string name="sort_order_title">Ordenatu</string>
+    <string name="sort_title">Ordenatu</string>
     <string name="sort_by_title">Ordenatu honela</string>
     <string name="sort_category_title">Izenburua</string>
     <string name="alphabet_asc">A-Z</string>

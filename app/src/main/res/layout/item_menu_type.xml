@@ -15,4 +15,4 @@
     android:textAppearance="@style/Appearance.Text.Subtitle1"
     app:drawableTint="?attr/colorControlNormal"
     tools:drawableStart="@drawable/ic_sort"
-    tools:text="@string/sort_order_title" />
+    tools:text="@string/sort_title" />

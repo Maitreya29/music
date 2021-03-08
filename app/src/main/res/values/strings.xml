@@ -23,9 +23,9 @@
     <string name="unknown">Unknown</string>3105
 
     <!-- Dialogs -->
-    <string name="question_enter_your_name">Enter your name</string>
+    <string name="enter_your_name">Enter your name</string>
     <string name="toast_enter_your_name">Please enter your name</string>
-    <string name="edit_playlist_title">Edit playlist title</string>
+    <string name="edit_user_playlist_name">Edit playlist title</string>
     <string name="hint_create_playlist">Enter playlist\'s name</string>
     <string name="add_track_to">Add track to\.\.\.</string>
     <string name="message_no_playlist_found">No playlist found\nClick on add button to create playlist</string>
@@ -74,7 +74,7 @@
     <!-- Toolbar Options menu -->
     <string name="context_menu_title">Options</string>
     <string name="toast_invalid_options_group">Invalid menu selected</string>
-    <string name="sort_order_title">Sort</string>
+    <string name="sort_title">Sort</string>
     <string name="sort_by_title">Sort by</string>
     <string name="sort_category_title">Title</string>
     <string name="alphabet_asc">A to Z</string>
@@ -178,7 +178,7 @@
 
 
     <!-- Search Activity -->
-    <string name="hint_search">Search for artist, songs or albums\.\.\.</string>
+    <string name="hint_search">Search for artist, tracks or albums\.\.\.</string>
     <string name="message_empty_search_result">Nothing to show</string>
 
 
@@ -236,14 +236,14 @@
     <!-- Theme section -->
     <string name="category_theme">Theme</string>
     <string name="select_dark_theme">Select dark theme</string>
-    <string name="select_dark_theme_desc">Choose dark theme to apply when dark mode is turned on</string>
+    <string name="select_dark_theme_desc">Choose the dark theme to use when dark mode is enabled</string>
     <string name="enable_dark_mode">Turn on dark mode</string>
     <string name="enable_dark_mode_desc">Instantly enables preferred dark theme</string>
     <string name="enable_auto_mode">Automatically set theme</string>
     <string name="enable_auto_mode_desc">Sets light and preferred dark theme based on time of the day</string>
 
     <string name="category_colors">Colors</string>
-    <string name="desaturated_accents">Desaturated colors</string>
+    <string name="desaturated_accents">Soften accent color</string>
     <string name="desaturated_accents_desc">Make accent color desaturated when dark theme is applied</string>
     <string name="pick_accent_color">Pick accent color</string>
     <string name="pick_accent_color_desc">Select accent colors to apply</string>
@@ -332,14 +332,14 @@
     <!-- For translators: If the color words does not make much sense in your language,
     you can try substituting a similar description of the color. But keep it short
     -->
-    <string name="exodus_fruit">Slate Blue</string>
-    <string name="electron_blue">Azure Radiance</string>
-    <string name="mint_leaf">Persian Mint</string>
-    <string name="chi_gong">Valencia</string>
-    <string name="sei_bar">Millbrook</string>
-    <string name="coral">Coral</string>
-    <string name="sunkist">Sunkist</string>
-    <string name="blue_pink">Cornflower Blue</string>
+    <string name="color_slate_blue">Slate Blue</string>
+    <string name="color_azure_radiance">Azure Radiance</string>
+    <string name="color_persian_mint">Persian Mint</string>
+    <string name="color_valencia">Valencia</string>
+    <string name="color_millbrook">Millbrook</string>
+    <string name="color_coral">Coral</string>
+    <string name="color_sunkist">Sunkist</string>
+    <string name="color_cornflower_blue">Cornflower Blue</string>
 
 
     <!-- Custom accents dialog -->

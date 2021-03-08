@@ -47,42 +47,42 @@ public class PresetColors {
         AccentsModel[] accentsModels = new AccentsModel[8];
         accentsModels[0] = new AccentsModel(
                 Preferences.ACCENT_SLATE_BLUE,
-                context.getString(R.string.exodus_fruit),
+                context.getString(R.string.color_slate_blue),
                 SLATE_BLUE);
 
         accentsModels[1] = new AccentsModel(
                 Preferences.ACCENT_AZURE_RADIANCE,
-                context.getString(R.string.electron_blue),
+                context.getString(R.string.color_azure_radiance),
                 AZURE_RADIANCE);
 
         accentsModels[2] = new AccentsModel(
                 Preferences.ACCENT_PERSIAN_MINT,
-                context.getString(R.string.mint_leaf),
+                context.getString(R.string.color_persian_mint),
                 PERSIAN_MINT);
 
         accentsModels[3] = new AccentsModel(
                 Preferences.ACCENT_VALENCIA,
-                context.getString(R.string.chi_gong),
+                context.getString(R.string.color_valencia),
                 VALENCIA);
 
         accentsModels[4] = new AccentsModel(
                 Preferences.ACCENT_MILLBROOK,
-                context.getString(R.string.sei_bar),
+                context.getString(R.string.color_millbrook),
                 MILLBROOK);
 
         accentsModels[5] = new AccentsModel(
                 Preferences.ACCENT_CORAL,
-                context.getString(R.string.coral),
+                context.getString(R.string.color_coral),
                 CORAL);
 
         accentsModels[6] = new AccentsModel(
                 Preferences.ACCENT_SUNKIST,
-                context.getString(R.string.sunkist),
+                context.getString(R.string.color_sunkist),
                 SUNKIST);
 
         accentsModels[7] = new AccentsModel(
                 Preferences.ACCENT_CORNFLOUR_BLUE,
-                context.getString(R.string.blue_pink),
+                context.getString(R.string.color_cornflower_blue),
                 CORNFLOUR_BLUE);
 
         return accentsModels;

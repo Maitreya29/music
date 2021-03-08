@@ -105,8 +105,8 @@ public class HomeBottomSheetFragment extends RoundedCustomBottomSheetFragment {
         sheetDialog.setContentView(layout);
         sheetDialog.show();
 
-        ((MaterialTextView) layout.findViewById(R.id.header)).setText(getResources().getString(R.string.question_enter_your_name));
-        ((TextInputLayout) layout.findViewById(R.id.edit_text_container)).setHint(getResources().getString(R.string.question_enter_your_name));
+        ((MaterialTextView) layout.findViewById(R.id.header)).setText(getResources().getString(R.string.enter_your_name));
+        ((TextInputLayout) layout.findViewById(R.id.edit_text_container)).setHint(getResources().getString(R.string.enter_your_name));
         TextInputEditText et = layout.findViewById(R.id.text_input_field);
 
         layout.findViewById(R.id.confirm_btn).setOnClickListener(v -> {

@@ -63,7 +63,7 @@ public class AlbumDetailsActivity extends BaseDetailsActivity implements Options
 
     private void showOptionsMenu() {
         ToolbarContextMenuDialog.Builder builder = new ToolbarContextMenuDialog.Builder();
-        builder.addGroup(Preferences.MENU_GROUP_TYPE_SORT, getString(R.string.sort_order_title), R.drawable.ic_sort);
+        builder.addGroup(Preferences.MENU_GROUP_TYPE_SORT, getString(R.string.sort_title), R.drawable.ic_sort);
         builder.setMenuSelectedListener(groupItem -> {
             MenuDetailsDialog detailsDialog = ToolbarMenuBuilder.buildSortOrderDialog(
                     this,

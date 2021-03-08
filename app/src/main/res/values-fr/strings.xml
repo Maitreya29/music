@@ -19,9 +19,9 @@
     <string name="tracks_not_found">Aucun morceau</string>
     <string name="unknown">Inconnu</string>
     <!-- Dialogs -->
-    <string name="question_enter_your_name">Entrez votre nom</string>
+    <string name="enter_your_name">Entrez votre nom</string>
     <string name="toast_enter_your_name">Veuillez entrer votre nom</string>
-    <string name="edit_playlist_title">Modifier le titre de la playlist</string>
+    <string name="edit_user_playlist_name">Modifier le titre de la playlist</string>
     <string name="hint_create_playlist">Saisir le nom de la playlist</string>
     <string name="add_track_to">Ajouter un morceau à\.\.\.</string>
     <string name="message_no_playlist_found">Aucune liste de lecture\nCliquer sur ajouter pour créer une liste de lecture</string>
@@ -60,7 +60,7 @@
     <!-- Toolbar Options menu -->
     <string name="context_menu_title">Options</string>
     <string name="toast_invalid_options_group">Menu sélectionné invalide</string>
-    <string name="sort_order_title">Trier</string>
+    <string name="sort_title">Trier</string>
     <string name="sort_by_title">Trier par</string>
     <string name="sort_category_title">Titre</string>
     <string name="alphabet_asc">A à Z</string>
@@ -267,14 +267,14 @@
     <!-- For translators: If the color words does not make much sense in your language,
     you can try substituting a similar description of the color. But keep it short
     -->
-    <string name="exodus_fruit">Violette</string>
-    <string name="electron_blue">Azur</string>
-    <string name="mint_leaf">Menthe</string>
-    <string name="chi_gong">Feu</string>
-    <string name="sei_bar">Chocolat</string>
-    <string name="coral">Corail</string>
-    <string name="sunkist">Ocre</string>
-    <string name="blue_pink">Bleuet</string>
+    <string name="color_slate_blue">Violette</string>
+    <string name="color_azure_radiance">Azur</string>
+    <string name="color_persian_mint">Menthe</string>
+    <string name="color_valencia">Feu</string>
+    <string name="color_millbrook">Chocolat</string>
+    <string name="color_coral">Corail</string>
+    <string name="color_sunkist">Ocre</string>
+    <string name="color_cornflower_blue">Bleuet</string>
     <!-- Custom accents dialog -->
     <string name="hint_hex_color">Code Hex</string>
     <string name="invalid_color">Couleur invalide</string>

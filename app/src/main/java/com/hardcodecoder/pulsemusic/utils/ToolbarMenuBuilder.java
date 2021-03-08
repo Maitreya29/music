@@ -40,7 +40,7 @@ public class ToolbarMenuBuilder {
         });
 
         builder.addGroup(Preferences.MENU_GROUP_TYPE_SORT,
-                activity.getString(R.string.sort_order_title), R.drawable.ic_sort);
+                activity.getString(R.string.sort_title), R.drawable.ic_sort);
         builder.addGroup(Preferences.MENU_GROUP_TYPE_COLUMN_COUNT,
                 activity.getString(R.string.column_title), R.drawable.ic_columns);
         return builder.build();

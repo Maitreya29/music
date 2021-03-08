@@ -18,9 +18,9 @@
     <string name="tracks_not_found">Nenhuma faixa encontrada</string>
     <string name="unknown">Desconhecido</string>
     <!-- Dialogs -->
-    <string name="question_enter_your_name">Digite seu nome</string>
+    <string name="enter_your_name">Digite seu nome</string>
     <string name="toast_enter_your_name">Por favor, insira seu nome</string>
-    <string name="edit_playlist_title">Editar o título da lista de reprodução</string>
+    <string name="edit_user_playlist_name">Editar o título da lista de reprodução</string>
     <string name="hint_create_playlist">Insira o nome da lista de reprodução</string>
     <string name="add_track_to">Adicionar trilha a\.\.\.</string>
     <string name="message_no_playlist_found">Nenhuma lista de reprodução encontrada\nClique no botão Adicionar para criar lista de reprodução</string>
@@ -59,7 +59,7 @@
     <!-- Toolbar Options menu -->
     <string name="context_menu_title">Opções</string>
     <string name="toast_invalid_options_group">Menu inválido selecionado</string>
-    <string name="sort_order_title">Organizar</string>
+    <string name="sort_title">Organizar</string>
     <string name="sort_by_title">Ordenar por</string>
     <string name="sort_category_title">Título</string>
     <string name="alphabet_asc">A até Z</string>
@@ -159,8 +159,8 @@
     <!-- For translators: If the color words does not make much sense in your language,
     you can try substituting a similar description of the color. But keep it short
     -->
-    <string name="coral">Coral</string>
-    <string name="sunkist">Sunkist</string>
+    <string name="color_coral">Coral</string>
+    <string name="color_sunkist">Sunkist</string>
     <!-- Custom accents dialog -->
     <string name="apply">Aplicar</string>
     <string name="presets">Modelos</string>

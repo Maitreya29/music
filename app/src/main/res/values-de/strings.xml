@@ -18,9 +18,9 @@
     <string name="tracks_not_found">Keine Titel gefunden</string>
     <string name="unknown">Unbekannt</string>
     <!-- Dialogs -->
-    <string name="question_enter_your_name">Gib deinen Namen ein</string>
+    <string name="enter_your_name">Gib deinen Namen ein</string>
     <string name="toast_enter_your_name">Bitte gib deinen Namen ein</string>
-    <string name="edit_playlist_title">Playlisttitel bearbeiten</string>
+    <string name="edit_user_playlist_name">Playlisttitel bearbeiten</string>
     <string name="hint_create_playlist">Gib den Namen der Playlist ein</string>
     <string name="add_track_to">Titel hinzufügen zu\.\.\.</string>
     <string name="message_no_playlist_found">Keine Playlist gefunden\nKlicke auf den Hinzufügen-Button um eine zu erstellen</string>
@@ -58,7 +58,7 @@
     <string name="cannot_delete_default_playlist">Standardplaylist kann nicht entfernt werden</string>
     <!-- Toolbar Options menu -->
     <string name="context_menu_title">Einstellungen</string>
-    <string name="sort_order_title">Sortierreihenfolge</string>
+    <string name="sort_title">Sortierreihenfolge</string>
     <string name="sort_by_title">Sortieren nach</string>
     <string name="sort_category_title">Titel</string>
     <string name="alphabet_asc">A bis Z</string>
@@ -215,14 +215,14 @@
     <!-- For translators: If the color words does not make much sense in your language,
     you can try substituting a similar description of the color. But keep it short
     -->
-    <string name="exodus_fruit">Exodus Frucht</string>
-    <string name="electron_blue">Elektron Blau</string>
-    <string name="mint_leaf">Minzblatt</string>
-    <string name="chi_gong">Chi gong</string>
-    <string name="sei_bar">Sei bar</string>
-    <string name="coral">Koralle</string>
-    <string name="sunkist">Sunkist</string>
-    <string name="blue_pink">Blaues Pink</string>
+    <string name="color_slate_blue">Exodus Frucht</string>
+    <string name="color_azure_radiance">Elektron Blau</string>
+    <string name="color_persian_mint">Minzblatt</string>
+    <string name="color_valencia">Chi gong</string>
+    <string name="color_millbrook">Sei bar</string>
+    <string name="color_coral">Koralle</string>
+    <string name="color_sunkist">Sunkist</string>
+    <string name="color_cornflower_blue">Blaues Pink</string>
     <!-- Custom accents dialog -->
     <string name="hint_hex_color">Hex-Farbcode</string>
     <string name="invalid_color">Ungültige Farbe</string>

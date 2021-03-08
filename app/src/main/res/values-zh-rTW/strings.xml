@@ -17,9 +17,9 @@
     <string name="tracks_not_found">未找到音樂</string>
     <string name="unknown">未知</string>
     <!-- Dialogs -->
-    <string name="question_enter_your_name">請輸入您的姓名</string>
+    <string name="enter_your_name">請輸入您的姓名</string>
     <string name="toast_enter_your_name">請輸入您的姓名</string>
-    <string name="edit_playlist_title">編輯播放清單名稱</string>
+    <string name="edit_user_playlist_name">編輯播放清單名稱</string>
     <string name="hint_create_playlist">輸入清單名稱</string>
     <string name="add_track_to">新增曲目至\.\.\.</string>
     <string name="message_no_playlist_found">未找到播放清單\n點擊新增鈕以建立播放清單</string>
@@ -50,7 +50,7 @@
     <string name="cannot_delete_default_playlist">無法移除預設播放清單</string>
     <!-- Toolbar Options menu -->
     <string name="context_menu_title">選項</string>
-    <string name="sort_order_title">排序</string>
+    <string name="sort_title">排序</string>
     <string name="sort_by_title">排序依據</string>
     <string name="sort_category_title">標題</string>
     <string name="alphabet_asc">字母順序A至Z</string>
@@ -225,8 +225,8 @@
     <!-- For translators: If the color words does not make much sense in your language,
     you can try substituting a similar description of the color. But keep it short
     -->
-    <string name="coral">珊瑚</string>
-    <string name="sunkist">香吉士</string>
+    <string name="color_coral">珊瑚</string>
+    <string name="color_sunkist">香吉士</string>
     <!-- Custom accents dialog -->
     <string name="invalid_color">顏色無效</string>
     <string name="color_channel_r">紅</string>
