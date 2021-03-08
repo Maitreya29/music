@@ -1,7 +1,9 @@
 package com.hardcodecoder.pulsemusic;
 
 import android.os.Handler;
+import android.os.HandlerThread;
 import android.os.Looper;
+import android.os.Process;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -9,38 +11,41 @@ import androidx.annotation.Nullable;
 import com.hardcodecoder.pulsemusic.utils.LogUtils;
 
 import java.util.concurrent.Callable;
-import java.util.concurrent.Executor;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 public class TaskRunner {
 
-    private static final Executor CUSTOM_THREAD_POOL_EXECUTOR =
-            new ThreadPoolExecutor(1, 5, 1, TimeUnit.SECONDS, new LinkedBlockingQueue<>());
-    private static final Handler handler = new Handler(Looper.getMainLooper());
+    private static final HandlerThread sWorkerThread;
+    private static final Handler sWorkerThreadHandler;
+    private static final Handler sMainHandler;
+
+    static {
+        sWorkerThread = new HandlerThread("TaskRunnerWorkerThread", Process.THREAD_PRIORITY_BACKGROUND);
+        sWorkerThread.start();
+        sWorkerThreadHandler = new Handler(sWorkerThread.getLooper());
+        sMainHandler = new Handler(Looper.getMainLooper());
+    }
 
     private TaskRunner() {
     }
 
     public static <V> void executeAsync(@NonNull Callable<V> callable, @NonNull Callback<V> callback) {
-        CUSTOM_THREAD_POOL_EXECUTOR.execute(() -> {
+        sWorkerThreadHandler.post(() -> {
             try {
                 final V result = callable.call();
-                handler.post(() -> callback.onComplete(result));
+                sMainHandler.post(() -> callback.onComplete(result));
             } catch (Exception e) {
                 LogUtils.logException(callable.getClass().getCanonicalName(), "at: executeAsync(): callable", e);
 
                 // Callback is necessary to trigger
                 // any fallback event that happen if load fails
-                handler.post(() -> callback.onComplete(null));
+                sMainHandler.post(() -> callback.onComplete(null));
             }
         });
     }
 
     public static void executeAsync(@NonNull Runnable runnable) {
         try {
-            CUSTOM_THREAD_POOL_EXECUTOR.execute(runnable);
+            sWorkerThreadHandler.post(runnable);
         } catch (Exception e) {
             LogUtils.logException(TaskRunner.class.getSimpleName(), "at: executeAsync(): runnable", e);
         }
