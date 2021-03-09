@@ -22,14 +22,11 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
-import com.hardcodecoder.pulsemusic.TaskRunner;
 import com.hardcodecoder.pulsemusic.activities.base.ControllerActivity;
 import com.hardcodecoder.pulsemusic.activities.main.TrackPickerActivity;
-import com.hardcodecoder.pulsemusic.helper.MediaArtHelper;
-import com.hardcodecoder.pulsemusic.loaders.PlaylistArtLoader;
+import com.hardcodecoder.pulsemusic.helper.PlaylistHelper;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.themes.ThemeColors;
-import com.hardcodecoder.pulsemusic.themes.ThemeManagerUtils;
 import com.hardcodecoder.pulsemusic.utils.DimensionsUtil;
 import com.hardcodecoder.pulsemusic.views.AccentColorMaterialButton;
 import com.hardcodecoder.pulsemusic.views.CustomToolbar;
@@ -47,7 +44,7 @@ public abstract class PlaylistActivity extends ControllerActivity {
     private CollapsingToolbarLayout mCollapsingToolbarLayout;
     private MaterialTextView mPlaylistInfo;
     private String mPlaylistTitle = null;
-    private long mTotalPlaylistDuration = 0;
+    private long mCurrentPlaylistDuration = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,8 +71,8 @@ public abstract class PlaylistActivity extends ControllerActivity {
         mCollapsingToolbarLayout.setTitle(title);
     }
 
-    protected long getTotalPlaylistDuration() {
-        return mTotalPlaylistDuration;
+    protected long getCurrentPlaylistDuration() {
+        return mCurrentPlaylistDuration;
     }
 
     private void setUpHeader() {
@@ -100,41 +97,22 @@ public abstract class PlaylistActivity extends ControllerActivity {
         recyclerView.setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
 
         loadRecyclerList(recyclerView, list);
-        loadPlaylistMediaArt(list);
-        updateTracksInfo(list.size(), calculatePlaylistDuration(list));
+        PlaylistHelper.loadPlaylistArtInto(findViewById(R.id.playlist_media_art), list);
+        updateTracksInfo(list.size(), getPlaylistDurationFor(list));
     }
 
-    protected long calculatePlaylistDuration(@NonNull List<MusicModel> list) {
-        long duration = 0;
-        for (MusicModel md : list)
-            duration += md.getTrackDuration();
-        return duration;
-    }
-
-    private void loadPlaylistMediaArt(@NonNull List<MusicModel> list) {
-        TaskRunner.executeAsync(new PlaylistArtLoader(this, list), result -> {
-            MediaArtImageView playlistArt = findViewById(R.id.playlist_media_art);
-            if (null != result) playlistArt.setImageBitmap(result);
-            else loadDefaultPlaylistArt(playlistArt);
-        });
-    }
-
-    private void loadDefaultPlaylistArt(@NonNull MediaArtImageView imageView) {
-        int color;
-        if (ThemeManagerUtils.isDarkModeEnabled())
-            color = ThemeColors.getCurrentColorWindowBackground();
-        else color = ThemeColors.getCurrentColorBackgroundHighlight();
-        imageView.setBackgroundColor(color);
-        imageView.setImageDrawable(MediaArtHelper.getDefaultAlbumArt(this, -1));
+    protected long getPlaylistDurationFor(@Nullable List<MusicModel> playlist) {
+        if (null == playlist) return 0;
+        return PlaylistHelper.calculatePlaylistDuration(playlist);
     }
 
     protected void updateTracksInfo(int size, long duration) {
-        mTotalPlaylistDuration = duration;
+        mCurrentPlaylistDuration = duration;
         String text = "● "
                 + size + "\t"
                 + getString(R.string.suffix_tracks)
                 + " ● "
-                + DateUtils.formatElapsedTime(mTotalPlaylistDuration / 1000);
+                + DateUtils.formatElapsedTime(mCurrentPlaylistDuration / 1000);
         mPlaylistInfo.setText(text);
     }
 
@@ -149,7 +127,7 @@ public abstract class PlaylistActivity extends ControllerActivity {
 
             // Set playlist art
             MediaArtImageView playlistArt = findViewById(R.id.playlist_media_art);
-            loadDefaultPlaylistArt(playlistArt);
+            PlaylistHelper.loadDefaultPlaylistArt(playlistArt, null);
 
             // Disable appbar scrolling
             AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) mCollapsingToolbarLayout.getLayoutParams();

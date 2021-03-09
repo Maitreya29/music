@@ -80,7 +80,7 @@ public class CustomizablePlaylist extends PlaylistActivity implements PlaylistIt
                 result -> {
                     if (null != result) {
                         mAdapter.updatePlaylist(result);
-                        updateTracksInfo(result.size(), calculatePlaylistDuration(result));
+                        updateTracksInfo(result.size(), getPlaylistDurationFor(result));
                     }
                 });
     }
@@ -112,10 +112,12 @@ public class CustomizablePlaylist extends PlaylistActivity implements PlaylistIt
         Snackbar sb = Snackbar.make(findViewById(R.id.playlist_layout_root), R.string.track_removed_from_queue, Snackbar.LENGTH_SHORT);
         sb.setAction(getString(R.string.undo), v -> {
             mAdapter.restoreItem();
-            updateTracksInfo(mAdapter.getItemCount(), getTotalPlaylistDuration() + dismissedItem.getTrackDuration());
+            updateTracksInfo(mAdapter.getItemCount(),
+                    getCurrentPlaylistDuration() + dismissedItem.getTrackDuration());
         });
         sb.show();
-        updateTracksInfo(mAdapter.getItemCount(), getTotalPlaylistDuration() - dismissedItem.getTrackDuration());
+        updateTracksInfo(mAdapter.getItemCount(),
+                getCurrentPlaylistDuration() - dismissedItem.getTrackDuration());
         mPlaylistModified = true;
         // Do something when playlist is empty
         // We need to take into account that after removing last item, it can be restored.
@@ -133,7 +135,8 @@ public class CustomizablePlaylist extends PlaylistActivity implements PlaylistIt
         if (null == mAdapter) setUpContent(list);
         else {
             mAdapter.addItems(list);
-            updateTracksInfo(mAdapter.getItemCount(), getTotalPlaylistDuration() + calculatePlaylistDuration(list));
+            updateTracksInfo(mAdapter.getItemCount(),
+                    getCurrentPlaylistDuration() + getPlaylistDurationFor(list));
         }
     }
 

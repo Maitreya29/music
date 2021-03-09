@@ -103,19 +103,27 @@ public class CurrentQueuePlaylist extends PlaylistActivity implements PlaylistIt
     @Override
     public void onItemDismissed(@NonNull MusicModel dismissedItem, int itemPosition) {
         mPulseController.removeItemFromQueue(itemPosition);
-        Snackbar sb = Snackbar.make(findViewById(R.id.playlist_layout_root), R.string.track_removed_from_queue, Snackbar.LENGTH_SHORT);
+        Snackbar sb = Snackbar.make(
+                findViewById(R.id.playlist_layout_root),
+                R.string.track_removed_from_queue,
+                Snackbar.LENGTH_SHORT);
+
         sb.setAction(getString(R.string.undo), v -> {
             mAdapter.restoreItem();
             mPulseController.addToQueue(dismissedItem, itemPosition);
             if (mQueueManager.getActiveIndex() == itemPosition)
                 mRemote.play();
-            updateTracksInfo(mAdapter.getItemCount(), getTotalPlaylistDuration() + dismissedItem.getTrackDuration());
+            updateTracksInfo(mAdapter.getItemCount(),
+                    getCurrentPlaylistDuration() + dismissedItem.getTrackDuration());
         });
+
         sb.show();
+
         if (itemPosition == mQueueManager.getActiveIndex()) {
             if (mQueueManager.getQueue().size() > itemPosition) {
                 MediaController controller = mPulseController.getController();
-                if (controller != null && controller.getPlaybackState() != null && controller.getPlaybackState().getState() == PlaybackState.STATE_PLAYING)
+                if (controller != null && controller.getPlaybackState() != null
+                        && controller.getPlaybackState().getState() == PlaybackState.STATE_PLAYING)
                     mRemote.play();
             } else {
                 // Active and last item in the playlist was removed
@@ -123,8 +131,9 @@ public class CurrentQueuePlaylist extends PlaylistActivity implements PlaylistIt
                 mRemote.stop();
             }
         }
+
         updateTracksInfo(mAdapter.getItemCount(),
-                getTotalPlaylistDuration() - dismissedItem.getTrackDuration());
+                getCurrentPlaylistDuration() - dismissedItem.getTrackDuration());
     }
 
     private void onClearQueue() {
@@ -145,7 +154,8 @@ public class CurrentQueuePlaylist extends PlaylistActivity implements PlaylistIt
             mPulseController.setPlaylist(list);
         } else {
             mAdapter.addItems(list);
-            updateTracksInfo(mAdapter.getItemCount(), getTotalPlaylistDuration() + calculatePlaylistDuration(list));
+            updateTracksInfo(mAdapter.getItemCount(),
+                    getCurrentPlaylistDuration() + getPlaylistDurationFor(list));
             mPulseController.setPlaylist(mAdapter.getDataList(), mQueueManager.getActiveIndex());
         }
     }
