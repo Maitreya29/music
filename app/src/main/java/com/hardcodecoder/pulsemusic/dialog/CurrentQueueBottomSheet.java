@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,16 +20,22 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.PulseController;
 import com.hardcodecoder.pulsemusic.R;
+import com.hardcodecoder.pulsemusic.TaskRunner;
 import com.hardcodecoder.pulsemusic.adapters.playlist.CustomizablePlaylistAdapter;
 import com.hardcodecoder.pulsemusic.dialog.base.RoundedCustomBottomSheetFragment;
+import com.hardcodecoder.pulsemusic.helper.MediaArtHelper;
 import com.hardcodecoder.pulsemusic.helper.RecyclerViewGestureHelper;
 import com.hardcodecoder.pulsemusic.interfaces.ItemGestureCallback;
 import com.hardcodecoder.pulsemusic.interfaces.PlaylistItemListener;
+import com.hardcodecoder.pulsemusic.loaders.PlaylistArtLoader;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
+import com.hardcodecoder.pulsemusic.themes.ThemeColors;
+import com.hardcodecoder.pulsemusic.themes.ThemeManagerUtils;
 import com.hardcodecoder.pulsemusic.views.MediaArtImageView;
 
 import java.util.List;
@@ -38,6 +45,7 @@ public class CurrentQueueBottomSheet extends RoundedCustomBottomSheetFragment im
     public static final String TAG = CurrentQueueBottomSheet.class.getSimpleName();
     private View rootView;
     private MediaArtImageView mUpNextTrackAlbumArt;
+    private ImageView mPlaylistMediaArt;
     private MaterialTextView mUpNextTrackTitle;
     private MaterialTextView mUpNextTrackArtist;
     private CustomizablePlaylistAdapter mAdapter;
@@ -94,15 +102,22 @@ public class CurrentQueueBottomSheet extends RoundedCustomBottomSheetFragment im
 
         rootView = view;
 
+        mPlaylistMediaArt = view.findViewById(R.id.current_queue_playlist_art);
         mUpNextTrackAlbumArt = view.findViewById(R.id.up_next_track_album_art);
         mUpNextTrackTitle = view.findViewById(R.id.up_next_track_title);
         mUpNextTrackArtist = view.findViewById(R.id.up_next_track_sub_title);
+
+        MaterialCardView upNextCard = view.findViewById(R.id.up_next_card);
+        upNextCard.setStrokeColor(ThemeColors.getCurrentColorControlNormal());
         updateUpNextCard();
+
+        List<MusicModel> list = mQueueManager.getQueue();
+
+        loadPlaylistMediaArt(list);
 
         RecyclerView recyclerView = (RecyclerView) ((ViewStub) view.findViewById(R.id.current_queue_stub_queue_list)).inflate();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(recyclerView.getContext(), RecyclerView.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
-        List<MusicModel> list = mQueueManager.getQueue();
         mAdapter = new CustomizablePlaylistAdapter(getLayoutInflater(), list, this, this);
         recyclerView.setAdapter(mAdapter);
 
@@ -140,6 +155,7 @@ public class CurrentQueueBottomSheet extends RoundedCustomBottomSheetFragment im
                 // Active and last item in the playlist was removed
                 // Stop playback immediately
                 mRemote.stop();
+                dismiss();
             }
         }
     }
@@ -164,6 +180,22 @@ public class CurrentQueueBottomSheet extends RoundedCustomBottomSheetFragment im
     public void onDismiss(@NonNull DialogInterface dialog) {
         mPulseController.unregisterCallback(mCallback);
         super.onDismiss(dialog);
+    }
+
+    private void loadPlaylistMediaArt(@NonNull List<MusicModel> list) {
+        TaskRunner.executeAsync(new PlaylistArtLoader(requireContext(), list), playlistArt -> {
+            if (null != playlistArt) mPlaylistMediaArt.setImageBitmap(playlistArt);
+            else loadDefaultPlaylistArt();
+        });
+    }
+
+    private void loadDefaultPlaylistArt() {
+        int color;
+        if (ThemeManagerUtils.isDarkModeEnabled())
+            color = ThemeColors.getCurrentColorWindowBackground();
+        else color = ThemeColors.getCurrentColorBackgroundHighlight();
+        mPlaylistMediaArt.setBackgroundColor(color);
+        mPlaylistMediaArt.setImageDrawable(MediaArtHelper.getDefaultAlbumArt(requireContext(), -1));
     }
 
     private void updateUpNextCard() {

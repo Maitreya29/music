@@ -6,19 +6,37 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/current_queue_title"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_gravity="center_horizontal|top"
+        android:gravity="center"
+        android:text="@string/playlist_play_queue"
+        android:textAppearance="@style/TextAppearanceToolbar" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:animateLayoutChanges="true"
-        android:orientation="vertical">
+        android:clipToPadding="true"
+        android:orientation="vertical"
+        android:paddingTop="56dp">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/current_queue_title"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:gravity="center"
-            android:text="@string/playlist_play_queue"
-            android:textAppearance="@style/TextAppearanceToolbar" />
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            app:cardCornerRadius="@dimen/rounding_radius_8dp"
+            app:cardElevation="4dp"
+            app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
+
+            <ImageView
+                android:id="@+id/current_queue_playlist_art"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:contentDescription="@string/desc_album_art" />
+        </com.google.android.material.card.MaterialCardView>
 
         <com.hardcodecoder.pulsemusic.views.AccentColorTextView
             android:id="@+id/current_queue_now_playing_title"
@@ -39,19 +57,16 @@
             app:cardBackgroundColor="?attr/colorSurface"
             app:cardCornerRadius="@dimen/rounding_radius_8dp"
             app:cardElevation="4dp"
-            app:strokeColor="#ff4242"
             app:strokeWidth="3dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="84dp"
-                android:paddingStart="16dp"
-                android:paddingEnd="32dp">
+                android:layout_height="76dp">
 
                 <com.hardcodecoder.pulsemusic.views.MediaArtImageView
                     android:id="@+id/up_next_track_album_art"
-                    android:layout_width="56dp"
-                    android:layout_height="56dp"
+                    android:layout_width="76dp"
+                    android:layout_height="match_parent"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="16dp"
@@ -65,7 +80,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignTop="@id/up_next_track_album_art"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="12dp"
                     android:layout_toEndOf="@id/up_next_track_album_art"
                     android:maxLines="1"
                     android:textAppearance="@style/Appearance.Text.Subtitle1"
@@ -76,6 +91,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/up_next_track_title"
+                    android:layout_marginTop="8dp"
                     android:layout_toEndOf="@id/up_next_track_album_art"
                     android:maxLines="1"
                     android:textAppearance="@style/Appearance.Text.Subtitle2"
