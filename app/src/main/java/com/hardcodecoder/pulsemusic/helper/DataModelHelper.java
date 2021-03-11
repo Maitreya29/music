@@ -25,6 +25,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.hardcodecoder.pulsemusic.utils.LogUtils.Type.GENERAL;
+
 public class DataModelHelper {
 
     /**
@@ -78,7 +80,7 @@ public class DataModelHelper {
             discTrackNumber[1] = getNumber(mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_CD_TRACK_NUMBER));
             mmr.release();
         } catch (Exception e) {
-            LogUtils.logException("DataModelHelper", "at buildMusicModelFrom()", e);
+            LogUtils.logException(GENERAL, "DataModelHelper", "at buildMusicModelFrom()", e);
             return null;
         }
         return new MusicModel(
@@ -108,7 +110,7 @@ public class DataModelHelper {
                 try {
                     mediaExtractor.setDataSource(context, uri, null);
                 } catch (IOException e) {
-                    LogUtils.logException("DataModelHelper", "at getTrackInfo#settingDataSource", e);
+                    LogUtils.logException(GENERAL, "DataModelHelper", "at getTrackInfo#settingDataSource", e);
                 }
 
                 int nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
@@ -127,7 +129,7 @@ public class DataModelHelper {
                     sampleRate = mediaFormat.getInteger(MediaFormat.KEY_SAMPLE_RATE);
                     channelCount = mediaFormat.getInteger(MediaFormat.KEY_CHANNEL_COUNT);
                 } catch (NullPointerException e) {
-                    LogUtils.logException("DataModelHelper", "at getTrackInfo#extractingInfo", e);
+                    LogUtils.logException(GENERAL, "DataModelHelper", "at getTrackInfo#extractingInfo", e);
                 }
                 cursor.close();
                 TrackFileModel trackFileModel = new TrackFileModel(displayName, mimeType, fileSize, bitRate, sampleRate, channelCount);

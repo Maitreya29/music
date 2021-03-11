@@ -151,7 +151,7 @@ public class IgnoreFolderChooser extends RoundedCustomBottomSheetFragment {
                     + (paths.length == 1 ? "" : paths[1] + File.separator);
         }
         String logText = "Received path: " + folder.getPath() + "\nPaths: " + Arrays.toString(paths) + "\nCompletePath: " + completePath;
-        LogUtils.logInfo("if", TAG, logText);
+        LogUtils.logInfo(TAG, logText);
         return completePath;
     }
 

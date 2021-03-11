@@ -12,6 +12,8 @@ import com.hardcodecoder.pulsemusic.utils.LogUtils;
 
 import java.util.concurrent.Callable;
 
+import static com.hardcodecoder.pulsemusic.utils.LogUtils.Type.BACKGROUND;
+
 public class TaskRunner {
 
     private static final HandlerThread sWorkerThread;
@@ -34,7 +36,7 @@ public class TaskRunner {
                 final V result = callable.call();
                 sMainHandler.post(() -> callback.onComplete(result));
             } catch (Exception e) {
-                LogUtils.logException(callable.getClass().getCanonicalName(), "at: executeAsync(): callable", e);
+                LogUtils.logException(BACKGROUND, callable.getClass().getCanonicalName(), "at: executeAsync(): callable", e);
 
                 // Callback is necessary to trigger
                 // any fallback event that happen if load fails
@@ -47,7 +49,7 @@ public class TaskRunner {
         try {
             sWorkerThreadHandler.post(runnable);
         } catch (Exception e) {
-            LogUtils.logException(TaskRunner.class.getSimpleName(), "at: executeAsync(): runnable", e);
+            LogUtils.logException(BACKGROUND, TaskRunner.class.getSimpleName(), "at: executeAsync(): runnable", e);
         }
     }
 

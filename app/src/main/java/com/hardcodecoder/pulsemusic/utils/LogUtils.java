@@ -9,8 +9,10 @@ import androidx.annotation.Nullable;
 import com.hardcodecoder.pulsemusic.BuildConfig;
 import com.hardcodecoder.pulsemusic.TaskRunner;
 
+import java.io.BufferedWriter;
 import java.io.File;
-import java.io.PrintStream;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -27,51 +29,59 @@ public class LogUtils {
         mExternalFilesDirPath = context.getExternalFilesDir(null).getAbsolutePath();
     }
 
-    public static void logException(@NonNull Exception exception) {
-        logException(null, null, exception);
-    }
-
-    public static void logException(@Nullable String tag, @Nullable String msg, @NonNull Exception exception) {
-        if (BuildConfig.DEBUG) {
-            Log.e(tag, msg, exception);
-            return;
-        }
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd_hh:mm:ss", Locale.ENGLISH);
-        long currentTime = Calendar.getInstance().getTimeInMillis();
-        String filename = simpleDateFormat.format(new Date(currentTime));
-        logException(filename, tag, msg, exception);
-    }
-
-    public static void logException(@NonNull String fileName, @Nullable String tag, @Nullable String msg, @NonNull Exception exception) {
-        if (BuildConfig.DEBUG) {
-            Log.e(tag, msg, exception);
-            return;
-        }
-        TaskRunner.executeAsync(() -> {
-            File file = new File(mExternalFilesDirPath, "logcat_" + fileName + "_.txt");
-            try (PrintStream ps = new PrintStream(file)) {
-                if (null != tag) ps.print(tag + ": ");
-                if (null != msg) ps.println(msg);
-                exception.printStackTrace(ps);
-            } catch (Exception ex) {
-                Log.e("PulseMusic: LogHelper", "Failed to write log to file: ", ex);
-            }
-        });
-    }
-
-    public static void logInfo(@NonNull String fileName, @Nullable String tag, @Nullable String msg) {
+    public static void logInfo(@Nullable String tag, @Nullable String msg) {
         if (BuildConfig.DEBUG) {
             Log.i(tag, msg);
             return;
         }
+        writeLog("INFO", tag, msg, null);
+    }
+
+    public static void logException(@NonNull Type type, @Nullable String tag, @Nullable String msg, @NonNull Exception exception) {
+        if (BuildConfig.DEBUG) {
+            Log.e(tag, msg, exception);
+            return;
+        }
+        String fileName;
+        switch (type) {
+            case IO:
+                fileName = "IO";
+                break;
+            case GENERAL:
+                fileName = "GENERAL";
+                break;
+            case BACKGROUND:
+                fileName = "TASK_RUNNER";
+                break;
+            default:
+                fileName = "OTHERS";
+        }
+        writeLog(fileName, tag, msg, exception);
+    }
+
+
+    private static void writeLog(@NonNull String fileName, @Nullable String tag, @Nullable String msg, @Nullable Exception exception) {
         TaskRunner.executeAsync(() -> {
-            File file = new File(mExternalFilesDirPath, "logcat_" + fileName + ".txt");
-            try (PrintStream ps = new PrintStream(file)) {
-                if (null != tag) ps.print(tag + ": ");
-                if (null != msg) ps.println(msg);
+            File file = new File(mExternalFilesDirPath, fileName + "_logcat" + ".txt");
+            try (PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(file, true)), true)) {
+                writer.println("\n\n*********** BEGINNING OF CRASH ***********");
+
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd_hh:mm:ss", Locale.ENGLISH);
+                long currentTime = Calendar.getInstance().getTimeInMillis();
+                writer.println(simpleDateFormat.format(new Date(currentTime)));
+
+                if (null != tag) writer.print(tag + " ");
+                if (null != msg) writer.println(msg);
+                if (null != exception) exception.printStackTrace(writer);
             } catch (Exception ex) {
                 Log.e("PulseMusic: LogHelper", "Failed to write log to file: ", ex);
             }
         });
+    }
+
+    public enum Type {
+        IO,
+        GENERAL,
+        BACKGROUND
     }
 }

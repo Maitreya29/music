@@ -122,7 +122,7 @@ public class MainContentActivity extends DraggableNowPlayingSheetActivity {
                     return true;
                 }
             } catch (Exception e) {
-                LogUtils.logException(TAG, "Handling intent", e);
+                LogUtils.logException(LogUtils.Type.GENERAL, TAG, "Handling intent", e);
             }
         }
         return false;

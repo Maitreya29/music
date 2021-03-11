@@ -14,9 +14,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import static com.hardcodecoder.pulsemusic.utils.LogUtils.Type.IO;
+
 public class StorageUtil {
 
-    private static final String TAG = "StorageUtil";
+    private static final String TAG = StorageUtil.class.getSimpleName();
 
     @NonNull
     public static String[] readLinesFromFile(@NonNull File file, int lines) {
@@ -25,13 +27,14 @@ public class StorageUtil {
             for (int i = 0; i < lines; i++)
                 linesArray[i] = reader.readLine();
         } catch (Exception e) {
-            LogUtils.logException("IO", TAG, "at: readLinesFromFile(): " + file.getAbsolutePath(), e);
+            LogUtils.logException(IO, TAG, "at: readLinesFromFile(): " + file.getAbsolutePath(), e);
         }
         return linesArray;
     }
 
     @Nullable
     public static List<String> readLinesFromFile(@NonNull File file) {
+        if (!file.exists()) return null;
         List<String> linesList = null;
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             linesList = new ArrayList<>();
@@ -39,7 +42,7 @@ public class StorageUtil {
             while ((line = reader.readLine()) != null)
                 linesList.add(line);
         } catch (Exception e) {
-            LogUtils.logException("IO", TAG, "at: List<String> readLinesFromFile(): " + file.getAbsolutePath(), e);
+            LogUtils.logException(IO, TAG, "at: List<String> readLinesFromFile(): " + file.getAbsolutePath(), e);
         }
         return linesList;
     }
@@ -47,21 +50,21 @@ public class StorageUtil {
     public static void writeStringToFile(@NonNull File file, @NonNull String data, boolean append) {
         try (FileOutputStream fos = new FileOutputStream(file, append)) {
             fos.write(data.getBytes());
-            fos.flush();
         } catch (IOException e) {
-            LogUtils.logException("IO", TAG, "at: writeStringToFile(): " + file.getAbsolutePath(), e);
+            LogUtils.logException(IO, TAG, "at: writeStringToFile(): " + file.getAbsolutePath(), e);
         }
     }
 
     @Nullable
     public static List<Integer> readPlaylistIdsFromFile(@NonNull File file) {
+        if (!file.exists()) return null;
         List<Integer> idList = null;
         try (Scanner input = new Scanner(file)) {
             idList = new ArrayList<>();
             while (input.hasNextInt())
                 idList.add(input.nextInt());
         } catch (Exception e) {
-            LogUtils.logException("IO", TAG, "at: readPlaylistIdsFromFile(): " + file.getAbsolutePath(), e);
+            LogUtils.logException(IO, TAG, "at: readPlaylistIdsFromFile(): " + file.getAbsolutePath(), e);
         }
         return idList;
     }
@@ -78,7 +81,7 @@ public class StorageUtil {
         try {
             return file.createNewFile();
         } catch (IOException e) {
-            LogUtils.logException("IO", TAG, "at: createFile(): " + file.getAbsolutePath(), e);
+            LogUtils.logException(IO, TAG, "at: createFile(): " + file.getAbsolutePath(), e);
         }
         return false;
     }
