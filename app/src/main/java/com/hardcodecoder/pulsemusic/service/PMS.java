@@ -21,6 +21,7 @@ import android.support.v4.media.session.MediaSessionCompat;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.media.session.MediaButtonReceiver;
@@ -39,7 +40,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class PMS extends Service implements PlaybackManager.PlaybackServiceCallback, MediaNotificationManager.NotificationCallback {
+public class PMS extends Service implements PlaybackManager.PlaybackServiceCallback,
+        MediaNotificationManager.NotificationCallback,
+        SharedPreferences.OnSharedPreferenceChangeListener {
 
     public static final String ACTION_DEFAULT_PLAY = "com.hardcodecoder.pulsemusic.service.PMS.ACTION_DEFAULT_PLAY";
     public static final String ACTION_PLAY_CONTINUE = "com.hardcodecoder.pulsemusic.service.PMS.ACTION_PLAY_CONTINUE";
@@ -56,7 +59,8 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
     private MediaNotificationManager mNotificationManager = null;
     private HandlerThread mServiceThread = null;
     private Handler mWorkerHandler = null;
-    private SharedPreferences.OnSharedPreferenceChangeListener sharedPreferenceChangeListener;
+    private PlaybackManager mPlaybackManager;
+    private PulseController mPulseController;
     private boolean isServiceRunning = false;
     private boolean isReceiverRegistered = false;
 
@@ -66,31 +70,25 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
         mServiceThread = new HandlerThread("PMS Thread", Thread.NORM_PRIORITY);
         mServiceThread.start();
         mWorkerHandler = new Handler(mServiceThread.getLooper());
-        // Cannot run this asynchronously on mServiceThread.
-        // MediaSession needs to be initialize before client(s) binds to this service
-        initializeSession();
-    }
-
-    private void initializeSession() {
-        final boolean rememberPlaylist = getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, MODE_PRIVATE)
-                .getBoolean(Preferences.REMEMBER_PREVIOUS_PLAYLIST, false);
 
         LocalPlayback playback = new LocalPlayback(this, mWorkerHandler);
-        PlaybackManager playbackManager = new PlaybackManager(getApplicationContext(), playback, this);
-        playbackManager.setRememberPlaylist(rememberPlaylist);
+        mPlaybackManager = new PlaybackManager(getApplicationContext(), playback, this, mWorkerHandler);
 
         mMediaSession = new MediaSession(getApplicationContext(), TAG);
-        mMediaSession.setCallback(playbackManager.getSessionCallbacks(), mWorkerHandler);
+        mMediaSession.setCallback(mPlaybackManager.getSessionCallbacks(), mWorkerHandler);
         mMediaSession.setFlags(MediaSession.FLAG_HANDLES_MEDIA_BUTTONS | MediaSession.FLAG_HANDLES_TRANSPORT_CONTROLS);
-        PulseController pulseController = PulseController.getInstance();
-        pulseController.setController(mMediaSession.getController());
-        pulseController.setRememberPlaylist(rememberPlaylist, false);
+
+        mWorkerHandler.post(this::initializeAsync);
+    }
+
+    private void initializeAsync() {
+        mPulseController = PulseController.getInstance();
+        mPulseController.setController(mMediaSession.getController());
 
         Intent mediaButtonIntent = new Intent(Intent.ACTION_MEDIA_BUTTON);
         mediaButtonIntent.setClass(getApplicationContext(), MediaButtonReceiver.class);
         PendingIntent mbrIntent = PendingIntent.getBroadcast(this, 0, mediaButtonIntent, 0);
         mMediaSession.setMediaButtonReceiver(mbrIntent);
-        mNotificationManager = new MediaNotificationManager(this, mMediaSession.getController(), this);
 
         // Start audio fx
         final Intent intent = new Intent(AudioEffect.ACTION_OPEN_AUDIO_EFFECT_CONTROL_SESSION);
@@ -99,29 +97,18 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
         intent.putExtra(AudioEffect.EXTRA_CONTENT_TYPE, AudioEffect.CONTENT_TYPE_MUSIC);
         sendBroadcast(intent);
 
-        sharedPreferenceChangeListener = (sharedPreferences, key) -> {
-            if (key.equals(Preferences.REMEMBER_PREVIOUS_PLAYLIST)) {
-                boolean remember = sharedPreferences.getBoolean(Preferences.REMEMBER_PREVIOUS_PLAYLIST, false);
-                playbackManager.setRememberPlaylist(remember);
-                pulseController.setRememberPlaylist(remember, true);
-            }
-        };
+        mNotificationManager = new MediaNotificationManager(this, mMediaSession.getController(), this);
+
+        final boolean rememberPlaylist = getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, MODE_PRIVATE)
+                .getBoolean(Preferences.REMEMBER_PREVIOUS_PLAYLIST, false);
+
+        mPlaybackManager.setRememberPlaylist(rememberPlaylist);
+        mPulseController.setRememberPlaylist(rememberPlaylist, false);
+
         getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, MODE_PRIVATE)
-                .registerOnSharedPreferenceChangeListener(sharedPreferenceChangeListener);
+                .registerOnSharedPreferenceChangeListener(this);
     }
 
-    /* Never use START_STICKY here
-     * The use case was -
-     * --> open the app
-     * --> pLay a song
-     * --> remove the app from recent
-     * --> relaunch the app by clicking on notification
-     * --> pause the playback
-     * --> remove the app from recent
-     * --> Notification was started again and the service runs in the background, tapping on notification causes the app to crash
-     * Reason --> The system was recreating the service {verified by logs in on create and onStartCommand)
-     * and thus notification was getting posted with the old metadata
-     */
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         MediaButtonReceiver.handleIntent(MediaSessionCompat.fromMediaSession(this, mMediaSession), intent);
@@ -210,7 +197,7 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
 
     private void playPlaylist(@Nullable List<MusicModel> playlist) {
         if (null != playlist && !playlist.isEmpty()) {
-            PulseController.getInstance().setPlaylist(playlist);
+            mPulseController.setPlaylist(playlist);
             mMediaSession.getController().getTransportControls().play();
         } else
             Toast.makeText(this, getString(R.string.message_empty_recent), Toast.LENGTH_SHORT).show();
@@ -234,10 +221,9 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
         if (controller.getPlaybackState() != null && controller.getPlaybackState().getState() != PlaybackState.STATE_NONE) {
             LoaderManager.clearCache();
         }
-        PulseController.getInstance().releaseController();
-        if (null != sharedPreferenceChangeListener)
-            getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, MODE_PRIVATE)
-                    .unregisterOnSharedPreferenceChangeListener(sharedPreferenceChangeListener);
+        mPulseController.releaseController();
+        getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, MODE_PRIVATE)
+                .unregisterOnSharedPreferenceChangeListener(this);
         if (isReceiverRegistered)
             mNotificationManager.unregisterControlsReceiver();
         if (mMediaSession != null)
@@ -305,6 +291,21 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
     public void unregisterControlsReceiver(BroadcastReceiver controlsReceiver) {
         unregisterReceiver(controlsReceiver);
         isReceiverRegistered = false;
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(@NonNull SharedPreferences sharedPreferences, @NonNull String key) {
+        mWorkerHandler.post(() -> handleSharedPreferenceChange(sharedPreferences, key));
+    }
+
+    private void handleSharedPreferenceChange(@NonNull SharedPreferences sharedPreferences, @NonNull String key) {
+        switch (key) {
+            case Preferences.REMEMBER_PREVIOUS_PLAYLIST:
+                boolean remember = sharedPreferences.getBoolean(Preferences.REMEMBER_PREVIOUS_PLAYLIST, false);
+                mPlaybackManager.setRememberPlaylist(remember);
+                mPulseController.setRememberPlaylist(remember, true);
+                break;
+        }
     }
 
     public class ServiceBinder extends Binder {
