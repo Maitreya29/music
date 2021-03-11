@@ -5,6 +5,9 @@ import android.media.MediaMetadata;
 import android.media.session.MediaSession;
 import android.media.session.PlaybackState;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.SystemClock;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,6 +35,10 @@ public class PlaybackManager implements Playback.Callback {
     private final PlaybackServiceCallback mServiceCallback;
     private final PulseController.QueueManager mQueueManager;
     private final Context mContext;
+    private final Handler mHandler;
+    private Runnable mSleepTimerRunnableTask = null;
+    private long mCurrentFutureEndTime = -1;
+    private boolean mPendingStartTimer;
     private boolean mManualPause;
     private boolean mRememberPlaylist;
     private final MediaSession.Callback mMediaSessionCallback = new MediaSession.Callback() {
@@ -102,10 +109,16 @@ public class PlaybackManager implements Playback.Callback {
         }
     };
 
-    public PlaybackManager(@NonNull Context context, @NonNull Playback playback, @NonNull PlaybackServiceCallback serviceCallback) {
+    public PlaybackManager(@NonNull Context context,
+                           @NonNull Playback playback,
+                           @NonNull PlaybackServiceCallback serviceCallback,
+                           @Nullable Handler handler) {
         mContext = context;
         mPlayback = playback;
         mServiceCallback = serviceCallback;
+        if (null != handler) mHandler = handler;
+        else mHandler = new Handler(Looper.myLooper());
+
         mPlayback.setCallback(this);
         mQueueManager = PulseController.getInstance().getQueueManager();
     }
@@ -121,6 +134,7 @@ public class PlaybackManager implements Playback.Callback {
     private void handlePlayRequest() {
         mServiceCallback.onPlaybackStart();
         mPlayback.onPlay(0, true);
+        if (mPendingStartTimer) startTimer(true);
     }
 
     private void handlePauseRequest() {
@@ -222,6 +236,52 @@ public class PlaybackManager implements Playback.Callback {
                         position);
             }
         }
+    }
+
+    public void configureTimer(boolean startTimer, boolean isSessionActive) {
+        if (startTimer) startTimer(isSessionActive);
+        else stopTimer();
+    }
+
+    private void startTimer(boolean isSessionActive) {
+        // Make sure to remove any previous timer
+        stopTimer();
+
+        // Check if the timer should start now
+        // We start the timer only when playback starts
+        if (!isSessionActive) {
+            mPendingStartTimer = true;
+            return;
+        }
+
+        // Start a new timer
+        long timerDuration = AppSettings.getSleepTimerDurationMinutes(mContext) * 60000; // Convert minutes to milliseconds
+        long currentSystemTime = SystemClock.uptimeMillis(); // Current up time in milliseconds
+        if (mCurrentFutureEndTime != -1 && timerDuration >= mCurrentFutureEndTime)
+            mCurrentFutureEndTime = currentSystemTime + (timerDuration - mCurrentFutureEndTime);
+        else mCurrentFutureEndTime = currentSystemTime + timerDuration;
+
+        mSleepTimerRunnableTask = () -> {
+            handleStopRequest();
+
+            if (AppSettings.isRepeatingTimerEnabled(mContext)) {
+                // Allow the timer to start for the next session
+                mPendingStartTimer = true;
+            } else {
+                // Repeating mode is off, timer is used once and no longer required
+                AppSettings.setSleepTimer(mContext, false);
+            }
+        };
+
+        mHandler.postAtTime(mSleepTimerRunnableTask, mCurrentFutureEndTime);
+        mPendingStartTimer = false;
+    }
+
+    private void stopTimer() {
+        if (null == mSleepTimerRunnableTask) return;
+        mHandler.removeCallbacksAndMessages(mSleepTimerRunnableTask);
+        mSleepTimerRunnableTask = null;
+        mPendingStartTimer = false;
     }
 
     public interface PlaybackServiceCallback {

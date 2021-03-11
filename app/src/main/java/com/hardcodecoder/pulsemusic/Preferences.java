@@ -135,4 +135,11 @@ public class Preferences {
     public static final String HOME_PLAYLIST_REDISCOVER = "HomePlaylistRediscover";
     public static final String HOME_PLAYLIST_NEW_IN_LIBRARY = "HomePlaylistNewInLibrary";
     public static final String HOME_PLAYLIST_TOP_ARTIST = "HomePlaylistTopArtist";
+
+
+    public static final String SLEEP_TIMER = "SleepTimer";
+    public static final boolean SLEEP_TIMER_DEFAULT = false;
+    public static final String SLEEP_TIMER_DURATION = "SleepTimerDuration";
+    public static final int SLEEP_TIMER_DURATION_DEFAULT = 20; // 20 minutes
+    public static final String REPEATING_TIMER = "RepeatingSleepTimer";
 }

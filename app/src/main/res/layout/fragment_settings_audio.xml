@@ -41,4 +41,38 @@
         app:settingItemIconColor="?attr/colorControlNormal"
         app:settingItemText="@string/tile_auto_play_desc"
         app:settingItemTitle="@string/tile_auto_play" />
+
+    <com.hardcodecoder.pulsemusic.views.AccentColorTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/category_sleep_timer"
+        android:textAppearance="@style/Appearance.Text.Overline" />
+
+    <com.hardcodecoder.pulsemusic.views.SettingsToggleableItem
+        android:id="@+id/sleep_timer_toggle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:settingToggleableItemIcon="@drawable/ic_timer"
+        app:settingToggleableItemText="@string/sleep_timer_desc"
+        app:settingToggleableItemTitle="@string/sleep_timer" />
+
+    <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
+        android:id="@+id/sleep_timer_configure"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="normal"
+        app:settingItemIcon="@drawable/ic_timer"
+        app:settingItemIconColor="?attr/colorControlNormal"
+        app:settingItemText="@string/configure_sleep_timer_desc"
+        app:settingItemTitle="@string/configure_sleep_timer" />
+
+    <com.hardcodecoder.pulsemusic.views.SettingsToggleableItem
+        android:id="@+id/repeat_timer_toggle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:settingToggleableItemIcon="@drawable/ic_replay"
+        app:settingToggleableItemText="@string/repeating_sleep_timer_desc"
+        app:settingToggleableItemTitle="@string/repeating_sleep_timer" />
 </LinearLayout>

@@ -12,9 +12,11 @@ import androidx.annotation.Nullable;
 import com.hardcodecoder.pulsemusic.Preferences;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.dialog.AutoPlayActionChooser;
+import com.hardcodecoder.pulsemusic.dialog.ConfigureSleepTimer;
 import com.hardcodecoder.pulsemusic.fragments.settings.base.SettingsBaseFragment;
 import com.hardcodecoder.pulsemusic.service.AudioDeviceService;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
+import com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView;
 import com.hardcodecoder.pulsemusic.views.SettingsToggleableItem;
 
 public class SettingsAudioFragment extends SettingsBaseFragment {
@@ -71,6 +73,29 @@ public class SettingsAudioFragment extends SettingsBaseFragment {
                     action -> AppSettings.saveAutoPlayAction(requireContext(), Preferences.QS_TILE_ACTION_KEY, action),
                     AppSettings.getAutoPlayAction(requireContext(), Preferences.QS_TILE_ACTION_KEY));
             dialog.show(requireFragmentManager(), AutoPlayActionChooser.TAG);
+        });
+
+        boolean isSleepTimerEnabled = AppSettings.isSleepTimerEnabled(requireContext());
+
+        SettingsCategoryItemView sleepTimerConfigurator = view.findViewById(R.id.sleep_timer_configure);
+        sleepTimerConfigurator.setEnabled(isSleepTimerEnabled);
+        sleepTimerConfigurator.setOnClickListener(v -> {
+            ConfigureSleepTimer configureSleepTimer = ConfigureSleepTimer.getInstance();
+            configureSleepTimer.show(requireFragmentManager(), ConfigureSleepTimer.TAG);
+        });
+
+        SettingsToggleableItem repeatTimerToggle = view.findViewById(R.id.repeat_timer_toggle);
+        repeatTimerToggle.setSwitchChecked(AppSettings.isRepeatingTimerEnabled(requireContext()));
+        repeatTimerToggle.setEnabled(isSleepTimerEnabled);
+        repeatTimerToggle.setOnSwitchCheckedChangedListener((buttonView, isChecked) ->
+                AppSettings.setRepeatingTimer(requireContext(), isChecked));
+
+        SettingsToggleableItem sleepTimerToggle = view.findViewById(R.id.sleep_timer_toggle);
+        sleepTimerToggle.setSwitchChecked(isSleepTimerEnabled);
+        sleepTimerToggle.setOnSwitchCheckedChangedListener((buttonView, isChecked) -> {
+            AppSettings.setSleepTimer(requireContext(), isChecked);
+            sleepTimerConfigurator.setEnabled(isChecked);
+            repeatTimerToggle.setEnabled(isChecked);
         });
     }
 }

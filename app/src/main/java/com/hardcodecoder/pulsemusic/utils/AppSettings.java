@@ -262,4 +262,38 @@ public class AppSettings {
         return context.getSharedPreferences(Preferences.NOW_PLAYING_CONTROLS, Context.MODE_PRIVATE)
                 .getBoolean(Preferences.NOW_PLAYING_CONTROLS_SEEK_ENABLED, Preferences.NOW_PLAYING_CONTROLS_SEEK_ENABLED_DEF);
     }
+
+    public static void setSleepTimer(@NonNull Context context, boolean enable) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, Context.MODE_PRIVATE).edit();
+        editor.putBoolean(Preferences.SLEEP_TIMER, enable);
+        editor.apply();
+    }
+
+    public static boolean isSleepTimerEnabled(@NonNull Context context) {
+        return context.getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, Context.MODE_PRIVATE)
+                .getBoolean(Preferences.SLEEP_TIMER, Preferences.SLEEP_TIMER_DEFAULT);
+    }
+
+    public static void setSleepTimerDurationMinutes(@NonNull Context context, int durationMinutes) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, Context.MODE_PRIVATE).edit();
+        editor.putInt(Preferences.SLEEP_TIMER_DURATION, durationMinutes);
+        editor.apply();
+    }
+
+
+    public static int getSleepTimerDurationMinutes(@NonNull Context context) {
+        return context.getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, Context.MODE_PRIVATE)
+                .getInt(Preferences.SLEEP_TIMER_DURATION, Preferences.SLEEP_TIMER_DURATION_DEFAULT);
+    }
+
+    public static void setRepeatingTimer(@NonNull Context context, boolean enable) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, Context.MODE_PRIVATE).edit();
+        editor.putBoolean(Preferences.REPEATING_TIMER, enable);
+        editor.apply();
+    }
+
+    public static boolean isRepeatingTimerEnabled(@NonNull Context context) {
+        return context.getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, Context.MODE_PRIVATE)
+                .getBoolean(Preferences.REPEATING_TIMER, Preferences.SLEEP_TIMER_DEFAULT);
+    }
 }

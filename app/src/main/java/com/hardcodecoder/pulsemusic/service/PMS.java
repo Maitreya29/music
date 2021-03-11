@@ -105,6 +105,10 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
         mPlaybackManager.setRememberPlaylist(rememberPlaylist);
         mPulseController.setRememberPlaylist(rememberPlaylist, false);
 
+        final boolean sleepTimerEnabled = getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, MODE_PRIVATE)
+                .getBoolean(Preferences.SLEEP_TIMER, Preferences.SLEEP_TIMER_DEFAULT);
+        mPlaybackManager.configureTimer(sleepTimerEnabled, false);
+
         getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, MODE_PRIVATE)
                 .registerOnSharedPreferenceChangeListener(this);
     }
@@ -304,6 +308,11 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
                 boolean remember = sharedPreferences.getBoolean(Preferences.REMEMBER_PREVIOUS_PLAYLIST, false);
                 mPlaybackManager.setRememberPlaylist(remember);
                 mPulseController.setRememberPlaylist(remember, true);
+                break;
+            case Preferences.SLEEP_TIMER:
+            case Preferences.SLEEP_TIMER_DURATION:
+                mPlaybackManager.configureTimer(sharedPreferences.getBoolean(Preferences.SLEEP_TIMER, Preferences.SLEEP_TIMER_DEFAULT),
+                        mMediaSession.isActive());
                 break;
         }
     }
