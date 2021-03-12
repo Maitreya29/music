@@ -75,7 +75,7 @@ public class DataModelHelper {
             album = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM);
             dateAdded = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DATE);
             dateModified = null == dateAdded ? 0 : Long.parseLong(dateAdded);
-            duration = Integer.parseInt(mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION));
+            duration = getNumber(mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION));
             discTrackNumber[0] = getNumber(mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DISC_NUMBER));
             discTrackNumber[1] = getNumber(mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_CD_TRACK_NUMBER));
             mmr.release();
@@ -121,9 +121,9 @@ public class DataModelHelper {
                 String mimeType = context.getContentResolver().getType(uri);
 
                 MediaFormat mediaFormat = mediaExtractor.getTrackFormat(0);
-                int bitRate = 0;
-                int sampleRate = 0;
-                int channelCount = 1;
+                Integer bitRate = null;
+                Integer sampleRate = null;
+                Integer channelCount = null;
                 try {
                     bitRate = mediaFormat.getInteger(MediaFormat.KEY_BIT_RATE);
                     sampleRate = mediaFormat.getInteger(MediaFormat.KEY_SAMPLE_RATE);
@@ -132,7 +132,13 @@ public class DataModelHelper {
                     LogUtils.logException(GENERAL, "DataModelHelper", "at getTrackInfo#extractingInfo", e);
                 }
                 cursor.close();
-                TrackFileModel trackFileModel = new TrackFileModel(displayName, mimeType, fileSize, bitRate, sampleRate, channelCount);
+                TrackFileModel trackFileModel = new TrackFileModel(
+                        displayName,
+                        mimeType,
+                        fileSize,
+                        bitRate == null ? 0 : bitRate,
+                        sampleRate == null ? 0 : sampleRate,
+                        channelCount == null ? 0 : channelCount);
                 callback.onComplete(trackFileModel);
             }
         });
@@ -140,10 +146,14 @@ public class DataModelHelper {
 
     private static int getNumber(@Nullable String str) {
         if (null == str || str.length() == 0) return 1;
-        if (str.contains("/"))
-            return Integer.parseInt(str.substring(0, str.indexOf("/")));
-        else if (str.matches("[0-9]+"))
-            return Integer.parseInt(str);
+        try {
+            if (str.contains("/"))
+                return Integer.parseInt(str.substring(0, str.indexOf("/")));
+            else if (str.matches("[0-9]+"))
+                return Integer.parseInt(str);
+        } catch (Exception e) {
+            LogUtils.logException(GENERAL, "DataModelHelper", "at getNumber() with input:" + str, e);
+        }
         return 1;
     }
 }
