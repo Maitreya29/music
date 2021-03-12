@@ -37,7 +37,8 @@ public class PlaybackManager implements Playback.Callback {
     private final Context mContext;
     private final Handler mHandler;
     private Runnable mSleepTimerRunnableTask = null;
-    private long mCurrentFutureEndTime = -1;
+    private long mAbsoluteEndTimeMills = -1;
+    private int mTimerMinutes = -1;
     private boolean mPendingStartTimer;
     private boolean mManualPause;
     private boolean mRememberPlaylist;
@@ -255,15 +256,10 @@ public class PlaybackManager implements Playback.Callback {
         }
 
         // Start a new timer
-        long timerDuration = AppSettings.getSleepTimerDurationMinutes(mContext) * 60000; // Convert minutes to milliseconds
-        long currentSystemTime = SystemClock.uptimeMillis(); // Current up time in milliseconds
-        if (mCurrentFutureEndTime != -1 && timerDuration >= mCurrentFutureEndTime)
-            mCurrentFutureEndTime = currentSystemTime + (timerDuration - mCurrentFutureEndTime);
-        else mCurrentFutureEndTime = currentSystemTime + timerDuration;
-
         mSleepTimerRunnableTask = () -> {
             handleStopRequest();
-
+            mTimerMinutes = -1;
+            mAbsoluteEndTimeMills = -1;
             if (AppSettings.isRepeatingTimerEnabled(mContext)) {
                 // Allow the timer to start for the next session
                 mPendingStartTimer = true;
@@ -273,13 +269,36 @@ public class PlaybackManager implements Playback.Callback {
             }
         };
 
-        mHandler.postAtTime(mSleepTimerRunnableTask, mCurrentFutureEndTime);
+        int minutes = AppSettings.getSleepTimerDurationMinutes(mContext);
+
+        if (mTimerMinutes == -1 || mAbsoluteEndTimeMills == -1) {
+            // No active timer detected, calculate a fresh end time
+            mAbsoluteEndTimeMills = SystemClock.uptimeMillis() + (minutes * 60000);
+        } else {
+            if (mTimerMinutes < minutes) {
+                // User increased timer duration
+                // Adjust only for the amount of minutes increased
+                mAbsoluteEndTimeMills += ((minutes - mTimerMinutes) * 60000);
+            } else {
+                // User decreased timer duration
+                // Calculate the reduced absolute future time mills
+                long reducedAbsoluteEndTime = mAbsoluteEndTimeMills - ((mTimerMinutes - minutes) * 60000);
+                long currentSystemUpTime = SystemClock.uptimeMillis();
+                if (currentSystemUpTime > reducedAbsoluteEndTime) {
+                    // This reduced end time is already up
+                    // set up a 1 sec frame for the timer to fire.
+                    mAbsoluteEndTimeMills = currentSystemUpTime + 1000;
+                } else mAbsoluteEndTimeMills = reducedAbsoluteEndTime;
+            }
+        }
+        mTimerMinutes = minutes;
+        mHandler.postAtTime(mSleepTimerRunnableTask, mAbsoluteEndTimeMills + 200 /* Added a small delay */);
         mPendingStartTimer = false;
     }
 
     private void stopTimer() {
         if (null == mSleepTimerRunnableTask) return;
-        mHandler.removeCallbacksAndMessages(mSleepTimerRunnableTask);
+        mHandler.removeCallbacks(mSleepTimerRunnableTask);
         mSleepTimerRunnableTask = null;
         mPendingStartTimer = false;
     }
