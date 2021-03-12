@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Pulse Music</string>
+    <string name="toast_requires_storage_access">Απαιτείται πρόσβαση στον αποθηκευτικό χώρο της συσκευής σας για να λειτουργήσει η εφαρμογή</string>
+    <string name="notification_playback_channel_name">Ειδοποίηση Μουσικής</string>
+    <string name="notification_audio_channel_name">Ανίχνευση Συσκευής Ήχου</string>
+    <!-- Content description -->
+    <string name="desc_album_art">Εικόνα εξωφύλλου</string>
+    <string name="desc_close_btn">Κουμπί τερματισμού</string>
+    <string name="desc_action_btn">Κουμπί ενέργειας</string>
+    <string name="desc_icon_button">Κουμπί εικονιδίου</string>
+    <string name="desc_confirm_btn">Επιβεβαίωση επιλογής</string>
+    <string name="desc_play_pause_btn">Κουμπί αναπαραγωγής και παύσης πολυμέσων</string>
+    <string name="desc_options_btn">Μενού</string>
+    <!-- General strings -->
+    <string name="equalizer">Ισοσταθμιστής</string>
+    <string name="select_equalizer">Επιλογή Ισοσταθμιστή</string>
+    <string name="shuffle">Τυχαία αναπαραγωγή</string>
+    <string name="tracks_not_found">Δε βρέθηκαν κομμάτια</string>
+    <string name="unknown">Άγνωστος</string>
+    <!-- Dialogs -->
+    <string name="enter_your_name">Καταχωρίστε το όνομά σας</string>
+    <string name="toast_enter_your_name">Παρακαλώ καταχωρίστε το όνομά σας</string>
+    <string name="edit_user_playlist_name">Επεξεργασία ονόματος λίστας αναπαραγωγής</string>
+    <string name="hint_create_playlist">Καταχώριση ονόματος λίστας αναπαραγωγής</string>
+    <string name="add_track_to">Προσθήκη κομματιού σε\.\.\.</string>
+    <string name="message_no_playlist_found">Δε βρέθηκε λίστα αναπαραγωγής\nΠατήστε στο κουμπί προσθήκης για δημιουργία λίστας αναπαραγωγής</string>
+    <string name="toast_added_to_playlist">Το κομμάτι προστέθηκε στη λίστα αναπαραγωγής</string>
+    <string name="toast_add_to_playlist_failed">Σφάλμα προσθήκης κομματιού στη λίστα αναπαραγωγής</string>
+    <string name="yes">Ναι</string>
+    <string name="set">Ορισμός</string>
+    <string name="confirm">Επιβεβαίωση</string>
+    <string name="cancel">Ακύρωση</string>
+    <!-- Navigation section titles -->
+    <string name="nav_home">Αρχική σελίδα</string>
+    <string name="nav_library">Βιβλιοθήκη</string>
+    <string name="nav_albums">Δίσκοι</string>
+    <string name="nav_artists">Καλλιτέχνες</string>
+    <string name="nav_playlist">Λίστα αναπαραγωγής</string>
+    <!-- Home Fragment -->
+    <string name="track_picker">Επιλογέας κομματιών</string>
+    <string name="for_you">Για εσάς</string>
+    <string name="rediscover">Ανακαλύψτε ξανά</string>
+    <string name="new_in_library">Νέες προσθήκες</string>
+    <string name="top_artist">Κορυφαίοι καλλιτέχνες</string>
+    <string name="top_albums">Κορυφαίοι δίσκοι</string>
+    <string name="played_n_times" formatted="true">Αναπαράχθηκε %d φορές</string>
+    <string name="toast_selected_track_load_failed">Αδυναμία αναπαραγωγής επιλεγμένου κομματιού, αποτυχία φόρτωσης</string>
+    <!-- Home menu contents -->
+    <string name="welcome">Καλώς ορίσατε,</string>
+    <string name="def_user_name">Χρήστη</string>
+    <string name="footer_message">Φτιαγμένο με \u2665 στην Ινδία</string>
+    <string name="select_image">Επιλογή εικόνας</string>
+    <string name="toast_select_image_error">Σφάλμα επιλογής εικόνας</string>
+    <!-- Playlist fragment -->
+    <string name="playlist_play_queue">Ουρά αναπαραγωγής</string>
+    <string name="playlist_delete_dialog_title">Είστε βέβαιος ότι θέλετε να διαγραφεί αυτή η λίστα αναπαραγωγής;</string>
+    <string name="toast_playlist_deleted_success">Η διαγραφή της λίστας αναπαραγωγής ήταν επιτυχής</string>
+    <string name="cannot_delete_default_playlist">Αδυναμία αφαίρεσης προεπιλεγμένης λίστας αναπαραγωγής</string>
+    <!-- Toolbar Options menu -->
+    <string name="context_menu_title">Επιλογές</string>
+    <string name="toast_invalid_options_group">Επιλέχθηκε μη έγκυρο μενού</string>
+    <string name="sort_title">Ταξινόμηση</string>
+    <string name="sort_by_title">Ταξινόμηση κατά</string>
+    <string name="sort_category_title">Τίτλος</string>
+    <string name="alphabet_asc">Από Α σε Ω</string>
+    <string name="alphabet_desc">Από Ω σε Α</string>
+    <string name="sort_category_duration">Διάρκεια</string>
+    <string name="duration_asc">Διάρκεια ↑</string>
+    <string name="duration_desc">Διάρκεια ↓</string>
+    <string name="sort_category_date">Ημερομηνία</string>
+    <string name="date_added_asc">Ημερομηνία προσθήκης (τα παλαιότερα πρώτα)</string>
+    <string name="date_added_desc">Ημερομηνία προσθήκης (τα νεότερα πρώτα)</string>
+    <string name="date_modified_asc">Ημερομηνία τροποποίησης (τα παλαιότερα πρώτα)</string>
+    <string name="date_modified_desc">Ημερομηνία τροποποίησης (τα νεότερα πρώτα)</string>
+    <string name="sort_category_track_number">Αριθμός κομματιού</string>
+    <string name="album_track_number_asc">Αριθμός κομματιού (αύξουσα)</string>
+    <string name="album_track_number_desc">Αριθμός κομματιού (φθίνουσα)</string>
+    <string name="sort_category_artist">Καλλιτέχνης</string>
+    <string name="album_artist_asc">Αύξων καλλιτέχνης δίσκου</string>
+    <string name="album_artist_desc">Καλλιτέχνης δίσκου (φθίνουσα)</string>
+    <string name="sort_category_year">Έτος</string>
+    <string name="album_year_asc">Έτος δίσκου (παλαιότερα πρώτα)</string>
+    <string name="album_year_desc">Έτος δίσκου (νεότερα πρώτα)</string>
+    <string name="create_playlist">Δημιουργία λίστας αναπαραγωγής</string>
+    <string name="toast_equalizer_not_found">Αδυναμία εύρεσης ισοσταθμιστή</string>
+    <string name="column_title">Στήλες</string>
+    <string name="column_category_count">Μέτρηση</string>
+    <string name="one">Ένα</string>
+    <string name="two">Δύο</string>
+    <string name="three">Τρία</string>
+    <string name="four">Τέσσερα</string>
+    <string name="five">Πέντε</string>
+    <string name="six">Έξι</string>
+    <string name="remove_duplicates">Διαγραφή διπλότυπων</string>
+    <!-- Options menu for list items -->
+    <string name="play_next">Αναπαραγωγή Επόμενου</string>
+    <string name="toast_added_to_play_next">Το κομμάτι προστέθηκε και θα αναπαραχθεί αμέσως μετά</string>
+    <string name="add_to_queue">Προσθήκη στην ουρά</string>
+    <string name="toast_added_to_queue">Το κομμάτι προστέθηκε στην ουρά αναπαραγωγής</string>
+    <string name="add_to_playlist">Προσθήκη στην λίστα αναπαραγωγής</string>
+    <string name="add_to_favorite">Προσθήκη στα αγαπημένα</string>
+    <string name="remove_from_favorite">Αφαίρεση από τα αγαπημένα</string>
+    <string name="share">Κοινοποίηση</string>
+    <string name="share_intent">Κοινοποίηση κομματιού με</string>
+    <string name="go_to_album">Μετάβαση στον δίσκο</string>
+    <string name="go_to_artist">Μετάβαση στον καλλιτέχνη</string>
+    <string name="track_info">Πληροφορίες κομματιού</string>
+    <!-- Playlist tracks Activity -->
+    <string name="message_empty_playlist">Αυτή η λίστα αναπαραγωγής είναι άδεια\nΜπορείτε να προσθέσετε κομμάτια χρησιμοποιώντας το κουμπί προσθήκης</string>
+    <string name="track_removed_from_queue">Το κομμάτι αφαιρέθηκε από την ουρά !!!</string>
+    <string name="undo">Αναίρεση</string>
+    <string name="play">Αναπαραγωγή</string>
+    <string name="add">Προσθήκη</string>
+    <string name="clear_all">Εκκαθάριση όλων</string>
+    <string name="toast_playlist_shuffle_success">Η λίστα αναπαραγωγής ανακατεύτηκε επιτυχώς</string>
+    <string name="coming_up_next">Επόμενο</string>
+    <string name="current_queue">Τρέχουσα ουρά αναπαραγωγής</string>
+    <!-- Favorites Playlist Activity-->
+    <string name="favorites">Αγαπημένα</string>
+    <string name="your_favorites">Τα αγαπημένα σας</string>
+    <string name="message_empty_favorites">Τα αγαπημένα σας είναι άδεια\nΠροσθέστε μερικά κομμάτια στα αγαπημένα\n\n\u2665</string>
+    <!-- Recent Activity-->
+    <string name="recent">Πρόσφατα</string>
+    <string name="recent_playlist_title">Πρόσφατη αναπαραγωγή</string>
+    <string name="message_empty_recent">Δε βρέθηκαν κομμάτια\n\u2639</string>
+    <!-- Now Playing Activity -->
+    <string name="now_playing">Τρέχουσα Αναπαραγωγή</string>
+    <string name="toast_added_to_favorites">Το κομμάτι προστέθηκε στα αγαπημένα</string>
+    <string name="toast_cannot_add_to_favorites">Αδυναμία προσθήκης κομματιού στα αγαπημένα</string>
+    <string name="toast_removed_from_favorites">Το κομμάτι αφαιρέθηκε από τα αγαπημένα</string>
+    <string name="playlist_completed">Η λίστα αναπαραγωγής ολοκληρώθηκε</string>
+    <!-- Media Folder Chooser Activity -->
+    <string name="select_folders">Επιλογή φακέλων</string>
+    <string name="message_empty_folders_list">Δε βρέθηκαν φάκελοι πολυμέσων στον αποθηκευτικό χώρο\n\u2639</string>
+    <!-- Details Activity -->
+    <string name="artist_tracks_count">Ο καλλιτέχνης έχει ● %d δίσκους</string>
+    <string name="album_tracks_count">Ο δίσκος περιέχει ● %d κομμάτια</string>
+    <string name="suffix_tracks">κομμάτια</string>
+    <string name="track_number_info">Δίσκος/Κομμάτι: %d%d</string>
+    <!-- Song info dialog -->
+    <string name="track">Κομμάτι</string>
+    <string name="file_size">Μέγεθος αρχείου</string>
+    <string name="file_type">Τύπος αρχείου</string>
+    <string name="bitrate">Ρυθμός μετάδοσης</string>
+    <string name="sample_rate">Ρυθμός δειγματοληψίας</string>
+    <string name="channel_count">Αριθμός καναλιών</string>
+    <!-- Search Activity -->
+    <string name="hint_search">Αναζήτηση καλλιτέχνη, κομματιών ή δίσκων\.\.\.</string>
+    <string name="message_empty_search_result">Τίποτα για προβολή</string>
+    <!-- Settings Activity -->
+    <string name="settings">Ρυθμίσεις</string>
+    <string name="restart_app">Επανεκκίνηση εφαρμογής</string>
+    <string name="restart_app_dialog_desc">Απαιτείται επανεκκίνηση για εφαρμογή των αλλαγών</string>
+    <string name="restart">Επανεκκίνηση</string>
+    <string name="do_it_later">Αργότερα</string>
+    <!-- Category -->
+    <string name="general">Γενικά</string>
+    <string name="general_desc">Διαμόρφωση βασικών ρυθμίσεων</string>
+    <string name="theme">Θέμα</string>
+    <string name="theme_desc">Αλλαγή της εμφάνισης της εφαρμογής</string>
+    <string name="now_playing_title">Τρέχουσα αναπαραγωγή</string>
+    <string name="now_playing_desc">Διαμόρφωση της οθόνης της τρέχουσας αναπαραγωγής</string>
+    <string name="audio">Ήχος</string>
+    <string name="audio_desc">Αλλαγή ρυθμίσεων ήχου</string>
+    <string name="contributors">Συντελεστές</string>
+    <string name="contributors_desc">Γνωρίστε τους προγραμματιστές</string>
+    <string name="support_development">Υποστηρίξτε την ανάπτυξη της εφαρμογής</string>
+    <string name="support_development_desc">Δωρίστε ένα μικρό ποσό ως υποστήριξη στους προγραμματιστές</string>
+    <string name="about">Περί</string>
+    <string name="about_desc">Τα πάντα σχετικά με την εφαρμογή</string>
+    <!-- General Section -->
+    <string name="category_loader">Φορτωτής</string>
+    <string name="ignored_folder_title">Επιλογή φακέλων προς αγνόηση</string>
+    <string name="ignored_folder_desc">Προσθήκη ή αφαίρεση φακέλων για απόκρυψη των κομματιών από τη βιβλιοθήκη</string>
+    <string name="ignored_folder_picker_title">Επιλογή φακέλων</string>
+    <string name="ignored_folder_picker_empty_text">Ο κατάλογος είναι άδειος</string>
+    <string name="toast_folder_added_to_ignored_list">Επιτυχής προσθήκη του φακέλου στον κατάλογο</string>
+    <string name="toast_failed_to_add_folder">Αποτυχία προσθήκης του φακέλου στον κατάλογο</string>
+    <string name="toast_removed_folder_from_ignored_list">Ο φάκελος αφαιρέθηκε από τον κατάλογο</string>
+    <string name="duration_filter_title">Φίλτρο διαρκείας</string>
+    <string name="duration_filter_desc">Φιλτράρισμα κομματιών βάσει της διάρκειάς τους</string>
+    <string name="duration_filter_unit">δευτ.</string>
+    <string name="category_others">Λοιπά</string>
+    <string name="remember_playlist_title">Απομνημόνευση λίστας αναπαραγωγής</string>
+    <string name="remember_playlist_desc">Η λίστα αναπαραγωγής θα απομνημονευθεί. Έτσι, έχετε τη δυνατότητα να συνεχίσετε από εκεί που σταματήσατε</string>
+    <string name="edit_playlist_sections_title">Επεξεργασία τμήματος λίστας αναπαραγωγής</string>
+    <string name="edit_playlist_section_desc">Επιλογή της λίστας αναπαραγωγής που θα εμφανίζεται στην αρχική οθόνη</string>
+    <string name="playlist_section_selector_title">Εναλλαγή τμήματος λίστας αναπαραγωγής</string>
+    <string name="rediscover_section_desc">Υποσημείωση: Αυτό το τμήμα είναι δυναμικό κι ίσως να μην εμφανίζεται μόνιμα, ακόμη κι όταν είναι ενεργοποιημένο</string>
+    <!-- Theme section -->
+    <string name="category_theme">Θέμα</string>
+    <string name="select_dark_theme">Επιλογή σκούρου θέματος</string>
+    <string name="select_dark_theme_desc">Επιλογή σκούρου θέματος για χρήση όταν είναι ενεργοποιημένο το σκούρο περιβάλλον</string>
+    <string name="enable_dark_mode">Ενεργοποίηση σκούρου περιβάλλοντος</string>
+    <string name="enable_dark_mode_desc">Ενεργοποιεί άμεσα το προτιμώμενο σκούρο θέμα</string>
+    <string name="enable_auto_mode">Αυτόματος ορισμός θέματος</string>
+    <string name="enable_auto_mode_desc">Ορισμός φωτεινού και προτιμώμενου σκούρου θέματος βάσει της ώρας της ημέρας</string>
+    <string name="category_colors">Χρώματα</string>
+    <string name="desaturated_accents">Απαλύνση χρώματος έμφασης</string>
+    <string name="desaturated_accents_desc">Αποκορεσμός χρώματος έμφασης όταν είναι ενεργοποιημένο το σκούρο θέμα</string>
+    <string name="pick_accent_color">Επιλογή χρώματος έμφασης</string>
+    <string name="pick_accent_color_desc">Επιλογή χρώματος έμφασης για εφαρμογή</string>
+    <string name="accents_color_picker_title">Επιλογή χρώματος έμφασης</string>
+    <string name="custom">Προσαρμοσμένο</string>
+    <string name="select_custom_accent">Επιλογή προσαρμοσμένου χρώματος</string>
+    <string name="dark_theme_gray">Γκρι</string>
+    <string name="dark_theme_signature">Σκοτεινό</string>
+    <string name="dark_theme_lights_out">Μαύρο</string>
+    <string name="select_dark_theme_style">Ορισμός προτιμώμενου σκούρου θέματος</string>
+    <!-- Now playing settings -->
+    <string name="category_style">Στυλ</string>
+    <string name="select_np_style">Διαμόρφωση στυλ της τρέχουσας αναπαραγωγής</string>
+    <string name="select_np_style_desc">Επιλογή στυλ οθόνης της τρέχουσας αναπαραγωγής</string>
+    <string name="style_modern">Σύγχρονο</string>
+    <string name="style_stylish">Κομψό</string>
+    <string name="style_edge">Από άκρη σε άκρη</string>
+    <string name="corner_radius">Γωνιακή ακτίνα</string>
+    <string name="corner_radius_desc">Επιλογή γωνιακής ακτίνας εξωφύλλου</string>
+    <string name="corner_radius_selector_title">Προσαρμογή γωνιακής ακτίνας</string>
+    <string name="corner_radius_unit">dp</string>
+    <string name="top_left">Πάνω αριστερά</string>
+    <string name="top_right">Πάνω δεξιά</string>
+    <string name="bottom_left">Κάτω αριστερά</string>
+    <string name="bottom_right">Κάτω δεξιά</string>
+    <string name="category_controls">Κουμπιά ελέγχου</string>
+    <string name="enable_seek_buttons">Ενεργοποίηση κουμπιών αναζήτησης</string>
+    <string name="enable_seek_buttons_desc">Αντικαθιστά τα κουμπιά παράλειψης με κουμπιά αναζήτησης στην οθόνη Τρέχουσας αναπαραγωγής</string>
+    <string name="change_seek_duration">Αλλαγή διάρκειας αναζήτησης</string>
+    <string name="change_seek_duration_desc">Αλλαγή της διάρκειας των κουμπιών αναζήτησης</string>
+    <string name="seek_duration_selector_title">Επιλογή διάρκειας αναζήτησης</string>
+    <string name="forward_seek">Αναζήτηση προς τα εμπρός</string>
+    <string name="reverse_seek">Αναζήτηση προς τα πίσω</string>
+    <!-- Audio settings -->
+    <string name="category_auto_play">Αυτόματη αναπαραγωγή</string>
+    <string name="bluetooth_auto_play">Αυτόματη αναπαραγωγή bluetooth</string>
+    <string name="bluetooth_auto_play_desc">Έναρξη αναπαραγωγής μουσικής όταν συνδέεται μία συσκευή bluetooth</string>
+    <string name="bluetooth_auto_play_action">Επιλογή ενέργειας αυτόματης αναπαραγωγής bluetooth</string>
+    <string name="bluetooth_auto_play_action_desc">Επιλογή της λίστας αναπαραγωγής που θα αναπαράγεται όταν συνδέεται μία συσκευή bluetooth</string>
+    <string name="select_bluetooth_action">Ορισμός προτιμώμενης ενέργειας bluetooth</string>
+    <string name="tile_auto_play">Επιλογή ενέργειας πλακιδίου</string>
+    <string name="tile_auto_play_desc">Επιλογή λίστας αναπαραγωγής για αναπαραγωγή με Γρήγορη Ρύθμιση</string>
+    <string name="select_tile_action">Ορισμός προτιμώμενης ενέργειας της Γρήγορης Ρύθμισης</string>
+    <string name="play_shuffle">Τυχαία αναπαραγωγή κομματιών</string>
+    <string name="play_new_in_store">Αναπαραγωγή λίστας αναπαραγωγής «Νέες προσθήκες»</string>
+    <string name="play_for_you">Αναπαραγωγή λίστας αναπαραγωγής «Για εσάς»</string>
+    <string name="play_continue_playlist">Συνεχίστε από εκεί που σταματήσατε \n(Εξαρτάται από την επιλογή «Απομνημόνευση της λίστας αναπαραγωγής»)</string>
+    <!-- Contributors -->
+    <string name="lead_developer">Κύριοι προγραμματιστές</string>
+    <string name="github">GitHub</string>
+    <string name="twitter">Twitter</string>
+    <string name="telegram">Telegram</string>
+    <!-- Donations -->
+    <string name="category_contribute">Συνεισφέρετε</string>
+    <string name="donation_card_title">Απολαμβάνετε την Pulse Music;</string>
+    <string name="donation_card_text">Απαιτείται πολύς χρόνος και κόπος για την παράδοση ποιοτικών προϊόντων, αφιλοκερδώς μάλιστα\nΠαρακαλώ, υποστηρίξτε την ανάπτυξη της εφαρμογής με μία μικρή δωρεά</string>
+    <string name="donate_options_title">Δωρεά μέσω</string>
+    <string name="buy_me_coffee">Κεράστε με ένα καφεδάκι</string>
+    <string name="pay_pal">PayPal</string>
+    <string name="upi">UPI (Μόνο για Ινδούς χρήστες)</string>
+    <string name="toast_upi_not_found">Δε βρέθηκε εφαρμογή UPI, παρακαλώ εγκαταστήστε μία για να συνεχίσετε</string>
+    <!-- About -->
+    <string name="category_app_info">Πληροφορίες εφαρμογής</string>
+    <string name="app_version">Έκδοση εφαρμογής</string>
+    <string name="build_date">Ημερομηνία έκδοσης</string>
+    <string name="build_type">Τύπος έκδοσης</string>
+    <string name="build_code">Κώδικας έκδοσης</string>
+    <string name="category_social_links">Σύνδεσμοι μέσων κοινωνικής δικτύωσης</string>
+    <!-- Accents -->
+    <!-- For translators: If the color words does not make much sense in your language,
+    you can try substituting a similar description of the color. But keep it short
+    -->
+    <string name="color_slate_blue">Βιολετί</string>
+    <string name="color_azure_radiance">Γαλάζιο</string>
+    <string name="color_persian_mint">Πράσινο</string>
+    <string name="color_valencia">Κόκκινο</string>
+    <string name="color_millbrook">Καφέ</string>
+    <string name="color_coral">Κοραλλί</string>
+    <string name="color_sunkist">Πορτοκαλί</string>
+    <string name="color_cornflower_blue">Μπλε</string>
+    <!-- Custom accents dialog -->
+    <string name="hint_hex_color">Κώδικας Hex</string>
+    <string name="invalid_color">Μη έγκυρο χρώμα</string>
+    <string name="color_channel_r">Κ</string>
+    <string name="color_channel_g">Π</string>
+    <string name="color_channel_b">Μ</string>
+    <string name="apply">Εφαρμογή</string>
+    <string name="presets">Προεπιλογές</string>
+    <!-- App shortcuts -->
+    <!-- Max length = 10 characters including spaces-->
+    <string name="shortcut_shuffle">Τυχαία αναπαραγωγή</string>
+    <!-- Max length = 25 characters including spaces-->
+    <string name="shortcut_shuffle_desc">Τυχαία αναπαραγωγή</string>
+    <!-- Max length = 10 characters including spaces-->
+    <string name="shortcut_latest">Πρόσφατα</string>
+    <!-- Max length = 25 characters including spaces-->
+    <string name="shortcut_latest_desc">Πρόσφατα</string>
+    <!-- Max length = 10 characters including spaces-->
+    <string name="shortcut_suggested_label">Για εσάς</string>
+    <!-- Max length = 25 characters including spaces-->
+    <string name="shortcut_suggested_label_long">Για εσάς</string>
+</resources>
