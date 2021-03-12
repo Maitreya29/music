@@ -238,6 +238,9 @@
     <string name="bluetooth_auto_play_action">Action de lecture automatique bluetooth</string>
     <string name="bluetooth_auto_play_action_desc">Choisir la liste de lecture à lancer lorsqu\'un périphérique Bluetooth se connecte</string>
     <string name="select_bluetooth_action">Définir une action Bluetooth par défaut</string>
+    <string name="tile_auto_play">Sélectionnez l\'action de la tuile d\'accès rapide</string>
+    <string name="tile_auto_play_desc">Sélectionner la liste de lecture à lire lors de l\'utilisation de la tuile de réglage rapide</string>
+    <string name="select_tile_action">Sélectionnez l\'action de la tuile de réglage rapide</string>
     <string name="play_shuffle">Lire des morceaux aléatoires</string>
     <string name="play_new_in_store">Lancer la liste de lecture \"Nouveaux morceaux\"</string>
     <string name="play_for_you">Lire la liste de lecture \"Pour vous\"</string>
