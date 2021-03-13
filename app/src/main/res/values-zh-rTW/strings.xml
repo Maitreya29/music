@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Pulse 音樂播放器</string>
+    <string name="toast_requires_storage_access">應用程式需要存取裝置儲存空間以運作</string>
     <string name="notification_playback_channel_name">Pulse 音樂播放器通知</string>
     <string name="notification_audio_channel_name">音訊裝置偵測</string>
     <!-- Content description -->
@@ -38,15 +39,21 @@
     <!-- Home Fragment -->
     <string name="track_picker">自檔案選擇音樂</string>
     <string name="for_you">為您推薦</string>
+    <string name="rediscover">重新探索</string>
     <string name="new_in_library">新音樂</string>
     <string name="top_artist">熱門演出者</string>
     <string name="top_albums">熱門專輯</string>
+    <string name="toast_selected_track_load_failed">無法播放選擇的曲目，載入失敗</string>
     <!-- Home menu contents -->
+    <string name="welcome">歡迎，</string>
     <string name="def_user_name">使用者</string>
+    <string name="footer_message">用\u2665製作，來自印度</string>
     <string name="select_image">選擇圖片</string>
+    <string name="toast_select_image_error">選擇圖片錯誤</string>
     <!-- Playlist fragment -->
     <string name="playlist_play_queue">播放佇列</string>
     <string name="playlist_delete_dialog_title">確定要刪除這個播放列表嗎？</string>
+    <string name="toast_playlist_deleted_success">成功刪除播放清單</string>
     <string name="cannot_delete_default_playlist">無法移除預設播放清單</string>
     <!-- Toolbar Options menu -->
     <string name="context_menu_title">選項</string>
@@ -75,15 +82,19 @@
     <string name="create_playlist">建立播放清單</string>
     <string name="toast_equalizer_not_found">找不到等化器</string>
     <string name="column_title">欄</string>
+    <string name="column_category_count">數目</string>
     <string name="one">一</string>
     <string name="two">2</string>
     <string name="three">3</string>
     <string name="four">4</string>
     <string name="five">5</string>
     <string name="six">6</string>
+    <string name="remove_duplicates">移除重複項</string>
     <!-- Options menu for list items -->
     <string name="play_next">播放下一首</string>
+    <string name="toast_added_to_play_next">曲目已新增且將於下一首播放</string>
     <string name="add_to_queue">加入佇列</string>
+    <string name="toast_added_to_queue">曲目已新增至播放佇列</string>
     <string name="add_to_playlist">加入播放清單</string>
     <string name="add_to_favorite">新增至我的最愛</string>
     <string name="remove_from_favorite">從我的最愛移除</string>
@@ -159,11 +170,13 @@
     <string name="ignored_folder_desc">新增或移除資料夾以排除顯示在音樂庫中的歌曲</string>
     <string name="ignored_folder_picker_title">選擇資料夾</string>
     <string name="ignored_folder_picker_empty_text">忽略清單為空</string>
+    <string name="toast_folder_added_to_ignored_list">成功將資料夾新增至忽略清單</string>
     <string name="toast_failed_to_add_folder">新增資料夾至忽略清單失敗</string>
     <string name="toast_removed_folder_from_ignored_list">資料夾已自忽略清單移出</string>
     <string name="duration_filter_unit">秒</string>
     <string name="category_others">其他</string>
     <string name="remember_playlist_title">記住此播放清單</string>
+    <string name="remember_playlist_desc">播放清單將會被記憶，允許您從離開處繼續播放</string>
     <!-- Theme section -->
     <string name="category_theme">主題</string>
     <string name="select_dark_theme">選擇暗色主題</string>
@@ -199,6 +212,7 @@
     <string name="bottom_left">左下</string>
     <string name="bottom_right">右下</string>
     <string name="category_controls">控制</string>
+    <string name="enable_seek_buttons_desc">在現正播放畫面中以搜索按鈕取代跳過按鈕</string>
     <string name="change_seek_duration">變更搜索長度</string>
     <!-- Audio settings -->
     <string name="category_auto_play">自動播放</string>
@@ -209,6 +223,16 @@
     <string name="select_bluetooth_action">設定偏好的藍牙動作</string>
     <string name="select_tile_action">設定偏好的快速選單動作</string>
     <string name="play_shuffle">播放隨機曲目</string>
+    <string name="category_sleep_timer">睡眠計時器</string>
+    <string name="sleep_timer">開啟睡眠計時器</string>
+    <string name="sleep_timer_desc">選定一段時間播放後停止</string>
+    <string name="configure_sleep_timer">選擇計時器長度</string>
+    <string name="configure_sleep_timer_desc">選擇睡眠計時器的長度</string>
+    <plurals name="duration_minutes">
+        <item quantity="other">分鐘</item>
+    </plurals>
+    <string name="repeating_sleep_timer">重複睡眠計時器</string>
+    <string name="repeating_sleep_timer_desc">下一個播放項目自動開始睡眠計時器</string>
     <!-- Contributors -->
     <string name="lead_developer">主要開發者</string>
     <string name="github">Github</string>
@@ -221,10 +245,17 @@
     <string name="buy_me_coffee">贊助我一杯咖啡</string>
     <string name="pay_pal">PayPal</string>
     <!-- About -->
+    <string name="category_app_info">應用程式資訊</string>
+    <string name="app_version">應用程式版本</string>
+    <string name="build_date">編譯日期</string>
+    <string name="build_type">編譯類型</string>
+    <string name="build_code">編譯碼</string>
+    <string name="category_social_links">社群連結</string>
     <!-- Accents -->
     <!-- For translators: If the color words does not make much sense in your language,
     you can try substituting a similar description of the color. But keep it short
     -->
+    <string name="color_slate_blue">板岩藍</string>
     <string name="color_coral">珊瑚</string>
     <string name="color_sunkist">香吉士</string>
     <!-- Custom accents dialog -->

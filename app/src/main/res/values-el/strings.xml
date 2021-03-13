@@ -245,6 +245,20 @@
     <string name="play_new_in_store">Αναπαραγωγή λίστας αναπαραγωγής «Νέες προσθήκες»</string>
     <string name="play_for_you">Αναπαραγωγή λίστας αναπαραγωγής «Για εσάς»</string>
     <string name="play_continue_playlist">Συνεχίστε από εκεί που σταματήσατε \n(Εξαρτάται από την επιλογή «Απομνημόνευση της λίστας αναπαραγωγής»)</string>
+    <string name="category_sleep_timer">Χρονοδιακόπτης Ύπνου</string>
+    <string name="sleep_timer">Ενεργοποίηση Χρονοδιακόπτη Ύπνου</string>
+    <string name="sleep_timer_desc">Διακοπή αναπαραγωγής με το πέρας του επιλεγμένου χρονικού διαστήματος</string>
+    <string name="configure_sleep_timer">Επιλογή διαρκείας χρονοδιακόπτη</string>
+    <string name="configure_sleep_timer_desc">Επιλογή διαρκείας χρονοδιακόπτη ύπνου</string>
+    <string name="configure_sleep_timer_title">Ρύθμιση χρονοδιακόπτη ύπνου</string>
+    <string name="hint_sleep_timer_duration">Διακοπή αναπαραγωγής μετά</string>
+    <plurals name="duration_minutes">
+        <item quantity="one">λεπτό</item>
+        <item quantity="other">λεπτά</item>
+    </plurals>
+    <string name="error_invalid_duration">Μη έγκυρη διάρκεια. Χρήση ακεραίων &gt; 0</string>
+    <string name="repeating_sleep_timer">Επανάληψη χρονοδιακόπτη ύπνου</string>
+    <string name="repeating_sleep_timer_desc">Ξεκινά τον χρονοδιακόπτη ύπνου αυτόματα για τη νέα συνεδρία αναπαραγωγής</string>
     <!-- Contributors -->
     <string name="lead_developer">Κύριοι προγραμματιστές</string>
     <string name="github">GitHub</string>
