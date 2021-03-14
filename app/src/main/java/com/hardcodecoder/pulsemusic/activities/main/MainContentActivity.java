@@ -46,6 +46,7 @@ public class MainContentActivity extends DraggableNowPlayingSheetActivity {
 
     public static final String TAG = MainContentActivity.class.getSimpleName();
     public static final String ACTION_OPEN_NOW_PLAYING = "com.hardcodecoder.pulsemusic.activities.main.MainContentActivity.ActionOpenNPS";
+    public static final String ACTION_PLAY_FROM_URI = "com.hardcodecoder.pulsemusic.activities.main.MainContentActivity.ActionPlayFromUri";
     public static final String TRACK_URI = "TrackUri";
     private static final String ACTIVE = "ActiveFragment";
     private final MediaController.Callback mCallback = new MediaController.Callback() {
@@ -100,32 +101,45 @@ public class MainContentActivity extends DraggableNowPlayingSheetActivity {
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
+        if (null == intent) return;
         handleIntent(intent);
     }
 
     private boolean handleIntent(@NonNull Intent intent) {
-        if (intent.getAction() != null && intent.getAction().equals(ACTION_OPEN_NOW_PLAYING)) {
-            updateDraggableSheet(true);
-            expandBottomSheet();
-            return true;
-        } else if (intent.hasExtra(TRACK_URI)) {
-            try {
-                String path = intent.getStringExtra(TRACK_URI);
-                if (null == path) return false;
-                Uri data = Uri.parse(path);
-                MusicModel md = DataModelHelper.buildMusicModelFrom(this, data);
-                if (null != md) {
-                    List<MusicModel> singlePickedItemList = new ArrayList<>();
-                    singlePickedItemList.add(md);
-                    mPulseController.setPlaylist(singlePickedItemList, 0);
-                    mRemote.play();
-                    return true;
+        String action = intent.getAction();
+        if (action == null || action.isEmpty()) return false;
+        boolean intentHandled = true;
+
+        switch (action) {
+            case ACTION_OPEN_NOW_PLAYING:
+                updateDraggableSheet(true);
+                expandBottomSheet();
+                break;
+            case ACTION_PLAY_FROM_URI:
+                if (!intent.hasExtra(TRACK_URI)) return false;
+                try {
+                    String path = intent.getStringExtra(TRACK_URI);
+                    if (null == path || path.isEmpty()) return false;
+                    Uri data = Uri.parse(path);
+                    MusicModel md = DataModelHelper.buildMusicModelFrom(this, data);
+                    if (null != md) {
+                        List<MusicModel> singlePickedItemList = new ArrayList<>();
+                        singlePickedItemList.add(md);
+                        mPulseController.setPlaylist(singlePickedItemList, 0);
+                        mRemote.play();
+                    }
+                } catch (Exception e) {
+                    LogUtils.logException(LogUtils.Type.GENERAL, TAG, "Handling intent", e);
+                    intentHandled = false;
                 }
-            } catch (Exception e) {
-                LogUtils.logException(LogUtils.Type.GENERAL, TAG, "Handling intent", e);
-            }
+                break;
+            default:
+                intentHandled = false;
         }
-        return false;
+
+        // Don't want to act open the same action on activity recreate
+        intent.setAction(null);
+        return intentHandled;
     }
 
     @Override

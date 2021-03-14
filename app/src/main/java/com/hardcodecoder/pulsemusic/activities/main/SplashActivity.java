@@ -84,7 +84,10 @@ public class SplashActivity extends ThemeActivity {
         mHandler.postDelayed(() -> {
             Intent intent = new Intent(SplashActivity.this, MainContentActivity.class);
             Uri uri = getIntent().getData();
-            if (uri != null) intent.putExtra(MainContentActivity.TRACK_URI, uri.toString());
+            if (uri != null) {
+                intent.setAction(MainContentActivity.ACTION_PLAY_FROM_URI);
+                intent.putExtra(MainContentActivity.TRACK_URI, uri.toString());
+            }
             startActivity(intent);
             finish();
         }, 400);
