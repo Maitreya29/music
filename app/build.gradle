@@ -11,8 +11,8 @@ android {
         applicationId "com.hardcodecoder.pulsemusic"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 210040100
-        versionName "4.1.0"
+        versionCode 210040101
+        versionName "4.1.1"
         vectorDrawables.useSupportLibrary = true
         resConfigs "de", "en", "el", "fr", "pl", "ru", "zh-rTW"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

@@ -1,0 +1,14 @@
+﻿Pulse Music V4.1.1
+
+Note: If coming from V4.0.6 or older, musct clear data and cache for A11+ devices
+
+- Added sleep timer feature.
+- Updated current queue (in Now playing screen) to follow playlist-like UI.
+- Updated list animations.
+- Fixed: Clicking on notification opens Now Playing screen with mini controls at the top.
+- Fixed: Changing dark themes clears all tracks.
+- Fixed inconsistent text styles in settings.
+- Fixed album covers not loading in artists page.
+- Added Greek translations.
+- Updated translations/Removed outdated and incomplete translations.
+- Under the hood optimizations.

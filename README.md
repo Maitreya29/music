@@ -51,11 +51,11 @@
 </p>
 <p align="center">
     <a href="https://paypal.me/HardcodeCoder">
-    <img src="https://www.paypalobjects.com/webstatic/en_AU/i/buttons/btn_paywith_primary_l.png" alt="Pay with PayPal" width="200" height="51"  />
+    <img src="https://www.paypalobjects.com/webstatic/en_AU/i/buttons/btn_paywith_primary_l.jpg" alt="Pay with PayPal" width="200" height="51"  />
   </a>
 
   <a href="https://www.buymeacoffee.com/hardcodecoder">
-    <img src="https://cdn.buymeacoffee.com/buttons/v2/default-blue.png" alt="Buy Me A Coffee" height="51" width="200" >
+    <img src="https://cdn.buymeacoffee.com/buttons/v2/default-blue.jpg" alt="Buy Me A Coffee" height="51" width="200" >
   </a>
 </p>
 
@@ -69,22 +69,22 @@
 
 
 ## Screenshots
-| <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/1.png" width="200"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/2.png" width="200"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/3.png" width="200"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/4.png" width="200"/> |
+| <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/A.jpg" width="200"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/B.jpg" width="200"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/C.jpg" width="200"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/D.jpg" width="200"/> |
 |:---:|:---:|:---:|:---:|
 | Home | Library | Albums |  Playlist |
 
 ### Now playing screen
-| <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/5.png" width="200"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/6.png" width="200"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/7.png" width="200"/> |
+| <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/E.jpg" width="200"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/F.jpg" width="200"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/G.jpg" width="200"/> |
 |:---:|:---:|:---:|
 | Modern | Stylish | Edge to edge |
 
 ### Themes
-| <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/9.png" width="200"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/J.png" width="200"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/K.png" width="200"/> |
+| <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/I.jpg" width="200"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/J.jpg" width="200"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/K.jpg" width="200"/> |
 |:---:|:---:|:---:|
 | Just gray | Lights out | Signature dark |
 
 ### Landscape ready
-| <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/S.png" width="300"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/T.png" width="300"/> |
+| <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/S.jpg" width="300"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/T.jpg" width="300"/> |
 |:----:|:----:|
 | Can change column count | Now playing screen |
 
