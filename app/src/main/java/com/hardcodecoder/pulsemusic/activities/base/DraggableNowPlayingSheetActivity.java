@@ -44,13 +44,13 @@ public abstract class DraggableNowPlayingSheetActivity extends ControllerActivit
     private Fragment mPeekingFragment = null;
     private Fragment mExpandedFragment = null;
     private BottomNavigationView mBottomNavBar;
-    private boolean mPendingUpdateExpandedFragment = false;
     private int mPaddingBottomDefault;
     private int mPaddingBottomWhenPeeking;
     private int mCurrentOrientation;
     private int mDefaultSystemUiVisibility = -1;
     private boolean mSafeToCommit = true;
     private boolean mPendingInitializeBottomSheet = false;
+    private boolean mPendingUpdateExpandedFragment = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -133,11 +133,15 @@ public abstract class DraggableNowPlayingSheetActivity extends ControllerActivit
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
                 switch (newState) {
                     case BottomSheetBehavior.STATE_EXPANDED:
-                        mPeekingFrame.setVisibility(View.GONE);
+                        if (mPeekingFrame.getVisibility() != View.GONE)
+                            mPeekingFrame.setVisibility(View.GONE);
+                        if (mExpandedFrame.getVisibility() != View.VISIBLE)
+                            mExpandedFrame.setVisibility(View.VISIBLE);
                         if (needsLightStatusBarIcons()) setLightStatusBarIcons(true);
                         break;
                     case BottomSheetBehavior.STATE_COLLAPSED:
-                        mExpandedFrame.setVisibility(View.GONE);
+                        if (mExpandedFrame.getVisibility() != View.GONE)
+                            mExpandedFrame.setVisibility(View.GONE);
                         if (mPeekingFrame.getVisibility() != View.VISIBLE)
                             mPeekingFrame.setVisibility(View.VISIBLE);
                         updateBottomBarElevation(true);
@@ -280,7 +284,6 @@ public abstract class DraggableNowPlayingSheetActivity extends ControllerActivit
 
     public void collapseBottomSheet() {
         if (null != mBehaviour) mBehaviour.setState(BottomSheetBehavior.STATE_COLLAPSED);
-        mExpandedFrame.setVisibility(View.GONE);
         mPeekingFrame.setVisibility(View.VISIBLE);
     }
 

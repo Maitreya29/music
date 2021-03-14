@@ -113,7 +113,9 @@ public class MainContentActivity extends DraggableNowPlayingSheetActivity {
         switch (action) {
             case ACTION_OPEN_NOW_PLAYING:
                 updateDraggableSheet(true);
-                expandBottomSheet();
+                // Delay expanding bottom sheet
+                // Fixes bottom sheet callback issues and reduces stuttering
+                mAppBar.postOnAnimationDelayed(this::expandBottomSheet, 260);
                 break;
             case ACTION_PLAY_FROM_URI:
                 if (!intent.hasExtra(TRACK_URI)) return false;
