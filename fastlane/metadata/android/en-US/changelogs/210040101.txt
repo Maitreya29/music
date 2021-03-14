@@ -1,6 +1,6 @@
 ﻿Pulse Music V4.1.1
 
-Note: If coming from V4.0.6 or older, musct clear data and cache for A11+ devices
+Note: If coming from V4.0.6 or older, must clear data and cache for A11+ devices
 
 - Added sleep timer feature.
 - Updated current queue (in Now playing screen) to follow playlist-like UI.

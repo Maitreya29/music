@@ -51,11 +51,11 @@
 </p>
 <p align="center">
     <a href="https://paypal.me/HardcodeCoder">
-    <img src="https://www.paypalobjects.com/webstatic/en_AU/i/buttons/btn_paywith_primary_l.jpg" alt="Pay with PayPal" width="200" height="51"  />
+    <img src="https://www.paypalobjects.com/webstatic/en_AU/i/buttons/btn_paywith_primary_l.png" alt="Pay with PayPal" width="200" height="51"  />
   </a>
 
   <a href="https://www.buymeacoffee.com/hardcodecoder">
-    <img src="https://cdn.buymeacoffee.com/buttons/v2/default-blue.jpg" alt="Buy Me A Coffee" height="51" width="200" >
+    <img src="https://cdn.buymeacoffee.com/buttons/v2/default-blue.png" alt="Buy Me A Coffee" height="51" width="200" >
   </a>
 </p>
 
