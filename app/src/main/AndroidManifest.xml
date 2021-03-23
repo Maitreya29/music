@@ -1,6 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-
     package="com.hardcodecoder.pulsemusic">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -36,6 +35,10 @@
             <action android:name="android.intent.action.PICK" />
             <data android:mimeType="image/*" />
         </intent>
+
+        <intent>
+            <action android:name="android.media.action.DISPLAY_AUDIO_EFFECT_CONTROL_PANEL" />
+        </intent>
     </queries>
 
     <application
@@ -47,11 +50,12 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="false"
         android:theme="@style/ActivityThemeDark"
-        tools:targetApi="Q">
+        tools:targetApi="O">
 
         <activity android:name=".activities.main.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MUSIC_PLAYER" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -59,8 +63,8 @@
             </intent-filter>
 
             <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
                 <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
 
                 <data android:scheme="file" />
                 <data android:mimeType="audio/*" />
@@ -70,8 +74,8 @@
             </intent-filter>
 
             <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
                 <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
 
                 <data android:scheme="content" />
                 <data android:mimeType="audio/*" />

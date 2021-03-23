@@ -8,6 +8,7 @@ import android.media.AudioAttributes;
 import android.media.AudioFocusRequest;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.audiofx.AudioEffect;
 import android.media.session.PlaybackState;
 import android.net.Uri;
 import android.os.Build;
@@ -48,6 +49,7 @@ public class LocalPlayback implements
     private AudioFocusRequest mAudioFocusRequest = null;
     private PhoneStateListener mPhoneStateListener;
     private Handler mHandler;
+    private int mAudioSessionId = -1;
     private int mPlaybackState = PlaybackState.STATE_NONE;
     private int mCurrentState;
     private int mMediaId = -99;
@@ -74,7 +76,12 @@ public class LocalPlayback implements
         mp = new MediaPlayer();
         mp.setOnPreparedListener(this);
         mp.setOnCompletionListener(this);
-        mp.reset();
+        if (mAudioSessionId == -1) {
+            mAudioSessionId = mp.getAudioSessionId();
+            PulseController.getInstance().setAudioSessionId(mAudioSessionId);
+        }
+        mp.setAudioSessionId(mAudioSessionId);
+        openAudioEffects();
         try {
             mp.setDataSource(mContext, Uri.parse(md.getTrackPath()));
             mp.prepare();
@@ -182,6 +189,7 @@ public class LocalPlayback implements
     public void onStop(boolean abandonAudioFocus) {
         if (abandonAudioFocus) abandonAudioFocus();
 
+        closeAudioEffects();
         releaseMediaPlayer();
         mMediaId = -999;
 
@@ -207,6 +215,23 @@ public class LocalPlayback implements
             mp.release();
             mp = null;
         }
+    }
+
+    private void openAudioEffects() {
+        if (null == mp) return;
+        final Intent effectsIntent = new Intent(AudioEffect.ACTION_OPEN_AUDIO_EFFECT_CONTROL_SESSION);
+        effectsIntent.putExtra(AudioEffect.EXTRA_PACKAGE_NAME, mContext.getPackageName());
+        effectsIntent.putExtra(AudioEffect.EXTRA_AUDIO_SESSION, mp.getAudioSessionId());
+        effectsIntent.putExtra(AudioEffect.EXTRA_CONTENT_TYPE, AudioEffect.CONTENT_TYPE_MUSIC);
+        mContext.sendBroadcast(effectsIntent);
+    }
+
+    private void closeAudioEffects() {
+        if (null == mp) return;
+        final Intent effectsIntent = new Intent(AudioEffect.ACTION_CLOSE_AUDIO_EFFECT_CONTROL_SESSION);
+        effectsIntent.putExtra(AudioEffect.EXTRA_PACKAGE_NAME, mContext.getPackageName());
+        effectsIntent.putExtra(AudioEffect.EXTRA_AUDIO_SESSION, mp.getAudioSessionId());
+        mContext.sendBroadcast(effectsIntent);
     }
 
     @Override

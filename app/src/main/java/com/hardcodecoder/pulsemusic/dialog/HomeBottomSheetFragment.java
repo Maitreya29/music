@@ -1,6 +1,7 @@
 package com.hardcodecoder.pulsemusic.dialog;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.media.audiofx.AudioEffect;
 import android.os.Bundle;
@@ -19,11 +20,13 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textview.MaterialTextView;
+import com.hardcodecoder.pulsemusic.PulseController;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.activities.main.SettingsActivity;
 import com.hardcodecoder.pulsemusic.dialog.base.RoundedCustomBottomSheet;
 import com.hardcodecoder.pulsemusic.dialog.base.RoundedCustomBottomSheetFragment;
 import com.hardcodecoder.pulsemusic.glide.GlideApp;
+import com.hardcodecoder.pulsemusic.utils.LogUtils;
 import com.hardcodecoder.pulsemusic.utils.UserInfo;
 
 import java.io.File;
@@ -31,6 +34,7 @@ import java.io.File;
 public class HomeBottomSheetFragment extends RoundedCustomBottomSheetFragment {
 
     public static final String TAG = "HomeBottomSheetFragment";
+    private static final int REQUEST_CODE_OPEN_EQUALIZER = 599;
     private static final int PICK_AVATAR = 1500;
     private ImageView mUserPic;
     private MaterialTextView mUserName;
@@ -63,14 +67,26 @@ public class HomeBottomSheetFragment extends RoundedCustomBottomSheetFragment {
         });
 
         view.findViewById(R.id.drawer_option_equalizer).setOnClickListener(v -> {
-            final Intent intent = new Intent(AudioEffect.ACTION_DISPLAY_AUDIO_EFFECT_CONTROL_PANEL);
-            final Intent chooser = Intent.createChooser(intent, getString(R.string.select_equalizer));
-            if ((chooser.resolveActivity(requireContext().getPackageManager()) != null)) {
-                startActivity(chooser);
-                view.postOnAnimation(this::dismiss);
-            } else
-                Toast.makeText(requireContext(), getString(R.string.toast_equalizer_not_found), Toast.LENGTH_SHORT).show();
+            openStockEqualizer();
+            view.postOnAnimation(this::dismiss);
         });
+    }
+
+    private void openStockEqualizer() {
+        final int sessionId = PulseController.getInstance().getAudioSessionId();
+        if (sessionId == AudioEffect.ERROR_BAD_VALUE) {
+            Toast.makeText(requireContext(), getString(R.string.toast_equalizer_not_found), Toast.LENGTH_SHORT).show();
+            return;
+        }
+        try {
+            final Intent audioEffectIntent = new Intent(AudioEffect.ACTION_DISPLAY_AUDIO_EFFECT_CONTROL_PANEL);
+            audioEffectIntent.putExtra(AudioEffect.EXTRA_AUDIO_SESSION, sessionId);
+            audioEffectIntent.putExtra(AudioEffect.EXTRA_CONTENT_TYPE, AudioEffect.CONTENT_TYPE_MUSIC);
+            requireActivity().startActivityForResult(audioEffectIntent, REQUEST_CODE_OPEN_EQUALIZER);
+        } catch (ActivityNotFoundException notFoundException) {
+            LogUtils.logException(LogUtils.Type.GENERAL, TAG, "Error opening Equalizer", notFoundException);
+            Toast.makeText(requireContext(), getString(R.string.toast_equalizer_not_found), Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void loadProfilePic(@NonNull File profilePicFile) {

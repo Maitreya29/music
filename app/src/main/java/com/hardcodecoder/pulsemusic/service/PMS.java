@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.media.MediaMetadata;
-import android.media.audiofx.AudioEffect;
 import android.media.session.MediaController;
 import android.media.session.MediaSession;
 import android.media.session.PlaybackState;
@@ -89,13 +88,6 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
         mediaButtonIntent.setClass(getApplicationContext(), MediaButtonReceiver.class);
         PendingIntent mbrIntent = PendingIntent.getBroadcast(this, 0, mediaButtonIntent, 0);
         mMediaSession.setMediaButtonReceiver(mbrIntent);
-
-        // Start audio fx
-        final Intent intent = new Intent(AudioEffect.ACTION_OPEN_AUDIO_EFFECT_CONTROL_SESSION);
-        intent.putExtra(AudioEffect.EXTRA_AUDIO_SESSION, mMediaSession.getSessionToken());
-        intent.putExtra(AudioEffect.EXTRA_PACKAGE_NAME, getPackageName());
-        intent.putExtra(AudioEffect.EXTRA_CONTENT_TYPE, AudioEffect.CONTENT_TYPE_MUSIC);
-        sendBroadcast(intent);
 
         mNotificationManager = new MediaNotificationManager(this, mMediaSession.getController(), this);
 

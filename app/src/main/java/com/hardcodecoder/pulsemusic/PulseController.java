@@ -25,6 +25,7 @@ public class PulseController {
     private final PulseRemote mRemote = new PulseRemote();
     private List<ConnectionCallback> mConnectionCallbacks;
     private MediaController mMediaController;
+    private int mAudioSessionId = -1;
     private boolean mRememberPlaylist = false;
 
     @NonNull
@@ -47,6 +48,14 @@ public class PulseController {
             for (ConnectionCallback connectionCallback : mConnectionCallbacks)
                 mMainHandler.post(() -> connectionCallback.onControllerReady(mediaController));
         }
+    }
+
+    public int getAudioSessionId() {
+        return mAudioSessionId;
+    }
+
+    public void setAudioSessionId(int audioSessionId) {
+        mAudioSessionId = audioSessionId;
     }
 
     public void setRememberPlaylist(boolean remember, boolean saveNow) {
