@@ -59,6 +59,17 @@
   </a>
 </p>
 
+## Licence
+Pulse Music is licenced under [GPLv3](https://github.com/HardcodeCoder/pulsemusic/blob/master/LICENSE) and anyone wanting to use it (as a base for your own project or even use some of its parts or features) has to adhere to this license completely. Make sure that you are aware of all the licensing terms before creating your own project based on Pulse Music.
+
+Here some important points to keep in mind, as to how we handle licensing for Pulse Music:
+
+- You cannot simply rename our app, strip it of all credit and upload it anywhere as your own, be this with or without monetization.
+- You have to make changes in terms of design, features, etc before publishing it anywhere. Changing app name, package name and logo is not enough.
+- You are required to give us full credits for any work you may be using from us.
+- If you're simply using Pulse Music as a reference for minor implementation details or utility functions (not entire features of our app or designs) you can treat that as if it were licensed under [Apache2](https://www.apache.org/licenses/LICENSE-2.0) and properly credit us.
+- We will ALWAYS use all our legal options, if you do not strictly adhere to these licencing terms.
+
 ## Contribution
 **Help us make Pulse Music even better**
 
@@ -134,9 +145,6 @@ With 3 different dark themes and several curated accents to choose from, customi
 - App shortcut support to play tracks without even opening the app.
 - All your favorite tracks in one place.
 - Option to change now playing screen album cover corner radius.
-
-
-IMPORTANT : *Please mention the steps to reproduce the bug while reporting. Providing logs will be really helpful*
 
 #### Icons used in the project and in the app are provided by:
 
