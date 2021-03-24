@@ -2,6 +2,7 @@ package com.hardcodecoder.pulsemusic.adapters.main;
 
 import android.content.res.Configuration;
 import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,7 +51,7 @@ public class ArtistAdapter extends EfficientRecyclerViewAdapter<ArtistModel, Art
     }
 
     public void updateSortOrder(SortOrder.ARTIST sortOrder) {
-        final Handler handler = new Handler();
+        final Handler handler = new Handler(Looper.getMainLooper());
         TaskRunner.executeAsync(() -> {
             List<ArtistModel> currentDataList = getDataList();
             List<ArtistModel> oldSortedTracks = new ArrayList<>(currentDataList);
@@ -73,8 +74,9 @@ public class ArtistAdapter extends EfficientRecyclerViewAdapter<ArtistModel, Art
                 (orientation == Configuration.ORIENTATION_LANDSCAPE && newSpanCount > 4);
     }
 
+    @NonNull
     @Override
-    protected CharSequence getSectionText(@NonNull ArtistModel data) {
+    protected String getSectionText(@NonNull ArtistModel data) {
         return data.getArtistName().substring(0, 1);
     }
 

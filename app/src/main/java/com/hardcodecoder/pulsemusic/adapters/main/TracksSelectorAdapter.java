@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -46,9 +45,9 @@ public class TracksSelectorAdapter extends SelectableItemAdapter<MusicModel, Tra
         return new TrackItemHolder(mInflater.inflate(R.layout.list_item, parent, false), mListener);
     }
 
-    @Nullable
+    @NonNull
     @Override
-    protected CharSequence getSectionText(@NonNull MusicModel data) {
+    protected String getSectionText(@NonNull MusicModel data) {
         return data.getTrackName().substring(0, 1);
     }
 

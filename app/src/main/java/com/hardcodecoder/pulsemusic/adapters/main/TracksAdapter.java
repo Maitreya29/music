@@ -71,8 +71,9 @@ public class TracksAdapter extends EfficientRecyclerViewAdapter<MusicModel, Trac
         });
     }
 
+    @NonNull
     @Override
-    protected CharSequence getSectionText(@NonNull MusicModel data) {
+    protected String getSectionText(@NonNull MusicModel data) {
         switch (mSortOrder) {
             case DURATION_ASC:
             case DURATION_DESC:
@@ -94,7 +95,7 @@ public class TracksAdapter extends EfficientRecyclerViewAdapter<MusicModel, Trac
     }
 
     @NonNull
-    private CharSequence getDate(long seconds) {
+    private String getDate(long seconds) {
         if (null == mDateFormatter)
             mDateFormatter = new SimpleDateFormat("MMM dd, yy", Locale.getDefault());
         return mDateFormatter.format(new Date(seconds * 1000));

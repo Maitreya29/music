@@ -38,9 +38,9 @@ public class FoldersListAdapter extends SelectableItemAdapter<Folder, FoldersLis
         return new FolderItemHolder(mInflater.inflate(R.layout.rv_folder_item, parent, false), mListener);
     }
 
-    @Nullable
+    @NonNull
     @Override
-    protected CharSequence getSectionText(@NonNull Folder data) {
+    protected String getSectionText(@NonNull Folder data) {
         return data.getPaths().substring(0, 1);
     }
 

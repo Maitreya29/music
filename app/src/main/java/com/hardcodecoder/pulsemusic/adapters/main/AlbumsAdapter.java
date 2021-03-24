@@ -74,8 +74,9 @@ public class AlbumsAdapter extends EfficientRecyclerViewAdapter<AlbumModel, Albu
         });
     }
 
+    @NonNull
     @Override
-    protected CharSequence getSectionText(@NonNull AlbumModel data) {
+    protected String getSectionText(@NonNull AlbumModel data) {
         switch (mSortOrder) {
             case ARTIST_ASC:
             case ARTIST_DESC:
@@ -94,7 +95,7 @@ public class AlbumsAdapter extends EfficientRecyclerViewAdapter<AlbumModel, Albu
     }
 
     @NonNull
-    private CharSequence getDate(long seconds) {
+    private String getDate(long seconds) {
         if (null == mDateFormatter)
             mDateFormatter = new SimpleDateFormat("yyyy", Locale.getDefault());
         return mDateFormatter.format(new Date(seconds * 1000));

@@ -10,9 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hardcodecoder.pulsemusic.themes.ColorUtil;
 import com.hardcodecoder.pulsemusic.themes.ThemeColors;
-import com.l4digital.fastscroll.FastScrollRecyclerView;
 
-public class CustomFastScrollRecyclerView extends FastScrollRecyclerView {
+
+public class CustomFastScrollRecyclerView extends RecyclerView {
 
     public CustomFastScrollRecyclerView(@NonNull Context context) {
         this(context, null);
@@ -30,9 +30,6 @@ public class CustomFastScrollRecyclerView extends FastScrollRecyclerView {
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
         int accentColor = ThemeColors.getCurrentColorPrimary();
-        setBubbleColor(accentColor);
-        setHandleColor(accentColor);
-        setTrackColor(ThemeColors.getCurrentColorControlHighlight());
         setEdgeEffectFactory(new EdgeEffectFactory() {
             @NonNull
             @Override
@@ -42,5 +39,7 @@ public class CustomFastScrollRecyclerView extends FastScrollRecyclerView {
                 return edgeEffect;
             }
         });
+
+        new PulseScrollerBuilder(this).usePulsePopupStyle().build();
     }
 }

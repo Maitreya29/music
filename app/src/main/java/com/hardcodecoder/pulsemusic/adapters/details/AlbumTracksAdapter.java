@@ -1,6 +1,7 @@
 package com.hardcodecoder.pulsemusic.adapters.details;
 
 import android.os.Handler;
+import android.os.Looper;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,7 +43,7 @@ public class AlbumTracksAdapter extends EfficientRecyclerViewAdapter<MusicModel,
 
     public void updateSortOrder(@Nullable SortOrder sortOrder) {
         mSortOrder = sortOrder;
-        final Handler handler = new Handler();
+        final Handler handler = new Handler(Looper.getMainLooper());
         TaskRunner.executeAsync(() -> {
             List<MusicModel> currentDataList = getDataList();
             List<MusicModel> oldSortedTracks = new ArrayList<>(currentDataList);
@@ -52,8 +53,9 @@ public class AlbumTracksAdapter extends EfficientRecyclerViewAdapter<MusicModel,
         });
     }
 
+    @NonNull
     @Override
-    protected CharSequence getSectionText(@NonNull MusicModel data) {
+    protected String getSectionText(@NonNull MusicModel data) {
         switch (mSortOrder) {
             case DURATION_ASC:
             case DURATION_DESC:

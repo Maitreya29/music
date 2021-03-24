@@ -6,7 +6,5 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layoutAnimation="@anim/item_falls_down_animation"
-    app:bubbleSize="small"
-    app:bubbleTextColor="?attr/colorOnPrimary"
     app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
     tools:listitem="@layout/list_item_with_options" />

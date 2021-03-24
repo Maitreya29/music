@@ -4,20 +4,20 @@ import android.view.View;
 
 import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hardcodecoder.pulsemusic.interfaces.ItemSelectorAdapterCallback;
 import com.hardcodecoder.pulsemusic.interfaces.ItemTouchHelperViewHolder;
 import com.hardcodecoder.pulsemusic.utils.ImageUtil;
-import com.l4digital.fastscroll.FastScroller;
 
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import me.zhanghai.android.fastscroll.PopupTextProvider;
+
 public abstract class SelectableItemAdapter<T, SIH extends SelectableItemAdapter.SelectableItemHolder<T>> extends RecyclerView.Adapter<SIH>
-        implements ItemSelectorAdapterCallback, FastScroller.SectionIndexer {
+        implements ItemSelectorAdapterCallback, PopupTextProvider {
 
     private final Set<T> mSelectedData;
     private final List<T> mDataList;
@@ -68,14 +68,15 @@ public abstract class SelectableItemAdapter<T, SIH extends SelectableItemAdapter
         mSelectedData.remove(mDataList.get(position));
     }
 
+    @NonNull
     @Override
-    public CharSequence getSectionText(int position) {
+    public String getPopupText(int position) {
         return getSectionText(mDataList.get(position));
     }
 
-    @Nullable
-    protected CharSequence getSectionText(@NonNull T data) {
-        return null;
+    @NonNull
+    protected String getSectionText(@NonNull T data) {
+        return "";
     }
 
     @NonNull

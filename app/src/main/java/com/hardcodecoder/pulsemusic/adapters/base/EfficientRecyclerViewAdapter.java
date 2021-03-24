@@ -4,15 +4,14 @@ import android.view.View;
 
 import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.l4digital.fastscroll.FastScroller;
 
 import java.util.List;
 
+import me.zhanghai.android.fastscroll.PopupTextProvider;
+
 public abstract class EfficientRecyclerViewAdapter<T, SVH extends EfficientRecyclerViewAdapter.SmartViewHolder<T>>
-        extends RecyclerView.Adapter<SVH> implements FastScroller.SectionIndexer {
+        extends RecyclerView.Adapter<SVH> implements PopupTextProvider {
 
     private final List<T> mDataList;
 
@@ -49,14 +48,15 @@ public abstract class EfficientRecyclerViewAdapter<T, SVH extends EfficientRecyc
         mDataList.clear();
     }
 
+    @NonNull
     @Override
-    public CharSequence getSectionText(int position) {
+    public String getPopupText(int position) {
         return getSectionText(mDataList.get(position));
     }
 
-    @Nullable
-    protected CharSequence getSectionText(@NonNull T data) {
-        return null;
+    @NonNull
+    protected String getSectionText(@NonNull T data) {
+        return "";
     }
 
     @NonNull
