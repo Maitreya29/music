@@ -75,7 +75,6 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
 
         mMediaSession = new MediaSession(getApplicationContext(), TAG);
         mMediaSession.setCallback(mPlaybackManager.getSessionCallbacks(), mWorkerHandler);
-        mMediaSession.setFlags(MediaSession.FLAG_HANDLES_MEDIA_BUTTONS | MediaSession.FLAG_HANDLES_TRANSPORT_CONTROLS);
 
         mWorkerHandler.post(this::initializeAsync);
     }
@@ -107,8 +106,8 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        MediaButtonReceiver.handleIntent(MediaSessionCompat.fromMediaSession(this, mMediaSession), intent);
         isServiceRunning = true;
+        mWorkerHandler.post(() -> MediaButtonReceiver.handleIntent(MediaSessionCompat.fromMediaSession(this, mMediaSession), intent));
         mWorkerHandler.post(() -> handleIntent(intent));
         return START_NOT_STICKY;
     }
@@ -224,6 +223,7 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
             mNotificationManager.unregisterControlsReceiver();
         if (mMediaSession != null)
             mMediaSession.release();
+        mWorkerHandler.removeCallbacksAndMessages(null);
         mServiceThread.quit();
         super.onDestroy();
     }

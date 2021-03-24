@@ -1,6 +1,7 @@
 package com.hardcodecoder.pulsemusic.activities.base;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 
 import androidx.annotation.Nullable;
 
@@ -17,5 +18,11 @@ public class ControllerActivity extends ThemeActivity {
 
         mPulseController = PulseController.getInstance();
         mRemote = mPulseController.getRemote();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        boolean mediaKey = null != mPulseController.getController() && mPulseController.getController().dispatchMediaButtonEvent(event);
+        return mediaKey || super.onKeyDown(keyCode, event);
     }
 }
