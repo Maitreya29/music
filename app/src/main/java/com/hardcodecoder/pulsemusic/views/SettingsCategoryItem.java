@@ -21,21 +21,21 @@ import com.hardcodecoder.pulsemusic.themes.ThemeColors;
 import com.hardcodecoder.pulsemusic.themes.ThemeManagerUtils;
 import com.hardcodecoder.pulsemusic.utils.DimensionsUtil;
 
-public class SettingsCategoryItemView extends RelativeLayout {
+public class SettingsCategoryItem extends RelativeLayout {
 
     private final MaterialTextView mTitle;
     private final MaterialTextView mText;
     private ImageView mIcon;
 
-    public SettingsCategoryItemView(@NonNull Context context) {
+    public SettingsCategoryItem(@NonNull Context context) {
         this(context, null, 0);
     }
 
-    public SettingsCategoryItemView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public SettingsCategoryItem(@NonNull Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public SettingsCategoryItemView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public SettingsCategoryItem(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
         final int paddingDef = DimensionsUtil.getDimensionPixelSize(context, 12);
@@ -49,20 +49,20 @@ public class SettingsCategoryItemView extends RelativeLayout {
         mTitle = view.findViewById(R.id.settings_list_item_title);
         mText = view.findViewById(R.id.settings_list_item_text);
 
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.SettingsCategoryItemView);
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.SettingsCategoryItem);
 
-        if (mTitle.getTypeface() != null && typedArray.hasValue(R.styleable.SettingsCategoryItemView_android_textStyle)) {
-            mTitle.setTypeface(mTitle.getTypeface(), typedArray.getInteger(R.styleable.SettingsCategoryItemView_android_textStyle, Typeface.NORMAL));
+        if (mTitle.getTypeface() != null && typedArray.hasValue(R.styleable.SettingsCategoryItem_android_textStyle)) {
+            mTitle.setTypeface(mTitle.getTypeface(), typedArray.getInteger(R.styleable.SettingsCategoryItem_android_textStyle, Typeface.NORMAL));
         }
 
-        if (typedArray.hasValue(R.styleable.SettingsCategoryItemView_settingItemIcon)) {
+        if (typedArray.hasValue(R.styleable.SettingsCategoryItem_settingItemIcon)) {
             mIcon = view.findViewById(R.id.settings_list_item_icon);
-            mIcon.setImageDrawable(typedArray.getDrawable(R.styleable.SettingsCategoryItemView_settingItemIcon));
+            mIcon.setImageDrawable(typedArray.getDrawable(R.styleable.SettingsCategoryItem_settingItemIcon));
 
-            int iconColor = typedArray.getColor(R.styleable.SettingsCategoryItemView_settingItemIconColor,
+            int iconColor = typedArray.getColor(R.styleable.SettingsCategoryItem_settingItemIconColor,
                     ThemeColors.getCurrentColorControlNormal());
 
-            boolean isColoredIcon = typedArray.getBoolean(R.styleable.SettingsCategoryItemView_settingItemColoredIcon, false);
+            boolean isColoredIcon = typedArray.getBoolean(R.styleable.SettingsCategoryItem_settingItemColoredIcon, false);
             int iconBackgroundColor = isColoredIcon ? iconColor : ThemeColors.getCurrentColorBackgroundHighlight();
 
             if (isColoredIcon) {
@@ -72,7 +72,7 @@ public class SettingsCategoryItemView extends RelativeLayout {
                     iconBackgroundColor = ColorUtil.mixColors(iconBackgroundColor, Color.WHITE, 0.4f);
                 } else {
                     iconBackgroundColor = ColorUtil.changeAlphaComponentTo(iconBackgroundColor,
-                            typedArray.getFloat(R.styleable.SettingsCategoryItemView_settingItemBackgroundAlpha, 0.2f));
+                            typedArray.getFloat(R.styleable.SettingsCategoryItem_settingItemBackgroundAlpha, 0.2f));
                 }
             }
 
@@ -80,8 +80,8 @@ public class SettingsCategoryItemView extends RelativeLayout {
             mIcon.setImageTintList(ColorStateList.valueOf(iconColor));
         }
 
-        mTitle.setText(typedArray.getText(R.styleable.SettingsCategoryItemView_settingItemTitle));
-        mText.setText(typedArray.getText(R.styleable.SettingsCategoryItemView_settingItemText));
+        mTitle.setText(typedArray.getText(R.styleable.SettingsCategoryItem_settingItemTitle));
+        mText.setText(typedArray.getText(R.styleable.SettingsCategoryItem_settingItemText));
 
         typedArray.recycle();
     }

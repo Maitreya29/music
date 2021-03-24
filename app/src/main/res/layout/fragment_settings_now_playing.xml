@@ -14,7 +14,7 @@
         android:text="@string/category_style"
         android:textAppearance="@style/Appearance.Text.Overline" />
 
-    <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
+    <com.hardcodecoder.pulsemusic.views.SettingsCategoryItem
         android:id="@+id/now_playing_screen_style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,7 +24,7 @@
         app:settingItemText="@string/select_np_style_desc"
         app:settingItemTitle="@string/select_np_style" />
 
-    <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
+    <com.hardcodecoder.pulsemusic.views.SettingsCategoryItem
         android:id="@+id/now_playing_album_cover_corner_radius"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
         app:settingToggleableItemText="@string/enable_seek_buttons_desc"
         app:settingToggleableItemTitle="@string/enable_seek_buttons" />
 
-    <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
+    <com.hardcodecoder.pulsemusic.views.SettingsCategoryItem
         android:id="@+id/now_playing_seek_duration_selector"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

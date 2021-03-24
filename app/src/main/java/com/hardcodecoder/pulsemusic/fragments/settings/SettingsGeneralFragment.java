@@ -13,7 +13,7 @@ import com.hardcodecoder.pulsemusic.dialog.IgnoreFolderChooser;
 import com.hardcodecoder.pulsemusic.dialog.PlaylistSectionSelector;
 import com.hardcodecoder.pulsemusic.fragments.settings.base.SettingsBaseFragment;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
-import com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView;
+import com.hardcodecoder.pulsemusic.views.SettingsCategoryItem;
 import com.hardcodecoder.pulsemusic.views.SettingsToggleableItem;
 import com.hardcodecoder.pulsemusic.views.ValueSlider;
 
@@ -65,7 +65,7 @@ public class SettingsGeneralFragment extends SettingsBaseFragment {
         rememberOption.setOnSwitchCheckedChangedListener((buttonView, isChecked) ->
                 AppSettings.setRememberPlaylist(requireContext(), isChecked));
 
-        SettingsCategoryItemView editPlaylist = view.findViewById(R.id.home_section_playlist_selector);
+        SettingsCategoryItem editPlaylist = view.findViewById(R.id.home_section_playlist_selector);
         editPlaylist.setOnClickListener(v -> {
             if (null != getFragmentManager()) {
                 PlaylistSectionSelector playlistSectionSelector = PlaylistSectionSelector.getInstance(needsRestartOnDismiss -> {

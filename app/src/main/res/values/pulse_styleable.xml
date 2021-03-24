@@ -8,7 +8,7 @@
         <attr name="toolbarAccentTitle" format="boolean" />
     </declare-styleable>
 
-    <declare-styleable name="SettingsCategoryItemView">
+    <declare-styleable name="SettingsCategoryItem">
         <attr name="settingItemIcon" format="reference" />
         <attr name="settingItemIconColor" format="reference" />
         <attr name="settingItemBackgroundAlpha" format="float" />

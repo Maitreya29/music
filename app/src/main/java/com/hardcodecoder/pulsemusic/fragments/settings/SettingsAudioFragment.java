@@ -16,7 +16,7 @@ import com.hardcodecoder.pulsemusic.dialog.ConfigureSleepTimer;
 import com.hardcodecoder.pulsemusic.fragments.settings.base.SettingsBaseFragment;
 import com.hardcodecoder.pulsemusic.service.AudioDeviceService;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
-import com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView;
+import com.hardcodecoder.pulsemusic.views.SettingsCategoryItem;
 import com.hardcodecoder.pulsemusic.views.SettingsToggleableItem;
 
 public class SettingsAudioFragment extends SettingsBaseFragment {
@@ -77,7 +77,7 @@ public class SettingsAudioFragment extends SettingsBaseFragment {
 
         boolean isSleepTimerEnabled = AppSettings.isSleepTimerEnabled(requireContext());
 
-        SettingsCategoryItemView sleepTimerConfigurator = view.findViewById(R.id.sleep_timer_configure);
+        SettingsCategoryItem sleepTimerConfigurator = view.findViewById(R.id.sleep_timer_configure);
         sleepTimerConfigurator.setEnabled(isSleepTimerEnabled);
         sleepTimerConfigurator.setOnClickListener(v -> {
             ConfigureSleepTimer configureSleepTimer = ConfigureSleepTimer.getInstance();

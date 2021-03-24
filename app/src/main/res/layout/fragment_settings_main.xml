@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
+    <com.hardcodecoder.pulsemusic.views.SettingsCategoryItem
         android:id="@+id/generalSettings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,7 +16,7 @@
         app:settingItemText="@string/general_desc"
         app:settingItemTitle="@string/general" />
 
-    <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
+    <com.hardcodecoder.pulsemusic.views.SettingsCategoryItem
         android:id="@+id/themeSettings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,7 +27,7 @@
         app:settingItemText="@string/theme_desc"
         app:settingItemTitle="@string/theme" />
 
-    <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
+    <com.hardcodecoder.pulsemusic.views.SettingsCategoryItem
         android:id="@+id/nowPlayingSettings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
         app:settingItemText="@string/now_playing_desc"
         app:settingItemTitle="@string/now_playing_title" />
 
-    <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
+    <com.hardcodecoder.pulsemusic.views.SettingsCategoryItem
         android:id="@+id/audioSettings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
         app:settingItemText="@string/audio_desc"
         app:settingItemTitle="@string/audio" />
 
-    <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
+    <com.hardcodecoder.pulsemusic.views.SettingsCategoryItem
         android:id="@+id/contributorsSettings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -60,7 +60,7 @@
         app:settingItemText="@string/contributors_desc"
         app:settingItemTitle="@string/contributors" />
 
-    <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
+    <com.hardcodecoder.pulsemusic.views.SettingsCategoryItem
         android:id="@+id/donationSettings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -71,7 +71,7 @@
         app:settingItemText="@string/support_development_desc"
         app:settingItemTitle="@string/support_development" />
 
-    <com.hardcodecoder.pulsemusic.views.SettingsCategoryItemView
+    <com.hardcodecoder.pulsemusic.views.SettingsCategoryItem
         android:id="@+id/aboutSettings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
