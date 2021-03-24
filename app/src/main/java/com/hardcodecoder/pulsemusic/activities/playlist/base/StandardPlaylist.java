@@ -20,7 +20,7 @@ public abstract class StandardPlaylist extends PlaylistActivity implements Simpl
     protected void loadRecyclerList(@NonNull RecyclerView recyclerView, @NonNull List<MusicModel> list) {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), RecyclerView.VERTICAL, false));
-        mAdapter = new TracksAdapter(getLayoutInflater(), list, this, null, null, true);
+        mAdapter = new TracksAdapter(getLayoutInflater(), list, this, null, null);
         recyclerView.setAdapter(mAdapter);
     }
 

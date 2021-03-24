@@ -6,7 +6,6 @@ import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,39 +34,25 @@ public class TracksAdapter extends EfficientRecyclerViewAdapter<MusicModel, Trac
     private final LayoutInflater mInflater;
     private final SimpleItemClickListener mListener;
     private final GridAdapterCallback mCallback;
-    private final boolean mAnimateItems;
     private SimpleDateFormat mDateFormatter = null;
     private SortOrder mSortOrder;
-    private int lastPosition = -1;
 
     public TracksAdapter(@NonNull LayoutInflater inflater,
                          @NonNull List<MusicModel> tracksList,
                          @NonNull SimpleItemClickListener listener,
                          @Nullable GridAdapterCallback callback,
-                         @Nullable SortOrder sortOrder,
-                         boolean animateItems) {
+                         @Nullable SortOrder sortOrder) {
         super(tracksList);
         mInflater = inflater;
         mListener = listener;
         mCallback = callback;
         mSortOrder = sortOrder;
-        mAnimateItems = animateItems;
     }
 
     @NonNull
     @Override
     public LibraryItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new LibraryItemHolder(mInflater.inflate(R.layout.list_item_with_options, parent, false), mListener);
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull LibraryItemHolder holder, int position) {
-        super.onBindViewHolder(holder, position);
-        if (mAnimateItems) {
-            holder.itemView.startAnimation(AnimationUtils.loadAnimation(holder.itemView.getContext(),
-                    (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top));
-            lastPosition = position;
-        }
     }
 
     public void updateSortOrder(@Nullable SortOrder sortOrder) {

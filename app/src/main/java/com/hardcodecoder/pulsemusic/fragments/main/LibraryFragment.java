@@ -188,8 +188,7 @@ public class LibraryFragment extends ListGridFragment implements SimpleItemClick
                     list,
                     this,
                     this::onSortUpdateComplete,
-                    mSortOrder,
-                    true);
+                    mSortOrder);
             recyclerView.setAdapter(mAdapter);
         });
     }

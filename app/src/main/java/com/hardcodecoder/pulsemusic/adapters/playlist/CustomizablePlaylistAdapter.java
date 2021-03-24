@@ -1,11 +1,11 @@
 package com.hardcodecoder.pulsemusic.adapters.playlist;
 
 import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -37,7 +37,6 @@ public class CustomizablePlaylistAdapter extends EfficientRecyclerViewAdapter<Mu
     private final PlaylistItemListener mListener;
     private MusicModel deletedItem;
     private int deletedIndex;
-    private int lastPosition = -1;
 
     public CustomizablePlaylistAdapter(@NonNull LayoutInflater inflater,
                                        @NonNull List<MusicModel> playlistTracks,
@@ -56,14 +55,6 @@ public class CustomizablePlaylistAdapter extends EfficientRecyclerViewAdapter<Mu
     @Override
     public PlaylistTrackItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new PlaylistTrackItemHolder(mInflater.inflate(R.layout.list_item_with_drag_handle, parent, false), mListener);
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull PlaylistTrackItemHolder holder, int position) {
-        super.onBindViewHolder(holder, position);
-        holder.itemView.startAnimation(AnimationUtils.loadAnimation(holder.itemView.getContext(),
-                (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top));
-        lastPosition = position;
     }
 
     @Override
@@ -90,7 +81,7 @@ public class CustomizablePlaylistAdapter extends EfficientRecyclerViewAdapter<Mu
     }
 
     public void updatePlaylist(@NonNull List<MusicModel> newList) {
-        final Handler handler = new Handler();
+        final Handler handler = new Handler(Looper.getMainLooper());
         TaskRunner.executeAsync(() -> {
             final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new DiffCb(mPlaylistTracks, newList));
             handler.post(() -> {

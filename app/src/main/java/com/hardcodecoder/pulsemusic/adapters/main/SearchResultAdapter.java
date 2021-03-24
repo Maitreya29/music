@@ -1,6 +1,7 @@
 package com.hardcodecoder.pulsemusic.adapters.main;
 
 import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 
 import androidx.annotation.NonNull;
@@ -19,11 +20,11 @@ import java.util.List;
 public class SearchResultAdapter extends TracksAdapter {
 
     private final Deque<List<MusicModel>> pendingUpdates = new ArrayDeque<>();
-    private final Handler mMainHandler = new Handler();
+    private final Handler mMainHandler = new Handler(Looper.getMainLooper());
 
     public SearchResultAdapter(@NonNull LayoutInflater inflater,
                                @NonNull SimpleItemClickListener listener) {
-        super(inflater, new ArrayList<>(), listener, null, null, false);
+        super(inflater, new ArrayList<>(), listener, null, null);
     }
 
     public void updateItems(final List<MusicModel> newItems) {
