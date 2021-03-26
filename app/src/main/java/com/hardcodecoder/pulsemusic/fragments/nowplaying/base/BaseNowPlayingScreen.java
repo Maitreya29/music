@@ -1,16 +1,13 @@
 package com.hardcodecoder.pulsemusic.fragments.nowplaying.base;
 
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.media.MediaMetadata;
 import android.media.session.MediaController;
 import android.media.session.PlaybackState;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.text.format.DateUtils;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -45,8 +42,8 @@ import com.hardcodecoder.pulsemusic.utils.AppSettings;
 
 import java.util.List;
 
-public abstract class BaseNowPlayingScreen extends Fragment
-        implements MediaProgressUpdateHelper.Callback,
+public abstract class BaseNowPlayingScreen extends Fragment implements PulseController.ConnectionCallback,
+        MediaProgressUpdateHelper.Callback,
         FavoritesProvider.FavoritesProviderCallback,
         SharedPreferences.OnSharedPreferenceChangeListener {
 
@@ -57,7 +54,6 @@ public abstract class BaseNowPlayingScreen extends Fragment
     private PulseController.QueueManager mQueueManager;
     private PulseController.PulseRemote mRemote;
     private MediaProgressUpdateHelper mUpdateHelper;
-    private ServiceConnection mServiceConnection = null;
     private ViewPager2 mMediaArtPager;
     private MediaArtPagerAdapter mMediaArtAdapter;
     private final PulseController.Callback mControllerCallback = new PulseController.Callback() {
@@ -135,27 +131,9 @@ public abstract class BaseNowPlayingScreen extends Fragment
 
         onInitializeViews(view);
 
-        if (mPulseController.getController() != null) {
-            mUpdateHelper = new MediaProgressUpdateHelper(mPulseController.getController(), BaseNowPlayingScreen.this);
-            mPulseController.registerCallback(mControllerCallback);
-        } else {
-            mServiceConnection = new ServiceConnection() {
-                @Override
-                public void onServiceConnected(ComponentName name, IBinder service) {
-                    PMS.ServiceBinder serviceBinder = (PMS.ServiceBinder) service;
-                    mPulseController.setController(serviceBinder.getMediaController());
-                    mUpdateHelper = new MediaProgressUpdateHelper(mPulseController.getController(), BaseNowPlayingScreen.this);
-                }
-
-                @Override
-                public void onServiceDisconnected(ComponentName name) {
-                }
-            };
-            if (null != getActivity()) {
-                Intent intent = new Intent(getActivity(), PMS.class);
-                getActivity().bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE);
-            }
-        }
+        if (null == mPulseController.getController())
+            requireActivity().startService(new Intent(requireActivity(), PMS.class));
+        mPulseController.addConnectionCallback(this);
 
         // Convert the int values to mills
         mForwardSeekDuration = 1000 * AppSettings.getSeekButtonDuration(requireContext(), Preferences.NOW_PLAYING_SEEK_DURATION_FORWARD);
@@ -165,6 +143,12 @@ public abstract class BaseNowPlayingScreen extends Fragment
                 .registerOnSharedPreferenceChangeListener(this);
 
         ProviderManager.getFavoritesProvider().addCallback(this);
+    }
+
+    @Override
+    public void onControllerReady(@NonNull MediaController controller) {
+        mUpdateHelper = new MediaProgressUpdateHelper(controller, this);
+        mPulseController.registerCallback(mControllerCallback);
     }
 
     @Override
@@ -474,15 +458,11 @@ public abstract class BaseNowPlayingScreen extends Fragment
 
     @Override
     public void onDestroy() {
-        if (null != mMediaArtPager)
-            mMediaArtPager.requestDisallowInterceptTouchEvent(false);
-        if (null != mUpdateHelper)
-            mUpdateHelper.destroy();
-        if (null != getActivity()) {
-            requireActivity().getSharedPreferences(Preferences.NOW_PLAYING_CONTROLS, Context.MODE_PRIVATE)
-                    .unregisterOnSharedPreferenceChangeListener(this);
-            if (null != mServiceConnection) getActivity().unbindService(mServiceConnection);
-        }
+        if (null != mMediaArtPager) mMediaArtPager.requestDisallowInterceptTouchEvent(false);
+        if (null != mUpdateHelper) mUpdateHelper.destroy();
+        requireActivity().getSharedPreferences(Preferences.NOW_PLAYING_CONTROLS, Context.MODE_PRIVATE)
+                .unregisterOnSharedPreferenceChangeListener(this);
+        mPulseController.removeConnectionCallback(this);
         mPulseController.unregisterCallback(mControllerCallback);
         ProviderManager.getFavoritesProvider().removeCallback(this);
         super.onDestroy();
