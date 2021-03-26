@@ -71,6 +71,10 @@ public class PulseController {
     public void addConnectionCallback(@NonNull ConnectionCallback callback) {
         if (null == mConnectionCallbacks) mConnectionCallbacks = new ArrayList<>();
         mConnectionCallbacks.add(callback);
+        if (null != mMediaController) {
+            // The controller is already ready, so notify the listener
+            mMainHandler.post(() -> callback.onControllerReady(mMediaController));
+        }
     }
 
     public void removeConnectionCallback(@NonNull ConnectionCallback callback) {
