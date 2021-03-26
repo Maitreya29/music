@@ -20,6 +20,7 @@ import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.TaskRunner;
 import com.hardcodecoder.pulsemusic.activities.base.ThemeActivity;
 import com.hardcodecoder.pulsemusic.providers.ProviderManager;
+import com.hardcodecoder.pulsemusic.service.PMS;
 import com.hardcodecoder.pulsemusic.shortcuts.AppShortcutsManager;
 import com.hardcodecoder.pulsemusic.themes.TintHelper;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
@@ -88,6 +89,7 @@ public class SplashActivity extends ThemeActivity {
                 intent.setAction(MainContentActivity.ACTION_PLAY_FROM_URI);
                 intent.putExtra(MainContentActivity.TRACK_URI, uri.toString());
             }
+            startService(new Intent(this, PMS.class));
             startActivity(intent);
             finish();
         }, 400);

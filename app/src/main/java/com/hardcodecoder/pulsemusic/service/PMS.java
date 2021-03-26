@@ -22,7 +22,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.media.session.MediaButtonReceiver;
 
 import com.hardcodecoder.pulsemusic.Preferences;
@@ -60,8 +59,8 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
     private Handler mWorkerHandler = null;
     private PlaybackManager mPlaybackManager;
     private PulseController mPulseController;
-    private boolean isServiceRunning = false;
     private boolean isReceiverRegistered = false;
+    private boolean mCanServiceStopSelf = true;
 
     @Override
     public void onCreate() {
@@ -106,7 +105,6 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        isServiceRunning = true;
         mWorkerHandler.post(() -> MediaButtonReceiver.handleIntent(MediaSessionCompat.fromMediaSession(this, mMediaSession), intent));
         mWorkerHandler.post(() -> handleIntent(intent));
         return START_NOT_STICKY;
@@ -201,28 +199,35 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
+        mCanServiceStopSelf = false;
         return mBinder;
     }
 
     @Override
+    public boolean onUnbind(Intent intent) {
+        return true;
+    }
+
+    @Override
+    public void onRebind(Intent intent) {
+        mCanServiceStopSelf = false;
+        super.onRebind(intent);
+    }
+
+    @Override
     public void onTaskRemoved(Intent rootIntent) {
+        mCanServiceStopSelf = true;
         if (mMediaSession != null && !mMediaSession.isActive()) stopSelf();
-        super.onTaskRemoved(rootIntent);
     }
 
     @Override
     public void onDestroy() {
-        MediaController controller = mMediaSession.getController();
-        if (controller.getPlaybackState() != null && controller.getPlaybackState().getState() != PlaybackState.STATE_NONE) {
-            LoaderManager.clearCache();
-        }
         mPulseController.releaseController();
+        LoaderManager.clearCache();
         getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, MODE_PRIVATE)
                 .unregisterOnSharedPreferenceChangeListener(this);
-        if (isReceiverRegistered)
-            mNotificationManager.unregisterControlsReceiver();
-        if (mMediaSession != null)
-            mMediaSession.release();
+        if (isReceiverRegistered) mNotificationManager.unregisterControlsReceiver();
+        if (mMediaSession != null) mMediaSession.release();
         mWorkerHandler.removeCallbacksAndMessages(null);
         mServiceThread.quit();
         super.onDestroy();
@@ -231,14 +236,11 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
     @Override
     public void onPlaybackStart() {
         mMediaSession.setActive(true);
-        if (!isServiceRunning)
-            ContextCompat.startForegroundService(this, new Intent(this.getApplicationContext(), PMS.class));
     }
 
     @Override
     public void onPlaybackStopped() {
         mMediaSession.setActive(false);
-        isServiceRunning = false;
     }
 
     @Override
@@ -274,7 +276,7 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
     @Override
     public void onNotificationStopped(boolean removeNotification) {
         stopForeground(removeNotification);
-        if (removeNotification) stopSelf();
+        if (removeNotification && mCanServiceStopSelf) stopSelf();
     }
 
     @Override

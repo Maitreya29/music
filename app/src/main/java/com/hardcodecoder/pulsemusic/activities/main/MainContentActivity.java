@@ -21,6 +21,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.hardcodecoder.pulsemusic.MediaArtCache;
+import com.hardcodecoder.pulsemusic.PulseController;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.activities.base.DraggableNowPlayingSheetActivity;
 import com.hardcodecoder.pulsemusic.dialog.HomeBottomSheetFragment;
@@ -42,7 +43,7 @@ import com.hardcodecoder.pulsemusic.views.PulseToolbar;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainContentActivity extends DraggableNowPlayingSheetActivity {
+public class MainContentActivity extends DraggableNowPlayingSheetActivity implements PulseController.ConnectionCallback {
 
     public static final String TAG = MainContentActivity.class.getSimpleName();
     public static final String ACTION_OPEN_NOW_PLAYING = "com.hardcodecoder.pulsemusic.activities.main.MainContentActivity.ActionOpenNPS";
@@ -70,16 +71,16 @@ public class MainContentActivity extends DraggableNowPlayingSheetActivity {
     private AppBarLayout mAppBar;
     private PulseToolbar mPulseToolbar;
     private MediaController mController;
-    private final ServiceConnection serviceConnection = new ServiceConnection() {
+    private final ServiceConnection mServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder binder) {
             PMS.ServiceBinder serviceBinder = (PMS.ServiceBinder) binder;
-            mController = serviceBinder.getMediaController();
-            onControllerReady();
+            onControllerReady(serviceBinder.getMediaController());
         }
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
+            finish();
         }
     };
 
@@ -91,7 +92,7 @@ public class MainContentActivity extends DraggableNowPlayingSheetActivity {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        connectToMediaService();
+        bindService(new Intent(this, PMS.class), mServiceConnection, Context.BIND_AUTO_CREATE);
         setUpToolbar();
         if (null == savedInstanceState || LoaderManager.isMasterListEmpty())
             LoaderManager.loadMaster(this, success -> setUpMainContents(savedInstanceState));
@@ -159,11 +160,6 @@ public class MainContentActivity extends DraggableNowPlayingSheetActivity {
             if (activeFrag != playlistCardFrag)
                 switchFragment(playlistCardFrag, PlaylistFragment.TAG);
         }
-    }
-
-    private void connectToMediaService() {
-        Intent intent = new Intent(this, PMS.class);
-        bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
     }
 
     private void setUpToolbar() {
@@ -248,7 +244,8 @@ public class MainContentActivity extends DraggableNowPlayingSheetActivity {
         });
     }
 
-    public void onControllerReady() {
+    public void onControllerReady(@NonNull MediaController controller) {
+        mController = controller;
         mController.registerCallback(mCallback);
         if (handleIntent(getIntent())) return;
 
@@ -272,7 +269,7 @@ public class MainContentActivity extends DraggableNowPlayingSheetActivity {
 
     @Override
     protected void onDestroy() {
-        if (null != serviceConnection) unbindService(serviceConnection);
+        unbindService(mServiceConnection);
         if (null != mController) mController.unregisterCallback(mCallback);
         // This is our root activity, clear ui related caches when ui is not visible
         MediaArtCache.flushCache();
