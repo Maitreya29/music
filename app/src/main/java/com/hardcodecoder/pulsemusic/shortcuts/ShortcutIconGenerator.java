@@ -14,6 +14,7 @@ import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 
 import com.hardcodecoder.pulsemusic.R;
+import com.hardcodecoder.pulsemusic.utils.DimensionsUtil;
 
 @RequiresApi(Build.VERSION_CODES.N_MR1)
 public class ShortcutIconGenerator {
@@ -28,6 +29,11 @@ public class ShortcutIconGenerator {
             foreground.setTint(ShortcutsThemeManager.getAccentColorForIcons());
 
         LayerDrawable layerDrawable = new LayerDrawable(new Drawable[]{background, foreground});
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            final int padding = DimensionsUtil.getDimensionPixelSize(context, 16);
+            layerDrawable.setLayerInset(1, padding, padding, padding, padding);
+            return Icon.createWithAdaptiveBitmap(createBitmap(layerDrawable));
+        }
         return Icon.createWithBitmap(createBitmap(layerDrawable));
     }
 
