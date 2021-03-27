@@ -15,21 +15,32 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:layout_marginEnd="36dp"
+        android:layout_marginEnd="16dp"
         android:textAppearance="@style/Appearance.Text.Subtitle1"
         app:layout_constraintBottom_toBottomOf="@id/bottom_dialog_picker_add_btn"
-        app:layout_constraintEnd_toStartOf="@id/bottom_dialog_picker_add_btn"
+        app:layout_constraintEnd_toStartOf="@id/bottom_dialog_picker_edit"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/bottom_dialog_picker_add_btn"
         tools:text="@tools:sample/full_names" />
 
     <ImageView
+        android:id="@+id/bottom_dialog_picker_edit"
+        style="@style/ButtonStyle24"
+        android:layout_marginEnd="8dp"
+        android:contentDescription="@string/desc_action_btn"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@id/bottom_dialog_picker_add_btn"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_edit"
+        tools:visibility="visible" />
+
+    <ImageView
         android:id="@+id/bottom_dialog_picker_add_btn"
         style="@style/ButtonStyle24"
         android:contentDescription="@string/desc_action_btn"
-        android:src="@drawable/ic_playlist_add"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_playlist_add" />
 
     <ViewStub
         android:id="@+id/bottom_dialog_picker_stub_rv"

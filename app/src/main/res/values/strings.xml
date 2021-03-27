@@ -222,6 +222,8 @@
     <string name="toast_folder_added_to_ignored_list">Successfully added folder to ignored list</string>
     <string name="toast_failed_to_add_folder">Failed to add folder to ignored list</string>
     <string name="toast_removed_folder_from_ignored_list">Folder removed from ignored list</string>
+    <string name="ignored_folder_enter_path_title">Ignored folder path</string>
+    <string name="hint_ignored_folder_enter_path">Enter folder path</string>
     <string name="duration_filter_title">Duration filter</string>
     <string name="duration_filter_desc">Filter tracks based on track duration</string>
     <string name="duration_filter_unit">sec</string>
