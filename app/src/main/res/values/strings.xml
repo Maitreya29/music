@@ -319,6 +319,7 @@
     <string name="github">Github</string>
     <string name="twitter">Twitter</string>
     <string name="telegram">Telegram</string>
+    <string name="crowdin">Translate</string>
 
 
     <!-- Donations -->

@@ -125,11 +125,10 @@
         android:id="@+id/app_link_twitter"
         android:layout_width="128dp"
         android:layout_height="128dp"
-        android:layout_marginStart="56dp"
         android:layout_marginTop="16dp"
         app:cardCornerRadius="@dimen/rounding_radius_8dp"
         app:cardElevation="4dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/guide_start"
         app:layout_constraintTop_toBottomOf="@id/social_link_title">
 
         <com.hardcodecoder.pulsemusic.views.ColoredIconView
@@ -189,8 +188,7 @@
         android:layout_marginTop="16dp"
         app:cardCornerRadius="@dimen/rounding_radius_8dp"
         app:cardElevation="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@id/app_link_twitter"
         app:layout_constraintTop_toBottomOf="@id/app_link_twitter">
 
         <com.hardcodecoder.pulsemusic.views.ColoredIconView
@@ -210,6 +208,38 @@
             android:layout_marginBottom="12dp"
             android:gravity="center"
             android:text="@string/github"
+            android:textAppearance="@style/Appearance.Text.Subtitle2"
+            android:textColor="@color/darkColorBackground" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/app_link_crowdin"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        app:cardCornerRadius="@dimen/rounding_radius_8dp"
+        app:cardElevation="4dp"
+        app:layout_constraintStart_toEndOf="@id/app_link_github"
+        app:layout_constraintTop_toBottomOf="@id/app_link_telegram">
+
+        <com.hardcodecoder.pulsemusic.views.ColoredIconView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="-16dp"
+            app:icon="@drawable/ic_translate"
+            app:iconBackgroundShape="rectangle"
+            app:iconColor="@color/md_deep_orange_500"
+            app:iconPadding="42dp" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="12dp"
+            android:gravity="center"
+            android:text="@string/crowdin"
             android:textAppearance="@style/Appearance.Text.Subtitle2"
             android:textColor="@color/darkColorBackground" />
     </com.google.android.material.card.MaterialCardView>
