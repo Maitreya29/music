@@ -6,6 +6,7 @@ import com.hardcodecoder.pulsemusic.BuildConfig;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.providers.ProviderManager;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -42,18 +43,20 @@ public class RediscoverLoader implements Callable<List<MusicModel>> {
             return null;
         }
 
+        List<MusicModel> rediscoverList = new ArrayList<>(master);
+
         // Remove tracks user has already played
-        master.removeAll(historyTracks);
+        rediscoverList.removeAll(historyTracks);
 
         // Remove specified tracks
         if (null != mExcludeTracks)
-            master.removeAll(mExcludeTracks);
+            rediscoverList.removeAll(mExcludeTracks);
 
         // Shuffle leftover tracks
-        Collections.shuffle(master);
+        Collections.shuffle(rediscoverList);
 
         // Consider 30 or 20% of master#size() whichever is smaller
-        final int rediscoverCount = Math.min((int) (0.2 * master.size()), 30);
-        return master.subList(0, rediscoverCount);
+        final int rediscoverCount = Math.min((int) (0.2 * rediscoverList.size()), 30);
+        return rediscoverList.subList(0, rediscoverCount);
     }
 }
