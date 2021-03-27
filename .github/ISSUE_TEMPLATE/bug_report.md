@@ -31,3 +31,6 @@ If applicable, add screenshots to help explain your problem.
 
 **Additional context**
 Add any other context about the problem here.
+
+**Logs**
+Attach any logs found here: `/Android/data/com.hardcodecoder.pulsemusic/files/`
