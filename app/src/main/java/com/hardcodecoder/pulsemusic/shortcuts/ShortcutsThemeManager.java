@@ -28,7 +28,7 @@ class ShortcutsThemeManager {
                 break;
             case Configuration.UI_MODE_NIGHT_NO:
             default:
-                mBackgroundColorForIcons = ColorUtil.mixColors(0x121212, 0xFFFFFF, 0.05f);
+                mBackgroundColorForIcons = ColorUtil.mixColors(0x000000, 0xFFFFFF, 0.02f);
                 AppSettings.setAppShortcutThemeMode(context, false);
                 break;
         }
