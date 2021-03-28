@@ -21,7 +21,7 @@ public final class PulseAppGlideModule extends AppGlideModule {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions = requestOptions.diskCacheStrategy(DiskCacheStrategy.RESOURCE);
         builder.setDefaultRequestOptions(requestOptions);
-        if (BuildConfig.DEBUG) builder.setLogLevel(Log.DEBUG);
+        if (BuildConfig.DEBUG) builder.setLogLevel(Log.WARN);
         else builder.setLogLevel(Log.ERROR);
     }
 }
