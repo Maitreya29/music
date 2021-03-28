@@ -167,12 +167,14 @@ public class LocalPlayback implements
 
     @Override
     public void onPause() {
-        if (mp != null) {
+        if (mp != null && mp.isPlaying()) {
             mp.pause();
             mResumePosition = mp.getCurrentPosition() - 250; // Offset playback position by 250
         }
-        mPlaybackState = PlaybackState.STATE_PAUSED;
-        mPlaybackCallback.onPlaybackStateChanged(mPlaybackState);
+        if (mPlaybackState != PlaybackState.STATE_PAUSED) {
+            mPlaybackState = PlaybackState.STATE_PAUSED;
+            mPlaybackCallback.onPlaybackStateChanged(mPlaybackState);
+        }
     }
 
     @Override
@@ -201,7 +203,7 @@ public class LocalPlayback implements
             mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_NONE);
         }
 
-        if (abandonAudioFocus) {
+        if (abandonAudioFocus && mPlaybackState != PlaybackState.STATE_STOPPED) {
             mPlaybackState = PlaybackState.STATE_STOPPED;
             mPlaybackCallback.onPlaybackStateChanged(mPlaybackState);
         }
