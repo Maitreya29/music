@@ -223,7 +223,11 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
     @Override
     public void onDestroy() {
         mPulseController.releaseController();
-        LoaderManager.clearCache();
+        if (mCanServiceStopSelf) {
+            // Clear track cache only when service is free to stop itself
+            // not during a restart or unbind-rebind event
+            LoaderManager.clearCache();
+        }
         getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, MODE_PRIVATE)
                 .unregisterOnSharedPreferenceChangeListener(this);
         if (isReceiverRegistered) mNotificationManager.unregisterControlsReceiver();
