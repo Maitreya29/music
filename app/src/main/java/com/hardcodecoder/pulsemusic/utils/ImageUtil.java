@@ -3,6 +3,7 @@ package com.hardcodecoder.pulsemusic.utils;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 
 import androidx.annotation.ColorInt;
@@ -20,7 +21,7 @@ import java.io.InputStream;
 
 public class ImageUtil {
 
-    @NonNull
+    @Nullable
     public static Drawable generateTintedDefaultAlbumArt(@NonNull Context context, @ColorInt int color) {
         Drawable drawable = ContextCompat.getDrawable(context, R.drawable.ic_audio_48dp);
         if (drawable != null) {
@@ -43,8 +44,7 @@ public class ImageUtil {
     @Nullable
     public static Drawable getSelectedItemDrawable(@NonNull Context context) {
         Drawable drawable = getRoundedRectangle(context);
-        if (null == drawable)
-            return null;
+        if (null == drawable) return null;
         return TintHelper.setTintTo(
                 drawable,
                 ColorUtil.changeAlphaComponentTo(ThemeColors.getCurrentColorPrimary(), 0.26f),
@@ -56,8 +56,17 @@ public class ImageUtil {
         return ContextCompat.getDrawable(context, R.drawable.shape_rounded_rectangle);
     }
 
+    @NonNull
+    public static Bitmap getBitmapFromDrawable(@NonNull Drawable drawable) {
+        Bitmap bitmap = Bitmap.createBitmap(400, 400, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+        return bitmap;
+    }
+
     @Nullable
-    public static Bitmap getScaledBitmap(@NonNull final InputStream stream, int width, int height) {
+    public static Bitmap getScaledBitmap(@Nullable final InputStream stream, int width, int height) {
         try {
             if (null == stream) {
                 return null;
