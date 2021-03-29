@@ -35,7 +35,7 @@ public class CornerRadiusChangeDialogFragment extends RoundedCustomBottomSheetFr
         ValueSlider bottomLeft = view.findViewById(R.id.radius_slider_bl);
         ValueSlider bottomRight = view.findViewById(R.id.radius_slider_br);
 
-        int[] radiusValues = AppSettings.getNowPlayingAlbumCoverCornerRadius(requireContext());
+        int[] radiusValues = AppSettings.getNowPlayingAlbumCardCornerRadius(requireContext());
 
         topLeft.setSliderValue(radiusValues[0]);
         topRight.setSliderValue(radiusValues[1]);
@@ -43,7 +43,7 @@ public class CornerRadiusChangeDialogFragment extends RoundedCustomBottomSheetFr
         bottomRight.setSliderValue(radiusValues[3]);
 
         view.findViewById(R.id.radius_changer_set_btn).setOnClickListener(v -> {
-            AppSettings.saveNowPlayingAlbumCoverCornerRadius(
+            AppSettings.setNowPlayingAlbumCardCornerRadius(
                     requireContext(),
                     topLeft.getSliderValue(),
                     topRight.getSliderValue(),

@@ -34,8 +34,8 @@ public class SeekDurationSelector extends RoundedCustomBottomSheetFragment {
         ValueSlider forward = view.findViewById(R.id.forward_seek_duration);
         ValueSlider backward = view.findViewById(R.id.backwards_seek_duration);
 
-        final int currentForwardDuration = AppSettings.getSeekButtonDuration(requireContext(), Preferences.NOW_PLAYING_SEEK_DURATION_FORWARD);
-        final int currentBackwardDuration = AppSettings.getSeekButtonDuration(requireContext(), Preferences.NOW_PLAYING_SEEK_DURATION_BACKWARD);
+        final int currentForwardDuration = AppSettings.getSeekButtonDuration(requireContext(), Preferences.KEY_NOW_PLAYING_SEEK_DURATION_FORWARD);
+        final int currentBackwardDuration = AppSettings.getSeekButtonDuration(requireContext(), Preferences.KEY_NOW_PLAYING_SEEK_DURATION_BACKWARD);
 
         forward.setSliderValue(currentForwardDuration);
         backward.setSliderValue(currentBackwardDuration);
@@ -44,9 +44,9 @@ public class SeekDurationSelector extends RoundedCustomBottomSheetFragment {
             int newForwardDuration = forward.getSliderValue();
             int newBackwardDuration = backward.getSliderValue();
             if (newForwardDuration != currentForwardDuration)
-                AppSettings.setSeekButtonDuration(requireContext(), Preferences.NOW_PLAYING_SEEK_DURATION_FORWARD, newForwardDuration);
+                AppSettings.setSeekButtonDuration(requireContext(), Preferences.KEY_NOW_PLAYING_SEEK_DURATION_FORWARD, newForwardDuration);
             if (newBackwardDuration != currentBackwardDuration)
-                AppSettings.setSeekButtonDuration(requireContext(), Preferences.NOW_PLAYING_SEEK_DURATION_BACKWARD, newBackwardDuration);
+                AppSettings.setSeekButtonDuration(requireContext(), Preferences.KEY_NOW_PLAYING_SEEK_DURATION_BACKWARD, newBackwardDuration);
             dismiss();
         });
     }

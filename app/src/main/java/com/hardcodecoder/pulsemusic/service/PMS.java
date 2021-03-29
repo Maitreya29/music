@@ -89,17 +89,19 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
 
         mNotificationManager = new MediaNotificationManager(this, mMediaSession.getController(), this);
 
-        final boolean rememberPlaylist = getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, MODE_PRIVATE)
-                .getBoolean(Preferences.REMEMBER_PREVIOUS_PLAYLIST, false);
+        final boolean rememberPlaylist = getSharedPreferences(Preferences.PREF_GENERAL, MODE_PRIVATE)
+                .getBoolean(Preferences.KEY_REMEMBER_PREVIOUS_PLAYLIST, false);
 
         mPlaybackManager.setRememberPlaylist(rememberPlaylist);
         mPulseController.setRememberPlaylist(rememberPlaylist, false);
 
-        final boolean sleepTimerEnabled = getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, MODE_PRIVATE)
-                .getBoolean(Preferences.SLEEP_TIMER, Preferences.SLEEP_TIMER_DEFAULT);
+        final boolean sleepTimerEnabled = getSharedPreferences(Preferences.PREF_AUDIO, MODE_PRIVATE)
+                .getBoolean(Preferences.KEY_SLEEP_TIMER, Preferences.DEF_SLEEP_TIMER_DISABLED);
         mPlaybackManager.configureTimer(sleepTimerEnabled, false);
 
-        getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, MODE_PRIVATE)
+        getSharedPreferences(Preferences.PREF_GENERAL, MODE_PRIVATE)
+                .registerOnSharedPreferenceChangeListener(this);
+        getSharedPreferences(Preferences.PREF_AUDIO, MODE_PRIVATE)
                 .registerOnSharedPreferenceChangeListener(this);
     }
 
@@ -228,7 +230,9 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
             // not during a restart or unbind-rebind event
             LoaderManager.clearCache();
         }
-        getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, MODE_PRIVATE)
+        getSharedPreferences(Preferences.PREF_GENERAL, MODE_PRIVATE)
+                .unregisterOnSharedPreferenceChangeListener(this);
+        getSharedPreferences(Preferences.PREF_AUDIO, MODE_PRIVATE)
                 .unregisterOnSharedPreferenceChangeListener(this);
         if (isReceiverRegistered) mNotificationManager.unregisterControlsReceiver();
         if (mMediaSession != null) mMediaSession.release();
@@ -302,14 +306,14 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
 
     private void handleSharedPreferenceChange(@NonNull SharedPreferences sharedPreferences, @NonNull String key) {
         switch (key) {
-            case Preferences.REMEMBER_PREVIOUS_PLAYLIST:
-                boolean remember = sharedPreferences.getBoolean(Preferences.REMEMBER_PREVIOUS_PLAYLIST, false);
+            case Preferences.KEY_REMEMBER_PREVIOUS_PLAYLIST:
+                boolean remember = sharedPreferences.getBoolean(Preferences.KEY_REMEMBER_PREVIOUS_PLAYLIST, false);
                 mPlaybackManager.setRememberPlaylist(remember);
                 mPulseController.setRememberPlaylist(remember, true);
                 break;
-            case Preferences.SLEEP_TIMER:
-            case Preferences.SLEEP_TIMER_DURATION:
-                mPlaybackManager.configureTimer(sharedPreferences.getBoolean(Preferences.SLEEP_TIMER, Preferences.SLEEP_TIMER_DEFAULT),
+            case Preferences.KEY_SLEEP_TIMER:
+            case Preferences.KEY_SLEEP_TIMER_DURATION:
+                mPlaybackManager.configureTimer(sharedPreferences.getBoolean(Preferences.PREF_AUDIO, Preferences.DEF_SLEEP_TIMER_DISABLED),
                         mMediaSession.isActive());
                 break;
         }

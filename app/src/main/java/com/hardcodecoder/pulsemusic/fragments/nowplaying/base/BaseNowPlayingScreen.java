@@ -136,10 +136,10 @@ public abstract class BaseNowPlayingScreen extends Fragment implements PulseCont
         mPulseController.addConnectionCallback(this);
 
         // Convert the int values to mills
-        mForwardSeekDuration = 1000 * AppSettings.getSeekButtonDuration(requireContext(), Preferences.NOW_PLAYING_SEEK_DURATION_FORWARD);
-        mBackwardsSeekDuration = 1000 * AppSettings.getSeekButtonDuration(requireContext(), Preferences.NOW_PLAYING_SEEK_DURATION_BACKWARD);
+        mForwardSeekDuration = 1000 * AppSettings.getSeekButtonDuration(requireContext(), Preferences.KEY_NOW_PLAYING_SEEK_DURATION_FORWARD);
+        mBackwardsSeekDuration = 1000 * AppSettings.getSeekButtonDuration(requireContext(), Preferences.KEY_NOW_PLAYING_SEEK_DURATION_BACKWARD);
 
-        requireActivity().getSharedPreferences(Preferences.NOW_PLAYING_CONTROLS, Context.MODE_PRIVATE)
+        requireActivity().getSharedPreferences(Preferences.PREF_NOW_PLAYING, Context.MODE_PRIVATE)
                 .registerOnSharedPreferenceChangeListener(this);
 
         ProviderManager.getFavoritesProvider().addCallback(this);
@@ -154,17 +154,17 @@ public abstract class BaseNowPlayingScreen extends Fragment implements PulseCont
     @Override
     public void onSharedPreferenceChanged(@NonNull SharedPreferences sharedPreferences, @NonNull String key) {
         switch (key) {
-            case Preferences.NOW_PLAYING_SEEK_DURATION_FORWARD:
+            case Preferences.KEY_NOW_PLAYING_SEEK_DURATION_FORWARD:
                 mForwardSeekDuration = 1000 * sharedPreferences.getInt(
-                        Preferences.NOW_PLAYING_SEEK_DURATION_FORWARD,
-                        Preferences.NOW_PLAYING_SEEK_DURATION_DEF);
+                        Preferences.KEY_NOW_PLAYING_SEEK_DURATION_FORWARD,
+                        Preferences.DEF_NOW_PLAYING_SEEK_DURATION);
                 break;
-            case Preferences.NOW_PLAYING_SEEK_DURATION_BACKWARD:
+            case Preferences.KEY_NOW_PLAYING_SEEK_DURATION_BACKWARD:
                 mBackwardsSeekDuration = 1000 * sharedPreferences.getInt(
-                        Preferences.NOW_PLAYING_SEEK_DURATION_BACKWARD,
-                        Preferences.NOW_PLAYING_SEEK_DURATION_DEF);
+                        Preferences.KEY_NOW_PLAYING_SEEK_DURATION_BACKWARD,
+                        Preferences.DEF_NOW_PLAYING_SEEK_DURATION);
                 break;
-            case Preferences.NOW_PLAYING_CONTROLS_SEEK_ENABLED:
+            case Preferences.KEY_NOW_PLAYING_CONTROLS_SEEK_ENABLED:
                 onTrackControlButtonsChanged();
                 break;
         }
@@ -258,7 +258,7 @@ public abstract class BaseNowPlayingScreen extends Fragment implements PulseCont
 
     protected ShapeAppearanceModel getMediaImageViewShapeAppearanceModel() {
         float factor = (float) getResources().getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT;
-        int[] radiusDP = AppSettings.getNowPlayingAlbumCoverCornerRadius(requireContext());
+        int[] radiusDP = AppSettings.getNowPlayingAlbumCardCornerRadius(requireContext());
         float tl = radiusDP[0] * factor;
         float tr = radiusDP[1] * factor;
         float bl = radiusDP[2] * factor;
@@ -460,7 +460,7 @@ public abstract class BaseNowPlayingScreen extends Fragment implements PulseCont
     public void onDestroy() {
         if (null != mMediaArtPager) mMediaArtPager.requestDisallowInterceptTouchEvent(false);
         if (null != mUpdateHelper) mUpdateHelper.destroy();
-        requireActivity().getSharedPreferences(Preferences.NOW_PLAYING_CONTROLS, Context.MODE_PRIVATE)
+        requireActivity().getSharedPreferences(Preferences.PREF_NOW_PLAYING, Context.MODE_PRIVATE)
                 .unregisterOnSharedPreferenceChangeListener(this);
         mPulseController.removeConnectionCallback(this);
         mPulseController.unregisterCallback(mControllerCallback);

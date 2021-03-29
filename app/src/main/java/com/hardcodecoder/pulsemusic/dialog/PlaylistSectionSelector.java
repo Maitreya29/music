@@ -79,11 +79,11 @@ public class PlaylistSectionSelector extends RoundedCustomBottomSheetFragment {
         AccentColorSwitch newInLibrary = view.findViewById(R.id.switch_new_in_library);
         AccentColorSwitch topArtist = view.findViewById(R.id.switch_top_artist);
 
-        mIsTopAlbumsEnabled = AppSettings.isPlaylistSectionEnabled(mContext, Preferences.HOME_PLAYLIST_TOP_ALBUMS);
-        mIsForYouEnabled = AppSettings.isPlaylistSectionEnabled(mContext, Preferences.HOME_PLAYLIST_FOR_YOU);
-        mIsRediscoverEnabled = AppSettings.isPlaylistSectionEnabled(mContext, Preferences.HOME_PLAYLIST_REDISCOVER);
-        mIsNewInLibraryEnabled = AppSettings.isPlaylistSectionEnabled(mContext, Preferences.HOME_PLAYLIST_NEW_IN_LIBRARY);
-        mIsTopArtistEnabled = AppSettings.isPlaylistSectionEnabled(mContext, Preferences.HOME_PLAYLIST_TOP_ARTIST);
+        mIsTopAlbumsEnabled = AppSettings.isPlaylistSectionEnabled(mContext, Preferences.KEY_HOME_PLAYLIST_TOP_ALBUMS);
+        mIsForYouEnabled = AppSettings.isPlaylistSectionEnabled(mContext, Preferences.KEY_HOME_PLAYLIST_FOR_YOU);
+        mIsRediscoverEnabled = AppSettings.isPlaylistSectionEnabled(mContext, Preferences.KEY_HOME_PLAYLIST_REDISCOVER);
+        mIsNewInLibraryEnabled = AppSettings.isPlaylistSectionEnabled(mContext, Preferences.KEY_HOME_PLAYLIST_NEW_IN_LIBRARY);
+        mIsTopArtistEnabled = AppSettings.isPlaylistSectionEnabled(mContext, Preferences.KEY_HOME_PLAYLIST_TOP_ARTIST);
 
         topAlbums.setChecked(mIsTopAlbumsEnabled);
         forYou.setChecked(mIsForYouEnabled);
@@ -108,34 +108,34 @@ public class PlaylistSectionSelector extends RoundedCustomBottomSheetFragment {
 
 
         topAlbums.setOnCheckedChangeListener((buttonView, isChecked) ->
-                AppSettings.setPlaylistSectionEnabled(mContext, Preferences.HOME_PLAYLIST_TOP_ALBUMS, isChecked)
+                AppSettings.setPlaylistSectionEnabled(mContext, Preferences.KEY_HOME_PLAYLIST_TOP_ALBUMS, isChecked)
         );
 
         forYou.setOnCheckedChangeListener((buttonView, isChecked) ->
-                AppSettings.setPlaylistSectionEnabled(mContext, Preferences.HOME_PLAYLIST_FOR_YOU, isChecked)
+                AppSettings.setPlaylistSectionEnabled(mContext, Preferences.KEY_HOME_PLAYLIST_FOR_YOU, isChecked)
         );
 
         rediscover.setOnCheckedChangeListener((buttonView, isChecked) ->
-                AppSettings.setPlaylistSectionEnabled(mContext, Preferences.HOME_PLAYLIST_REDISCOVER, isChecked)
+                AppSettings.setPlaylistSectionEnabled(mContext, Preferences.KEY_HOME_PLAYLIST_REDISCOVER, isChecked)
         );
 
         newInLibrary.setOnCheckedChangeListener((buttonView, isChecked) ->
-                AppSettings.setPlaylistSectionEnabled(mContext, Preferences.HOME_PLAYLIST_NEW_IN_LIBRARY, isChecked)
+                AppSettings.setPlaylistSectionEnabled(mContext, Preferences.KEY_HOME_PLAYLIST_NEW_IN_LIBRARY, isChecked)
         );
 
         topArtist.setOnCheckedChangeListener((buttonView, isChecked) ->
-                AppSettings.setPlaylistSectionEnabled(mContext, Preferences.HOME_PLAYLIST_TOP_ARTIST, isChecked)
+                AppSettings.setPlaylistSectionEnabled(mContext, Preferences.KEY_HOME_PLAYLIST_TOP_ARTIST, isChecked)
         );
     }
 
     @Override
     public void onDismiss(@NonNull DialogInterface dialog) {
         super.onDismiss(dialog);
-        boolean isTopAlbumsEnabled = AppSettings.isPlaylistSectionEnabled(mContext, Preferences.HOME_PLAYLIST_TOP_ALBUMS);
-        boolean isForYouEnabled = AppSettings.isPlaylistSectionEnabled(mContext, Preferences.HOME_PLAYLIST_FOR_YOU);
-        boolean isRediscoverEnabled = AppSettings.isPlaylistSectionEnabled(mContext, Preferences.HOME_PLAYLIST_REDISCOVER);
-        boolean isNewInLibraryEnabled = AppSettings.isPlaylistSectionEnabled(mContext, Preferences.HOME_PLAYLIST_NEW_IN_LIBRARY);
-        boolean isTopArtistEnabled = AppSettings.isPlaylistSectionEnabled(mContext, Preferences.HOME_PLAYLIST_TOP_ARTIST);
+        boolean isTopAlbumsEnabled = AppSettings.isPlaylistSectionEnabled(mContext, Preferences.KEY_HOME_PLAYLIST_TOP_ALBUMS);
+        boolean isForYouEnabled = AppSettings.isPlaylistSectionEnabled(mContext, Preferences.KEY_HOME_PLAYLIST_FOR_YOU);
+        boolean isRediscoverEnabled = AppSettings.isPlaylistSectionEnabled(mContext, Preferences.KEY_HOME_PLAYLIST_REDISCOVER);
+        boolean isNewInLibraryEnabled = AppSettings.isPlaylistSectionEnabled(mContext, Preferences.KEY_HOME_PLAYLIST_NEW_IN_LIBRARY);
+        boolean isTopArtistEnabled = AppSettings.isPlaylistSectionEnabled(mContext, Preferences.KEY_HOME_PLAYLIST_TOP_ARTIST);
 
         mDismissListener.onDismissed(isTopAlbumsEnabled != mIsTopAlbumsEnabled ||
                 isForYouEnabled != mIsForYouEnabled ||

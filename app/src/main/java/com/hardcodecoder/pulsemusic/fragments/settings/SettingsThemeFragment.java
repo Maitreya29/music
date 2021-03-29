@@ -50,11 +50,11 @@ public class SettingsThemeFragment extends SettingsBaseFragment {
         SettingsToggleableItem desaturatedAccentItem = view.findViewById(R.id.laf_enable_desaturated);
 
         boolean desaturatedAccents;
-        desaturatedAccents = AppSettings.getAccentDesaturatedColor(requireContext());
+        desaturatedAccents = AppSettings.isAccentDesaturated(requireContext());
 
         desaturatedAccentItem.setSwitchChecked(desaturatedAccents);
         desaturatedAccentItem.setOnSwitchCheckedChangedListener((buttonView, isChecked) -> {
-            AppSettings.saveAccentDesaturatedColor(requireActivity(), isChecked);
+            AppSettings.setAccentDesaturated(requireActivity(), isChecked);
             if (ThemeManagerUtils.isDarkModeEnabled())
                 applyTheme();
         });

@@ -59,7 +59,7 @@ public class SettingsGeneralFragment extends SettingsBaseFragment {
         mCurrentFilterDuration = AppSettings.getFilterDuration(requireContext());
         mDurationFilter.setSliderValue(mCurrentFilterDuration);
 
-        boolean remember = AppSettings.rememberPlaylistEnabled(requireContext());
+        boolean remember = AppSettings.isRememberPlaylistEnabled(requireContext());
         SettingsToggleableItem rememberOption = view.findViewById(R.id.remember_playlist_option);
         rememberOption.setSwitchChecked(remember);
         rememberOption.setOnSwitchCheckedChangedListener((buttonView, isChecked) ->

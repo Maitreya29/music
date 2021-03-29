@@ -22,6 +22,17 @@ public class AppSettings {
         editor.apply();
     }
 
+    public static void saveSortOrder(@NonNull Context context, String prefId, int sortOrder) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.SORT_ORDER_PREFS_KEY, Context.MODE_PRIVATE).edit();
+        editor.putInt(prefId, sortOrder);
+        editor.apply();
+    }
+
+    public static int getSortOrder(@NonNull Context context, String prefId) {
+        return context.getSharedPreferences(Preferences.SORT_ORDER_PREFS_KEY, Context.MODE_PRIVATE)
+                .getInt(prefId, Preferences.SORT_ORDER_ASC);
+    }
+
     public static void savePortraitModeColumnCount(@NonNull Context context, String prefId, int count) {
         SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.COLUMN_COUNT, Context.MODE_PRIVATE).edit();
         editor.putInt(prefId, count);
@@ -44,256 +55,244 @@ public class AppSettings {
                 .getInt(prefId, defValue);
     }
 
-    public static void saveSortOrder(@NonNull Context context, String prefId, int sortOrder) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.SORT_ORDER_PREFS_KEY, Context.MODE_PRIVATE).edit();
-        editor.putInt(prefId, sortOrder);
+    public static void setFilterDuration(@NonNull Context context, int duration) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.PREF_GENERAL, Context.MODE_PRIVATE).edit();
+        editor.putInt(Preferences.KEY_FILTER_DURATION, duration);
         editor.apply();
     }
 
-    public static int getSortOrder(@NonNull Context context, String prefId) {
-        return context.getSharedPreferences(Preferences.SORT_ORDER_PREFS_KEY, Context.MODE_PRIVATE)
-                .getInt(prefId, Preferences.SORT_ORDER_ASC);
+    public static int getFilterDuration(@NonNull Context context) {
+        return context.getSharedPreferences(Preferences.PREF_GENERAL, Context.MODE_PRIVATE)
+                .getInt(Preferences.KEY_FILTER_DURATION, 30); // By default filter duration is 30 sec
     }
 
-    public static void enableDarkMode(@NonNull Context context, boolean state) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.PULSE_THEMES_PREFS, Context.MODE_PRIVATE).edit();
-        editor.putBoolean(Preferences.UI_THEME_DARK_KEY, state);
+    public static void setRememberPlaylist(@NonNull Context context, boolean enabled) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.PREF_GENERAL, Context.MODE_PRIVATE).edit();
+        editor.putBoolean(Preferences.KEY_REMEMBER_PREVIOUS_PLAYLIST, enabled);
         editor.apply();
     }
 
-    public static void enableAutoTheme(@NonNull Context context, boolean state) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.PULSE_THEMES_PREFS, Context.MODE_PRIVATE).edit();
-        editor.putBoolean(Preferences.UI_MODE_AUTO_KEY, state);
+    public static boolean isRememberPlaylistEnabled(@NonNull Context context) {
+        return context.getSharedPreferences(Preferences.PREF_GENERAL, Context.MODE_PRIVATE)
+                .getBoolean(Preferences.KEY_REMEMBER_PREVIOUS_PLAYLIST, false); // By default do not remember last track
+    }
+
+    public static void savePlaylistTrackAndPosition(@NonNull Context context, int trackIndex, int position) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.PREF_GENERAL, Context.MODE_PRIVATE).edit();
+        editor.putInt(Preferences.KEY_PREVIOUS_PLAYLIST_TRACK_INDEX, trackIndex);
+        editor.putInt(Preferences.KEY_PREVIOUS_PLAYLIST_TRACK_POSITION, position);
         editor.apply();
     }
 
-    public static boolean isDarkModeEnabled(@NonNull Context context) {
-        return context.getSharedPreferences(Preferences.PULSE_THEMES_PREFS, Context.MODE_PRIVATE)
-                .getBoolean(Preferences.UI_THEME_DARK_KEY, false);
+    public static int getLastTrackIndex(@NonNull Context context) {
+        return context.getSharedPreferences(Preferences.PREF_GENERAL, Context.MODE_PRIVATE)
+                .getInt(Preferences.KEY_PREVIOUS_PLAYLIST_TRACK_INDEX, -1);
     }
 
-    public static boolean isAutoThemeEnabled(@NonNull Context context) {
-        return context.getSharedPreferences(Preferences.PULSE_THEMES_PREFS, Context.MODE_PRIVATE)
-                .getBoolean(Preferences.UI_MODE_AUTO_KEY, false);
+    public static int getLastTrackPosition(@NonNull Context context) {
+        return context.getSharedPreferences(Preferences.PREF_GENERAL, Context.MODE_PRIVATE)
+                .getInt(Preferences.KEY_PREVIOUS_PLAYLIST_TRACK_POSITION, 0);
+    }
+
+    public static void setPlaylistSectionEnabled(@NonNull Context context, @NonNull String playlistSection, boolean enable) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.PREF_HOME_PLAYLIST_SECTIONS, Context.MODE_PRIVATE).edit();
+        editor.putBoolean(playlistSection, enable);
+        editor.apply();
+    }
+
+    public static boolean isPlaylistSectionEnabled(@NonNull Context context, @NonNull String playlistSection) {
+        return context.getSharedPreferences(Preferences.PREF_HOME_PLAYLIST_SECTIONS, Context.MODE_PRIVATE)
+                .getBoolean(playlistSection, false);
     }
 
     public static void saveSelectedDarkTheme(@NonNull Context context, int id) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.PULSE_THEMES_PREFS, Context.MODE_PRIVATE).edit();
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.PREFS_PULSE_THEMES, Context.MODE_PRIVATE).edit();
         editor.putInt(Preferences.DARK_THEME_CATEGORY_KEY, id);
         editor.apply();
     }
 
     public static int getSelectedDarkTheme(@NonNull Context context) {
-        return context.getSharedPreferences(Preferences.PULSE_THEMES_PREFS, Context.MODE_PRIVATE)
+        return context.getSharedPreferences(Preferences.PREFS_PULSE_THEMES, Context.MODE_PRIVATE)
                 .getInt(Preferences.DARK_THEME_CATEGORY_KEY, Preferences.DARK_THEME_GRAY);
     }
 
+    public static void enableDarkMode(@NonNull Context context, boolean state) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.PREFS_PULSE_THEMES, Context.MODE_PRIVATE).edit();
+        editor.putBoolean(Preferences.KEY_UI_THEME_DARK, state);
+        editor.apply();
+    }
+
+    public static boolean isDarkModeEnabled(@NonNull Context context) {
+        return context.getSharedPreferences(Preferences.PREFS_PULSE_THEMES, Context.MODE_PRIVATE)
+                .getBoolean(Preferences.KEY_UI_THEME_DARK, false);
+    }
+
+    public static void enableAutoTheme(@NonNull Context context, boolean state) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.PREFS_PULSE_THEMES, Context.MODE_PRIVATE).edit();
+        editor.putBoolean(Preferences.KEY_UI_MODE_AUTO, state);
+        editor.apply();
+    }
+
+    public static boolean isAutoThemeEnabled(@NonNull Context context) {
+        return context.getSharedPreferences(Preferences.PREFS_PULSE_THEMES, Context.MODE_PRIVATE)
+                .getBoolean(Preferences.KEY_UI_MODE_AUTO, false);
+    }
+
+    public static void setAccentDesaturated(@NonNull Context context, boolean isDesaturated) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.PREFS_PULSE_THEMES, Context.MODE_PRIVATE).edit();
+        editor.putBoolean(Preferences.KEY_ACCENTS_COLOR_DESATURATED, isDesaturated);
+        editor.apply();
+    }
+
+    public static boolean isAccentDesaturated(@NonNull Context context) {
+        return context.getSharedPreferences(Preferences.PREFS_PULSE_THEMES, Context.MODE_PRIVATE)
+                .getBoolean(Preferences.KEY_ACCENTS_COLOR_DESATURATED, false);
+    }
+
     public static void saveSelectedAccentId(@NonNull Context context, int accentId) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.PULSE_THEMES_PREFS, Context.MODE_PRIVATE).edit();
-        editor.putInt(Preferences.ACCENTS_COLOR_PRESET_KEY, accentId);
-        editor.putBoolean(Preferences.ACCENTS_MODE_USING_PRESET_KEY, true);
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.PREFS_PULSE_THEMES, Context.MODE_PRIVATE).edit();
+        editor.putInt(Preferences.KEY_ACCENTS_COLOR_PRESET, accentId);
+        editor.putBoolean(Preferences.KEY_ACCENTS_USING_PRESET, true);
         editor.apply();
     }
 
     public static int getSelectedAccentId(@NonNull Context context) {
-        return context.getSharedPreferences(Preferences.PULSE_THEMES_PREFS, Context.MODE_PRIVATE)
-                .getInt(Preferences.ACCENTS_COLOR_PRESET_KEY, Preferences.ACCENT_SLATE_BLUE);
+        return context.getSharedPreferences(Preferences.PREFS_PULSE_THEMES, Context.MODE_PRIVATE)
+                .getInt(Preferences.KEY_ACCENTS_COLOR_PRESET, Preferences.ACCENT_SLATE_BLUE);
+    }
+
+    public static boolean isPresetAccentModeEnabled(@NonNull Context context) {
+        return context.getSharedPreferences(Preferences.PREFS_PULSE_THEMES, Context.MODE_PRIVATE)
+                .getBoolean(Preferences.KEY_ACCENTS_USING_PRESET, true /*Use preset colors by default*/);
     }
 
     public static void saveCustomAccentColor(@NonNull Context context, @ColorInt int color) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.PULSE_THEMES_PREFS, Context.MODE_PRIVATE).edit();
-        editor.putInt(Preferences.ACCENTS_COLOR_CUSTOM_KEY, color);
-        editor.putBoolean(Preferences.ACCENTS_MODE_USING_PRESET_KEY, false);
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.PREFS_PULSE_THEMES, Context.MODE_PRIVATE).edit();
+        editor.putInt(Preferences.KEY_ACCENTS_COLOR_CUSTOM, color);
+        editor.putBoolean(Preferences.KEY_ACCENTS_USING_PRESET, false);
         editor.apply();
     }
 
     public static int getCustomAccentColor(@NonNull Context context) {
-        return context.getSharedPreferences(Preferences.PULSE_THEMES_PREFS, Context.MODE_PRIVATE)
-                .getInt(Preferences.ACCENTS_COLOR_CUSTOM_KEY, PresetColors.SLATE_BLUE);
+        return context.getSharedPreferences(Preferences.PREFS_PULSE_THEMES, Context.MODE_PRIVATE)
+                .getInt(Preferences.KEY_ACCENTS_COLOR_CUSTOM, PresetColors.SLATE_BLUE);
     }
 
-    public static boolean getPresetAccentModeEnabled(@NonNull Context context) {
-        return context.getSharedPreferences(Preferences.PULSE_THEMES_PREFS, Context.MODE_PRIVATE)
-                .getBoolean(Preferences.ACCENTS_MODE_USING_PRESET_KEY, true /*Use preset colors by default*/);
-    }
-
-    public static void saveAccentDesaturatedColor(@NonNull Context context, boolean enabled) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.PULSE_THEMES_PREFS, Context.MODE_PRIVATE).edit();
-        editor.putBoolean(Preferences.ACCENTS_COLOR_DESATURATED_KEY, enabled);
+    public static void setAppShortcutUsingDarkTheme(@NonNull Context context, boolean darkModeOn) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.PREFS_PULSE_THEMES, Context.MODE_PRIVATE).edit();
+        editor.putBoolean(Preferences.KEY_SHORTCUT_THEME_DARK, darkModeOn);
         editor.apply();
     }
 
-    public static boolean getAccentDesaturatedColor(@NonNull Context context) {
-        return context.getSharedPreferences(Preferences.PULSE_THEMES_PREFS, Context.MODE_PRIVATE)
-                .getBoolean(Preferences.ACCENTS_COLOR_DESATURATED_KEY, false);
+    public static boolean isAppShortcutUsingThemeDark(@NonNull Context context) {
+        return context.getSharedPreferences(Preferences.PREFS_PULSE_THEMES, Context.MODE_PRIVATE)
+                .getBoolean(Preferences.KEY_SHORTCUT_THEME_DARK, false);
     }
 
     public static void setNowPlayingScreenStyle(@NonNull Context context, int id) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.NOW_PLAYING_SCREEN_STYLE_KEY, Context.MODE_PRIVATE).edit();
-        editor.putInt(Preferences.NOW_PLAYING_SCREEN_STYLE_KEY, id);
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.PREF_NOW_PLAYING, Context.MODE_PRIVATE).edit();
+        editor.putInt(Preferences.KEY_NOW_PLAYING_STYLE, id);
         editor.apply();
     }
 
     public static int getNowPlayingScreenStyle(@NonNull Context context) {
-        return context.getSharedPreferences(Preferences.NOW_PLAYING_SCREEN_STYLE_KEY, Context.MODE_PRIVATE)
-                .getInt(Preferences.NOW_PLAYING_SCREEN_STYLE_KEY, Preferences.NOW_PLAYING_SCREEN_MODERN);
+        return context.getSharedPreferences(Preferences.PREF_NOW_PLAYING, Context.MODE_PRIVATE)
+                .getInt(Preferences.KEY_NOW_PLAYING_STYLE, Preferences.NOW_PLAYING_SCREEN_MODERN);
     }
 
-    public static void saveBluetoothDeviceDetection(@NonNull Context context, boolean enabled) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.AUDIO_DEVICE_AUTO_PLAY, Context.MODE_PRIVATE).edit();
-        editor.putBoolean(Preferences.BLUETOOTH_DEVICE_DETECTION_KEY, enabled);
-        editor.apply();
-    }
-
-    public static boolean isBluetoothDeviceDetectionEnabled(@NonNull Context context) {
-        return context.getSharedPreferences(Preferences.AUDIO_DEVICE_AUTO_PLAY, Context.MODE_PRIVATE)
-                .getBoolean(Preferences.BLUETOOTH_DEVICE_DETECTION_KEY, false);
-    }
-
-    public static void saveAutoPlayAction(@NonNull Context context, @NonNull String key, int action) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.AUDIO_DEVICE_AUTO_PLAY, Context.MODE_PRIVATE).edit();
-        editor.putInt(key, action);
-        editor.apply();
-    }
-
-    public static int getAutoPlayAction(@NonNull Context context, @NonNull String key) {
-        return context.getSharedPreferences(Preferences.AUDIO_DEVICE_AUTO_PLAY, Context.MODE_PRIVATE)
-                .getInt(key, Preferences.ACTION_PLAY_SHUFFLE);
-    }
-
-    public static void saveNowPlayingAlbumCoverCornerRadius(@NonNull Context context, int tl, int tr, int bl, int br) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.NOW_PLAYING_ALBUM_COVER_CORNER_RADIUS, Context.MODE_PRIVATE).edit();
-        editor.putInt(Preferences.NOW_PLAYING_ALBUM_COVER_RADIUS_TL, tl);
-        editor.putInt(Preferences.NOW_PLAYING_ALBUM_COVER_RADIUS_TR, tr);
-        editor.putInt(Preferences.NOW_PLAYING_ALBUM_COVER_RADIUS_BL, bl);
-        editor.putInt(Preferences.NOW_PLAYING_ALBUM_COVER_RADIUS_BR, br);
+    public static void setNowPlayingAlbumCardCornerRadius(@NonNull Context context, int tl, int tr, int bl, int br) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.PREF_NOW_PLAYING, Context.MODE_PRIVATE).edit();
+        editor.putInt(Preferences.KEY_NOW_PLAYING_ALBUM_CARD_RADIUS_TL, tl);
+        editor.putInt(Preferences.KEY_NOW_PLAYING_ALBUM_CARD_RADIUS_TR, tr);
+        editor.putInt(Preferences.KEY_NOW_PLAYING_ALBUM_CARD_RADIUS_BL, bl);
+        editor.putInt(Preferences.KEY_NOW_PLAYING_ALBUM_CARD_RADIUS_BR, br);
         editor.apply();
     }
 
     @NonNull
-    public static int[] getNowPlayingAlbumCoverCornerRadius(@NonNull Context context) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(Preferences.NOW_PLAYING_ALBUM_COVER_CORNER_RADIUS, Context.MODE_PRIVATE);
-        int tl = sharedPreferences.getInt(Preferences.NOW_PLAYING_ALBUM_COVER_RADIUS_TL, Preferences.NOW_PLAYING_ALBUM_COVER_RADIUS_DEF);
-        int tr = sharedPreferences.getInt(Preferences.NOW_PLAYING_ALBUM_COVER_RADIUS_TR, Preferences.NOW_PLAYING_ALBUM_COVER_RADIUS_DEF);
-        int bl = sharedPreferences.getInt(Preferences.NOW_PLAYING_ALBUM_COVER_RADIUS_BL, Preferences.NOW_PLAYING_ALBUM_COVER_RADIUS_DEF);
-        int br = sharedPreferences.getInt(Preferences.NOW_PLAYING_ALBUM_COVER_RADIUS_BR, Preferences.NOW_PLAYING_ALBUM_COVER_RADIUS_DEF);
+    public static int[] getNowPlayingAlbumCardCornerRadius(@NonNull Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(Preferences.PREF_NOW_PLAYING, Context.MODE_PRIVATE);
+        int tl = sharedPreferences.getInt(Preferences.KEY_NOW_PLAYING_ALBUM_CARD_RADIUS_TL, Preferences.DEF_NOW_PLAYING_ALBUM_CARD_RADIUS);
+        int tr = sharedPreferences.getInt(Preferences.KEY_NOW_PLAYING_ALBUM_CARD_RADIUS_TR, Preferences.DEF_NOW_PLAYING_ALBUM_CARD_RADIUS);
+        int bl = sharedPreferences.getInt(Preferences.KEY_NOW_PLAYING_ALBUM_CARD_RADIUS_BL, Preferences.DEF_NOW_PLAYING_ALBUM_CARD_RADIUS);
+        int br = sharedPreferences.getInt(Preferences.KEY_NOW_PLAYING_ALBUM_CARD_RADIUS_BR, Preferences.DEF_NOW_PLAYING_ALBUM_CARD_RADIUS);
         return new int[]{tl, tr, bl, br};
     }
 
-    public static void setAppShortcutThemeMode(@NonNull Context context, boolean darkModeOn) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.APP_SHORTCUT_THEME, Context.MODE_PRIVATE).edit();
-        editor.putBoolean(Preferences.APP_SHORTCUT_THEME_MODE, darkModeOn);
+    public static void setSeekButtonsEnabled(@NonNull Context context, boolean enable) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.PREF_NOW_PLAYING, Context.MODE_PRIVATE).edit();
+        editor.putBoolean(Preferences.KEY_NOW_PLAYING_CONTROLS_SEEK_ENABLED, enable);
         editor.apply();
     }
 
-    public static boolean getAppShortcutThemeMode(@NonNull Context context) {
-        return context.getSharedPreferences(Preferences.APP_SHORTCUT_THEME, Context.MODE_PRIVATE)
-                .getBoolean(Preferences.APP_SHORTCUT_THEME_MODE, false);
-    }
-
-    public static void setFilterDuration(@NonNull Context context, int duration) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, Context.MODE_PRIVATE).edit();
-        editor.putInt(Preferences.FILTER_DURATION, duration);
-        editor.apply();
-    }
-
-    public static int getFilterDuration(@NonNull Context context) {
-        return context.getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, Context.MODE_PRIVATE)
-                .getInt(Preferences.FILTER_DURATION, 30); // By default filter duration is 30 sec
-    }
-
-    public static void setRememberPlaylist(@NonNull Context context, boolean enabled) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, Context.MODE_PRIVATE).edit();
-        editor.putBoolean(Preferences.REMEMBER_PREVIOUS_PLAYLIST, enabled);
-        editor.apply();
-    }
-
-    public static boolean rememberPlaylistEnabled(@NonNull Context context) {
-        return context.getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, Context.MODE_PRIVATE)
-                .getBoolean(Preferences.REMEMBER_PREVIOUS_PLAYLIST, false); // By default do not remember last track
-    }
-
-    public static void savePlaylistTrackAndPosition(@NonNull Context context, int trackIndex, int position) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, Context.MODE_PRIVATE).edit();
-        editor.putInt(Preferences.PREVIOUS_PLAYLIST_TRACK_INDEX, trackIndex);
-        editor.putInt(Preferences.PREVIOUS_PLAYLIST_TRACK_POSITION, position);
-        editor.apply();
-    }
-
-    public static int getLastTrackIndex(@NonNull Context context) {
-        return context.getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, Context.MODE_PRIVATE)
-                .getInt(Preferences.PREVIOUS_PLAYLIST_TRACK_INDEX, -1);
-    }
-
-    public static int getLastTrackPosition(@NonNull Context context) {
-        return context.getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, Context.MODE_PRIVATE)
-                .getInt(Preferences.PREVIOUS_PLAYLIST_TRACK_POSITION, 0);
-    }
-
-    public static boolean isPlaylistSectionEnabled(@NonNull Context context, @NonNull String playlistSection) {
-        return context.getSharedPreferences(Preferences.HOME_PLAYLIST_SECTIONS, Context.MODE_PRIVATE)
-                .getBoolean(playlistSection, false);
-    }
-
-    public static void setPlaylistSectionEnabled(@NonNull Context context, @NonNull String playlistSection, boolean enable) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.HOME_PLAYLIST_SECTIONS, Context.MODE_PRIVATE).edit();
-        editor.putBoolean(playlistSection, enable);
-        editor.apply();
+    public static boolean isSeekButtonsEnabled(@NonNull Context context) {
+        return context.getSharedPreferences(Preferences.PREF_NOW_PLAYING, Context.MODE_PRIVATE)
+                .getBoolean(Preferences.KEY_NOW_PLAYING_CONTROLS_SEEK_ENABLED, false);
     }
 
     public static void setSeekButtonDuration(@NonNull Context context, @NonNull String key, int duration) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.NOW_PLAYING_CONTROLS, Context.MODE_PRIVATE).edit();
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.PREF_NOW_PLAYING, Context.MODE_PRIVATE).edit();
         editor.putInt(key, duration);
         editor.apply();
     }
 
     public static int getSeekButtonDuration(@NonNull Context context, @NonNull String key) {
-        return context.getSharedPreferences(Preferences.NOW_PLAYING_CONTROLS, Context.MODE_PRIVATE)
-                .getInt(key, Preferences.NOW_PLAYING_SEEK_DURATION_DEF);
+        return context.getSharedPreferences(Preferences.PREF_NOW_PLAYING, Context.MODE_PRIVATE)
+                .getInt(key, Preferences.DEF_NOW_PLAYING_SEEK_DURATION);
     }
 
-    public static void setSeekButtonsEnabled(@NonNull Context context, boolean enable) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.NOW_PLAYING_CONTROLS, Context.MODE_PRIVATE).edit();
-        editor.putBoolean(Preferences.NOW_PLAYING_CONTROLS_SEEK_ENABLED, enable);
+    public static void enableBluetoothAutoPlay(@NonNull Context context, boolean enabled) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.PREF_AUDIO, Context.MODE_PRIVATE).edit();
+        editor.putBoolean(Preferences.KEY_BLUETOOTH_AUTO_PLAY, enabled);
         editor.apply();
     }
 
-    public static boolean isSeekButtonsEnabled(@NonNull Context context) {
-        return context.getSharedPreferences(Preferences.NOW_PLAYING_CONTROLS, Context.MODE_PRIVATE)
-                .getBoolean(Preferences.NOW_PLAYING_CONTROLS_SEEK_ENABLED, Preferences.NOW_PLAYING_CONTROLS_SEEK_ENABLED_DEF);
+    public static boolean isBluetoothAutoPlayEnabled(@NonNull Context context) {
+        return context.getSharedPreferences(Preferences.PREF_AUDIO, Context.MODE_PRIVATE)
+                .getBoolean(Preferences.KEY_BLUETOOTH_AUTO_PLAY, false);
+    }
+
+    public static void saveAutoPlayAction(@NonNull Context context, @NonNull String key, int action) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.PREF_AUDIO, Context.MODE_PRIVATE).edit();
+        editor.putInt(key, action);
+        editor.apply();
+    }
+
+    public static int getAutoPlayAction(@NonNull Context context, @NonNull String key) {
+        return context.getSharedPreferences(Preferences.PREF_AUDIO, Context.MODE_PRIVATE)
+                .getInt(key, Preferences.ACTION_PLAY_SHUFFLE);
     }
 
     public static void setSleepTimer(@NonNull Context context, boolean enable) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, Context.MODE_PRIVATE).edit();
-        editor.putBoolean(Preferences.SLEEP_TIMER, enable);
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.PREF_AUDIO, Context.MODE_PRIVATE).edit();
+        editor.putBoolean(Preferences.KEY_SLEEP_TIMER, enable);
         editor.apply();
     }
 
     public static boolean isSleepTimerEnabled(@NonNull Context context) {
-        return context.getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, Context.MODE_PRIVATE)
-                .getBoolean(Preferences.SLEEP_TIMER, Preferences.SLEEP_TIMER_DEFAULT);
+        return context.getSharedPreferences(Preferences.PREF_AUDIO, Context.MODE_PRIVATE)
+                .getBoolean(Preferences.KEY_SLEEP_TIMER, Preferences.DEF_SLEEP_TIMER_DISABLED);
     }
 
     public static void setSleepTimerDurationMinutes(@NonNull Context context, int durationMinutes) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, Context.MODE_PRIVATE).edit();
-        editor.putInt(Preferences.SLEEP_TIMER_DURATION, durationMinutes);
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.PREF_AUDIO, Context.MODE_PRIVATE).edit();
+        editor.putInt(Preferences.KEY_SLEEP_TIMER_DURATION, durationMinutes);
         editor.apply();
     }
 
-
     public static int getSleepTimerDurationMinutes(@NonNull Context context) {
-        return context.getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, Context.MODE_PRIVATE)
-                .getInt(Preferences.SLEEP_TIMER_DURATION, Preferences.SLEEP_TIMER_DURATION_DEFAULT);
+        return context.getSharedPreferences(Preferences.PREF_AUDIO, Context.MODE_PRIVATE)
+                .getInt(Preferences.KEY_SLEEP_TIMER_DURATION, 20);
     }
 
     public static void setRepeatingTimer(@NonNull Context context, boolean enable) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, Context.MODE_PRIVATE).edit();
-        editor.putBoolean(Preferences.REPEATING_TIMER, enable);
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.PREF_AUDIO, Context.MODE_PRIVATE).edit();
+        editor.putBoolean(Preferences.KEY_REPEATING_TIMER, enable);
         editor.apply();
     }
 
     public static boolean isRepeatingTimerEnabled(@NonNull Context context) {
-        return context.getSharedPreferences(Preferences.GENERAL_SETTINGS_PREF, Context.MODE_PRIVATE)
-                .getBoolean(Preferences.REPEATING_TIMER, Preferences.SLEEP_TIMER_DEFAULT);
+        return context.getSharedPreferences(Preferences.PREF_AUDIO, Context.MODE_PRIVATE)
+                .getBoolean(Preferences.KEY_REPEATING_TIMER, Preferences.DEF_SLEEP_TIMER_DISABLED);
     }
 }

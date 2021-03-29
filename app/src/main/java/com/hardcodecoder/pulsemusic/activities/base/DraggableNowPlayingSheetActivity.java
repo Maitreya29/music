@@ -123,7 +123,7 @@ public abstract class DraggableNowPlayingSheetActivity extends ControllerActivit
             // Setting View.GONE here causes ViewPager2 to not correctly update active album art
             mExpandedFrame.setVisibility(View.INVISIBLE);
             createExpandedFragment(false);
-            getSharedPreferences(Preferences.NOW_PLAYING_SCREEN_STYLE_KEY, Context.MODE_PRIVATE)
+            getSharedPreferences(Preferences.PREF_NOW_PLAYING, Context.MODE_PRIVATE)
                     .registerOnSharedPreferenceChangeListener(this);
         }
 
@@ -311,7 +311,7 @@ public abstract class DraggableNowPlayingSheetActivity extends ControllerActivit
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, @NonNull String key) {
-        if (key.equals(Preferences.NOW_PLAYING_SCREEN_STYLE_KEY))
+        if (key.equals(Preferences.KEY_NOW_PLAYING_STYLE))
             createExpandedFragment(true);
     }
 
@@ -332,7 +332,7 @@ public abstract class DraggableNowPlayingSheetActivity extends ControllerActivit
 
     @Override
     protected void onDestroy() {
-        getSharedPreferences(Preferences.NOW_PLAYING_SCREEN_STYLE_KEY, Context.MODE_PRIVATE)
+        getSharedPreferences(Preferences.PREF_NOW_PLAYING, Context.MODE_PRIVATE)
                 .unregisterOnSharedPreferenceChangeListener(this);
         if (null != mBehaviour && null != mBehaviourCallback)
             mBehaviour.removeBottomSheetCallback(mBehaviourCallback);

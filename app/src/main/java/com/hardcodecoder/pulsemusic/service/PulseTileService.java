@@ -74,8 +74,8 @@ public class PulseTileService extends TileService implements PulseController.Con
         PlaybackState state = null;
         if (null != mController) state = mController.getPlaybackState();
         if (null == mController || null == state || state.getState() == PlaybackState.STATE_STOPPED) {
-            final int action = AppSettings.getAutoPlayAction(this, Preferences.QS_TILE_ACTION_KEY);
-            if (action == Preferences.ACTION_PLAY_CONTINUE && !AppSettings.rememberPlaylistEnabled(this))
+            final int action = AppSettings.getAutoPlayAction(this, Preferences.KEY_QS_TILE_ACTION);
+            if (action == Preferences.ACTION_PLAY_CONTINUE && !AppSettings.isRememberPlaylistEnabled(this))
                 return;
             Intent intent = new Intent(this, PMS.class);
             intent.setAction(PMS.ACTION_PLAY_CONTINUE);

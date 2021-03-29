@@ -49,11 +49,11 @@ public class SettingsAudioFragment extends SettingsBaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
         SettingsToggleableItem bluetoothDeviceDetectionItem = view.findViewById(R.id.audio_device_bluetooth_toggle);
-        boolean bluetoothDeviceDetection = AppSettings.isBluetoothDeviceDetectionEnabled(requireContext());
+        boolean bluetoothDeviceDetection = AppSettings.isBluetoothAutoPlayEnabled(requireContext());
 
         bluetoothDeviceDetectionItem.setSwitchChecked(bluetoothDeviceDetection);
         bluetoothDeviceDetectionItem.setOnSwitchCheckedChangedListener((buttonView, isChecked) -> {
-            AppSettings.saveBluetoothDeviceDetection(requireContext(), isChecked);
+            AppSettings.enableBluetoothAutoPlay(requireContext(), isChecked);
             Intent bluetoothServiceIntent = new Intent(requireContext().getApplicationContext(), AudioDeviceService.class);
             if (isChecked) requireContext().startService(bluetoothServiceIntent);
             else requireContext().stopService(bluetoothServiceIntent);
@@ -62,16 +62,16 @@ public class SettingsAudioFragment extends SettingsBaseFragment {
         view.findViewById(R.id.audio_device_bluetooth_action_picker).setOnClickListener(v -> {
             AutoPlayActionChooser dialog = new AutoPlayActionChooser(
                     getString(R.string.select_bluetooth_action),
-                    action -> AppSettings.saveAutoPlayAction(requireContext(), Preferences.BLUETOOTH_DEVICE_ACTION_KEY, action),
-                    AppSettings.getAutoPlayAction(requireContext(), Preferences.BLUETOOTH_DEVICE_ACTION_KEY));
+                    action -> AppSettings.saveAutoPlayAction(requireContext(), Preferences.KEY_BLUETOOTH_AUTO_PLAY_ACTION, action),
+                    AppSettings.getAutoPlayAction(requireContext(), Preferences.KEY_BLUETOOTH_AUTO_PLAY_ACTION));
             dialog.show(requireFragmentManager(), AutoPlayActionChooser.TAG);
         });
 
         view.findViewById(R.id.qs_tile_action_picker).setOnClickListener(v -> {
             AutoPlayActionChooser dialog = new AutoPlayActionChooser(
                     getString(R.string.select_tile_action),
-                    action -> AppSettings.saveAutoPlayAction(requireContext(), Preferences.QS_TILE_ACTION_KEY, action),
-                    AppSettings.getAutoPlayAction(requireContext(), Preferences.QS_TILE_ACTION_KEY));
+                    action -> AppSettings.saveAutoPlayAction(requireContext(), Preferences.KEY_QS_TILE_ACTION, action),
+                    AppSettings.getAutoPlayAction(requireContext(), Preferences.KEY_QS_TILE_ACTION));
             dialog.show(requireFragmentManager(), AutoPlayActionChooser.TAG);
         });
 

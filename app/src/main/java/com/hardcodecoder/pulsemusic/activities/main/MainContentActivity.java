@@ -252,7 +252,7 @@ public class MainContentActivity extends DraggableNowPlayingSheetActivity implem
         if (mController.getPlaybackState() != null && mController.getPlaybackState().getState() != PlaybackState.STATE_STOPPED)
             updateDraggableSheet(true);
 
-        else if (mController.getPlaybackState() == null && AppSettings.rememberPlaylistEnabled(this)) {
+        else if (mController.getPlaybackState() == null && AppSettings.isRememberPlaylistEnabled(this)) {
             Bundle extras = new Bundle();
             extras.putBoolean(PlaybackManager.START_PLAYBACK, false);
             mController.getTransportControls().sendCustomAction(

@@ -16,7 +16,7 @@ public class BootCompletedReceiver extends BroadcastReceiver {
     public void onReceive(@NonNull Context context, @NonNull Intent eventIntent) {
         String action = eventIntent.getAction();
         if (Intent.ACTION_BOOT_COMPLETED.equals(action)) {
-            boolean startService = AppSettings.isBluetoothDeviceDetectionEnabled(context);
+            boolean startService = AppSettings.isBluetoothAutoPlayEnabled(context);
             if (startService)
                 ContextCompat.startForegroundService(context, new Intent(context, AudioDeviceService.class));
         }

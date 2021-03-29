@@ -28,7 +28,7 @@ public class AudioDeviceService extends Service {
 
     @Override
     public void onCreate() {
-        if (AppSettings.isBluetoothDeviceDetectionEnabled(this)) {
+        if (AppSettings.isBluetoothAutoPlayEnabled(this)) {
             IntentFilter filter = new IntentFilter();
             filter.addAction(BluetoothDevice.ACTION_ACL_CONNECTED);
             filter.addAction(BluetoothDevice.ACTION_ACL_DISCONNECTED);

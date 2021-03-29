@@ -24,7 +24,7 @@ public class ThemeManagerUtils {
         if (!forceInitialize && mInitialized) return;
 
         mAutoMode = AppSettings.isAutoThemeEnabled(context);
-        if ((mUsingPresetColors = AppSettings.getPresetAccentModeEnabled(context))) {
+        if ((mUsingPresetColors = AppSettings.isPresetAccentModeEnabled(context))) {
             mPresetsAccentsId = AppSettings.getSelectedAccentId(context);
             mStoredAccentColor = PresetColors.getPresetAccentColorById(mPresetsAccentsId);
         } else
@@ -36,7 +36,7 @@ public class ThemeManagerUtils {
         if (mDarkMode) mThemeId = AppSettings.getSelectedDarkTheme(context);
         else mThemeId = Preferences.LIGHT_THEME;
 
-        mDesaturatedAccents = AppSettings.getAccentDesaturatedColor(context) && mDarkMode;
+        mDesaturatedAccents = AppSettings.isAccentDesaturated(context) && mDarkMode;
 
         // we have initialized theme, older colors may no longer represent the current theme
         // Reset theme colors, will be re initialized on PMB#onCreate

@@ -14,7 +14,7 @@ class ShortcutsThemeManager {
     private static boolean mRequiredRecreate;
 
     static void init(Context context) {
-        boolean currentAppliedIsDarkMode = AppSettings.getAppShortcutThemeMode(context);
+        boolean currentAppliedIsDarkMode = AppSettings.isAppShortcutUsingThemeDark(context);
         int systemThemeMode = context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
         mRequiredRecreate = currentAppliedIsDarkMode && systemThemeMode == Configuration.UI_MODE_NIGHT_NO ||
                 !currentAppliedIsDarkMode && systemThemeMode == Configuration.UI_MODE_NIGHT_YES;
@@ -22,14 +22,14 @@ class ShortcutsThemeManager {
         switch (context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) {
             case Configuration.UI_MODE_NIGHT_YES:
                 mBackgroundColorForIcons = ColorUtil.mixColors(0x121212, 0xFFFFFF, 0.84f);
-                if (AppSettings.getAccentDesaturatedColor(context))
+                if (AppSettings.isAccentDesaturated(context))
                     mAccentColorForIcons = ColorUtil.makeColorDesaturated(mAccentColorForIcons);
-                AppSettings.setAppShortcutThemeMode(context, true);
+                AppSettings.setAppShortcutUsingDarkTheme(context, true);
                 break;
             case Configuration.UI_MODE_NIGHT_NO:
             default:
                 mBackgroundColorForIcons = ColorUtil.mixColors(0x000000, 0xFFFFFF, 0.02f);
-                AppSettings.setAppShortcutThemeMode(context, false);
+                AppSettings.setAppShortcutUsingDarkTheme(context, false);
                 break;
         }
     }
@@ -51,7 +51,7 @@ class ShortcutsThemeManager {
     // ThemeManagerUtils and ThemeColors are not initialized
     // when generating icons
     private static int getAccentColor(Context context) {
-        if ((AppSettings.getPresetAccentModeEnabled(context))) {
+        if ((AppSettings.isPresetAccentModeEnabled(context))) {
             int presetsAccentsId = AppSettings.getSelectedAccentId(context);
             return PresetColors.getPresetAccentColorById(presetsAccentsId);
         } else

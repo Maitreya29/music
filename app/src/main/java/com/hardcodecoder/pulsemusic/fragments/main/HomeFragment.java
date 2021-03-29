@@ -69,11 +69,11 @@ public class HomeFragment extends PulseFragment {
             noTracksText.setText(getString(R.string.tracks_not_found));
         } else {
             TaskRunner.executeAsync(() -> {
-                boolean isTopAlbumsEnabled = AppSettings.isPlaylistSectionEnabled(requireContext(), Preferences.HOME_PLAYLIST_TOP_ALBUMS);
-                boolean isForYouEnabled = AppSettings.isPlaylistSectionEnabled(requireContext(), Preferences.HOME_PLAYLIST_FOR_YOU);
-                boolean isRediscoverEnabled = AppSettings.isPlaylistSectionEnabled(requireContext(), Preferences.HOME_PLAYLIST_REDISCOVER);
-                boolean isNewInLibraryEnabled = AppSettings.isPlaylistSectionEnabled(requireContext(), Preferences.HOME_PLAYLIST_NEW_IN_LIBRARY);
-                boolean isTopArtistEnabled = AppSettings.isPlaylistSectionEnabled(requireContext(), Preferences.HOME_PLAYLIST_TOP_ARTIST);
+                boolean isTopAlbumsEnabled = AppSettings.isPlaylistSectionEnabled(requireContext(), Preferences.KEY_HOME_PLAYLIST_TOP_ALBUMS);
+                boolean isForYouEnabled = AppSettings.isPlaylistSectionEnabled(requireContext(), Preferences.KEY_HOME_PLAYLIST_FOR_YOU);
+                boolean isRediscoverEnabled = AppSettings.isPlaylistSectionEnabled(requireContext(), Preferences.KEY_HOME_PLAYLIST_REDISCOVER);
+                boolean isNewInLibraryEnabled = AppSettings.isPlaylistSectionEnabled(requireContext(), Preferences.KEY_HOME_PLAYLIST_NEW_IN_LIBRARY);
+                boolean isTopArtistEnabled = AppSettings.isPlaylistSectionEnabled(requireContext(), Preferences.KEY_HOME_PLAYLIST_TOP_ARTIST);
 
                 if (isTopAlbumsEnabled)
                     LoaderManager.loadTopAlbums(result -> loadTopAlbums(view, result));

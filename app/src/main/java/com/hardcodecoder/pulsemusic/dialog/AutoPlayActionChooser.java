@@ -43,7 +43,7 @@ public class AutoPlayActionChooser extends RoundedCustomBottomSheetFragment {
 
         RadioGroup radioGroup = view.findViewById(R.id.radio_button_group);
 
-        boolean continueWhereYouLeftEnabled = AppSettings.rememberPlaylistEnabled(requireContext());
+        boolean continueWhereYouLeftEnabled = AppSettings.isRememberPlaylistEnabled(requireContext());
         view.findViewById(R.id.radio_btn_continue).setEnabled(continueWhereYouLeftEnabled);
 
         switch (mActiveOption) {

@@ -49,15 +49,15 @@ public class SettingsActivity extends ControllerActivity implements SettingsFrag
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
             mAccentsChangedListener = (sharedPreferences, key) -> {
-                if (key.equals(Preferences.ACCENTS_COLOR_PRESET_KEY) ||
-                        key.equals(Preferences.ACCENTS_COLOR_CUSTOM_KEY) ||
-                        key.equals(Preferences.ACCENTS_COLOR_DESATURATED_KEY) ||
-                        key.equals(Preferences.ACCENTS_MODE_USING_PRESET_KEY)) {
+                if (key.equals(Preferences.KEY_ACCENTS_COLOR_PRESET) ||
+                        key.equals(Preferences.KEY_ACCENTS_COLOR_CUSTOM) ||
+                        key.equals(Preferences.KEY_ACCENTS_COLOR_DESATURATED) ||
+                        key.equals(Preferences.KEY_ACCENTS_USING_PRESET)) {
                     AppShortcutsManager manager = new AppShortcutsManager(getApplicationContext());
                     manager.initDynamicShortcuts(true);
                 }
             };
-            getSharedPreferences(Preferences.PULSE_THEMES_PREFS, MODE_PRIVATE)
+            getSharedPreferences(Preferences.PREFS_PULSE_THEMES, MODE_PRIVATE)
                     .registerOnSharedPreferenceChangeListener(mAccentsChangedListener);
         }
     }
@@ -129,7 +129,7 @@ public class SettingsActivity extends ControllerActivity implements SettingsFrag
     @Override
     protected void onDestroy() {
         if (null != mAccentsChangedListener)
-            getSharedPreferences(Preferences.PULSE_THEMES_PREFS, MODE_PRIVATE)
+            getSharedPreferences(Preferences.PREFS_PULSE_THEMES, MODE_PRIVATE)
                     .unregisterOnSharedPreferenceChangeListener(mAccentsChangedListener);
         if (null != mRestartDialog) mRestartDialog.dismiss();
         super.onDestroy();
