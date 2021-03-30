@@ -48,6 +48,8 @@ public class SettingsMainFragment extends SettingsBaseFragment {
                 v.postOnAnimation(() -> openSettingsFragment(SettingsNowPlayingFragment.getInstance())));
         view.findViewById(R.id.audioSettings).setOnClickListener(v ->
                 v.postOnAnimation(() -> openSettingsFragment(SettingsAudioFragment.getInstance())));
+        view.findViewById(R.id.widgetSettings).setOnClickListener(v ->
+                v.postOnAnimation(() -> openSettingsFragment(SettingsWidgetsFragment.getInstance())));
         view.findViewById(R.id.contributorsSettings).setOnClickListener(v ->
                 v.postOnAnimation(() -> openSettingsFragment(SettingsContributorsFragment.getInstance())));
         view.findViewById(R.id.donationSettings).setOnClickListener(v ->

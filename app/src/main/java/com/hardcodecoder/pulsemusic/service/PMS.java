@@ -33,6 +33,8 @@ import com.hardcodecoder.pulsemusic.playback.LocalPlayback;
 import com.hardcodecoder.pulsemusic.playback.MediaNotificationManager;
 import com.hardcodecoder.pulsemusic.playback.PlaybackManager;
 import com.hardcodecoder.pulsemusic.providers.ProviderManager;
+import com.hardcodecoder.pulsemusic.utils.AppSettings;
+import com.hardcodecoder.pulsemusic.widgets.PulseWidgetsHelper;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -60,6 +62,7 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
     private PlaybackManager mPlaybackManager;
     private PulseController mPulseController;
     private boolean isReceiverRegistered = false;
+    private boolean isWidgetsEnabled = false;
     private boolean mCanServiceStopSelf = true;
 
     @Override
@@ -99,9 +102,13 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
                 .getBoolean(Preferences.KEY_SLEEP_TIMER, Preferences.DEF_SLEEP_TIMER_DISABLED);
         mPlaybackManager.configureTimer(sleepTimerEnabled, false);
 
+        isWidgetsEnabled = AppSettings.isWidgetEnable(this);
+
         getSharedPreferences(Preferences.PREF_GENERAL, MODE_PRIVATE)
                 .registerOnSharedPreferenceChangeListener(this);
         getSharedPreferences(Preferences.PREF_AUDIO, MODE_PRIVATE)
+                .registerOnSharedPreferenceChangeListener(this);
+        getSharedPreferences(Preferences.PREF_WIDGETS, MODE_PRIVATE)
                 .registerOnSharedPreferenceChangeListener(this);
     }
 
@@ -240,6 +247,7 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
                 .unregisterOnSharedPreferenceChangeListener(this);
         if (isReceiverRegistered) mNotificationManager.unregisterControlsReceiver();
         if (mMediaSession != null) mMediaSession.release();
+        if (isWidgetsEnabled) PulseWidgetsHelper.resetWidgets(this);
         mWorkerHandler.removeCallbacksAndMessages(null);
         mServiceThread.quit();
         super.onDestroy();
@@ -268,11 +276,13 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
     @Override
     public void onPlaybackStateChanged(PlaybackState newState) {
         mMediaSession.setPlaybackState(newState);
+        if (isWidgetsEnabled) PulseWidgetsHelper.notifyWidgets(this);
     }
 
     @Override
     public void onMetaDataChanged(MediaMetadata newMetaData) {
         mMediaSession.setMetadata(newMetaData);
+        if (isWidgetsEnabled) PulseWidgetsHelper.notifyWidgets(this);
     }
 
     @Override
@@ -319,6 +329,9 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
             case Preferences.KEY_SLEEP_TIMER_DURATION:
                 mPlaybackManager.configureTimer(sharedPreferences.getBoolean(Preferences.PREF_AUDIO, Preferences.DEF_SLEEP_TIMER_DISABLED),
                         mMediaSession.isActive());
+                break;
+            case Preferences.KEY_WIDGET_ENABLED:
+                isWidgetsEnabled = AppSettings.isWidgetEnable(this);
                 break;
         }
     }

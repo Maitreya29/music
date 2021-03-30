@@ -180,4 +180,13 @@ public final class Preferences {
     public static final String KEY_SLEEP_TIMER_DURATION = "SleepTimerDuration";
     // Key to check whether sleep timer should be repeated for next session
     public static final String KEY_REPEATING_TIMER = "RepeatingSleepTimer";
+
+
+    /* *********************** WIDGET SECTION ********************* */
+    // Shared Preference for Widgets
+    public static final String PREF_WIDGETS = "Widgets";
+    // Key to check whether widgets are enabled (Disabled by default)
+    public static final String KEY_WIDGET_ENABLED = "WidgetEnabled";
+    // Key for storing the widget's play action
+    public static final String KEY_WIDGET_PLAY_ACTION = "PlayAction";
 }

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:initialKeyguardLayout="@xml/pulse_widget_normal"
+    android:initialLayout="@layout/pulse_widget_normal_light"
+    android:minWidth="250dp"
+    android:minHeight="40dp"
+    android:minResizeWidth="200dp"
+    android:minResizeHeight="40dp"
+    android:resizeMode="horizontal|vertical"
+    android:updatePeriodMillis="0"
+    android:widgetCategory="home_screen" />

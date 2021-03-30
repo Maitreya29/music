@@ -50,6 +50,17 @@
         app:settingItemTitle="@string/audio" />
 
     <com.hardcodecoder.pulsemusic.views.SettingsCategoryItem
+        android:id="@+id/widgetSettings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="normal"
+        app:settingItemColoredIcon="true"
+        app:settingItemIcon="@drawable/ic_widgets"
+        app:settingItemIconColor="@color/md_grey_500"
+        app:settingItemText="@string/widgets_desc"
+        app:settingItemTitle="@string/widgets" />
+
+    <com.hardcodecoder.pulsemusic.views.SettingsCategoryItem
         android:id="@+id/contributorsSettings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

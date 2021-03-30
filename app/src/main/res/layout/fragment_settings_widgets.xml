@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="16dp"
+    android:paddingBottom="16dp">
+
+    <com.hardcodecoder.pulsemusic.views.AccentColorTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:text="@string/category_widget_action"
+        android:textAppearance="@style/Appearance.Text.Overline" />
+
+    <com.hardcodecoder.pulsemusic.views.SettingsCategoryItem
+        android:id="@+id/widget_play_action_picker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="normal"
+        app:settingItemIcon="@drawable/ic_play_circle"
+        app:settingItemIconColor="?attr/colorControlNormal"
+        app:settingItemText="@string/widget_play_button_action_desc"
+        app:settingItemTitle="@string/widget_play_button_action" />
+</LinearLayout>

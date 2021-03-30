@@ -206,6 +206,9 @@
     <string name="audio">Audio</string>
     <string name="audio_desc">Change audio settings</string>
 
+    <string name="widgets">Widgets</string>
+    <string name="widgets_desc">Customize widgets and actions</string>
+
     <string name="contributors">Contributors</string>
     <string name="contributors_desc">Meet the developers</string>
 
@@ -316,6 +319,16 @@
     <string name="error_invalid_duration">Invalid duration. Must be an integer > 0</string>
     <string name="repeating_sleep_timer">Repeat sleep timer</string>
     <string name="repeating_sleep_timer_desc">Starts the sleep timer automatically for the next playback session</string>
+
+
+    <!-- Widgets -->
+    <string name="widget_name_normal">Normal light</string>
+    <string name="widget_name_normal_dark">Normal Dark</string>
+    <string name="category_widget_action">Action</string>
+    <string name="widget_play_button_action">Action on play</string>
+    <string name="widget_play_button_action_desc">Choose the action to perform when clicked on widget\'s play button</string>
+    <string name="widget_play_button_action_chooser_title">Choose play action</string>
+
 
     <!-- Contributors -->
     <string name="lead_developer">Lead developers</string>

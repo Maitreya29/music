@@ -35,4 +35,16 @@
     <color name="blackColorBackground">#000000</color>
     <color name="blackColorSurface">#0d0d0d</color>
     <color name="blackColorOnPrimary">@color/md_grey_900</color>
+
+
+    <!-- ******************************************************** -->
+    <!-- ********************* WIDGET COLORS ******************** -->
+    <color name="widget_background_light">#99FFFFFF</color>
+    <color name="widget_background_dark">#99000000</color>
+    <color name="widget_background_secondary_light">#B3FFFFFF</color>
+    <color name="widget_background_secondary_dark">#B3000000</color>
+    <color name="widget_primary_text_color_light">#000000</color>
+    <color name="widget_primary_text_color_dark">#FFFFFF</color>
+    <color name="widget_button_tint_light">#000000</color>
+    <color name="widget_button_tint_dark">#FFFFFF</color>
 </resources>

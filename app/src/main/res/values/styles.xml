@@ -28,6 +28,12 @@
         <item name="android:padding">12dp</item>
     </style>
 
+    <style name="WidgetButton">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:padding">12dp</item>
+    </style>
+
     <style name="TrackContextMenuTextStyle">
         <item name="android:layout_height">48dp</item>
         <item name="android:layout_width">match_parent</item>

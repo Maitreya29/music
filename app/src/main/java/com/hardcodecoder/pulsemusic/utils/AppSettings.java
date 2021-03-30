@@ -295,4 +295,26 @@ public class AppSettings {
         return context.getSharedPreferences(Preferences.PREF_AUDIO, Context.MODE_PRIVATE)
                 .getBoolean(Preferences.KEY_REPEATING_TIMER, Preferences.DEF_SLEEP_TIMER_DISABLED);
     }
+
+    public static void setWidgetEnabled(@NonNull Context context, boolean enabled) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.PREF_WIDGETS, Context.MODE_PRIVATE).edit();
+        editor.putBoolean(Preferences.KEY_WIDGET_ENABLED, enabled);
+        editor.apply();
+    }
+
+    public static boolean isWidgetEnable(@NonNull Context context) {
+        return context.getSharedPreferences(Preferences.PREF_WIDGETS, Context.MODE_PRIVATE)
+                .getBoolean(Preferences.KEY_WIDGET_ENABLED, false);
+    }
+
+    public static void setWidgetPlayAction(@NonNull Context context, int action) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.PREF_WIDGETS, Context.MODE_PRIVATE).edit();
+        editor.putInt(Preferences.KEY_WIDGET_PLAY_ACTION, action);
+        editor.apply();
+    }
+
+    public static int getWidgetPlayAction(@NonNull Context context) {
+        return context.getSharedPreferences(Preferences.PREF_WIDGETS, Context.MODE_PRIVATE)
+                .getInt(Preferences.KEY_WIDGET_PLAY_ACTION, Preferences.ACTION_PLAY_SUGGESTED);
+    }
 }
