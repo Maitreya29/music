@@ -12,11 +12,12 @@ public final class Preferences {
      * **************** General UI preferences *******************
      * *********************************************************** */
 
-    // Determine app first run
-    public static final String FIRST_RUN = "FirstRun";
+    // Shared Preference for storing first run
+    public static final String PREF_FIRST_RUN = "FirstRun";
+    public static final String KEY_FIRST_RUN = "IsFirstRun";
 
     // Shared Preference for sort order preferences
-    public static final String SORT_ORDER_PREFS_KEY = "SortOrder";
+    public static final String PREF_SORT_ORDER = "SortOrder";
     // Keys for sort order preferences
     public static final String SORT_ORDER_LIBRARY_KEY = "LibrarySortOrder";
     public static final String SORT_ORDER_ALBUMS_KEY = "AlbumsSortOrder";
@@ -25,7 +26,7 @@ public final class Preferences {
     public static final String SORT_ORDER_ARTIST_DETAILS_KEY = "ArtistDetailsSortOrder";
 
     // Shared Preference for column count preferences
-    public static final String COLUMN_COUNT = "ColumnCount";
+    public static final String PREF_COLUMN_COUNT = "ColumnCount";
     // Keys for column count preferences
     public static final String COLUMN_COUNT_LIBRARY_PORTRAIT_KEY = "ColumnCountLibraryPortrait";
     public static final String COLUMN_COUNT_LIBRARY_LANDSCAPE_KEY = "ColumnCountLibraryLandscape";

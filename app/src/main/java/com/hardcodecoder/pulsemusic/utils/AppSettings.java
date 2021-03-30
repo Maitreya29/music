@@ -12,46 +12,46 @@ import com.hardcodecoder.pulsemusic.themes.PresetColors;
 public class AppSettings {
 
     public static boolean isFirstRun(@NonNull Context context) {
-        return context.getSharedPreferences(Preferences.FIRST_RUN, Context.MODE_PRIVATE)
-                .getBoolean(Preferences.FIRST_RUN, true);
+        return context.getSharedPreferences(Preferences.PREF_FIRST_RUN, Context.MODE_PRIVATE)
+                .getBoolean(Preferences.KEY_FIRST_RUN, true);
     }
 
     public static void setFirstRun(@NonNull Context context, boolean firstRun) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.FIRST_RUN, Context.MODE_PRIVATE).edit();
-        editor.putBoolean(Preferences.FIRST_RUN, firstRun);
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.PREF_FIRST_RUN, Context.MODE_PRIVATE).edit();
+        editor.putBoolean(Preferences.KEY_FIRST_RUN, firstRun);
         editor.apply();
     }
 
     public static void saveSortOrder(@NonNull Context context, String prefId, int sortOrder) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.SORT_ORDER_PREFS_KEY, Context.MODE_PRIVATE).edit();
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.PREF_SORT_ORDER, Context.MODE_PRIVATE).edit();
         editor.putInt(prefId, sortOrder);
         editor.apply();
     }
 
     public static int getSortOrder(@NonNull Context context, String prefId) {
-        return context.getSharedPreferences(Preferences.SORT_ORDER_PREFS_KEY, Context.MODE_PRIVATE)
+        return context.getSharedPreferences(Preferences.PREF_SORT_ORDER, Context.MODE_PRIVATE)
                 .getInt(prefId, Preferences.SORT_ORDER_ASC);
     }
 
     public static void savePortraitModeColumnCount(@NonNull Context context, String prefId, int count) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.COLUMN_COUNT, Context.MODE_PRIVATE).edit();
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.PREF_COLUMN_COUNT, Context.MODE_PRIVATE).edit();
         editor.putInt(prefId, count);
         editor.apply();
     }
 
     public static int getPortraitModeColumnCount(@NonNull Context context, String prefId, int defValue) {
-        return context.getSharedPreferences(Preferences.COLUMN_COUNT, Context.MODE_PRIVATE)
+        return context.getSharedPreferences(Preferences.PREF_COLUMN_COUNT, Context.MODE_PRIVATE)
                 .getInt(prefId, defValue);
     }
 
     public static void saveLandscapeModeColumnCount(@NonNull Context context, String prefId, int count) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.COLUMN_COUNT, Context.MODE_PRIVATE).edit();
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.PREF_COLUMN_COUNT, Context.MODE_PRIVATE).edit();
         editor.putInt(prefId, count);
         editor.apply();
     }
 
     public static int getLandscapeModeColumnCount(@NonNull Context context, String prefId, int defValue) {
-        return context.getSharedPreferences(Preferences.COLUMN_COUNT, Context.MODE_PRIVATE)
+        return context.getSharedPreferences(Preferences.PREF_COLUMN_COUNT, Context.MODE_PRIVATE)
                 .getInt(prefId, defValue);
     }
 

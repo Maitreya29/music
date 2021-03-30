@@ -92,14 +92,12 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
 
         mNotificationManager = new MediaNotificationManager(this, mMediaSession.getController(), this);
 
-        final boolean rememberPlaylist = getSharedPreferences(Preferences.PREF_GENERAL, MODE_PRIVATE)
-                .getBoolean(Preferences.KEY_REMEMBER_PREVIOUS_PLAYLIST, false);
+        final boolean rememberPlaylist = AppSettings.isRememberPlaylistEnabled(this);
 
         mPlaybackManager.setRememberPlaylist(rememberPlaylist);
         mPulseController.setRememberPlaylist(rememberPlaylist, false);
 
-        final boolean sleepTimerEnabled = getSharedPreferences(Preferences.PREF_AUDIO, MODE_PRIVATE)
-                .getBoolean(Preferences.KEY_SLEEP_TIMER, Preferences.DEF_SLEEP_TIMER_DISABLED);
+        final boolean sleepTimerEnabled = AppSettings.isSleepTimerEnabled(this);
         mPlaybackManager.configureTimer(sleepTimerEnabled, false);
 
         isWidgetsEnabled = AppSettings.isWidgetEnable(this);
@@ -315,20 +313,19 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
 
     @Override
     public void onSharedPreferenceChanged(@NonNull SharedPreferences sharedPreferences, @NonNull String key) {
-        mWorkerHandler.post(() -> handleSharedPreferenceChange(sharedPreferences, key));
+        mWorkerHandler.post(() -> handleSharedPreferenceChange(key));
     }
 
-    private void handleSharedPreferenceChange(@NonNull SharedPreferences sharedPreferences, @NonNull String key) {
+    private void handleSharedPreferenceChange(@NonNull String key) {
         switch (key) {
             case Preferences.KEY_REMEMBER_PREVIOUS_PLAYLIST:
-                boolean remember = sharedPreferences.getBoolean(Preferences.KEY_REMEMBER_PREVIOUS_PLAYLIST, false);
+                boolean remember = AppSettings.isRememberPlaylistEnabled(this);
                 mPlaybackManager.setRememberPlaylist(remember);
                 mPulseController.setRememberPlaylist(remember, true);
                 break;
             case Preferences.KEY_SLEEP_TIMER:
             case Preferences.KEY_SLEEP_TIMER_DURATION:
-                mPlaybackManager.configureTimer(sharedPreferences.getBoolean(Preferences.PREF_AUDIO, Preferences.DEF_SLEEP_TIMER_DISABLED),
-                        mMediaSession.isActive());
+                mPlaybackManager.configureTimer(AppSettings.isSleepTimerEnabled(this), mMediaSession.isActive());
                 break;
             case Preferences.KEY_WIDGET_ENABLED:
                 isWidgetsEnabled = AppSettings.isWidgetEnable(this);
