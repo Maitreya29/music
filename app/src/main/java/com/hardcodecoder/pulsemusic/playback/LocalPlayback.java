@@ -21,6 +21,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.hardcodecoder.pulsemusic.PulseController;
+import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 
 import java.io.IOException;
@@ -88,7 +89,7 @@ public class LocalPlayback implements
         } catch (IOException e) {
             e.printStackTrace();
             //Stop playback if data source failed
-            Toast.makeText(mContext, "Music file not found, playing next song in queue", Toast.LENGTH_LONG).show();
+            Toast.makeText(mContext, mContext.getString(R.string.toast_error_playing_track), Toast.LENGTH_LONG).show();
             mPlaybackCallback.onPlaybackCompletion();
         }
     }

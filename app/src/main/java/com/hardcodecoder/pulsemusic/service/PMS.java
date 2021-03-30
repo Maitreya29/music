@@ -145,7 +145,7 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
                     Toast.makeText(this, getString(R.string.message_empty_recent), Toast.LENGTH_SHORT).show();
                 else mWorkerHandler.post(() -> handleDefaultActions(action));
             });
-        } else handleDefaultActions(action);
+        } else mWorkerHandler.post(() -> handleDefaultActions(action));
     }
 
     private void handleDefaultActions(int action) {
@@ -182,6 +182,10 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
     }
 
     private void playContinuePlaylist() {
+        if (!AppSettings.isRememberPlaylistEnabled(this)) {
+            Toast.makeText(this, getString(R.string.toast_remember_playlist_disabled), Toast.LENGTH_LONG).show();
+            return;
+        }
         MediaController controller = mMediaSession.getController();
         Bundle extras = new Bundle();
         extras.putBoolean(PlaybackManager.START_PLAYBACK, true);

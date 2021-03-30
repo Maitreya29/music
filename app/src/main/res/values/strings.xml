@@ -20,7 +20,10 @@
     <string name="select_equalizer">Select Equalizer</string>
     <string name="shuffle">Shuffle</string>
     <string name="tracks_not_found">No tracks found</string>
-    <string name="unknown">Unknown</string>3105
+    <string name="unknown">Unknown</string>
+    <string name="toast_error_playing_track">Error setting data source, playing next song in queue</string>
+    <string name="toast_remember_playlist_disabled">Cannot continue playback, remember playlist is disabled</string>
+    <string name="toast_remember_playlist_not_found">No playlist found to resume playback</string>
 
     <!-- Dialogs -->
     <string name="enter_your_name">Enter your name</string>

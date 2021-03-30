@@ -8,11 +8,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.SystemClock;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.hardcodecoder.pulsemusic.PulseController;
+import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.helper.MediaArtHelper;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.providers.ProviderManager;
@@ -159,7 +161,10 @@ public class PlaybackManager implements Playback.Callback {
 
     private void handleLoadLastTrack(@NonNull Bundle bundle) {
         List<MusicModel> previousPlaylist = ProviderManager.getPreviousPlaylistProvider().getPlaylist();
-        if (previousPlaylist == null || previousPlaylist.isEmpty()) return;
+        if (previousPlaylist == null || previousPlaylist.isEmpty()) {
+            Toast.makeText(mContext, mContext.getString(R.string.toast_remember_playlist_not_found), Toast.LENGTH_LONG).show();
+            return;
+        }
         final int index = AppSettings.getLastTrackIndex(mContext);
         final int resumePosition = AppSettings.getLastTrackPosition(mContext);
         PulseController.getInstance().setPlaylist(previousPlaylist, index);
