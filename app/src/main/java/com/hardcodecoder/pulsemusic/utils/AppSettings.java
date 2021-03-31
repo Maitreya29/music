@@ -317,4 +317,15 @@ public class AppSettings {
         return context.getSharedPreferences(Preferences.PREF_WIDGETS, Context.MODE_PRIVATE)
                 .getInt(Preferences.KEY_WIDGET_PLAY_ACTION, Preferences.ACTION_PLAY_SUGGESTED);
     }
+
+    public static void setWidgetBackgroundAlpha(@NonNull Context context, int alphaPercent) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(Preferences.PREF_WIDGETS, Context.MODE_PRIVATE).edit();
+        editor.putInt(Preferences.KEY_WIDGET_BACKGROUND_ALPHA, alphaPercent);
+        editor.apply();
+    }
+
+    public static int getWidgetBackgroundAlpha(@NonNull Context context) {
+        return context.getSharedPreferences(Preferences.PREF_WIDGETS, Context.MODE_PRIVATE)
+                .getInt(Preferences.KEY_WIDGET_BACKGROUND_ALPHA, 60);
+    }
 }

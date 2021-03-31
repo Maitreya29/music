@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <integer name="now_playing_cover_corner_radius_max">50</integer>
+    <integer name="widget_background_alpha_min_value">0</integer>
+    <integer name="widget_background_alpha_max_value">100</integer>
 </resources>

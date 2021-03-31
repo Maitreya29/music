@@ -324,6 +324,12 @@
     <!-- Widgets -->
     <string name="widget_name_normal">Normal light</string>
     <string name="widget_name_normal_dark">Normal Dark</string>
+    <string name="category_widget_style">Style</string>
+    <string name="widget_background_alpha">Background alpha</string>
+    <string name="widget_background_alpha_desc">Adjust alpha value of widget\'s background</string>
+    <string name="widget_background_alpha_chooser_title">Select alpha value</string>
+    <string name="widget_background_alpha_min">Transparent</string>
+    <string name="widget_background_alpha_max">Opaque</string>
     <string name="category_widget_action">Action</string>
     <string name="widget_play_button_action">Action on play</string>
     <string name="widget_play_button_action_desc">Choose the action to perform when clicked on widget\'s play button</string>

@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.dialog.AutoPlayActionChooser;
+import com.hardcodecoder.pulsemusic.dialog.WidgetBackgroundAlphaChooser;
 import com.hardcodecoder.pulsemusic.fragments.settings.base.SettingsBaseFragment;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 
@@ -48,6 +49,11 @@ public class SettingsWidgetsFragment extends SettingsBaseFragment {
                     action -> AppSettings.setWidgetPlayAction(requireContext(), action),
                     AppSettings.getWidgetPlayAction(requireContext()));
             dialog.show(requireFragmentManager(), AutoPlayActionChooser.TAG);
+        });
+
+        view.findViewById(R.id.widget_background_alpha_chooser).setOnClickListener(v -> {
+            WidgetBackgroundAlphaChooser alphaChooser = WidgetBackgroundAlphaChooser.getInstance();
+            alphaChooser.show(requireFragmentManager(), WidgetBackgroundAlphaChooser.TAG);
         });
     }
 }

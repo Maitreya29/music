@@ -139,7 +139,7 @@
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/pulse_widget_normal_dark" />
+                android:resource="@xml/pulse_widget_normal" />
         </receiver>
 
         <receiver

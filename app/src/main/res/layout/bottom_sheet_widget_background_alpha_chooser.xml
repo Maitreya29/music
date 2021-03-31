@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="24dp">
+
+    <com.hardcodecoder.pulsemusic.views.AccentColorTextView
+        android:id="@+id/widget_alpha_chooser_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="start"
+        android:text="@string/widget_background_alpha_chooser_title"
+        android:textAppearance="@style/Appearance.Text.Subtitle1" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/min_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/widget_alpha_chooser_title"
+        android:layout_marginTop="36dp"
+        android:text="@string/widget_background_alpha_min" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/max_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/widget_alpha_chooser_title"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="36dp"
+        android:text="@string/widget_background_alpha_max" />
+
+    <com.hardcodecoder.pulsemusic.views.ValueSlider
+        android:id="@+id/widget_alpha_slider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/min_text"
+        android:layout_marginTop="16dp"
+        app:endValue="@integer/widget_background_alpha_max_value"
+        app:startValue="@integer/widget_background_alpha_min_value"
+        app:unit="" />
+
+    <com.hardcodecoder.pulsemusic.views.AccentColorMaterialButton
+        android:id="@+id/cancel_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/widget_alpha_slider"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_toStartOf="@id/set_btn"
+        android:text="@string/cancel"
+        app:accentButtonStyle="text" />
+
+    <com.hardcodecoder.pulsemusic.views.AccentColorMaterialButton
+        android:id="@+id/set_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/widget_alpha_slider"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="16dp"
+        android:text="@string/set"
+        app:accentButtonStyle="text" />
+</RelativeLayout>

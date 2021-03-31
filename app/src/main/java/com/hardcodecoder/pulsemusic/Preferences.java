@@ -190,4 +190,6 @@ public final class Preferences {
     public static final String KEY_WIDGET_ENABLED = "WidgetEnabled";
     // Key for storing the widget's play action
     public static final String KEY_WIDGET_PLAY_ACTION = "PlayAction";
+    // Key for storing widgets background transparency (Default Alpha = 60%
+    public static final String KEY_WIDGET_BACKGROUND_ALPHA = "BackgroundAlpha";
 }

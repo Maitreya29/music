@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
     android:initialKeyguardLayout="@xml/pulse_widget_normal"
-    android:initialLayout="@layout/pulse_widget_normal_light"
+    android:initialLayout="@layout/pulse_widget_normal"
     android:minWidth="250dp"
     android:minHeight="40dp"
     android:minResizeWidth="200dp"

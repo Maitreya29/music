@@ -15,6 +15,11 @@ import static com.hardcodecoder.pulsemusic.widgets.PulseWidgetControlReceiver.AC
 public abstract class PulseWidgetNormal extends PulseWidgetBase {
 
     @Override
+    public int getLayoutId() {
+        return R.layout.pulse_widget_normal;
+    }
+
+    @Override
     public void setUpLayout(@NonNull Context context, @NonNull RemoteViews layoutView, @NonNull PendingIntent defaultClickAction) {
         layoutView.setOnClickPendingIntent(R.id.widget_media_art, defaultClickAction);
         layoutView.setImageViewBitmap(R.id.widget_media_art, getAlbumArt(context));
@@ -23,8 +28,12 @@ public abstract class PulseWidgetNormal extends PulseWidgetBase {
         layoutView.setImageViewResource(R.id.widget_next_btn, R.drawable.ic_round_skip_next);
         layoutView.setTextViewText(R.id.widget_track_title, getTitle(context));
 
+        applyTheme(context, layoutView);
+
         layoutView.setOnClickPendingIntent(R.id.widget_previous_btn, buildPendingControlBroadcast(context, ACTION_SKIP_PREV));
         layoutView.setOnClickPendingIntent(R.id.widget_play_pause_btn, buildPendingControlBroadcast(context, ACTION_PLAY_PAUSE));
         layoutView.setOnClickPendingIntent(R.id.widget_next_btn, buildPendingControlBroadcast(context, ACTION_SKIP_NEXT));
     }
+
+    public abstract void applyTheme(@NonNull Context context, @NonNull RemoteViews layoutView);
 }
