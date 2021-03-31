@@ -15,6 +15,7 @@ import android.media.session.PlaybackState;
 import android.os.Build;
 import android.support.v4.media.session.MediaSessionCompat;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -183,7 +184,7 @@ public class MediaNotificationManager {
                     .setContentText(mMetadata.getString(MediaMetadata.METADATA_KEY_ARTIST))
                     .setLargeIcon(mMetadata.getBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART))
                     .addAction(R.drawable.ic_round_skip_previous_noti, "Skip prev", mPreviousIntent)
-                    .addAction(setButton(), "Play Pause Button", getActionIntent())
+                    .addAction(getPlayOrPauseButton(), "Play Pause Button", getPlayOrPauseAction())
                     .addAction(R.drawable.ic_round_skip_next_noti, "Skip Next", mNextIntent)
                     .addAction(R.drawable.ic_close_noti, "Stop Self", mStopIntent)
                     .setContentIntent(mOpenNowPlaying)
@@ -196,12 +197,14 @@ public class MediaNotificationManager {
         return null;
     }
 
-    private int setButton() {
+    @DrawableRes
+    private int getPlayOrPauseButton() {
         return mPlaybackState.getState() == PlaybackState.STATE_PLAYING ?
                 R.drawable.ic_round_pause_noti : R.drawable.ic_round_play_noti;
     }
 
-    private PendingIntent getActionIntent() {
+    @NonNull
+    private PendingIntent getPlayOrPauseAction() {
         return mPlaybackState.getState() == PlaybackState.STATE_PLAYING ?
                 mPauseIntent : mPlayIntent;
     }
@@ -231,8 +234,8 @@ public class MediaNotificationManager {
 
         void onNotificationStopped(boolean removeNotification);
 
-        void registerControlsReceiver(BroadcastReceiver controlsReceiver, IntentFilter filter);
+        void registerControlsReceiver(@NonNull BroadcastReceiver controlsReceiver, @NonNull IntentFilter filter);
 
-        void unregisterControlsReceiver(BroadcastReceiver controlsReceiver);
+        void unregisterControlsReceiver(@NonNull BroadcastReceiver controlsReceiver);
     }
 }

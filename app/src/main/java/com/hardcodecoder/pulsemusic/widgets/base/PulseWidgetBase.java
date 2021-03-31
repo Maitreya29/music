@@ -10,7 +10,6 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.media.MediaMetadata;
 import android.media.session.MediaController;
-import android.media.session.PlaybackState;
 import android.widget.RemoteViews;
 
 import androidx.annotation.LayoutRes;
@@ -83,10 +82,7 @@ public abstract class PulseWidgetBase extends AppWidgetProvider {
     }
 
     protected boolean isPlaying() {
-        MediaController controller = mPulseController.getController();
-        if (null == controller || null == controller.getPlaybackState()) return false;
-        PlaybackState state = controller.getPlaybackState();
-        return state.getState() == PlaybackState.STATE_PLAYING;
+        return mPulseController.isPlaying();
     }
 
     @LayoutRes

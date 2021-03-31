@@ -2,6 +2,7 @@ package com.hardcodecoder.pulsemusic;
 
 import android.media.session.MediaController;
 import android.media.session.MediaController.TransportControls;
+import android.media.session.PlaybackState;
 import android.os.Handler;
 import android.os.Looper;
 
@@ -18,7 +19,12 @@ import java.util.List;
 
 public class PulseController {
 
-    private static final PulseController sInstance = new PulseController();
+    private static final PulseController sInstance;
+
+    static {
+        sInstance = new PulseController();
+    }
+
     private final Handler mMainHandler = new Handler(Looper.getMainLooper());
     private final List<Callback> mCallbacksList = new ArrayList<>();
     private final QueueManager mQueueManager = new QueueManager();
@@ -56,6 +62,12 @@ public class PulseController {
 
     public void setAudioSessionId(int audioSessionId) {
         mAudioSessionId = audioSessionId;
+    }
+
+    public boolean isPlaying() {
+        if (null == mMediaController || null == mMediaController.getPlaybackState()) return false;
+        PlaybackState state = mMediaController.getPlaybackState();
+        return state.getState() == PlaybackState.STATE_PLAYING;
     }
 
     public void setRememberPlaylist(boolean remember, boolean saveNow) {

@@ -302,13 +302,13 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
     }
 
     @Override
-    public void registerControlsReceiver(BroadcastReceiver controlsReceiver, IntentFilter filter) {
+    public void registerControlsReceiver(@NonNull BroadcastReceiver controlsReceiver, @NonNull IntentFilter filter) {
         registerReceiver(controlsReceiver, filter);
         isReceiverRegistered = true;
     }
 
     @Override
-    public void unregisterControlsReceiver(BroadcastReceiver controlsReceiver) {
+    public void unregisterControlsReceiver(@NonNull BroadcastReceiver controlsReceiver) {
         unregisterReceiver(controlsReceiver);
         isReceiverRegistered = false;
     }

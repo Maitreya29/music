@@ -371,10 +371,7 @@ public abstract class BaseNowPlayingScreen extends Fragment implements PulseCont
     }
 
     protected void togglePlayPause() {
-        MediaController controller = mPulseController.getController();
-        if (null == controller || null == controller.getPlaybackState()) return;
-        PlaybackState state = controller.getPlaybackState();
-        if (state.getState() == PlaybackState.STATE_PLAYING) mRemote.pause();
+        if (mPulseController.isPlaying()) mRemote.pause();
         else mRemote.play();
     }
 
