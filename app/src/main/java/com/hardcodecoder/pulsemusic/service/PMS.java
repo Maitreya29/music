@@ -243,6 +243,8 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
                 .unregisterOnSharedPreferenceChangeListener(this);
         getSharedPreferences(Preferences.PREF_AUDIO, MODE_PRIVATE)
                 .unregisterOnSharedPreferenceChangeListener(this);
+        getSharedPreferences(Preferences.PREF_WIDGETS, MODE_PRIVATE)
+                .unregisterOnSharedPreferenceChangeListener(this);
         if (isReceiverRegistered) mNotificationManager.unregisterControlsReceiver();
         if (mMediaSession != null) mMediaSession.release();
         if (isWidgetsEnabled) PulseWidgetsHelper.resetWidgets(this);
