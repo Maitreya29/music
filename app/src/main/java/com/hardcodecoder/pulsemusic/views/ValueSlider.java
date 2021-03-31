@@ -3,8 +3,9 @@ package com.hardcodecoder.pulsemusic.views;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.View;
-import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,11 +15,11 @@ import com.hardcodecoder.pulsemusic.R;
 
 import java.util.Locale;
 
-public class ValueSlider extends FrameLayout {
+public class ValueSlider extends LinearLayout {
 
-    private AccentColorSlider mSlider;
-    private MaterialTextView mStartValueText;
-    private String suffix;
+    private final AccentColorSlider mSlider;
+    private final MaterialTextView mStartValueText;
+    private final String suffix;
 
     public ValueSlider(@NonNull Context context) {
         this(context, null, 0);
@@ -30,11 +31,11 @@ public class ValueSlider extends FrameLayout {
 
     public ValueSlider(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        initialize(context, attrs);
-    }
+        setGravity(Gravity.CENTER);
+        setOrientation(LinearLayout.HORIZONTAL);
 
-    private void initialize(@NonNull Context context, @Nullable AttributeSet attrs) {
-        View view = View.inflate(context, R.layout.layout_value_slider, this);
+        View view = View.inflate(context, R.layout.value_slider, this);
+
         mStartValueText = view.findViewById(R.id.slider_start_value_text);
         MaterialTextView endText = view.findViewById(R.id.slider_end_value_text);
         mSlider = view.findViewById(R.id.value_slider);
