@@ -35,54 +35,32 @@ public class MediaNotificationManager {
     private static final String CHANNEL_ID = "com.hardcodecoder.pulsemusic.MUSIC_CHANNEL_ID";
     private static final int NOTIFICATION_ID = 412;
     private static final int REQUEST_CODE = 100;
-    private final NotificationManager mNotificationManager;
     private final Context mContext;
+    private final NotificationManager mNotificationManager;
     private final NotificationCallback mCallback;
     private final MediaController mController;
     private final MediaController.TransportControls mTransportControls;
-    private final BroadcastReceiver controlsReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver mControlsReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(@NonNull Context context, @NonNull Intent intent) {
             final String action = intent.getAction();
-            if (action != null && mTransportControls != null) {
-                switch (action) {
-                    case ACTION_PLAY:
-                        mTransportControls.play();
-                        break;
-                    case ACTION_PAUSE:
-                        mTransportControls.pause();
-                        break;
-                    case ACTION_STOP:
-                        mTransportControls.stop();
-                        break;
-                    case ACTION_NEXT:
-                        mTransportControls.skipToNext();
-                        break;
-                    case ACTION_PREV:
-                        mTransportControls.skipToPrevious();
-                        break;
-                }
-            }
-        }
-    };
-    private final MediaController.Callback mCb = new MediaController.Callback() {
-        @Override
-        public void onPlaybackStateChanged(@Nullable PlaybackState state) {
-            if (null != state) {
-                int mState = state.getState();
-                if (mPlaybackState.getState() != mState && mState != PlaybackState.STATE_STOPPED) {
-                    mPlaybackState = state;
-                    updateNotification();
-                }
-                mPlaybackState = state;
-            }
-        }
-
-        @Override
-        public void onMetadataChanged(@Nullable MediaMetadata metadata) {
-            if (null != metadata) {
-                mMetadata = metadata;
-                updateNotification();
+            if (null == action) return;
+            switch (action) {
+                case ACTION_PLAY:
+                    mTransportControls.play();
+                    break;
+                case ACTION_PAUSE:
+                    mTransportControls.pause();
+                    break;
+                case ACTION_STOP:
+                    mTransportControls.stop();
+                    break;
+                case ACTION_NEXT:
+                    mTransportControls.skipToNext();
+                    break;
+                case ACTION_PREV:
+                    mTransportControls.skipToPrevious();
+                    break;
             }
         }
     };
@@ -92,10 +70,22 @@ public class MediaNotificationManager {
     private PendingIntent mNextIntent;
     private PendingIntent mStopIntent;
     private PendingIntent mOpenNowPlaying;
-    private boolean mStarted;
+    private PlaybackState mPlaybackState = null;
+    private MediaMetadata mMetadata = null;
     private boolean mInitialised = false;
-    private PlaybackState mPlaybackState;
-    private MediaMetadata mMetadata;
+    private final MediaController.Callback mControllerCallback = new MediaController.Callback() {
+        @Override
+        public void onPlaybackStateChanged(@Nullable PlaybackState state) {
+            mPlaybackState = state;
+            updateNotification();
+        }
+
+        @Override
+        public void onMetadataChanged(@Nullable MediaMetadata metadata) {
+            mMetadata = metadata;
+            updateNotification();
+        }
+    };
 
     public MediaNotificationManager(@NonNull Context context, @NonNull MediaController controller, @NonNull NotificationCallback notificationCallback) {
         mContext = context;
@@ -104,56 +94,58 @@ public class MediaNotificationManager {
         mCallback = notificationCallback;
         mNotificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
         if (null != mNotificationManager) mNotificationManager.cancelAll();
+        mController.registerCallback(mControllerCallback);
     }
 
     private void updateNotification() {
-        Notification notification = createNotification();
-        if (mPlaybackState.getState() == PlaybackState.STATE_PLAYING) {
-            mCallback.onNotificationStarted(NOTIFICATION_ID, notification);
-        } else if (mPlaybackState.getState() == PlaybackState.STATE_PAUSED) {
-            mCallback.onNotificationStopped(false);
+        if (null == mPlaybackState || null == mMetadata) return;
+        int state = mPlaybackState.getState();
+        if (state == PlaybackState.STATE_STOPPED) {
+            mNotificationManager.cancel(NOTIFICATION_ID);
+            mCallback.onNotificationStopped(true);
+        } else {
+            if (!mInitialised) initializeNotification();
+            Notification notification = createNotification();
+            if (state == PlaybackState.STATE_PLAYING) {
+                mCallback.onNotificationStarted(notification, NOTIFICATION_ID);
+            } else if (state == PlaybackState.STATE_PAUSED) {
+                mCallback.onNotificationStopped(false);
+            }
+            mNotificationManager.notify(NOTIFICATION_ID, notification);
         }
-        mNotificationManager.notify(NOTIFICATION_ID, notification);
     }
 
-    private void initialisePendingIntents() {
+    private void initializeNotification() {
         String pkg = mContext.getPackageName();
-        mPlayIntent = PendingIntent.getBroadcast(mContext, REQUEST_CODE, new Intent(ACTION_PLAY).setPackage(pkg), PendingIntent.FLAG_CANCEL_CURRENT);
-        mPauseIntent = PendingIntent.getBroadcast(mContext, REQUEST_CODE, new Intent(ACTION_PAUSE).setPackage(pkg), PendingIntent.FLAG_CANCEL_CURRENT);
-        mStopIntent = PendingIntent.getBroadcast(mContext, REQUEST_CODE, new Intent(ACTION_STOP).setPackage(pkg), PendingIntent.FLAG_CANCEL_CURRENT);
-        mNextIntent = PendingIntent.getBroadcast(mContext, REQUEST_CODE, new Intent(ACTION_NEXT).setPackage(pkg), PendingIntent.FLAG_CANCEL_CURRENT);
-        mPreviousIntent = PendingIntent.getBroadcast(mContext, REQUEST_CODE, new Intent(ACTION_PREV).setPackage(pkg), PendingIntent.FLAG_CANCEL_CURRENT);
+
+        mPlayIntent = PendingIntent.getBroadcast(mContext, REQUEST_CODE,
+                new Intent(ACTION_PLAY).setPackage(pkg), PendingIntent.FLAG_CANCEL_CURRENT);
+        mPauseIntent = PendingIntent.getBroadcast(mContext, REQUEST_CODE,
+                new Intent(ACTION_PAUSE).setPackage(pkg), PendingIntent.FLAG_CANCEL_CURRENT);
+        mStopIntent = PendingIntent.getBroadcast(mContext, REQUEST_CODE,
+                new Intent(ACTION_STOP).setPackage(pkg), PendingIntent.FLAG_CANCEL_CURRENT);
+        mNextIntent = PendingIntent.getBroadcast(mContext, REQUEST_CODE,
+                new Intent(ACTION_NEXT).setPackage(pkg), PendingIntent.FLAG_CANCEL_CURRENT);
+        mPreviousIntent = PendingIntent.getBroadcast(mContext, REQUEST_CODE,
+                new Intent(ACTION_PREV).setPackage(pkg), PendingIntent.FLAG_CANCEL_CURRENT);
+
         if (mNotificationManager != null) mNotificationManager.cancelAll();
+
         Intent intent = new Intent(mContext, MainContentActivity.class);
         intent.setAction(MainContentActivity.ACTION_OPEN_NOW_PLAYING);
         mOpenNowPlaying = PendingIntent.getActivity(mContext, REQUEST_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        mInitialised = true;
-    }
 
-    public void startNotification() {
-        if (!mInitialised) {
-            initialisePendingIntents();
-        }
-        if (!mStarted) {
-            mMetadata = mController.getMetadata();
-            mPlaybackState = mController.getPlaybackState();
-            // The notification must be updated after setting started to true
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-                createNotificationChannel();
-            Notification notification = createNotification();
-            if (notification != null) {
-                mController.registerCallback(mCb);
-                IntentFilter filter = new IntentFilter();
-                filter.addAction(ACTION_NEXT);
-                filter.addAction(ACTION_PAUSE);
-                filter.addAction(ACTION_PLAY);
-                filter.addAction(ACTION_PREV);
-                filter.addAction(ACTION_STOP);
-                mCallback.registerControlsReceiver(controlsReceiver, filter);
-                mCallback.onNotificationStarted(NOTIFICATION_ID, notification);
-                mStarted = true;
-            }
-        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+            createNotificationChannel();
+
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(ACTION_NEXT);
+        filter.addAction(ACTION_PAUSE);
+        filter.addAction(ACTION_PLAY);
+        filter.addAction(ACTION_PREV);
+        filter.addAction(ACTION_STOP);
+        mContext.registerReceiver(mControlsReceiver, filter);
+        mInitialised = true;
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -170,31 +162,28 @@ public class MediaNotificationManager {
         }
     }
 
-    @Nullable
+    @NonNull
     private Notification createNotification() {
-        if (mMetadata != null) {
-            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(mContext, CHANNEL_ID);
-            notificationBuilder.setStyle(new androidx.media.app.NotificationCompat.MediaStyle()
-                    .setMediaSession(MediaSessionCompat.Token.fromToken(mCallback.getMediaSessionToken()))
-                    .setCancelButtonIntent(mStopIntent)
-                    .setShowCancelButton(true)
-                    .setShowActionsInCompactView(0, 1, 2))
-                    .setSmallIcon(R.drawable.ic_notification)
-                    .setContentTitle(mMetadata.getString(MediaMetadata.METADATA_KEY_TITLE))
-                    .setContentText(mMetadata.getString(MediaMetadata.METADATA_KEY_ARTIST))
-                    .setLargeIcon(mMetadata.getBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART))
-                    .addAction(R.drawable.ic_round_skip_previous_noti, "Skip prev", mPreviousIntent)
-                    .addAction(getPlayOrPauseButton(), "Play Pause Button", getPlayOrPauseAction())
-                    .addAction(R.drawable.ic_round_skip_next_noti, "Skip Next", mNextIntent)
-                    .addAction(R.drawable.ic_close_noti, "Stop Self", mStopIntent)
-                    .setContentIntent(mOpenNowPlaying)
-                    .setOnlyAlertOnce(true)
-                    .setAutoCancel(false)
-                    .setDeleteIntent(mStopIntent)
-                    .setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
-            return notificationBuilder.build();
-        }
-        return null;
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(mContext, CHANNEL_ID);
+        notificationBuilder.setStyle(new androidx.media.app.NotificationCompat.MediaStyle()
+                .setMediaSession(MediaSessionCompat.Token.fromToken(mCallback.getMediaSessionToken()))
+                .setCancelButtonIntent(mStopIntent)
+                .setShowCancelButton(true)
+                .setShowActionsInCompactView(0, 1, 2))
+                .setSmallIcon(R.drawable.ic_notification)
+                .setContentTitle(mMetadata.getString(MediaMetadata.METADATA_KEY_TITLE))
+                .setContentText(mMetadata.getString(MediaMetadata.METADATA_KEY_ARTIST))
+                .setLargeIcon(mMetadata.getBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART))
+                .addAction(R.drawable.ic_round_skip_previous_noti, "Skip prev", mPreviousIntent)
+                .addAction(getPlayOrPauseButton(), "Play Pause Button", getPlayOrPauseAction())
+                .addAction(R.drawable.ic_round_skip_next_noti, "Skip Next", mNextIntent)
+                .addAction(R.drawable.ic_close_noti, "Stop Self", mStopIntent)
+                .setContentIntent(mOpenNowPlaying)
+                .setOnlyAlertOnce(true)
+                .setAutoCancel(false)
+                .setDeleteIntent(mStopIntent)
+                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
+        return notificationBuilder.build();
     }
 
     @DrawableRes
@@ -209,33 +198,19 @@ public class MediaNotificationManager {
                 mPauseIntent : mPlayIntent;
     }
 
-    public void stopNotification() {
-        if (mStarted) {
-            mStarted = false;
-            mController.unregisterCallback(mCb);
-            try {
-                mNotificationManager.cancel(NOTIFICATION_ID);
-                mCallback.unregisterControlsReceiver(controlsReceiver);
-            } catch (IllegalArgumentException ex) {
-                // ignore if the receiver is not registered.
-            }
-            mCallback.onNotificationStopped(true);
-        }
-    }
-
-    public void unregisterControlsReceiver() {
-        mCallback.unregisterControlsReceiver(controlsReceiver);
+    public void onDestroy() {
+        mController.unregisterCallback(mControllerCallback);
+        if (!mInitialised) return;
+        mContext.unregisterReceiver(mControlsReceiver);
     }
 
     public interface NotificationCallback {
+
+        @NonNull
         MediaSession.Token getMediaSessionToken();
 
-        void onNotificationStarted(int notificationId, Notification notification);
+        void onNotificationStarted(@NonNull Notification notification, int notificationId);
 
         void onNotificationStopped(boolean removeNotification);
-
-        void registerControlsReceiver(@NonNull BroadcastReceiver controlsReceiver, @NonNull IntentFilter filter);
-
-        void unregisterControlsReceiver(@NonNull BroadcastReceiver controlsReceiver);
     }
 }

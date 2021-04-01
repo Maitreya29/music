@@ -3,9 +3,7 @@ package com.hardcodecoder.pulsemusic.service;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.content.BroadcastReceiver;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.media.MediaMetadata;
 import android.media.session.MediaController;
@@ -22,6 +20,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.media.session.MediaButtonReceiver;
 
 import com.hardcodecoder.pulsemusic.Preferences;
@@ -61,7 +60,6 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
     private Handler mWorkerHandler = null;
     private PlaybackManager mPlaybackManager;
     private PulseController mPulseController;
-    private boolean isReceiverRegistered = false;
     private boolean isWidgetsEnabled = false;
     private boolean mCanServiceStopSelf = true;
 
@@ -245,7 +243,7 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
                 .unregisterOnSharedPreferenceChangeListener(this);
         getSharedPreferences(Preferences.PREF_WIDGETS, MODE_PRIVATE)
                 .unregisterOnSharedPreferenceChangeListener(this);
-        if (isReceiverRegistered) mNotificationManager.unregisterControlsReceiver();
+        mNotificationManager.onDestroy();
         if (mMediaSession != null) mMediaSession.release();
         if (isWidgetsEnabled) PulseWidgetsHelper.resetWidgets(this);
         mWorkerHandler.removeCallbacksAndMessages(null);
@@ -255,6 +253,9 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
 
     @Override
     public void onPlaybackStart() {
+        // Make sure the service is always started
+        // startForeground() does not start the service.
+        ContextCompat.startForegroundService(this, new Intent(this, getClass()));
         mMediaSession.setActive(true);
     }
 
@@ -264,34 +265,25 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
     }
 
     @Override
-    public void onStartNotification() {
-        mNotificationManager.startNotification();
-    }
-
-    @Override
-    public void onStopNotification() {
-        mNotificationManager.stopNotification();
-    }
-
-    @Override
-    public void onPlaybackStateChanged(PlaybackState newState) {
+    public void onPlaybackStateChanged(@NonNull PlaybackState newState) {
         mMediaSession.setPlaybackState(newState);
         if (isWidgetsEnabled) PulseWidgetsHelper.notifyWidgets(this);
     }
 
     @Override
-    public void onMetaDataChanged(MediaMetadata newMetaData) {
+    public void onMetaDataChanged(@NonNull MediaMetadata newMetaData) {
         mMediaSession.setMetadata(newMetaData);
         if (isWidgetsEnabled) PulseWidgetsHelper.notifyWidgets(this);
     }
 
     @Override
+    @NonNull
     public MediaSession.Token getMediaSessionToken() {
         return mMediaSession.getSessionToken();
     }
 
     @Override
-    public void onNotificationStarted(int notificationId, Notification notification) {
+    public void onNotificationStarted(@NonNull Notification notification, int notificationId) {
         startForeground(notificationId, notification);
     }
 
@@ -299,18 +291,6 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
     public void onNotificationStopped(boolean removeNotification) {
         stopForeground(removeNotification);
         if (removeNotification && mCanServiceStopSelf) stopSelf();
-    }
-
-    @Override
-    public void registerControlsReceiver(@NonNull BroadcastReceiver controlsReceiver, @NonNull IntentFilter filter) {
-        registerReceiver(controlsReceiver, filter);
-        isReceiverRegistered = true;
-    }
-
-    @Override
-    public void unregisterControlsReceiver(@NonNull BroadcastReceiver controlsReceiver) {
-        unregisterReceiver(controlsReceiver);
-        isReceiverRegistered = false;
     }
 
     @Override

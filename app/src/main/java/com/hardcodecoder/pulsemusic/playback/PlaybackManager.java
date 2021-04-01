@@ -176,12 +176,6 @@ public class PlaybackManager implements Playback.Callback {
         mStateBuilder.setState(currentState, mPlayback.getCurrentStreamingPosition(), currentState == PlaybackState.STATE_PLAYING ? 1 : 0);
         mStateBuilder.setActions(getActions(currentState));
         mServiceCallback.onPlaybackStateChanged(mStateBuilder.build());
-
-        if (currentState == PlaybackState.STATE_PLAYING) {
-            mServiceCallback.onStartNotification();
-        } else if (currentState == PlaybackState.STATE_STOPPED) {
-            mServiceCallback.onStopNotification();
-        }
     }
 
     private long getActions(int state) {
@@ -313,12 +307,8 @@ public class PlaybackManager implements Playback.Callback {
 
         void onPlaybackStopped();
 
-        void onStartNotification();
+        void onPlaybackStateChanged(@NonNull PlaybackState newState);
 
-        void onStopNotification();
-
-        void onPlaybackStateChanged(PlaybackState newState);
-
-        void onMetaDataChanged(MediaMetadata newMetaData);
+        void onMetaDataChanged(@NonNull MediaMetadata newMetaData);
     }
 }
