@@ -29,7 +29,7 @@ public class ConfigureSleepTimer extends RoundedCustomBottomSheetFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.bottom_sheet_configure_sleep_timer, container, false);
+        return inflater.inflate(R.layout.bsd_configure_sleep_timer, container, false);
     }
 
     @Override

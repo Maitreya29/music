@@ -24,7 +24,7 @@ import com.hardcodecoder.pulsemusic.MediaArtCache;
 import com.hardcodecoder.pulsemusic.PulseController;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.activities.base.DraggableNowPlayingSheetActivity;
-import com.hardcodecoder.pulsemusic.dialog.HomeBottomSheetFragment;
+import com.hardcodecoder.pulsemusic.dialog.MainActivityMenu;
 import com.hardcodecoder.pulsemusic.fragments.main.AlbumsFragment;
 import com.hardcodecoder.pulsemusic.fragments.main.ArtistFragment;
 import com.hardcodecoder.pulsemusic.fragments.main.HomeFragment;
@@ -167,8 +167,8 @@ public class MainContentActivity extends DraggableNowPlayingSheetActivity implem
         mPulseToolbar = mAppBar.findViewById(R.id.pulse_toolbar);
 
         mPulseToolbar.setNavigationIconOnClickListener(v -> {
-            HomeBottomSheetFragment homeBottomSheetFragment = HomeBottomSheetFragment.getInstance();
-            homeBottomSheetFragment.show(getSupportFragmentManager(), HomeBottomSheetFragment.TAG);
+            MainActivityMenu mainActivityMenu = MainActivityMenu.getInstance();
+            mainActivityMenu.show(getSupportFragmentManager(), MainActivityMenu.TAG);
         });
 
         mPulseToolbar.setQuickActionIconOnClickListener(v ->

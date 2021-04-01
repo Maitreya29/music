@@ -33,7 +33,7 @@ public class AutoPlayActionChooser extends RoundedCustomBottomSheetFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.bottom_sheet_auto_play_action_chooser, container, false);
+        return inflater.inflate(R.layout.bsd_choose_auto_play_action, container, false);
     }
 
     @Override

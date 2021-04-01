@@ -17,7 +17,7 @@ import com.hardcodecoder.pulsemusic.utils.AppSettings;
 
 public class NowPlayingStyleChooser extends RoundedCustomBottomSheetFragment {
 
-    public static final String TAG = "AlbumCardStyleChooser";
+    public static final String TAG = NowPlayingStyleChooser.class.getSimpleName();
     private boolean mOptionChanged = false;
 
     @NonNull
@@ -28,7 +28,7 @@ public class NowPlayingStyleChooser extends RoundedCustomBottomSheetFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.bottom_sheet_now_playing_screen_selector, container, false);
+        return inflater.inflate(R.layout.bsd_choose_now_playing_style, container, false);
     }
 
     @Override

@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.dialog.AutoPlayActionChooser;
-import com.hardcodecoder.pulsemusic.dialog.WidgetBackgroundAlphaChooser;
+import com.hardcodecoder.pulsemusic.dialog.ConfigureWidgetBackgroundAlpha;
 import com.hardcodecoder.pulsemusic.fragments.settings.base.SettingsBaseFragment;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 
@@ -44,16 +44,16 @@ public class SettingsWidgetsFragment extends SettingsBaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
         view.findViewById(R.id.widget_play_action_picker).setOnClickListener(v -> {
-            AutoPlayActionChooser dialog = new AutoPlayActionChooser(
+            AutoPlayActionChooser autoPlayActionChooser = new AutoPlayActionChooser(
                     getString(R.string.widget_play_button_action_chooser_title),
                     action -> AppSettings.setWidgetPlayAction(requireContext(), action),
                     AppSettings.getWidgetPlayAction(requireContext()));
-            dialog.show(requireFragmentManager(), AutoPlayActionChooser.TAG);
+            autoPlayActionChooser.show(requireFragmentManager(), AutoPlayActionChooser.TAG);
         });
 
         view.findViewById(R.id.widget_background_alpha_chooser).setOnClickListener(v -> {
-            WidgetBackgroundAlphaChooser alphaChooser = WidgetBackgroundAlphaChooser.getInstance();
-            alphaChooser.show(requireFragmentManager(), WidgetBackgroundAlphaChooser.TAG);
+            ConfigureWidgetBackgroundAlpha configureAlpha = ConfigureWidgetBackgroundAlpha.getInstance();
+            configureAlpha.show(requireFragmentManager(), ConfigureWidgetBackgroundAlpha.TAG);
         });
     }
 }

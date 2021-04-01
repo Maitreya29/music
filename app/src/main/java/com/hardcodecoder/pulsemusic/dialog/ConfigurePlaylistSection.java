@@ -24,9 +24,9 @@ import com.hardcodecoder.pulsemusic.utils.AppSettings;
 import com.hardcodecoder.pulsemusic.utils.DimensionsUtil;
 import com.hardcodecoder.pulsemusic.views.AccentColorSwitch;
 
-public class PlaylistSectionSelector extends RoundedCustomBottomSheetFragment {
+public class ConfigurePlaylistSection extends RoundedCustomBottomSheetFragment {
 
-    public static final String TAG = PlaylistSectionSelector.class.getSimpleName();
+    public static final String TAG = ConfigurePlaylistSection.class.getSimpleName();
     private OnDialogDismiss mDismissListener;
     private Context mContext;
     private boolean mIsTopAlbumsEnabled;
@@ -36,8 +36,8 @@ public class PlaylistSectionSelector extends RoundedCustomBottomSheetFragment {
     private boolean mIsTopArtistEnabled;
 
     @NonNull
-    public static PlaylistSectionSelector getInstance(OnDialogDismiss dismissListener) {
-        PlaylistSectionSelector sectionSelector = new PlaylistSectionSelector();
+    public static ConfigurePlaylistSection getInstance(OnDialogDismiss dismissListener) {
+        ConfigurePlaylistSection sectionSelector = new ConfigurePlaylistSection();
         sectionSelector.mDismissListener = dismissListener;
         return sectionSelector;
     }
@@ -45,7 +45,7 @@ public class PlaylistSectionSelector extends RoundedCustomBottomSheetFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.bottom_sheet_select_playlist_section, container, false);
+        return inflater.inflate(R.layout.bsd_configure_home_playlist_section, container, false);
     }
 
     @Override

@@ -9,9 +9,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.hardcodecoder.pulsemusic.R;
-import com.hardcodecoder.pulsemusic.dialog.CornerRadiusChangeDialogFragment;
+import com.hardcodecoder.pulsemusic.dialog.ConfigureSeekDuration;
+import com.hardcodecoder.pulsemusic.dialog.CornerRadiusChooser;
 import com.hardcodecoder.pulsemusic.dialog.NowPlayingStyleChooser;
-import com.hardcodecoder.pulsemusic.dialog.SeekDurationSelector;
 import com.hardcodecoder.pulsemusic.fragments.settings.base.SettingsBaseFragment;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 import com.hardcodecoder.pulsemusic.views.SettingsCategoryItem;
@@ -47,13 +47,13 @@ public class SettingsNowPlayingFragment extends SettingsBaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
         view.findViewById(R.id.now_playing_screen_style).setOnClickListener(v -> {
-            NowPlayingStyleChooser dialog = NowPlayingStyleChooser.getInstance();
-            dialog.show(requireFragmentManager(), NowPlayingStyleChooser.TAG);
+            NowPlayingStyleChooser nowPlayingStyleChooser = NowPlayingStyleChooser.getInstance();
+            nowPlayingStyleChooser.show(requireFragmentManager(), NowPlayingStyleChooser.TAG);
         });
 
         view.findViewById(R.id.now_playing_album_cover_corner_radius).setOnClickListener(v -> {
-            CornerRadiusChangeDialogFragment dialog = CornerRadiusChangeDialogFragment.getInstance();
-            dialog.show(requireFragmentManager(), CornerRadiusChangeDialogFragment.TAG);
+            CornerRadiusChooser cornerRadiusChooser = CornerRadiusChooser.getInstance();
+            cornerRadiusChooser.show(requireFragmentManager(), CornerRadiusChooser.TAG);
         });
 
         SettingsToggleableItem seekButtonsEnabler = view.findViewById(R.id.np_enable_seek_buttons);
@@ -69,8 +69,8 @@ public class SettingsNowPlayingFragment extends SettingsBaseFragment {
         });
 
         seekDurationSelector.setOnClickListener(v -> {
-            SeekDurationSelector seekDurationSelectorDialog = SeekDurationSelector.getInstance();
-            seekDurationSelectorDialog.show(requireFragmentManager(), SeekDurationSelector.TAG);
+            ConfigureSeekDuration configureSeekDuration = ConfigureSeekDuration.getInstance();
+            configureSeekDuration.show(requireFragmentManager(), ConfigureSeekDuration.TAG);
         });
     }
 }

@@ -9,8 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.hardcodecoder.pulsemusic.R;
+import com.hardcodecoder.pulsemusic.dialog.ConfigurePlaylistSection;
 import com.hardcodecoder.pulsemusic.dialog.IgnoreFolderChooser;
-import com.hardcodecoder.pulsemusic.dialog.PlaylistSectionSelector;
 import com.hardcodecoder.pulsemusic.fragments.settings.base.SettingsBaseFragment;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 import com.hardcodecoder.pulsemusic.views.SettingsCategoryItem;
@@ -68,10 +68,10 @@ public class SettingsGeneralFragment extends SettingsBaseFragment {
         SettingsCategoryItem editPlaylist = view.findViewById(R.id.home_section_playlist_selector);
         editPlaylist.setOnClickListener(v -> {
             if (null != getFragmentManager()) {
-                PlaylistSectionSelector playlistSectionSelector = PlaylistSectionSelector.getInstance(needsRestartOnDismiss -> {
+                ConfigurePlaylistSection configurePlaylistSection = ConfigurePlaylistSection.getInstance(needsRestartOnDismiss -> {
                     if (needsRestartOnDismiss) requiresApplicationRestart(false);
                 });
-                playlistSectionSelector.show(getFragmentManager(), PlaylistSectionSelector.TAG);
+                configurePlaylistSection.show(getFragmentManager(), ConfigurePlaylistSection.TAG);
             }
         });
     }

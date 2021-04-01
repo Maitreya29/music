@@ -20,23 +20,23 @@ import com.hardcodecoder.pulsemusic.dialog.base.RoundedCustomBottomSheetFragment
 import com.hardcodecoder.pulsemusic.themes.ThemeColors;
 import com.hardcodecoder.pulsemusic.themes.ThemeManagerUtils;
 
-public class CustomAccentChooserDialogFragment extends RoundedCustomBottomSheetFragment {
+public class CustomAccentChooser extends RoundedCustomBottomSheetFragment {
 
-    public static final String TAG = CustomAccentChooserDialogFragment.class.getSimpleName();
+    public static final String TAG = CustomAccentChooser.class.getSimpleName();
     private TextInputEditText mHexCode;
     private ImageView mColorPreview;
     private Slider[] mSliders;
     private int mSelectedColor;
 
     @NonNull
-    public static CustomAccentChooserDialogFragment getInstance() {
-        return new CustomAccentChooserDialogFragment();
+    public static CustomAccentChooser getInstance() {
+        return new CustomAccentChooser();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.bottom_sheet_custom_accent_chooser, container, false);
+        return inflater.inflate(R.layout.bsd_choose_custom_accent, container, false);
     }
 
     private void compileColor() {
@@ -112,8 +112,8 @@ public class CustomAccentChooserDialogFragment extends RoundedCustomBottomSheetF
 
         // Button sends user back to presets
         view.findViewById(R.id.custom_accents_presets_btn).setOnClickListener(v -> {
-            AccentsChooserDialogFragment dialogFragment = AccentsChooserDialogFragment.getInstance();
-            dialogFragment.show(requireFragmentManager(), AccentsChooserDialogFragment.TAG);
+            PresetAccentsChooser presetAccentsChooser = PresetAccentsChooser.getInstance();
+            presetAccentsChooser.show(requireFragmentManager(), PresetAccentsChooser.TAG);
             dismiss();
         });
 

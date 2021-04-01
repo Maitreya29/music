@@ -9,8 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.hardcodecoder.pulsemusic.R;
-import com.hardcodecoder.pulsemusic.dialog.AccentsChooserDialogFragment;
-import com.hardcodecoder.pulsemusic.dialog.ThemeChooserBottomSheetDialogFragment;
+import com.hardcodecoder.pulsemusic.dialog.DarkThemeChooser;
+import com.hardcodecoder.pulsemusic.dialog.PresetAccentsChooser;
 import com.hardcodecoder.pulsemusic.fragments.settings.base.SettingsBaseFragment;
 import com.hardcodecoder.pulsemusic.themes.ThemeManagerUtils;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
@@ -60,15 +60,15 @@ public class SettingsThemeFragment extends SettingsBaseFragment {
         });
 
         view.findViewById(R.id.laf_select_accent_color).setOnClickListener(v -> {
-            AccentsChooserDialogFragment dialogFragment = AccentsChooserDialogFragment.getInstance();
-            dialogFragment.show(requireFragmentManager(), AccentsChooserDialogFragment.TAG);
+            PresetAccentsChooser presetAccentsChooser = PresetAccentsChooser.getInstance();
+            presetAccentsChooser.show(requireFragmentManager(), PresetAccentsChooser.TAG);
         });
     }
 
     private void updateThemeSection(@NonNull View view) {
         view.findViewById(R.id.laf_select_dark_theme).setOnClickListener(v -> {
-            ThemeChooserBottomSheetDialogFragment dialog = ThemeChooserBottomSheetDialogFragment.getInstance();
-            dialog.show(requireFragmentManager(), ThemeChooserBottomSheetDialogFragment.TAG);
+            DarkThemeChooser darkThemeChooser = DarkThemeChooser.getInstance();
+            darkThemeChooser.show(requireFragmentManager(), DarkThemeChooser.TAG);
         });
 
         // Get custom views

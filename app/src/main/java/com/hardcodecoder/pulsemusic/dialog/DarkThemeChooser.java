@@ -16,20 +16,20 @@ import com.hardcodecoder.pulsemusic.dialog.base.RoundedCustomBottomSheetFragment
 import com.hardcodecoder.pulsemusic.themes.ThemeManagerUtils;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 
-public class ThemeChooserBottomSheetDialogFragment extends RoundedCustomBottomSheetFragment {
+public class DarkThemeChooser extends RoundedCustomBottomSheetFragment {
 
-    public static final String TAG = "ThemeChooserBottomSheetDialog";
+    public static final String TAG = DarkThemeChooser.class.getSimpleName();
     private boolean mOptionChanged = false;
 
     @NonNull
-    public static ThemeChooserBottomSheetDialogFragment getInstance() {
-        return new ThemeChooserBottomSheetDialogFragment();
+    public static DarkThemeChooser getInstance() {
+        return new DarkThemeChooser();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.bottom_sheet_choose_theme, container, false);
+        return inflater.inflate(R.layout.bsd_chose_dark_theme, container, false);
     }
 
     @Override

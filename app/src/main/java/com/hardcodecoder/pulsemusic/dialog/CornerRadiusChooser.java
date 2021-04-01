@@ -13,19 +13,19 @@ import com.hardcodecoder.pulsemusic.dialog.base.RoundedCustomBottomSheetFragment
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 import com.hardcodecoder.pulsemusic.views.ValueSlider;
 
-public class CornerRadiusChangeDialogFragment extends RoundedCustomBottomSheetFragment {
+public class CornerRadiusChooser extends RoundedCustomBottomSheetFragment {
 
-    public static final String TAG = CornerRadiusChangeDialogFragment.class.getSimpleName();
+    public static final String TAG = CornerRadiusChooser.class.getSimpleName();
 
     @NonNull
-    public static CornerRadiusChangeDialogFragment getInstance() {
-        return new CornerRadiusChangeDialogFragment();
+    public static CornerRadiusChooser getInstance() {
+        return new CornerRadiusChooser();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.bottom_sheet_corner_radius_changer, container, false);
+        return inflater.inflate(R.layout.bsd_configure_corner_radius, container, false);
     }
 
     @Override

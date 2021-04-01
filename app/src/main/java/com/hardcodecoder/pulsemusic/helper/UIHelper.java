@@ -45,7 +45,7 @@ public class UIHelper {
 
     public static void buildCreatePlaylistDialog(@NonNull Context context, @NonNull CreatePlaylist callback) {
         BottomSheetDialog sheetDialog = new RoundedCustomBottomSheet(context, RoundedCustomBottomSheet::setDefaultBehaviour);
-        View layout = View.inflate(context, R.layout.bottom_dialog_edit_text, null);
+        View layout = View.inflate(context, R.layout.bsd_edit_text, null);
         sheetDialog.setContentView(layout);
 
         TextView header = layout.findViewById(R.id.header);
@@ -79,7 +79,7 @@ public class UIHelper {
 
     public static void buildSongInfoDialog(@NonNull Context context, @NonNull final MusicModel musicModel) {
         BottomSheetDialog bottomSheetDialog = new RoundedCustomBottomSheet(context, RoundedCustomBottomSheet::setDefaultBehaviour);
-        final View view = View.inflate(context, R.layout.bottom_sheet_track_info, null);
+        final View view = View.inflate(context, R.layout.bsd_track_info, null);
         bottomSheetDialog.setContentView(view);
         view.findViewById(R.id.dialog_ok).setOnClickListener(v -> dismiss(bottomSheetDialog));
         // Reference view fields which needs to be filled with data

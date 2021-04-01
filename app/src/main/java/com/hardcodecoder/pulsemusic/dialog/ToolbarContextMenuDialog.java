@@ -34,7 +34,7 @@ public class ToolbarContextMenuDialog extends RoundedCustomBottomSheetFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.bottom_sheet_context_menu, container, false);
+        return inflater.inflate(R.layout.bsd_context_menu, container, false);
     }
 
     @Override

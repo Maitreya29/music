@@ -26,7 +26,7 @@ import java.util.List;
 
 public class AddToPlaylistDialog extends RoundedCustomBottomSheetFragment {
 
-    public static final String TAG = "AddToPlaylistDialog";
+    public static final String TAG = AddToPlaylistDialog.class.getSimpleName();
     public static final String MUSIC_MODEL_KEY = "data";
     private PlaylistItemAdapter mAdapter;
     private MaterialTextView mEmptyListText;
@@ -43,7 +43,7 @@ public class AddToPlaylistDialog extends RoundedCustomBottomSheetFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if (getArguments() != null)
             mItemToAdd = (MusicModel) getArguments().getSerializable(MUSIC_MODEL_KEY);
-        return inflater.inflate(R.layout.bottom_sheet_dialog_simple_item_picker, container, false);
+        return inflater.inflate(R.layout.bsd_item_picker, container, false);
     }
 
     @Override

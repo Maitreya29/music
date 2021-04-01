@@ -153,7 +153,7 @@ public class PlaylistFragment extends PulseFragment implements PlaylistCardListe
     }
 
     private void showEditPlaylistDialog(int pos) {
-        View layout = View.inflate(requireContext(), R.layout.bottom_dialog_edit_text, null);
+        View layout = View.inflate(requireContext(), R.layout.bsd_edit_text, null);
         BottomSheetDialog sheetDialog = new RoundedCustomBottomSheet(layout.getContext(), RoundedCustomBottomSheet::setDefaultBehaviour);
         sheetDialog.setContentView(layout);
         sheetDialog.show();

@@ -14,19 +14,19 @@ import com.hardcodecoder.pulsemusic.dialog.base.RoundedCustomBottomSheetFragment
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 import com.hardcodecoder.pulsemusic.views.ValueSlider;
 
-public class SeekDurationSelector extends RoundedCustomBottomSheetFragment {
+public class ConfigureSeekDuration extends RoundedCustomBottomSheetFragment {
 
-    public static final String TAG = SeekDurationSelector.class.getSimpleName();
+    public static final String TAG = ConfigureSeekDuration.class.getSimpleName();
 
     @NonNull
-    public static SeekDurationSelector getInstance() {
-        return new SeekDurationSelector();
+    public static ConfigureSeekDuration getInstance() {
+        return new ConfigureSeekDuration();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.bottom_sheet_seek_duration_selector, container, false);
+        return inflater.inflate(R.layout.bsd_configure_seek_duration, container, false);
     }
 
     @Override

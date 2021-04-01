@@ -31,23 +31,23 @@ import com.hardcodecoder.pulsemusic.utils.UserInfo;
 
 import java.io.File;
 
-public class HomeBottomSheetFragment extends RoundedCustomBottomSheetFragment {
+public class MainActivityMenu extends RoundedCustomBottomSheetFragment {
 
-    public static final String TAG = "HomeBottomSheetFragment";
+    public static final String TAG = MainActivityMenu.class.getSimpleName();
     private static final int REQUEST_CODE_OPEN_EQUALIZER = 599;
     private static final int PICK_AVATAR = 1500;
     private ImageView mUserPic;
     private MaterialTextView mUserName;
 
     @NonNull
-    public static HomeBottomSheetFragment getInstance() {
-        return new HomeBottomSheetFragment();
+    public static MainActivityMenu getInstance() {
+        return new MainActivityMenu();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.boottom_sheet_home_dialog, container, false);
+        return inflater.inflate(R.layout.bsd_main_activity_menu, container, false);
     }
 
     @Override
@@ -116,7 +116,7 @@ public class HomeBottomSheetFragment extends RoundedCustomBottomSheetFragment {
     }
 
     private void addUserName() {
-        View layout = View.inflate(requireContext(), R.layout.bottom_dialog_edit_text, null);
+        View layout = View.inflate(requireContext(), R.layout.bsd_edit_text, null);
         BottomSheetDialog sheetDialog = new RoundedCustomBottomSheet(layout.getContext(), RoundedCustomBottomSheet::setDefaultBehaviour);
         sheetDialog.setContentView(layout);
         sheetDialog.show();

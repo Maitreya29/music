@@ -18,20 +18,20 @@ import com.hardcodecoder.pulsemusic.themes.PresetColors;
 import com.hardcodecoder.pulsemusic.themes.ThemeManagerUtils;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 
-public class AccentsChooserDialogFragment extends RoundedCustomBottomSheetFragment {
+public class PresetAccentsChooser extends RoundedCustomBottomSheetFragment {
 
-    public static final String TAG = "AccentsChooser";
+    public static final String TAG = PresetAccentsChooser.class.getSimpleName();
     private int newAccentId;
 
     @NonNull
-    public static AccentsChooserDialogFragment getInstance() {
-        return new AccentsChooserDialogFragment();
+    public static PresetAccentsChooser getInstance() {
+        return new PresetAccentsChooser();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.bottom_sheet_accents_picker, container, false);
+        return inflater.inflate(R.layout.bsd_choose_preset_accents, container, false);
     }
 
     @Override
@@ -59,8 +59,8 @@ public class AccentsChooserDialogFragment extends RoundedCustomBottomSheetFragme
         view.findViewById(R.id.choose_accents_cancel_btn).setOnClickListener(v -> dismiss());
 
         view.findViewById(R.id.choose_accents_custom_btn).setOnClickListener(v -> {
-            CustomAccentChooserDialogFragment dialogFragment = CustomAccentChooserDialogFragment.getInstance();
-            dialogFragment.show(requireFragmentManager(), CustomAccentChooserDialogFragment.TAG);
+            CustomAccentChooser customAccentChooser = CustomAccentChooser.getInstance();
+            customAccentChooser.show(requireFragmentManager(), CustomAccentChooser.TAG);
             dismiss();
         });
     }

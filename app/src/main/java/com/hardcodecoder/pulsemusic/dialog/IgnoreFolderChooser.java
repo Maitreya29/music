@@ -55,7 +55,7 @@ public class IgnoreFolderChooser extends RoundedCustomBottomSheetFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.bottom_sheet_dialog_simple_item_picker, container, false);
+        return inflater.inflate(R.layout.bsd_item_picker, container, false);
     }
 
     @Override
@@ -87,7 +87,7 @@ public class IgnoreFolderChooser extends RoundedCustomBottomSheetFragment {
     }
 
     private void createPathInputDialog() {
-        View layout = View.inflate(requireContext(), R.layout.bottom_dialog_edit_text, null);
+        View layout = View.inflate(requireContext(), R.layout.bsd_edit_text, null);
         BottomSheetDialog sheetDialog = new RoundedCustomBottomSheet(layout.getContext(), RoundedCustomBottomSheet::setDefaultBehaviour);
         sheetDialog.setContentView(layout);
         sheetDialog.show();

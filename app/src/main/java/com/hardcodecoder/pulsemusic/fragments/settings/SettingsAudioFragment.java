@@ -60,19 +60,19 @@ public class SettingsAudioFragment extends SettingsBaseFragment {
         });
 
         view.findViewById(R.id.audio_device_bluetooth_action_picker).setOnClickListener(v -> {
-            AutoPlayActionChooser dialog = new AutoPlayActionChooser(
+            AutoPlayActionChooser autoPlayActionChooser = new AutoPlayActionChooser(
                     getString(R.string.select_bluetooth_action),
                     action -> AppSettings.saveAutoPlayAction(requireContext(), Preferences.KEY_BLUETOOTH_AUTO_PLAY_ACTION, action),
                     AppSettings.getAutoPlayAction(requireContext(), Preferences.KEY_BLUETOOTH_AUTO_PLAY_ACTION));
-            dialog.show(requireFragmentManager(), AutoPlayActionChooser.TAG);
+            autoPlayActionChooser.show(requireFragmentManager(), AutoPlayActionChooser.TAG);
         });
 
         view.findViewById(R.id.qs_tile_action_picker).setOnClickListener(v -> {
-            AutoPlayActionChooser dialog = new AutoPlayActionChooser(
+            AutoPlayActionChooser autoPlayActionChooser = new AutoPlayActionChooser(
                     getString(R.string.select_tile_action),
                     action -> AppSettings.saveAutoPlayAction(requireContext(), Preferences.KEY_QS_TILE_ACTION, action),
                     AppSettings.getAutoPlayAction(requireContext(), Preferences.KEY_QS_TILE_ACTION));
-            dialog.show(requireFragmentManager(), AutoPlayActionChooser.TAG);
+            autoPlayActionChooser.show(requireFragmentManager(), AutoPlayActionChooser.TAG);
         });
 
         boolean isSleepTimerEnabled = AppSettings.isSleepTimerEnabled(requireContext());

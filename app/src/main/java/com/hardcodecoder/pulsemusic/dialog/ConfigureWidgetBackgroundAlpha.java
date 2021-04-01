@@ -14,19 +14,19 @@ import com.hardcodecoder.pulsemusic.utils.AppSettings;
 import com.hardcodecoder.pulsemusic.views.ValueSlider;
 import com.hardcodecoder.pulsemusic.widgets.PulseWidgetsHelper;
 
-public class WidgetBackgroundAlphaChooser extends RoundedCustomBottomSheetFragment {
+public class ConfigureWidgetBackgroundAlpha extends RoundedCustomBottomSheetFragment {
 
-    public static final String TAG = WidgetBackgroundAlphaChooser.class.getSimpleName();
+    public static final String TAG = ConfigureWidgetBackgroundAlpha.class.getSimpleName();
 
     @NonNull
-    public static WidgetBackgroundAlphaChooser getInstance() {
-        return new WidgetBackgroundAlphaChooser();
+    public static ConfigureWidgetBackgroundAlpha getInstance() {
+        return new ConfigureWidgetBackgroundAlpha();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.bottom_sheet_widget_background_alpha_chooser, container, false);
+        return inflater.inflate(R.layout.bsd_configure_widget_background_alpha, container, false);
     }
 
     @Override
