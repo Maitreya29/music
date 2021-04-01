@@ -13,8 +13,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toStartOf="@id/ic_recent"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_max="260dp"
         app:shortcutIcon="@drawable/ic_favorite"
         app:shortcutIconColor="@color/md_red_A400"
         app:shortcutTitle="@string/favorites" />
@@ -27,6 +29,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/ic_favorite"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_max="260dp"
         app:shortcutIcon="@drawable/ic_history"
         app:shortcutIconColor="@color/md_yellow_A400"
         app:shortcutTitle="@string/recent" />
@@ -37,8 +40,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toStartOf="@id/ic_shuffle"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ic_favorite"
+        app:layout_constraintWidth_max="260dp"
         app:shortcutIcon="@drawable/ic_folder"
         app:shortcutIconColor="@color/md_blue_A400"
         app:shortcutTitle="@string/track_picker" />
@@ -52,6 +57,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/ic_folder"
         app:layout_constraintTop_toBottomOf="@id/ic_recent"
+        app:layout_constraintWidth_max="260dp"
         app:shortcutIcon="@drawable/ic_shuffle"
         app:shortcutIconColor="@color/md_green_A700"
         app:shortcutTitle="@string/shuffle" />

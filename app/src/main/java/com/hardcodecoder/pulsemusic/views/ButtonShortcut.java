@@ -6,6 +6,7 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -37,9 +38,10 @@ public class ButtonShortcut extends LinearLayout {
 
     private void initialize(@NonNull Context context, @Nullable AttributeSet attrs) {
         final int paddingVertical = DimensionsUtil.getDimensionPixelSize(context, 12);
-        final int paddingHorizontal = DimensionsUtil.getDimensionPixelSize(context, 16);
-        setPadding(paddingHorizontal, paddingVertical, paddingHorizontal, paddingVertical);
+        setPadding(0, paddingVertical, 0, paddingVertical);
         setOrientation(LinearLayout.HORIZONTAL);
+        setGravity(Gravity.CENTER_VERTICAL);
+        setMinimumHeight(DimensionsUtil.getDimensionPixelSize(context, 48));
 
         View contents = View.inflate(context, R.layout.button_shortcut, this);
         ImageView icon = contents.findViewById(R.id.shortcut_icon);
