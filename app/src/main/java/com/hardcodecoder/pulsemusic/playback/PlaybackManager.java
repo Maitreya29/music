@@ -28,9 +28,9 @@ import static com.hardcodecoder.pulsemusic.utils.LogUtils.Type.BACKGROUND;
 public class PlaybackManager implements Playback.Callback {
 
     public static final String ACTION_LOAD_LAST_PLAYLIST = "LoadLastPlaylist";
-    public static final String START_PLAYBACK = "STartPlayback";
-    public static final short ACTION_PLAY_NEXT = 1;
-    public static final short ACTION_PLAY_PREV = -1;
+    public static final String START_PLAYBACK = "StartPlayback";
+    public static final short PLAY_NEXT = 1;
+    public static final short PLAY_PREV = -1;
     private static final String TAG = PlaybackManager.class.getSimpleName();
     private final PlaybackState.Builder mStateBuilder = new PlaybackState.Builder();
     private final Playback mPlayback;
@@ -68,7 +68,7 @@ public class PlaybackManager implements Playback.Callback {
         @Override
         public void onSkipToNext() {
             try {
-                handleSkipRequest(ACTION_PLAY_NEXT, true);
+                handleSkipRequest(PLAY_NEXT, true);
             } catch (Exception e) {
                 LogUtils.logException(BACKGROUND, TAG, "onSkipToNext()", e);
             }
@@ -77,7 +77,7 @@ public class PlaybackManager implements Playback.Callback {
         @Override
         public void onSkipToPrevious() {
             try {
-                handleSkipRequest(ACTION_PLAY_PREV, true);
+                handleSkipRequest(PLAY_PREV, true);
             } catch (Exception e) {
                 LogUtils.logException(BACKGROUND, TAG, "onSkipToPrevious()", e);
             }
@@ -197,7 +197,7 @@ public class PlaybackManager implements Playback.Callback {
 
     @Override
     public void onPlaybackCompletion() {
-        handleSkipRequest(ACTION_PLAY_NEXT, false);
+        handleSkipRequest(PLAY_NEXT, false);
     }
 
     @Override

@@ -251,10 +251,10 @@ public class PulseController {
             if (mRepeatCurrentTrack) {
                 return true;
             }
-            if (direction == PlaybackManager.ACTION_PLAY_NEXT && mActiveIndex < mActiveQueue.size() - 1) {
+            if (direction == PlaybackManager.PLAY_NEXT && mActiveIndex < mActiveQueue.size() - 1) {
                 setActiveIndex(++mActiveIndex);
                 return true;
-            } else if (direction == PlaybackManager.ACTION_PLAY_PREV && mActiveIndex > 0) {
+            } else if (direction == PlaybackManager.PLAY_PREV && mActiveIndex > 0) {
                 setActiveIndex(--mActiveIndex);
                 return true;
             }
@@ -262,12 +262,13 @@ public class PulseController {
         }
 
         public void resetQueue() {
+            mActiveIndex = -1;
             mActiveQueue.clear();
             mRepeatCurrentTrack = false;
         }
 
         private void setQueue(@NonNull List<MusicModel> playlist, int startIndex) {
-            mActiveQueue.clear();
+            resetQueue();
             mActiveQueue.addAll(playlist);
             setActiveIndex(startIndex);
         }
