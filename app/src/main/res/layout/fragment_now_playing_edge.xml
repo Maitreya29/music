@@ -72,9 +72,9 @@
         android:id="@+id/edge_nps_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:gravity="center_horizontal|bottom"
+        android:layout_marginStart="76dp"
+        android:layout_marginEnd="76dp"
+        android:gravity="center"
         android:singleLine="true"
         android:textAppearance="@style/ItemTitle"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -97,6 +97,16 @@
         app:layout_constraintStart_toStartOf="@id/edge_nps_title"
         app:layout_constraintTop_toBottomOf="@+id/edge_nps_title"
         tools:text="Artist name" />
+
+    <ImageView
+        android:id="@+id/edge_nps_favourite_btn"
+        style="@style/ButtonStyle24"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="@id/edge_nps_sub_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/edge_nps_title"
+        tools:ignore="contentDescription"
+        tools:src="@drawable/ic_favorite_border" />
 
     <ImageView
         android:id="@+id/edge_nps_repeat_btn"
@@ -138,21 +148,21 @@
         android:id="@+id/edge_nps_track_controls_2"
         style="@style/ButtonStyle36"
         app:layout_constraintBottom_toBottomOf="@id/edge_nps_play_pause_btn"
-        app:layout_constraintEnd_toStartOf="@id/edge_nps_favourite_btn"
+        app:layout_constraintEnd_toStartOf="@id/edge_nps_shuffle_btn"
         app:layout_constraintStart_toEndOf="@+id/edge_nps_play_pause_btn"
         app:layout_constraintTop_toTopOf="@id/edge_nps_play_pause_btn"
         tools:ignore="contentDescription"
         tools:src="@drawable/ic_round_skip_next" />
 
     <ImageView
-        android:id="@+id/edge_nps_favourite_btn"
+        android:id="@+id/edge_nps_shuffle_btn"
         style="@style/ButtonStyle24"
         android:layout_marginEnd="16dp"
+        android:src="@drawable/ic_shuffle"
         app:layout_constraintBottom_toBottomOf="@id/edge_nps_play_pause_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/edge_nps_play_pause_btn"
-        tools:ignore="contentDescription"
-        tools:src="@drawable/ic_favorite_border" />
+        tools:ignore="contentDescription" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/edge_nps_up_next"
@@ -169,7 +179,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/edge_nps_play_pause_btn"
-        app:layout_constraintVertical_bias="0.3"
+        app:layout_constraintVertical_bias="0.28"
         tools:text="@tools:sample/lorem/random" />
 
     <ImageView
@@ -180,7 +190,7 @@
         android:src="@drawable/ic_options"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edge_nps_favourite_btn"
+        app:layout_constraintTop_toBottomOf="@id/edge_nps_shuffle_btn"
         app:layout_constraintVertical_bias="0.8" />
 
     <ImageView
@@ -189,7 +199,7 @@
         android:contentDescription="@string/desc_album_art"
         android:src="@drawable/ic_down_arrow"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/edge_nps_favourite_btn"
-        app:layout_constraintTop_toBottomOf="@id/edge_nps_favourite_btn"
+        app:layout_constraintEnd_toEndOf="@id/edge_nps_shuffle_btn"
+        app:layout_constraintTop_toBottomOf="@id/edge_nps_shuffle_btn"
         app:layout_constraintVertical_bias="0.8" />
 </androidx.constraintlayout.widget.ConstraintLayout>

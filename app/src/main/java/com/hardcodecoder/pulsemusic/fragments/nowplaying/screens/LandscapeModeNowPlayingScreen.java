@@ -24,6 +24,7 @@ public class LandscapeModeNowPlayingScreen extends BaseNowPlayingScreen {
     private Slider mProgressSlider;
     private ImageView mFavoriteBtn;
     private ImageView mRepeatBtn;
+    private ImageView mShuffleBtn;
     private ImageView mTrackControl1;
     private FloatingActionButton mPlayPauseBtn;
     private ImageView mTrackControl2;
@@ -65,12 +66,14 @@ public class LandscapeModeNowPlayingScreen extends BaseNowPlayingScreen {
         mPlayPauseBtn = view.findViewById(R.id.fragment_nps_land_play_pause_btn);
         mTrackControl2 = view.findViewById(R.id.land_nps_track_controls_2);
         mFavoriteBtn = view.findViewById(R.id.fragment_nps_land_favourite_btn);
+        mShuffleBtn = view.findViewById(R.id.fragment_nps_land_shuffle_btn);
         mUpNext = view.findViewById(R.id.fragment_nps_land_up_next);
 
         view.findViewById(R.id.fragment_nps_land_close_btn).setOnClickListener(v -> dismiss());
         mRepeatBtn.setOnClickListener(v -> toggleRepeatMode());
         mPlayPauseBtn.setOnClickListener(v -> togglePlayPause());
         mFavoriteBtn.setOnClickListener(v -> toggleFavorite());
+        mShuffleBtn.setOnClickListener(v -> toggleShuffleMode());
 
         setShowOptionsClickMenuListener(view.findViewById(R.id.land_nps_options_btn));
         setGotToCurrentQueueCLickListener(mUpNext);
@@ -98,12 +101,17 @@ public class LandscapeModeNowPlayingScreen extends BaseNowPlayingScreen {
 
     @Override
     public void onRepeatStateChanged(boolean repeat) {
-        handleRepeatStateChanged(mRepeatBtn, repeat);
+        setIconSelectedTint(mRepeatBtn, repeat);
     }
 
     @Override
     public void onFavoriteStateChanged(boolean isFavorite) {
         handleFavoriteStateChanged(mFavoriteBtn, isFavorite);
+    }
+
+    @Override
+    public void onShuffleStateChanged(boolean shuffleEnabled) {
+        setIconSelectedTint(mShuffleBtn, shuffleEnabled);
     }
 
     @Override

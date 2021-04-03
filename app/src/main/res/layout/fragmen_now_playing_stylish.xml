@@ -13,9 +13,9 @@
         android:layout_height="24dp"
         android:layout_marginTop="4dp"
         android:ellipsize="marquee"
-        android:gravity="start|bottom"
+        android:gravity="bottom"
         android:paddingStart="26dp"
-        android:paddingEnd="72dp"
+        android:paddingEnd="100dp"
         android:requiresFadingEdge="horizontal"
         android:singleLine="true"
         android:textAppearance="@style/ItemTitle"
@@ -27,12 +27,12 @@
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/stylish_nps_up_next"
         android:layout_width="0dp"
-        android:layout_height="56dp"
+        android:layout_height="54dp"
         android:background="?attr/selectableItemBackground"
         android:gravity="center_vertical"
         android:paddingStart="26dp"
         android:paddingTop="20dp"
-        android:paddingEnd="72dp"
+        android:paddingEnd="100dp"
         android:requiresFadingEdge="horizontal"
         android:singleLine="true"
         android:textAppearance="@style/ItemSub"
@@ -40,6 +40,15 @@
         app:layout_constraintStart_toStartOf="@id/stylish_nps_title"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="@tools:sample/lorem/random" />
+
+    <ImageView
+        android:id="@+id/stylish_nps_favourite_btn"
+        style="@style/ButtonStyle24"
+        app:layout_constraintBottom_toBottomOf="@id/stylish_nps_up_next"
+        app:layout_constraintEnd_toStartOf="@id/stylish_nps_options_btn"
+        app:layout_constraintTop_toTopOf="@id/stylish_nps_title"
+        tools:ignore="contentDescription"
+        tools:src="@drawable/ic_favorite_border" />
 
     <ImageView
         android:id="@+id/stylish_nps_options_btn"
@@ -79,7 +88,7 @@
         android:id="@+id/stylish_nps_start_time"
         android:layout_width="40dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="22dp"
         android:textAppearance="@style/ItemSub"
         app:layout_constraintBottom_toBottomOf="@id/stylish_nps_slider"
         app:layout_constraintStart_toStartOf="parent"
@@ -101,7 +110,7 @@
         android:id="@+id/stylish_nps_end_time"
         android:layout_width="40dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="22dp"
         android:textAppearance="@style/ItemSub"
         app:layout_constraintBottom_toBottomOf="@id/stylish_nps_slider"
         app:layout_constraintEnd_toEndOf="parent"
@@ -148,21 +157,21 @@
         android:id="@+id/stylish_nps_track_controls_2"
         style="@style/ButtonStyle36"
         app:layout_constraintBottom_toBottomOf="@id/stylish_nps_play_pause_btn"
-        app:layout_constraintEnd_toStartOf="@id/stylish_nps_favourite_btn"
+        app:layout_constraintEnd_toStartOf="@id/stylish_nps_shuffle_btn"
         app:layout_constraintStart_toEndOf="@+id/stylish_nps_play_pause_btn"
         app:layout_constraintTop_toTopOf="@id/stylish_nps_play_pause_btn"
         tools:ignore="contentDescription"
         tools:src="@drawable/ic_round_skip_next" />
 
     <ImageView
-        android:id="@+id/stylish_nps_favourite_btn"
+        android:id="@+id/stylish_nps_shuffle_btn"
         style="@style/ButtonStyle24"
         android:layout_marginEnd="8dp"
+        android:src="@drawable/ic_shuffle"
         app:layout_constraintBottom_toBottomOf="@id/stylish_nps_play_pause_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/stylish_nps_play_pause_btn"
-        tools:ignore="contentDescription"
-        tools:src="@drawable/ic_favorite_border" />
+        tools:ignore="contentDescription" />
 
     <ImageView
         android:id="@+id/stylish_nps_close_btn"
@@ -170,7 +179,7 @@
         android:contentDescription="@string/desc_close_btn"
         android:src="@drawable/ic_down_arrow"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/stylish_nps_favourite_btn"
-        app:layout_constraintTop_toBottomOf="@id/stylish_nps_favourite_btn"
+        app:layout_constraintEnd_toEndOf="@id/stylish_nps_shuffle_btn"
+        app:layout_constraintTop_toBottomOf="@id/stylish_nps_shuffle_btn"
         app:layout_constraintVertical_bias="0.5" />
 </androidx.constraintlayout.widget.ConstraintLayout>

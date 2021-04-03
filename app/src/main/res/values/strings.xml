@@ -156,6 +156,9 @@
     <string name="toast_added_to_favorites">Track added to favorites</string>
     <string name="toast_cannot_add_to_favorites">Track cannot be added to favorites</string>
     <string name="toast_removed_from_favorites">Track removed from favorites</string>
+    <string name="toast_shuffle_mode_enabled">Next track will be shuffled</string>
+    <string name="toast_shuffle_mode_disabled">Shuffle mode disabled</string>
+    <string name="shuffle_mode_up_next_title">Random</string>
     <string name="playlist_completed">Playlist completed</string>
 
 

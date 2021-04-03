@@ -215,7 +215,7 @@ public abstract class BaseNowPlayingScreen extends Fragment implements PulseCont
         onFavoriteStateChanged(mCurrentItemFavorite = false);
     }
 
-    protected void setUpPagerAlbumArt(@NonNull ViewPager2 pager, @LayoutRes int redId, ShapeAppearanceModel model) {
+    protected void setUpPagerAlbumArt(@NonNull ViewPager2 pager, @LayoutRes int redId, @Nullable ShapeAppearanceModel model) {
         mMediaArtPager = pager;
         // Workaround to disable over scroll mode
         mMediaArtPager.getChildAt(0).setOverScrollMode(ViewPager2.OVER_SCROLL_NEVER);
@@ -257,6 +257,7 @@ public abstract class BaseNowPlayingScreen extends Fragment implements PulseCont
         });
     }
 
+    @NonNull
     protected ShapeAppearanceModel getMediaImageViewShapeAppearanceModel() {
         float factor = (float) getResources().getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT;
         int[] radiusDP = AppSettings.getNowPlayingAlbumCardCornerRadius(requireContext());
@@ -327,9 +328,6 @@ public abstract class BaseNowPlayingScreen extends Fragment implements PulseCont
         }
     }
 
-    protected void onTrackControlButtonsChanged() {
-    }
-
     protected boolean isSeekButtonsEnabled() {
         return AppSettings.isSeekButtonsEnabled(requireContext());
     }
@@ -366,9 +364,14 @@ public abstract class BaseNowPlayingScreen extends Fragment implements PulseCont
         updateFavoriteItem();
     }
 
-    protected void setDefaultTintToPlayBtn(@NonNull ImageView playPauseBtn) {
-        playPauseBtn.setBackgroundTintList(ThemeColors.getPrimaryColorStateList());
-        playPauseBtn.setImageTintList(ColorStateList.valueOf(ThemeColors.getCurrentColorOnPrimary()));
+    protected void toggleShuffleMode() {
+        boolean shuffleModeEnable = !mQueueManager.isShuffleModeEnabled();
+        mQueueManager.setShuffleMode(shuffleModeEnable);
+        onShuffleStateChanged(shuffleModeEnable);
+        Toast.makeText(requireContext(), getString(shuffleModeEnable ?
+                        R.string.toast_shuffle_mode_enabled : R.string.toast_shuffle_mode_disabled),
+                Toast.LENGTH_SHORT).show();
+        onUpNextItemChanged(getUpNextText());
     }
 
     protected void togglePlayPause() {
@@ -376,12 +379,13 @@ public abstract class BaseNowPlayingScreen extends Fragment implements PulseCont
         else mRemote.play();
     }
 
-    protected void togglePlayPauseAnimation(View playPauseBtn, PlaybackState state) {
-        if (null == state || null == playPauseBtn) return;
+    protected void togglePlayPauseAnimation(@NonNull View playPauseBtn, @Nullable PlaybackState state) {
+        if (null == state) return;
         playPauseBtn.setSelected(state.getState() == PlaybackState.STATE_PLAYING);
     }
 
-    protected String getFormattedElapsedTime(long elapsedTime) {
+    @NonNull
+    public String getFormattedElapsedTime(long elapsedTime) {
         return DateUtils.formatElapsedTime(elapsedTime);
     }
 
@@ -401,6 +405,9 @@ public abstract class BaseNowPlayingScreen extends Fragment implements PulseCont
                 UIHelper.showMenuForLibraryTracks(requireActivity(), mQueueManager.getActiveQueueItem()));
     }
 
+    protected void onTrackControlButtonsChanged() {
+    }
+
     protected void onUpNextItemChanged(String upNextTitle) {
     }
 
@@ -417,9 +424,11 @@ public abstract class BaseNowPlayingScreen extends Fragment implements PulseCont
     private String getUpNextText() {
         MusicModel nextItem = mQueueManager.getNextQueueItem();
         String upNextText;
-        if (null != nextItem)
-            upNextText = mUpNextTitle + nextItem.getTrackName();
-        else upNextText = getString(R.string.playlist_completed);
+        if (null != nextItem) {
+            if (mQueueManager.isShuffleModeEnabled())
+                upNextText = getString(R.string.shuffle_mode_up_next_title);
+            else upNextText = mUpNextTitle + nextItem.getTrackName();
+        } else upNextText = getString(R.string.playlist_completed);
         return upNextText;
     }
 
@@ -427,27 +436,24 @@ public abstract class BaseNowPlayingScreen extends Fragment implements PulseCont
         onRepeatStateChanged(mQueueManager.isCurrentTrackInRepeatMode());
     }
 
-    protected void handleRepeatStateChanged(ImageView imageView, boolean repeating) {
-        if (repeating) {
-            imageView.setImageTintList(ThemeColors.getPrimaryColorStateList());
-        } else {
-            imageView.setImageTintList(ThemeColors.getColorControlNormalTintList());
-        }
-    }
-
     private void updateFavoriteItem() {
         ProviderManager.getFavoritesProvider().isTemFavorite(mQueueManager.getActiveQueueItem(), isFavorite ->
                 onFavoriteStateChanged((mCurrentItemFavorite = isFavorite != null && isFavorite)));
     }
 
-    protected void handleFavoriteStateChanged(ImageView imageView, boolean favorite) {
-        if (favorite) {
-            imageView.setImageTintList(ThemeColors.getPrimaryColorStateList());
-            imageView.setImageResource(R.drawable.ic_favorite);
-        } else {
-            imageView.setImageTintList(ThemeColors.getColorControlNormalTintList());
-            imageView.setImageResource(R.drawable.ic_favorite_border);
-        }
+    protected void handleFavoriteStateChanged(@NonNull ImageView imageView, boolean favorite) {
+        imageView.setImageResource(favorite ? R.drawable.ic_favorite : R.drawable.ic_favorite_border);
+        setIconSelectedTint(imageView, favorite);
+    }
+
+    protected void setDefaultTintToPlayBtn(@NonNull ImageView playPauseBtn) {
+        playPauseBtn.setBackgroundTintList(ThemeColors.getPrimaryColorStateList());
+        playPauseBtn.setImageTintList(ColorStateList.valueOf(ThemeColors.getCurrentColorOnPrimary()));
+    }
+
+    protected void setIconSelectedTint(@NonNull ImageView icon, boolean selected) {
+        icon.setImageTintList(selected ?
+                ThemeColors.getPrimaryColorStateList() : ThemeColors.getColorControlNormalTintList());
     }
 
     protected void dismiss() {
@@ -471,6 +477,8 @@ public abstract class BaseNowPlayingScreen extends Fragment implements PulseCont
     public abstract void onRepeatStateChanged(boolean repeat);
 
     public abstract void onFavoriteStateChanged(boolean isFavorite);
+
+    public abstract void onShuffleStateChanged(boolean shuffleEnabled);
 
     public abstract void onProgressUpdated(int progressInSeconds);
 }

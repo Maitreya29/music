@@ -22,6 +22,7 @@ public final class QueueManager {
     private int mActiveIndex = -1;
     private boolean mRememberPlaylist = false;
     private boolean mRepeatCurrentTrack = false;
+    private boolean mShuffleMode = false;
 
     QueueManager(@NonNull Handler handler) {
         mPreviousPlaylistProvider = ProviderManager.getPreviousPlaylistProvider();
@@ -50,11 +51,7 @@ public final class QueueManager {
         resetPlaylist();
         mActiveQueue.addAll(playlist);
         setActiveIndex(startIndex);
-
-        for (OnQueueChangedListener listener : mListeners)
-            mHandler.post(() -> listener.onPlaylistChanged(playlist));
-
-        if (mRememberPlaylist) mPreviousPlaylistProvider.savePlaylist(playlist);
+        notifyPlaylistChanged();
     }
 
     public void playNext(@NonNull MusicModel item) {
@@ -124,12 +121,25 @@ public final class QueueManager {
         return mRepeatCurrentTrack;
     }
 
+    public void setShuffleMode(boolean enable) {
+        mShuffleMode = enable;
+    }
+
+    public boolean isShuffleModeEnabled() {
+        return mShuffleMode;
+    }
+
     public boolean skipTrack(short skipDirection) {
         if (mRepeatCurrentTrack) {
             return true;
         }
         if (skipDirection == PlaybackManager.PLAY_NEXT && mActiveIndex < mActiveQueue.size() - 1) {
             setActiveIndex(++mActiveIndex);
+            if (mShuffleMode) {
+                // Shuffle tracks from mActiveIndex
+                Collections.shuffle(mActiveQueue.subList(mActiveIndex, mActiveQueue.size()));
+                notifyPlaylistChanged();
+            }
             return true;
         } else if (skipDirection == PlaybackManager.PLAY_PREV && mActiveIndex > 0) {
             setActiveIndex(--mActiveIndex);
@@ -142,6 +152,7 @@ public final class QueueManager {
         mActiveIndex = -1;
         mActiveQueue.clear();
         mRepeatCurrentTrack = false;
+        mShuffleMode = false;
     }
 
     public void release() {
@@ -150,6 +161,12 @@ public final class QueueManager {
             mListeners.clear();
             mListeners = null;
         }
+    }
+
+    private void notifyPlaylistChanged() {
+        if (mRememberPlaylist) mPreviousPlaylistProvider.savePlaylist(mActiveQueue);
+        for (OnQueueChangedListener listener : mListeners)
+            mHandler.post(() -> listener.onPlaylistChanged(mActiveQueue));
     }
 
     private boolean addToPlayNext(@NonNull MusicModel item) {

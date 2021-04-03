@@ -2,6 +2,7 @@ package com.hardcodecoder.pulsemusic.fragments.nowplaying.base;
 
 import android.content.Context;
 import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +33,10 @@ public class MediaArtPagerAdapter extends RecyclerView.Adapter<MediaArtPagerAdap
     @LayoutRes
     private final int mLLayoutRes;
 
-    public MediaArtPagerAdapter(Context context, List<MusicModel> tracks, @LayoutRes int layoutRes, ShapeAppearanceModel appearanceModel) {
+    public MediaArtPagerAdapter(@NonNull Context context,
+                                @NonNull List<MusicModel> tracks,
+                                @LayoutRes int layoutRes,
+                                @Nullable ShapeAppearanceModel appearanceModel) {
         mContext = context;
         mTracksList.addAll(tracks);
         mLLayoutRes = layoutRes;
@@ -40,7 +44,7 @@ public class MediaArtPagerAdapter extends RecyclerView.Adapter<MediaArtPagerAdap
     }
 
     public void notifyTracksChanged(@NonNull List<MusicModel> updatedTracks, @Nullable Callback<Void> callback) {
-        final Handler handler = new Handler();
+        final Handler handler = new Handler(Looper.getMainLooper());
         TaskRunner.executeAsync(() -> {
             DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new DiffCb(mTracksList, updatedTracks));
             handler.post(() -> {

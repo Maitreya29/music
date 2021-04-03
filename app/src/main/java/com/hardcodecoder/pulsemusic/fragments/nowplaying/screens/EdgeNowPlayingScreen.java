@@ -28,6 +28,7 @@ public class EdgeNowPlayingScreen extends BaseNowPlayingScreen {
     private AppCompatSeekBar mProgressSeekBar;
     private ImageView mFavoriteBtn;
     private ImageView mRepeatBtn;
+    private ImageView mShuffleBtn;
     private ImageView mTrackControl1;
     private FloatingActionButton mPlayPauseBtn;
     private ImageView mTrackControl2;
@@ -73,12 +74,14 @@ public class EdgeNowPlayingScreen extends BaseNowPlayingScreen {
         mTrackControl2 = view.findViewById(R.id.edge_nps_track_controls_2);
         mPlayPauseBtn = view.findViewById(R.id.edge_nps_play_pause_btn);
         mFavoriteBtn = view.findViewById(R.id.edge_nps_favourite_btn);
+        mShuffleBtn = view.findViewById(R.id.edge_nps_shuffle_btn);
         mUpNext = view.findViewById(R.id.edge_nps_up_next);
 
         view.findViewById(R.id.edge_nps_close_btn).setOnClickListener(v -> dismiss());
         mRepeatBtn.setOnClickListener(v -> toggleRepeatMode());
         mPlayPauseBtn.setOnClickListener(v -> togglePlayPause());
         mFavoriteBtn.setOnClickListener(v -> toggleFavorite());
+        mShuffleBtn.setOnClickListener(v -> toggleShuffleMode());
 
         setShowOptionsClickMenuListener(view.findViewById(R.id.edge_nps_options_btn));
         setGotToCurrentQueueCLickListener(mUpNext);
@@ -113,12 +116,17 @@ public class EdgeNowPlayingScreen extends BaseNowPlayingScreen {
 
     @Override
     public void onRepeatStateChanged(boolean repeat) {
-        handleRepeatStateChanged(mRepeatBtn, repeat);
+        setIconSelectedTint(mRepeatBtn, repeat);
     }
 
     @Override
     public void onFavoriteStateChanged(boolean isFavorite) {
         handleFavoriteStateChanged(mFavoriteBtn, isFavorite);
+    }
+
+    @Override
+    public void onShuffleStateChanged(boolean shuffleEnabled) {
+        setIconSelectedTint(mShuffleBtn, shuffleEnabled);
     }
 
     @Override

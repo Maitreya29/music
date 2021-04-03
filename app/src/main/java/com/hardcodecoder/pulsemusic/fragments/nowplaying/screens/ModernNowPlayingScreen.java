@@ -24,6 +24,7 @@ public class ModernNowPlayingScreen extends BaseNowPlayingScreen {
     private Slider mProgressSlider;
     private ImageView mFavoriteBtn;
     private ImageView mRepeatBtn;
+    private ImageView mShuffleBtn;
     private ImageView mTrackControl1;
     private FloatingActionButton mPlayPauseBtn;
     private ImageView mTrackControl2;
@@ -61,6 +62,7 @@ public class ModernNowPlayingScreen extends BaseNowPlayingScreen {
         mStartTime = view.findViewById(R.id.modern_nps_start_time);
         mEndTime = view.findViewById(R.id.modern_nps_end_time);
         mRepeatBtn = view.findViewById(R.id.modern_nps_repeat_btn);
+        mShuffleBtn = view.findViewById(R.id.modern_nps_shuffle_btn);
         mTrackControl1 = view.findViewById(R.id.modern_nps_track_controls_1);
         mPlayPauseBtn = view.findViewById(R.id.modern_nps_play_pause_btn);
         mTrackControl2 = view.findViewById(R.id.modern_nps_track_controls_2);
@@ -71,6 +73,7 @@ public class ModernNowPlayingScreen extends BaseNowPlayingScreen {
         mRepeatBtn.setOnClickListener(v -> toggleRepeatMode());
         mPlayPauseBtn.setOnClickListener(v -> togglePlayPause());
         mFavoriteBtn.setOnClickListener(v -> toggleFavorite());
+        mShuffleBtn.setOnClickListener(v -> toggleShuffleMode());
 
         setShowOptionsClickMenuListener(view.findViewById(R.id.modern_nps_options_btn));
         setGotToCurrentQueueCLickListener(mUpNext);
@@ -81,12 +84,17 @@ public class ModernNowPlayingScreen extends BaseNowPlayingScreen {
 
     @Override
     public void onRepeatStateChanged(boolean repeat) {
-        handleRepeatStateChanged(mRepeatBtn, repeat);
+        setIconSelectedTint(mRepeatBtn, repeat);
     }
 
     @Override
     public void onFavoriteStateChanged(boolean isFavorite) {
         handleFavoriteStateChanged(mFavoriteBtn, isFavorite);
+    }
+
+    @Override
+    public void onShuffleStateChanged(boolean shuffleEnabled) {
+        setIconSelectedTint(mShuffleBtn, shuffleEnabled);
     }
 
     @Override
