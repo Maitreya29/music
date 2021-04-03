@@ -24,13 +24,13 @@ import androidx.core.content.ContextCompat;
 import androidx.media.session.MediaButtonReceiver;
 
 import com.hardcodecoder.pulsemusic.Preferences;
-import com.hardcodecoder.pulsemusic.PulseController;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.loaders.LoaderManager;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.playback.LocalPlayback;
 import com.hardcodecoder.pulsemusic.playback.MediaNotificationManager;
 import com.hardcodecoder.pulsemusic.playback.PlaybackManager;
+import com.hardcodecoder.pulsemusic.playback.PulseController;
 import com.hardcodecoder.pulsemusic.providers.ProviderManager;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 import com.hardcodecoder.pulsemusic.widgets.PulseWidgetsHelper;
@@ -92,8 +92,7 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
 
         final boolean rememberPlaylist = AppSettings.isRememberPlaylistEnabled(this);
 
-        mPlaybackManager.setRememberPlaylist(rememberPlaylist);
-        mPulseController.setRememberPlaylist(rememberPlaylist, false);
+        mPlaybackManager.setRememberPlaylist(rememberPlaylist, false);
 
         final boolean sleepTimerEnabled = AppSettings.isSleepTimerEnabled(this);
         mPlaybackManager.configureTimer(sleepTimerEnabled, false);
@@ -199,7 +198,7 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
 
     private void playPlaylist(@Nullable List<MusicModel> playlist) {
         if (null != playlist && !playlist.isEmpty()) {
-            mPulseController.setPlaylist(playlist);
+            mPulseController.getQueueManager().setPlaylist(playlist);
             mMediaSession.getController().getTransportControls().play();
         } else
             Toast.makeText(this, getString(R.string.message_empty_recent), Toast.LENGTH_SHORT).show();
@@ -302,8 +301,7 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
         switch (key) {
             case Preferences.KEY_REMEMBER_PREVIOUS_PLAYLIST:
                 boolean remember = AppSettings.isRememberPlaylistEnabled(this);
-                mPlaybackManager.setRememberPlaylist(remember);
-                mPulseController.setRememberPlaylist(remember, true);
+                mPlaybackManager.setRememberPlaylist(remember, true);
                 break;
             case Preferences.KEY_SLEEP_TIMER:
             case Preferences.KEY_SLEEP_TIMER_DURATION:

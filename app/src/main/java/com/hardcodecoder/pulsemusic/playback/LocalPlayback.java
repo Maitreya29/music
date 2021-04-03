@@ -20,7 +20,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.hardcodecoder.pulsemusic.PulseController;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 
@@ -35,7 +34,7 @@ public class LocalPlayback implements
     private final IntentFilter filter = new IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY);
     private final Context mContext;
     private final AudioManager mAudioManager;
-    private final PulseController.QueueManager mQueueManager;
+    private final QueueManager mQueueManager;
     private Playback.Callback mPlaybackCallback;
     private final BroadcastReceiver becomingNoisyReceiver = new BroadcastReceiver() {
         @Override

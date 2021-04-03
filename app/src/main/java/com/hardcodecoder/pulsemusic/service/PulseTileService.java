@@ -15,8 +15,8 @@ import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 
 import com.hardcodecoder.pulsemusic.Preferences;
-import com.hardcodecoder.pulsemusic.PulseController;
 import com.hardcodecoder.pulsemusic.R;
+import com.hardcodecoder.pulsemusic.playback.PulseController;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 
 @RequiresApi(api = Build.VERSION_CODES.N)

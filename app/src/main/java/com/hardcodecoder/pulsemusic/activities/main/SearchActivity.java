@@ -101,7 +101,7 @@ public class SearchActivity extends ControllerActivity implements SimpleItemClic
     @Override
     public void onItemClick(int position) {
         if (null == mAdapter) return;
-        mPulseController.setPlaylist(mAdapter.getDataList(), position);
+        mPulseController.getQueueManager().setPlaylist(mAdapter.getDataList(), position);
         mRemote.play();
     }
 

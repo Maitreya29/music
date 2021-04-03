@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
-import com.hardcodecoder.pulsemusic.PulseController;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.activities.playlist.base.PlaylistActivity;
 import com.hardcodecoder.pulsemusic.adapters.playlist.CustomizablePlaylistAdapter;
@@ -17,19 +16,20 @@ import com.hardcodecoder.pulsemusic.helper.RecyclerViewGestureHelper;
 import com.hardcodecoder.pulsemusic.interfaces.ItemGestureCallback;
 import com.hardcodecoder.pulsemusic.interfaces.PlaylistItemListener;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
+import com.hardcodecoder.pulsemusic.playback.QueueManager;
 
 import java.util.List;
 
 public class CurrentQueuePlaylist extends PlaylistActivity implements PlaylistItemListener, ItemGestureCallback<MusicModel> {
 
     private CustomizablePlaylistAdapter mAdapter;
-    private PulseController.QueueManager mQueueManager;
+    private QueueManager mQueueManager;
     private ItemTouchHelper mItemTouchHelper;
 
     @Override
     protected void loadContent() {
         mQueueManager = mPulseController.getQueueManager();
-        setUpContent(mQueueManager.getQueue());
+        setUpContent(mQueueManager.getPlaylist());
         setPlaylistTitle(getString(R.string.playlist_play_queue));
     }
 
@@ -70,7 +70,7 @@ public class CurrentQueuePlaylist extends PlaylistActivity implements PlaylistIt
             // Shuffle and play
             if (mAdapter != null) {
                 shuffleTrackAndPlay(mAdapter.getDataList());
-                mAdapter.updatePlaylist(mQueueManager.getQueue());
+                mAdapter.updatePlaylist(mQueueManager.getPlaylist());
             }
         });
 
@@ -95,12 +95,12 @@ public class CurrentQueuePlaylist extends PlaylistActivity implements PlaylistIt
 
     @Override
     public void onItemMove(int fromPosition, int toPosition) {
-        mPulseController.moveQueueItem(fromPosition, toPosition);
+        mQueueManager.swapPlaylistItem(fromPosition, toPosition);
     }
 
     @Override
     public void onItemDismissed(@NonNull MusicModel dismissedItem, int itemPosition) {
-        mPulseController.removeItemFromQueue(itemPosition);
+        mQueueManager.deletePlaylistItem(dismissedItem, itemPosition);
         Snackbar sb = Snackbar.make(
                 findViewById(R.id.playlist_layout_root),
                 R.string.track_removed_from_queue,
@@ -108,7 +108,7 @@ public class CurrentQueuePlaylist extends PlaylistActivity implements PlaylistIt
 
         sb.setAction(getString(R.string.undo), v -> {
             mAdapter.restoreItem();
-            mPulseController.addToQueue(dismissedItem, itemPosition);
+            mQueueManager.addToPlaylist(dismissedItem, itemPosition);
             if (mQueueManager.getActiveIndex() == itemPosition)
                 mRemote.play();
             updateTracksInfo(mAdapter.getItemCount(),
@@ -118,7 +118,7 @@ public class CurrentQueuePlaylist extends PlaylistActivity implements PlaylistIt
         sb.show();
 
         if (itemPosition == mQueueManager.getActiveIndex()) {
-            if (mQueueManager.getQueue().size() > itemPosition) {
+            if (mQueueManager.getPlaylist().size() > itemPosition) {
                 if (mPulseController.isPlaying()) mRemote.play();
             } else {
                 // Active and last item in the playlist was removed
@@ -139,19 +139,19 @@ public class CurrentQueuePlaylist extends PlaylistActivity implements PlaylistIt
         mAdapter = null;
 
         mRemote.stop();
-        mPulseController.getQueueManager().resetQueue();
+        mQueueManager.resetPlaylist();
     }
 
     @Override
     protected void onReceivedTracks(@NonNull List<MusicModel> list) {
         if (null == mAdapter) {
             setUpContent(list);
-            mPulseController.setPlaylist(list);
+            mQueueManager.setPlaylist(list);
         } else {
             mAdapter.addItems(list);
             updateTracksInfo(mAdapter.getItemCount(),
                     getCurrentPlaylistDuration() + getPlaylistDurationFor(list));
-            mPulseController.setPlaylist(mAdapter.getDataList(), mQueueManager.getActiveIndex());
+            mQueueManager.setPlaylist(mAdapter.getDataList(), mQueueManager.getActiveIndex());
         }
     }
 }

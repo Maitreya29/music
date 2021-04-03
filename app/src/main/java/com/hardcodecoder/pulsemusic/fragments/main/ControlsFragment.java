@@ -14,8 +14,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.textview.MaterialTextView;
-import com.hardcodecoder.pulsemusic.PulseController;
 import com.hardcodecoder.pulsemusic.R;
+import com.hardcodecoder.pulsemusic.playback.PulseController;
 
 public class ControlsFragment extends Fragment implements PulseController.OnControllerReadyListener {
 

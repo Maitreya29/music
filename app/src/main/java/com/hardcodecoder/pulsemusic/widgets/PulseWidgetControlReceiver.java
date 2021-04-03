@@ -9,8 +9,8 @@ import android.media.session.PlaybackState;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
-import com.hardcodecoder.pulsemusic.PulseController;
-import com.hardcodecoder.pulsemusic.PulseController.PulseRemote;
+import com.hardcodecoder.pulsemusic.playback.PulseController;
+import com.hardcodecoder.pulsemusic.playback.PulseController.PulseRemote;
 import com.hardcodecoder.pulsemusic.service.PMS;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 import com.hardcodecoder.pulsemusic.utils.LogUtils;

@@ -104,7 +104,7 @@ public class SettingsActivity extends ControllerActivity implements SettingsFrag
                 startActivity(restartIntent);
                 if (shouldStopPlayback) {
                     mRemote.stop();
-                    mPulseController.getQueueManager().resetQueue();
+                    mPulseController.getQueueManager().resetPlaylist();
                     mRestartDialog.dismiss();
                 }
                 finish();

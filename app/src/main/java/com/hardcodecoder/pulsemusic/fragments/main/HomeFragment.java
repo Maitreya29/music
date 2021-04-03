@@ -19,7 +19,6 @@ import androidx.recyclerview.widget.SnapHelper;
 
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.Preferences;
-import com.hardcodecoder.pulsemusic.PulseController;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.TaskRunner;
 import com.hardcodecoder.pulsemusic.activities.playlist.FavoritesActivity;
@@ -35,6 +34,8 @@ import com.hardcodecoder.pulsemusic.loaders.LoaderManager;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.model.TopAlbumModel;
 import com.hardcodecoder.pulsemusic.model.TopArtistModel;
+import com.hardcodecoder.pulsemusic.playback.PulseController;
+import com.hardcodecoder.pulsemusic.playback.QueueManager;
 import com.hardcodecoder.pulsemusic.service.PMS;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 import com.hardcodecoder.pulsemusic.utils.NavigationUtil;
@@ -46,8 +47,8 @@ public class HomeFragment extends PulseFragment {
 
     public static final String TAG = "Home";
     private static final int PICK_MUSIC = 1600;
-    private final PulseController mPulseController = PulseController.getInstance();
-    private final PulseController.PulseRemote mRemote = mPulseController.getRemote();
+    private final QueueManager mQueueManager = PulseController.getInstance().getQueueManager();
+    private final PulseController.PulseRemote mRemote = PulseController.getInstance().getRemote();
     private String mFragmentTitle = null;
 
     @NonNull
@@ -154,7 +155,7 @@ public class HomeFragment extends PulseFragment {
             HomeSectionAdapter adapter = new HomeSectionAdapter(getLayoutInflater(), list, new SimpleItemClickListener() {
                 @Override
                 public void onItemClick(int position) {
-                    mPulseController.setPlaylist(list, position);
+                    mQueueManager.setPlaylist(list, position);
                     mRemote.play();
                 }
 
@@ -178,7 +179,7 @@ public class HomeFragment extends PulseFragment {
             HomeSectionAdapter adapter = new HomeSectionAdapter(getLayoutInflater(), list, new SimpleItemClickListener() {
                 @Override
                 public void onItemClick(int position) {
-                    mPulseController.setPlaylist(list, position);
+                    mQueueManager.setPlaylist(list, position);
                     mRemote.play();
                 }
 
@@ -202,7 +203,7 @@ public class HomeFragment extends PulseFragment {
             HomeSectionAdapter adapter = new HomeSectionAdapter(getLayoutInflater(), list, new SimpleItemClickListener() {
                 @Override
                 public void onItemClick(int position) {
-                    mPulseController.setPlaylist(list, position);
+                    mQueueManager.setPlaylist(list, position);
                     mRemote.play();
                 }
 
@@ -244,7 +245,7 @@ public class HomeFragment extends PulseFragment {
             if (md != null) {
                 List<MusicModel> singlePickedItemList = new ArrayList<>();
                 singlePickedItemList.add(md);
-                mPulseController.setPlaylist(singlePickedItemList, 0);
+                mQueueManager.setPlaylist(singlePickedItemList, 0);
                 mRemote.play();
             } else
                 Toast.makeText(requireContext(), getString(R.string.toast_selected_track_load_failed), Toast.LENGTH_SHORT).show();

@@ -21,7 +21,6 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.hardcodecoder.pulsemusic.MediaArtCache;
-import com.hardcodecoder.pulsemusic.PulseController;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.activities.base.DraggableNowPlayingSheetActivity;
 import com.hardcodecoder.pulsemusic.dialog.MainActivityMenu;
@@ -35,6 +34,7 @@ import com.hardcodecoder.pulsemusic.helper.DataModelHelper;
 import com.hardcodecoder.pulsemusic.loaders.LoaderManager;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.playback.PlaybackManager;
+import com.hardcodecoder.pulsemusic.playback.PulseController;
 import com.hardcodecoder.pulsemusic.service.PMS;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 import com.hardcodecoder.pulsemusic.utils.LogUtils;
@@ -128,7 +128,7 @@ public class MainContentActivity extends DraggableNowPlayingSheetActivity implem
                     if (null != md) {
                         List<MusicModel> singlePickedItemList = new ArrayList<>();
                         singlePickedItemList.add(md);
-                        mPulseController.setPlaylist(singlePickedItemList, 0);
+                        mPulseController.getQueueManager().setPlaylist(singlePickedItemList, 0);
                         mRemote.play();
                     }
                 } catch (Exception e) {

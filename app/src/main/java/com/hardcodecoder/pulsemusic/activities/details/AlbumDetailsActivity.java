@@ -153,7 +153,7 @@ public class AlbumDetailsActivity extends BaseDetailsActivity implements Options
                 new SimpleItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
-                        mPulseController.setPlaylist(list, position);
+                        mPulseController.getQueueManager().setPlaylist(list, position);
                         mRemote.play();
                     }
 

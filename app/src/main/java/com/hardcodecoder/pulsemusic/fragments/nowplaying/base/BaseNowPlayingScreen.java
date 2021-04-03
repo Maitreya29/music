@@ -27,13 +27,14 @@ import com.google.android.material.shape.CornerFamily;
 import com.google.android.material.shape.ShapeAppearanceModel;
 import com.google.android.material.slider.Slider;
 import com.hardcodecoder.pulsemusic.Preferences;
-import com.hardcodecoder.pulsemusic.PulseController;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.activities.base.DraggableNowPlayingSheetActivity;
 import com.hardcodecoder.pulsemusic.dialog.CurrentQueueBottomSheet;
 import com.hardcodecoder.pulsemusic.helper.MediaProgressUpdateHelper;
 import com.hardcodecoder.pulsemusic.helper.UIHelper;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
+import com.hardcodecoder.pulsemusic.playback.PulseController;
+import com.hardcodecoder.pulsemusic.playback.QueueManager;
 import com.hardcodecoder.pulsemusic.providers.FavoritesProvider;
 import com.hardcodecoder.pulsemusic.providers.ProviderManager;
 import com.hardcodecoder.pulsemusic.service.PMS;
@@ -51,38 +52,38 @@ public abstract class BaseNowPlayingScreen extends Fragment implements PulseCont
     protected String mUpNextTitle = "";
     protected String mArtistTitle = "";
     private PulseController mPulseController;
-    private PulseController.QueueManager mQueueManager;
+    private QueueManager mQueueManager;
     private PulseController.PulseRemote mRemote;
     private MediaProgressUpdateHelper mUpdateHelper;
     private ViewPager2 mMediaArtPager;
     private MediaArtPagerAdapter mMediaArtAdapter;
-    private final PulseController.Callback mControllerCallback = new PulseController.Callback() {
+    private final QueueManager.OnQueueChangedListener mQueueChangedListener = new QueueManager.OnQueueChangedListener() {
         @Override
-        public void onTrackListChanged(@NonNull List<MusicModel> newTracks) {
+        public void onPlaylistChanged(@NonNull List<MusicModel> newPlaylist) {
             int trackIndex = mQueueManager.getActiveIndex();
             int currentItemIndex = mMediaArtPager.getCurrentItem();
-            mMediaArtAdapter.notifyTracksChanged(newTracks, completed -> {
+            mMediaArtAdapter.notifyTracksChanged(newPlaylist, completed -> {
                 if (currentItemIndex != trackIndex)
                     mMediaArtPager.setCurrentItem(mQueueManager.getActiveIndex(), false);
             });
         }
 
         @Override
-        public void onTrackItemAdded(@NonNull MusicModel trackItem, int position) {
-            mMediaArtAdapter.notifyTrackAdded(trackItem, position);
-            if (position == mMediaArtPager.getCurrentItem() + 1)
+        public void onPlaylistItemAdded(@NonNull MusicModel newItem, int index) {
+            mMediaArtAdapter.notifyTrackAdded(newItem, index);
+            if (index == mMediaArtPager.getCurrentItem() + 1)
                 onUpNextItemChanged(getUpNextText());
         }
 
         @Override
-        public void onTrackItemRemoved(int position) {
-            mMediaArtAdapter.notifyTrackRemoved(position);
-            if (position == mMediaArtPager.getCurrentItem() + 1)
+        public void onPlaylistItemDeleted(@NonNull MusicModel deletedItem, int index) {
+            mMediaArtAdapter.notifyTrackRemoved(index);
+            if (index == mMediaArtPager.getCurrentItem() + 1)
                 onUpNextItemChanged(getUpNextText());
         }
 
         @Override
-        public void onTrackItemMoved(int from, int to) {
+        public void onPlaylistItemSwapped(int from, int to) {
             mMediaArtAdapter.notifyTracksSwapped(from, to);
             int upNextPosition = mMediaArtPager.getCurrentItem() + 1;
             if (from == upNextPosition || to == upNextPosition)
@@ -148,7 +149,7 @@ public abstract class BaseNowPlayingScreen extends Fragment implements PulseCont
     @Override
     public void onControllerReady(@NonNull MediaController controller) {
         mUpdateHelper = new MediaProgressUpdateHelper(controller, this);
-        mPulseController.registerCallback(mControllerCallback);
+        mQueueManager.addQueueChangedListener(mQueueChangedListener);
     }
 
     @Override
@@ -218,7 +219,7 @@ public abstract class BaseNowPlayingScreen extends Fragment implements PulseCont
         mMediaArtPager = pager;
         // Workaround to disable over scroll mode
         mMediaArtPager.getChildAt(0).setOverScrollMode(ViewPager2.OVER_SCROLL_NEVER);
-        mMediaArtAdapter = new MediaArtPagerAdapter(pager.getContext(), mQueueManager.getQueue(), redId, model);
+        mMediaArtAdapter = new MediaArtPagerAdapter(pager.getContext(), mQueueManager.getPlaylist(), redId, model);
         mMediaArtPager.setAdapter(mMediaArtAdapter);
         mMediaArtPager.setCurrentItem(mQueueManager.getActiveIndex(), false);
         mMediaArtPager.setSaveEnabled(false);
@@ -460,7 +461,7 @@ public abstract class BaseNowPlayingScreen extends Fragment implements PulseCont
         requireActivity().getSharedPreferences(Preferences.PREF_NOW_PLAYING, Context.MODE_PRIVATE)
                 .unregisterOnSharedPreferenceChangeListener(this);
         mPulseController.removeConnectionCallback(this);
-        mPulseController.unregisterCallback(mControllerCallback);
+        mQueueManager.removeQueueChangedListener(mQueueChangedListener);
         ProviderManager.getFavoritesProvider().removeCallback(this);
         super.onDestroy();
     }

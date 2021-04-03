@@ -5,7 +5,7 @@ import android.view.KeyEvent;
 
 import androidx.annotation.Nullable;
 
-import com.hardcodecoder.pulsemusic.PulseController;
+import com.hardcodecoder.pulsemusic.playback.PulseController;
 
 public class ControllerActivity extends ThemeActivity {
 

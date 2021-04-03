@@ -196,7 +196,7 @@ public abstract class PlaylistActivity extends ControllerActivity {
 
     protected void setTrackAndPlay(@Nullable List<MusicModel> playlist, int startIndex) {
         if (null == playlist || playlist.isEmpty()) return;
-        mPulseController.setPlaylist(playlist, startIndex);
+        mPulseController.getQueueManager().setPlaylist(playlist, startIndex);
         mRemote.play();
     }
 
@@ -204,7 +204,7 @@ public abstract class PlaylistActivity extends ControllerActivity {
         if (null == playlist || playlist.isEmpty()) return;
         List<MusicModel> playListToPlay = new ArrayList<>(playlist);
         Collections.shuffle(playListToPlay);
-        mPulseController.setPlaylist(playListToPlay);
+        mPulseController.getQueueManager().setPlaylist(playListToPlay);
         mRemote.play();
         Toast.makeText(this, getString(R.string.toast_playlist_shuffle_success), Toast.LENGTH_SHORT).show();
     }

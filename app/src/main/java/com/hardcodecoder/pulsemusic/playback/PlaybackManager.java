@@ -13,7 +13,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.hardcodecoder.pulsemusic.PulseController;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.helper.MediaArtHelper;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
@@ -35,7 +34,7 @@ public class PlaybackManager implements Playback.Callback {
     private final PlaybackState.Builder mStateBuilder = new PlaybackState.Builder();
     private final Playback mPlayback;
     private final PlaybackServiceCallback mServiceCallback;
-    private final PulseController.QueueManager mQueueManager;
+    private final QueueManager mQueueManager;
     private final Context mContext;
     private final Handler mHandler;
     private Runnable mSleepTimerRunnableTask = null;
@@ -126,8 +125,9 @@ public class PlaybackManager implements Playback.Callback {
         mQueueManager = PulseController.getInstance().getQueueManager();
     }
 
-    public void setRememberPlaylist(boolean remember) {
+    public void setRememberPlaylist(boolean remember, boolean saveNow) {
         mRememberPlaylist = remember;
+        mQueueManager.setRememberPlaylist(remember, saveNow);
     }
 
     public MediaSession.Callback getSessionCallbacks() {
@@ -155,7 +155,7 @@ public class PlaybackManager implements Playback.Callback {
     private void handleSkipRequest(short di, boolean manualSkip) {
         // User manually skipped the track, so we stop repeat
         if (manualSkip) mQueueManager.repeatCurrentTrack(false);
-        if (mQueueManager.canSkipTrack(di)) handlePlayRequest();
+        if (mQueueManager.skipTrack(di)) handlePlayRequest();
         else handlePauseRequest();
     }
 
@@ -167,7 +167,7 @@ public class PlaybackManager implements Playback.Callback {
         }
         final int index = AppSettings.getLastTrackIndex(mContext);
         final int resumePosition = AppSettings.getLastTrackPosition(mContext);
-        PulseController.getInstance().setPlaylist(previousPlaylist, index);
+        mQueueManager.setPlaylist(previousPlaylist, index);
         final boolean startPlayback = bundle.getBoolean(START_PLAYBACK, false);
         mPlayback.onPlay(resumePosition, startPlayback);
     }

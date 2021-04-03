@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.Preferences;
-import com.hardcodecoder.pulsemusic.PulseController;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.TaskRunner;
 import com.hardcodecoder.pulsemusic.adapters.main.TracksAdapter;
@@ -24,6 +23,7 @@ import com.hardcodecoder.pulsemusic.interfaces.SimpleItemClickListener;
 import com.hardcodecoder.pulsemusic.loaders.LoaderManager;
 import com.hardcodecoder.pulsemusic.loaders.SortOrder;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
+import com.hardcodecoder.pulsemusic.playback.PulseController;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 import com.hardcodecoder.pulsemusic.utils.SortUtil;
 import com.hardcodecoder.pulsemusic.utils.ToolbarMenuBuilder;
@@ -95,9 +95,9 @@ public class LibraryFragment extends ListGridFragment implements SimpleItemClick
 
     @Override
     public void onItemClick(int position) {
-        PulseController controller = PulseController.getInstance();
-        controller.setPlaylist(mAdapter.getDataList(), position);
-        controller.getRemote().play();
+        PulseController pulseController = PulseController.getInstance();
+        pulseController.getQueueManager().setPlaylist(mAdapter.getDataList(), position);
+        pulseController.getRemote().play();
     }
 
     @Override

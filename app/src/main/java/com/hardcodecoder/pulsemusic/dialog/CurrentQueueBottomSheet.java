@@ -3,6 +3,7 @@ package com.hardcodecoder.pulsemusic.dialog;
 import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.media.MediaMetadata;
+import android.media.session.MediaController;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +21,6 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textview.MaterialTextView;
-import com.hardcodecoder.pulsemusic.PulseController;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.adapters.playlist.CustomizablePlaylistAdapter;
 import com.hardcodecoder.pulsemusic.dialog.base.RoundedCustomBottomSheetFragment;
@@ -29,12 +29,15 @@ import com.hardcodecoder.pulsemusic.helper.RecyclerViewGestureHelper;
 import com.hardcodecoder.pulsemusic.interfaces.ItemGestureCallback;
 import com.hardcodecoder.pulsemusic.interfaces.PlaylistItemListener;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
+import com.hardcodecoder.pulsemusic.playback.PulseController;
+import com.hardcodecoder.pulsemusic.playback.QueueManager;
 import com.hardcodecoder.pulsemusic.themes.ThemeColors;
 import com.hardcodecoder.pulsemusic.views.MediaArtImageView;
 
 import java.util.List;
 
-public class CurrentQueueBottomSheet extends RoundedCustomBottomSheetFragment implements PlaylistItemListener, ItemGestureCallback<MusicModel> {
+public class CurrentQueueBottomSheet extends RoundedCustomBottomSheetFragment implements
+        PlaylistItemListener, ItemGestureCallback<MusicModel>, QueueManager.OnQueueChangedListener {
 
     public static final String TAG = CurrentQueueBottomSheet.class.getSimpleName();
     private View rootView;
@@ -44,30 +47,8 @@ public class CurrentQueueBottomSheet extends RoundedCustomBottomSheetFragment im
     private CustomizablePlaylistAdapter mAdapter;
     private ItemTouchHelper mItemTouchHelper;
     private PulseController mPulseController;
-    private PulseController.QueueManager mQueueManager;
-    private final PulseController.Callback mCallback = new PulseController.Callback() {
-
-        @Override
-        public void onTrackItemAdded(@NonNull MusicModel trackItem, int position) {
-            int upNextPosition = mQueueManager.getActiveIndex() + 1;
-            if (position == upNextPosition)
-                updateUpNextCard();
-        }
-
-        @Override
-        public void onTrackItemRemoved(int position) {
-            int upNextPosition = mQueueManager.getActiveIndex() + 1;
-            if (position == upNextPosition)
-                updateUpNextCard();
-        }
-
-        @Override
-        public void onTrackItemMoved(int from, int to) {
-            int upNextPosition = mQueueManager.getActiveIndex() + 1;
-            if (from <= upNextPosition || to <= upNextPosition)
-                updateUpNextCard();
-        }
-
+    private QueueManager mQueueManager;
+    private final MediaController.Callback mCallback = new MediaController.Callback() {
         @Override
         public void onMetadataChanged(@Nullable MediaMetadata metadata) {
             updateUpNextCard();
@@ -91,7 +72,9 @@ public class CurrentQueueBottomSheet extends RoundedCustomBottomSheetFragment im
         mPulseController = PulseController.getInstance();
         mQueueManager = mPulseController.getQueueManager();
         mRemote = mPulseController.getRemote();
-        mPulseController.registerCallback(mCallback);
+        if (null != mPulseController.getController())
+            mPulseController.getController().registerCallback(mCallback);
+        mQueueManager.addQueueChangedListener(this);
 
         rootView = view;
 
@@ -103,7 +86,7 @@ public class CurrentQueueBottomSheet extends RoundedCustomBottomSheetFragment im
         upNextCard.setStrokeColor(ThemeColors.getCurrentColorControlNormal());
         updateUpNextCard();
 
-        List<MusicModel> list = mQueueManager.getQueue();
+        List<MusicModel> list = mQueueManager.getPlaylist();
 
         PlaylistHelper.loadPlaylistArtInto(view.findViewById(R.id.current_queue_playlist_art), list);
 
@@ -128,17 +111,17 @@ public class CurrentQueueBottomSheet extends RoundedCustomBottomSheetFragment im
 
     @Override
     public void onItemDismissed(@NonNull MusicModel dismissedItem, int itemPosition) {
-        mPulseController.removeItemFromQueue(itemPosition);
+        mQueueManager.deletePlaylistItem(dismissedItem, itemPosition);
         Snackbar sb = Snackbar.make(rootView, R.string.track_removed_from_queue, Snackbar.LENGTH_SHORT);
         sb.setAction(getString(R.string.undo), v -> {
             mAdapter.restoreItem();
-            mPulseController.addToQueue(dismissedItem, itemPosition);
+            mQueueManager.addToPlaylist(dismissedItem, itemPosition);
             if (mQueueManager.getActiveIndex() == itemPosition)
                 mRemote.play();
         });
         sb.show();
         if (itemPosition == mQueueManager.getActiveIndex()) {
-            if (mQueueManager.getQueue().size() > itemPosition) {
+            if (mQueueManager.getPlaylist().size() > itemPosition) {
                 if (mPulseController.isPlaying()) mRemote.play();
             } else {
                 // Active and last item in the playlist was removed
@@ -151,7 +134,7 @@ public class CurrentQueueBottomSheet extends RoundedCustomBottomSheetFragment im
 
     @Override
     public void onItemMove(int fromPosition, int toPosition) {
-        mPulseController.moveQueueItem(fromPosition, toPosition);
+        mQueueManager.swapPlaylistItem(fromPosition, toPosition);
     }
 
     @Override
@@ -167,8 +150,35 @@ public class CurrentQueueBottomSheet extends RoundedCustomBottomSheetFragment im
 
     @Override
     public void onDismiss(@NonNull DialogInterface dialog) {
-        mPulseController.unregisterCallback(mCallback);
+        if (null != mPulseController.getController())
+            mPulseController.getController().registerCallback(mCallback);
+        mQueueManager.removeQueueChangedListener(this);
         super.onDismiss(dialog);
+    }
+
+    @Override
+    public void onPlaylistChanged(@NonNull List<MusicModel> newPlaylist) {
+    }
+
+    @Override
+    public void onPlaylistItemAdded(@NonNull MusicModel newItem, int index) {
+        int upNextPosition = mQueueManager.getActiveIndex() + 1;
+        if (index == upNextPosition)
+            updateUpNextCard();
+    }
+
+    @Override
+    public void onPlaylistItemDeleted(@NonNull MusicModel deletedItem, int index) {
+        int upNextPosition = mQueueManager.getActiveIndex() + 1;
+        if (index == upNextPosition)
+            updateUpNextCard();
+    }
+
+    @Override
+    public void onPlaylistItemSwapped(int from, int to) {
+        int upNextPosition = mQueueManager.getActiveIndex() + 1;
+        if (from <= upNextPosition || to <= upNextPosition)
+            updateUpNextCard();
     }
 
     private void updateUpNextCard() {

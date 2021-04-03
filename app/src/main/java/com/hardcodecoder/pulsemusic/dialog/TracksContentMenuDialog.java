@@ -12,11 +12,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.android.material.textview.MaterialTextView;
-import com.hardcodecoder.pulsemusic.PulseController;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.dialog.base.RoundedCustomBottomSheetFragment;
 import com.hardcodecoder.pulsemusic.helper.UIHelper;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
+import com.hardcodecoder.pulsemusic.playback.PulseController;
+import com.hardcodecoder.pulsemusic.playback.QueueManager;
 import com.hardcodecoder.pulsemusic.providers.ProviderManager;
 import com.hardcodecoder.pulsemusic.utils.NavigationUtil;
 import com.hardcodecoder.pulsemusic.views.MediaArtImageView;
@@ -86,14 +87,15 @@ public class TracksContentMenuDialog extends RoundedCustomBottomSheetFragment {
             dismiss();
         });
 
+        QueueManager queueManager = PulseController.getInstance().getQueueManager();
         view.findViewById(R.id.track_play_next).setOnClickListener(v -> {
-            PulseController.getInstance().playNext(mTrackModel);
+            queueManager.playNext(mTrackModel);
             Toast.makeText(v.getContext(), getString(R.string.toast_added_to_play_next), Toast.LENGTH_SHORT).show();
             dismiss();
         });
 
         view.findViewById(R.id.add_to_queue).setOnClickListener(v -> {
-            PulseController.getInstance().addToQueue(mTrackModel);
+            queueManager.addToPlaylist(mTrackModel);
             Toast.makeText(requireContext(), getString(R.string.toast_added_to_queue), Toast.LENGTH_SHORT).show();
             dismiss();
         });
