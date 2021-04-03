@@ -17,7 +17,7 @@ import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.PulseController;
 import com.hardcodecoder.pulsemusic.R;
 
-public class ControlsFragment extends Fragment implements PulseController.ConnectionCallback {
+public class ControlsFragment extends Fragment implements PulseController.OnControllerReadyListener {
 
     public static final String TAG = ControlsFragment.class.getSimpleName();
     private MaterialTextView tv1;

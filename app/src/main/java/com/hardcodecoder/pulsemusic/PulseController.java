@@ -29,7 +29,7 @@ public class PulseController {
     private final List<Callback> mCallbacksList = new ArrayList<>();
     private final QueueManager mQueueManager = new QueueManager();
     private final PulseRemote mRemote = new PulseRemote();
-    private List<ConnectionCallback> mConnectionCallbacks;
+    private List<OnControllerReadyListener> mOnControllerReadyListeners;
     private MediaController mMediaController;
     private int mAudioSessionId = -1;
     private boolean mRememberPlaylist = false;
@@ -50,9 +50,9 @@ public class PulseController {
     public void setController(@NonNull MediaController mediaController) {
         mMediaController = mediaController;
         mRemote.setTransportControls(mediaController.getTransportControls());
-        if (null != mConnectionCallbacks) {
-            for (ConnectionCallback connectionCallback : mConnectionCallbacks)
-                mMainHandler.post(() -> connectionCallback.onControllerReady(mediaController));
+        if (null != mOnControllerReadyListeners) {
+            for (OnControllerReadyListener onControllerReadyListener : mOnControllerReadyListeners)
+                mMainHandler.post(() -> onControllerReadyListener.onControllerReady(mediaController));
         }
     }
 
@@ -80,19 +80,19 @@ public class PulseController {
         }
     }
 
-    public void addConnectionCallback(@NonNull ConnectionCallback callback) {
-        if (null == mConnectionCallbacks) mConnectionCallbacks = new ArrayList<>();
-        mConnectionCallbacks.add(callback);
+    public void addConnectionCallback(@NonNull OnControllerReadyListener callback) {
+        if (null == mOnControllerReadyListeners) mOnControllerReadyListeners = new ArrayList<>();
+        mOnControllerReadyListeners.add(callback);
         if (null != mMediaController) {
             // The controller is already ready, so notify the listener
             mMainHandler.post(() -> callback.onControllerReady(mMediaController));
         }
     }
 
-    public void removeConnectionCallback(@NonNull ConnectionCallback callback) {
-        if (null == mConnectionCallbacks) return;
-        mConnectionCallbacks.remove(callback);
-        if (mConnectionCallbacks.size() == 0) mConnectionCallbacks = null;
+    public void removeConnectionCallback(@NonNull OnControllerReadyListener callback) {
+        if (null == mOnControllerReadyListeners) return;
+        mOnControllerReadyListeners.remove(callback);
+        if (mOnControllerReadyListeners.size() == 0) mOnControllerReadyListeners = null;
     }
 
     public void registerCallback(@NonNull Callback callback) {
@@ -158,7 +158,7 @@ public class PulseController {
             mMediaController = null;
         }
         mCallbacksList.clear();
-        if (null != mConnectionCallbacks) mConnectionCallbacks.clear();
+        if (null != mOnControllerReadyListeners) mOnControllerReadyListeners.clear();
         mQueueManager.resetQueue();
     }
 
@@ -172,7 +172,7 @@ public class PulseController {
         return mQueueManager;
     }
 
-    public interface ConnectionCallback {
+    public interface OnControllerReadyListener {
         void onControllerReady(@NonNull MediaController controller);
     }
 

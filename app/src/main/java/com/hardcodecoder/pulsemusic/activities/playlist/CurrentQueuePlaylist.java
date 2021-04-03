@@ -1,7 +1,5 @@
 package com.hardcodecoder.pulsemusic.activities.playlist;
 
-import android.media.session.MediaController;
-import android.media.session.PlaybackState;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -121,10 +119,7 @@ public class CurrentQueuePlaylist extends PlaylistActivity implements PlaylistIt
 
         if (itemPosition == mQueueManager.getActiveIndex()) {
             if (mQueueManager.getQueue().size() > itemPosition) {
-                MediaController controller = mPulseController.getController();
-                if (controller != null && controller.getPlaybackState() != null
-                        && controller.getPlaybackState().getState() == PlaybackState.STATE_PLAYING)
-                    mRemote.play();
+                if (mPulseController.isPlaying()) mRemote.play();
             } else {
                 // Active and last item in the playlist was removed
                 // Stop playback immediately

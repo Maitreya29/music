@@ -3,8 +3,6 @@ package com.hardcodecoder.pulsemusic.dialog;
 import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.media.MediaMetadata;
-import android.media.session.MediaController;
-import android.media.session.PlaybackState;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -141,10 +139,7 @@ public class CurrentQueueBottomSheet extends RoundedCustomBottomSheetFragment im
         sb.show();
         if (itemPosition == mQueueManager.getActiveIndex()) {
             if (mQueueManager.getQueue().size() > itemPosition) {
-                MediaController controller = mPulseController.getController();
-                if (controller != null && controller.getPlaybackState() != null &&
-                        controller.getPlaybackState().getState() == PlaybackState.STATE_PLAYING)
-                    mRemote.play();
+                if (mPulseController.isPlaying()) mRemote.play();
             } else {
                 // Active and last item in the playlist was removed
                 // Stop playback immediately

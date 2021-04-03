@@ -42,7 +42,7 @@ import com.hardcodecoder.pulsemusic.utils.AppSettings;
 
 import java.util.List;
 
-public abstract class BaseNowPlayingScreen extends Fragment implements PulseController.ConnectionCallback,
+public abstract class BaseNowPlayingScreen extends Fragment implements PulseController.OnControllerReadyListener,
         MediaProgressUpdateHelper.Callback,
         FavoritesProvider.FavoritesProviderCallback,
         SharedPreferences.OnSharedPreferenceChangeListener {

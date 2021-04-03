@@ -43,7 +43,7 @@ import com.hardcodecoder.pulsemusic.views.PulseToolbar;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainContentActivity extends DraggableNowPlayingSheetActivity implements PulseController.ConnectionCallback {
+public class MainContentActivity extends DraggableNowPlayingSheetActivity implements PulseController.OnControllerReadyListener {
 
     public static final String TAG = MainContentActivity.class.getSimpleName();
     public static final String ACTION_OPEN_NOW_PLAYING = "com.hardcodecoder.pulsemusic.activities.main.MainContentActivity.ActionOpenNPS";

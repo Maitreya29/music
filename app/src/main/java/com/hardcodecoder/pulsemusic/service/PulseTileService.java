@@ -20,7 +20,7 @@ import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
-public class PulseTileService extends TileService implements PulseController.ConnectionCallback {
+public class PulseTileService extends TileService implements PulseController.OnControllerReadyListener {
 
     public static final String TAG = PulseTileService.class.getSimpleName();
     private MediaController mController;
