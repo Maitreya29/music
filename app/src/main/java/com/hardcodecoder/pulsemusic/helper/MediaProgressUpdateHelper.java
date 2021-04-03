@@ -24,6 +24,11 @@ public class MediaProgressUpdateHelper extends Handler {
                 stop();
                 return;
             }
+            if (state.getState() == PlaybackState.STATE_SKIPPING_TO_QUEUE_ITEM) {
+                // Do not notify about skipping event
+                // We use this state to fix seek bar issue in notification
+                return;
+            }
             mCallback.onPlaybackStateChanged(state);
             if (state.getState() == PlaybackState.STATE_PLAYING) start();
             else stop();

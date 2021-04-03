@@ -26,6 +26,11 @@ public class ControlsFragment extends Fragment implements PulseController.OnCont
     private final MediaController.Callback mCallback = new MediaController.Callback() {
         @Override
         public void onPlaybackStateChanged(@Nullable PlaybackState state) {
+            if (null != state && state.getState() == PlaybackState.STATE_SKIPPING_TO_QUEUE_ITEM) {
+                // Do not notify about skipping event
+                // We use this state to fix seek bar issue in notification
+                return;
+            }
             updateControls();
         }
 

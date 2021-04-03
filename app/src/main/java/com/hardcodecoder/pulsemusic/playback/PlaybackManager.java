@@ -155,8 +155,10 @@ public class PlaybackManager implements Playback.Callback {
     private void handleSkipRequest(short di, boolean manualSkip) {
         // User manually skipped the track, so we stop repeat
         if (manualSkip) mQueueManager.repeatCurrentTrack(false);
-        if (mQueueManager.skipTrack(di)) handlePlayRequest();
-        else handlePauseRequest();
+        if (mQueueManager.skipTrack(di)) {
+            updatePlaybackState(PlaybackState.STATE_SKIPPING_TO_QUEUE_ITEM);
+            handlePlayRequest();
+        } else handlePauseRequest();
     }
 
     private void handleLoadLastTrack(@NonNull Bundle bundle) {
@@ -173,7 +175,9 @@ public class PlaybackManager implements Playback.Callback {
     }
 
     private void updatePlaybackState(int currentState) {
-        mStateBuilder.setState(currentState, mPlayback.getCurrentStreamingPosition(), currentState == PlaybackState.STATE_PLAYING ? 1 : 0);
+        long position = (currentState == PlaybackState.STATE_SKIPPING_TO_QUEUE_ITEM) ? 0 :
+                mPlayback.getCurrentStreamingPosition();
+        mStateBuilder.setState(currentState, position, currentState == PlaybackState.STATE_PLAYING ? 1 : 0);
         mStateBuilder.setActions(getActions(currentState));
         mServiceCallback.onPlaybackStateChanged(mStateBuilder.build());
     }

@@ -95,6 +95,11 @@ public class PulseTileService extends TileService implements PulseController.OnC
     }
 
     private void updateTileState(@Nullable PlaybackState state) {
+        if (null != state && state.getState() == PlaybackState.STATE_SKIPPING_TO_QUEUE_ITEM) {
+            // Do not notify about skipping event
+            // We use this state to fix seek bar issue in notification
+            return;
+        }
         Tile tile = getQsTile();
         tile.setState((null == state || state.getState() == PlaybackState.STATE_STOPPED) ?
                 Tile.STATE_INACTIVE : Tile.STATE_ACTIVE);
