@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.adapters.main.TracksAdapter;
-import com.hardcodecoder.pulsemusic.helper.UIHelper;
+import com.hardcodecoder.pulsemusic.helper.DialogHelper;
 import com.hardcodecoder.pulsemusic.interfaces.SimpleItemClickListener;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 
@@ -55,7 +55,7 @@ public abstract class StandardPlaylist extends PlaylistActivity implements Simpl
 
     @Override
     public void onOptionsClick(int position) {
-        UIHelper.showMenuForLibraryTracks(this, mAdapter.getDataList().get(position));
+        DialogHelper.showMenuForLibraryTracks(this, mAdapter.getDataList().get(position));
     }
 
     protected abstract void onTracksCleared();

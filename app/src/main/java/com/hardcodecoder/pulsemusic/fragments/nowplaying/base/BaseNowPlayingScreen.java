@@ -30,8 +30,8 @@ import com.hardcodecoder.pulsemusic.Preferences;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.activities.base.DraggableNowPlayingSheetActivity;
 import com.hardcodecoder.pulsemusic.dialog.CurrentQueueBottomSheet;
+import com.hardcodecoder.pulsemusic.helper.DialogHelper;
 import com.hardcodecoder.pulsemusic.helper.MediaProgressUpdateHelper;
-import com.hardcodecoder.pulsemusic.helper.UIHelper;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.playback.PulseController;
 import com.hardcodecoder.pulsemusic.playback.QueueManager;
@@ -402,7 +402,7 @@ public abstract class BaseNowPlayingScreen extends Fragment implements PulseCont
 
     protected void setShowOptionsClickMenuListener(@NonNull View view) {
         view.setOnClickListener(v ->
-                UIHelper.showMenuForLibraryTracks(requireActivity(), mQueueManager.getActiveQueueItem()));
+                DialogHelper.showMenuForLibraryTracks(requireActivity(), mQueueManager.getActiveQueueItem()));
     }
 
     protected void onTrackControlButtonsChanged() {

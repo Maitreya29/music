@@ -16,7 +16,7 @@ import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.TaskRunner;
 import com.hardcodecoder.pulsemusic.activities.base.ControllerActivity;
 import com.hardcodecoder.pulsemusic.adapters.main.SearchResultAdapter;
-import com.hardcodecoder.pulsemusic.helper.UIHelper;
+import com.hardcodecoder.pulsemusic.helper.DialogHelper;
 import com.hardcodecoder.pulsemusic.interfaces.SimpleItemClickListener;
 import com.hardcodecoder.pulsemusic.loaders.SearchQueryLoader;
 import com.hardcodecoder.pulsemusic.themes.TintHelper;
@@ -108,7 +108,7 @@ public class SearchActivity extends ControllerActivity implements SimpleItemClic
     @Override
     public void onOptionsClick(int position) {
         if (null == mAdapter) return;
-        UIHelper.showMenuForLibraryTracks(this, mAdapter.getDataList().get(position));
+        DialogHelper.showMenuForLibraryTracks(this, mAdapter.getDataList().get(position));
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.hardcodecoder.pulsemusic.helper;
+package com.hardcodecoder.pulsemusic.utils;
 
 import android.widget.ImageView;
 
@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.hardcodecoder.pulsemusic.TaskRunner;
+import com.hardcodecoder.pulsemusic.helper.MediaArtHelper;
 import com.hardcodecoder.pulsemusic.loaders.PlaylistArtLoader;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.themes.ThemeColors;
@@ -13,7 +14,7 @@ import com.hardcodecoder.pulsemusic.themes.ThemeManagerUtils;
 
 import java.util.List;
 
-public class PlaylistHelper {
+public class PlaylistUtil {
 
     public static long calculatePlaylistDuration(@NonNull List<MusicModel> list) {
         long duration = 0;

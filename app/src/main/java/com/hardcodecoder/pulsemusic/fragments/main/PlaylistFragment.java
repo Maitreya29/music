@@ -30,8 +30,8 @@ import com.hardcodecoder.pulsemusic.adapters.main.PlaylistsAdapter;
 import com.hardcodecoder.pulsemusic.dialog.ToolbarContextMenuDialog;
 import com.hardcodecoder.pulsemusic.dialog.base.RoundedCustomBottomSheet;
 import com.hardcodecoder.pulsemusic.fragments.main.base.PulseFragment;
+import com.hardcodecoder.pulsemusic.helper.DialogHelper;
 import com.hardcodecoder.pulsemusic.helper.RecyclerViewGestureHelper;
-import com.hardcodecoder.pulsemusic.helper.UIHelper;
 import com.hardcodecoder.pulsemusic.interfaces.ItemGestureCallback;
 import com.hardcodecoder.pulsemusic.interfaces.PlaylistCardListener;
 import com.hardcodecoder.pulsemusic.providers.ProviderManager;
@@ -87,7 +87,7 @@ public class PlaylistFragment extends PulseFragment implements PlaylistCardListe
         ToolbarContextMenuDialog.Builder builder = new ToolbarContextMenuDialog.Builder();
         builder.addGroup(Preferences.MENU_GROUP_TYPE_CREATE_PLAYLIST, getString(R.string.create_playlist), R.drawable.ic_playlist_add);
         builder.setMenuSelectedListener(groupItem ->
-                UIHelper.buildCreatePlaylistDialog(requireContext(), playlistName -> {
+                DialogHelper.buildCreatePlaylistDialog(requireContext(), playlistName -> {
                     // File observer monitors creation of new playlists
                     // No need to call PlaylistAdapter#addPlaylist();
                 })

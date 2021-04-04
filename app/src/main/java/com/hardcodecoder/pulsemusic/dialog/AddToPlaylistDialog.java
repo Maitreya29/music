@@ -17,7 +17,7 @@ import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.adapters.playlist.PlaylistItemAdapter;
 import com.hardcodecoder.pulsemusic.dialog.base.RoundedCustomBottomSheetFragment;
-import com.hardcodecoder.pulsemusic.helper.UIHelper;
+import com.hardcodecoder.pulsemusic.helper.DialogHelper;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.providers.ProviderManager;
 
@@ -53,7 +53,7 @@ public class AddToPlaylistDialog extends RoundedCustomBottomSheetFragment {
         title.setText(R.string.add_track_to);
         ImageView addBtn = view.findViewById(R.id.bottom_dialog_picker_add_btn);
         addBtn.setImageResource(R.drawable.ic_playlist_add);
-        addBtn.setOnClickListener(v -> UIHelper.buildCreatePlaylistDialog(requireActivity(), playlistName -> {
+        addBtn.setOnClickListener(v -> DialogHelper.buildCreatePlaylistDialog(requireActivity(), playlistName -> {
             if (null == mAdapter) setUpRecyclerView(view);
             else view.post(() -> mAdapter.addItem(playlistName));
         }));

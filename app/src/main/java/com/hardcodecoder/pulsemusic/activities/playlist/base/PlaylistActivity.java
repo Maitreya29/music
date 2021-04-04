@@ -24,10 +24,10 @@ import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.activities.base.ControllerActivity;
 import com.hardcodecoder.pulsemusic.activities.main.TrackPickerActivity;
-import com.hardcodecoder.pulsemusic.helper.PlaylistHelper;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.themes.ThemeColors;
 import com.hardcodecoder.pulsemusic.utils.DimensionsUtil;
+import com.hardcodecoder.pulsemusic.utils.PlaylistUtil;
 import com.hardcodecoder.pulsemusic.views.AccentColorMaterialButton;
 import com.hardcodecoder.pulsemusic.views.CustomToolbar;
 import com.hardcodecoder.pulsemusic.views.MediaArtImageView;
@@ -97,13 +97,13 @@ public abstract class PlaylistActivity extends ControllerActivity {
         recyclerView.setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
 
         loadRecyclerList(recyclerView, list);
-        PlaylistHelper.loadPlaylistArtInto(findViewById(R.id.playlist_media_art), list);
+        PlaylistUtil.loadPlaylistArtInto(findViewById(R.id.playlist_media_art), list);
         updateTracksInfo(list.size(), getPlaylistDurationFor(list));
     }
 
     protected long getPlaylistDurationFor(@Nullable List<MusicModel> playlist) {
         if (null == playlist) return 0;
-        return PlaylistHelper.calculatePlaylistDuration(playlist);
+        return PlaylistUtil.calculatePlaylistDuration(playlist);
     }
 
     protected void updateTracksInfo(int size, long duration) {
@@ -127,7 +127,7 @@ public abstract class PlaylistActivity extends ControllerActivity {
 
             // Set playlist art
             MediaArtImageView playlistArt = findViewById(R.id.playlist_media_art);
-            PlaylistHelper.loadDefaultPlaylistArt(playlistArt, null);
+            PlaylistUtil.loadDefaultPlaylistArt(playlistArt, null);
 
             // Disable appbar scrolling
             AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) mCollapsingToolbarLayout.getLayoutParams();

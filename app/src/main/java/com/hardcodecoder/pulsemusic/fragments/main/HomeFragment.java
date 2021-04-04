@@ -28,7 +28,7 @@ import com.hardcodecoder.pulsemusic.adapters.main.TopAlbumsAdapter;
 import com.hardcodecoder.pulsemusic.adapters.main.TopArtistsAdapter;
 import com.hardcodecoder.pulsemusic.fragments.main.base.PulseFragment;
 import com.hardcodecoder.pulsemusic.helper.DataModelHelper;
-import com.hardcodecoder.pulsemusic.helper.UIHelper;
+import com.hardcodecoder.pulsemusic.helper.DialogHelper;
 import com.hardcodecoder.pulsemusic.interfaces.SimpleItemClickListener;
 import com.hardcodecoder.pulsemusic.loaders.LoaderManager;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
@@ -161,7 +161,7 @@ public class HomeFragment extends PulseFragment {
 
                 @Override
                 public void onOptionsClick(int position) {
-                    UIHelper.showMenuForLibraryTracks(requireActivity(), list.get(position));
+                    DialogHelper.showMenuForLibraryTracks(requireActivity(), list.get(position));
                 }
             });
             rv.setAdapter(adapter);
@@ -185,7 +185,7 @@ public class HomeFragment extends PulseFragment {
 
                 @Override
                 public void onOptionsClick(int position) {
-                    UIHelper.showMenuForLibraryTracks(requireActivity(), list.get(position));
+                    DialogHelper.showMenuForLibraryTracks(requireActivity(), list.get(position));
                 }
             });
             rv.setAdapter(adapter);
@@ -209,7 +209,7 @@ public class HomeFragment extends PulseFragment {
 
                 @Override
                 public void onOptionsClick(int position) {
-                    UIHelper.showMenuForLibraryTracks(requireActivity(), list.get(position));
+                    DialogHelper.showMenuForLibraryTracks(requireActivity(), list.get(position));
                 }
             });
             rv.setAdapter(adapter);

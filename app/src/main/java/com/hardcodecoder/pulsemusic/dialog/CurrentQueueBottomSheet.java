@@ -24,7 +24,6 @@ import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.adapters.playlist.CustomizablePlaylistAdapter;
 import com.hardcodecoder.pulsemusic.dialog.base.RoundedCustomBottomSheetFragment;
-import com.hardcodecoder.pulsemusic.helper.PlaylistHelper;
 import com.hardcodecoder.pulsemusic.helper.RecyclerViewGestureHelper;
 import com.hardcodecoder.pulsemusic.interfaces.ItemGestureCallback;
 import com.hardcodecoder.pulsemusic.interfaces.PlaylistItemListener;
@@ -32,6 +31,7 @@ import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.playback.PulseController;
 import com.hardcodecoder.pulsemusic.playback.QueueManager;
 import com.hardcodecoder.pulsemusic.themes.ThemeColors;
+import com.hardcodecoder.pulsemusic.utils.PlaylistUtil;
 import com.hardcodecoder.pulsemusic.views.MediaArtImageView;
 
 import java.util.List;
@@ -88,7 +88,7 @@ public class CurrentQueueBottomSheet extends RoundedCustomBottomSheetFragment im
 
         List<MusicModel> list = mQueueManager.getPlaylist();
 
-        PlaylistHelper.loadPlaylistArtInto(view.findViewById(R.id.current_queue_playlist_art), list);
+        PlaylistUtil.loadPlaylistArtInto(view.findViewById(R.id.current_queue_playlist_art), list);
 
         RecyclerView recyclerView = (RecyclerView) ((ViewStub) view.findViewById(R.id.current_queue_stub_queue_list)).inflate();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(recyclerView.getContext(), RecyclerView.VERTICAL, false);

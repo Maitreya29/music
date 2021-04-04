@@ -14,7 +14,7 @@ import androidx.annotation.Nullable;
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.dialog.base.RoundedCustomBottomSheetFragment;
-import com.hardcodecoder.pulsemusic.helper.UIHelper;
+import com.hardcodecoder.pulsemusic.helper.DialogHelper;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.playback.PulseController;
 import com.hardcodecoder.pulsemusic.playback.QueueManager;
@@ -101,7 +101,7 @@ public class TracksContentMenuDialog extends RoundedCustomBottomSheetFragment {
         });
 
         view.findViewById(R.id.song_info).setOnClickListener(v -> {
-            UIHelper.buildSongInfoDialog(requireActivity(), mTrackModel);
+            DialogHelper.buildSongInfoDialog(requireActivity(), mTrackModel);
             dismiss();
         });
 
@@ -132,7 +132,7 @@ public class TracksContentMenuDialog extends RoundedCustomBottomSheetFragment {
         }
 
         view.findViewById(R.id.add_to_playlist).setOnClickListener(v -> {
-            UIHelper.openAddToPlaylistDialog(requireFragmentManager(), mTrackModel);
+            DialogHelper.openAddToPlaylistDialog(requireFragmentManager(), mTrackModel);
             dismiss();
         });
     }

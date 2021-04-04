@@ -22,8 +22,8 @@ import com.hardcodecoder.pulsemusic.adapters.details.AlbumTracksAdapter;
 import com.hardcodecoder.pulsemusic.dialog.MenuDetailsDialog;
 import com.hardcodecoder.pulsemusic.dialog.ToolbarContextMenuDialog;
 import com.hardcodecoder.pulsemusic.glide.GlideApp;
+import com.hardcodecoder.pulsemusic.helper.DialogHelper;
 import com.hardcodecoder.pulsemusic.helper.MediaArtHelper;
-import com.hardcodecoder.pulsemusic.helper.UIHelper;
 import com.hardcodecoder.pulsemusic.interfaces.OptionsMenuListener;
 import com.hardcodecoder.pulsemusic.interfaces.SimpleItemClickListener;
 import com.hardcodecoder.pulsemusic.loaders.LoaderManager;
@@ -159,7 +159,7 @@ public class AlbumDetailsActivity extends BaseDetailsActivity implements Options
 
                     @Override
                     public void onOptionsClick(int position) {
-                        UIHelper.showMenuForAlbumDetails(AlbumDetailsActivity.this, list.get(position));
+                        DialogHelper.showMenuForAlbumDetails(AlbumDetailsActivity.this, list.get(position));
                     }
                 },
                 mSortOrder);

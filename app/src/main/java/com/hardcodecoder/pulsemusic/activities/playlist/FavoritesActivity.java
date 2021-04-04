@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.activities.playlist.base.StandardPlaylist;
-import com.hardcodecoder.pulsemusic.helper.UIHelper;
+import com.hardcodecoder.pulsemusic.helper.DialogHelper;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.providers.FavoritesProvider;
 import com.hardcodecoder.pulsemusic.providers.ProviderManager;
@@ -59,7 +59,7 @@ public class FavoritesActivity extends StandardPlaylist implements FavoritesProv
 
     @Override
     public void onOptionsClick(int position) {
-        UIHelper.showMenuForLibraryTracks(this, mAdapter.getDataList().get(position));
+        DialogHelper.showMenuForLibraryTracks(this, mAdapter.getDataList().get(position));
     }
 
     @Override

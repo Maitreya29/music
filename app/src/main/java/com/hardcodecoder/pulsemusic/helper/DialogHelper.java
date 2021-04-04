@@ -27,7 +27,7 @@ import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.providers.ProviderManager;
 import com.hardcodecoder.pulsemusic.utils.DataUtils;
 
-public class UIHelper {
+public class DialogHelper {
 
     public static void showMenuForLibraryTracks(@NonNull FragmentActivity activity, @NonNull MusicModel data) {
         TracksContentMenuDialog tracksContentDialog = new TracksContentMenuDialog(data);

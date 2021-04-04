@@ -17,7 +17,7 @@ import com.hardcodecoder.pulsemusic.adapters.main.TracksAdapter;
 import com.hardcodecoder.pulsemusic.dialog.MenuDetailsDialog;
 import com.hardcodecoder.pulsemusic.dialog.ToolbarContextMenuDialog;
 import com.hardcodecoder.pulsemusic.fragments.main.base.ListGridFragment;
-import com.hardcodecoder.pulsemusic.helper.UIHelper;
+import com.hardcodecoder.pulsemusic.helper.DialogHelper;
 import com.hardcodecoder.pulsemusic.interfaces.OptionsMenuListener;
 import com.hardcodecoder.pulsemusic.interfaces.SimpleItemClickListener;
 import com.hardcodecoder.pulsemusic.loaders.LoaderManager;
@@ -102,7 +102,7 @@ public class LibraryFragment extends ListGridFragment implements SimpleItemClick
 
     @Override
     public void onOptionsClick(int position) {
-        UIHelper.showMenuForLibraryTracks(requireActivity(), mAdapter.getDataList().get(position));
+        DialogHelper.showMenuForLibraryTracks(requireActivity(), mAdapter.getDataList().get(position));
     }
 
     public void onSortUpdateComplete() {
