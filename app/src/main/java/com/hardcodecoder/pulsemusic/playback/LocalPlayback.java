@@ -13,7 +13,6 @@ import android.media.session.PlaybackState;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
-import android.os.Looper;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.widget.Toast;
@@ -21,6 +20,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.hardcodecoder.pulsemusic.R;
+import com.hardcodecoder.pulsemusic.TaskRunner;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 
 import java.io.IOException;
@@ -35,6 +35,7 @@ public class LocalPlayback implements
     private final Context mContext;
     private final AudioManager mAudioManager;
     private final QueueManager mQueueManager;
+    private final Handler mHandler = TaskRunner.getWorkerHandler();
     private Playback.Callback mPlaybackCallback;
     private final BroadcastReceiver becomingNoisyReceiver = new BroadcastReceiver() {
         @Override
@@ -48,7 +49,6 @@ public class LocalPlayback implements
     private TelephonyManager mTelephonyManager;
     private AudioFocusRequest mAudioFocusRequest = null;
     private PhoneStateListener mPhoneStateListener;
-    private Handler mHandler;
     private int mAudioSessionId = -1;
     private int mPlaybackState = PlaybackState.STATE_NONE;
     private int mCurrentState;
@@ -58,12 +58,10 @@ public class LocalPlayback implements
     private boolean mDelayedPlayback = false;
     private boolean mStartPlaybackWhenReady = true;
 
-    public LocalPlayback(@NonNull Context context, Handler handler) {
+    public LocalPlayback(@NonNull Context context) {
         Context applicationContext = context.getApplicationContext();
         mContext = applicationContext;
         mAudioManager = (AudioManager) applicationContext.getSystemService(Context.AUDIO_SERVICE);
-        mHandler = handler;
-        if (mHandler == null) mHandler = new Handler(Looper.myLooper());
         mQueueManager = PulseController.getInstance().getQueueManager();
     }
 

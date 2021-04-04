@@ -7,7 +7,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Handler;
-import android.os.Looper;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -38,7 +37,7 @@ public class UserInfo {
     }
 
     public static void saveUserProfilePic(@NonNull Context context, @NonNull Uri uri, @Nullable TaskRunner.Callback<File> callback) {
-        Handler handler = new Handler(Looper.getMainLooper());
+        Handler handler = TaskRunner.getMainHandler();
         TaskRunner.executeAsync(() -> {
             File file = new File(context.getFilesDir().getAbsolutePath(), PROFILE_PICTURE);
             try {

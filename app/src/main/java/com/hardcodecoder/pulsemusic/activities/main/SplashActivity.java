@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -28,7 +27,7 @@ import com.hardcodecoder.pulsemusic.utils.AppSettings;
 public class SplashActivity extends ThemeActivity {
 
     private static final int REQUEST_CODE = 69;
-    private final Handler mHandler = new Handler(Looper.getMainLooper());
+    private final Handler mHandler = TaskRunner.getMainHandler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

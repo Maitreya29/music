@@ -1,7 +1,6 @@
 package com.hardcodecoder.pulsemusic.adapters.main;
 
 import android.os.Handler;
-import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +26,7 @@ import java.util.List;
 public class TracksSelectorAdapter extends SelectableItemAdapter<MusicModel, TracksSelectorAdapter.TrackItemHolder> {
 
     private final Deque<List<MusicModel>> pendingUpdates = new ArrayDeque<>();
-    private final Handler mMainHandler = new Handler(Looper.getMainLooper());
+    private final Handler mMainHandler = TaskRunner.getMainHandler();
     private LayoutInflater mInflater;
     private ItemSelectorListener mListener;
 

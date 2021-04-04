@@ -4,10 +4,11 @@ import android.media.session.MediaController;
 import android.media.session.MediaController.TransportControls;
 import android.media.session.PlaybackState;
 import android.os.Handler;
-import android.os.Looper;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.hardcodecoder.pulsemusic.TaskRunner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,7 @@ public class PulseController {
         sInstance = new PulseController();
     }
 
-    private final Handler mMainHandler = new Handler(Looper.getMainLooper());
+    private final Handler mMainHandler = TaskRunner.getMainHandler();
     private final QueueManager mQueueManager = new QueueManager(mMainHandler);
     private final PulseRemote mRemote = new PulseRemote();
     private List<OnControllerReadyListener> mOnControllerReadyListeners;

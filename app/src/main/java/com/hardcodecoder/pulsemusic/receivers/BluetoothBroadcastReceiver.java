@@ -5,13 +5,12 @@ import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Handler;
-import android.os.Looper;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
 import com.hardcodecoder.pulsemusic.Preferences;
+import com.hardcodecoder.pulsemusic.TaskRunner;
 import com.hardcodecoder.pulsemusic.service.PMS;
 import com.hardcodecoder.pulsemusic.utils.AppSettings;
 
@@ -29,7 +28,7 @@ public class BluetoothBroadcastReceiver extends BroadcastReceiver {
             // tell us whether the device can immediately start receiving audio stream
             // as some devices are able to play audio only after a few seconds
             // so we delay playback by 5 sec
-            new Handler(Looper.myLooper()).postDelayed(() -> {
+            TaskRunner.getWorkerHandler().postDelayed(() -> {
                 int bluetoothAction = AppSettings.getAutoPlayAction(context, Preferences.KEY_BLUETOOTH_AUTO_PLAY_ACTION);
                 if (bluetoothAction == Preferences.ACTION_PLAY_CONTINUE && !AppSettings.isRememberPlaylistEnabled(context))
                     return;

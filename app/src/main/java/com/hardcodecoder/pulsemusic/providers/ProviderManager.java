@@ -2,13 +2,14 @@ package com.hardcodecoder.pulsemusic.providers;
 
 import android.content.Context;
 import android.os.Handler;
-import android.os.Looper;
 
 import androidx.annotation.NonNull;
 
+import com.hardcodecoder.pulsemusic.TaskRunner;
+
 public class ProviderManager {
 
-    private static final Handler sHandler = new Handler(Looper.getMainLooper());
+    private static final Handler sHandler = TaskRunner.getMainHandler();
     private static HistoryProvider mHistoryProvider = null;
     private static FavoritesProvider mFavoritesProvider = null;
     private static PlaylistProvider mPlaylistProvider = null;

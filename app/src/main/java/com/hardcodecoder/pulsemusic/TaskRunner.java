@@ -14,20 +14,31 @@ import java.util.concurrent.Callable;
 
 import static com.hardcodecoder.pulsemusic.utils.LogUtils.Type.BACKGROUND;
 
-public class TaskRunner {
+public final class TaskRunner {
 
+    private static final String TAG = TaskRunner.class.getSimpleName();
     private static final HandlerThread sWorkerThread;
     private static final Handler sWorkerThreadHandler;
     private static final Handler sMainHandler;
 
     static {
-        sWorkerThread = new HandlerThread("TaskRunnerWorkerThread", Process.THREAD_PRIORITY_BACKGROUND);
+        sWorkerThread = new HandlerThread(TAG, Process.THREAD_PRIORITY_BACKGROUND);
         sWorkerThread.start();
         sWorkerThreadHandler = new Handler(sWorkerThread.getLooper());
         sMainHandler = new Handler(Looper.getMainLooper());
     }
 
     private TaskRunner() {
+    }
+
+    @NonNull
+    public static Handler getMainHandler() {
+        return sMainHandler;
+    }
+
+    @NonNull
+    public static Handler getWorkerHandler() {
+        return sWorkerThreadHandler;
     }
 
     public static <V> void executeAsync(@NonNull Callable<V> callable, @NonNull Callback<V> callback) {
@@ -49,7 +60,7 @@ public class TaskRunner {
         try {
             sWorkerThreadHandler.post(runnable);
         } catch (Exception e) {
-            LogUtils.logException(BACKGROUND, TaskRunner.class.getSimpleName(), "at: executeAsync(): runnable", e);
+            LogUtils.logException(BACKGROUND, TAG, "at: executeAsync(): runnable", e);
         }
     }
 

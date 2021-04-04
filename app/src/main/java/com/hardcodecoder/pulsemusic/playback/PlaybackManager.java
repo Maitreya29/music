@@ -6,7 +6,6 @@ import android.media.session.MediaSession;
 import android.media.session.PlaybackState;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.os.SystemClock;
 import android.widget.Toast;
 
@@ -14,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.hardcodecoder.pulsemusic.R;
+import com.hardcodecoder.pulsemusic.TaskRunner;
 import com.hardcodecoder.pulsemusic.helper.MediaArtHelper;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.providers.ProviderManager;
@@ -36,7 +36,7 @@ public class PlaybackManager implements Playback.Callback {
     private final PlaybackServiceCallback mServiceCallback;
     private final QueueManager mQueueManager;
     private final Context mContext;
-    private final Handler mHandler;
+    private final Handler mHandler = TaskRunner.getWorkerHandler();
     private Runnable mSleepTimerRunnableTask = null;
     private long mAbsoluteEndTimeMills = -1;
     private int mTimerMinutes = -1;
@@ -113,13 +113,10 @@ public class PlaybackManager implements Playback.Callback {
 
     public PlaybackManager(@NonNull Context context,
                            @NonNull Playback playback,
-                           @NonNull PlaybackServiceCallback serviceCallback,
-                           @Nullable Handler handler) {
+                           @NonNull PlaybackServiceCallback serviceCallback) {
         mContext = context;
         mPlayback = playback;
         mServiceCallback = serviceCallback;
-        if (null != handler) mHandler = handler;
-        else mHandler = new Handler(Looper.myLooper());
 
         mPlayback.setCallback(this);
         mQueueManager = PulseController.getInstance().getQueueManager();

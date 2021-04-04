@@ -12,7 +12,6 @@ import android.media.session.PlaybackState;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.HandlerThread;
 import android.os.IBinder;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.util.Log;
@@ -25,6 +24,7 @@ import androidx.media.session.MediaButtonReceiver;
 
 import com.hardcodecoder.pulsemusic.Preferences;
 import com.hardcodecoder.pulsemusic.R;
+import com.hardcodecoder.pulsemusic.TaskRunner;
 import com.hardcodecoder.pulsemusic.loaders.LoaderManager;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.playback.LocalPlayback;
@@ -54,10 +54,9 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
     public static final int DEFAULT_ACTION_CONTINUE_PLAYLIST = Preferences.ACTION_PLAY_CONTINUE;
     private static final String TAG = "PMS";
     private final IBinder mBinder = new ServiceBinder();
+    private final Handler mWorkerHandler = TaskRunner.getWorkerHandler();
     private MediaSession mMediaSession = null;
     private MediaNotificationManager mNotificationManager = null;
-    private HandlerThread mServiceThread = null;
-    private Handler mWorkerHandler = null;
     private PlaybackManager mPlaybackManager;
     private PulseController mPulseController;
     private boolean isWidgetsEnabled = false;
@@ -66,12 +65,9 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
     @Override
     public void onCreate() {
         ProviderManager.init(this);
-        mServiceThread = new HandlerThread("PMS Thread", Thread.NORM_PRIORITY);
-        mServiceThread.start();
-        mWorkerHandler = new Handler(mServiceThread.getLooper());
 
-        LocalPlayback playback = new LocalPlayback(this, mWorkerHandler);
-        mPlaybackManager = new PlaybackManager(getApplicationContext(), playback, this, mWorkerHandler);
+        LocalPlayback playback = new LocalPlayback(this);
+        mPlaybackManager = new PlaybackManager(getApplicationContext(), playback, this);
 
         mMediaSession = new MediaSession(getApplicationContext(), TAG);
         mMediaSession.setCallback(mPlaybackManager.getSessionCallbacks(), mWorkerHandler);
@@ -246,7 +242,6 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
         if (mMediaSession != null) mMediaSession.release();
         if (isWidgetsEnabled) PulseWidgetsHelper.resetWidgets(this);
         mWorkerHandler.removeCallbacksAndMessages(null);
-        mServiceThread.quit();
         super.onDestroy();
     }
 

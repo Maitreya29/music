@@ -1,7 +1,6 @@
 package com.hardcodecoder.pulsemusic.adapters.playlist;
 
 import android.os.Handler;
-import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -81,7 +80,7 @@ public class CustomizablePlaylistAdapter extends EfficientRecyclerViewAdapter<Mu
     }
 
     public void updatePlaylist(@NonNull List<MusicModel> newList) {
-        final Handler handler = new Handler(Looper.getMainLooper());
+        final Handler handler = TaskRunner.getMainHandler();
         TaskRunner.executeAsync(() -> {
             final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new DiffCb(mPlaylistTracks, newList));
             handler.post(() -> {
