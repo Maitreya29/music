@@ -9,7 +9,7 @@ import com.hardcodecoder.pulsemusic.TaskRunner;
 
 public class ProviderManager {
 
-    private static final Handler sHandler = TaskRunner.getMainHandler();
+    private static Handler mHandler = null;
     private static HistoryProvider mHistoryProvider = null;
     private static FavoritesProvider mFavoritesProvider = null;
     private static PlaylistProvider mPlaylistProvider = null;
@@ -18,41 +18,52 @@ public class ProviderManager {
     private static String mBaseFilesDir;
 
     public static void init(@NonNull Context context) {
+        mHandler = TaskRunner.getMainHandler();
         mBaseFilesDir = context.getFilesDir().getAbsolutePath();
     }
 
     @NonNull
-    public static HistoryProvider getHistoryProvider() {
+    public static synchronized HistoryProvider getHistoryProvider() {
         if (null == mHistoryProvider)
-            mHistoryProvider = new HistoryProvider(mBaseFilesDir, sHandler);
+            mHistoryProvider = new HistoryProvider(mBaseFilesDir, mHandler);
         return mHistoryProvider;
     }
 
     @NonNull
-    public static FavoritesProvider getFavoritesProvider() {
+    public static synchronized FavoritesProvider getFavoritesProvider() {
         if (null == mFavoritesProvider)
-            mFavoritesProvider = new FavoritesProvider(mBaseFilesDir, sHandler);
+            mFavoritesProvider = new FavoritesProvider(mBaseFilesDir, mHandler);
         return mFavoritesProvider;
     }
 
     @NonNull
-    public static PlaylistProvider getPlaylistProvider() {
+    public static synchronized PlaylistProvider getPlaylistProvider() {
         if (null == mPlaylistProvider)
-            mPlaylistProvider = new PlaylistProvider(mBaseFilesDir, sHandler);
+            mPlaylistProvider = new PlaylistProvider(mBaseFilesDir, mHandler);
         return mPlaylistProvider;
     }
 
     @NonNull
-    public static IgnoreListProvider getIgnoredListProvider() {
+    public static synchronized IgnoreListProvider getIgnoredListProvider() {
         if (null == mIgnoredListProvider)
-            mIgnoredListProvider = new IgnoreListProvider(mBaseFilesDir, sHandler);
+            mIgnoredListProvider = new IgnoreListProvider(mBaseFilesDir, mHandler);
         return mIgnoredListProvider;
     }
 
     @NonNull
-    public static PreviousPlaylistProvider getPreviousPlaylistProvider() {
+    public static synchronized PreviousPlaylistProvider getPreviousPlaylistProvider() {
         if (null == mPreviousPlaylistProvider)
-            mPreviousPlaylistProvider = new PreviousPlaylistProvider(mBaseFilesDir, sHandler);
+            mPreviousPlaylistProvider = new PreviousPlaylistProvider(mBaseFilesDir, mHandler);
         return mPreviousPlaylistProvider;
+    }
+
+    public static void release() {
+        mHistoryProvider = null;
+        mFavoritesProvider = null;
+        mPlaylistProvider = null;
+        mIgnoredListProvider = null;
+        mPreviousPlaylistProvider = null;
+        mBaseFilesDir = null;
+        mHandler = null;
     }
 }

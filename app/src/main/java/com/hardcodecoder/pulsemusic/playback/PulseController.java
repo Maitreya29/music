@@ -15,22 +15,18 @@ import java.util.List;
 
 public class PulseController {
 
-    private static final PulseController sInstance;
-
-    static {
-        sInstance = new PulseController();
-    }
-
+    private static PulseController mInstance = null;
     private final Handler mMainHandler = TaskRunner.getMainHandler();
     private final QueueManager mQueueManager = new QueueManager(mMainHandler);
     private final PulseRemote mRemote = new PulseRemote();
-    private List<OnControllerReadyListener> mOnControllerReadyListeners;
+    private List<OnControllerReadyListener> mListeners;
     private MediaController mMediaController;
     private int mAudioSessionId = -1;
 
     @NonNull
-    public static PulseController getInstance() {
-        return sInstance;
+    public static synchronized PulseController getInstance() {
+        if (null == mInstance) mInstance = new PulseController();
+        return mInstance;
     }
 
     @Nullable
@@ -44,8 +40,8 @@ public class PulseController {
     public void setController(@NonNull MediaController mediaController) {
         mMediaController = mediaController;
         mRemote.setTransportControls(mediaController.getTransportControls());
-        if (null != mOnControllerReadyListeners) {
-            for (OnControllerReadyListener onControllerReadyListener : mOnControllerReadyListeners)
+        if (null != mListeners) {
+            for (OnControllerReadyListener onControllerReadyListener : mListeners)
                 mMainHandler.post(() -> onControllerReadyListener.onControllerReady(mediaController));
         }
     }
@@ -65,8 +61,8 @@ public class PulseController {
     }
 
     public void addConnectionCallback(@NonNull OnControllerReadyListener callback) {
-        if (null == mOnControllerReadyListeners) mOnControllerReadyListeners = new ArrayList<>();
-        mOnControllerReadyListeners.add(callback);
+        if (null == mListeners) mListeners = new ArrayList<>();
+        mListeners.add(callback);
         if (null != mMediaController) {
             // The controller is already ready, so notify the listener
             mMainHandler.post(() -> callback.onControllerReady(mMediaController));
@@ -74,15 +70,19 @@ public class PulseController {
     }
 
     public void removeConnectionCallback(@NonNull OnControllerReadyListener callback) {
-        if (null == mOnControllerReadyListeners) return;
-        mOnControllerReadyListeners.remove(callback);
-        if (mOnControllerReadyListeners.size() == 0) mOnControllerReadyListeners = null;
+        if (null == mListeners) return;
+        mListeners.remove(callback);
+        if (mListeners.isEmpty()) mListeners = null;
     }
 
     public void releaseController() {
         mMediaController = null;
-        if (null != mOnControllerReadyListeners) mOnControllerReadyListeners.clear();
+        if (null != mListeners) {
+            mListeners.clear();
+            mListeners = null;
+        }
         mQueueManager.release();
+        mInstance = null;
     }
 
     @NonNull
