@@ -23,6 +23,7 @@ import com.hardcodecoder.pulsemusic.dialog.MenuDetailsDialog;
 import com.hardcodecoder.pulsemusic.dialog.ToolbarContextMenuDialog;
 import com.hardcodecoder.pulsemusic.glide.GlideApp;
 import com.hardcodecoder.pulsemusic.helper.DialogHelper;
+import com.hardcodecoder.pulsemusic.helper.MasterListUpdater;
 import com.hardcodecoder.pulsemusic.helper.MediaArtHelper;
 import com.hardcodecoder.pulsemusic.interfaces.OptionsMenuListener;
 import com.hardcodecoder.pulsemusic.interfaces.SimpleItemClickListener;
@@ -167,5 +168,12 @@ public class AlbumDetailsActivity extends BaseDetailsActivity implements Options
         LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(this, R.anim.item_falls_down_animation);
         rv.setLayoutAnimation(controller);
         rv.setAdapter(mAdapter);
+        MasterListUpdater.getInstance().addMasterListListener(mAdapter);
+    }
+
+    @Override
+    protected void onDestroy() {
+        MasterListUpdater.getInstance().removeMasterListListener(mAdapter);
+        super.onDestroy();
     }
 }

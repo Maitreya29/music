@@ -9,13 +9,16 @@ import androidx.annotation.NonNull;
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.adapters.base.EfficientRecyclerViewAdapter;
+import com.hardcodecoder.pulsemusic.helper.DataModelHelper;
+import com.hardcodecoder.pulsemusic.helper.MasterListUpdater;
 import com.hardcodecoder.pulsemusic.interfaces.SimpleItemClickListener;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.views.MediaArtImageView;
 
 import java.util.List;
 
-public class HomeSectionAdapter extends EfficientRecyclerViewAdapter<MusicModel, HomeSectionAdapter.HomeSectionItemHolder> {
+public class HomeSectionAdapter extends EfficientRecyclerViewAdapter<MusicModel, HomeSectionAdapter.HomeSectionItemHolder>
+        implements MasterListUpdater.OnMasterListUpdateListener {
 
     private final LayoutInflater mInflater;
     private final SimpleItemClickListener mListener;
@@ -33,6 +36,15 @@ public class HomeSectionAdapter extends EfficientRecyclerViewAdapter<MusicModel,
     @Override
     public HomeSectionItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new HomeSectionItemHolder(mInflater.inflate(R.layout.rv_home_item_sq, parent, false), mListener);
+    }
+
+    @Override
+    public void onItemDeleted(@NonNull MusicModel item) {
+        DataModelHelper.getItemIndexInPlaylist(getDataList(), item, index -> {
+            if (null == index || index == -1) return;
+            getDataList().remove(index.intValue());
+            notifyItemRemoved(index);
+        });
     }
 
     static class HomeSectionItemHolder extends EfficientRecyclerViewAdapter.SmartViewHolder<MusicModel> {

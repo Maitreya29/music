@@ -17,6 +17,7 @@ import com.hardcodecoder.pulsemusic.TaskRunner;
 import com.hardcodecoder.pulsemusic.activities.base.ControllerActivity;
 import com.hardcodecoder.pulsemusic.adapters.main.SearchResultAdapter;
 import com.hardcodecoder.pulsemusic.helper.DialogHelper;
+import com.hardcodecoder.pulsemusic.helper.MasterListUpdater;
 import com.hardcodecoder.pulsemusic.interfaces.SimpleItemClickListener;
 import com.hardcodecoder.pulsemusic.loaders.SearchQueryLoader;
 import com.hardcodecoder.pulsemusic.themes.TintHelper;
@@ -96,6 +97,7 @@ public class SearchActivity extends ControllerActivity implements SimpleItemClic
         rv.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
         mAdapter = new SearchResultAdapter(getLayoutInflater(), this);
         rv.setAdapter(mAdapter);
+        MasterListUpdater.getInstance().addMasterListListener(mAdapter);
     }
 
     @Override
@@ -113,8 +115,9 @@ public class SearchActivity extends ControllerActivity implements SimpleItemClic
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
+        MasterListUpdater.getInstance().removeMasterListListener(mAdapter);
         pendingUpdates.clear();
+        super.onDestroy();
     }
 
     private void overrideActivityTransition() {

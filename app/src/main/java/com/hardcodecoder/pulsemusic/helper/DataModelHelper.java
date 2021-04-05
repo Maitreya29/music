@@ -98,6 +98,22 @@ public class DataModelHelper {
                 duration);
     }
 
+    public static void getItemIndexInPlaylist(@NonNull List<MusicModel> playlist, @NonNull MusicModel item,
+                                              @NonNull TaskRunner.Callback<Integer> callback) {
+        TaskRunner.executeAsync(() -> {
+            int index = -1;
+            for (int i = 0; i < playlist.size(); i++) {
+                MusicModel md = playlist.get(i);
+                if (md.equals(item)) {
+                    index = i;
+                    break;
+                }
+            }
+            int finalIndex = index;
+            TaskRunner.getMainHandler().post(() -> callback.onComplete(finalIndex));
+        });
+    }
+
     static void getTrackInfo(@NonNull Context context, @NonNull MusicModel musicModel, @NonNull TaskRunner.Callback<TrackFileModel> callback) {
         TaskRunner.executeAsync(() -> {
             Uri uri = Uri.parse(musicModel.getTrackPath());

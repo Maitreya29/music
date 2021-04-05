@@ -29,6 +29,7 @@ import com.hardcodecoder.pulsemusic.adapters.main.TopArtistsAdapter;
 import com.hardcodecoder.pulsemusic.fragments.main.base.PulseFragment;
 import com.hardcodecoder.pulsemusic.helper.DataModelHelper;
 import com.hardcodecoder.pulsemusic.helper.DialogHelper;
+import com.hardcodecoder.pulsemusic.helper.MasterListUpdater;
 import com.hardcodecoder.pulsemusic.interfaces.SimpleItemClickListener;
 import com.hardcodecoder.pulsemusic.loaders.LoaderManager;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
@@ -49,6 +50,10 @@ public class HomeFragment extends PulseFragment {
     private static final int PICK_MUSIC = 1600;
     private final QueueManager mQueueManager = PulseController.getInstance().getQueueManager();
     private final PulseController.PulseRemote mRemote = PulseController.getInstance().getRemote();
+    private final MasterListUpdater mMasterListUpdater = MasterListUpdater.getInstance();
+    private HomeSectionAdapter mForYouAdapter;
+    private HomeSectionAdapter mRediscoverAdapter;
+    private HomeSectionAdapter mLatestAdapter;
     private String mFragmentTitle = null;
 
     @NonNull
@@ -152,7 +157,7 @@ public class HomeFragment extends PulseFragment {
             RecyclerView rv = (RecyclerView) ((ViewStub) view.findViewById(R.id.stub_suggested_list)).inflate();
             rv.setLayoutManager(new LinearLayoutManager(rv.getContext(), LinearLayoutManager.HORIZONTAL, false));
             rv.setHasFixedSize(true);
-            HomeSectionAdapter adapter = new HomeSectionAdapter(getLayoutInflater(), list, new SimpleItemClickListener() {
+            mForYouAdapter = new HomeSectionAdapter(getLayoutInflater(), list, new SimpleItemClickListener() {
                 @Override
                 public void onItemClick(int position) {
                     mQueueManager.setPlaylist(list, position);
@@ -164,7 +169,8 @@ public class HomeFragment extends PulseFragment {
                     DialogHelper.showMenuForLibraryTracks(requireActivity(), list.get(position));
                 }
             });
-            rv.setAdapter(adapter);
+            rv.setAdapter(mForYouAdapter);
+            mMasterListUpdater.addMasterListListener(mForYouAdapter);
         });
     }
 
@@ -176,7 +182,7 @@ public class HomeFragment extends PulseFragment {
             RecyclerView rv = (RecyclerView) ((ViewStub) view.findViewById(R.id.stub_rediscover_list)).inflate();
             rv.setLayoutManager(new LinearLayoutManager(rv.getContext(), LinearLayoutManager.HORIZONTAL, false));
             rv.setHasFixedSize(true);
-            HomeSectionAdapter adapter = new HomeSectionAdapter(getLayoutInflater(), list, new SimpleItemClickListener() {
+            mRediscoverAdapter = new HomeSectionAdapter(getLayoutInflater(), list, new SimpleItemClickListener() {
                 @Override
                 public void onItemClick(int position) {
                     mQueueManager.setPlaylist(list, position);
@@ -188,7 +194,8 @@ public class HomeFragment extends PulseFragment {
                     DialogHelper.showMenuForLibraryTracks(requireActivity(), list.get(position));
                 }
             });
-            rv.setAdapter(adapter);
+            rv.setAdapter(mRediscoverAdapter);
+            mMasterListUpdater.addMasterListListener(mRediscoverAdapter);
         });
     }
 
@@ -200,7 +207,7 @@ public class HomeFragment extends PulseFragment {
             RecyclerView rv = (RecyclerView) ((ViewStub) view.findViewById(R.id.stub_new_in_store_list)).inflate();
             rv.setLayoutManager(new LinearLayoutManager(rv.getContext(), LinearLayoutManager.HORIZONTAL, false));
             rv.setHasFixedSize(true);
-            HomeSectionAdapter adapter = new HomeSectionAdapter(getLayoutInflater(), list, new SimpleItemClickListener() {
+            mLatestAdapter = new HomeSectionAdapter(getLayoutInflater(), list, new SimpleItemClickListener() {
                 @Override
                 public void onItemClick(int position) {
                     mQueueManager.setPlaylist(list, position);
@@ -212,7 +219,8 @@ public class HomeFragment extends PulseFragment {
                     DialogHelper.showMenuForLibraryTracks(requireActivity(), list.get(position));
                 }
             });
-            rv.setAdapter(adapter);
+            rv.setAdapter(mLatestAdapter);
+            mMasterListUpdater.addMasterListListener(mLatestAdapter);
         });
     }
 
@@ -250,5 +258,14 @@ public class HomeFragment extends PulseFragment {
             } else
                 Toast.makeText(requireContext(), getString(R.string.toast_selected_track_load_failed), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        if (null != mForYouAdapter) mMasterListUpdater.removeMasterListListener(mForYouAdapter);
+        if (null != mLatestAdapter) mMasterListUpdater.removeMasterListListener(mLatestAdapter);
+        if (null != mRediscoverAdapter)
+            mMasterListUpdater.removeMasterListListener(mRediscoverAdapter);
+        super.onDestroy();
     }
 }

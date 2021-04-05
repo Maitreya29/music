@@ -18,6 +18,7 @@ import com.hardcodecoder.pulsemusic.dialog.MenuDetailsDialog;
 import com.hardcodecoder.pulsemusic.dialog.ToolbarContextMenuDialog;
 import com.hardcodecoder.pulsemusic.fragments.main.base.ListGridFragment;
 import com.hardcodecoder.pulsemusic.helper.DialogHelper;
+import com.hardcodecoder.pulsemusic.helper.MasterListUpdater;
 import com.hardcodecoder.pulsemusic.interfaces.OptionsMenuListener;
 import com.hardcodecoder.pulsemusic.interfaces.SimpleItemClickListener;
 import com.hardcodecoder.pulsemusic.loaders.LoaderManager;
@@ -190,6 +191,13 @@ public class LibraryFragment extends ListGridFragment implements SimpleItemClick
                     this::onSortUpdateComplete,
                     mSortOrder);
             recyclerView.setAdapter(mAdapter);
+            MasterListUpdater.getInstance().addMasterListListener(mAdapter);
         });
+    }
+
+    @Override
+    public void onDestroy() {
+        MasterListUpdater.getInstance().removeMasterListListener(mAdapter);
+        super.onDestroy();
     }
 }

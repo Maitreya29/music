@@ -14,7 +14,9 @@ import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.TaskRunner;
 import com.hardcodecoder.pulsemusic.adapters.base.EfficientRecyclerViewAdapter;
+import com.hardcodecoder.pulsemusic.helper.DataModelHelper;
 import com.hardcodecoder.pulsemusic.helper.DiffCb;
+import com.hardcodecoder.pulsemusic.helper.MasterListUpdater;
 import com.hardcodecoder.pulsemusic.interfaces.GridAdapterCallback;
 import com.hardcodecoder.pulsemusic.interfaces.SimpleItemClickListener;
 import com.hardcodecoder.pulsemusic.loaders.SortOrder;
@@ -28,7 +30,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class TracksAdapter extends EfficientRecyclerViewAdapter<MusicModel, TracksAdapter.LibraryItemHolder> {
+public class TracksAdapter extends EfficientRecyclerViewAdapter<MusicModel, TracksAdapter.LibraryItemHolder>
+        implements MasterListUpdater.OnMasterListUpdateListener {
 
     private final LayoutInflater mInflater;
     private final SimpleItemClickListener mListener;
@@ -52,6 +55,15 @@ public class TracksAdapter extends EfficientRecyclerViewAdapter<MusicModel, Trac
     @Override
     public LibraryItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new LibraryItemHolder(mInflater.inflate(R.layout.list_item_with_options, parent, false), mListener);
+    }
+
+    @Override
+    public void onItemDeleted(@NonNull MusicModel item) {
+        DataModelHelper.getItemIndexInPlaylist(getDataList(), item, index -> {
+            if (null == index || index == -1) return;
+            getDataList().remove(index.intValue());
+            notifyItemRemoved(index);
+        });
     }
 
     public void updateSortOrder(@Nullable SortOrder sortOrder) {

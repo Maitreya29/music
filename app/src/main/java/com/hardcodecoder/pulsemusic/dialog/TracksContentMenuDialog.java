@@ -1,8 +1,14 @@
 package com.hardcodecoder.pulsemusic.dialog;
 
+import android.app.RecoverableSecurityException;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentSender;
+import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,29 +16,38 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
+import com.hardcodecoder.pulsemusic.TaskRunner;
 import com.hardcodecoder.pulsemusic.dialog.base.RoundedCustomBottomSheetFragment;
 import com.hardcodecoder.pulsemusic.helper.DialogHelper;
+import com.hardcodecoder.pulsemusic.helper.MasterListUpdater;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.playback.PulseController;
 import com.hardcodecoder.pulsemusic.playback.QueueManager;
 import com.hardcodecoder.pulsemusic.providers.ProviderManager;
+import com.hardcodecoder.pulsemusic.utils.LogUtils;
 import com.hardcodecoder.pulsemusic.utils.NavigationUtil;
 import com.hardcodecoder.pulsemusic.views.MediaArtImageView;
+
+import java.io.File;
+
+import static android.app.Activity.RESULT_OK;
 
 public class TracksContentMenuDialog extends RoundedCustomBottomSheetFragment {
 
     public static final String TAG = TracksContentMenuDialog.class.getSimpleName();
+    private static final int DELETE_REQ_CODE = 45;
     private final MusicModel mTrackModel;
+    private AlertDialog mDeleteConfirmDialog;
     private boolean mShowGoToAlbums = false;
     private boolean mShowGoToArtists = false;
     private boolean mIsItemFavorite = false;
-
-    public TracksContentMenuDialog() {
-        mTrackModel = null;
-    }
 
     public TracksContentMenuDialog(@NonNull MusicModel trackModel) {
         mTrackModel = trackModel;
@@ -45,8 +60,11 @@ public class TracksContentMenuDialog extends RoundedCustomBottomSheetFragment {
     }
 
     @Override
+    @SuppressWarnings("ConstantConditions")
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        if (mTrackModel == null) {
+        // Additional null check even though we will not accept null values for mTrackModel
+        // Just in case at runtime mTrack happens to be null Don't show this dialog
+        if (mTrackModel == null || mTrackModel.getId() < 0) {
             dismiss();
             return;
         }
@@ -86,6 +104,8 @@ public class TracksContentMenuDialog extends RoundedCustomBottomSheetFragment {
             }
             dismiss();
         });
+
+        view.findViewById(R.id.delete).setOnClickListener(v -> showDeleteConfirmationDialog());
 
         QueueManager queueManager = PulseController.getInstance().getQueueManager();
         view.findViewById(R.id.track_play_next).setOnClickListener(v -> {
@@ -143,5 +163,127 @@ public class TracksContentMenuDialog extends RoundedCustomBottomSheetFragment {
 
     public void setShowGoToArtists(boolean show) {
         mShowGoToArtists = show;
+    }
+
+    private void showDeleteConfirmationDialog() {
+        View layout = View.inflate(requireContext(), R.layout.alert_dialog_view, null);
+        MaterialTextView title = layout.findViewById(R.id.alert_dialog_title);
+        MaterialTextView msg = layout.findViewById(R.id.alert_dialog_message);
+
+        MaterialButton deleteBtn = layout.findViewById(R.id.alert_dialog_positive_btn);
+        MaterialButton cancelBtn = layout.findViewById(R.id.alert_dialog_negative_btn);
+
+        title.setText(R.string.delete_confirmation_dialog_title);
+        msg.setText(R.string.delete_confirmation_dialog_desc);
+
+        mDeleteConfirmDialog = new MaterialAlertDialogBuilder(requireContext())
+                .setView(layout)
+                .create();
+
+        deleteBtn.setText(R.string.delete);
+        deleteBtn.setOnClickListener(positive -> {
+            deleteTrack();
+            mDeleteConfirmDialog.dismiss();
+        });
+
+        cancelBtn.setText(R.string.cancel);
+        cancelBtn.setOnClickListener(negative -> mDeleteConfirmDialog.dismiss());
+        mDeleteConfirmDialog.show();
+    }
+
+    public void deleteTrack() {
+        TaskRunner.executeAsync(() -> {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) performDeleteTrackQ();
+            else performDeleteTrackPreQ();
+        });
+    }
+
+    private void performDeleteTrackPreQ() {
+        try {
+            Cursor cursor = requireActivity().getContentResolver().query(
+                    MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
+                    new String[]{MediaStore.Audio.Media.DATA},
+                    MediaStore.Audio.Media._ID + " = ?",
+                    new String[]{String.valueOf(mTrackModel.getId())},
+                    null);
+
+            if (null == cursor || !cursor.moveToFirst()) return;
+
+            String fullPath = cursor.getString(0);
+            File file = new File(fullPath);
+            if (file.delete()) {
+                int deleted = deleteFromMediaStore();
+                if (deleted < 1) {
+                    // unable to delete from media store
+                    // log info
+                    LogUtils.logInfo(TAG, "Unable to delete track from MediaStore: " + mTrackModel.getTrackPath());
+                }
+                // Since the track has been deleted from the file system
+                // We notify the ui even if deleting from media store fails
+                onPostDeleteAction(true);
+            } else LogUtils.logInfo(TAG, "Unable to delete track : " + mTrackModel.getTrackPath());
+            cursor.close();
+        } catch (Exception exception) {
+            LogUtils.logException(LogUtils.Type.IO, TAG, "at: performDeleteTrackPreQ()", exception);
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.Q)
+    private void performDeleteTrackQ() {
+        try {
+            int deleted = deleteFromMediaStore();
+            onPostDeleteAction(deleted > 0);
+        } catch (SecurityException securityException) {
+            if (!(securityException instanceof RecoverableSecurityException)) return;
+            RecoverableSecurityException rsException = (RecoverableSecurityException) securityException;
+            try {
+                IntentSender intentSender = rsException.getUserAction().getActionIntent().getIntentSender();
+                startIntentSenderForResult(intentSender, DELETE_REQ_CODE,
+                        null,
+                        0,
+                        0,
+                        0,
+                        null);
+            } catch (IntentSender.SendIntentException intentException) {
+                LogUtils.logException(LogUtils.Type.IO, TAG, "at: performDeleteTrackQ()", intentException);
+            }
+        }
+    }
+
+    private int deleteFromMediaStore() {
+        return requireActivity()
+                .getContentResolver()
+                .delete(Uri.parse(mTrackModel.getTrackPath()),
+                        MediaStore.Audio.Media._ID + " = ?",
+                        new String[]{String.valueOf(mTrackModel.getId())});
+    }
+
+    private void onPostDeleteAction(boolean deleted) {
+        if (deleted) {
+            // Notify master list updater that this item has been deleted
+            MasterListUpdater.getInstance().removeDeletedTrack(mTrackModel);
+            // Remove this item from Favorite
+            ProviderManager.getFavoritesProvider().removeFromFavorite(mTrackModel);
+            // Notify user that track has been deleted
+            Toast.makeText(requireContext(), getString(R.string.toast_delete_from_device_success), Toast.LENGTH_LONG).show();
+            // Dismiss dialog as this item info is no longer valid
+            dismiss();
+        } else
+            Toast.makeText(requireContext(), getString(R.string.toast_delete_from_device_failed), Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == DELETE_REQ_CODE && resultCode == RESULT_OK) {
+            // We have been granted the permission to delete the item
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) performDeleteTrackQ();
+        }
+    }
+
+    @Override
+    public void onDismiss(@NonNull DialogInterface dialog) {
+        if (null != mDeleteConfirmDialog) mDeleteConfirmDialog.dismiss();
+        super.onDismiss(dialog);
     }
 }

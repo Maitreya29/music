@@ -14,7 +14,9 @@ import com.google.android.material.textview.MaterialTextView;
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.TaskRunner;
 import com.hardcodecoder.pulsemusic.adapters.base.EfficientRecyclerViewAdapter;
+import com.hardcodecoder.pulsemusic.helper.DataModelHelper;
 import com.hardcodecoder.pulsemusic.helper.DiffCb;
+import com.hardcodecoder.pulsemusic.helper.MasterListUpdater;
 import com.hardcodecoder.pulsemusic.interfaces.SimpleItemClickListener;
 import com.hardcodecoder.pulsemusic.loaders.SortOrder;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
@@ -24,7 +26,8 @@ import com.hardcodecoder.pulsemusic.views.MediaArtImageView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AlbumTracksAdapter extends EfficientRecyclerViewAdapter<MusicModel, AlbumTracksAdapter.AlbumTracksAdapterSVH> {
+public class AlbumTracksAdapter extends EfficientRecyclerViewAdapter<MusicModel, AlbumTracksAdapter.AlbumTracksAdapterSVH>
+        implements MasterListUpdater.OnMasterListUpdateListener {
 
     private final LayoutInflater mInflater;
     private final SimpleItemClickListener mListener;
@@ -49,6 +52,15 @@ public class AlbumTracksAdapter extends EfficientRecyclerViewAdapter<MusicModel,
             SortUtil.sortLibraryList(currentDataList, sortOrder);
             final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new DiffCb(oldSortedTracks, currentDataList));
             handler.post(() -> diffResult.dispatchUpdatesTo(AlbumTracksAdapter.this));
+        });
+    }
+
+    @Override
+    public void onItemDeleted(@NonNull MusicModel item) {
+        DataModelHelper.getItemIndexInPlaylist(getDataList(), item, index -> {
+            if (null == index || index == -1) return;
+            getDataList().remove(index.intValue());
+            notifyItemRemoved(index);
         });
     }
 

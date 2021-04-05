@@ -14,6 +14,8 @@ import androidx.annotation.Nullable;
 
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.TaskRunner;
+import com.hardcodecoder.pulsemusic.helper.DataModelHelper;
+import com.hardcodecoder.pulsemusic.helper.MasterListUpdater;
 import com.hardcodecoder.pulsemusic.helper.MediaArtHelper;
 import com.hardcodecoder.pulsemusic.model.MusicModel;
 import com.hardcodecoder.pulsemusic.providers.ProviderManager;
@@ -24,7 +26,7 @@ import java.util.List;
 
 import static com.hardcodecoder.pulsemusic.utils.LogUtils.Type.BACKGROUND;
 
-public class PlaybackManager implements Playback.Callback {
+public class PlaybackManager implements Playback.Callback, MasterListUpdater.OnMasterListUpdateListener {
 
     public static final String ACTION_LOAD_LAST_PLAYLIST = "LoadLastPlaylist";
     public static final String START_PLAYBACK = "StartPlayback";
@@ -120,6 +122,7 @@ public class PlaybackManager implements Playback.Callback {
 
         mPlayback.setCallback(this);
         mQueueManager = PulseController.getInstance().getQueueManager();
+        MasterListUpdater.getInstance().addMasterListListener(this);
     }
 
     public void setRememberPlaylist(boolean remember, boolean saveNow) {
@@ -187,6 +190,23 @@ public class PlaybackManager implements Playback.Callback {
             actions = PlaybackState.ACTION_PLAY;
         }
         return PlaybackState.ACTION_SKIP_TO_PREVIOUS | PlaybackState.ACTION_SKIP_TO_NEXT | actions | PlaybackState.ACTION_SEEK_TO;
+    }
+
+    @Override
+    public void onItemDeleted(@NonNull MusicModel item) {
+        DataModelHelper.getItemIndexInPlaylist(mQueueManager.getPlaylist(), item, index -> {
+            if (null == index || index == -1) return;
+            mQueueManager.deletePlaylistItem(item, index);
+            if (index != mQueueManager.getActiveIndex())
+                return;
+            if (mQueueManager.getPlaylist().size() > index) {
+                if (PulseController.getInstance().isPlaying()) handlePlayRequest();
+            } else {
+                // Active and last item in the playlist was removed
+                // Stop playback immediately
+                handleStopRequest();
+            }
+        });
     }
 
     @Override

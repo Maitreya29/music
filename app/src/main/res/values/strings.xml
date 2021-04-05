@@ -120,6 +120,12 @@
     <string name="add_to_playlist">Add to playlist</string>
     <string name="add_to_favorite">Add to favorite</string>
     <string name="remove_from_favorite">Remove from favorite</string>
+    <string name="delete_from_device">Delete from device</string>
+    <string name="delete">Delete</string>
+    <string name="delete_confirmation_dialog_title">Confirm delete</string>
+    <string name="delete_confirmation_dialog_desc">Are you sure you want to delete the track from your device?</string>
+    <string name="toast_delete_from_device_success">Track deleted from device</string>
+    <string name="toast_delete_from_device_failed">Failed to delete track</string>
     <string name="share">Share</string>
     <string name="share_intent">Share track using</string>
     <string name="go_to_album">Go to album</string>
