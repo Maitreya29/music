@@ -15,7 +15,7 @@
         android:background="?attr/windowBackgroundColor"
         app:liftOnScroll="true">
 
-        <com.hardcodecoder.pulsemusic.views.PulseToolbar
+        <com.nezukoos.music.views.PulseToolbar
             android:id="@+id/pulse_toolbar"
             android:layout_width="match_parent"
             android:layout_height="56dp"

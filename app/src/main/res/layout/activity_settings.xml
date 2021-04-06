@@ -12,7 +12,7 @@
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$Behavior"
         app:liftOnScroll="true">
 
-        <com.hardcodecoder.pulsemusic.views.PulseToolbar
+        <com.nezukoos.music.views.PulseToolbar
             android:id="@+id/settings_toolbar"
             android:layout_width="match_parent"
             android:layout_height="56dp"

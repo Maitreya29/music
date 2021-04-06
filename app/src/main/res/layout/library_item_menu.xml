@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:paddingBottom="32dp">
 
-        <com.hardcodecoder.pulsemusic.views.MediaArtImageView
+        <com.nezukoos.music.views.MediaArtImageView
             android:id="@+id/track_album_art"
             android:layout_width="56dp"
             android:layout_height="56dp"

@@ -47,7 +47,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/details_activity_title" />
 
-    <com.hardcodecoder.pulsemusic.views.MediaArtImageView
+    <com.nezukoos.music.views.MediaArtImageView
         android:id="@+id/details_activity_art"
         android:layout_width="0dp"
         android:layout_height="0dp"

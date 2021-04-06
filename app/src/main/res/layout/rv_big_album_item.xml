@@ -8,7 +8,7 @@
     android:paddingTop="16dp"
     android:paddingBottom="16dp">
 
-    <com.hardcodecoder.pulsemusic.views.MediaArtImageView
+    <com.nezukoos.music.views.MediaArtImageView
         android:id="@+id/big_album_item_art"
         android:layout_width="match_parent"
         android:layout_height="0dp"

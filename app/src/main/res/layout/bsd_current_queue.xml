@@ -38,7 +38,7 @@
                 android:contentDescription="@string/desc_album_art" />
         </com.google.android.material.card.MaterialCardView>
 
-        <com.hardcodecoder.pulsemusic.views.AccentColorTextView
+        <com.nezukoos.music.views.AccentColorTextView
             android:id="@+id/current_queue_now_playing_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="76dp">
 
-                <com.hardcodecoder.pulsemusic.views.MediaArtImageView
+                <com.nezukoos.music.views.MediaArtImageView
                     android:id="@+id/up_next_track_album_art"
                     android:layout_width="76dp"
                     android:layout_height="match_parent"
@@ -75,7 +75,7 @@
                     tools:ignore="contentDescription"
                     tools:src="@tools:sample/backgrounds/scenic" />
 
-                <com.hardcodecoder.pulsemusic.views.AccentColorTextView
+                <com.nezukoos.music.views.AccentColorTextView
                     android:id="@+id/up_next_track_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -100,7 +100,7 @@
             </RelativeLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <com.hardcodecoder.pulsemusic.views.AccentColorTextView
+        <com.nezukoos.music.views.AccentColorTextView
             android:id="@+id/current_queue_list_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -9,7 +9,7 @@
     android:paddingTop="16dp"
     android:paddingBottom="16dp">
 
-    <com.hardcodecoder.pulsemusic.views.ColorView
+    <com.nezukoos.music.views.ColorView
         android:id="@+id/accent_color"
         android:layout_width="72dp"
         android:layout_height="72dp"

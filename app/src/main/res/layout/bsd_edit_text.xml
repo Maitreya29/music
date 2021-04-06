@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="@tools:sample/full_names" />
 
-    <com.hardcodecoder.pulsemusic.views.AccentColorTextInputLayout
+    <com.nezukoos.music.views.AccentColorTextInputLayout
         android:id="@+id/edit_text_container"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
         android:layout_width="match_parent"
@@ -33,9 +33,9 @@
             android:inputType="textPersonName"
             android:textAppearance="@style/Appearance.Text.Subtitle1"
             tools:text="@tools:sample/full_names" />
-    </com.hardcodecoder.pulsemusic.views.AccentColorTextInputLayout>
+    </com.nezukoos.music.views.AccentColorTextInputLayout>
 
-    <com.hardcodecoder.pulsemusic.views.AccentColorMaterialButton
+    <com.nezukoos.music.views.AccentColorMaterialButton
         android:id="@+id/cancel_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
         app:layout_constraintEnd_toStartOf="@+id/confirm_btn"
         app:layout_constraintTop_toBottomOf="@id/edit_text_container" />
 
-    <com.hardcodecoder.pulsemusic.views.AccentColorMaterialButton
+    <com.nezukoos.music.views.AccentColorMaterialButton
         android:id="@+id/confirm_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

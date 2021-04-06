@@ -12,7 +12,7 @@
     android:paddingEnd="32dp"
     android:paddingBottom="16dp">
 
-    <com.hardcodecoder.pulsemusic.views.AccentColorTextView
+    <com.nezukoos.music.views.AccentColorTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -64,7 +64,7 @@
             android:textColor="?android:attr/textColorSecondary" />
     </com.google.android.material.card.MaterialCardView>
 
-    <com.hardcodecoder.pulsemusic.views.AccentColorTextView
+    <com.nezukoos.music.views.AccentColorTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -88,7 +88,7 @@
             android:paddingTop="32dp"
             android:paddingBottom="32dp">
 
-            <com.hardcodecoder.pulsemusic.views.ColoredIconView
+            <com.nezukoos.music.views.ColoredIconView
                 android:id="@+id/github_logo"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
@@ -109,7 +109,7 @@
                 app:layout_constraintStart_toStartOf="@id/github_logo"
                 app:layout_constraintTop_toBottomOf="@id/github_logo" />
 
-            <com.hardcodecoder.pulsemusic.views.ColoredIconView
+            <com.nezukoos.music.views.ColoredIconView
                 android:id="@+id/twitter_logo"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
@@ -130,7 +130,7 @@
                 app:layout_constraintStart_toStartOf="@id/twitter_logo"
                 app:layout_constraintTop_toBottomOf="@id/twitter_logo" />
 
-            <com.hardcodecoder.pulsemusic.views.ColoredIconView
+            <com.nezukoos.music.views.ColoredIconView
                 android:id="@+id/telegram_logo"
                 android:layout_width="48dp"
                 android:layout_height="48dp"

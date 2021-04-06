@@ -7,7 +7,7 @@
     android:paddingTop="32dp"
     android:paddingBottom="32dp">
 
-    <com.hardcodecoder.pulsemusic.views.AccentColorTextView
+    <com.nezukoos.music.views.AccentColorTextView
         android:id="@+id/playlist_selector_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -26,7 +26,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/playlist_selector_title" />
 
-    <com.hardcodecoder.pulsemusic.views.AccentColorSwitch
+    <com.nezukoos.music.views.AccentColorSwitch
         android:id="@+id/switch_top_albums"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/playlist_top_albums" />
 
-    <com.hardcodecoder.pulsemusic.views.AccentColorSwitch
+    <com.nezukoos.music.views.AccentColorSwitch
         android:id="@+id/switch_for_you"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -64,7 +64,7 @@
         app:layout_constraintTop_toBottomOf="@id/playlist_for_you"
         tools:text="Rediscover\nNote: Rediscover section is only shown after the user has played few tracks" />
 
-    <com.hardcodecoder.pulsemusic.views.AccentColorSwitch
+    <com.nezukoos.music.views.AccentColorSwitch
         android:id="@+id/switch_rediscover"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -81,7 +81,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/playlist_rediscover" />
 
-    <com.hardcodecoder.pulsemusic.views.AccentColorSwitch
+    <com.nezukoos.music.views.AccentColorSwitch
         android:id="@+id/switch_new_in_library"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -98,7 +98,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/playlist_new_in_library" />
 
-    <com.hardcodecoder.pulsemusic.views.AccentColorSwitch
+    <com.nezukoos.music.views.AccentColorSwitch
         android:id="@+id/switch_top_artist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

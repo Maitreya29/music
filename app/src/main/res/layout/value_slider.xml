@@ -10,7 +10,7 @@
         android:minWidth="48dp"
         tools:text="0" />
 
-    <com.hardcodecoder.pulsemusic.views.AccentColorSlider
+    <com.nezukoos.music.views.AccentColorSlider
         android:id="@+id/value_slider"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

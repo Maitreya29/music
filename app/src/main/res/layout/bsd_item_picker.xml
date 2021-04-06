@@ -10,7 +10,7 @@
     android:paddingEnd="16dp"
     android:paddingBottom="24dp">
 
-    <com.hardcodecoder.pulsemusic.views.AccentColorTextView
+    <com.nezukoos.music.views.AccentColorTextView
         android:id="@+id/bottom_dialog_picker_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

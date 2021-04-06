@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:padding="24dp">
 
-    <com.hardcodecoder.pulsemusic.views.AccentColorTextView
+    <com.nezukoos.music.views.AccentColorTextView
         android:id="@+id/sleep_timer_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -14,7 +14,7 @@
         android:text="@string/configure_sleep_timer_title"
         android:textAppearance="@style/Appearance.Text.Subtitle1" />
 
-    <com.hardcodecoder.pulsemusic.views.AccentColorTextInputLayout
+    <com.nezukoos.music.views.AccentColorTextInputLayout
         android:id="@+id/edit_text_container"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
         android:layout_width="match_parent"
@@ -32,9 +32,9 @@
             android:minEms="8"
             android:textAppearance="@style/Appearance.Text.Subtitle1"
             tools:text="@tools:sample/us_zipcodes" />
-    </com.hardcodecoder.pulsemusic.views.AccentColorTextInputLayout>
+    </com.nezukoos.music.views.AccentColorTextInputLayout>
 
-    <com.hardcodecoder.pulsemusic.views.AccentColorMaterialButton
+    <com.nezukoos.music.views.AccentColorMaterialButton
         android:id="@+id/cancel_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
         android:layout_toStartOf="@id/confirm_btn"
         android:text="@string/cancel" />
 
-    <com.hardcodecoder.pulsemusic.views.AccentColorMaterialButton
+    <com.nezukoos.music.views.AccentColorMaterialButton
         android:id="@+id/confirm_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

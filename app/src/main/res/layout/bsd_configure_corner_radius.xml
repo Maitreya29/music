@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:padding="24dp">
 
-    <com.hardcodecoder.pulsemusic.views.AccentColorTextView
+    <com.nezukoos.music.views.AccentColorTextView
         android:id="@+id/bsd_corner_radius_changer_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/top_left" />
 
-            <com.hardcodecoder.pulsemusic.views.ValueSlider
+            <com.nezukoos.music.views.ValueSlider
                 android:id="@+id/radius_slider_tl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -46,7 +46,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/top_right" />
 
-            <com.hardcodecoder.pulsemusic.views.ValueSlider
+            <com.nezukoos.music.views.ValueSlider
                 android:id="@+id/radius_slider_tr"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -60,7 +60,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/bottom_left" />
 
-            <com.hardcodecoder.pulsemusic.views.ValueSlider
+            <com.nezukoos.music.views.ValueSlider
                 android:id="@+id/radius_slider_bl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/bottom_right" />
 
-            <com.hardcodecoder.pulsemusic.views.ValueSlider
+            <com.nezukoos.music.views.ValueSlider
                 android:id="@+id/radius_slider_br"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -82,7 +82,7 @@
                 app:startValue="0"
                 app:unit="@string/corner_radius_unit" />
 
-            <com.hardcodecoder.pulsemusic.views.AccentColorMaterialButton
+            <com.nezukoos.music.views.AccentColorMaterialButton
                 android:id="@+id/radius_changer_set_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

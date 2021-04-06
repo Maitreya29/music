@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:padding="24dp">
 
-    <com.hardcodecoder.pulsemusic.views.AccentColorTextView
+    <com.nezukoos.music.views.AccentColorTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/seek_duration_selector_title"
@@ -20,7 +20,7 @@
         android:text="@string/forward_seek"
         android:textAppearance="@style/Appearance.Text.Subtitle2" />
 
-    <com.hardcodecoder.pulsemusic.views.ValueSlider
+    <com.nezukoos.music.views.ValueSlider
         android:id="@+id/forward_seek_duration"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -37,7 +37,7 @@
         android:text="@string/reverse_seek"
         android:textAppearance="@style/Appearance.Text.Subtitle2" />
 
-    <com.hardcodecoder.pulsemusic.views.ValueSlider
+    <com.nezukoos.music.views.ValueSlider
         android:id="@+id/backwards_seek_duration"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -47,7 +47,7 @@
         app:unit="@string/duration_filter_unit"
         tools:defaultValue="10" />
 
-    <com.hardcodecoder.pulsemusic.views.AccentColorMaterialButton
+    <com.nezukoos.music.views.AccentColorMaterialButton
         android:id="@+id/seek_duration_confirm_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
