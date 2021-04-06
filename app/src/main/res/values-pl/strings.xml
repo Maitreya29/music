@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Pulse Music</string>
+    <string name="app_name">Nezuko Music</string>
     <string name="toast_requires_storage_access">Aplikacja potrzebuje dostępu do pamięci urządzenia aby działać</string>
     <string name="notification_playback_channel_name">Powiadomienia dot. muzyki</string>
     <string name="notification_audio_channel_name">Wykrywanie urządzeń audio</string>
@@ -31,9 +31,9 @@
     <string name="confirm">Potwierdź</string>
     <string name="cancel">Anuluj</string>
     <!-- Navigation section titles -->
-    <string name="nav_home">Strona Główna</string>
+    <string name="nav_homescreen">Strona Główna</string>
     <string name="nav_library">Biblioteka</string>
-    <string name="nav_albums">Albumy</string>
+    <string name="nav_home">Albumy</string>
     <string name="nav_artists">Wykonawcy</string>
     <string name="nav_playlist">Playlista</string>
     <!-- Home Fragment -->
@@ -145,7 +145,7 @@
     <!-- Settings Activity -->
     <string name="settings">Ustawienia</string>
     <string name="restart_app">Uruchom ponownie aplikację</string>
-    <string name="restart_app_dialog_desc">Pulse Music musi być zrestartowane, aby zmiany zaczęły działać</string>
+    <string name="restart_app_dialog_desc">Nezuko Music musi być zrestartowane, aby zmiany zaczęły działać</string>
     <string name="restart">Uruchom ponownie</string>
     <string name="do_it_later">Później</string>
     <!-- Category -->
@@ -237,7 +237,7 @@
     <string name="lead_developer">Główni programiści</string>
     <!-- Donations -->
     <string name="category_contribute">Wsparcie</string>
-    <string name="donation_card_title">Podoba Ci się Pulse Music?</string>
+    <string name="donation_card_title">Podoba Ci się Nezuko Music?</string>
     <string name="donation_card_text">Dostarczanie produktów wysokiej jakości wymaga dużo czasu i wysiłku, i jeszcze za darmo\nRozważ dokonanie małej darowizny, aby wesprzeć rozwój aplikacji</string>
     <string name="buy_me_coffee">Kup mi kawę</string>
     <string name="pay_pal">PayPal</string>

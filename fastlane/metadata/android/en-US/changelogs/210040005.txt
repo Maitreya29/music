@@ -1,4 +1,4 @@
-Pulse Music V4.0.5
+Nezuko Music V4.0.5
 
 - Fixed bottom sheet in landscape mode in now playing screen
 - Removed Internet permission

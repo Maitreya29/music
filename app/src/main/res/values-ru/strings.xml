@@ -28,9 +28,9 @@
     <string name="confirm">Подтвердить</string>
     <string name="cancel">Отмена</string>
     <!-- Navigation section titles -->
-    <string name="nav_home">Главная</string>
+    <string name="nav_homescreen">Главная</string>
     <string name="nav_library">Треки</string>
-    <string name="nav_albums">Альбомы</string>
+    <string name="nav_home">Альбомы</string>
     <string name="nav_artists">Исполнители</string>
     <string name="nav_playlist">Плейлисты</string>
     <!-- Home Fragment -->
@@ -223,7 +223,7 @@
     <string name="lead_developer">Основные разработчики</string>
     <!-- Donations -->
     <string name="category_contribute">Поддержать</string>
-    <string name="donation_card_title">Нравится Pulse Music?</string>
+    <string name="donation_card_title">Нравится Nezuko Music?</string>
     <string name="donation_card_text">На создание приложения уходит много времени, а вы получаете его совершенно бесплатно. Если вам нравится то, что я делаю, вы можете поддержать меня материално</string>
     <string name="buy_me_coffee">Купить чашечку кофе</string>
     <!-- About -->

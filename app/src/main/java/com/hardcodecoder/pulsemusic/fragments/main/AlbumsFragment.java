@@ -59,7 +59,7 @@ public class AlbumsFragment extends CardGridFragment
 
     @Override
     public String getFragmentTitle(@NonNull Context context) {
-        if (null == mFragmentTitle) mFragmentTitle = context.getString(R.string.nav_albums);
+        if (null == mFragmentTitle) mFragmentTitle = context.getString(R.string.nav_home);
         return mFragmentTitle;
     }
 

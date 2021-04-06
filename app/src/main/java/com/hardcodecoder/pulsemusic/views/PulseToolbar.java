@@ -167,16 +167,7 @@ public class PulseToolbar extends RelativeLayout {
 
     public void setTitle(@Nullable String title) {
         if (null == title) mTitle.setText(null);
-        else if (mAccentFirstLetter) {
-            SpannableString spannableString = new SpannableString(title);
-            spannableString.setSpan(
-                    new StyleSpan(Typeface.BOLD),
-                    0, 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-            spannableString.setSpan(
-                    new ForegroundColorSpan(ThemeColors.getCurrentColorPrimary()),
-                    0, 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-            mTitle.setText(spannableString);
-        } else mTitle.setText(title);
+        else mTitle.setText(title);
     }
 
     public void setNavigationIcon(@DrawableRes int drawableRes) {

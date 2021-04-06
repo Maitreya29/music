@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import com.hardcodecoder.pulsemusic.activities.main.SettingsActivity;
 
 import com.hardcodecoder.pulsemusic.R;
 import com.hardcodecoder.pulsemusic.fragments.settings.base.SettingsBaseFragment;
@@ -46,12 +47,19 @@ public class SettingsContributorsFragment extends SettingsBaseFragment {
 
         view.findViewById(R.id.github_logo).setOnClickListener(v -> openLink("https://github.com/HardcodeCoder"));
         view.findViewById(R.id.twitter_logo).setOnClickListener(v -> openLink("https://www.twitter.com/hardcodecoder"));
-        view.findViewById(R.id.telegram_logo).setOnClickListener(v -> openLink("https://t.me/HardcodeCoder"));
-
+        view.findViewById(R.id.telegram_logo).setOnClickListener(v ->
+                v.postOnAnimation(() -> openSettingsFragment(SettingsDonationFragment.getInstance())));
+ 
         GlideApp.with(view)
                 .load(R.drawable.def_avatar)
                 .circleCrop()
                 .into((ImageView) view.findViewById(R.id.lead_developer_avatar));
+    }
+
+    private void openSettingsFragment(SettingsBaseFragment fragment) {
+        if (mListener instanceof SettingsActivity) {
+            mListener.changeFragment(fragment);
+        }
     }
 
     private void openLink(@NonNull String url) {

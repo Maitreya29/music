@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="72dp"
+        app:layout_constraintGuide_begin="22dp"
         app:layout_constraintStart_toStartOf="parent" />
 
     <com.hardcodecoder.pulsemusic.views.AccentColorTextView
@@ -117,6 +117,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="@string/category_social_links"
+        android:visibility="gone"
         android:textAppearance="@style/Appearance.Text.Overline"
         app:layout_constraintStart_toEndOf="@id/guide_start"
         app:layout_constraintTop_toBottomOf="@id/about_app_build_type" />
@@ -128,6 +129,7 @@
         android:layout_marginTop="16dp"
         app:cardCornerRadius="@dimen/rounding_radius_8dp"
         app:cardElevation="4dp"
+        android:visibility="gone"
         app:layout_constraintStart_toEndOf="@id/guide_start"
         app:layout_constraintTop_toBottomOf="@id/social_link_title">
 
@@ -136,6 +138,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="-16dp"
             app:icon="@drawable/ic_twitter"
+            android:visibility="gone"
             app:iconBackgroundShape="rectangle"
             app:iconColor="@color/md_teal_A400"
             app:iconPadding="42dp" />
@@ -146,6 +149,7 @@
             android:layout_gravity="center_horizontal|bottom"
             android:layout_marginBottom="12dp"
             android:gravity="center"
+            android:visibility="gone"
             android:text="@string/twitter"
             android:textAppearance="@style/Appearance.Text.Subtitle2"
             android:textColor="@color/darkColorBackground" />
@@ -155,7 +159,8 @@
         android:id="@+id/app_link_telegram"
         android:layout_width="128dp"
         android:layout_height="128dp"
-        android:layout_marginStart="32dp"
+        android:visibility="gone"
+        android:layout_marginStart="100dp"
         app:cardCornerRadius="@dimen/rounding_radius_8dp"
         app:cardElevation="4dp"
         app:layout_constraintStart_toEndOf="@id/app_link_twitter"
@@ -165,6 +170,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="-16dp"
+            android:visibility="gone"
             app:icon="@drawable/ic_telegram"
             app:iconBackgroundShape="rectangle"
             app:iconColor="@color/md_yellow_A400"
@@ -175,6 +181,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|bottom"
             android:layout_marginBottom="12dp"
+            android:visibility="gone"
             android:gravity="center"
             android:text="@string/telegram"
             android:textAppearance="@style/Appearance.Text.Subtitle2"
@@ -186,6 +193,7 @@
         android:layout_width="128dp"
         android:layout_height="128dp"
         android:layout_marginTop="16dp"
+        android:visibility="gone"
         app:cardCornerRadius="@dimen/rounding_radius_8dp"
         app:cardElevation="4dp"
         app:layout_constraintStart_toStartOf="@id/app_link_twitter"
@@ -194,6 +202,7 @@
         <com.hardcodecoder.pulsemusic.views.ColoredIconView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:visibility="gone"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="-16dp"
             app:icon="@drawable/ic_github"
@@ -206,6 +215,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|bottom"
             android:layout_marginBottom="12dp"
+            android:visibility="gone"
             android:gravity="center"
             android:text="@string/github"
             android:textAppearance="@style/Appearance.Text.Subtitle2"
@@ -216,10 +226,11 @@
         android:id="@+id/app_link_crowdin"
         android:layout_width="128dp"
         android:layout_height="128dp"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="100dp"
         android:layout_marginTop="16dp"
         app:cardCornerRadius="@dimen/rounding_radius_8dp"
         app:cardElevation="4dp"
+        android:visibility="gone"
         app:layout_constraintStart_toEndOf="@id/app_link_github"
         app:layout_constraintTop_toBottomOf="@id/app_link_telegram">
 
@@ -239,6 +250,7 @@
             android:layout_gravity="center_horizontal|bottom"
             android:layout_marginBottom="12dp"
             android:gravity="center"
+            android:visibility="gone"
             android:text="@string/crowdin"
             android:textAppearance="@style/Appearance.Text.Subtitle2"
             android:textColor="@color/darkColorBackground" />

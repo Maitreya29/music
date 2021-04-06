@@ -11,7 +11,7 @@ import com.hardcodecoder.pulsemusic.model.AccentsModel;
 
 public class PresetColors {
 
-    // Pulse music accent color
+    // Nezuko Music accent color
     public static final int SLATE_BLUE = Color.parseColor("#6c5ce7");
     private static final int AZURE_RADIANCE = Color.parseColor("#0984e3");
     private static final int PERSIAN_MINT = Color.parseColor("#00b894");

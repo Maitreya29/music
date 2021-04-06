@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/nav_home"
-        android:icon="@drawable/ic_home"
+        android:icon="@drawable/ic_album"
         android:title="@string/nav_home" />
 
     <item
@@ -11,9 +11,9 @@
         android:title="@string/nav_library" />
 
     <item
-        android:id="@+id/nav_album"
-        android:icon="@drawable/ic_album"
-        android:title="@string/nav_albums" />
+        android:id="@+id/nav_homescreen"
+        android:icon="@drawable/ic_home"
+        android:title="@string/nav_homescreen" />
 
     <item
         android:id="@+id/nav_artist"

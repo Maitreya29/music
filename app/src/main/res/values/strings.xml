@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">Pulse Music</string>
+    <string name="app_name">Nezuko Music</string>
     <string name="toast_requires_storage_access">App needs to access device storage to work</string>
-
+    <string name="donatetodev">Donate</string>
     <string name="notification_playback_channel_name">Music Notification</string>
     <string name="notification_audio_channel_name">Audio Device Detection</string>
 
@@ -41,9 +41,9 @@
 
 
     <!-- Navigation section titles -->
-    <string name="nav_home">Home</string>
+    <string name="nav_homescreen">Home</string>
     <string name="nav_library">Library</string>
-    <string name="nav_albums">Albums</string>
+    <string name="nav_home">Albums</string>
     <string name="nav_artists">Artists</string>
     <string name="nav_playlist">Playlist</string>
 
@@ -197,7 +197,7 @@
     <!-- Settings Activity -->
     <string name="settings">Settings</string>
     <string name="restart_app">Restart app</string>
-    <string name="restart_app_dialog_desc">Pulse Music needs to restart for changes to take effect</string>
+    <string name="restart_app_dialog_desc">Nezuko Music needs to restart for changes to take effect</string>
     <string name="restart">Restart</string>
     <string name="do_it_later">Do it later</string>
 
@@ -347,6 +347,7 @@
 
     <!-- Contributors -->
     <string name="lead_developer">Lead developers</string>
+    <string name="base_dev">Pulse Music lead - The base app.</string>
     <string name="lead_developer_1" translatable="false">Ashutosh P.</string>
     <string name="lead_developer_1_user_name" translatable="false">\@HardcodeCoder</string>
     <string name="github">Github</string>
@@ -357,7 +358,7 @@
 
     <!-- Donations -->
     <string name="category_contribute">Contribute</string>
-    <string name="donation_card_title">Enjoying Pulse Music?</string>
+    <string name="donation_card_title">Enjoying Nezuko Music?</string>
     <string name="donation_card_text">It takes a lot of time and effort to deliver quality products, that too for free\nPlease consider making a small donation to support the development</string>
     <string name="donate_options_title">Donate using</string>
     <string name="buy_me_coffee">Buy me a Coffee</string>

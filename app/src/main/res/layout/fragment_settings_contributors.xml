@@ -16,7 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:text="@string/lead_developer"
+        android:text="@string/base_dev"
         android:textAppearance="@style/Appearance.Text.Overline" />
 
     <com.google.android.material.card.MaterialCardView
@@ -134,7 +134,7 @@
                 android:id="@+id/telegram_logo"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                app:icon="@drawable/ic_telegram"
+                app:icon="@drawable/ic_donation"
                 app:iconColor="@color/md_yellow_A400"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/twitter_logo"
@@ -144,7 +144,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@string/telegram"
+                android:text="@string/donatetodev"
                 android:textAppearance="@style/Appearance.Text.Subtitle2"
                 android:textColor="?android:attr/textColorPrimary"
                 app:layout_constraintEnd_toEndOf="@id/telegram_logo"

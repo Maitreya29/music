@@ -1,4 +1,4 @@
-Pulse Music V3.0.1-Release
+Nezuko Music V3.0.1-Release
 
 - Added donation section
 - Added Spanish translations (thanks to @sguinetti) 

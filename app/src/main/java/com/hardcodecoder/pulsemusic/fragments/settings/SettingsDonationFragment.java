@@ -40,7 +40,7 @@ public class SettingsDonationFragment extends SettingsBaseFragment {
         view.findViewById(R.id.upi_frame).setOnClickListener(v -> {
             Uri uri = Uri.parse("upi://pay").buildUpon()
                     .appendQueryParameter("pa", "ashutoshpatoa3105@oksbi")
-                    .appendQueryParameter("pn", "Pulse Music")
+                    .appendQueryParameter("pn", "Nezuko Music")
                     .appendQueryParameter("cu", "INR")
                     .build();
 

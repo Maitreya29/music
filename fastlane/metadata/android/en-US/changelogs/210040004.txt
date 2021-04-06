@@ -1,4 +1,4 @@
-Pulse Music V4.0.4
+Nezuko Music V4.0.4
 
 - Added sliding now playing screen
 - Added Rediscover section (dynamic)

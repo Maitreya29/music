@@ -100,7 +100,7 @@ public class DialogHelper {
                     displayTextView.setText(infoModel.getDisplayName());
                     displayTextView.setSelected(true);
                     setInfo(trackTitle, context.getString(R.string.track), musicModel.getTrackName(), styleSpan);
-                    setInfo(trackAlbum, context.getString(R.string.nav_albums), musicModel.getAlbum(), styleSpan);
+                    setInfo(trackAlbum, context.getString(R.string.nav_home), musicModel.getAlbum(), styleSpan);
                     setInfo(trackArtist, context.getString(R.string.nav_artists), musicModel.getArtist(), styleSpan);
                     setInfo(trackFileSize, context.getString(R.string.file_size), DataUtils.getFormattedFileSize(infoModel.getFileSize()), styleSpan);
                     setInfo(trackFileType, context.getString(R.string.file_type), infoModel.getFileType(), styleSpan);

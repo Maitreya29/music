@@ -148,11 +148,11 @@ public class MainContentActivity extends DraggableNowPlayingSheetActivity implem
     @Override
     public void onNavigationItemSelected(@NonNull MenuItem menuItem) {
         final int id = menuItem.getItemId();
-        if (id == R.id.nav_home) {
+        if (id == R.id.nav_homescreen) {
             if (activeFrag != homeFrag) switchFragment(homeFrag, HomeFragment.TAG);
         } else if (id == R.id.nav_library) {
             if (activeFrag != libraryFrag) switchFragment(libraryFrag, LibraryFragment.TAG);
-        } else if (id == R.id.nav_album) {
+        } else if (id == R.id.nav_home) {
             if (activeFrag != albumsFrag) switchFragment(albumsFrag, AlbumsFragment.TAG);
         } else if (id == R.id.nav_artist) {
             if (activeFrag != artistFrag) switchFragment(artistFrag, ArtistFragment.TAG);
@@ -180,8 +180,8 @@ public class MainContentActivity extends DraggableNowPlayingSheetActivity implem
     }
 
     private void setUpMainContents(Bundle savedInstanceState) {
-        if (savedInstanceState == null) switchFragment(homeFrag, HomeFragment.TAG);
-        else switchFragment(activeFrag, savedInstanceState.getString(ACTIVE, HomeFragment.TAG));
+        if (savedInstanceState == null) switchFragment(albumsFrag, AlbumsFragment.TAG);
+        else switchFragment(activeFrag, savedInstanceState.getString(ACTIVE, AlbumsFragment.TAG));
     }
 
     private void switchFragment(@Nullable PulseFragment switchTo, @NonNull String tag) {

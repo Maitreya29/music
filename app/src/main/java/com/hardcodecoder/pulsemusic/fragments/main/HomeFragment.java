@@ -127,7 +127,7 @@ public class HomeFragment extends PulseFragment {
 
     @Override
     public String getFragmentTitle(@NonNull Context context) {
-        if (null == mFragmentTitle) mFragmentTitle = context.getString(R.string.nav_home);
+        if (null == mFragmentTitle) mFragmentTitle = context.getString(R.string.nav_homescreen);
         return mFragmentTitle;
     }
 

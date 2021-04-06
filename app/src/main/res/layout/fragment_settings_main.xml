@@ -77,6 +77,7 @@
         android:layout_height="wrap_content"
         android:textStyle="normal"
         app:settingItemColoredIcon="true"
+        android:visibility="gone"
         app:settingItemIcon="@drawable/ic_donation"
         app:settingItemIconColor="@color/md_yellow_A400"
         app:settingItemText="@string/support_development_desc"
