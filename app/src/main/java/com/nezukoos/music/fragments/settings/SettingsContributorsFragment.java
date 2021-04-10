@@ -46,6 +46,8 @@ public class SettingsContributorsFragment extends SettingsBaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
         view.findViewById(R.id.github_logo).setOnClickListener(v -> openLink("https://github.com/HardcodeCoder"));
+        view.findViewById(R.id.gh_logo).setOnClickListener(v -> openLink("https://github.com/Maitreya29"));
+        view.findViewById(R.id.tg_logo).setOnClickListener(v -> openLink("https://t.me/Maitreya29"));
         view.findViewById(R.id.twitter_logo).setOnClickListener(v -> openLink("https://www.twitter.com/hardcodecoder"));
         view.findViewById(R.id.telegram_logo).setOnClickListener(v ->
                 v.postOnAnimation(() -> openSettingsFragment(SettingsDonationFragment.getInstance())));
@@ -54,6 +56,10 @@ public class SettingsContributorsFragment extends SettingsBaseFragment {
                 .load(R.drawable.def_avatar)
                 .circleCrop()
                 .into((ImageView) view.findViewById(R.id.lead_developer_avatar));
+        GlideApp.with(view)
+                .load(R.drawable.maitreya)
+                .circleCrop()
+                .into((ImageView) view.findViewById(R.id.d_avatar));
     }
 
     private void openSettingsFragment(SettingsBaseFragment fragment) {
