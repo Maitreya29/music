@@ -30,7 +30,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/top_left" />
+                android:text="@string/top_left"
+            android:textColor="@color/shit"
+ />
 
             <com.nezukoos.music.views.ValueSlider
                 android:id="@+id/radius_slider_tl"
@@ -38,13 +40,15 @@
                 android:layout_height="wrap_content"
                 app:endValue="@integer/now_playing_cover_corner_radius_max"
                 app:startValue="0"
-                app:unit="@string/corner_radius_unit" />
+                app:unit="@string/corner_radius_unit" 
+                android:textColor="@color/shit"/>
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/top_right" />
+                android:text="@string/top_right" 
+                android:textColor="@color/shit"/>
 
             <com.nezukoos.music.views.ValueSlider
                 android:id="@+id/radius_slider_tr"
@@ -52,13 +56,15 @@
                 android:layout_height="wrap_content"
                 app:endValue="@integer/now_playing_cover_corner_radius_max"
                 app:startValue="0"
-                app:unit="@string/corner_radius_unit" />
+                app:unit="@string/corner_radius_unit" 
+                android:textColor="@color/shit"/>
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/bottom_left" />
+                android:text="@string/bottom_left" 
+                android:textColor="@color/shit"/>
 
             <com.nezukoos.music.views.ValueSlider
                 android:id="@+id/radius_slider_bl"
@@ -66,13 +72,15 @@
                 android:layout_height="wrap_content"
                 app:endValue="@integer/now_playing_cover_corner_radius_max"
                 app:startValue="0"
-                app:unit="@string/corner_radius_unit" />
+                app:unit="@string/corner_radius_unit" 
+                android:textColor="@color/shit"/>
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/bottom_right" />
+                android:text="@string/bottom_right" 
+                android:textColor="@color/shit"/>
 
             <com.nezukoos.music.views.ValueSlider
                 android:id="@+id/radius_slider_br"
@@ -80,7 +88,8 @@
                 android:layout_height="wrap_content"
                 app:endValue="@integer/now_playing_cover_corner_radius_max"
                 app:startValue="0"
-                app:unit="@string/corner_radius_unit" />
+                app:unit="@string/corner_radius_unit"
+                android:textColor="@color/shit"/>
 
             <com.nezukoos.music.views.AccentColorMaterialButton
                 android:id="@+id/radius_changer_set_btn"
@@ -89,7 +98,8 @@
                 android:layout_gravity="end"
                 android:layout_marginTop="8dp"
                 android:text="@string/set"
-                app:accentButtonStyle="text" />
+                app:accentButtonStyle="text" 
+                android:textColor="@color/shit"/>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </LinearLayout>

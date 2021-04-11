@@ -29,7 +29,7 @@
         android:paddingEnd="8dp"
         android:paddingBottom="10dp"
         android:textAppearance="@style/Appearance.Text.Subtitle2"
-        android:textSize="12sp"
+android:textColor="@color/shit"        android:textSize="12sp"
         android:textStyle="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -1,4 +1,4 @@
-Nezuko Music V4.0.3-Release
+Music V4.0.3-Release
 
 - Replaced repeat once option with repeat endlessly (#26) 
 - Redesigned Playlist section 

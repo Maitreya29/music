@@ -9,6 +9,7 @@
     <com.nezukoos.music.views.AccentColorTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:layout_marginStart="72dp"
         android:text="@string/category_loader"
         android:textAppearance="@style/Appearance.Text.Overline" />
@@ -18,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="normal"
-        app:settingItemIcon="@drawable/ic_rule_folder"
+        android:visibility="gone"
         app:settingItemIconColor="?attr/colorControlNormal"
         app:settingItemText="@string/ignored_folder_desc"
         app:settingItemTitle="@string/ignored_folder_title" />
@@ -28,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="normal"
-        app:settingItemIcon="@drawable/ic_filter"
+        android:visibility="gone"
         app:settingItemIconColor="?attr/colorControlNormal"
         app:settingItemText="@string/duration_filter_desc"
         app:settingItemTitle="@string/duration_filter_title" />
@@ -37,8 +38,9 @@
         android:id="@+id/duration_filter_slider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="32dp"
+        android:paddingStart="72dp"
         android:paddingEnd="32dp"
+        android:visibility="gone"
         app:endValue="60"
         app:startValue="0"
         app:unit="@string/duration_filter_unit" />
@@ -47,7 +49,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="72dp"
-        android:layout_marginTop="32dp"
         android:text="@string/category_others"
         android:textAppearance="@style/Appearance.Text.Overline" />
 
@@ -55,7 +56,6 @@
         android:id="@+id/remember_playlist_option"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:settingToggleableItemIcon="@drawable/ic_save"
         app:settingToggleableItemText="@string/remember_playlist_desc"
         app:settingToggleableItemTitle="@string/remember_playlist_title" />
 
@@ -64,7 +64,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="normal"
-        app:settingItemIcon="@drawable/ic_category"
         app:settingItemIconColor="?attr/colorControlNormal"
         app:settingItemText="@string/edit_playlist_section_desc"
         app:settingItemTitle="@string/edit_playlist_sections_title" />

@@ -19,7 +19,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="normal"
-        app:settingItemIcon="@drawable/ic_opacity"
         app:settingItemIconColor="?attr/colorControlNormal"
         app:settingItemText="@string/widget_background_alpha_desc"
         app:settingItemTitle="@string/widget_background_alpha" />
@@ -37,7 +36,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="normal"
-        app:settingItemIcon="@drawable/ic_play_circle"
         app:settingItemIconColor="?attr/colorControlNormal"
         app:settingItemText="@string/widget_play_button_action_desc"
         app:settingItemTitle="@string/widget_play_button_action" />

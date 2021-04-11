@@ -29,7 +29,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/developer_head"
-        app:layout_constraintVertical_bias="0.2">
+        app:layout_constraintVertical_bias="0.2"
+        android:color="@color/shit"
+        app:cardBackgroundColor="@color/card">
 
         <ImageView
             android:id="@+id/d_avatar"
@@ -61,14 +63,14 @@
             android:paddingBottom="24dp"
             android:text="@string/lead_developer_0_user_name"
             android:textAppearance="@style/Appearance.Text.Subtitle2"
-            android:textColor="?android:attr/textColorSecondary" />
+            android:textColor="@color/shit" />
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="?attr/colorSurface"
         app:cardCornerRadius="0dp"
+        app:cardBackgroundColor="@color/card"
         app:cardElevation="4dp"
         app:cardUseCompatPadding="false">
 
@@ -95,8 +97,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/github"
-                android:textAppearance="@style/Appearance.Text.Subtitle2"
-                android:textColor="?android:attr/textColorPrimary"
+            android:textAppearance="@style/Appearance.Text.Subtitle2"
+            android:textColor="@color/shit"
                 app:layout_constraintEnd_toEndOf="@id/gh_logo"
                 app:layout_constraintStart_toStartOf="@id/gh_logo"
                 app:layout_constraintTop_toBottomOf="@id/gh_logo" />
@@ -116,8 +118,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/twitter"
-                android:textAppearance="@style/Appearance.Text.Subtitle2"
-                android:textColor="?android:attr/textColorPrimary"
+            android:textAppearance="@style/Appearance.Text.Subtitle2"
+            android:textColor="@color/shit"
                 app:layout_constraintEnd_toEndOf="@id/tw_logo"
                 app:layout_constraintStart_toStartOf="@id/tw_logo"
                 app:layout_constraintTop_toBottomOf="@id/tw_logo" />
@@ -137,8 +139,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/telegram"
-                android:textAppearance="@style/Appearance.Text.Subtitle2"
-                android:textColor="?android:attr/textColorPrimary"
+            android:textAppearance="@style/Appearance.Text.Subtitle2"
+            android:textColor="@color/shit"
                 app:layout_constraintEnd_toEndOf="@id/tg_logo"
                 app:layout_constraintStart_toStartOf="@id/tg_logo"
                 app:layout_constraintTop_toBottomOf="@id/tg_logo" />
@@ -149,7 +151,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="20dp"
         android:text="@string/base_dev"
         android:textAppearance="@style/Appearance.Text.Overline" />
 
@@ -159,6 +161,7 @@
         android:layout_height="196dp"
         android:layout_gravity="center_horizontal"
         app:cardCornerRadius="0dp"
+        app:cardBackgroundColor="@color/card"
         app:cardElevation="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -195,15 +198,14 @@
             android:paddingBottom="24dp"
             android:text="@string/lead_developer_1_user_name"
             android:textAppearance="@style/Appearance.Text.Subtitle2"
-            android:textColor="?android:attr/textColorSecondary" />
+            android:textColor="@color/shit" />
     </com.google.android.material.card.MaterialCardView>
 
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-        app:cardBackgroundColor="?attr/colorSurface"
+        app:cardBackgroundColor="@color/card"
         app:cardCornerRadius="0dp"
         app:cardElevation="4dp"
         app:cardUseCompatPadding="false">
@@ -231,8 +233,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/github"
-                android:textAppearance="@style/Appearance.Text.Subtitle2"
-                android:textColor="?android:attr/textColorPrimary"
+            android:textAppearance="@style/Appearance.Text.Subtitle2"
+            android:textColor="@color/shit"
                 app:layout_constraintEnd_toEndOf="@id/github_logo"
                 app:layout_constraintStart_toStartOf="@id/github_logo"
                 app:layout_constraintTop_toBottomOf="@id/github_logo" />
@@ -252,8 +254,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/twitter"
-                android:textAppearance="@style/Appearance.Text.Subtitle2"
-                android:textColor="?android:attr/textColorPrimary"
+            android:textAppearance="@style/Appearance.Text.Subtitle2"
+            android:textColor="@color/shit"
                 app:layout_constraintEnd_toEndOf="@id/twitter_logo"
                 app:layout_constraintStart_toStartOf="@id/twitter_logo"
                 app:layout_constraintTop_toBottomOf="@id/twitter_logo" />
@@ -273,8 +275,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/donatetodev"
-                android:textAppearance="@style/Appearance.Text.Subtitle2"
-                android:textColor="?android:attr/textColorPrimary"
+            android:textAppearance="@style/Appearance.Text.Subtitle2"
+            android:textColor="@color/shit"
                 app:layout_constraintEnd_toEndOf="@id/telegram_logo"
                 app:layout_constraintStart_toStartOf="@id/telegram_logo"
                 app:layout_constraintTop_toBottomOf="@id/telegram_logo" />

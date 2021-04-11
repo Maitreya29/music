@@ -30,8 +30,8 @@
             android:paddingStart="32dp"
             android:paddingEnd="0dp"
             android:text="@string/dark_theme_gray"
-            android:textAppearance="@style/Appearance.Text.Subtitle2"
-            android:textColor="?android:attr/textColorPrimary" />
+android:textAppearance="@style/Appearance.Text.Subtitle2"
+            android:textColor="@color/textshit" />
 
         <com.nezukoos.music.views.AccentColorRadioButton
             android:id="@+id/radio_btn_dark_theme_kinda"
@@ -40,8 +40,8 @@
             android:paddingStart="32dp"
             android:paddingEnd="0dp"
             android:text="@string/dark_theme_signature"
-            android:textAppearance="@style/Appearance.Text.Subtitle2"
-            android:textColor="?android:attr/textColorPrimary" />
+android:textAppearance="@style/Appearance.Text.Subtitle2"
+            android:textColor="@color/textshit" />
 
         <com.nezukoos.music.views.AccentColorRadioButton
             android:id="@+id/radio_btn_dark_theme_pure_black"
@@ -50,8 +50,8 @@
             android:paddingStart="32dp"
             android:paddingEnd="0dp"
             android:text="@string/dark_theme_lights_out"
-            android:textAppearance="@style/Appearance.Text.Subtitle2"
-            android:textColor="?android:attr/textColorPrimary" />
+android:textAppearance="@style/Appearance.Text.Subtitle2"
+            android:textColor="@color/textshit" />
     </RadioGroup>
 
     <com.nezukoos.music.views.AccentColorMaterialButton

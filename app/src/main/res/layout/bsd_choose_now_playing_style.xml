@@ -30,8 +30,7 @@
             android:paddingStart="32dp"
             android:paddingEnd="0dp"
             android:text="@string/style_modern"
-            android:textAppearance="@style/Appearance.Text.Subtitle2"
-            android:textColor="?android:attr/textColorPrimary" />
+            android:textColor="@color/textshit" />
 
         <com.nezukoos.music.views.AccentColorRadioButton
             android:id="@+id/selector_now_playing_screen_stylish"
@@ -40,8 +39,7 @@
             android:paddingStart="32dp"
             android:paddingEnd="0dp"
             android:text="@string/style_stylish"
-            android:textAppearance="@style/Appearance.Text.Subtitle2"
-            android:textColor="?android:attr/textColorPrimary" />
+            android:textColor="@color/textshit" />
 
         <com.nezukoos.music.views.AccentColorRadioButton
             android:id="@+id/selector_now_playing_screen_edge"
@@ -50,8 +48,7 @@
             android:paddingStart="32dp"
             android:paddingEnd="0dp"
             android:text="@string/style_edge"
-            android:textAppearance="@style/Appearance.Text.Subtitle2"
-            android:textColor="?android:attr/textColorPrimary" />
+            android:textColor="@color/textshit" />
     </RadioGroup>
 
     <com.nezukoos.music.views.AccentColorMaterialButton

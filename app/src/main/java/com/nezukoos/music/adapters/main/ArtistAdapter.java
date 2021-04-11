@@ -97,7 +97,6 @@ public class ArtistAdapter extends EfficientRecyclerViewAdapter<ArtistModel, Art
 
         public ArtistItemHolder(@NonNull View itemView, @NonNull SimpleTransitionClickListener listener) {
             super(itemView);
-            itemView.setBackground(ImageUtil.getHighlightedItemBackground(itemView.getContext()));
             mArtistArt = itemView.findViewById(R.id.grid_item_artist_iv);
             TintHelper.setAccentTintTo(mArtistArt);
             mArtistTitle = itemView.findViewById(R.id.grid_item_artist_tv);

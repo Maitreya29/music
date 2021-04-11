@@ -1,8 +1,8 @@
-Nezuko Music V4.0.6
+Music V4.0.6
 
 - Fixed sliding controls panel not showing correctly #39.
 - Fixed album art not loading in some devices #40.
 - Fixed app closes on back press in now playing screen #41.
 - Fixed misalignment in playlist section
-- Added option to open audio files via Nezuko Music #45
+- Added option to open audio files via Music #45
 - Tweaked home UI elements to fit more content 

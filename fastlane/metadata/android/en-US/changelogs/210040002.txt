@@ -1,4 +1,4 @@
-Nezuko Music V4.0.2-Release
+Music V4.0.2-Release
 
 Note: Please reselct (if previously selected) blacklisted folders after updating to this release
 

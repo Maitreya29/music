@@ -1,4 +1,4 @@
-Nezuko Music V3.0.0-Release
+Music V3.0.0-Release
 
 - Redesigned Home section
 - Completely new Settings page

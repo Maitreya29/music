@@ -1,4 +1,4 @@
-﻿Nezuko Music V4.1.1
+﻿Music V4.1.1
 
 Note: If coming from V4.0.6 or older, must clear data and cache for A11+ devices
 

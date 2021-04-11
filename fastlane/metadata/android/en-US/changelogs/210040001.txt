@@ -1,4 +1,4 @@
-Nezuko Music V4.0.1-Release
+Music V4.0.1-Release
 
 Note: Please uninstall any previous version (and clear app data) before installing this release. 
 

@@ -60,7 +60,7 @@
             android:paddingBottom="24dp"
             android:text="@string/lead_developer_1_user_name"
             android:textAppearance="@style/Appearance.Text.Subtitle2"
-            android:textColor="?android:attr/textColorSecondary" />
+            android:textColor="@color/shit" />
     </com.google.android.material.card.MaterialCardView>
 
     <com.nezukoos.music.views.AccentColorTextView
@@ -107,8 +107,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/github"
-                android:textAppearance="@style/Appearance.Text.Subtitle2"
-                android:textColor="?android:attr/textColorPrimary"
+            android:textAppearance="@style/Appearance.Text.Subtitle2"
+            android:textColor="@color/shit"
                 app:layout_constraintEnd_toEndOf="@id/github_logo"
                 app:layout_constraintStart_toStartOf="@id/github_logo"
                 app:layout_constraintTop_toBottomOf="@id/github_logo" />
@@ -128,8 +128,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/twitter"
-                android:textAppearance="@style/Appearance.Text.Subtitle2"
-                android:textColor="?android:attr/textColorPrimary"
+            android:textAppearance="@style/Appearance.Text.Subtitle2"
+            android:textColor="@color/shit"
                 app:layout_constraintEnd_toEndOf="@id/twitter_logo"
                 app:layout_constraintStart_toStartOf="@id/twitter_logo"
                 app:layout_constraintTop_toBottomOf="@id/twitter_logo" />
@@ -149,8 +149,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/telegram"
-                android:textAppearance="@style/Appearance.Text.Subtitle2"
-                android:textColor="?android:attr/textColorPrimary"
+            android:textAppearance="@style/Appearance.Text.Subtitle2"
+            android:textColor="@color/shit"
                 app:layout_constraintEnd_toEndOf="@id/telegram_logo"
                 app:layout_constraintStart_toStartOf="@id/telegram_logo"
                 app:layout_constraintTop_toBottomOf="@id/telegram_logo" />

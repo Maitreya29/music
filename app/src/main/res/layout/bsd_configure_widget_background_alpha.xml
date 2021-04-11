@@ -20,7 +20,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/widget_alpha_chooser_title"
         android:layout_marginTop="36dp"
-        android:text="@string/widget_background_alpha_min" />
+        android:text="@string/widget_background_alpha_min" 
+        android:textColor="@color/shit"/>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/max_text"
@@ -29,7 +30,8 @@
         android:layout_below="@id/widget_alpha_chooser_title"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="36dp"
-        android:text="@string/widget_background_alpha_max" />
+        android:text="@string/widget_background_alpha_max" 
+        android:textColor="@color/shit"/>
 
     <com.nezukoos.music.views.ValueSlider
         android:id="@+id/widget_alpha_slider"

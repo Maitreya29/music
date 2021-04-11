@@ -39,7 +39,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/track_album_art"
             app:layout_constraintTop_toTopOf="@id/track_album_art"
-            tools:text="@tools:sample/full_names" />
+            tools:text="@tools:sample/full_names" 
+            android:textColor="@color/shit"/>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/track_sub_title"
@@ -49,12 +50,11 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="32dp"
             android:maxLines="1"
-            android:textAppearance="@style/Appearance.Text.Subtitle2"
-            android:textColor="?android:attr/textColorSecondary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/track_album_art"
             app:layout_constraintTop_toBottomOf="@id/track_title"
-            tools:text="@tools:sample/full_names" />
+            tools:text="@tools:sample/full_names" 
+            android:textColor="@color/shit"/>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/track_play_next"
@@ -63,7 +63,8 @@
             android:text="@string/play_next"
             app:drawableStartCompat="@drawable/ic_queue_play_next"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/track_sub_title" />
+            app:layout_constraintTop_toBottomOf="@id/track_sub_title" 
+            android:textColor="@color/shit"/>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/add_to_queue"
@@ -71,7 +72,8 @@
             android:text="@string/add_to_queue"
             app:drawableStartCompat="@drawable/ic_queue_music"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/track_play_next" />
+            app:layout_constraintTop_toBottomOf="@id/track_play_next" 
+            android:textColor="@color/shit"/>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/add_to_playlist"
@@ -79,7 +81,8 @@
             android:text="@string/add_to_playlist"
             app:drawableStartCompat="@drawable/ic_playlist_add"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_to_queue" />
+            app:layout_constraintTop_toBottomOf="@id/add_to_queue" 
+            android:textColor="@color/shit"/>
 
         <View
             android:id="@+id/divider1"
@@ -99,7 +102,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/divider1"
             tools:drawableStartCompat="@drawable/ic_favorite_border"
-            tools:text="@string/add_to_favorite" />
+            tools:text="@string/add_to_favorite" 
+            android:textColor="@color/shit"/>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/delete"
@@ -108,7 +112,8 @@
             app:drawableStartCompat="@drawable/ic_delete"
             app:layout_constraintBottom_toTopOf="@id/share"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/update_favorite" />
+            app:layout_constraintTop_toBottomOf="@id/update_favorite" 
+            android:textColor="@color/shit"/>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/share"
@@ -117,7 +122,8 @@
             app:drawableStartCompat="@drawable/ic_share"
             app:layout_constraintBottom_toTopOf="@id/divider2"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/delete" />
+            app:layout_constraintTop_toBottomOf="@id/delete" 
+            android:textColor="@color/shit"/>
 
         <View
             android:id="@+id/divider2"
@@ -128,7 +134,8 @@
             android:layout_marginBottom="8dp"
             android:background="?attr/colorControlHighlight"
             app:layout_constraintBottom_toTopOf="@id/go_to_album"
-            app:layout_constraintTop_toBottomOf="@id/share" />
+            app:layout_constraintTop_toBottomOf="@id/share" 
+            android:textColor="@color/shit"/>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/go_to_album"
@@ -139,7 +146,8 @@
             app:layout_constraintBottom_toTopOf="@id/go_to_artist"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/divider2"
-            tools:visibility="visible" />
+            tools:visibility="visible" 
+            android:textColor="@color/shit"/>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/go_to_artist"
@@ -148,7 +156,8 @@
             app:drawableStartCompat="@drawable/ic_artist"
             app:layout_constraintBottom_toTopOf="@id/divider3"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/go_to_album" />
+            app:layout_constraintTop_toBottomOf="@id/go_to_album" 
+            android:textColor="@color/shit"/>
 
         <View
             android:id="@+id/divider3"
@@ -168,6 +177,7 @@
             app:drawableStartCompat="@drawable/ic_info"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/divider3" />
+            app:layout_constraintTop_toBottomOf="@id/divider3" 
+            android:textColor="@color/shit"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

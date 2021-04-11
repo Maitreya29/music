@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Nezuko Music</string>
+    <string name="app_name">Music</string>
     <string name="toast_requires_storage_access">App braucht Zugriff auf den Gerätespeicher, um zu funktionieren</string>
-    <string name="notification_playback_channel_name">Nezuko Music Benachrichtigung</string>
+    <string name="notification_playback_channel_name">Music Benachrichtigung</string>
     <string name="notification_audio_channel_name">Audio-Geräteerkennung</string>
     <!-- Content description -->
     <string name="desc_album_art">Albumcover</string>
@@ -202,7 +202,7 @@
     <string name="lead_developer">Führender Entwickler</string>
     <!-- Donations -->
     <string name="category_contribute">Unterstütze</string>
-    <string name="donation_card_title">Gefällt dir Nezuko Music?</string>
+    <string name="donation_card_title">Gefällt dir Music?</string>
     <string name="donation_card_text">Bitte erwägen Sie eine kleine Spende zur Unterstützung der Entwicklung</string>
     <string name="buy_me_coffee">Kauf mir einen Kaffee</string>
     <!-- About -->

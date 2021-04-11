@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="ic_launcher_background">#6c5ce7</color>
 
     <color name="translucent">#5C000000</color>
     <color name="translucent_rgb">#a3a3a3</color>
@@ -10,6 +9,11 @@
     <color name="lightColorBackground">#FFFFFF</color>
     <color name="lightColorOnPrimary">#FFFFFF</color>
 
+    <color name="card">#FFFFFF</color>
+
+
+    <color name="textshit">#000000</color>
+    <color name="shit">#000000</color>
 
     <!-- ********************************************* -->
     <!-- *********** COLORS FOR DARK GREY *********** -->

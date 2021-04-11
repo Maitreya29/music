@@ -9,6 +9,7 @@
     <ViewStub
         android:id="@+id/stub_folder_chooser_rv"
         android:layout_width="match_parent"
+        android:textColor="@color/shit"
         android:layout_height="match_parent"
         android:layout="@layout/recycler_view_vertical_fast_scroll"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
@@ -17,6 +18,7 @@
         android:id="@+id/stub_no_data_found"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:textColor="@color/shit"
         android:layout_gravity="center"
         android:layout="@layout/empty_tracks_text" />
 

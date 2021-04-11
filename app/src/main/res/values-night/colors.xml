@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ic_launcher_background">#6c5ce7</color>
+
+    <color name="translucent">#5C000000</color>
+    <color name="translucent_rgb">#a3a3a3</color>
+
+    <!-- ********************************************* -->
+    <!-- *********** COLORS FOR LIGHT MODE *********** -->
+    <color name="lightColorBackground">#000000</color>
+    <color name="lightColorOnPrimary">#0d0d0d</color>
+
+
+    <!-- ********************************************* -->
+    <!-- *********** COLORS FOR DARK GREY *********** -->
+    <color name="darkColorBackground">#121212</color>
+    <color name="darkColorSurface">#1e1e1e</color>
+
+    <color name="card">#000000</color>
+
+
+    <!-- ******************************************************** -->
+    <!-- ***************** COLORS FOR KINDA MODE **************** -->
+
+    <!-- To create branded dark surfaces, overlay the primary
+         brand color (#6c5ce7) at a 8% opacity over the recommended dark theme
+         surface color (#121212).-->
+    <color name="signatureColorBackground">#191823</color>
+    <!--1dp elevated surface 5% alpha over white overlay on background color-->
+    <color name="signatureColorSurface">#25242e</color>
+    <color name="signatureColorOnPrimary">@color/signatureColorSurface</color>
+
+
+    <!-- ******************************************************** -->
+    <!-- *************** COLORS FOR BLACK ******************** -->
+
+    <color name="blackColorBackground">#000000</color>
+    <color name="blackColorSurface">#0d0d0d</color>
+    <color name="blackColorOnPrimary">@color/md_grey_900</color>
+
+    <color name="textshit">#FFFFFF</color>
+    <color name="shit">#FFFFFF</color>
+
+    <!-- ******************************************************** -->
+    <!-- ********************* WIDGET COLORS ******************** -->
+    <color name="widget_background_light">#000000</color>
+    <color name="widget_background_dark">#000000</color>
+    <color name="widget_primary_text_color_light">#FFFFFF</color>
+    <color name="widget_primary_text_color_dark">#FFFFFF</color>
+    <color name="widget_button_tint_light">#FFFFFF</color>
+    <color name="widget_button_tint_dark">#FFFFFF</color>
+</resources>

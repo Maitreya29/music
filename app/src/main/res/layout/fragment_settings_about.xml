@@ -41,8 +41,8 @@
         android:id="@+id/app_version"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/Appearance.Text.Subtitle2"
-        android:textColor="?android:attr/textColorSecondary"
+            android:textAppearance="@style/Appearance.Text.Subtitle2"
+            android:textColor="@color/shit"
         app:layout_constraintStart_toEndOf="@id/guide_start"
         app:layout_constraintTop_toBottomOf="@id/app_version_title"
         tools:text="@tools:sample/us_zipcodes" />
@@ -62,8 +62,8 @@
         android:id="@+id/app_release_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/Appearance.Text.Subtitle2"
-        android:textColor="?android:attr/textColorSecondary"
+            android:textAppearance="@style/Appearance.Text.Subtitle2"
+            android:textColor="@color/shit"
         app:layout_constraintStart_toEndOf="@id/guide_start"
         app:layout_constraintTop_toBottomOf="@id/build_date_title"
         tools:text="@tools:sample/date/hhmmss" />
@@ -83,8 +83,8 @@
         android:id="@+id/about_app_build_code"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/Appearance.Text.Subtitle2"
-        android:textColor="?android:attr/textColorSecondary"
+            android:textAppearance="@style/Appearance.Text.Subtitle2"
+            android:textColor="@color/shit"
         app:layout_constraintStart_toEndOf="@id/guide_start"
         app:layout_constraintTop_toBottomOf="@id/build_code_title"
         tools:text="@tools:sample/us_zipcodes" />
@@ -104,8 +104,8 @@
         android:id="@+id/about_app_build_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/Appearance.Text.Subtitle2"
-        android:textColor="?android:attr/textColorSecondary"
+            android:textAppearance="@style/Appearance.Text.Subtitle2"
+            android:textColor="@color/shit"
         app:layout_constraintBottom_toTopOf="@id/social_link_title"
         app:layout_constraintStart_toEndOf="@id/guide_start"
         app:layout_constraintTop_toBottomOf="@id/build_type_title"
@@ -152,7 +152,7 @@
             android:visibility="gone"
             android:text="@string/twitter"
             android:textAppearance="@style/Appearance.Text.Subtitle2"
-            android:textColor="@color/darkColorBackground" />
+            android:textColor="@color/shit" />
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
@@ -185,7 +185,7 @@
             android:gravity="center"
             android:text="@string/telegram"
             android:textAppearance="@style/Appearance.Text.Subtitle2"
-            android:textColor="@color/darkColorBackground" />
+            android:textColor="@color/shit" />
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
@@ -219,7 +219,7 @@
             android:gravity="center"
             android:text="@string/github"
             android:textAppearance="@style/Appearance.Text.Subtitle2"
-            android:textColor="@color/darkColorBackground" />
+            android:textColor="@color/shit" />
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
@@ -253,6 +253,6 @@
             android:visibility="gone"
             android:text="@string/crowdin"
             android:textAppearance="@style/Appearance.Text.Subtitle2"
-            android:textColor="@color/darkColorBackground" />
+            android:textColor="@color/shit" />
     </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

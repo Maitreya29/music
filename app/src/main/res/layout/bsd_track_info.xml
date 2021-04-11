@@ -29,7 +29,7 @@
         android:layout_marginTop="32dp"
         android:maxLines="1"
         android:textAppearance="@style/Appearance.Text.Subtitle2"
-        tools:text="Track: Let me love you (Deluxe)" />
+android:textColor="@color/shit"        tools:text="Track: Let me love you (Deluxe)" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/dialog_track_album"
@@ -38,7 +38,7 @@
         android:layout_marginTop="8dp"
         android:maxLines="1"
         android:textAppearance="@style/Appearance.Text.Subtitle2"
-        tools:text="Album: Let me love you" />
+android:textColor="@color/shit"        tools:text="Album: Let me love you" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/dialog_track_artist"
@@ -47,7 +47,7 @@
         android:layout_marginTop="8dp"
         android:maxLines="1"
         android:textAppearance="@style/Appearance.Text.Subtitle2"
-        tools:text="Artist: Selina Gomez" />
+android:textColor="@color/shit"        tools:text="Artist: Selina Gomez" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/dialog_file_size"
@@ -56,7 +56,7 @@
         android:layout_marginTop="8dp"
         android:maxLines="1"
         android:textAppearance="@style/Appearance.Text.Subtitle2"
-        tools:text="File size: 11.56 MB" />
+android:textColor="@color/shit"        tools:text="File size: 11.56 MB" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/dialog_file_type"
@@ -65,7 +65,7 @@
         android:layout_marginTop="8dp"
         android:maxLines="1"
         android:textAppearance="@style/Appearance.Text.Subtitle2"
-        tools:text="File type: audio/mp3" />
+android:textColor="@color/shit"        tools:text="File type: audio/mp3" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/dialog_bitrate"
@@ -74,7 +74,7 @@
         android:layout_marginTop="8dp"
         android:maxLines="1"
         android:textAppearance="@style/Appearance.Text.Subtitle2"
-        tools:text="Bit rate: 320kbps" />
+android:textColor="@color/shit"        tools:text="Bit rate: 320kbps" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/dialog_sample_rate"
@@ -83,7 +83,7 @@
         android:layout_marginTop="8dp"
         android:maxLines="1"
         android:textAppearance="@style/Appearance.Text.Subtitle2"
-        tools:text="Sample rate: 44100Hz" />
+android:textColor="@color/shit"        tools:text="Sample rate: 44100Hz" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/dialog_channel_count"
@@ -92,7 +92,7 @@
         android:layout_marginTop="8dp"
         android:maxLines="1"
         android:textAppearance="@style/Appearance.Text.Subtitle2"
-        tools:text="Number of channels: 2" />
+android:textColor="@color/shit"        tools:text="Number of channels: 2" />
 
     <com.nezukoos.music.views.AccentColorMaterialButton
         android:id="@+id/dialog_ok"

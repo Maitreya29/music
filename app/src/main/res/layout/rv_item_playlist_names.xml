@@ -10,8 +10,7 @@
     <ImageView
         style="@style/ButtonStyle24"
         android:contentDescription="@string/desc_album_art"
-        android:src="@drawable/ic_playlist"
-        app:tint="?attr/colorControlNormal" />
+        android:src="@drawable/ic_playlist"/>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/rv_item_playlist_name"
@@ -19,5 +18,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:textAppearance="@style/Appearance.Text.Body2"
-        tools:text="@tools:sample/full_names" />
+        tools:text="@tools:sample/full_names" 
+        android:textColor="@color/shit"/>
 </LinearLayout>

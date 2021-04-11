@@ -97,8 +97,8 @@
                     android:layout_gravity="bottom|center_horizontal"
                     android:layout_marginBottom="16dp"
                     android:text="@string/pay_pal"
-                    android:textAppearance="@style/Appearance.Text.Subtitle2"
-                    android:textColor="@color/darkColorBackground" />
+            android:textAppearance="@style/Appearance.Text.Subtitle2"
+            android:textColor="@color/shit" />
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
@@ -129,8 +129,8 @@
                     android:layout_gravity="bottom|center_horizontal"
                     android:layout_marginBottom="16dp"
                     android:text="@string/buy_me_coffee"
-                    android:textAppearance="@style/Appearance.Text.Subtitle2"
-                    android:textColor="@color/darkColorBackground" />
+            android:textAppearance="@style/Appearance.Text.Subtitle2"
+            android:textColor="@color/shit" />
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
@@ -161,8 +161,8 @@
                     android:layout_gravity="bottom|center_horizontal"
                     android:layout_marginBottom="16dp"
                     android:text="@string/upi"
-                    android:textAppearance="@style/Appearance.Text.Subtitle2"
-                    android:textColor="@color/darkColorBackground" />
+            android:textAppearance="@style/Appearance.Text.Subtitle2"
+            android:textColor="@color/shit" />
             </com.google.android.material.card.MaterialCardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>

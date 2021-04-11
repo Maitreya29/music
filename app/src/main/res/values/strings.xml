@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Nezuko Music</string>
+    <string name="app_name">Music</string>
     <string name="toast_requires_storage_access">App needs to access device storage to work</string>
     <string name="donatetodev">Donate</string>
     <string name="notification_playback_channel_name">Music Notification</string>
@@ -197,7 +197,7 @@
     <!-- Settings Activity -->
     <string name="settings">Settings</string>
     <string name="restart_app">Restart app</string>
-    <string name="restart_app_dialog_desc">Nezuko Music needs to restart for changes to take effect</string>
+    <string name="restart_app_dialog_desc">Music needs to restart for changes to take effect</string>
     <string name="restart">Restart</string>
     <string name="do_it_later">Do it later</string>
 
@@ -360,7 +360,7 @@
 
     <!-- Donations -->
     <string name="category_contribute">Contribute</string>
-    <string name="donation_card_title">Enjoying Nezuko Music?</string>
+    <string name="donation_card_title">Enjoying Music?</string>
     <string name="donation_card_text">It takes a lot of time and effort to deliver quality products, that too for free\nPlease consider making a small donation to support the development</string>
     <string name="donate_options_title">Donate using</string>
     <string name="buy_me_coffee">Buy me a Coffee</string>

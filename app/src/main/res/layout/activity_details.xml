@@ -67,7 +67,7 @@
         android:gravity="center"
         android:maxLines="1"
         android:textAppearance="@style/Appearance.Text.Subtitle2"
-        app:layout_constraintEnd_toEndOf="@id/details_activity_art"
+android:textColor="@color/shit"        app:layout_constraintEnd_toEndOf="@id/details_activity_art"
         app:layout_constraintStart_toStartOf="@id/details_activity_art"
         app:layout_constraintTop_toBottomOf="@id/details_activity_art"
         tools:text="@tools:sample/cities" />

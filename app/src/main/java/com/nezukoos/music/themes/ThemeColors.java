@@ -69,7 +69,7 @@ public class ThemeColors {
                 android.R.attr.textColorSecondary,   // [7]
         };
         TypedArray array = context.obtainStyledAttributes(ThemeManagerUtils.getThemeToApply(), attrs);
-        mCurrentColorControlNormal = array.getColor(0, 0x8A000000);
+        mCurrentColorControlNormal = array.getColor(0, 0xFFF2F2F2);
         mCurrentColorControlHighlight = array.getColor(1, 0x0DFFFFFF);
         mCurrentColorSurface = array.getColor(2, 0xFFFFFFFF);
         mCurrentColorOnSurface = array.getColor(3, 0xFF000000);

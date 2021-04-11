@@ -1,0 +1,72 @@
+<resources>
+
+    <!-- Specific Feed activity theme -->
+    <style name="ActivityThemeLight" parent="PulseDarkTheme" />
+
+    <style name="ActivityThemeDark" parent="PulseDarkTheme" />
+
+    <style name="ActivityThemeKindaDark" parent="PulseDarkTheme" />
+
+    <style name="ActivityThemeBlack" parent="PulseDarkTheme" />
+
+    <style name="ButtonStyleBase">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:background">?selectableItemBackgroundBorderless</item>
+        <item name="android:scaleType">fitXY</item>
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:contentDescription">@string/desc_icon_button</item>
+        <item name="tint">?attr/colorControlNormal</item>
+    </style>
+
+    <style name="ButtonStyle36" parent="ButtonStyleBase">
+        <item name="android:padding">6dp</item>
+    </style>
+
+    <style name="ButtonStyle24" parent="ButtonStyleBase">
+        <item name="android:padding">12dp</item>
+    </style>
+
+    <style name="WidgetButton">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:padding">12dp</item>
+    </style>
+
+    <style name="TrackContextMenuTextStyle">
+        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:paddingStart">24dp</item>
+        <item name="android:paddingEnd">24dp</item>
+        <item name="android:drawablePadding">16dp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+    <style name="ToggleItemText">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:paddingStart">32dp</item>
+        <item name="android:paddingEnd">0dp</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+        <item name="android:textAppearance">@style/Appearance.Text.Subtitle1</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_marginTop">8dp</item>
+    </style>
+
+    <style name="TextAppearanceToolbar" parent="Appearance.Text.Headline6" />
+
+    <style name="TextAppearanceExpanded" parent="Appearance.Text.Headline4">
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ItemTitle" parent="Base.ItemTitle">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ItemSub" parent="Base.ItemSub" />
+</resources>

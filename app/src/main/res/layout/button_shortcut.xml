@@ -17,6 +17,6 @@
         android:layout_marginStart="12dp"
         android:gravity="start"
         android:textAppearance="@style/Appearance.Text.Subtitle2"
-        android:textSize="15sp"
+android:textColor="@color/shit"        android:textSize="15sp"
         tools:text="@tools:sample/full_names" />
 </merge>

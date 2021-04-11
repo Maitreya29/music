@@ -70,7 +70,6 @@ public class PlaylistsAdapter extends EfficientRecyclerViewAdapter<String, Playl
 
         public PlaylistItemHolder(@NonNull View itemView, @NonNull PlaylistCardListener listener) {
             super(itemView);
-            itemView.setBackground(ImageUtil.getHighlightedItemBackground(itemView.getContext()));
             itemView.setOnClickListener(v ->
                     listener.onItemClick(getAdapterPosition()));
 

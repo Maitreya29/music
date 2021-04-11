@@ -24,6 +24,7 @@
         android:text="@string/top_albums"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/shit"
         app:layout_constraintTop_toBottomOf="@id/playlist_selector_title" />
 
     <com.nezukoos.music.views.AccentColorSwitch
@@ -33,6 +34,7 @@
         android:layout_marginEnd="32dp"
         app:layout_constraintBottom_toBottomOf="@id/playlist_top_albums"
         app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/shit"
         app:layout_constraintTop_toTopOf="@id/playlist_top_albums" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -40,6 +42,7 @@
         style="@style/ToggleItemText"
         android:text="@string/for_you"
         app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/shit"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/playlist_top_albums" />
 
@@ -50,6 +53,7 @@
         android:layout_marginEnd="32dp"
         app:layout_constraintBottom_toBottomOf="@id/playlist_for_you"
         app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/shit"
         app:layout_constraintTop_toTopOf="@id/playlist_for_you" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -58,6 +62,7 @@
         android:layout_height="wrap_content"
         android:paddingTop="8dp"
         android:paddingEnd="64dp"
+        android:textColor="@color/shit"
         android:paddingBottom="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -67,6 +72,7 @@
     <com.nezukoos.music.views.AccentColorSwitch
         android:id="@+id/switch_rediscover"
         android:layout_width="wrap_content"
+        android:textColor="@color/shit"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         app:layout_constraintBottom_toBottomOf="@id/playlist_rediscover"
@@ -76,6 +82,7 @@
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/playlist_new_in_library"
         style="@style/ToggleItemText"
+        android:textColor="@color/shit"
         android:text="@string/new_in_library"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -85,6 +92,7 @@
         android:id="@+id/switch_new_in_library"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/shit"
         android:layout_marginEnd="32dp"
         app:layout_constraintBottom_toBottomOf="@id/playlist_new_in_library"
         app:layout_constraintEnd_toEndOf="parent"
@@ -94,6 +102,7 @@
         android:id="@+id/playlist_top_artist"
         style="@style/ToggleItemText"
         android:text="@string/top_artist"
+        android:textColor="@color/shit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/playlist_new_in_library" />
@@ -102,6 +111,7 @@
         android:id="@+id/switch_top_artist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/shit"
         android:layout_marginEnd="32dp"
         app:layout_constraintBottom_toBottomOf="@id/playlist_top_artist"
         app:layout_constraintEnd_toEndOf="parent"

@@ -27,7 +27,7 @@
         android:gravity="center_horizontal"
         android:singleLine="true"
         android:textAppearance="@style/Appearance.Text.Subtitle2"
-        app:layout_constraintEnd_toEndOf="parent"
+android:textColor="@color/shit"        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/big_album_item_art"
         tools:text="@tools:sample/lorem/random" />

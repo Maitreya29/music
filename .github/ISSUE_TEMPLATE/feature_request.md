@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Suggest a feature you'd like to see on Nezuko Music
+about: Suggest a feature you'd like to see on Music
 title: "[Feature Request]"
 labels: ''
 assignees: ''

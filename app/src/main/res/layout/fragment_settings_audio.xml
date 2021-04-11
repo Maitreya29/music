@@ -18,7 +18,6 @@
         android:id="@+id/audio_device_bluetooth_toggle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:settingToggleableItemIcon="@drawable/ic_bluetooth_connected"
         app:settingToggleableItemText="@string/bluetooth_auto_play_desc"
         app:settingToggleableItemTitle="@string/bluetooth_auto_play" />
 
@@ -27,7 +26,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="normal"
-        app:settingItemIcon="@drawable/ic_play_circle"
         app:settingItemIconColor="?attr/colorControlNormal"
         app:settingItemText="@string/bluetooth_auto_play_action_desc"
         app:settingItemTitle="@string/bluetooth_auto_play_action" />
@@ -37,7 +35,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="normal"
-        app:settingItemIcon="@drawable/ic_play_circle"
         app:settingItemIconColor="?attr/colorControlNormal"
         app:settingItemText="@string/tile_auto_play_desc"
         app:settingItemTitle="@string/tile_auto_play" />
@@ -54,7 +51,6 @@
         android:id="@+id/sleep_timer_toggle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:settingToggleableItemIcon="@drawable/ic_timer"
         app:settingToggleableItemText="@string/sleep_timer_desc"
         app:settingToggleableItemTitle="@string/sleep_timer" />
 
@@ -63,7 +59,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="normal"
-        app:settingItemIcon="@drawable/ic_timer"
         app:settingItemIconColor="?attr/colorControlNormal"
         app:settingItemText="@string/configure_sleep_timer_desc"
         app:settingItemTitle="@string/configure_sleep_timer" />
@@ -72,7 +67,6 @@
         android:id="@+id/repeat_timer_toggle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:settingToggleableItemIcon="@drawable/ic_replay"
         app:settingToggleableItemText="@string/repeating_sleep_timer_desc"
         app:settingToggleableItemTitle="@string/repeating_sleep_timer" />
 </LinearLayout>

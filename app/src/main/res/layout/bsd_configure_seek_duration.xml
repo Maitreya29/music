@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="@string/forward_seek"
-        android:textAppearance="@style/Appearance.Text.Subtitle2" />
+        android:textColor="@color/shit"/>
 
     <com.nezukoos.music.views.ValueSlider
         android:id="@+id/forward_seek_duration"
@@ -28,24 +28,28 @@
         app:endValue="60"
         app:startValue="1"
         app:unit="@string/duration_filter_unit"
-        tools:defaultValue="10" />
+        tools:defaultValue="10" 
+        android:textColor="@color/shit"/>
 
     <com.google.android.material.textview.MaterialTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/reverse_seek"
-        android:textAppearance="@style/Appearance.Text.Subtitle2" />
+        android:textColor="@color/shit"/>
 
     <com.nezukoos.music.views.ValueSlider
         android:id="@+id/backwards_seek_duration"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:paddingTop="8dp"
         app:endValue="60"
         app:startValue="1"
         app:unit="@string/duration_filter_unit"
-        tools:defaultValue="10" />
+        tools:defaultValue="10" 
+        android:textColor="@color/shit"
+        android:color="@color/shit"/>
 
     <com.nezukoos.music.views.AccentColorMaterialButton
         android:id="@+id/seek_duration_confirm_btn"
@@ -54,5 +58,6 @@
         android:layout_gravity="end"
         android:layout_marginTop="8dp"
         android:text="@string/set"
-        app:accentButtonStyle="text" />
+        app:accentButtonStyle="text" 
+        android:textColor="@color/shit"/>
 </LinearLayout>

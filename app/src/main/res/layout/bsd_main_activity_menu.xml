@@ -25,7 +25,7 @@
         android:layout_marginTop="32dp"
         android:text="@string/welcome"
         android:textAppearance="@style/Appearance.Text.Body2"
-        android:textColor="?android:attr/textColorSecondary"
+        android:textColor="@color/textshit"
         app:layout_constraintStart_toEndOf="@id/drawer_user_logo"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,8 +39,7 @@
         android:requiresFadingEdge="horizontal"
         android:singleLine="true"
         android:textAppearance="@style/Appearance.Text.Headline6"
-        android:textColor="?android:attr/textColorPrimary"
-        app:drawableTint="?attr/colorControlNormal"
+        android:textColor="@color/textshit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/drawer_user_logo"
         app:layout_constraintTop_toBottomOf="@id/drawer_welcome_text"
@@ -59,7 +58,7 @@
         android:paddingEnd="32dp"
         android:text="@string/settings"
         android:textAppearance="@style/Appearance.Text.Body1"
-        app:drawableTint="?attr/colorControlNormal"
+        android:textColor="@color/textshit"
         app:layout_constraintTop_toBottomOf="@id/drawer_user_name" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -73,8 +72,9 @@
         android:paddingStart="32dp"
         android:paddingEnd="32dp"
         android:text="@string/equalizer"
+        android:textStyle="normal"
         android:textAppearance="@style/Appearance.Text.Body1"
-        app:drawableTint="?attr/colorControlNormal"
+        android:textColor="@color/textshit"
         app:layout_constraintTop_toBottomOf="@id/drawer_option_settings" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -85,7 +85,7 @@
         android:paddingBottom="24dp"
         android:text="@string/footer_message"
         android:textAppearance="@style/Appearance.Text.Caption"
-        android:textColor="?android:attr/textColorPrimary"
+        android:textColor="@color/textshit"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/drawer_option_equalizer" />
 </androidx.constraintlayout.widget.ConstraintLayout>

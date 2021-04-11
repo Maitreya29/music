@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/play"
+        android:drawable="@drawable/ic_round_play"
+        android:state_selected="false" />
+    <item
+        android:id="@+id/pause"
+        android:drawable="@drawable/ic_round_pause"
+        android:state_selected="true" />
+
+    <transition
+        android:drawable="@drawable/play_to_pause_linear_out_slow_in"
+        android:fromId="@+id/play"
+        android:toId="@+id/pause" />
+
+    <transition
+        android:drawable="@drawable/pause_to_play"
+        android:fromId="@+id/pause"
+        android:toId="@+id/play" />
+</animated-selector>

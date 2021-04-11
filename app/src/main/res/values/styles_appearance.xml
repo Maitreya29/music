@@ -23,12 +23,9 @@
     </style>
 
     <style name="Base.ItemTitle" parent="Appearance.Text.Subtitle1">
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
     </style>
 
     <style name="Base.ItemSub" parent="Appearance.Text.Subtitle2">
-        <item name="android:textStyle">normal</item>
-        <item name="android:textColor">?android:attr/textColorSecondary</item>
     </style>
 
     <style name="Appearance.Text.Headline4" parent="TextAppearance.AppCompat.Display1">

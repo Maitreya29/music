@@ -58,9 +58,9 @@ public class ConfigurePlaylistSection extends RoundedCustomBottomSheetFragment {
         String rediscoverText = getString(R.string.rediscover);
         String rediscoverDesc = getString(R.string.rediscover_section_desc);
 
-        SpannableString spannableString = new SpannableString(rediscoverText + "\n" + rediscoverDesc);
+        SpannableString spannableString = new SpannableString(rediscoverText);
         spannableString.setSpan(
-                new AbsoluteSizeSpan(DimensionsUtil.getDimensionPixelSize(mContext, 12)),
+                new AbsoluteSizeSpan(DimensionsUtil.getDimensionPixelSize(mContext, 10)),
                 rediscoverText.length(),
                 spannableString.length(),
                 Spanned.SPAN_INCLUSIVE_INCLUSIVE);

@@ -31,7 +31,8 @@
             android:maxLength="8"
             android:minEms="8"
             android:textAppearance="@style/Appearance.Text.Subtitle1"
-            tools:text="@tools:sample/us_zipcodes" />
+            tools:text="@tools:sample/us_zipcodes" 
+            android:textColor="@color/shit"/>
     </com.nezukoos.music.views.AccentColorTextInputLayout>
 
     <com.nezukoos.music.views.AccentColorMaterialButton

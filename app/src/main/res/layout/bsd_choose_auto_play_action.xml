@@ -30,7 +30,7 @@
             android:paddingStart="32dp"
             android:paddingEnd="0dp"
             android:text="@string/play_shuffle"
-            android:textAppearance="@style/Appearance.Text.Subtitle2" />
+            android:textColor="@color/shit"/>
 
         <com.nezukoos.music.views.AccentColorRadioButton
             android:id="@+id/radio_btn_suggested"
@@ -39,7 +39,7 @@
             android:paddingStart="32dp"
             android:paddingEnd="0dp"
             android:text="@string/play_for_you"
-            android:textAppearance="@style/Appearance.Text.Subtitle2" />
+            android:textColor="@color/shit"/>
 
         <com.nezukoos.music.views.AccentColorRadioButton
             android:id="@+id/radio_btn_latest"
@@ -48,7 +48,7 @@
             android:paddingStart="32dp"
             android:paddingEnd="0dp"
             android:text="@string/play_new_in_store"
-            android:textAppearance="@style/Appearance.Text.Subtitle2" />
+            android:textColor="@color/shit"/>
 
         <com.nezukoos.music.views.AccentColorRadioButton
             android:id="@+id/radio_btn_continue"
@@ -57,7 +57,7 @@
             android:paddingStart="32dp"
             android:paddingEnd="0dp"
             android:text="@string/play_continue_playlist"
-            android:textAppearance="@style/Appearance.Text.Subtitle2" />
+            android:textColor="@color/shit"/>
     </RadioGroup>
 
     <com.nezukoos.music.views.AccentColorMaterialButton

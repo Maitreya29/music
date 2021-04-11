@@ -1,4 +1,4 @@
-﻿Nezuko Music V4.1.0
+﻿Music V4.1.0
 
 Note: For Android 11 devices, please clear data and cache after updating.
 

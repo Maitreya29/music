@@ -25,5 +25,5 @@
         android:gravity="center_horizontal"
         android:maxLines="1"
         android:textAppearance="@style/Appearance.Text.Subtitle2"
-        tools:text="@tools:sample/full_names" />
+android:textColor="@color/shit"        tools:text="@tools:sample/full_names" />
 </LinearLayout>

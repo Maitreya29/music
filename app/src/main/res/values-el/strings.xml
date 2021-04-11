@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Nezuko Music</string>
+    <string name="app_name">Music</string>
     <string name="toast_requires_storage_access">Απαιτείται πρόσβαση στον αποθηκευτικό χώρο της συσκευής σας για να λειτουργήσει η εφαρμογή</string>
     <string name="notification_playback_channel_name">Ειδοποίηση Μουσικής</string>
     <string name="notification_audio_channel_name">Ανίχνευση Συσκευής Ήχου</string>
@@ -266,7 +266,7 @@
     <string name="telegram">Telegram</string>
     <!-- Donations -->
     <string name="category_contribute">Συνεισφέρετε</string>
-    <string name="donation_card_title">Απολαμβάνετε την Nezuko Music;</string>
+    <string name="donation_card_title">Απολαμβάνετε την Music;</string>
     <string name="donation_card_text">Απαιτείται πολύς χρόνος και κόπος για την παράδοση ποιοτικών προϊόντων, αφιλοκερδώς μάλιστα\nΠαρακαλώ, υποστηρίξτε την ανάπτυξη της εφαρμογής με μία μικρή δωρεά</string>
     <string name="donate_options_title">Δωρεά μέσω</string>
     <string name="buy_me_coffee">Κεράστε με ένα καφεδάκι</string>
