@@ -282,6 +282,7 @@
     <string name="style_modern">Modern</string>
     <string name="style_stylish">Stylish</string>
     <string name="style_edge">Edge to edge</string>
+    <string name="style_nezuko">Nezuko</string>
     <string name="corner_radius">Corner radius</string>
     <string name="corner_radius_desc">Select album cover corner radius</string>
     <string name="corner_radius_selector_title">Adjust corner radius</string>
