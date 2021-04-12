@@ -65,9 +65,10 @@ public abstract class DraggableNowPlayingSheetActivity extends ControllerActivit
 
     private void setUpBottomNavigationView() {
         mBottomNavBar = findViewById(R.id.bottom_nav_bar);
-        ColorStateList colorStateList = ThemeColors.getEnabledSelectedColorStateList();
-        mBottomNavBar.setItemIconTintList(colorStateList);
-        mBottomNavBar.setItemTextColor(colorStateList);
+        ColorStateList colorStateList2 = ThemeColors.getEnabledSelectedColorStateList();
+        ColorStateList colorStateList1 = ThemeColors.getEnabledSelectedColorStateList1();
+        mBottomNavBar.setItemIconTintList(colorStateList2);
+        mBottomNavBar.setItemTextColor(colorStateList1);
         mBottomNavBar.setItemRippleColor(ThemeColors.getBottomNavigationViewRippleColor());
         mBottomNavBar.setOnNavigationItemSelectedListener(menuItem -> {
             mBottomNavBar.postOnAnimation(() -> onNavigationItemSelected(menuItem));

@@ -309,6 +309,46 @@ public class ThemeColors {
 
         final int[] colors = new int[enabledSelectedStates.length];
 
+        colors[0] = R.color.card;
+        colors[1] = mCurrentColorControlNormal;
+        return new ColorStateList(enabledSelectedStates, colors);
+    }
+
+    /**
+     * Helper method to generate a simple color state list that represents
+     * Two states: Enabled,Selected & Enabled, Unselected
+     *
+     * @return ColorStateList object
+     */
+    @NonNull
+    public static ColorStateList getEnabledSelectedColorStateList1() {
+        int[][] enabledSelectedStates = new int[][]{
+                new int[]{android.R.attr.state_enabled, android.R.attr.state_selected}, // [0]
+                new int[]{android.R.attr.state_enabled, -android.R.attr.state_selected} // [1]
+        };
+
+        final int[] colors = new int[enabledSelectedStates.length];
+
+        colors[0] = mCurrentColorPrimary;
+        colors[1] = mCurrentColorPrimary;
+        return new ColorStateList(enabledSelectedStates, colors);
+    }
+
+    /**
+     * Helper method to generate a simple color state list that represents
+     * Two states: Enabled,Selected & Enabled, Unselected
+     *
+     * @return ColorStateList object
+     */
+    @NonNull
+    public static ColorStateList getEnabledSelectedColorStateList1() {
+        int[][] enabledSelectedStates = new int[][]{
+                new int[]{android.R.attr.state_enabled, android.R.attr.state_selected}, // [0]
+                new int[]{android.R.attr.state_enabled, -android.R.attr.state_selected} // [1]
+        };
+
+        final int[] colors = new int[enabledSelectedStates.length];
+
         colors[0] = mCurrentColorPrimary;
         colors[1] = mCurrentColorControlNormal;
         return new ColorStateList(enabledSelectedStates, colors);

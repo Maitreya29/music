@@ -284,7 +284,6 @@
     <!-- For translators: If the color words does not make much sense in your language,
     you can try substituting a similar description of the color. But keep it short
     -->
-    <string name="color_slate_blue">Βιολετί</string>
     <string name="color_azure_radiance">Γαλάζιο</string>
     <string name="color_persian_mint">Πράσινο</string>
     <string name="color_valencia">Κόκκινο</string>

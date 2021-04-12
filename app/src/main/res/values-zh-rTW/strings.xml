@@ -255,7 +255,6 @@
     <!-- For translators: If the color words does not make much sense in your language,
     you can try substituting a similar description of the color. But keep it short
     -->
-    <string name="color_slate_blue">板岩藍</string>
     <string name="color_coral">珊瑚</string>
     <string name="color_sunkist">香吉士</string>
     <!-- Custom accents dialog -->

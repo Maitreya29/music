@@ -270,7 +270,6 @@
     <!-- For translators: If the color words does not make much sense in your language,
     you can try substituting a similar description of the color. But keep it short
     -->
-    <string name="color_slate_blue">Violette</string>
     <string name="color_azure_radiance">Azur</string>
     <string name="color_persian_mint">Menthe</string>
     <string name="color_valencia">Feu</string>

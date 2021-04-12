@@ -108,7 +108,6 @@ public class PulseToolbar extends RelativeLayout {
         final int padding = DimensionsUtil.getDimensionPixelSize(getContext(), 6);
         mNavigationIcon.setPadding(padding, padding, padding, padding);
 
-        mNavigationIcon.setImageTintList(ThemeColors.getColorControlNormalTintList());
 
         addView(mNavigationIcon);
     }
@@ -134,7 +133,6 @@ public class PulseToolbar extends RelativeLayout {
         final int padding = DimensionsUtil.getDimensionPixelSize(getContext(), 6);
         mQuickActionIcon.setPadding(padding, padding, padding, padding);
 
-        mQuickActionIcon.setImageTintList(ThemeColors.getColorControlNormalTintList());
 
         addView(mQuickActionIcon);
     }
@@ -156,7 +154,6 @@ public class PulseToolbar extends RelativeLayout {
         final int padding = DimensionsUtil.getDimensionPixelSize(getContext(), 6);
         mOverflowIcon.setPadding(padding, padding, padding, padding);
 
-        mOverflowIcon.setImageTintList(ThemeColors.getColorControlNormalTintList());
 
         addView(mOverflowIcon);
     }
