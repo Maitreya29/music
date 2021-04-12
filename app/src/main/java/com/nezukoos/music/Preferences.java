@@ -128,7 +128,7 @@ public final class Preferences {
     // Key to check whether "Desaturated color" is enabled
     public static final String KEY_ACCENTS_COLOR_DESATURATED = "AccentsColorDesaturated";
     // Constants for preset accent colors
-    public static final short ACCENT_SLATE_BLUE = 700;
+    public static final short ACCENT_NEZUKO_PINK = 700;
     public static final short ACCENT_AZURE_RADIANCE = 701;
     public static final short ACCENT_PERSIAN_MINT = 702;
     public static final short ACCENT_VALENCIA = 703;

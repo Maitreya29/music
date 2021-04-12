@@ -34,7 +34,6 @@ public class SplashActivity extends ThemeActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         ProviderManager.init(this);
-        TintHelper.setAccentTintTo((ImageView) findViewById(R.id.splash_logo));
         getPermission();
     }
 

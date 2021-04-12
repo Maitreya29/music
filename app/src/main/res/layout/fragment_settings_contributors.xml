@@ -107,7 +107,7 @@
                 android:id="@+id/tw_logo"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                app:icon="@drawable/ic_twitter"
+                app:icon="@drawable/instagram"
                 app:iconColor="@color/md_teal_A400"
                 app:layout_constraintEnd_toStartOf="@id/tg_logo"
                 app:layout_constraintStart_toEndOf="@id/gh_logo"
@@ -117,7 +117,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@string/twitter"
+                android:text="@string/instagram"
             android:textAppearance="@style/Appearance.Text.Subtitle2"
             android:textColor="@color/shit"
                 app:layout_constraintEnd_toEndOf="@id/tw_logo"
@@ -151,7 +151,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="25dp"
         android:text="@string/base_dev"
         android:textAppearance="@style/Appearance.Text.Overline" />
 

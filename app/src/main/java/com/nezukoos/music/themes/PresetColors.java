@@ -12,7 +12,7 @@ import com.nezukoos.music.model.AccentsModel;
 public class PresetColors {
 
     // Music accent color
-    public static final int SLATE_BLUE = Color.parseColor("#6c5ce7");
+    public static final int NEZUKO_PINK = Color.parseColor("#FF4081");
     private static final int AZURE_RADIANCE = Color.parseColor("#0984e3");
     private static final int PERSIAN_MINT = Color.parseColor("#00b894");
     private static final int VALENCIA = Color.parseColor("#d63031");
@@ -38,7 +38,7 @@ public class PresetColors {
             case Preferences.ACCENT_CORNFLOUR_BLUE:
                 return PresetColors.CORNFLOUR_BLUE;
             default:
-                return PresetColors.SLATE_BLUE;
+                return PresetColors.NEZUKO_PINK;
         }
     }
 
@@ -46,9 +46,9 @@ public class PresetColors {
     public static AccentsModel[] getPresetColorsModel(@NonNull Context context) {
         AccentsModel[] accentsModels = new AccentsModel[8];
         accentsModels[0] = new AccentsModel(
-                Preferences.ACCENT_SLATE_BLUE,
-                context.getString(R.string.color_slate_blue),
-                SLATE_BLUE);
+                Preferences.ACCENT_NEZUKO_PINK,
+                context.getString(R.string.color_nezuko_pink),
+                NEZUKO_PINK);
 
         accentsModels[1] = new AccentsModel(
                 Preferences.ACCENT_AZURE_RADIANCE,

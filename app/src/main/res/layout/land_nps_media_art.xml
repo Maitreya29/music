@@ -2,6 +2,7 @@
 <com.nezukoos.music.views.MediaArtImageView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nps_media_art_image_view"
+    android:layout_marginTop="5dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:contentDescription="@string/desc_album_art"

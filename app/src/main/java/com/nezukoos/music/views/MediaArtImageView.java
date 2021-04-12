@@ -84,7 +84,7 @@ public class MediaArtImageView extends ShapeableImageView {
                     @Override
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                         post(() -> {
-                            setBackgroundColor(ThemeColors.getCurrentColorBackgroundHighlight());
+                            setBackgroundColor(android.R.color.transparent);
                             setImageDrawable(MediaArtHelper.getDefaultAlbumArt(getContext(), albumId));
                         });
                         return true;

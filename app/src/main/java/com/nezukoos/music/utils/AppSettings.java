@@ -158,7 +158,7 @@ public class AppSettings {
 
     public static int getSelectedAccentId(@NonNull Context context) {
         return context.getSharedPreferences(Preferences.PREFS_PULSE_THEMES, Context.MODE_PRIVATE)
-                .getInt(Preferences.KEY_ACCENTS_COLOR_PRESET, Preferences.ACCENT_SLATE_BLUE);
+                .getInt(Preferences.KEY_ACCENTS_COLOR_PRESET, Preferences.ACCENT_NEZUKO_PINK);
     }
 
     public static boolean isPresetAccentModeEnabled(@NonNull Context context) {
@@ -175,7 +175,7 @@ public class AppSettings {
 
     public static int getCustomAccentColor(@NonNull Context context) {
         return context.getSharedPreferences(Preferences.PREFS_PULSE_THEMES, Context.MODE_PRIVATE)
-                .getInt(Preferences.KEY_ACCENTS_COLOR_CUSTOM, PresetColors.SLATE_BLUE);
+                .getInt(Preferences.KEY_ACCENTS_COLOR_CUSTOM, PresetColors.NEZUKO_PINK);
     }
 
     public static void setAppShortcutUsingDarkTheme(@NonNull Context context, boolean darkModeOn) {

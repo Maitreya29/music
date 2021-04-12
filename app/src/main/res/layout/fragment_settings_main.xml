@@ -56,7 +56,7 @@
         android:textStyle="normal"
         app:settingItemColoredIcon="true"
         app:settingItemIcon="@drawable/ic_widgets"
-        app:settingItemIconColor="@color/md_grey_500"
+        app:settingItemIconColor="@color/pinkb"
         app:settingItemText="@string/widgets_desc"
         app:settingItemTitle="@string/widgets" />
 

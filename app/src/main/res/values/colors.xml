@@ -31,6 +31,7 @@
     <!--1dp elevated surface 5% alpha over white overlay on background color-->
     <color name="signatureColorSurface">#25242e</color>
     <color name="signatureColorOnPrimary">@color/signatureColorSurface</color>
+    <color name="nib">#FFFFFF</color>
 
 
     <!-- ******************************************************** -->

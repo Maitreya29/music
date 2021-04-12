@@ -7,4 +7,5 @@
     android:ellipsize="end"
     android:maxLines="1"
     android:textAppearance="@style/ItemTitle"
-    tools:text="@tools:sample/full_names" />
+    tools:text="@tools:sample/full_names" 
+    android:textColor="@color/shit"/>

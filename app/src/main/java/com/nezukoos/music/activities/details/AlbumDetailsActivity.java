@@ -121,7 +121,7 @@ public class AlbumDetailsActivity extends BaseDetailsActivity implements Options
                 .listener(new RequestListener<Drawable>() {
                     @Override
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                        sharedImageView.setBackgroundColor(ThemeColors.getCurrentColorBackgroundHighlight());
+                        sharedImageView.setBackgroundColor(R.color.card);
                         sharedImageView.setImageDrawable(MediaArtHelper.getDefaultAlbumArt(sharedImageView.getContext(), mAlbumId));
                         supportStartPostponedEnterTransition();
                         return true;

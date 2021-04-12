@@ -9,6 +9,7 @@
     <!-- *********** COLORS FOR LIGHT MODE *********** -->
     <color name="lightColorBackground">#000000</color>
     <color name="lightColorOnPrimary">#0d0d0d</color>
+    <color name="nib">#1e1e1e</color>
 
 
     <!-- ********************************************* -->

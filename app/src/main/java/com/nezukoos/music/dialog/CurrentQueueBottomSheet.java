@@ -83,7 +83,7 @@ public class CurrentQueueBottomSheet extends RoundedCustomBottomSheetFragment im
         mUpNextTrackArtist = view.findViewById(R.id.up_next_track_sub_title);
 
         MaterialCardView upNextCard = view.findViewById(R.id.up_next_card);
-        upNextCard.setStrokeColor(ThemeColors.getCurrentColorControlNormal());
+        upNextCard.setStrokeColor(R.color.card);
         updateUpNextCard();
 
         List<MusicModel> list = mQueueManager.getPlaylist();

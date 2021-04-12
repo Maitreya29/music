@@ -60,7 +60,7 @@
 
 
     <!-- Home menu contents -->
-    <string name="welcome">Welcome,</string>
+    <string name="welcome">Welcome</string>
     <string name="def_user_name">User</string>
     <string name="footer_message">Made with \u2665 in India</string>
     <string name="select_image">Select image</string>
@@ -354,6 +354,7 @@
     <string name="lead_developer_0_user_name" translatable="false">\@Maitreya29</string>
     <string name="github">Github</string>
     <string name="twitter">Twitter</string>
+    <string name="instagram">Instagram</string>
     <string name="telegram">Telegram</string>
     <string name="crowdin">Translate</string>
 
@@ -382,7 +383,7 @@
     <!-- For translators: If the color words does not make much sense in your language,
     you can try substituting a similar description of the color. But keep it short
     -->
-    <string name="color_slate_blue">Slate Blue</string>
+    <string name="color_nezuko_pink">Nezuko Pink</string>
     <string name="color_azure_radiance">Azure Radiance</string>
     <string name="color_persian_mint">Persian Mint</string>
     <string name="color_valencia">Valencia</string>

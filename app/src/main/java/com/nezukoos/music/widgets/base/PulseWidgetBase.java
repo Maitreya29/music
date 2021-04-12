@@ -76,7 +76,7 @@ public abstract class PulseWidgetBase extends AppWidgetProvider {
         MediaController controller = mPulseController.getController();
         if (null != controller && null != controller.getMetadata())
             return controller.getMetadata().getBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART);
-        Drawable drawable = ImageUtil.generateTintedDefaultAlbumArt(context, PresetColors.SLATE_BLUE);
+        Drawable drawable = ImageUtil.generateTintedDefaultAlbumArt(context, PresetColors.NEZUKO_PINK);
         if (null == drawable) return null;
         return ImageUtil.getBitmapFromDrawable(drawable);
     }
