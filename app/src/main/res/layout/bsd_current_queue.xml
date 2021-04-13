@@ -6,22 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/current_queue_title"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_gravity="center_horizontal|top"
-        android:gravity="center"
-        android:text="@string/playlist_play_queue"
-        android:textAppearance="@style/TextAppearanceToolbar" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:animateLayoutChanges="true"
         android:clipToPadding="true"
         android:orientation="vertical"
-        android:paddingTop="56dp">
+        android:paddingTop="30dp">
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="wrap_content"
