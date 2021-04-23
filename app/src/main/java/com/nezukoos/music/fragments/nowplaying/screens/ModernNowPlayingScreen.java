@@ -1,5 +1,8 @@
 package com.nezukoos.music.fragments.nowplaying.screens;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.media.MediaMetadata;
 import android.media.session.PlaybackState;
 import android.os.Bundle;
@@ -10,12 +13,14 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.slider.Slider;
 import com.google.android.material.textview.MaterialTextView;
 import com.nezukoos.music.R;
+import com.nezukoos.music.interfaces.BlurBuilder;
 import com.nezukoos.music.fragments.nowplaying.base.BaseNowPlayingScreen;
 
 public class ModernNowPlayingScreen extends BaseNowPlayingScreen {
@@ -74,6 +79,11 @@ public class ModernNowPlayingScreen extends BaseNowPlayingScreen {
         mPlayPauseBtn.setOnClickListener(v -> togglePlayPause());
         mFavoriteBtn.setOnClickListener(v -> toggleFavorite());
         mShuffleBtn.setOnClickListener(v -> toggleShuffleMode());
+
+        ConstraintLayout mContainerView = (ConstraintLayout) view.findViewById(R.id.modblur);
+        Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.back);
+        Bitmap blurredBitmap = BlurBuilder.blur( getActivity(), originalBitmap );
+        mContainerView.setBackground(new BitmapDrawable(getResources(), blurredBitmap));
 
         setShowOptionsClickMenuListener(view.findViewById(R.id.modern_nps_options_btn));
         setGotToCurrentQueueCLickListener(mUpNext);
