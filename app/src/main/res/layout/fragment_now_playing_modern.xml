@@ -8,6 +8,7 @@
     android:clipChildren="false"
     android:clipToPadding="false">
 
+
     <ImageView
         android:id="@+id/modern_nps_close_btn"
         style="@style/ButtonStyleBase"
@@ -19,17 +20,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/modern_nps_head" />
 
+
+
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/modern_nps_head"
         android:layout_width="wrap_content"
         android:layout_height="42dp"
+        android:textSize="20sp"
+        android:fontFamily="sans-serif-medium"
         android:gravity="center"
         android:text="@string/now_playing"
-        android:textAppearance="@style/Appearance.Text.Headline6"
+        android:textColor="#DAD3D3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <ImageView
         android:id="@+id/modern_nps_fav_btn"
@@ -67,9 +73,9 @@
         android:id="@+id/modern_nps_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="22dp"
+        android:layout_marginStart="24dp"
         android:layout_marginEnd="22dp"
-        android:gravity="center"
+        android:gravity="left"
         android:requiresFadingEdge="horizontal"
         android:scrollHorizontally="true"
         android:singleLine="true"
@@ -88,7 +94,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
-        android:gravity="center"
+        android:gravity="left"
         android:singleLine="true"
         android:textAppearance="@style/ItemSub"
         app:layout_constraintTop_toBottomOf="@+id/modern_nps_title"
@@ -96,7 +102,7 @@
 
     <include
         android:id="@+id/modern_nps_slider"
-        layout="@layout/nps_slider"
+        layout="@layout/nps_slider_small"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
