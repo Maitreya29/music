@@ -14,6 +14,7 @@
         android:id="@+id/ignored_folder_item_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:textColor="@color/shit"
         android:layout_weight="1" />
 
     <ImageView
