@@ -4,13 +4,12 @@ import java.time.format.DateTimeFormatter
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion '30.0.3'
+    compileSdk 31
 
     defaultConfig {
         applicationId "com.radiant.music"
-        minSdkVersion 21
-        targetSdkVersion 30
+        minSdk 21
+        targetSdk 31
         versionCode 210040101
         versionName "1.0"
         vectorDrawables.useSupportLibrary = true
