@@ -119,21 +119,21 @@ public class MediaNotificationManager {
         String pkg = mContext.getPackageName();
 
         mPlayIntent = PendingIntent.getBroadcast(mContext, REQUEST_CODE,
-                new Intent(ACTION_PLAY).setPackage(pkg), PendingIntent.FLAG_CANCEL_CURRENT);
+                new Intent(ACTION_PLAY).setPackage(pkg), PendingIntent.FLAG_MUTABLE);
         mPauseIntent = PendingIntent.getBroadcast(mContext, REQUEST_CODE,
-                new Intent(ACTION_PAUSE).setPackage(pkg), PendingIntent.FLAG_CANCEL_CURRENT);
+                new Intent(ACTION_PAUSE).setPackage(pkg), PendingIntent.FLAG_MUTABLE);
         mStopIntent = PendingIntent.getBroadcast(mContext, REQUEST_CODE,
-                new Intent(ACTION_STOP).setPackage(pkg), PendingIntent.FLAG_CANCEL_CURRENT);
+                new Intent(ACTION_STOP).setPackage(pkg), PendingIntent.FLAG_MUTABLE);
         mNextIntent = PendingIntent.getBroadcast(mContext, REQUEST_CODE,
-                new Intent(ACTION_NEXT).setPackage(pkg), PendingIntent.FLAG_CANCEL_CURRENT);
+                new Intent(ACTION_NEXT).setPackage(pkg), PendingIntent.FLAG_MUTABLE);
         mPreviousIntent = PendingIntent.getBroadcast(mContext, REQUEST_CODE,
-                new Intent(ACTION_PREV).setPackage(pkg), PendingIntent.FLAG_CANCEL_CURRENT);
+                new Intent(ACTION_PREV).setPackage(pkg), PendingIntent.FLAG_MUTABLE);
 
         if (mNotificationManager != null) mNotificationManager.cancelAll();
 
         Intent intent = new Intent(mContext, MainContentActivity.class);
         intent.setAction(MainContentActivity.ACTION_OPEN_NOW_PLAYING);
-        mOpenNowPlaying = PendingIntent.getActivity(mContext, REQUEST_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        mOpenNowPlaying = PendingIntent.getActivity(mContext, REQUEST_CODE, intent, PendingIntent.FLAG_MUTABLE);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
             createNotificationChannel();

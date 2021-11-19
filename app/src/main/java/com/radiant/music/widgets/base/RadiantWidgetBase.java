@@ -47,7 +47,7 @@ public abstract class RadiantWidgetBase extends AppWidgetProvider {
     public void updateWidget(@NonNull Context context, @NonNull AppWidgetManager appWidgetManager, @Nullable int[] appWidgetIds) {
         RemoteViews views = new RemoteViews(context.getPackageName(), getLayoutId());
         Intent launchIntent = new Intent(context, SplashActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, launchIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, launchIntent, PendingIntent.FLAG_MUTABLE);
         setUpLayout(context, views, pendingIntent);
         if (null != appWidgetIds) {
             appWidgetManager.updateAppWidget(appWidgetIds, views);
@@ -60,7 +60,7 @@ public abstract class RadiantWidgetBase extends AppWidgetProvider {
     protected PendingIntent buildPendingControlBroadcast(@NonNull Context context, final String action) {
         Intent intent = new Intent(context, RadiantWidgetControlReceiver.class);
         intent.setAction(action);
-        return PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        return PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_MUTABLE);
     }
 
     @NonNull

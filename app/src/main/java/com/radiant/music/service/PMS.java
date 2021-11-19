@@ -81,7 +81,7 @@ public class PMS extends Service implements PlaybackManager.PlaybackServiceCallb
 
         Intent mediaButtonIntent = new Intent(Intent.ACTION_MEDIA_BUTTON);
         mediaButtonIntent.setClass(getApplicationContext(), MediaButtonReceiver.class);
-        PendingIntent mbrIntent = PendingIntent.getBroadcast(this, 0, mediaButtonIntent, 0);
+        PendingIntent mbrIntent = PendingIntent.getBroadcast(this, 0, mediaButtonIntent, PendingIntent.FLAG_MUTABLE);
         mMediaSession.setMediaButtonReceiver(mbrIntent);
 
         mNotificationManager = new MediaNotificationManager(this, mMediaSession.getController(), this);
