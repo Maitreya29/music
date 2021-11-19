@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:padding="24dp">
 
-    <com.nezukoos.music.views.AccentColorTextView
+    <com.radiant.music.views.AccentColorTextView
         android:id="@+id/auto_play_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -23,7 +23,7 @@
         android:layout_marginBottom="8dp"
         android:orientation="vertical">
 
-        <com.nezukoos.music.views.AccentColorRadioButton
+        <com.radiant.music.views.AccentColorRadioButton
             android:id="@+id/radio_btn_shuffle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
             android:text="@string/play_shuffle"
             android:textColor="@color/shit"/>
 
-        <com.nezukoos.music.views.AccentColorRadioButton
+        <com.radiant.music.views.AccentColorRadioButton
             android:id="@+id/radio_btn_suggested"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
             android:text="@string/play_for_you"
             android:textColor="@color/shit"/>
 
-        <com.nezukoos.music.views.AccentColorRadioButton
+        <com.radiant.music.views.AccentColorRadioButton
             android:id="@+id/radio_btn_latest"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
             android:text="@string/play_new_in_store"
             android:textColor="@color/shit"/>
 
-        <com.nezukoos.music.views.AccentColorRadioButton
+        <com.radiant.music.views.AccentColorRadioButton
             android:id="@+id/radio_btn_continue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -60,7 +60,7 @@
             android:textColor="@color/shit"/>
     </RadioGroup>
 
-    <com.nezukoos.music.views.AccentColorMaterialButton
+    <com.radiant.music.views.AccentColorMaterialButton
         android:id="@+id/cancel_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -69,7 +69,7 @@
         android:text="@string/cancel"
         app:accentButtonStyle="text" />
 
-    <com.nezukoos.music.views.AccentColorMaterialButton
+    <com.radiant.music.views.AccentColorMaterialButton
         android:id="@+id/set_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

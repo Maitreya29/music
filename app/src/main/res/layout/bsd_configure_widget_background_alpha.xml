@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:padding="24dp">
 
-    <com.nezukoos.music.views.AccentColorTextView
+    <com.radiant.music.views.AccentColorTextView
         android:id="@+id/widget_alpha_chooser_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
         android:text="@string/widget_background_alpha_max" 
         android:textColor="@color/shit"/>
 
-    <com.nezukoos.music.views.ValueSlider
+    <com.radiant.music.views.ValueSlider
         android:id="@+id/widget_alpha_slider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
         app:startValue="@integer/widget_background_alpha_min_value"
         app:unit="" />
 
-    <com.nezukoos.music.views.AccentColorMaterialButton
+    <com.radiant.music.views.AccentColorMaterialButton
         android:id="@+id/cancel_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
         android:text="@string/cancel"
         app:accentButtonStyle="text" />
 
-    <com.nezukoos.music.views.AccentColorMaterialButton
+    <com.radiant.music.views.AccentColorMaterialButton
         android:id="@+id/set_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

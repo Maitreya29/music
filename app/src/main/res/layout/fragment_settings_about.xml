@@ -17,7 +17,7 @@
         app:layout_constraintGuide_begin="22dp"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <com.nezukoos.music.views.AccentColorTextView
+    <com.radiant.music.views.AccentColorTextView
         android:id="@+id/app_info_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -111,7 +111,7 @@
         app:layout_constraintTop_toBottomOf="@id/build_type_title"
         tools:text="@tools:sample/full_names" />
 
-    <com.nezukoos.music.views.AccentColorTextView
+    <com.radiant.music.views.AccentColorTextView
         android:id="@+id/social_link_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -133,7 +133,7 @@
         app:layout_constraintStart_toEndOf="@id/guide_start"
         app:layout_constraintTop_toBottomOf="@id/social_link_title">
 
-        <com.nezukoos.music.views.ColoredIconView
+        <com.radiant.music.views.ColoredIconView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="-16dp"
@@ -166,7 +166,7 @@
         app:layout_constraintStart_toEndOf="@id/app_link_twitter"
         app:layout_constraintTop_toTopOf="@id/app_link_twitter">
 
-        <com.nezukoos.music.views.ColoredIconView
+        <com.radiant.music.views.ColoredIconView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="-16dp"
@@ -199,7 +199,7 @@
         app:layout_constraintStart_toStartOf="@id/app_link_twitter"
         app:layout_constraintTop_toBottomOf="@id/app_link_twitter">
 
-        <com.nezukoos.music.views.ColoredIconView
+        <com.radiant.music.views.ColoredIconView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="gone"
@@ -234,7 +234,7 @@
         app:layout_constraintStart_toEndOf="@id/app_link_github"
         app:layout_constraintTop_toBottomOf="@id/app_link_telegram">
 
-        <com.nezukoos.music.views.ColoredIconView
+        <com.radiant.music.views.ColoredIconView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"

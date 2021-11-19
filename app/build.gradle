@@ -8,7 +8,7 @@ android {
     buildToolsVersion '30.0.3'
 
     defaultConfig {
-        applicationId "com.nezukoos.music"
+        applicationId "com.radiant.music"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 210040101

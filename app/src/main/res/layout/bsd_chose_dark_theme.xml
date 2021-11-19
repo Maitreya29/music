@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:padding="24dp">
 
-    <com.nezukoos.music.views.AccentColorTextView
+    <com.radiant.music.views.AccentColorTextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -23,7 +23,7 @@
         android:layout_marginBottom="8dp"
         android:orientation="vertical">
 
-        <com.nezukoos.music.views.AccentColorRadioButton
+        <com.radiant.music.views.AccentColorRadioButton
             android:id="@+id/radio_btn_dark_theme_gray"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
 android:textAppearance="@style/Appearance.Text.Subtitle2"
             android:textColor="@color/textshit" />
 
-        <com.nezukoos.music.views.AccentColorRadioButton
+        <com.radiant.music.views.AccentColorRadioButton
             android:id="@+id/radio_btn_dark_theme_kinda"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -43,7 +43,7 @@ android:textAppearance="@style/Appearance.Text.Subtitle2"
 android:textAppearance="@style/Appearance.Text.Subtitle2"
             android:textColor="@color/textshit" />
 
-        <com.nezukoos.music.views.AccentColorRadioButton
+        <com.radiant.music.views.AccentColorRadioButton
             android:id="@+id/radio_btn_dark_theme_pure_black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -54,7 +54,7 @@ android:textAppearance="@style/Appearance.Text.Subtitle2"
             android:textColor="@color/textshit" />
     </RadioGroup>
 
-    <com.nezukoos.music.views.AccentColorMaterialButton
+    <com.radiant.music.views.AccentColorMaterialButton
         android:id="@+id/choose_theme_cancel_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -63,7 +63,7 @@ android:textAppearance="@style/Appearance.Text.Subtitle2"
         android:text="@string/cancel"
         app:accentButtonStyle="text" />
 
-    <com.nezukoos.music.views.AccentColorMaterialButton
+    <com.radiant.music.views.AccentColorMaterialButton
         android:id="@+id/choose_theme_set_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

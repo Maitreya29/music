@@ -1,5 +1,5 @@
 ## Screenshots
-Pulse Music User Interface gallery
+Radiant Music User Interface gallery
 
 ### Main
 | <img src="../fastlane/metadata/android/en-US/images/phoneScreenshots/A.jpg" width="200"/> | <img src="../fastlane/metadata/android/en-US/images/phoneScreenshots/B.jpg" width="200"/> | <img src="../fastlane/metadata/android/en-US/images/phoneScreenshots/C.jpg" width="200"/> | <img src="../fastlane/metadata/android/en-US/images/phoneScreenshots/D.jpg" width="200"/> |

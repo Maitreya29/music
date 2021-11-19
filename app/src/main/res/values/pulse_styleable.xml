@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="PulseToolbar">
+    <declare-styleable name="RadiantToolbar">
         <attr name="toolbarNavigationIcon" format="reference" />
         <attr name="toolbarQuickActionIcon" format="reference" />
         <attr name="toolbarOverflowIcon" format="reference" />

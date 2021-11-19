@@ -11,7 +11,7 @@
         tools:text="0"
         android:textColor="@color/shit" />
 
-    <com.nezukoos.music.views.AccentColorSlider
+    <com.radiant.music.views.AccentColorSlider
         android:id="@+id/value_slider"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

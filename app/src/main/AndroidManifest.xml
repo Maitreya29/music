@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.nezukoos.music">
+    package="com.radiant.music">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission
@@ -42,7 +42,7 @@
     </queries>
 
     <application
-        android:name=".PulseApp"
+        android:name=".RadiantApp"
         android:appCategory="audio"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
@@ -119,7 +119,7 @@
         </receiver>
 
         <receiver
-            android:name=".widgets.PulseWidgetNormalLight"
+            android:name=".widgets.RadiantWidgetNormalLight"
             android:label="@string/widget_name_normal">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -127,11 +127,11 @@
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/pulse_widget_normal" />
+                android:resource="@xml/radiant_widget_normal" />
         </receiver>
 
         <receiver
-            android:name=".widgets.PulseWidgetNormalDark"
+            android:name=".widgets.RadiantWidgetNormalDark"
             android:label="@string/widget_name_normal_dark">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -139,11 +139,11 @@
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/pulse_widget_normal" />
+                android:resource="@xml/radiant_widget_normal" />
         </receiver>
 
         <receiver
-            android:name=".widgets.PulseWidgetControlReceiver"
+            android:name=".widgets.RadiantWidgetControlReceiver"
             android:exported="false" />
 
         <service
@@ -161,7 +161,7 @@
         </service>
 
         <service
-            android:name=".service.PulseTileService"
+            android:name=".service.RadiantTileService"
             android:icon="@drawable/ic_round_play"
             android:label="@string/play"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">

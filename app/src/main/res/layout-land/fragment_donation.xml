@@ -10,7 +10,7 @@
     android:paddingEnd="32dp"
     android:paddingBottom="16dp">
 
-    <com.nezukoos.music.views.AccentColorTextView
+    <com.radiant.music.views.AccentColorTextView
         android:id="@+id/category_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -90,7 +90,7 @@
                 app:layout_constraintTop_toBottomOf="@id/donate_options_title"
                 app:layout_constraintWidth_max="172dp">
 
-                <com.nezukoos.music.views.ColoredIconView
+                <com.radiant.music.views.ColoredIconView
                     android:id="@+id/pay_pal"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -122,7 +122,7 @@
                 app:layout_constraintTop_toTopOf="@id/pay_pal_frame"
                 app:layout_constraintWidth_max="172dp">
 
-                <com.nezukoos.music.views.ColoredIconView
+                <com.radiant.music.views.ColoredIconView
                     android:id="@+id/bmc"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -154,7 +154,7 @@
                 app:layout_constraintStart_toStartOf="@id/pay_pal_frame"
                 app:layout_constraintTop_toBottomOf="@id/pay_pal_frame">
 
-                <com.nezukoos.music.views.ColoredIconView
+                <com.radiant.music.views.ColoredIconView
                     android:id="@+id/upi"
                     android:layout_width="match_parent"
                     android:layout_height="160dp"

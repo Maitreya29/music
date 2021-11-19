@@ -7,21 +7,21 @@
     android:paddingTop="16dp"
     android:paddingBottom="0dp">
 
-    <com.nezukoos.music.views.AccentColorTextView
+    <com.radiant.music.views.AccentColorTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="72dp"
         android:text="@string/category_auto_play"
         android:textAppearance="@style/Appearance.Text.Overline" />
 
-    <com.nezukoos.music.views.SettingsToggleableItem
+    <com.radiant.music.views.SettingsToggleableItem
         android:id="@+id/audio_device_bluetooth_toggle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:settingToggleableItemText="@string/bluetooth_auto_play_desc"
         app:settingToggleableItemTitle="@string/bluetooth_auto_play" />
 
-    <com.nezukoos.music.views.SettingsCategoryItem
+    <com.radiant.music.views.SettingsCategoryItem
         android:id="@+id/audio_device_bluetooth_action_picker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
         app:settingItemText="@string/bluetooth_auto_play_action_desc"
         app:settingItemTitle="@string/bluetooth_auto_play_action" />
 
-    <com.nezukoos.music.views.SettingsCategoryItem
+    <com.radiant.music.views.SettingsCategoryItem
         android:id="@+id/qs_tile_action_picker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
         app:settingItemText="@string/tile_auto_play_desc"
         app:settingItemTitle="@string/tile_auto_play" />
 
-    <com.nezukoos.music.views.AccentColorTextView
+    <com.radiant.music.views.AccentColorTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="72dp"
@@ -47,14 +47,14 @@
         android:text="@string/category_sleep_timer"
         android:textAppearance="@style/Appearance.Text.Overline" />
 
-    <com.nezukoos.music.views.SettingsToggleableItem
+    <com.radiant.music.views.SettingsToggleableItem
         android:id="@+id/sleep_timer_toggle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:settingToggleableItemText="@string/sleep_timer_desc"
         app:settingToggleableItemTitle="@string/sleep_timer" />
 
-    <com.nezukoos.music.views.SettingsCategoryItem
+    <com.radiant.music.views.SettingsCategoryItem
         android:id="@+id/sleep_timer_configure"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
         app:settingItemText="@string/configure_sleep_timer_desc"
         app:settingItemTitle="@string/configure_sleep_timer" />
 
-    <com.nezukoos.music.views.SettingsToggleableItem
+    <com.radiant.music.views.SettingsToggleableItem
         android:id="@+id/repeat_timer_toggle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

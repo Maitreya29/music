@@ -33,4 +33,4 @@ If applicable, add screenshots to help explain your problem.
 Add any other context about the problem here.
 
 **Logs**
-Attach any logs found here: `/Android/data/com.hardcodecoder.pulsemusic/files/`
+Attach any logs found here: `/Android/data/com.radiant.music/files/`

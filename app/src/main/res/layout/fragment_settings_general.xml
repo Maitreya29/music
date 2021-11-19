@@ -6,14 +6,14 @@
     android:paddingTop="16dp"
     android:paddingBottom="0dp">
 
-    <com.nezukoos.music.views.AccentColorTextView
+    <com.radiant.music.views.AccentColorTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="72dp"
         android:text="@string/category_loader"
         android:textAppearance="@style/Appearance.Text.Overline" />
 
-    <com.nezukoos.music.views.SettingsCategoryItem
+    <com.radiant.music.views.SettingsCategoryItem
         android:id="@+id/ignore_folder_picker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,7 +22,7 @@
         app:settingItemText="@string/ignored_folder_desc"
         app:settingItemTitle="@string/ignored_folder_title" />
 
-    <com.nezukoos.music.views.SettingsCategoryItem
+    <com.radiant.music.views.SettingsCategoryItem
         android:id="@+id/duration_filter_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
         app:settingItemText="@string/duration_filter_desc"
         app:settingItemTitle="@string/duration_filter_title" />
 
-    <com.nezukoos.music.views.ValueSlider
+    <com.radiant.music.views.ValueSlider
         android:id="@+id/duration_filter_slider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -43,21 +43,21 @@
         app:startValue="0"
         app:unit="@string/duration_filter_unit" />
 
-    <com.nezukoos.music.views.AccentColorTextView
+    <com.radiant.music.views.AccentColorTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="72dp"
         android:text="@string/category_others"
         android:textAppearance="@style/Appearance.Text.Overline" />
 
-    <com.nezukoos.music.views.SettingsToggleableItem
+    <com.radiant.music.views.SettingsToggleableItem
         android:id="@+id/remember_playlist_option"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:settingToggleableItemText="@string/remember_playlist_desc"
         app:settingToggleableItemTitle="@string/remember_playlist_title" />
 
-    <com.nezukoos.music.views.SettingsCategoryItem
+    <com.radiant.music.views.SettingsCategoryItem
         android:id="@+id/home_section_playlist_selector"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

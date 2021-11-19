@@ -9,7 +9,7 @@
     android:paddingTop="16dp"
     android:paddingBottom="16dp">
 
-    <com.nezukoos.music.views.ColorView
+    <com.radiant.music.views.ColorView
         android:id="@+id/accent_color"
         android:layout_width="72dp"
         android:layout_height="72dp"
@@ -24,5 +24,5 @@
         android:layout_marginEnd="8dp"
         android:gravity="center"
         android:textAppearance="@style/Appearance.Text.Subtitle2"
-android:textColor="@color/shit"        tools:text="@string/color_nezuko_pink" />
+android:textColor="@color/shit"        tools:text="@string/color_radiant_pink" />
 </LinearLayout>

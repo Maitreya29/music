@@ -9,7 +9,7 @@
     android:paddingStart="20dp"
     android:paddingEnd="24dp">
 
-    <com.nezukoos.music.views.MediaArtImageView
+    <com.radiant.music.views.MediaArtImageView
         android:id="@+id/list_item_album_art"
         android:layout_width="42dp"
         android:layout_height="42dp"

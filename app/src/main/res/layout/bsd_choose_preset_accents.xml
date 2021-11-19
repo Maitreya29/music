@@ -7,7 +7,7 @@
     android:paddingTop="32dp"
     android:paddingBottom="24dp">
 
-    <com.nezukoos.music.views.AccentColorTextView
+    <com.radiant.music.views.AccentColorTextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
         android:paddingStart="24dp"
         android:paddingEnd="16dp" />
 
-    <com.nezukoos.music.views.AccentColorMaterialButton
+    <com.radiant.music.views.AccentColorMaterialButton
         android:id="@+id/choose_accents_custom_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
         android:text="@string/custom"
         app:accentButtonStyle="text" />
 
-    <com.nezukoos.music.views.AccentColorMaterialButton
+    <com.radiant.music.views.AccentColorMaterialButton
         android:id="@+id/choose_accents_cancel_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

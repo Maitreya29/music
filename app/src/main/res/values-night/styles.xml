@@ -1,13 +1,13 @@
 <resources>
 
     <!-- Specific Feed activity theme -->
-    <style name="ActivityThemeLight" parent="PulseDarkTheme" />
+    <style name="ActivityThemeLight" parent="RadiantDarkTheme" />
 
-    <style name="ActivityThemeDark" parent="PulseDarkTheme" />
+    <style name="ActivityThemeDark" parent="RadiantDarkTheme" />
 
-    <style name="ActivityThemeKindaDark" parent="PulseDarkTheme" />
+    <style name="ActivityThemeKindaDark" parent="RadiantDarkTheme" />
 
-    <style name="ActivityThemeBlack" parent="PulseDarkTheme" />
+    <style name="ActivityThemeBlack" parent="RadiantDarkTheme" />
 
     <style name="ButtonStyleBase">
         <item name="android:layout_width">48dp</item>

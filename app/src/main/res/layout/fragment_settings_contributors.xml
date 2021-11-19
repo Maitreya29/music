@@ -12,7 +12,7 @@
     android:paddingEnd="32dp"
     android:paddingBottom="16dp">
 
-    <com.nezukoos.music.views.AccentColorTextView
+    <com.radiant.music.views.AccentColorTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -82,7 +82,7 @@
             android:paddingTop="12dp"
             android:paddingBottom="12dp">
 
-            <com.nezukoos.music.views.ColoredIconView
+            <com.radiant.music.views.ColoredIconView
                 android:id="@+id/gh_logo"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
@@ -103,7 +103,7 @@
                 app:layout_constraintStart_toStartOf="@id/gh_logo"
                 app:layout_constraintTop_toBottomOf="@id/gh_logo" />
 
-            <com.nezukoos.music.views.ColoredIconView
+            <com.radiant.music.views.ColoredIconView
                 android:id="@+id/tw_logo"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
@@ -124,7 +124,7 @@
                 app:layout_constraintStart_toStartOf="@id/tw_logo"
                 app:layout_constraintTop_toBottomOf="@id/tw_logo" />
 
-            <com.nezukoos.music.views.ColoredIconView
+            <com.radiant.music.views.ColoredIconView
                 android:id="@+id/tg_logo"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
@@ -147,7 +147,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 
-    <com.nezukoos.music.views.AccentColorTextView
+    <com.radiant.music.views.AccentColorTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -218,7 +218,7 @@
             android:paddingTop="12dp"
             android:paddingBottom="12dp">
 
-            <com.nezukoos.music.views.ColoredIconView
+            <com.radiant.music.views.ColoredIconView
                 android:id="@+id/github_logo"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
@@ -239,7 +239,7 @@
                 app:layout_constraintStart_toStartOf="@id/github_logo"
                 app:layout_constraintTop_toBottomOf="@id/github_logo" />
 
-            <com.nezukoos.music.views.ColoredIconView
+            <com.radiant.music.views.ColoredIconView
                 android:id="@+id/twitter_logo"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
@@ -260,7 +260,7 @@
                 app:layout_constraintStart_toStartOf="@id/twitter_logo"
                 app:layout_constraintTop_toBottomOf="@id/twitter_logo" />
 
-            <com.nezukoos.music.views.ColoredIconView
+            <com.radiant.music.views.ColoredIconView
                 android:id="@+id/telegram_logo"
                 android:layout_width="48dp"
                 android:layout_height="48dp"

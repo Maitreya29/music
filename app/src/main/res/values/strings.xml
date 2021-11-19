@@ -282,7 +282,7 @@
     <string name="style_modern">Modern</string>
     <string name="style_stylish">Stylish</string>
     <string name="style_edge">Edge to edge</string>
-    <string name="style_nezuko">Nezuko</string>
+    <string name="style_radiant">Radiant</string>
     <string name="corner_radius">Corner radius</string>
     <string name="corner_radius_desc">Select album cover corner radius</string>
     <string name="corner_radius_selector_title">Adjust corner radius</string>
@@ -348,7 +348,7 @@
 
     <!-- Contributors -->
     <string name="lead_developer">Lead developer</string>
-    <string name="base_dev">Pulse Music lead - The base app.</string>
+    <string name="base_dev">Radiant Music lead - The base app.</string>
     <string name="lead_developer_1" translatable="false">Ashutosh P.</string>
     <string name="lead_developer_0" translatable="false">Maitreya Patni</string>
     <string name="lead_developer_1_user_name" translatable="false">\@HardcodeCoder</string>
@@ -384,7 +384,7 @@
     <!-- For translators: If the color words does not make much sense in your language,
     you can try substituting a similar description of the color. But keep it short
     -->
-    <string name="color_nezuko_pink">Nezuko Pink</string>
+    <string name="color_radiant_pink">Radiant Pink</string>
     <string name="color_azure_radiance">Azure Radiance</string>
     <string name="color_persian_mint">Persian Mint</string>
     <string name="color_valencia">Valencia</string>

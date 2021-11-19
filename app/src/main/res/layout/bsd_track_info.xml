@@ -94,7 +94,7 @@ android:textColor="@color/shit"        tools:text="Sample rate: 44100Hz" />
         android:textAppearance="@style/Appearance.Text.Subtitle2"
 android:textColor="@color/shit"        tools:text="Number of channels: 2" />
 
-    <com.nezukoos.music.views.AccentColorMaterialButton
+    <com.radiant.music.views.AccentColorMaterialButton
         android:id="@+id/dialog_ok"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

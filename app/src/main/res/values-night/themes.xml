@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="PulseMaterialButton" parent="Widget.MaterialComponents.Button">
+    <style name="RadiantMaterialButton" parent="Widget.MaterialComponents.Button">
         <item name="android:textSize">14sp</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:textAppearance">@style/Appearance.Text.Button</item>
@@ -32,7 +32,7 @@
         <item name="android:navigationBarColor">?attr/navigationBarColor</item>
         <item name="android:windowAnimationStyle">@style/WindowTransitions</item>
         <item name="android:windowContentTransitions">true</item>
-        <item name="materialButtonStyle">@style/PulseMaterialButton</item>
+        <item name="materialButtonStyle">@style/RadiantMaterialButton</item>
     </style>
 
     <style name="BaseThemeDark" parent="Theme.MaterialComponents.NoActionBar">
@@ -43,7 +43,7 @@
         <item name="android:navigationBarColor">?attr/navigationBarColor</item>
         <item name="android:windowAnimationStyle">@style/WindowTransitions</item>
         <item name="android:windowContentTransitions">true</item>
-        <item name="materialButtonStyle">@style/PulseMaterialButton</item>
+        <item name="materialButtonStyle">@style/RadiantMaterialButton</item>
     </style>
 
     <style name="ThemeLight" parent="BaseThemeLight">
@@ -54,28 +54,28 @@
 
     <style name="ThemeDark" parent="BaseThemeDark" />
 
-    <style name="PulseLightTheme" parent="ThemeLight">
+    <style name="RadiantLightTheme" parent="ThemeLight">
         <item name="android:windowBackground">@color/blackColorBackground</item>
         <item name="windowBackgroundColor">@color/blackColorBackground</item>
         <item name="colorSurface">@color/blackColorSurface</item>
         <item name="colorOnPrimary">@color/blackColorOnPrimary</item>
     </style>
 
-    <style name="PulseDarkTheme" parent="ThemeDark">
+    <style name="RadiantDarkTheme" parent="ThemeDark">
         <item name="android:windowBackground">@color/blackColorBackground</item>
         <item name="windowBackgroundColor">@color/blackColorBackground</item>
         <item name="colorSurface">@color/blackColorSurface</item>
         <item name="colorOnPrimary">@color/blackColorOnPrimary</item>
     </style>
 
-    <style name="PulseSignatureTheme" parent="PulseDarkTheme">
+    <style name="RadiantSignatureTheme" parent="RadiantDarkTheme">
         <item name="android:windowBackground">@color/blackColorBackground</item>
         <item name="windowBackgroundColor">@color/blackColorBackground</item>
         <item name="colorSurface">@color/blackColorSurface</item>
         <item name="colorOnPrimary">@color/blackColorOnPrimary</item>
     </style>
 
-    <style name="PulseDarkTheme.Black">
+    <style name="RadiantDarkTheme.Black">
         <item name="android:windowBackground">@color/blackColorBackground</item>
         <item name="windowBackgroundColor">@color/blackColorBackground</item>
         <item name="colorSurface">@color/blackColorSurface</item>

@@ -8,7 +8,7 @@
     android:paddingEnd="16dp"
     android:paddingBottom="32dp">
 
-    <com.nezukoos.music.views.ButtonShortcut
+    <com.radiant.music.views.ButtonShortcut
         android:id="@+id/ic_favorite"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
         app:shortcutIconColor="@color/md_red_A400"
         app:shortcutTitle="@string/favorites" />
 
-    <com.nezukoos.music.views.ButtonShortcut
+    <com.radiant.music.views.ButtonShortcut
         android:id="@+id/ic_recent"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
         app:shortcutIconColor="@color/md_yellow_A400"
         app:shortcutTitle="@string/recent" />
 
-    <com.nezukoos.music.views.ButtonShortcut
+    <com.radiant.music.views.ButtonShortcut
         android:id="@+id/ic_folder"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
         app:shortcutIconColor="@color/md_blue_A400"
         app:shortcutTitle="@string/track_picker" />
 
-    <com.nezukoos.music.views.ButtonShortcut
+    <com.radiant.music.views.ButtonShortcut
         android:id="@+id/ic_shuffle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

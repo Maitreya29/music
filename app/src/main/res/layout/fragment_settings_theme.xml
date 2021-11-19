@@ -7,14 +7,14 @@
     android:paddingTop="16dp"
     android:paddingBottom="0dp">
 
-    <com.nezukoos.music.views.AccentColorTextView
+    <com.radiant.music.views.AccentColorTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
         android:text="@string/category_theme"
         android:textAppearance="@style/Appearance.Text.Overline" />
 
-    <com.nezukoos.music.views.SettingsCategoryItem
+    <com.radiant.music.views.SettingsCategoryItem
         android:id="@+id/laf_select_dark_theme"
         android:layout_width="match_parent"
         android:visibility="gone"
@@ -25,7 +25,7 @@
         app:settingItemText="@string/select_dark_theme_desc"
         app:settingItemTitle="@string/select_dark_theme" />
 
-    <com.nezukoos.music.views.SettingsToggleableItem
+    <com.radiant.music.views.SettingsToggleableItem
         android:id="@+id/laf_enable_dark_mode"
         android:layout_width="match_parent"
         android:visibility="gone"
@@ -34,7 +34,7 @@
         app:settingToggleableItemText="@string/enable_dark_mode_desc"
         app:settingToggleableItemTitle="@string/enable_dark_mode" />
 
-    <com.nezukoos.music.views.SettingsToggleableItem
+    <com.radiant.music.views.SettingsToggleableItem
         android:id="@+id/laf_enable_auto_mode"
         android:layout_width="match_parent"
         android:visibility="gone"
@@ -43,7 +43,7 @@
         app:settingToggleableItemText="@string/enable_auto_mode_desc"
         app:settingToggleableItemTitle="@string/enable_auto_mode" />
 
-    <com.nezukoos.music.views.AccentColorTextView
+    <com.radiant.music.views.AccentColorTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="72dp"
@@ -51,14 +51,14 @@
         android:text="@string/category_colors"
         android:textAppearance="@style/Appearance.Text.Overline" />
 
-    <com.nezukoos.music.views.SettingsToggleableItem
+    <com.radiant.music.views.SettingsToggleableItem
         android:id="@+id/laf_enable_desaturated"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:settingToggleableItemText="@string/desaturated_accents_desc"
         app:settingToggleableItemTitle="@string/desaturated_accents" />
 
-    <com.nezukoos.music.views.SettingsCategoryItem
+    <com.radiant.music.views.SettingsCategoryItem
         android:id="@+id/laf_select_accent_color"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

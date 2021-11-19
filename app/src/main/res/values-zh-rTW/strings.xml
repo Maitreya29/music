@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Nezuko 音樂播放器</string>
+    <string name="app_name">Radiant 音樂播放器</string>
     <string name="toast_requires_storage_access">應用程式需要存取裝置儲存空間以運作</string>
-    <string name="notification_playback_channel_name">Nezuko 音樂播放器通知</string>
+    <string name="notification_playback_channel_name">Radiant 音樂播放器通知</string>
     <string name="notification_audio_channel_name">音訊裝置偵測</string>
     <!-- Content description -->
     <string name="desc_album_art">專輯美術圖片</string>
@@ -240,7 +240,7 @@
     <string name="telegram">Telegram</string>
     <!-- Donations -->
     <string name="category_contribute">貢獻</string>
-    <string name="donation_card_title">喜歡 Nezuko 音樂播放器嗎？</string>
+    <string name="donation_card_title">喜歡 Radiant 音樂播放器嗎？</string>
     <string name="donate_options_title">贊助使用</string>
     <string name="buy_me_coffee">贊助我一杯咖啡</string>
     <string name="pay_pal">PayPal</string>
