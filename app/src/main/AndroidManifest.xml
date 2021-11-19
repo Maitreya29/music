@@ -52,7 +52,8 @@
         android:theme="@style/ActivityThemeDark"
         tools:targetApi="O">
 
-        <activity android:name=".activities.main.SplashActivity">
+        <activity android:name=".activities.main.SplashActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.MUSIC_PLAYER" />
@@ -112,7 +113,8 @@
         <activity android:name=".activities.playlist.CurrentQueuePlaylist" />
         <activity android:name=".activities.main.MediaFolderChooserActivity" />
 
-        <receiver android:name=".receivers.BootCompletedReceiver">
+        <receiver android:name=".receivers.BootCompletedReceiver"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
@@ -120,6 +122,7 @@
 
         <receiver
             android:name=".widgets.RadiantWidgetNormalLight"
+            android:exported="true"
             android:label="@string/widget_name_normal">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -132,6 +135,7 @@
 
         <receiver
             android:name=".widgets.RadiantWidgetNormalDark"
+            android:exported="true"
             android:label="@string/widget_name_normal_dark">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -163,6 +167,7 @@
         <service
             android:name=".service.RadiantTileService"
             android:icon="@drawable/ic_round_play"
+            android:exported="true"
             android:label="@string/play"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
 
